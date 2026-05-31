@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ChainOfThought, Response } from '@forge/ui';
+import { ChainOfThought, Response } from '@eidos/ui';
 
 // Realistic fintech investigation steps — the doc page's "show your work" trace.
 const STEPS = [

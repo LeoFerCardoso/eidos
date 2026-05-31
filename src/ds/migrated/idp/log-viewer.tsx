@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / LogViewer
+// Eidos DS — Components / LogViewer
 // Three variants: compact (inline), expanded (with timestamps), filterable
 // (toolbar with severity chips + search).
 import { AutoPropsTable, Icons, Frame, Section, SubHead, TabbedCode, installTabs, LogViewer, Lede, Mono } from '@/ds/core';

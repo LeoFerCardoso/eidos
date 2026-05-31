@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://forge.equifax.dev/forge.contract.schema.json",
   "title": "Forge component contract",
-  "description": "The single machine-readable definition of 'a Forge component is Done', spanning four surfaces: docs page, @forge/ui export, Storybook story, registry item. Validated by scripts/check-contract.mjs.",
+  "description": "The single machine-readable definition of 'a Forge component is Done', spanning four surfaces: docs page, @eidos/ui export, Storybook story, registry item. Validated by scripts/check-contract.mjs.",
   "type": "object",
   "required": ["version", "clauses", "components"],
   "additionalProperties": false,
@@ -52,7 +52,7 @@
             "additionalProperties": false,
             "properties": {
               "docs": { "type": "string", "description": "src/ds/migrated path, or '' if N/A." },
-              "export": { "type": "string", "description": "@forge/ui export name (e.g. 'MetricCard')." },
+              "export": { "type": "string", "description": "@eidos/ui export name (e.g. 'MetricCard')." },
               "exportFile": { "type": "string", "description": "File the export actually lives in (e.g. 'packages/ui/src/blocks.tsx'). REQUIRED for grouped barrels." },
               "story": { "type": "string", "description": "stories path." },
               "registry": { "type": "string", "description": "registry item name → public/r/<name>.json." },

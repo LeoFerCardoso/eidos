@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Input.
+// Eidos DS — Components / Input.
 //
 // The everyday text-entry primitive. Built as composable building blocks so
 // any combination of label · prefix · control · suffix · helper / error /

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Combobox } from '@forge/ui';
+import { Combobox } from '@eidos/ui';
 
 // ── Realistic IDP data ────────────────────────────────────────────────────────
 

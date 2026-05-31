@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Banner } from '@forge/ui';
+import { Banner } from '@eidos/ui';
 
 const TONES = ['info', 'success', 'warning', 'danger', 'neutral'] as const;
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ArtifactPanel } from '@forge/ui';
-import type { ArtifactRef } from '@forge/ui';
+import { ArtifactPanel } from '@eidos/ui';
+import type { ArtifactRef } from '@eidos/ui';
 
 const DOC_ARTIFACT: ArtifactRef = {
   id: 'art-doc',
@@ -20,7 +20,7 @@ const CODE_ARTIFACT: ArtifactRef = {
   title: 'rollback.ts',
   meta: '22 lines · TypeScript',
   lang: 'ts',
-  content: `import { deployctl } from '@forge/infra';\n\nasync function rollback(service: string, version: string) {\n  await deployctl.rollback({ service, version, ring: 0 });\n}`,
+  content: `import { deployctl } from '@eidos/infra';\n\nasync function rollback(service: string, version: string) {\n  await deployctl.rollback({ service, version, ring: 0 });\n}`,
 };
 
 const TAB_ARTIFACT: ArtifactRef = {

@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Bottom sheet (scaffold). The mobile counterpart of a popover/dialog:
+// Eidos Mobile — Bottom sheet (scaffold). The mobile counterpart of a popover/dialog:
 // an edge-anchored panel with a grab handle, for actions and contextual detail.
 import * as React from 'react';
 import { Section, SubHead, Frame, CodeBlock, DeviceFrame, Icons, Lede, Mono, Spinner, Skeleton, Alert, AlertTitle, AlertDescription } from '@/ds/core';

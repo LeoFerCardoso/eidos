@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Model Selector (§2.2 component-page standard, num "18").
+// Eidos AI — Model Selector (§2.2 component-page standard, num "18").
 // Choose the model the next reply will use. A drop-up trigger inside the
 // prompt-input composer footer — or anywhere a model pick is needed.
 import * as React from 'react';
@@ -21,7 +21,7 @@ const DEFAULT_MODELS = [
 const CUSTOM_MODELS = [
   { id: 'anthropic/claude-sonnet-4-5', short: 'S', name: 'Claude Sonnet 4.5', cost: 'Fast · $3 / 1M' },
   { id: 'openai/gpt-5',                short: 'G', name: 'GPT-5',             cost: 'OpenAI · $15 / 1M' },
-  { id: 'forge-ai/sonnet-4-6',         short: 'F', name: 'Forge Sonnet 4.6',  cost: 'Hosted · $3 / 1M' },
+  { id: 'forge-ai/sonnet-4-6',         short: 'F', name: 'Eidos Sonnet 4.6',  cost: 'Hosted · $3 / 1M' },
   { id: 'anthropic/claude-haiku-4-5',  short: 'H', name: 'Claude Haiku 4.5', cost: 'Light · $1 / 1M' },
   { id: 'openai/gpt-4o-mini',          short: 'M', name: 'GPT-4o mini',      cost: 'Budget · $0.15 / 1M' },
 ];
@@ -121,7 +121,7 @@ function Demo() {
 const CUSTOM_CODE = `const MODELS = [
   { id: "anthropic/claude-sonnet-4-5", short: "S", name: "Claude Sonnet 4.5", cost: "Fast · $3 / 1M" },
   { id: "openai/gpt-5",                short: "G", name: "GPT-5",             cost: "OpenAI · $15 / 1M" },
-  { id: "forge-ai/sonnet-4-6",         short: "F", name: "Forge Sonnet 4.6",  cost: "Hosted · $3 / 1M" },
+  { id: "forge-ai/sonnet-4-6",         short: "F", name: "Eidos Sonnet 4.6",  cost: "Hosted · $3 / 1M" },
   { id: "anthropic/claude-haiku-4-5",  short: "H", name: "Claude Haiku 4.5", cost: "Light · $1 / 1M" },
   { id: "openai/gpt-4o-mini",          short: "M", name: "GPT-4o mini",      cost: "Budget · $0.15 / 1M" },
 ];

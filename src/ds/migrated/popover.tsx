@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Popover
+// Eidos DS — Components / Popover
 // A floating panel anchored to a trigger element. Holds rich content — forms,
 // link previews, mini-settings. Click to open; Esc or click-away to close.
 import * as React from 'react';
@@ -11,7 +11,7 @@ import {
 
 // ── Usage code snippet ────────────────────────────────────────────────────────
 
-const USAGE_CODE = `import { Popover, PopoverHeader, PopoverBody, PopoverFooter } from "@forge/ui"
+const USAGE_CODE = `import { Popover, PopoverHeader, PopoverBody, PopoverFooter } from "@eidos/ui"
 
 export function Demo() {
   return (

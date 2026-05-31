@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Carousel
+// Eidos DS — Components / Carousel
 // Page layout:
 //   1. Installation  (ComponentInstall / TabbedCode)
 //   2. Usage         (Frame: minimal render)
@@ -63,7 +63,7 @@ const FEATURES = [
 ];
 
 const HEROES = [
-  { tag: 'RELEASE',  title: 'Forge 1.1',         desc: '7 new components, full alphabetical sort.' },
+  { tag: 'RELEASE',  title: 'Eidos 1.1',         desc: '7 new components, full alphabetical sort.' },
   { tag: 'GUIDE',    title: 'Tailwind v4 setup',  desc: 'A 90-second walkthrough of the new preset.' },
   { tag: 'ROADMAP',  title: 'Coming next',        desc: 'Combobox, command palette, and a chart kit.' },
 ];
@@ -137,7 +137,7 @@ export default function CarouselPage() {
           ==================================================================== */}
       <ComponentInstall slug="carousel" peers="embla-carousel-react" />
       <Lede>
-        Built on <Mono>embla-carousel-react</Mono> — gesture handling, momentum, and snap math come from Embla; Forge adds arrow chrome, dot indicators, scoped tokens, and an RTL-aware direction adapter. The CLI copies the source file so you own it.
+        Built on <Mono>embla-carousel-react</Mono> — gesture handling, momentum, and snap math come from Embla; Eidos adds arrow chrome, dot indicators, scoped tokens, and an RTL-aware direction adapter. The CLI copies the source file so you own it.
       </Lede>
 
       {/* ====================================================================
@@ -290,7 +290,7 @@ export default function CarouselPage() {
         }}>
           <div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--fg-faint)' }}>What&apos;s new</div>
-            <div style={{ fontSize: 'var(--text-body)', fontWeight: 600, color: 'var(--fg)', marginTop: 4 }}>Forge 1.1 — release highlights</div>
+            <div style={{ fontSize: 'var(--text-body)', fontWeight: 600, color: 'var(--fg)', marginTop: 4 }}>Eidos 1.1 — release highlights</div>
           </div>
           <Carousel label="Release highlights" opts={{ align: 'start' }}>
             {FEATURES.slice(0, 4).map((s) => (
@@ -301,7 +301,7 @@ export default function CarouselPage() {
             <CarouselControls />
             <CarouselDots />
           </Carousel>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', fontVariantNumeric: 'tabular-nums', color: 'var(--fg-faint)' }}>Forge Design System · v1.1.0</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', fontVariantNumeric: 'tabular-nums', color: 'var(--fg-faint)' }}>Eidos Design System · v1.1.0</div>
         </div>
       </Frame>
 

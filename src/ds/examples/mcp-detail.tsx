@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Avatar, Code, CopyChip, HealthBadge, Icons, RelativeTime, Sparkline, Timeline } from '@/ds/core';
 import { FPageHeader, FShell } from './example-shell';
-// Forge IDP — Example: MCP server detail (Model Context Protocol).
+// Eidos IDP — Example: MCP server detail (Model Context Protocol).
 
   
   
@@ -66,13 +66,13 @@ import { FPageHeader, FShell } from './example-shell';
     return (
       <FShell
         nav="mcp"
-        crumbs={[{ label: 'Forge', href: '/example/ai-insights' }, 'MCP', 'github-mcp-server']}>
+        crumbs={[{ label: 'Eidos', href: '/example/ai-insights' }, 'MCP', 'github-mcp-server']}>
 
         <FPageHeader
           eyebrow="MCP / Hosted servers"
           title="github-mcp-server"
           status={<HealthBadge state="up"/>}
-          subtitle="Model Context Protocol server · exposes GitHub repo operations to Forge agents."
+          subtitle="Model Context Protocol server · exposes GitHub repo operations to Eidos agents."
           meta={
             <>
               <span className="chip">v0.4.2</span>
@@ -90,7 +90,7 @@ import { FPageHeader, FShell } from './example-shell';
           }/>
 
         <p style={{fontSize: 'var(--text-base)', lineHeight: 1.65, color:'var(--fg-muted)', maxWidth: 78 + 'ch', marginTop: 8, marginBottom: 18}}>
-          github-mcp-server is a Model Context Protocol adapter that fronts the GitHub REST and GraphQL APIs as a stable tool surface for Forge agents. It centralizes auth (OAuth app + per-tenant scopes), audit-logs every call, and rate-limits per agent — so PR-reviewer · release-notes · incident-triage can read repos, post reviews, and dispatch workflows without each carrying credentials.
+          github-mcp-server is a Model Context Protocol adapter that fronts the GitHub REST and GraphQL APIs as a stable tool surface for Eidos agents. It centralizes auth (OAuth app + per-tenant scopes), audit-logs every call, and rate-limits per agent — so PR-reviewer · release-notes · incident-triage can read repos, post reviews, and dispatch workflows without each carrying credentials.
         </p>
 
         {/* 4-tab strip */}

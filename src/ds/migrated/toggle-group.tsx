@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Toggle Group
+// Eidos DS — Components / Toggle Group
 // Canonical section order (DS-PAGE-STANDARD §2.2):
 //   1. Installation   (package managers)
 //   2. Usage          (hello world)

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ChartLegend, ForgeChart, Recharts } from '@forge/ui';
+import { ChartLegend, ForgeChart, Recharts } from '@eidos/ui';
 
 const ITEMS = [
   { label: 'Requests',  color: 'var(--viz-cat-1)' },

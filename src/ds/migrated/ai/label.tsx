@@ -1,7 +1,7 @@
 'use client';
-// Forge DS — Components / AI Label.
+// Eidos DS — Components / AI Label.
 // Small badge that flags AI-generated content. Reuses the 4-point sparkle
-// from the ForgeMark glyph + ember accent so an AI marker reads as a Forge
+// from the ForgeMark glyph + ember accent so an AI marker reads as a Eidos
 // moment, not a foreign sticker.
 import * as React from 'react';
 import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs, AILabel, AILabelWithPopover, Spark, Lede, Mono, Spinner, Alert, AlertTitle, AlertDescription } from '@/ds/core';
@@ -97,7 +97,7 @@ function ReviewDemo() {
   const resolved = status !== 'suggested';
 
   const copy = {
-    suggested: { note: 'Forge AI suggested this tier from the last 90 days of traffic. Review it.', tone: 'var(--fg-muted)' },
+    suggested: { note: 'Eidos AI suggested this tier from the last 90 days of traffic. Review it.', tone: 'var(--fg-muted)' },
     accepted: { note: 'Accepted — the value is now owned by the service, not the model.', tone: 'var(--fg-muted)' },
     revoked: { note: 'Revoked — the mark stays struck so the next reviewer sees it was checked.', tone: 'var(--fg-muted)' },
   }[status];
@@ -144,7 +144,7 @@ export default function AILabelPage() {
       id="ai-label"
       num="02"
       title="AI Label"
-      desc="A small badge that flags AI-generated content, built from the 4-point Forge sparkle and the ember accent. Attach it to the specific field or value a model wrote — never the whole page."
+      desc="A small badge that flags AI-generated content, built from the 4-point Eidos sparkle and the ember accent. Attach it to the specific field or value a model wrote — never the whole page."
     >
       {/* 1. INSTALLATION */}
       <SubHead meta="package managers">Installation</SubHead>
@@ -261,7 +261,7 @@ export default function AILabelPage() {
             defaultValue="Identity service — issues, rotates, and validates JWT credentials for all internal services."
           />
           <div style={{ fontSize: 'var(--text-base)', color: 'var(--fg-subtle)', marginTop: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
-            <Spark size={9}/> Suggested by Forge AI · accept or edit
+            <Spark size={9}/> Suggested by Eidos AI · accept or edit
           </div>
         </div>
       </Frame>
@@ -416,7 +416,7 @@ export default function AILabelPage() {
             </div>
           </div>
           <div className="ana-list" style={{maxWidth: 560, margin:'56px auto 0'}}>
-            <span className="num">1</span><span><b style={{color:'var(--fg)'}}>Sparkle glyph.</b> 4-point Forge mark in <Mono>currentColor</Mono>. 10–13px depending on size. Sits on the leading edge — flips to trailing in RTL.</span>
+            <span className="num">1</span><span><b style={{color:'var(--fg)'}}>Sparkle glyph.</b> 4-point Eidos mark in <Mono>currentColor</Mono>. 10–13px depending on size. Sits on the leading edge — flips to trailing in RTL.</span>
             <span className="num">2</span><span><b style={{color:'var(--fg)'}}>Label.</b> Geist mono 11px, weight 600, letter-spacing 0.04em. Always "AI" — an internationally recognised initialism, never translated.</span>
             <span className="num">3</span><span><b style={{color:'var(--fg)'}}>Accent color.</b> <Mono>var(--ember)</Mono> for text + border + glyph. One colour, one signal — never re-tint the badge.</span>
             <span className="num">4</span><span><b style={{color:'var(--fg)'}}>Pill shape.</b> <Mono>border-radius: 999px</Mono> with <Mono>--ember-soft</Mono> fill and a 30%-ember border. Other variants (box, mark, dot) drop the fill but keep the same accent + glyph.</span>

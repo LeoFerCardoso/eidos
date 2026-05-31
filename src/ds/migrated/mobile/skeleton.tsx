@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Skeleton. Grey placeholders shaped like the content that's loading, with a
+// Eidos Mobile — Skeleton. Grey placeholders shaped like the content that's loading, with a
 // soft shimmer. They hold the layout so nothing jumps when data lands, and they preview the
 // real structure — never a generic spinner over a blank screen. Show them only past ~300ms.
 import * as React from 'react';

@@ -1,5 +1,5 @@
 'use client';
-// Forge Blocks — Overview. Introduction-style landing; the hero previews a composed section.
+// Eidos Blocks — Overview. Introduction-style landing; the hero previews a composed section.
 import { DsOverview } from '@/components/docs';
 import { Icons } from '@/ds/core';
 
@@ -11,7 +11,7 @@ function BlocksHero() {
         <div className="pat-dot-grid" style={{ position: 'absolute', inset: 0, opacity: 0.4 }} />
         <div style={{ position: 'relative' }}>
           <div className="ds-h-eyebrow" style={{ fontSize: 'var(--text-xs)', marginBottom: 8 }}>Hero block</div>
-          <div style={{ fontSize: 'var(--text-lg)', fontWeight: 600, letterSpacing: '-0.01em' }}>Ship Forge products.</div>
+          <div style={{ fontSize: 'var(--text-lg)', fontWeight: 600, letterSpacing: '-0.01em' }}>Ship Eidos products.</div>
           <div style={{ fontSize: 'var(--text-base)', color: 'var(--fg-muted)', marginTop: 6 }}>Neutral chrome · the page spends its one ember on the CTA below.</div>
           <button className="btn ember sm" style={{ marginTop: 14 }}>Get started</button>
         </div>
@@ -44,7 +44,7 @@ const D: Record<string, string> = {
 export default function BlocksOverview() {
   return (
     <DsOverview
-      eyebrow="Forge / Blocks"
+      eyebrow="Eidos / Blocks"
       title="Compose the page."
       lede="The section-level recipes you assemble a real page from — heroes, feature grids, CTAs, stat bands — built entirely from core primitives and tokens. Copy a block, swap the content, ship the page."
       hero={{
@@ -70,8 +70,8 @@ export default function BlocksOverview() {
       tiles={BLOCKS.map(([slug, label]) => ({ href: `/blocks/${slug}`, label, desc: D[slug] }))}
       footer={{
         title: 'Need a backdrop?',
-        body: 'Pair a block with a texture from Forge Patterns for depth.',
-        actions: <a className="btn" href="/patterns/overview">Forge Patterns <Icons.arrowRight size={14} /></a>,
+        body: 'Pair a block with a texture from Eidos Patterns for depth.',
+        actions: <a className="btn" href="/patterns/overview">Eidos Patterns <Icons.arrowRight size={14} /></a>,
       }}
     />
   );

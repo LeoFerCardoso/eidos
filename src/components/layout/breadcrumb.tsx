@@ -7,7 +7,7 @@ import { navForPath, DESIGN_SYSTEMS } from '@/lib/nav';
 export function Breadcrumb() {
   const pathname = usePathname();
   const { item, ds } = navForPath(pathname);
-  const dsLabel = DESIGN_SYSTEMS.find((d) => d.id === ds)?.label ?? 'Forge';
+  const dsLabel = DESIGN_SYSTEMS.find((d) => d.id === ds)?.label ?? 'Eidos';
   const group = item?.group;
   const subgroup = item?.subgroup;
   const pageLabel = item?.label ?? 'Introduction';

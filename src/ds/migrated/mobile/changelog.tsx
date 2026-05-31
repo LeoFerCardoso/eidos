@@ -8,7 +8,7 @@ const CHANGELOG: ChangelogEntry[] = [
 
   // ─── v1.13.0 — RTL on every component + page-typography standard (2026-05-22) ──────
   { version: 'v1.13.0', date: '2026-05-22', type: 'feat', scope: 'mobile', title: 'RTL section added to all 24 mobile components',
-    summary: 'Every substantive Forge Mobile component page now ships the mandatory RTL section — a live dir="rtl" preview of the component plus a Lede naming exactly what mirrors (icon areas swap via logical inset-inline; directional glyphs flip with scaleX(-1)) and what stays. Examples: the Slider Drawer slides from the right, list/card chevrons mirror, badges and the FAB flip to the leading-left corner, the progress bar fills right-to-left, and tab/segment order reverses.' },
+    summary: 'Every substantive Eidos Mobile component page now ships the mandatory RTL section — a live dir="rtl" preview of the component plus a Lede naming exactly what mirrors (icon areas swap via logical inset-inline; directional glyphs flip with scaleX(-1)) and what stays. Examples: the Slider Drawer slides from the right, list/card chevrons mirror, badges and the FAB flip to the leading-left corner, the progress bar fills right-to-left, and tab/segment order reverses.' },
   { version: 'v1.13.0', date: '2026-05-22', type: 'docs', scope: 'foundations', title: 'Shared page typography (Lede / Mono) + RTL made required',
     summary: 'Section intros now use a shared <Lede> primitive and inline code refs a <Mono> primitive (both from @/ds/core), unified onto the existing .ds-caption scale — no more hand-rolled font sizes per page. docs/DS-PAGE-STANDARD.md §3.5 codifies the type scale against the --text-* tokens and §3.6 makes the RTL section required; the component-page / new-component / new-page skills were rewritten to the current migrated-TSX architecture.' },
   { version: 'v1.13.0', date: '2026-05-22', type: 'feat', scope: 'navigations', title: 'Top Navigation — Installation section + canonical order',
@@ -24,7 +24,7 @@ const CHANGELOG: ChangelogEntry[] = [
 
   // ─── v1.11.0 — 15 new components + Line-style nav (2026-05-22) ──────
   { version: 'v1.11.0', date: '2026-05-22', type: 'feat', scope: 'mobile', title: '15 new components — forms, overlays, navigation, status',
-    summary: 'Forge Mobile roughly doubles to 26 components, inspired by the LINE Design System catalogue but resolved in Forge tokens and the page standard. Inputs: Switch, Selection (checkbox + radio), Text field, Stepper, Slider. Overlays & feedback: Dialog (blocking confirm), Action sheet (bottom verb list), Menu (anchored popover), Progress (linear + circular), Skeleton (shimmer placeholders). Navigation: Tabs (scrollable, sliding underline), Navigation drawer (edge panel + scrim). Content: Avatar (initials/icon/presence/stack), Badge (dot + count). Gestures & actions: Floating action button. Every page ships the full template — Usage in a DeviceFrame, visual Anatomy, Accessibility (44px, roles, contrast, reduced motion), Do/Don\'t, Spec — and honours the contrast invariant (dark ink on every ember fill).' },
+    summary: 'Eidos Mobile roughly doubles to 26 components, inspired by the LINE Design System catalogue but resolved in Eidos tokens and the page standard. Inputs: Switch, Selection (checkbox + radio), Text field, Stepper, Slider. Overlays & feedback: Dialog (blocking confirm), Action sheet (bottom verb list), Menu (anchored popover), Progress (linear + circular), Skeleton (shimmer placeholders). Navigation: Tabs (scrollable, sliding underline), Navigation drawer (edge panel + scrim). Content: Avatar (initials/icon/presence/stack), Badge (dot + count). Gestures & actions: Floating action button. Every page ships the full template — Usage in a DeviceFrame, visual Anatomy, Accessibility (44px, roles, contrast, reduced motion), Do/Don\'t, Spec — and honours the contrast invariant (dark ink on every ember fill).' },
   { version: 'v1.11.0', date: '2026-05-22', type: 'docs', scope: 'mobile', title: 'Components nav regrouped Line-style',
     summary: 'The single Mobile “Components” group split into five domain groups — Inputs, Navigation, Content, Overlays & feedback, Gestures & actions — so the growing catalogue reads as organised rather than one long list. Existing components moved into their domains; sidebar order and breadcrumbs updated.' },
 
@@ -50,7 +50,7 @@ const CHANGELOG: ChangelogEntry[] = [
     summary: 'Drag the list down from scrollTop 0 to reload — the indicator rotates with the pull, flips to ember at the threshold (Release to refresh), then spins (new reusable .ds-spin utility) while loading.' },
 
   // ─── v1.9.0 — Mobile launches as a sub-DS (2026-05-21) ──────
-  { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'mobile', title: 'Forge Mobile launched at /mobile',
+  { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'mobile', title: 'Eidos Mobile launched at /mobile',
     summary: 'A new touch-first sub-DS: the same token graph and ember, re-sized for the thumb — 44px targets, bottom-anchored navigation and actions, edge-to-edge sheets, safe-area aware. Previewed at true device dimensions.' },
   { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'device-frame', title: 'DeviceFrame — true device dimensions + device picker',
     summary: 'Every mobile surface renders inside a DeviceFrame: real logical px (iPhone 15 Pro / 16 Pro Max / SE, Pixel 8, Galaxy S24) scaled to fit, with a header combobox to switch presets. A theme-adaptive bezel (light frame in light mode, dark in dark) with realistic black hardware — Dynamic Island + camera, punch-hole, home indicator. A `bare` mode hides the picker for static hero use.' },
@@ -67,8 +67,8 @@ export default function MobileChangelog() {
     <ChangelogView
       entries={CHANGELOG}
       title="Changelog"
-      desc="Every change to Forge Mobile — searchable, filterable, scoped per component."
-      dsName="Forge Mobile"
+      desc="Every change to Eidos Mobile — searchable, filterable, scoped per component."
+      dsName="Eidos Mobile"
     />
   );
 }

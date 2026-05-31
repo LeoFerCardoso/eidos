@@ -296,7 +296,7 @@ export default function Page() {
             { prop: 'stroke',       type: 'CSS color',description: 'Outline of the polygon. Keep at 1–1.5 stroke-width.' },
             { prop: 'fill',         type: 'CSS color',description: 'Filled region. Keep opacity 0.15–0.22 so overlapping series remain readable.' },
             { prop: 'fillOpacity',  type: 'number',   default: '0.18' },
-            { prop: 'PolarAngleAxis tick', type: 'object', description: 'Style for axis labels. Forge default: 12px mono / --fg / weight 500.' },
+            { prop: 'PolarAngleAxis tick', type: 'object', description: 'Style for axis labels. Eidos default: 12px mono / --fg / weight 500.' },
             { prop: 'PolarGrid gridType',  type: '"polygon" | "circle"', default: '"polygon"', description: 'Polygon mirrors the data shape; circle is more decorative.' },
             { prop: 'PolarRadiusAxis domain', type: '[min, max]', default: '[0, "auto"]', description: 'Force the radial scale (e.g. [0, 100] for percentages).' },
           ]}

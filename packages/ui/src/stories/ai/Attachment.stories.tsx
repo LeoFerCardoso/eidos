@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Attachment, PromptInput, Message, Response, ImageView } from '@forge/ui';
+import { Attachment, PromptInput, Message, Response, ImageView } from '@eidos/ui';
 
 // ── Attachment ─────────────────────────────────────────────────────────────────
 // An attachment chip + three contexts where it appears:

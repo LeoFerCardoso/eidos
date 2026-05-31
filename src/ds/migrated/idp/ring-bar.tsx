@@ -1,12 +1,12 @@
 'use client';
-// Forge DS — Components / RingBar
+// Eidos DS — Components / RingBar
 // Horizontal cohort strip for ring-deployment rollouts. The concentric
 // variant was retired in v1.5.0 — see CHANGELOG.
 import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs, RingBar, Lede, Mono } from '@/ds/core';
 
 
 const RINGS = [
-  { label: 'Ring 0', audience: 'Engineers (Forge team)',         percent: 100, status: 'done' },
+  { label: 'Ring 0', audience: 'Engineers (Eidos team)',         percent: 100, status: 'done' },
   { label: 'Ring 1', audience: 'Internal dogfood (~120 ppl)',     percent: 100, status: 'done' },
   { label: 'Ring 2', audience: 'Early-access cohorts (3 squads)', percent: 100, status: 'done' },
   { label: 'Ring 3', audience: '50% of production traffic',       percent: 64,  status: 'running' },

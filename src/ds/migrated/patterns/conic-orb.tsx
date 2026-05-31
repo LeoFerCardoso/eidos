@@ -63,10 +63,10 @@ export default function ConicOrbPage() {
         <div className="pat-dot-grid" style={{position:'relative', overflow:'hidden', padding: 32, border:'1px solid var(--border)', borderRadius: 'var(--radius-2xl)', minHeight: 220}}>
           <div className="pat-conic-orb is-lg" aria-hidden="true" style={{top: -140, insetInlineEnd: -140}}/>
           <div style={{position:'relative', maxWidth: '60%'}}>
-            <div className="ds-h-eyebrow" style={{marginBottom: 8}}>Forge AI</div>
+            <div className="ds-h-eyebrow" style={{marginBottom: 8}}>Eidos AI</div>
             <div style={{fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing:'-0.02em', lineHeight: 1.15}}>An agent for every loop in your platform.</div>
             <p style={{fontSize: 'var(--text-base)', color:'var(--fg-muted)', maxWidth: '40ch', marginTop: 12, lineHeight: 1.55}}>Open a drawer, ask, ship. The orb is on the right; the proposition is on the left.</p>
-            <button className="btn ember sm" style={{marginTop: 14}}>Try Forge AI <Icons.sparkle size={12}/></button>
+            <button className="btn ember sm" style={{marginTop: 14}}>Try Eidos AI <Icons.sparkle size={12}/></button>
           </div>
         </div>
       </Frame>

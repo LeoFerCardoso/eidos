@@ -11,7 +11,7 @@ const CHANGELOG: ChangelogEntry[] = [
     summary: 'Each texture page got a sharpened lede and an Accessibility section: the pattern is decorative (aria-hidden) and never the only carrier of meaning, content over it keeps AA contrast via a solid/scrim layer, and any animated pattern (conic-orb is-spin, ember-glow is-pulse, gradient-border is-spin) is gated behind prefers-reduced-motion.' },
 
   // ─── v1.9.0 — Patterns becomes its own sub-DS (2026-05-21) ──────
-  { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'patterns', title: 'Forge Patterns split into its own sub-DS at /patterns',
+  { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'patterns', title: 'Eidos Patterns split into its own sub-DS at /patterns',
     summary: 'The eight visual textures moved into a dedicated Patterns sub-DS, route-prefixed at /patterns. They stay pure decoration — CSS / SVG over the same --ember / --ice / surface tokens, never a new accent, never a page-level shell.' },
   { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'overview', title: 'Overview rebuilt — texture swatches in the hero',
     summary: 'New Introduction-style Overview whose hero is a 2×2 grid of live texture swatches (dot-grid, mesh, conic-orb, spotlight) rendered via the real .pat-* classes instead of stat cards.' },
@@ -30,8 +30,8 @@ export default function PatternsChangelog() {
     <ChangelogView
       entries={CHANGELOG}
       title="Changelog"
-      desc="Every change to Forge Patterns — searchable, filterable, scoped per texture."
-      dsName="Forge Patterns"
+      desc="Every change to Eidos Patterns — searchable, filterable, scoped per texture."
+      dsName="Eidos Patterns"
     />
   );
 }

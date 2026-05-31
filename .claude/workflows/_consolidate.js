@@ -24,9 +24,9 @@ You are a Forge DS engineer. Repo: ${REPO}. Obey these conventions (read the fil
 HARD RULES (never violate — these are acceptance criteria):
 1. CONTRAST: any fg on a colored/elevated surface gets an explicit contrasting color; on ember (var(--accent)/#FF6B35) the fg is DARK INK (#08090A / var(--bg)), never ember. dark surface→light fg, light surface→dark fg.
 2. Single ember accent, ≤2×/screen. Geist Sans (UI) + Geist Mono (numerics/eyebrows).
-3. NO per-page <style>. Any CSS a promoted component needs MUST be moved into packages/ui/styles/tokens.css or ds.css (de-indented, with a section comment) so it ships styled via 'forge-ui add'. Leave NO <style> block behind in the docs page.
+3. NO per-page <style>. Any CSS a promoted component needs MUST be moved into packages/ui/styles/tokens.css or ds.css (de-indented, with a section comment) so it ships styled via 'eidos add'. Leave NO <style> block behind in the docs page.
 4. Logical CSS props only (margin-inline-*, padding-inline-*, inset-inline-*) — RTL is first-class. Directional glyphs (chevrons) mirror under [dir=rtl]; trend arrows do NOT mirror.
-5. Framework-agnostic React over the SEMANTIC CSS layer. NO Tailwind utilities, NO Radix in the component layer. Use cn() from '@forge/ui'. Components import only from within @forge/ui (icons/atoms/etc.), never from the docs app.
+5. Framework-agnostic React over the SEMANTIC CSS layer. NO Tailwind utilities, NO Radix in the component layer. Use cn() from '@eidos/ui'. Components import only from within @eidos/ui (icons/atoms/etc.), never from the docs app.
 6. NAMING: custom value components use \`value\` + \`onValueChange:(v)=>void\`. Native-input wrappers keep native \`onChange\`. Breaking renames ship WITH an @deprecated back-compat alias export for one release.
 7. Keep JSX SWC-valid in docs pages (escape a literal '>' as {'>'}).
 Report exactly which files you wrote/edited and the exports added.`

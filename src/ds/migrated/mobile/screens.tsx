@@ -1,9 +1,9 @@
 'use client';
-// Forge Mobile — Example screens. Full handset screens with the generous mobile typography
+// Eidos Mobile — Example screens. Full handset screens with the generous mobile typography
 // of a real app: a task Board and an Activity feed, on the --bg canvas with lifted cards.
 //
 // Reuse policy (compose, never reinvent): the OS strip is the shared, platform-aware
-// <StatusBar/> from @forge/ui (tabular clock + pixel-aligned signal/wifi/battery glyphs that
+// <StatusBar/> from @eidos/ui (tabular clock + pixel-aligned signal/wifi/battery glyphs that
 // adapt iOS↔Android per device), not a hand-rolled local copy. Avatars / pills / surfaces
 // are core atoms. Raw px inside the device screens is intentional — real mobile type rides
 // larger than the docs scale so the canvas reads at arm's length.
@@ -242,7 +242,7 @@ export default function MobileScreens() {
       </div>
 
       <p className="ds-caption">
-        Both screens are pure Forge — the canvas is <Mono>--bg</Mono>, cards lift on
+        Both screens are pure Eidos — the canvas is <Mono>--bg</Mono>, cards lift on
         {' '}<Mono>--surface</Mono> with <Mono>--elev-1</Mono>, and the type ramps up for the thumb
         (30px titles, 19px section heads, 15px body).
       </p>

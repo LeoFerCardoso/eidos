@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Switch (formerly Toggle).
+// Eidos DS — Components / Switch (formerly Toggle).
 // A binary setting that takes effect immediately — no save button. The
 // thumb glides on a (0.34, 1.56, 0.64, 1) cubic-bezier so it overshoots
 // slightly then settles, giving the control a tactile, spring-like feel

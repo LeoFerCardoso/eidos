@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Overview. Introduction-style landing; the hero is a real DeviceFrame
+// Eidos Mobile — Overview. Introduction-style landing; the hero is a real DeviceFrame
 // whose service widget cycles through the lifecycle states a mobile health surface
 // actually has — loading → degraded → down — so the preview performs, not just poses.
 import * as React from 'react';
@@ -44,7 +44,7 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
-// App home — a Forge header (logo + name · avatar), then a service widget that
+// App home — a Eidos header (logo + name · avatar), then a service widget that
 // renders one of three real states with an animated counter and a framed DS area
 // chart. `phase` is driven by the hero; `cycle` re-keys the CountUp so it re-ticks.
 function MobileMini({ phase, cycle }: { phase: Phase; cycle: number }) {
@@ -58,10 +58,10 @@ function MobileMini({ phase, cycle }: { phase: Phase; cycle: number }) {
         <span>9:41</span>
         <span style={{ display: 'inline-flex', gap: 4, color: 'var(--fg-muted)' }}><Icons.activity size={11} /><Icons.battery size={12} /></span>
       </div>
-      {/* app header — Forge logo (solid flame, the brand mark) + name, avatar trailing */}
+      {/* app header — Eidos logo (solid flame, the brand mark) + name, avatar trailing */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '16px 18px 22px', flex: '0 0 auto' }}>
         <ForgeMark size={23} variant="solid" color="var(--ember)" />
-        <span style={{ fontWeight: 700, letterSpacing: '-0.02em', fontSize: 'var(--text-lg)' }}>Forge</span>
+        <span style={{ fontWeight: 700, letterSpacing: '-0.02em', fontSize: 'var(--text-lg)' }}>Eidos</span>
         <span style={{ marginInlineStart: 'auto', width: 30, height: 30, borderRadius: 999, background: 'var(--surface)', border: '1px solid var(--border-strong)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--fg-muted)' }}>LC</span>
       </div>
       {/* service widget — distinct card that bleeds to the bottom edge of the hero */}
@@ -197,12 +197,12 @@ const D: Record<string, string> = {
 export default function MobileOverview() {
   return (
     <DsOverview
-      eyebrow="Forge / Mobile"
-      title="Touch-first Forge."
+      eyebrow="Eidos / Mobile"
+      title="Touch-first Eidos."
       lede="The same token graph, the same ember, the same primitives — re-sized for the thumb. Larger hit targets, bottom-anchored navigation and actions, edge-to-edge sheets, safe-area aware. Previewed at true device dimensions."
       hero={{
         eyebrow: 'Handset · 44px targets · safe-area',
-        heading: 'Forge, scaled for the thumb.',
+        heading: 'Eidos, scaled for the thumb.',
         subtitle: 'Same tokens, touch-first layout.',
         body: 'Navigation and primary actions live within thumb reach — tab bars and sheets, not top toolbars. Every surface ships its real states — loading, degraded, down — previewed at true iPhone / Pixel dimensions.',
         actions: (
@@ -218,7 +218,7 @@ export default function MobileOverview() {
       principles={[
         { t: '44px targets', d: 'Every tappable element clears the minimum touch target; spacing scales up from the 4-pt base.' },
         { t: 'Bottom-anchored', d: 'Navigation and primary actions sit within thumb reach — tab bars and bottom sheets, not top toolbars.' },
-        { t: 'Same language', d: 'Inherits tokens.css + ds.css. No new palette, no new accent — Forge, re-laid for touch.' },
+        { t: 'Same language', d: 'Inherits tokens.css + ds.css. No new palette, no new accent — Eidos, re-laid for touch.' },
       ]}
       tilesTitle="Components"
       tiles={PAGES.map(([slug, label]) => ({ href: `/mobile/${slug}`, label, desc: D[slug] }))}

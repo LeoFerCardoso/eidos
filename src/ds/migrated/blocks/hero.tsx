@@ -8,7 +8,7 @@ import { Icons, Frame, Section, SubHead, PropsTable, Mono, Kbd } from '@/ds/core
 //    Use on the marketing landing, the product home, and the H1 splash.
 // ==========================================================================
 const HERO_BOLD_CODE = `<Hero variant="bold">
-  <Hero.Eyebrow>Forge / 2026 H1</Hero.Eyebrow>
+  <Hero.Eyebrow>Eidos / 2026 H1</Hero.Eyebrow>
   <Hero.Headline>
     Ship safely. <span className="muted">Faster.</span>
   </Hero.Headline>
@@ -25,7 +25,7 @@ const HeroBold = () => (
     <div className="hero-grid"/>
     <div className="ember-glow-bg" style={{width: 400, height: 400, right: -100, top: -100}}/>
     <div style={{position:'relative'}}>
-      <div className="ds-h-eyebrow" style={{marginBottom: 10}}>Forge / 2026 H1</div>
+      <div className="ds-h-eyebrow" style={{marginBottom: 10}}>Eidos / 2026 H1</div>
       <div style={{fontSize: 'var(--text-3xl)', fontWeight: 600, letterSpacing:'-0.02em', lineHeight: 1.15, maxWidth: '24ch'}}>
         Ship safely. <span style={{color:'var(--fg-muted)'}}>Faster.</span>
       </div>
@@ -42,7 +42,7 @@ const HeroBold = () => (
 //    Use when the message IS the hero (manifesto, principle, brand page).
 // ==========================================================================
 const HERO_EDITORIAL_CODE = `<Hero variant="editorial">
-  <Hero.Eyebrow centered>Forge — Engineering Charter</Hero.Eyebrow>
+  <Hero.Eyebrow centered>Eidos — Engineering Charter</Hero.Eyebrow>
   <Hero.Headline centered display>
     We move at the speed of trust,
     <br/>
@@ -56,7 +56,7 @@ const HERO_EDITORIAL_CODE = `<Hero variant="editorial">
 
 const HeroEditorial = () => (
   <div style={{width:'100%', minHeight: 280, padding: '56px 40px', background:'var(--bg-elevated)', border:'1px solid var(--border)', borderRadius: 10, textAlign:'center'}}>
-    <div className="ds-h-eyebrow" style={{marginBottom: 18}}>Forge — Engineering Charter</div>
+    <div className="ds-h-eyebrow" style={{marginBottom: 18}}>Eidos — Engineering Charter</div>
     <div style={{fontSize: 'var(--text-display)', lineHeight: 1.05, fontWeight: 600, letterSpacing:'-0.03em', maxWidth: '16ch', margin:'0 auto'}}>
       We move at the speed of trust,<br/>
       not the speed of merge.
@@ -129,7 +129,7 @@ const HeroSplit = () => (
 //    Use on enterprise landing pages, sales motion, and case studies.
 // ==========================================================================
 const HERO_LADDER_CODE = `<Hero variant="ladder">
-  <Hero.Eyebrow>Forge for platform teams</Hero.Eyebrow>
+  <Hero.Eyebrow>Eidos for platform teams</Hero.Eyebrow>
   <Hero.Headline>The control plane your auditors finally trust.</Hero.Headline>
   <Hero.Lede>
     Every deploy is signed, every change is reversible,
@@ -155,7 +155,7 @@ const Stat = ({label, value, delta}) => (
 
 const HeroLadder = () => (
   <div style={{width:'100%', padding: 36, background:'var(--bg-elevated)', border:'1px solid var(--border)', borderRadius: 10}}>
-    <div className="ds-h-eyebrow" style={{marginBottom: 10}}>Forge for platform teams</div>
+    <div className="ds-h-eyebrow" style={{marginBottom: 10}}>Eidos for platform teams</div>
     <div style={{fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing:'-0.02em', maxWidth: '20ch', lineHeight: 1.15}}>
       The control plane your auditors finally trust.
     </div>
@@ -178,7 +178,7 @@ const HeroLadder = () => (
 // ==========================================================================
 const HERO_QUIET_CODE = `<Hero variant="quiet">
   <Hero.Headline small>
-    Forge UI <span className="muted">— components, primitives, patterns.</span>
+    Eidos UI <span className="muted">— components, primitives, patterns.</span>
   </Hero.Headline>
   <Hero.Actions>
     <Button variant="ember" size="sm">
@@ -190,7 +190,7 @@ const HERO_QUIET_CODE = `<Hero variant="quiet">
 const HeroQuiet = () => (
   <div style={{width:'100%', padding:'24px 28px', background:'var(--bg-elevated)', border:'1px solid var(--border)', borderRadius: 10, display:'flex', alignItems:'center', justifyContent:'space-between', gap: 24, flexWrap:'wrap'}}>
     <div style={{fontSize: 'var(--text-lg)', fontWeight: 600, letterSpacing:'-0.01em'}}>
-      Forge UI <span style={{color:'var(--fg-muted)', fontWeight: 500}}>— components, primitives, patterns.</span>
+      Eidos UI <span style={{color:'var(--fg-muted)', fontWeight: 500}}>— components, primitives, patterns.</span>
     </div>
     <button className="btn ember sm">Browse components <Icons.arrowRight size={12}/></button>
   </div>
@@ -293,7 +293,7 @@ export default function HeroPattern() {
             <div className="stage" style={{position:'relative', width: 440, padding: 28, background:'var(--bg)', border:'1px solid var(--border)', borderRadius: 10, overflow:'hidden'}} aria-hidden="true">
               <div className="hero-grid"/>
               <div style={{position:'relative'}}>
-                <div className="ds-h-eyebrow" style={{marginBottom: 8}}>Forge / 2026</div>
+                <div className="ds-h-eyebrow" style={{marginBottom: 8}}>Eidos / 2026</div>
                 <div style={{fontSize: 'var(--text-xl)', fontWeight: 600, letterSpacing:'-0.02em', maxWidth: '20ch', lineHeight: 1.15}}>
                   Ship safely. <span style={{color:'var(--fg-muted)'}}>Faster.</span>
                 </div>
@@ -364,7 +364,7 @@ export default function HeroPattern() {
         <div className="dd-card do">
           <div className="head"><Icons.check size={12}/> Do — one ember CTA, one ghost</div>
           <div className="body" style={{flexDirection:'column', alignItems:'flex-start', gap: 10, padding: 18}}>
-            <div className="ds-h-eyebrow">Forge / 2026</div>
+            <div className="ds-h-eyebrow">Eidos / 2026</div>
             <div style={{fontSize: 'var(--text-lg)', fontWeight: 600, letterSpacing:'-0.015em'}}>Ship safely. Faster.</div>
             <div style={{display:'flex', gap: 8}}>
               <button className="btn ember sm">Get started</button>
@@ -376,7 +376,7 @@ export default function HeroPattern() {
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — three competing CTAs of equal weight</div>
           <div className="body" style={{flexDirection:'column', alignItems:'flex-start', gap: 10, padding: 18}}>
-            <div className="ds-h-eyebrow">Forge / 2026</div>
+            <div className="ds-h-eyebrow">Eidos / 2026</div>
             <div style={{fontSize: 'var(--text-lg)', fontWeight: 600, letterSpacing:'-0.015em'}}>Ship safely. Faster.</div>
             <div style={{display:'flex', gap: 8}}>
               <button className="btn ember sm">Get started</button>
@@ -399,7 +399,7 @@ export default function HeroPattern() {
           <div className="body" style={{flexDirection:'column', alignItems:'flex-start', gap: 6, padding: 18}}>
             <div className="ds-h-eyebrow">v4.18</div>
             <div style={{fontSize: 'var(--text-lg)', fontWeight: 600, letterSpacing:'-0.015em', lineHeight: 1.2}}>
-              Forge now ships an opinionated runbook surface that links every alert to the deploy that caused it and the on-call who owns it, plus a one-click Slack handoff.
+              Eidos now ships an opinionated runbook surface that links every alert to the deploy that caused it and the on-call who owns it, plus a one-click Slack handoff.
             </div>
           </div>
           <div className="note">If the headline takes a paragraph to say, the lede is doing it wrong. Compress the headline; expand the lede.</div>

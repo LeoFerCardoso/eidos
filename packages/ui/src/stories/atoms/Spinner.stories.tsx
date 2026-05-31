@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { Spinner } from '@forge/ui';
+import { Spinner } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/Spinner',

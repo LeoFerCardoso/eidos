@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Prose, ProseCode } from '@forge/ui';
+import { Prose, ProseCode } from '@eidos/ui';
 
 const meta = {
   title: 'AI/Prose',

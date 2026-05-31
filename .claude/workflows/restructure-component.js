@@ -1,7 +1,7 @@
 export const meta = {
   name: 'restructure-component',
   description:
-    'Restructure ONE Forge DS component end-to-end so its three surfaces are correct and consistent: the docs page (section standard), the Storybook story (CSF3 / atomic-clean taxonomy), and the install/registry item (forge-ui add). Flow: resolve+audit → 3 parallel rebuilds → build/verify (auto-fix) → adversarial critique.',
+    'Restructure ONE Forge DS component end-to-end so its three surfaces are correct and consistent: the docs page (section standard), the Storybook story (CSF3 / atomic-clean taxonomy), and the install/registry item (eidos add). Flow: resolve+audit → 3 parallel rebuilds → build/verify (auto-fix) → adversarial critique.',
   whenToUse:
     'Improving or building an existing Forge DS component. Invoke with args = a component name/slug string, or { component, dryRun, skipDocs, skipStory, skipInstall }. dryRun returns the audit/gap report without editing files.',
   phases: [
@@ -31,7 +31,7 @@ FORGE INVARIANTS (never violate): single ember accent #FF6B35 (≤2×/screen); d
 
 Storybook taxonomy (atomic-clean): Primitives · Forms · Atoms · Blocks · Charts · Overlays · Device · AI · Icons · Docs. Story title must use the correct group.
 
-Install model: a component is installable when (a) it is a curated entry in scripts/extract-registry.mjs FAMILIES, (b) its registry item declares the right registryDependencies (forge base, +forge-ai for AI components, + any sibling components it imports) and npm dependencies, and (c) any page-local <style> CSS it relies on has been PROMOTED into the shared packages/ui/styles/tokens.css (like .in-drop / .cal-* were) so it ships styled via forge-ui add.
+Install model: a component is installable when (a) it is a curated entry in scripts/extract-registry.mjs FAMILIES, (b) its registry item declares the right registryDependencies (forge base, +forge-ai for AI components, + any sibling components it imports) and npm dependencies, and (c) any page-local <style> CSS it relies on has been PROMOTED into the shared packages/ui/styles/tokens.css (like .in-drop / .cal-* were) so it ships styled via eidos add.
 `
 
 const AUDIT_SCHEMA = {
@@ -39,7 +39,7 @@ const AUDIT_SCHEMA = {
   additionalProperties: false,
   properties: {
     component: { type: 'string', description: 'Canonical PascalCase export name.' },
-    exists: { type: 'boolean', description: 'Does the component already exist as an exported @forge/ui component?' },
+    exists: { type: 'boolean', description: 'Does the component already exist as an exported @eidos/ui component?' },
     sourceFile: { type: 'string', description: 'Path to the component source (packages/ui/src/...), or "" if it must be created.' },
     family: { type: 'string', description: 'atoms|primitives|blocks|charts|device|drawer|forms|icons|ai|overlays' },
     storyTitle: { type: 'string', description: 'Correct atomic-clean Storybook title, e.g. "Forms/Combobox".' },
@@ -150,20 +150,20 @@ ${A}
 DO:
 - Author/rewrite the co-located CSF3 story at ${audit.storyFile || `packages/ui/src/stories/${audit.family}/${audit.component}.stories.tsx`}.
 - Pattern (match Banner/StatusDot stories): import type { Meta, StoryObj } from '@storybook/react-vite';
-  import { ${audit.component} } from '@forge/ui'; const meta = { title: '${audit.storyTitle}', component: ${audit.component},
+  import { ${audit.component} } from '@eidos/ui'; const meta = { title: '${audit.storyTitle}', component: ${audit.component},
   tags: ['autodocs'], parameters, args, argTypes } satisfies Meta<typeof ${audit.component}>; export default meta;
   type Story = StoryObj<typeof meta>.
 - Stories: Default (driven by args) + one per real Variant/Size/State from the audit + an InContext story
-  (compose with siblings; use MOCKS from '@forge/ui' for data-heavy components). Interactive/stateful
+  (compose with siblings; use MOCKS from '@eidos/ui' for data-heavy components). Interactive/stateful
   controls use a React.useState wrapper inside render. Rely on the global theme + RTL + a11y toolbars
   (do NOT duplicate stories per theme/direction). Correct atomic-clean title group.
-- Only import from '@forge/ui'. Provide ALL required props. Keep it tsc-clean.
+- Only import from '@eidos/ui'. Provide ALL required props. Keep it tsc-clean.
 Report the file you wrote.`,
   { label: `story:${audit.component}`, phase: 'Restructure', agentType: 'design-system-engineer' },
 ))
 
 if (!input.skipInstall) streams.push(() => agent(
-  `Repo: ${REPO}. Fix the INSTALL / REGISTRY surface for ${audit.component} so 'forge-ui add ${audit.registryName}' works and ships it styled.
+  `Repo: ${REPO}. Fix the INSTALL / REGISTRY surface for ${audit.component} so 'eidos add ${audit.registryName}' works and ships it styled.
 ${STANDARDS}
 
 AUDIT (shared source of truth):
@@ -194,7 +194,7 @@ and report each as a check (fix + re-run on failure; do not stop at the first re
   1. node scripts/gen-props.mjs              (refresh AutoPropsTable rows for ${audit.component})
   2. npm run ui:typecheck                    (0 errors)
   3. npm run registry:build                  (component appears; expected count grows; deps correct)
-  4. npm run cli:test  &&  npm run cli:test:full   (both ALL_PASS — proves forge-ui add ${audit.registryName} installs + the tree typechecks)
+  4. npm run cli:test  &&  npm run cli:test:full   (both ALL_PASS — proves eidos add ${audit.registryName} installs + the tree typechecks)
   5. npm run sb:build                         (story compiles; title under '${audit.storyTitle.split('/')[0]}/')
   6. npm run build                            (docs: 247+ routes, Compiled successfully — confirm .next/BUILD_ID present)
   7. npm run start (background) then: node scripts/verify-render.mjs ${audit.docRoute || '/' + audit.registryName}   (route renders clean), then stop the server

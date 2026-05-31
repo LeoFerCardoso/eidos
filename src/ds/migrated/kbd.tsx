@@ -80,7 +80,7 @@ export default function KbdPage() {
         <Kbd keys={['⌃',',']} />
       </Frame>
       <p className="ds-caption">
-        Forge convention: place keys side-by-side with a 2px gap. Avoid <Mono>Cmd+K</Mono> — the plus character drops to baseline and breaks the visual rhythm of the monospace cells.
+        Eidos convention: place keys side-by-side with a 2px gap. Avoid <Mono>Cmd+K</Mono> — the plus character drops to baseline and breaks the visual rhythm of the monospace cells.
       </p>
 
       {/* ── In context ──────────────────────────────────────────── */}

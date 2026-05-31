@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Code block (§2.2 component-page standard).
+// Eidos AI — Code block (§2.2 component-page standard).
 // Documents the two code surfaces in AI replies: the standalone CodeBlock
 // from core (label + copy + syntax-highlighted body) and the inline ProseCode
 // (language header + copy + scrollable mono body inside .ai-prose). A live
@@ -15,7 +15,7 @@ const SHIKI_CODE = `import { Experimental_Agent as Agent, stepCountIs } from 'ai
 
 const agent = new Agent({
   model: 'anthropic/claude-sonnet-4-6',
-  system: 'You are the Forge platform agent.',
+  system: 'You are the Eidos platform agent.',
   tools: { getServiceHealth, openIncident },
   stopWhen: stepCountIs(8),
 });
@@ -200,7 +200,7 @@ export default function AiCodeBlock() {
       {/* LIVE SHIKI DEMO */}
       <SubHead meta="shiki · github-dark">Live syntax highlight</SubHead>
       <Lede>
-        The built-in tokenizer is a lightweight single-pass highlighter. For documentation that benefits from full grammar-aware colouring, wire Shiki via a dynamic import in <Mono>useEffect</Mono> (never in core — it's a heavy dep). Shiki's output is self-styled inline; wrap it in a Forge surface for border-radius and overflow control.
+        The built-in tokenizer is a lightweight single-pass highlighter. For documentation that benefits from full grammar-aware colouring, wire Shiki via a dynamic import in <Mono>useEffect</Mono> (never in core — it's a heavy dep). Shiki's output is self-styled inline; wrap it in a Eidos surface for border-radius and overflow control.
       </Lede>
       <Frame label="Shiki · github-dark · TypeScript — loads on mount" height={320}>
         <ShikiDemo/>

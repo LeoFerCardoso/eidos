@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / FilterPanel
+// Eidos DS — Components / FilterPanel
 // Sidebar of grouped facets.
 import * as React from 'react';
 import { AutoPropsTable, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, FilterPanel, Icons, Lede, Mono } from '@/ds/core';

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 // DS stylesheets, in the same order the original HTML shells loaded them.
-// The base layer (tokens + ds + ai) ships from the extracted @forge/ui package.
-import '@forge/ui/styles/tokens.css';
-import '@forge/ui/styles/ds.css';
-import '@forge/ui/styles/ai.css';
+// The base layer (tokens + ds + ai) ships from the extracted @eidos/ui package.
+import '@eidos/ui/styles/tokens.css';
+import '@eidos/ui/styles/ds.css';
+import '@eidos/ui/styles/ai.css';
 import '../src/styles/ai-shell.css';
 import '../src/styles/example-shell.css';
 import './tailwind.css';
@@ -11,7 +11,7 @@ import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'Forge — Design System',
+  title: 'Eidos — Design System',
   description: "The design system that powers Equifax/Boa Vista's Internal Developer Platform.",
 };
 

@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Tag. A small content-classification label (category, topic,
+// Eidos Mobile — Tag. A small content-classification label (category, topic,
 // keyword) that lives inline with text or at the top of a card. NOT a status
 // pill and NOT the notification Badge. Variants: solid, soft, outline,
 // removable (×), plus an optional leading dot or icon. Tap target on removable
@@ -11,7 +11,7 @@ import { Section, SubHead, Frame, CodeBlock, DeviceFrame, Icons, Lede, Mono } fr
 // ── Primitive ────────────────────────────────────────────────────────────────
 // Shared geometry — the single source of the tag's pill metrics. These mirror
 // the `m-tag` recipe (see sharedRequest): label uses the mono eyebrow tracking,
-// the capsule reads from --space-* so the rhythm matches the rest of Forge.
+// the capsule reads from --space-* so the rhythm matches the rest of Eidos.
 
 const TAG_TRACK = '0.03em';             // mono keyword tracking (matches eyebrows)
 const TAG_GAP = 'var(--space-1)';       // 4px between dot/icon and label
@@ -464,7 +464,7 @@ export default function MobileTag() {
         The <Mono>m-tag</Mono> recipe is one capsule with three fills.
         Metrics come from the space scale — <Mono>--space-1</Mono> block padding and gap,
         <Mono>--space-3</Mono> inline padding (collapsing to <Mono>--space-1</Mono> on the
-        remove side) — so the rhythm matches the rest of Forge. The variant
+        remove side) — so the rhythm matches the rest of Eidos. The variant
         modifiers (<Mono>--solid</Mono>, <Mono>--soft</Mono>, <Mono>--outline</Mono>)
         swap only the fill, ink, and border.
       </Lede>

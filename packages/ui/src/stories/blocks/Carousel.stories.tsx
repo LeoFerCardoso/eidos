@@ -7,7 +7,7 @@ import {
   CarouselNext,
   CarouselDots,
   CarouselControls,
-} from '@forge/ui';
+} from '@eidos/ui';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 

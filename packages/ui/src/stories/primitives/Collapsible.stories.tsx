@@ -4,7 +4,7 @@ import {
   Collapsible,
   CollapsibleTrigger,
   CollapsibleContent,
-} from '@forge/ui';
+} from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/Collapsible',

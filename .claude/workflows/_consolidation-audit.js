@@ -1,7 +1,7 @@
 export const meta = {
   name: 'consolidation-audit',
   description:
-    'Read-only audit for the Forge DS consolidation + Storybook-completion program: deep-dives the 4 consolidation cases (Calendar, Badge family, Counter/CountUp, Select vs Combobox vs Dropdown) and builds a full coverage matrix (docs page ↔ @forge/ui export ↔ story ↔ registry item) classifying every component as complete / story-only / promote-component / consolidate. Produces the plan inputs — makes NO edits.',
+    'Read-only audit for the Forge DS consolidation + Storybook-completion program: deep-dives the 4 consolidation cases (Calendar, Badge family, Counter/CountUp, Select vs Combobox vs Dropdown) and builds a full coverage matrix (docs page ↔ @eidos/ui export ↔ story ↔ registry item) classifying every component as complete / story-only / promote-component / consolidate. Produces the plan inputs — makes NO edits.',
   whenToUse: 'Before planning the Forge DS component-consolidation + Storybook coverage work.',
   phases: [
     { title: 'Consolidation deep-dives' },
@@ -14,7 +14,7 @@ const REPO = '/Users/leocardoso/Projects/forge-ds'
 
 const GROUND = `
 GROUND TRUTH (verify against disk — packages/ui/src/index.ts barrel, packages/ui/src/stories/**, packages/registry/registry.generated.json — but use this to move fast):
-- @forge/ui REAL component exports (a component is "real" only if it is exported here; everything else lives only as CSS + inline JSX in a docs page and is "docs-only"):
+- @eidos/ui REAL component exports (a component is "real" only if it is exported here; everything else lives only as CSS + inline JSX in a docs page and is "docs-only"):
   atoms: Sparkline, Counter, CountUp(=alias of Counter), Avatar, TierBadge, LangBadge, Empty, StatusDot, Trend, HealthBadge, SeverityPill, KbdRow, CopyChip, RelativeTime, OwnerPill
   blocks: Banner, MetricCard, Stat, Pipeline, Timeline, RingBar, ScoreGauge, LogViewer, DiffViewer, TreeView, JSONInspector, ServiceCard, AgentCard, FilterPanel, DataTable
   calendar: Calendar, RangeCalendar
@@ -37,7 +37,7 @@ const DEEPDIVE = {
     caseName: { type: 'string' },
     currentState: { type: 'string', description: 'What exists today across component/story/docs — concrete, cite files.' },
     fragmentation: { type: 'array', items: { type: 'string' }, description: 'The redundant or over-split pieces (separate components/stories that should fold into one).' },
-    featureGap: { type: 'array', items: { type: 'string' }, description: 'Features present in the DS docs page but missing from the @forge/ui component and/or Storybook.' },
+    featureGap: { type: 'array', items: { type: 'string' }, description: 'Features present in the DS docs page but missing from the @eidos/ui component and/or Storybook.' },
     regressionDiagnosis: { type: 'string', description: 'Root cause of any bug/regression (e.g. Select chevron gone) with file:line. "" if N/A.' },
     proposedApi: {
       type: 'object', additionalProperties: false,
@@ -68,8 +68,8 @@ const COVERAGE = {
         properties: {
           docSlug: { type: 'string' },
           displayName: { type: 'string' },
-          exportName: { type: 'string', description: 'The @forge/ui export name, or "" if docs-only.' },
-          isRealComponent: { type: 'boolean', description: 'True only if exported from @forge/ui; false if it lives only as CSS + inline JSX in the docs page.' },
+          exportName: { type: 'string', description: 'The @eidos/ui export name, or "" if docs-only.' },
+          isRealComponent: { type: 'boolean', description: 'True only if exported from @eidos/ui; false if it lives only as CSS + inline JSX in the docs page.' },
           family: { type: 'string', description: 'atoms|blocks|forms|overlays|primitives|navigation|feedback|data|disclosure|ai' },
           hasStory: { type: 'boolean' },
           storyTitle: { type: 'string' },
@@ -150,7 +150,7 @@ For EACH of these docs slugs, inspect src/ds/migrated/<slug>.tsx (header/lede + 
 SLUGS: ${JSON.stringify(s.slugs)}
 
 For each, decide:
-- isRealComponent: is there a matching @forge/ui EXPORT (verify via grep of packages/ui/src/index.ts barrel + the source files)? If the docs page only renders raw HTML + CSS classes (no imported Forge component), it is docs-only → isRealComponent:false.
+- isRealComponent: is there a matching @eidos/ui EXPORT (verify via grep of packages/ui/src/index.ts barrel + the source files)? If the docs page only renders raw HTML + CSS classes (no imported Forge component), it is docs-only → isRealComponent:false.
 - hasStory: is there packages/ui/src/stories/**/<Comp>.stories.tsx? (give the title if so)
 - hasRegistryItem: is <kebab> in packages/registry/registry.generated.json?
 - pageLocalStyle: does the docs page contain a <style> block / rely on page-local CSS that would need promoting to packages/ui/styles/tokens.css before it can install styled?
@@ -158,7 +158,7 @@ For each, decide:
 - classification:
     complete            = real component + story + registry, in good shape
     story-only          = real component + registry exist, just missing/short a Storybook story
-    promote-component   = docs-only today; must be built as a real @forge/ui component (then story+registry)
+    promote-component   = docs-only today; must be built as a real @eidos/ui component (then story+registry)
     consolidate         = should fold into another component (note which in notes) — e.g. range-calendar→calendar, count-up→counter, lang-badge/severity-pill/tier-badge/health-badge→badge
     foundation-skip     = not a component (a foundation/guide page) — skip
 - effort: S (story only / trivial), M (promote a simple CSS-class component), L (promote a stateful/overlay component — modal, popover, command palette, accordion, sidebar, carousel, table, resizable).

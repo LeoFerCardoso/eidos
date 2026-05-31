@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Timeline
+// Eidos DS — Components / Timeline
 // Vertical sequence of events. (v1.6.0 removed the horizontal variant —
 // use <Pipeline variant="stepper"/> or "chevron" instead.)
 import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs, Timeline, Lede, Mono, Kbd } from '@/ds/core';

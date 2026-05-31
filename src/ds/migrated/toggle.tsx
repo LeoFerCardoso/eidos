@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Toggle
+// Eidos DS — Components / Toggle
 // Page layout:
 //   1. Installation     (TabbedCode: pnpm · npm · yarn · bun · Manual)
 //   2. Usage            (Frame: minimal render)
@@ -302,7 +302,7 @@ export default function TogglePage() {
               cursor: 'text',
             }}
           >
-            Forge ships at 3:47am — the toolbar and the keyboard speak the same toggle.
+            Eidos ships at 3:47am — the toolbar and the keyboard speak the same toggle.
           </div>
           <div
             aria-hidden="true"

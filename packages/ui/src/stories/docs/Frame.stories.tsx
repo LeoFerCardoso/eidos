@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Frame } from '@forge/ui';
+import { Frame } from '@eidos/ui';
 
 const SAMPLE_CODE = `<button className="btn btn-primary" type="button">\n  Ship it\n</button>`;
 

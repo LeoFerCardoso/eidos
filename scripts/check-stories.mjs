@@ -1,4 +1,4 @@
-// check-stories.mjs — every @forge/ui component has a CSF3 story whose meta.title
+// check-stories.mjs — every @eidos/ui component has a CSF3 story whose meta.title
 // prefix is a real Storybook group (read from preview.ts storySort.order, never
 // hardcoded) and matches its folder, with tags:['autodocs']. C-story (block).
 // C-story-matrix (advisory): a States/Variants story + ≥2 stories for surface-bearing

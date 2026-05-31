@@ -1,4 +1,4 @@
-// forge-ui — the Forge Design System CLI.
+// eidos — the Forge Design System CLI.
 //
 // "Own the code, copied not imported": `init` installs the Forge base layer
 // (design tokens + ds.css + cn) once, then `add <component>` copies a component's
@@ -166,11 +166,11 @@ async function cmdInit(cwd, flags) {
   note('Import the layer in your global stylesheet (order matters):');
   note(`  @import "./${cfg.aliases.styles}/forge/tokens.css";`);
   note(`  @import "./${cfg.aliases.styles}/forge/ds.css";`);
-  note(`Then: ${C.ember('forge-ui add <component>')}`);
+  note(`Then: ${C.ember('eidos add <component>')}`);
 }
 
 async function cmdAdd(cwd, names, flags) {
-  if (!names.length) throw new Error('Usage: forge-ui add <component...>');
+  if (!names.length) throw new Error('Usage: eidos add <component...>');
   const cfg = loadConfig(cwd, flags);
   // Always ensure the base is present in the graph.
   const graph = await resolveGraph(cfg.registry, names.includes('forge') ? names : ['forge', ...names]);
@@ -201,7 +201,7 @@ async function cmdList(cwd, flags) {
 }
 
 async function cmdDiff(cwd, names, flags) {
-  if (!names.length) throw new Error('Usage: forge-ui diff <component>');
+  if (!names.length) throw new Error('Usage: eidos diff <component>');
   const cfg = loadConfig(cwd, flags);
   let drift = 0;
   for (const name of names) {
@@ -215,15 +215,15 @@ async function cmdDiff(cwd, names, flags) {
       else { console.log(`${C.red('~')} ${target}: ${C.red('differs from upstream')}`); drift++; }
     }
   }
-  if (drift) info(`${drift} file(s) differ. Re-run ${C.ember('forge-ui add ' + names.join(' ') + ' --force')} to update.`);
+  if (drift) info(`${drift} file(s) differ. Re-run ${C.ember('eidos add ' + names.join(' ') + ' --force')} to update.`);
 }
 
 function help() {
   console.log(`
-${C.ember(C.bold('forge-ui'))} — the Forge Design System CLI
+${C.ember(C.bold('eidos'))} — the Forge Design System CLI
 
 ${C.bold('Usage')}
-  forge-ui <command> [components...] [options]
+  eidos <command> [components...] [options]
 
 ${C.bold('Commands')}
   init                 Set up the project and install the Forge base layer
@@ -249,6 +249,6 @@ export async function run(argv) {
     case 'add': return cmdAdd(cwd, rest, flags);
     case 'list': return cmdList(cwd, flags);
     case 'diff': return cmdDiff(cwd, rest, flags);
-    default: throw new Error(`Unknown command: ${command}. Run 'forge-ui --help'.`);
+    default: throw new Error(`Unknown command: ${command}. Run 'eidos --help'.`);
   }
 }

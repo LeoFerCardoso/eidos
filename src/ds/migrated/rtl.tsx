@@ -7,7 +7,7 @@ export default function RTL() {
       id="rtl"
       num="05"
       title="RTL"
-      desc="Forge uses logical CSS properties — components flip automatically under dir=rtl. Not yet shipped in a live RTL product, but the contracts below let you turn it on without rewrites."
+      desc="Eidos uses logical CSS properties — components flip automatically under dir=rtl. Not yet shipped in a live RTL product, but the contracts below let you turn it on without rewrites."
     >
       {/* Status callout — honesty first */}
       <SubHead meta="status">Where this stands</SubHead>
@@ -17,7 +17,7 @@ export default function RTL() {
           <div>
             <div className="t-body" style={{fontWeight: 600, marginBottom: 4}}>RTL is supported, not validated.</div>
             <div className="t-body" style={{color:'var(--fg-muted)', maxWidth:'68ch'}}>
-              Every layout in Forge uses logical properties (<Mono>margin-inline</Mono>, <Mono>padding-block</Mono>, <Mono>border-inline-start</Mono>) so flipping <Mono>dir=&quot;rtl&quot;</Mono> on the document root flips the chrome correctly. We have not yet shipped a product in Arabic or Hebrew, so before going live with RTL, validate with a native reader.
+              Every layout in Eidos uses logical properties (<Mono>margin-inline</Mono>, <Mono>padding-block</Mono>, <Mono>border-inline-start</Mono>) so flipping <Mono>dir=&quot;rtl&quot;</Mono> on the document root flips the chrome correctly. We have not yet shipped a product in Arabic or Hebrew, so before going live with RTL, validate with a native reader.
             </div>
           </div>
         </div>

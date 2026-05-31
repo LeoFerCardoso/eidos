@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Contexts. What the model is grounded on: attached files, linked sources,
+// Eidos AI — Contexts. What the model is grounded on: attached files, linked sources,
 // and scope chips. Plus the context-window gauge — how much of the model's token
 // budget is spent. Built from .pill / .chip + the core Icons + Context.
 import * as React from 'react';

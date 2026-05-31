@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Slider, NumberInput } from '@forge/ui';
+import { Slider, NumberInput } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/Slider',

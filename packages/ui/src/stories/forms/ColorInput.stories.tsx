@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { ColorInput, ColorPicker } from '@forge/ui';
+import { ColorInput, ColorPicker } from '@eidos/ui';
 
 // ─── Forge / IDP brand swatches ────────────────────────────────────────────
 const BRAND_SWATCHES = [

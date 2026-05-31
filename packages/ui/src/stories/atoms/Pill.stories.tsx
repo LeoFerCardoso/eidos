@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Pill, Icons } from '@forge/ui';
+import { Pill, Icons } from '@eidos/ui';
 
 const TONES = [
   'neutral', 'ember', 'success', 'warning', 'danger', 'ice',

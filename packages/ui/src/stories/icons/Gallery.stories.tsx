@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Icons } from '@forge/ui';
+import { Icons } from '@eidos/ui';
 
 // One story file, no component binding — Icons is a map, not a single component.
 const meta = {

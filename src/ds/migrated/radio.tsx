@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Radio.
+// Eidos DS — Components / Radio.
 // Mutually-exclusive choice from a known set. Always rendered as a group
 // — a single radio is a UX anti-pattern. Two visual variants: classic
 // row of small radios, and full-bleed radio cards for richer choices.

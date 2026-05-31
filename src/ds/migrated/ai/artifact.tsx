@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Artifact (doc page 20).
+// Eidos AI — Artifact (doc page 20).
 // Documents ArtifactWidget + ArtifactPanel: the two-part surface for any
 // self-contained thing the model produced — a document, HTML page, app, or
 // code file. The widget is a compact chip in the chat; the panel is the
@@ -78,7 +78,7 @@ function StreamingBody() {
   return (
     <div aria-busy="true" aria-live="polite" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <span className="ai-art-stream-note" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.06em', color: 'var(--fg-faint)' }}>
-        <Spinner size="sm" aria-label="Forge AI is writing the artifact"/> writing…
+        <Spinner size="sm" aria-label="Eidos AI is writing the artifact"/> writing…
       </span>
       <Skeleton variant="line" width="42%"/>
       <Skeleton lines={3} width="100%"/>
@@ -98,7 +98,7 @@ const DOC_ARTIFACT = {
   content: `# Service Design Brief — identity-svc
 
 ## Overview
-The identity service issues, rotates, and validates JWT credentials for all internal Forge services.
+The identity service issues, rotates, and validates JWT credentials for all internal Eidos services.
 
 ## Auth model
 Stateless JWTs signed with RS256. Tokens expire in 15 minutes; a separate refresh flow extends sessions.
@@ -637,7 +637,7 @@ const [active, setActive] = useState(docArtifact);
                   ]}
                 >
                   <p style={{ margin: 0, fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', lineHeight: 1.6 }}>
-                    The identity service issues, rotates, and validates JWT credentials for all internal Forge services.
+                    The identity service issues, rotates, and validates JWT credentials for all internal Eidos services.
                   </p>
                 </ArtifactPanel>
                 <span className="lead h" style={{ top: 22, left: -34, width: 30 }}/>

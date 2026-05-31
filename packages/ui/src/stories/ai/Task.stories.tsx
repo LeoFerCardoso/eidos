@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Task } from '@forge/ui';
+import { Task } from '@eidos/ui';
 
 const SUB_ITEMS = [
   { title: 'Fetch p95 latency', status: 'done' },

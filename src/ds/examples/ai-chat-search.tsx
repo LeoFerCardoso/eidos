@@ -1,5 +1,5 @@
 'use client';
-// Forge IDP — AI Chat · Search chat history.
+// Eidos IDP — AI Chat · Search chat history.
 //
 // The "Search chats" row in the chat sidebar lands here. A big search input
 // at the top, a "Recent searches" chip row, and a results list grouped by
@@ -70,11 +70,11 @@ const App = () => {
   ];
 
   return (
-    <ChatShell side="search" crumbs={['Forge', 'AI', 'Search chats']}>
+    <ChatShell side="search" crumbs={['Eidos', 'AI', 'Search chats']}>
       <div className="aic-search">
 
         <header className="aic-search-head">
-          <span className="eyebrow">Forge AI · Search</span>
+          <span className="eyebrow">Eidos AI · Search</span>
           <h1>Search your chat history</h1>
           <p className="lede">
             Find an answer the assistant already gave, or jump back into a thread.

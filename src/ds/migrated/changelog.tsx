@@ -9,7 +9,7 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.15.0', date: '2026-05-31', type: 'fix', scope: 'core', title: 'Design-critique remediation across all 217 doc pages',
     summary: 'A full design audit (every doc page + every Storybook story) drove a fix program closed against forge:verify (0 block-fail) + headless render. 11 P0 corrected: contrast on the Color ember-scale, Severity tiles, Textarea counter and mobile Snackbar — now token-driven and AA in both themes; emoji slop removed from Response/Pagination; status.tsx’s page-local CSS block promoted into ds.css. The single ember-on-fill invariant and the ≤220-char lede budget hold catalog-wide.' },
   { version: 'v1.15.0', date: '2026-05-31', type: 'feat', scope: 'core', title: 'Doc↔code a11y/motion sync — documented behaviour implemented, not just described',
-    summary: '~130 "docs claim X, component does Y" mismatches closed by IMPLEMENTING the documented behaviour in @forge/ui (never by deleting the promise): LogViewer body gained real keyboard panning (arrows/PageUp/Down/Home/End) + role="log" + aria-live + a focus ring; mobile Checkbox rows regained their focus-visible ring; severity-chip aria-pressed, prefers-reduced-motion guards and missing ARIA wired across AI/IDP/mobile components. The few cases where implementing would change a shipped contract had their docs corrected to the truth instead.' },
+    summary: '~130 "docs claim X, component does Y" mismatches closed by IMPLEMENTING the documented behaviour in @eidos/ui (never by deleting the promise): LogViewer body gained real keyboard panning (arrows/PageUp/Down/Home/End) + role="log" + aria-live + a focus ring; mobile Checkbox rows regained their focus-visible ring; severity-chip aria-pressed, prefers-reduced-motion guards and missing ARIA wired across AI/IDP/mobile components. The few cases where implementing would change a shipped contract had their docs corrected to the truth instead.' },
   { version: 'v1.15.0', date: '2026-05-31', type: 'tokens', scope: 'core', title: 'New tokens — --ink-fixed, --snackbar-bg/-fg, --severity-p{0..3}-ink, --tnum',
     summary: '--ink-fixed: a theme-independent dark ink for foregrounds on hardcoded bright fills (unlike --ember-fg it never flips to white). --snackbar-bg / --snackbar-fg: a fixed dark inverse surface so the snackbar’s single ember action keeps AA in both themes. --severity-p{0..3}-ink: per-tile ink that follows the tile’s own luminance (fixes white-on-amber P2). --tnum: tabular-nums alias for metric numerics.' },
   { version: 'v1.15.0', date: '2026-05-31', type: 'docs', scope: 'core', title: 'Storybook coverage — 156 stories added across 40 components',
@@ -23,19 +23,19 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.14.0', date: '2026-05-30', type: 'feat', scope: 'avatars', title: 'Avatar rebuilt to a full identity API + photo support',
     summary: 'Avatar gained size presets (xs-xl), a src image with deterministic initials fallback, a presence status dot (online/away/busy/offline; 2px ring; logical-property placement so it mirrors in RTL), and <Avatar.Group> for overlapping team rows with a +N overflow — while keeping the legacy { p } API working for existing callers. OwnerPill now accepts a photo (person.src) and hugs its content instead of stretching the row. Seven optimized headshots ship in public/avatars for photo examples, with matching Storybook stories.' },
   { version: 'v1.14.0', date: '2026-05-30', type: 'feat', scope: 'pills', title: 'Pill / Chip / Badge split into atomic pages',
-    summary: 'The old "Pills & Chips" page was repartitioned: Chip now has its own page, Pill is Pill-only, Badge keeps its own page — each with full anatomy, Accessibility, RTL, and a generated <AutoPropsTable>, matching the per-component install model (forge-ui add pill | chip | badge). Cross-links keep the family discoverable.' },
+    summary: 'The old "Pills & Chips" page was repartitioned: Chip now has its own page, Pill is Pill-only, Badge keeps its own page — each with full anatomy, Accessibility, RTL, and a generated <AutoPropsTable>, matching the per-component install model (eidos add pill | chip | badge). Cross-links keep the family discoverable.' },
   { version: 'v1.14.0', date: '2026-05-30', type: 'docs', scope: 'shell', title: 'Sidebar + Storybook ordered alphabetically',
     summary: 'Nav items now sort A-Z within each section (Get Started keeps its pedagogical order; each DS landing is pinned first), and Storybook sorts stories alphabetically within each group.' },
 
   // ─── v1.13.0 — Deterministic contract harness + consolidation (2026-05-29) ──────
   { version: 'v1.13.0', date: '2026-05-30', type: 'feat', scope: 'core', title: 'Deterministic contract harness — npm run forge:verify',
-    summary: 'A single machine-readable forge.contract.json defines "a component is Done" across its four surfaces (docs page, @forge/ui export, Storybook story, registry item). forge:verify aggregates every check — a11y, headless render, nav integrity, frame-code, visual regression, 4-surface parity, section structure, story coverage, registry validity — into per-component clause results, applies reviewed waivers, and renders a generated FORGE-HEALTH.md wall. New PreToolUse + Stop hooks gate edits against the contract.' },
+    summary: 'A single machine-readable forge.contract.json defines "a component is Done" across its four surfaces (docs page, @eidos/ui export, Storybook story, registry item). forge:verify aggregates every check — a11y, headless render, nav integrity, frame-code, visual regression, 4-surface parity, section structure, story coverage, registry validity — into per-component clause results, applies reviewed waivers, and renders a generated FORGE-HEALTH.md wall. New PreToolUse + Stop hooks gate edits against the contract.' },
   { version: 'v1.13.0', date: '2026-05-29', type: 'feat', scope: 'core', title: 'Component consolidation + generated API tables',
     summary: 'The Pill/Chip/Badge trio was unified, Calendar gained a single selectionMode, CountUp/Counter de-duplicated, and Select rebuilt as a custom dropdown. API reference tables are now generated from the typed component props (<AutoPropsTable> backed by props.generated), so they can no longer drift from the source; the core components were typed and JSDoc-documented to feed them.' },
 
   // ─── v1.12.0 — Monorepo extraction + Next 16 / React 19 (2026-05-26) ──────
   { version: 'v1.12.0', date: '2026-05-26', type: 'feat', scope: 'core', title: 'Extracted to a Turborepo monorepo + source-shipped distribution',
-    summary: 'The component layer moved to the @forge/ui package; a shadcn-schema @forge/registry plus the forge-ui CLI copy components straight into a consuming repo (source-shipped — you own the code, not a locked dependency); @forge/storybook hosts the isolated component workbench. Design tokens export to the W3C DTCG format (tokens/forge.tokens.json).' },
+    summary: 'The component layer moved to the @eidos/ui package; a shadcn-schema @eidos/registry plus the eidos CLI copy components straight into a consuming repo (source-shipped — you own the code, not a locked dependency); @eidos/storybook hosts the isolated component workbench. Design tokens export to the W3C DTCG format (tokens/forge.tokens.json).' },
   { version: 'v1.12.0', date: '2026-05-26', type: 'feat', scope: 'core', title: 'Next.js 14 to 16 + React 18 to 19',
     summary: 'Upgraded to Next 16 (Turbopack is now the default builder) and React 19. The async Request APIs (params is now a Promise) were applied to the dynamic routes; recharts moved to 2.15.x for the React 19 peer range. Build green across every route.' },
 
@@ -58,8 +58,8 @@ const CHANGELOG: ChangelogEntry[] = [
     summary: 'One global --ds-content-w (940px) drives the content column on every page, with or without the "On this page" rail, so widths match across the family. The rail layout uses symmetric outer margins (equal left/right) with a capped content↔rail gap, so the guide never leaves dead space on the right.' },
 
   // ─── v1.9.0 — Multi-DS family + doc hierarchy (2026-05-21) ──────
-  { version: 'v1.9.0', date: '2026-05-21', type: 'breaking', scope: 'core', title: 'Forge split into a multi-DS family — core + 6 sub-DSs',
-    summary: 'Forge is now a family: the core DS at the root (Introduction, Foundations, Components) plus six route-prefixed sub-DSs — Charts (/charts), AI (/ai), IDP (/idp), Blocks (/blocks), Patterns (/patterns), Mobile (/mobile). Each sub-DS inherits the same tokens, primitives and ember accent (the core is the base) and adds its own surfaces. The sidebar header is now a DS switcher; nav is generated per-DS (NAV_BY_DS) and the active DS is derived from the route. Migration was incremental via a per-DS `migrated` flag so the app never broke between steps.' },
+  { version: 'v1.9.0', date: '2026-05-21', type: 'breaking', scope: 'core', title: 'Eidos split into a multi-DS family — core + 6 sub-DSs',
+    summary: 'Eidos is now a family: the core DS at the root (Introduction, Foundations, Components) plus six route-prefixed sub-DSs — Charts (/charts), AI (/ai), IDP (/idp), Blocks (/blocks), Patterns (/patterns), Mobile (/mobile). Each sub-DS inherits the same tokens, primitives and ember accent (the core is the base) and adds its own surfaces. The sidebar header is now a DS switcher; nav is generated per-DS (NAV_BY_DS) and the active DS is derived from the route. Migration was incremental via a per-DS `migrated` flag so the app never broke between steps.' },
   { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'core', title: 'window-registry bridge cut — SWC re-enabled',
     summary: 'The legacy window-registry bridge (install-globals + generated manifest) is gone; core modules are plain ES modules and migrated pages import from @/ds/core. .babelrc removed so Next compiles with SWC again; package.json marks sideEffects: ["*.css"] so the core barrel tree-shakes (recharts only ships in chart chunks). 178 statically-generated routes.' },
   { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'docs', title: 'Text hierarchy rebuilt — semantic H2 section headings + floating "On this page" rail',
@@ -71,7 +71,7 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'overview', title: 'Sub-DS Overviews — Introduction-style, domain heroes',
     summary: 'Every sub-DS now opens with an Introduction-style Overview (eyebrow · title · subtitle · lede · hero · principles · start-here · footer) via a shared DsOverview layout. The hero’s right column is domain-specific: Charts shows real charts, AI a live streaming chat, IDP a service card + deploy pipeline, Patterns texture swatches, Blocks a section preview, Mobile a DeviceFrame bleeding to the hero’s edge.' },
   { version: 'v1.9.0', date: '2026-05-21', type: 'fix', scope: 'core', title: 'Section eyebrow resolves by route',
-    summary: 'The page-header eyebrow matched its nav item by id-slug, which is ambiguous across DSs (every DS has an "overview"). It now resolves by the current pathname, so sub-DS pages show their real group ("Charts"/"AI"/…) instead of falling back to "Forge".' },
+    summary: 'The page-header eyebrow matched its nav item by id-slug, which is ambiguous across DSs (every DS has an "overview"). It now resolves by the current pathname, so sub-DS pages show their real group ("Charts"/"AI"/…) instead of falling back to "Eidos".' },
   { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'changelog', title: 'Per-DS changelogs',
     summary: 'Each sub-DS now has its own Changelog, identical in structure to this one (shared ChangelogView component), scoped to that DS’s own history.' },
 
@@ -159,7 +159,7 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.7.0', date: '2026-05-17', type: 'breaking', scope: 'sidesheet',    title: 'Sidesheet moved from Patterns → Components',
     summary: 'Sidesheet is an overlay primitive — same family as Drawer / Modal / Popover. Now lives under Components → Overlays & Dialogs. Slug stays sidesheet; only the nav location and the file path changed.' },
   { version: 'v1.7.0', date: '2026-05-17', type: 'breaking', scope: 'patterns',     title: 'Page-level shells removed — see Examples gallery',
-    summary: 'Dashboard shell, Detail shell, Catalog shell, Wizard, Console split — the five page-level shells that used to live in Patterns — are gone. Their job (showing how to assemble a full Forge product page) is owned by the Examples gallery: DORA Dashboard covers the dashboard shell, Service Detail / Catalog cover the detail / catalog shells, and the two new examples below cover Wizard + Console split.' },
+    summary: 'Dashboard shell, Detail shell, Catalog shell, Wizard, Console split — the five page-level shells that used to live in Patterns — are gone. Their job (showing how to assemble a full Eidos product page) is owned by the Examples gallery: DORA Dashboard covers the dashboard shell, Service Detail / Catalog cover the detail / catalog shells, and the two new examples below cover Wizard + Console split.' },
   { version: 'v1.7.0', date: '2026-05-17', type: 'feat',     scope: 'examples',     title: 'Service Scaffold — new polished example',
     summary: 'A multi-step scaffold wizard: choose a template (T1 typescript-api gold standard, T2 python-worker, etc.), name the repo + pick a tribe + visibility, configure pipeline shape + ring strategy, set SLO target + dashboards / on-call provisioning, then review the generated artifacts and ship. Composes Pipeline (stepper), Banner, OwnerPill, StatusDot, in-group inputs — zero per-page CSS.' },
   { version: 'v1.7.0', date: '2026-05-17', type: 'feat',     scope: 'examples',     title: 'Pipeline Console — new polished example',
@@ -180,7 +180,7 @@ const CHANGELOG: ChangelogEntry[] = [
     summary: 'Dropped the 28 px icon tile, the size sm/md/lg variants, and the gradient-tinted custom tone. Banner now matches the original Alert primitive: inline icon, baseline-aligned title + message, ghost CTA on the right. Tones use the same --*-soft tokens as Alert — visual vocabulary stays unified between the two.' },
   { version: 'v1.6.0', date: '2026-05-16', type: 'fix',      scope: 'core',         title: 'Sidebar search spans the full sidebar width',
     summary: 'The search trigger sat at 10 px horizontal margin while nav links sat at the sidenav\'s 12 px padding — visually shorter than the links. Margin dropped to 0 with width:100% and box-sizing:border-box so it aligns to the same horizontal extent as every nav row.' },
-  { version: 'v1.6.0', date: '2026-05-16', type: 'fix',      scope: 'filter-panel', title: 'FilterPanel rows now use Forge\'s .fc-* form-control chrome',
+  { version: 'v1.6.0', date: '2026-05-16', type: 'fix',      scope: 'filter-panel', title: 'FilterPanel rows now use Eidos\'s .fc-* form-control chrome',
     summary: 'Each option row replaced its naked browser checkbox / radio with .fc-check-box + .fc-check-icon (or .fc-radio-box + .fc-radio-dot). The actual <input> stays as the accessible target — visible chrome matches the Checkbox / Radio components.' },
   { version: 'v1.6.0', date: '2026-05-16', type: 'breaking', scope: 'pipeline',     title: 'Pipeline variants gantt / ring / vertical removed',
     summary: 'Pipeline is now a strictly horizontal primitive with two variants: stepper and chevron. Top-down sequences belong to Timeline. Stage-progress visuals (rings) belong to RingBar / ScoreGauge. The Gantt-mini layout never earned its slot.' },
@@ -215,7 +215,7 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.5.0', date: '2026-05-16', type: 'fix',      scope: 'chart-radar', title: 'Radar polygons softer, axis text legible',
     summary: 'Stroke 2 → 1.25, fill opacity 0.25 → 0.18, polar grid radial lines off, axis labels promoted to 12 px / --fg / 500 via a shared angleTick style. Dots stroked in --surface so they pop without breaking the polygon shape. Comparison radar (two series) reads clearly now.' },
   { version: 'v1.5.0', date: '2026-05-16', type: 'feat',     scope: 'chart-heatmap', title: 'Heatmap cell hover popover (AI Label style)',
-    summary: 'Hovering any calendar or matrix cell now opens a Forge-styled popover (lifted from AILabelWithPopover) with the cell title, intensity label (Low/Moderate/High), exact score and bucket. Cell border tints to ember during hover for a clear hit zone. New .heat-pop CSS class.' },
+    summary: 'Hovering any calendar or matrix cell now opens a Eidos-styled popover (lifted from AILabelWithPopover) with the cell title, intensity label (Low/Moderate/High), exact score and bucket. Cell border tints to ember during hover for a clear hit zone. New .heat-pop CSS class.' },
   { version: 'v1.5.0', date: '2026-05-16', type: 'feat',     scope: 'chart-gauge', title: 'Gauge page rewritten from scratch (plain SVG)',
     summary: 'The previous PieChart-based gauge mis-centered inside ResponsiveContainer (cx/cy percentages did not resolve until after first layout). Replaced with a 30-line SVG primitive: three variants (semi 180° / three-q 270° / full 360°), explicit polar math, centered readout with tabular-nums. Variants include a Change Risk Score recipe (green/amber/red tinted by value).' },
   { version: 'v1.5.0', date: '2026-05-16', type: 'docs',     scope: 'charts',     title: 'Do / Don\'t notes strengthened',
@@ -223,21 +223,21 @@ const CHANGELOG: ChangelogEntry[] = [
 
   // ─── v1.4.0 — Phase 5 (Patterns) + Phase 6 (Examples) + Chart polish (2026-05-16) ──
   { version: 'v1.4.0', date: '2026-05-16', type: 'feat',     scope: 'examples',   title: 'IDP Examples gallery — 16 standalone product pages',
-    summary: 'A new section that lives outside the docs shell and simulates the Forge IDP product. 16 pages: AI Insights (home), Agent Chat (right drawer with tool calls + citations), Service Catalog, Service Detail, DORA Dashboard, Pipeline View, Ring Deployment, Feature Flags, Quality Gates, Score Cards, Agent Catalog, MCP Detail, Workflow Canvas, Incident Room, Cloud Inventory, Templates. Each page is built only from existing primitives — zero per-page CSS.' },
-  { version: 'v1.4.0', date: '2026-05-16', type: 'feat',     scope: 'examples',   title: 'AI Insights — Forge agent home',
-    summary: 'Landing page of the Forge IDP. Hero strip with top 3 ranked findings (drift, risk, cost), 4 KPI cards, agent-ranked insights feed, today\'s priorities sidebar, tribe pulse strip, weekly digest. Inspired by Linear AI / Github / Backstage homepage patterns.' },
+    summary: 'A new section that lives outside the docs shell and simulates the Eidos IDP product. 16 pages: AI Insights (home), Agent Chat (right drawer with tool calls + citations), Service Catalog, Service Detail, DORA Dashboard, Pipeline View, Ring Deployment, Feature Flags, Quality Gates, Score Cards, Agent Catalog, MCP Detail, Workflow Canvas, Incident Room, Cloud Inventory, Templates. Each page is built only from existing primitives — zero per-page CSS.' },
+  { version: 'v1.4.0', date: '2026-05-16', type: 'feat',     scope: 'examples',   title: 'AI Insights — Eidos agent home',
+    summary: 'Landing page of the Eidos IDP. Hero strip with top 3 ranked findings (drift, risk, cost), 4 KPI cards, agent-ranked insights feed, today\'s priorities sidebar, tribe pulse strip, weekly digest. Inspired by Linear AI / Github / Backstage homepage patterns.' },
   { version: 'v1.4.0', date: '2026-05-16', type: 'feat',     scope: 'examples',   title: 'Agent Chat — ChatGPT-in-the-platform drawer',
-    summary: 'Service detail page with the Forge agent in a 480px right drawer. Demonstrates user turns, agent turns with citations, thinking blocks, tool calls (observability.read, forge.openPR), and inline PR drafts with Change Risk Score. Inspired by Cursor / Copilot Chat / Linear AI.' },
+    summary: 'Service detail page with the Eidos agent in a 480px right drawer. Demonstrates user turns, agent turns with citations, thinking blocks, tool calls (observability.read, forge.openPR), and inline PR drafts with Change Risk Score. Inspired by Cursor / Copilot Chat / Linear AI.' },
   { version: 'v1.4.0', date: '2026-05-16', type: 'feat',     scope: 'patterns',   title: '5 pattern shells',
     summary: 'dashboard-shell · detail-shell · catalog-shell · wizard · console-split — composable layout templates that demonstrate how to wire primitives together for the most common page types in an IDP. All five live under Patterns.' },
   { version: 'v1.4.0', date: '2026-05-16', type: 'fix',      scope: 'charts',     title: 'Hover / highlight colours theme-aware',
-    summary: 'Recharts ships default cursor rgb(204,204,204) and white active dots — neither reads correctly in either Forge theme. Added scoped CSS overrides for .recharts-tooltip-cursor, .recharts-active-dot, .recharts-active-bar, .recharts-pie-sector:hover, .recharts-sankey-link:hover, and the entire .recharts-brush component family. Dark and light mode now show the same legibility.' },
+    summary: 'Recharts ships default cursor rgb(204,204,204) and white active dots — neither reads correctly in either Eidos theme. Added scoped CSS overrides for .recharts-tooltip-cursor, .recharts-active-dot, .recharts-active-bar, .recharts-pie-sector:hover, .recharts-sankey-link:hover, and the entire .recharts-brush component family. Dark and light mode now show the same legibility.' },
   { version: 'v1.4.0', date: '2026-05-16', type: 'feat',     scope: 'core',       title: 'Example shell + product chrome',
-    summary: 'New example-shell.css and example-shell.jsx assets simulate the Forge IDP product: 56 px primary rail with 13 destinations, sticky topbar with breadcrumbs + ⌘K + agent button + user avatar, grid helpers (fp-grid-2/3/4/auto/2x1), KPI tile (fp-kpi), section header, drawer chrome (fp-drawer). Pages compose from this shell.' },
+    summary: 'New example-shell.css and example-shell.jsx assets simulate the Eidos IDP product: 56 px primary rail with 13 destinations, sticky topbar with breadcrumbs + ⌘K + agent button + user avatar, grid helpers (fp-grid-2/3/4/auto/2x1), KPI tile (fp-kpi), section header, drawer chrome (fp-drawer). Pages compose from this shell.' },
 
   // ─── v1.3.0 — Phase 3 rework + Charts / Elements (2026-05-16) ────────────
   { version: 'v1.3.0', date: '2026-05-16', type: 'feat',     scope: 'charts',     title: 'Charts group with 11 chart types',
-    summary: 'Recharts-powered, themed with Forge tokens. Bar, line, area, histogram, pie, gauge, composed, radar, radial, sankey, heatmap. Each page documents 2–4 variants and a real IDP-shaped dataset. New <ForgeChart>, <ForgeTooltipContent>, useChartColors helpers in charts.jsx.' },
+    summary: 'Recharts-powered, themed with Eidos tokens. Bar, line, area, histogram, pie, gauge, composed, radar, radial, sankey, heatmap. Each page documents 2–4 variants and a real IDP-shaped dataset. New <ForgeChart>, <ForgeTooltipContent>, useChartColors helpers in charts.jsx.' },
   { version: 'v1.3.0', date: '2026-05-16', type: 'feat',     scope: 'elements',   title: 'Elements group — IDP recipes',
     summary: 'New top-level group dedicated to compositions of existing primitives. 8 pages: severity-pill, health-badge, metric-card, score-gauge, service-card, agent-card, stat — plus an overview landing. Pages emphasise that these are recipes, not new components.' },
   { version: 'v1.3.0', date: '2026-05-16', type: 'feat',     scope: 'banner',     title: 'Banner (replaces Alert bar)',
@@ -258,7 +258,7 @@ const CHANGELOG: ChangelogEntry[] = [
     summary: 'Side-by-side diff with per-side line numbers, paired deletions/additions, per-file header with +N / −M counts. wrap prop for long lines.' },
   { version: 'v1.3.0', date: '2026-05-16', type: 'feat',     scope: 'trend',      title: 'Trend — 4 variants',
     summary: 'arrow (default ↑ ↓ —), triangle (▲ ▼ ◆ for dense tables), badge (pill chrome for feature rows), bar (delta bar neighbour to a sparkline).' },
-  { version: 'v1.3.0', date: '2026-05-16', type: 'feat',     scope: 'relative-time', title: 'Relative time — Forge tooltip',
+  { version: 'v1.3.0', date: '2026-05-16', type: 'feat',     scope: 'relative-time', title: 'Relative time — Eidos tooltip',
     summary: 'Opt-in tooltip prop renders the full absolute datetime (with seconds) inside the design system .tt tooltip. Native title= fallback when tooltip is false.' },
   { version: 'v1.3.0', date: '2026-05-16', type: 'feat',     scope: 'timeline',   title: 'Timeline — horizontal variant',
     summary: 'Adds variant="horizontal" — a step tracker for wizards and deploy progress with rail + pin + line connectors.' },
@@ -279,7 +279,7 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.3.0', date: '2026-05-16', type: 'breaking', scope: 'core',       title: 'Re-shuffled Components subgroup',
     summary: 'Severity-pill, health-badge, metric-card, score-gauge, service-card, agent-card, stat moved from Components/IDP Blocks to the new Elements group. Heatmap moved to Charts. Alert bar renamed to Banner. Kbd-row and Owner-pill folded into Kbd and Avatar respectively. URLs of all moved pages changed.' },
   { version: 'v1.3.0', date: '2026-05-16', type: 'tokens',   scope: 'core',       title: 'Recharts UMD pinned + charts.jsx wrapper',
-    summary: 'recharts@2.12.7 and prop-types@15.8.1 added as pinned UMD dependencies in _template.html. New assets/js/core/charts.jsx wraps Recharts with Forge tokens (viz palette, axis font, tooltip surface, container chrome).' },
+    summary: 'recharts@2.12.7 and prop-types@15.8.1 added as pinned UMD dependencies in _template.html. New assets/js/core/charts.jsx wraps Recharts with Eidos tokens (viz palette, axis font, tooltip surface, container chrome).' },
 
   // ─── v1.2.0 — Phase 1 + Phase 2 + Phase 4 (2026-05-15) ──────────────────
   { version: 'v1.2.0', date: '2026-05-15', type: 'tokens',   scope: 'core',       title: 'IDP semantic palettes',
@@ -342,8 +342,8 @@ export default function Changelog() {
       entries={CHANGELOG}
       num="23"
       title="Changelog"
-      desc="Every meaningful change to Forge — searchable, filterable, scoped per component."
-      dsName="Forge Design System"
+      desc="Every meaningful change to Eidos — searchable, filterable, scoped per component."
+      dsName="Eidos Design System"
     />
   );
 }

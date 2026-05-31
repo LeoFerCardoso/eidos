@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Overview. Introduction-style landing; the hero is a live streaming chat.
+// Eidos AI — Overview. Introduction-style landing; the hero is a live streaming chat.
 import * as React from 'react';
 import { DsOverview } from '@/components/docs';
 import { AICaret, Icons } from '@/ds/core';
@@ -80,9 +80,9 @@ const PAGES: [string, string, string][] = [
 export default function AiOverview() {
   return (
     <DsOverview
-      eyebrow="Forge / AI"
+      eyebrow="Eidos / AI"
       title="Build AI surfaces."
-      lede="Chat threads, prompt composers, streaming, reasoning traces, tool calls, and agent loops — the moment a Forge product is wired to a model. Every one composes the same primitives, tokens, and ember accent as the core."
+      lede="Chat threads, prompt composers, streaming, reasoning traces, tool calls, and agent loops — the moment a Eidos product is wired to a model. Every one composes the same primitives, tokens, and ember accent as the core."
       hero={{
         eyebrow: 'Streaming · tools · agents',
         heading: 'The model is the only new dependency.',

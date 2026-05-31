@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Tabs.
+// Eidos DS — Components / Tabs.
 // Compound API: Tabs · TabsList · TabsTrigger · TabsContent.
 // Full ARIA (tablist/tab/tabpanel), roving tabindex, keyboard navigation,
 // RTL-aware directional arrow keys, and prefers-reduced-motion support.
@@ -71,7 +71,7 @@ export default function TabsPage() {
       <Lede>
         Full keyboard support (Arrow keys, Home/End, automatic activation) and the WAI-ARIA{' '}
         <Mono>tablist</Mono>/<Mono>tab</Mono>/<Mono>tabpanel</Mono> roles are built in — plain
-        React over the Forge CSS layer, no Radix runtime. Pick the <em>Manual</em> tab to
+        React over the Eidos CSS layer, no Radix runtime. Pick the <em>Manual</em> tab to
         paste the source files instead.
       </Lede>
 

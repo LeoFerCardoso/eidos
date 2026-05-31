@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { PropsTable } from '@forge/ui';
+import { PropsTable } from '@eidos/ui';
 
 // Realistic prop rows for a Button component.
 const BUTTON_ROWS = [

@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Switch. A binary on/off control for a setting that takes effect
+// Eidos Mobile — Switch. A binary on/off control for a setting that takes effect
 // immediately — no Save button. The mobile sibling of the desktop toggle, sized for
 // a thumb and reading its state from the track fill, not colour alone.
 import * as React from 'react';

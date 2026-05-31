@@ -12,7 +12,7 @@ const SkLine  = (p: React.ComponentProps<typeof Skeleton>) => <Skeleton variant=
 const SkBox   = (p: React.ComponentProps<typeof Skeleton>) => <Skeleton variant="box"    {...p}/>;
 const SkAv    = (p: React.ComponentProps<typeof Skeleton>) => <Skeleton variant="circle" {...p}/>;
 
-const USAGE_CODE = `import { Skeleton } from "@forge/ui"
+const USAGE_CODE = `import { Skeleton } from "@eidos/ui"
 
 export function Demo() {
   return <Skeleton variant="line" width={220} />
@@ -205,7 +205,7 @@ export default function Page() {
                 <span className="avatar md ember">LF</span>
                 <div style={{flex:1}}>
                   <div className="t-body" style={{fontWeight: 500, color:'var(--fg)'}}>Layla Faraj</div>
-                  <div className="t-small" style={{color:'var(--fg-muted)'}}>Lead designer · Forge core team</div>
+                  <div className="t-small" style={{color:'var(--fg-muted)'}}>Lead designer · Eidos core team</div>
                 </div>
                 <button className="btn sm">Profile</button>
               </div>

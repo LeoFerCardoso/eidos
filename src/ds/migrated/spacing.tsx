@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Foundations / Spacing & Radius
+// Eidos DS — Foundations / Spacing & Radius
 import { Icons, Section, SubHead, Frame } from '@/ds/core';
 
 export default function Spacing() {
@@ -29,14 +29,14 @@ export default function Spacing() {
   return (
     <Section id="spacing" num="04" title="Spacing & Radius" desc="A 4px base unit and a 6px radius rhythm — every gap, pad, and corner snaps to the scale so density reads as intentional. Logical properties keep the rhythm correct under RTL.">
       <p style={{color:'var(--fg-muted)', maxWidth:'68ch', marginBottom: 22, lineHeight: 1.6}}>
-        Forge uses a 4px base unit. Component padding lands on a 6/8/12/16 rhythm; section gaps on 24/32/40/56. Radii cap at 12px — there are no soft, marketing-y curves anywhere in the product chrome. The system is built for density: every gap exists because the eye needs to separate content, not for decoration.
+        Eidos uses a 4px base unit. Component padding lands on a 6/8/12/16 rhythm; section gaps on 24/32/40/56. Radii cap at 12px — there are no soft, marketing-y curves anywhere in the product chrome. The system is built for density: every gap exists because the eye needs to separate content, not for decoration.
       </p>
 
       {/* Philosophy */}
       <div className="ds-grid cols-3" style={{marginBottom: 24}}>
         {[
           ['4px base', 'Every spacing token is a multiple of 4. Eye-friendly, math-friendly, never breaks the grid.'],
-          ['Density first', 'Forge is a tool, not a marketing site. Padding is calibrated for information per square inch.'],
+          ['Density first', 'Eidos is a tool, not a marketing site. Padding is calibrated for information per square inch.'],
           ['Capped radii', 'Max radius 12px. Pills are the only element allowed to be fully round.'],
         ].map(([t,d]) => (
           <div key={t} className="surface" style={{padding: 16}}>

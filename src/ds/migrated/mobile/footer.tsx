@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Footer. A bottom toolbar / footer bar anchored to the safe area — a row of
+// Eidos Mobile — Footer. A bottom toolbar / footer bar anchored to the safe area — a row of
 // contextual actions (Share, Edit, Delete) or a primary action + meta text. Distinct from the
 // Tab Bar, which is navigation: the Footer provides screen-level commands that appear only
 // when relevant content is selected or a form is ready to submit.

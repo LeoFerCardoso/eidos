@@ -13,7 +13,7 @@ const CHANGELOG: ChangelogEntry[] = [
     summary: 'All 11 chart pages were brought to the component standard: a sharpened lede, a new Anatomy section (visual — the chart rendered with numbered pins on its axes / gridlines / series / legend + a numbered legend), and an Accessibility section covering colour-is-never-the-only-signal, the --viz-* palette, keyboard/tooltip + table fallback, and prefers-reduced-motion for the draw animation.' },
 
   // ─── v1.9.0 — Charts becomes its own sub-DS (2026-05-21) ──────
-  { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'charts', title: 'Forge Charts split into its own sub-DS at /charts',
+  { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'charts', title: 'Eidos Charts split into its own sub-DS at /charts',
     summary: 'The 11 chart types moved out of the core Components group into a dedicated Charts sub-DS, route-prefixed at /charts. It inherits the core tokens, mono axis font and the --viz-* palette; the sidebar DS switcher jumps straight to it.' },
   { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'overview', title: 'Overview rebuilt — real charts in the hero',
     summary: 'New Introduction-style Overview whose hero shows live charts instead of stat cards: a "Deploys / week" area sparkline with a Trend delta, a "By tribe" bar chart, and a DORA score gauge — so the landing reads as data viz, not a spec sheet.' },
@@ -29,7 +29,7 @@ const CHANGELOG: ChangelogEntry[] = [
     summary: 'The PieChart-based gauge mis-centered inside ResponsiveContainer. Replaced with a 30-line SVG primitive: semi / three-quarter / full variants, explicit polar math, centered tabular-nums readout, and a Change-Risk-Score recipe tinted green/amber/red.' },
   { version: 'v1.5.0', date: '2026-05-16', type: 'fix', scope: 'sankey', title: 'Sankey rendered empty — fixed the link renderer',
     summary: 'ForgeLink read props.d, but Recharts Sankey passes sourceX/targetX/… and expects the renderer to build the path. Rewrote it to construct the cubic bezier; ribbons now appear with palette-indexed colours and stroke-opacity 0.28→0.6 on hover.' },
-  { version: 'v1.3.0', date: '2026-05-16', type: 'feat', scope: 'charts', title: '11 chart types — Recharts themed with Forge tokens',
+  { version: 'v1.3.0', date: '2026-05-16', type: 'feat', scope: 'charts', title: '11 chart types — Recharts themed with Eidos tokens',
     summary: 'Bar, line, area, histogram, pie, gauge, composed, radar, radial, sankey, heatmap. Each page documents 2–4 variants on a real IDP-shaped dataset. New <ForgeChart>, <ForgeTooltipContent>, useChartColors helpers.' },
 ];
 
@@ -38,8 +38,8 @@ export default function ChartsChangelog() {
     <ChangelogView
       entries={CHANGELOG}
       title="Changelog"
-      desc="Every change to Forge Charts — searchable, filterable, scoped per chart."
-      dsName="Forge Charts"
+      desc="Every change to Eidos Charts — searchable, filterable, scoped per chart."
+      dsName="Eidos Charts"
     />
   );
 }

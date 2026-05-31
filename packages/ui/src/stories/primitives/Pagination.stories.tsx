@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Pagination } from '@forge/ui';
+import { Pagination } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/Pagination',

@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / OTP Input.
+// Eidos DS — Components / OTP Input.
 //
 // One-time codes — six-digit auth, SMS confirmation, email recovery, MFA.
 // Auto-advance forward on input, backward on Backspace, paste-fills-all,

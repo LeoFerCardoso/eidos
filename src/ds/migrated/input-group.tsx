@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Input Group
+// Eidos DS — Components / Input Group
 // Sections: Installation → Usage → Variants → Sizes → States → In context
 //           → Accessibility → RTL → Anatomy → Do/Don't → API reference
 import * as React from 'react';

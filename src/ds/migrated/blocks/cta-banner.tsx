@@ -1,5 +1,5 @@
 'use client';
-// Forge Blocks — CTA banner. A full-width call-to-action band that closes a page.
+// Eidos Blocks — CTA banner. A full-width call-to-action band that closes a page.
 import { Section, SubHead, Frame, CodeBlock, Icons, Mono, Lede, Spinner, Skeleton, Alert, AlertTitle, AlertDescription, AlertActions } from '@/ds/core';
 
 
@@ -15,7 +15,7 @@ function CtaBanner() {
     >
       <div style={{ maxWidth: '52ch' }}>
         <div className="ds-h-eyebrow" style={{ color: 'var(--ember)', marginBottom: 8 }}>Ready when you are</div>
-        <h2 style={{ margin: 0, fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.15 }}>Ship your first Forge service today.</h2>
+        <h2 style={{ margin: 0, fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.15 }}>Ship your first Eidos service today.</h2>
         <p style={{ color: 'var(--fg-muted)', marginTop: 8, marginBottom: 0, fontSize: 'var(--text-md)', lineHeight: 1.55 }}>Scaffold, wire CI, and roll out across rings — without leaving the platform.</p>
       </div>
       <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
@@ -44,7 +44,7 @@ export default function CtaBannerPage() {
         code={`<div className="cta-banner">
   <div>
     <div className="ds-h-eyebrow">Ready when you are</div>
-    <h2>Ship your first Forge service today.</h2>
+    <h2>Ship your first Eidos service today.</h2>
     <p>Scaffold, wire CI, and roll out across rings.</p>
   </div>
   <div className="actions">
@@ -71,7 +71,7 @@ export default function CtaBannerPage() {
         >
           <div style={{ maxWidth: '52ch' }}>
             <div className="ds-h-eyebrow" style={{ color: 'var(--ember)', marginBottom: 8 }}>Ready when you are</div>
-            <h2 style={{ margin: 0, fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.15 }}>Ship your first Forge service today.</h2>
+            <h2 style={{ margin: 0, fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.15 }}>Ship your first Eidos service today.</h2>
             <p style={{ color: 'var(--fg-muted)', marginTop: 8, marginBottom: 0, fontSize: 'var(--text-md)', lineHeight: 1.55 }}>Scaffold, wire CI, and roll out across rings — without leaving the platform.</p>
           </div>
           <div style={{ display: 'flex', gap: 8, flexShrink: 0 }} aria-busy="true">
@@ -95,7 +95,7 @@ export default function CtaBannerPage() {
         >
           <div style={{ maxWidth: '52ch' }}>
             <div className="ds-h-eyebrow" style={{ color: 'var(--fg-subtle)', marginBottom: 8 }}>Connect a repository first</div>
-            <h2 style={{ margin: 0, fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.15 }}>Ship your first Forge service today.</h2>
+            <h2 style={{ margin: 0, fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.15 }}>Ship your first Eidos service today.</h2>
             <p style={{ color: 'var(--fg-muted)', marginTop: 8, marginBottom: 0, fontSize: 'var(--text-md)', lineHeight: 1.55 }}>Link a Git provider to unlock scaffolding — it takes about a minute.</p>
           </div>
           <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
@@ -117,7 +117,7 @@ export default function CtaBannerPage() {
         >
           <div style={{ maxWidth: '52ch' }}>
             <div className="ds-h-eyebrow" style={{ color: 'var(--fg-subtle)', marginBottom: 8 }}>That didn’t go through</div>
-            <h2 style={{ margin: 0, fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.15 }}>Ship your first Forge service today.</h2>
+            <h2 style={{ margin: 0, fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.15 }}>Ship your first Eidos service today.</h2>
           </div>
           <Alert tone="danger">
             <AlertTitle>Scaffolding failed</AlertTitle>
@@ -207,7 +207,7 @@ export default function CtaBannerPage() {
   <div className="cta-banner">
     <div>
       <div className="ds-h-eyebrow">جاهزون متى كنت مستعدًا</div>
-      <h2>أطلق خدمتك الأولى على Forge اليوم.</h2>
+      <h2>أطلق خدمتك الأولى على Eidos اليوم.</h2>
       <p>هيّئ الخدمة، اربط الـ CI، وانشرها عبر الحلقات.</p>
     </div>
     <div className="actions">
@@ -229,7 +229,7 @@ export default function CtaBannerPage() {
           >
             <div style={{ maxWidth: '52ch' }}>
               <div className="ds-h-eyebrow" style={{ color: 'var(--ember)', marginBottom: 8 }}>جاهزون متى كنت مستعدًا</div>
-              <h2 style={{ margin: 0, fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.15 }}>أطلق خدمتك الأولى على Forge اليوم.</h2>
+              <h2 style={{ margin: 0, fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.15 }}>أطلق خدمتك الأولى على Eidos اليوم.</h2>
               <p style={{ color: 'var(--fg-muted)', marginTop: 8, marginBottom: 0, fontSize: 'var(--text-md)', lineHeight: 1.55 }}>هيّئ الخدمة، اربط الـ CI، وانشرها عبر الحلقات — دون مغادرة المنصة.</p>
             </div>
             <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
@@ -298,7 +298,7 @@ export default function CtaBannerPage() {
           <div className="head"><Icons.check size={12}/> Do — one ember primary, one quiet secondary</div>
           <div className="body" style={{flexDirection:'column', alignItems:'flex-start', gap: 10, padding: 18}}>
             <div className="ds-h-eyebrow" style={{color:'var(--ember)'}}>Ready when you are</div>
-            <h3 style={{margin: 0, fontSize: 'var(--text-lg)', fontWeight: 600, letterSpacing:'-0.015em', lineHeight: 1.2}}>Ship your first Forge service.</h3>
+            <h3 style={{margin: 0, fontSize: 'var(--text-lg)', fontWeight: 600, letterSpacing:'-0.015em', lineHeight: 1.2}}>Ship your first Eidos service.</h3>
             <div style={{display:'flex', gap: 8}}>
               <button className="btn ember sm">Scaffold a service</button>
               <button className="btn ghost sm">Read the docs</button>
@@ -310,7 +310,7 @@ export default function CtaBannerPage() {
           <div className="head"><Icons.x size={12}/> Don't — stack competing CTAs</div>
           <div className="body" style={{flexDirection:'column', alignItems:'flex-start', gap: 10, padding: 18}}>
             <div className="ds-h-eyebrow" style={{color:'var(--ember)'}}>Ready when you are</div>
-            <h3 style={{margin: 0, fontSize: 'var(--text-lg)', fontWeight: 600, letterSpacing:'-0.015em', lineHeight: 1.2}}>Ship your first Forge service.</h3>
+            <h3 style={{margin: 0, fontSize: 'var(--text-lg)', fontWeight: 600, letterSpacing:'-0.015em', lineHeight: 1.2}}>Ship your first Eidos service.</h3>
             <div style={{display:'flex', gap: 8}}>
               <button className="btn ember sm">Scaffold</button>
               <button className="btn ember sm">Book a demo</button>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { AskUser } from '@forge/ui';
-import type { AskQuestion, AskAnswer } from '@forge/ui';
+import { AskUser } from '@eidos/ui';
+import type { AskQuestion, AskAnswer } from '@eidos/ui';
 
 const ONBOARDING_QUESTIONS: AskQuestion[] = [
   {

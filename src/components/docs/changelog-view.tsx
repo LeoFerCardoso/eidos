@@ -24,7 +24,7 @@ export function ChangelogView({
   num,
   title = 'Changelog',
   desc = 'Every meaningful change — searchable, filterable, scoped per component.',
-  dsName = 'Forge Design System',
+  dsName = 'Eidos Design System',
 }: {
   entries: ChangelogEntry[];
   id?: string;
@@ -145,7 +145,7 @@ export function ChangelogView({
         <div style={{ position: 'relative' }}>
           <ForgeMark size={32} />
           <div style={{ fontSize: 'var(--text-xl)', fontWeight: 600, letterSpacing: '-0.02em', marginTop: 12 }}>{dsName}</div>
-          <div style={{ fontSize: 'var(--text-base)', color: 'var(--fg-subtle)', marginTop: 4, fontFamily: 'var(--font-mono)' }}>Maintained by the Forge Platform Team · forge@equifax.com.br</div>
+          <div style={{ fontSize: 'var(--text-base)', color: 'var(--fg-subtle)', marginTop: 4, fontFamily: 'var(--font-mono)' }}>Maintained by the Eidos Platform Team · forge@equifax.com.br</div>
         </div>
       </div>
     </Section>

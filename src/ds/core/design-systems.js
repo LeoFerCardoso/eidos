@@ -1,4 +1,4 @@
-// Forge — the family of Design Systems (build-time data, read by scripts/gen-nav.mjs,
+// Eidos — the family of Design Systems (build-time data, read by scripts/gen-nav.mjs,
 // like nav-config.js). `core` is the base every sub-DS follows: shared tokens, shared
 // primitives, one canonical brand. Sub-DSs only ADD domain components/patterns.
 //
@@ -13,13 +13,13 @@
   // DS stays at flat routes (its `home` is a flat slug, hrefs are unprefixed) so the
   // running app never breaks mid-migration.
   window.DESIGN_SYSTEMS = [
-    { id: 'core',     label: 'Forge',          tagline: 'Design System',     basePath: '',         icon: 'flame',    home: '',               migrated: true },
-    { id: 'charts',   label: 'Forge Charts',   tagline: 'Data viz',          basePath: 'charts',   icon: 'barChart', home: 'overview',       migrated: true },
-    { id: 'ai',       label: 'Forge AI',       tagline: 'AI surfaces',       basePath: 'ai',       icon: 'sparkle',  home: 'overview',       migrated: true },
-    { id: 'idp',      label: 'Forge IDP',      tagline: 'Internal platform', basePath: 'idp',      icon: 'server',   home: 'overview',       migrated: true },
-    { id: 'blocks',   label: 'Forge Blocks',   tagline: 'Sections & elements', basePath: 'blocks', icon: 'layers',     home: 'overview', migrated: true },
-    { id: 'patterns', label: 'Forge Patterns', tagline: 'Effects & texture', basePath: 'patterns', icon: 'grid',       home: 'overview', migrated: true },
-    { id: 'mobile',   label: 'Forge Mobile',   tagline: 'Mobile UI',         basePath: 'mobile',   icon: 'smartphone', home: 'overview', migrated: true },
+    { id: 'core',     label: 'Eidos',          tagline: 'Design System',     basePath: '',         icon: 'flame',    home: '',               migrated: true },
+    { id: 'charts',   label: 'Eidos Charts',   tagline: 'Data viz',          basePath: 'charts',   icon: 'barChart', home: 'overview',       migrated: true },
+    { id: 'ai',       label: 'Eidos AI',       tagline: 'AI surfaces',       basePath: 'ai',       icon: 'sparkle',  home: 'overview',       migrated: true },
+    { id: 'idp',      label: 'Eidos IDP',      tagline: 'Internal platform', basePath: 'idp',      icon: 'server',   home: 'overview',       migrated: true },
+    { id: 'blocks',   label: 'Eidos Blocks',   tagline: 'Sections & elements', basePath: 'blocks', icon: 'layers',     home: 'overview', migrated: true },
+    { id: 'patterns', label: 'Eidos Patterns', tagline: 'Effects & texture', basePath: 'patterns', icon: 'grid',       home: 'overview', migrated: true },
+    { id: 'mobile',   label: 'Eidos Mobile',   tagline: 'Mobile UI',         basePath: 'mobile',   icon: 'smartphone', home: 'overview', migrated: true },
   ];
 
   // Phase 1 logical partition: which DS each top-level nav group belongs to.

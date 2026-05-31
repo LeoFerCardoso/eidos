@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / StatusDot
+// Eidos DS — Components / StatusDot
 // 8px coloured dot that maps to a `--status-*`, `--health-*`, `--severity-*`
 // or `--risk-*` token. The single most reusable atom in any IDP surface —
 // rides next to a label in tables, pipeline rows, ring cohorts, log lines,

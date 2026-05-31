@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ServiceCard, MOCKS } from '@forge/ui';
+import { ServiceCard, MOCKS } from '@eidos/ui';
 
 // 24h latency shape (ms-scale), so the detailed sparkline reads like p95 over time
 // rather than an abstract ramp.

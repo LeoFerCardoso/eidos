@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Label } from '@forge/ui';
+import { Label } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/Label',

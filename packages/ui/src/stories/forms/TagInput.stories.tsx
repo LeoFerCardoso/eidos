@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { TagInput } from '@forge/ui';
+import { TagInput } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/TagInput',

@@ -17,7 +17,7 @@ Today Forge already has the determinism *parts* (4 hooks, 5 check scripts, 5 gen
 - **Stack is npm workspaces + Turborepo** (`packageManager: npm@10.8.2`, `turbo.json`). Never say pnpm.
 - **No shadcn primitives, no `cva`, no Tailwind-for-components.** Forge components compose **hand-authored `.ds-*` / `.ai-*` CSS classes** defined in `packages/ui/styles/{tokens.css,ds.css,ai.css}`; color/spacing come from `var(--token)` defined **once** in `tokens.css`. A blanket "ban all hex/px" regex is **forbidden** — `tokens.css` legitimately holds `#FF6B35`, `oklch()`, px. **Note:** `class-variance-authority` is already a transitive/root dependency (it is in the **root** `package.json` but is **NOT imported by any `packages/ui/src` component** — verify before acting). Do **not** introduce `cva` *into Forge components*; a lockfile grep alone will mislead you.
 - **Tokens are authored in CSS** and **exported** to DTCG via `scripts/gen-tokens.mjs` → `tokens/forge.tokens.json`. **Do NOT invert to Style-Dictionary-as-source.** ⚠️ **Verified bug to fix first:** `gen-tokens.mjs` hardcodes `readFileSync('src/styles/tokens.css', …)`, but that path **no longer exists** post-monorepo — the only token source on disk is `packages/ui/styles/tokens.css`. So `npm run gen:tokens` currently **throws `ENOENT`** and the DTCG export is stale/dead. The `C-tokens-dtcg` clause (§1.3) + a `gen-tokens --check` mode must **repoint the source to `packages/ui/styles/tokens.css`** (and assert the regenerated output matches the committed `tokens/forge.tokens.json`) so the DTCG export tracks the shipped token source. **Do NOT invert to Style-Dictionary-as-source** — CSS stays authoritative.
-- **Distribution is source-shipped** — `packages/registry` (`registry.json` → `public/r/<name>.json`) + `packages/cli` (`forge-ui add`) copy source into consumers. **No changesets, no published-package model.** Versioning is the single `DS_VERSION` in `src/lib/site.ts`, bumped by `/release`. (Add a git tag per release; that is the only release-governance change.)
+- **Distribution is source-shipped** — `packages/registry` (`registry.json` → `public/r/<name>.json`) + `packages/cli` (`eidos add`) copy source into consumers. **No changesets, no published-package model.** Versioning is the single `DS_VERSION` in `src/lib/site.ts`, bumped by `/release`. (Add a git tag per release; that is the only release-governance change.)
 - Single accent **ember `#FF6B35`** (`var(--accent)`), ≤2× per screen. **Geist Sans + Geist Mono.** Logical CSS properties (RTL is first-class). The theme axis is **{dark, light} × {ltr, rtl}** — NOT multi-accent.
 - **No Figma linkage** (DTCG export is the only bridge).
 - It's **Forge**, not "Eidos". Name every new artifact `forge.*` / `forge:verify` / `FORGE-HEALTH.md`.
@@ -37,11 +37,11 @@ Every Forge component must exist coherently across four trees, kept in sync. **S
 | # | Surface | Path | Source of truth for |
 |---|---------|------|---------------------|
 | 1 | **Docs page** | `src/ds/migrated/<ds>/<slug>.tsx` (core: `src/ds/migrated/<slug>.tsx`) | the DS-PAGE-STANDARD anatomy (the canonical demo) |
-| 2 | **`@forge/ui` export** | `packages/ui/src/<comp>.tsx` (or a grouped barrel — see ⚠️ below), re-exported from `packages/ui/src/index.ts` | the component API (types → `gen-props`) |
+| 2 | **`@eidos/ui` export** | `packages/ui/src/<comp>.tsx` (or a grouped barrel — see ⚠️ below), re-exported from `packages/ui/src/index.ts` | the component API (types → `gen-props`) |
 | 3 | **Storybook story** | `packages/ui/src/stories/<group>/<Comp>.stories.tsx` (CSF3) | the isolated variant×state matrix (the *canonical demo*) |
-| 4 | **Registry item** | `packages/registry/registry.json` → `public/r/<name>.json` (via `build-registry.mjs`), with a per-component source at `packages/registry/src/forge/<name>.tsx` | the `forge-ui add` install payload |
+| 4 | **Registry item** | `packages/registry/registry.json` → `public/r/<name>.json` (via `build-registry.mjs`), with a per-component source at `packages/registry/src/forge/<name>.tsx` | the `eidos add` install payload |
 
-⚠️ **Source-mapping reality (do not assume 1:1 filenames):** many `@forge/ui` exports do **not** live in a per-component file — `Chip`, `CountUp`, `Avatar`, etc. live inside **grouped barrel files** (`atoms.tsx`, `primitives.tsx`, `blocks.tsx`), while the registry keeps a **per-component** `src/forge/<name>.tsx` (split by `scripts/extract-registry.mjs`). Therefore the contract must bind registry↔source via an **explicit per-component mapping field** (`surfaces.exportFile`), never a filename-convention checksum. See `C-registry-sync` (§1.3) and §2.2.5 for the correct end-state.
+⚠️ **Source-mapping reality (do not assume 1:1 filenames):** many `@eidos/ui` exports do **not** live in a per-component file — `Chip`, `CountUp`, `Avatar`, etc. live inside **grouped barrel files** (`atoms.tsx`, `primitives.tsx`, `blocks.tsx`), while the registry keeps a **per-component** `src/forge/<name>.tsx` (split by `scripts/extract-registry.mjs`). Therefore the contract must bind registry↔source via an **explicit per-component mapping field** (`surfaces.exportFile`), never a filename-convention checksum. See `C-registry-sync` (§1.3) and §2.2.5 for the correct end-state.
 
 ### 1.2 `forge.contract.schema.json` (JSON Schema, draft 2020-12) — author this
 
@@ -93,7 +93,7 @@ The contract is a list of **clauses** + a list of **components** with their surf
             "additionalProperties": false,
             "properties": {
               "docs":       { "type": "string", "description": "src/ds/migrated path, or '' if N/A." },
-              "export":     { "type": "string", "description": "@forge/ui export name (e.g. 'Chip')." },
+              "export":     { "type": "string", "description": "@eidos/ui export name (e.g. 'Chip')." },
               "exportFile": { "type": "string", "description": "Actual file the export lives in (e.g. 'packages/ui/src/atoms.tsx'). REQUIRED for grouped barrels." },
               "story":      { "type": "string", "description": "stories path." },
               "registry":   { "type": "string", "description": "registry item name → public/r/<name>.json." },
@@ -172,12 +172,12 @@ Each clause maps to a verifier that **reuses an existing script** or names a **n
       "rule": "Every nav href resolves to a page/example; every page (except overview) is in nav; in-body <a href> resolve; PAGE_SLUG == nav-config id.",
       "verifier": "check-nav" },                                                  // EXISTING (extend to body links + PAGE_SLUG)
 
-    // ── Surface 2 · @forge/ui EXPORT ──
+    // ── Surface 2 · @eidos/ui EXPORT ──
     { "id": "C-export",          "surface": "export","gate": "block", "appliesTo": ["component","ai"],
       "rule": "Component is exported from packages/ui/src/index.ts barrel (resolved via surfaces.exportFile).",
       "verifier": "check-4-surface-parity" },                                     // NEW (parity)
     { "id": "C-typecheck",       "surface": "export","gate": "block", "appliesTo": ["component","ai"],
-      "rule": "tsc --noEmit clean for @forge/ui and the docs app.",
+      "rule": "tsc --noEmit clean for @eidos/ui and the docs app.",
       "verifier": "EXT:ui:typecheck" },                                           // EXISTING (blocking; also EXT:typecheck for docs app)
 
     // ── Surface 3 · STORYBOOK STORY (the story is the canonical demo) ──
@@ -191,15 +191,15 @@ Each clause maps to a verifier that **reuses an existing script** or names a **n
       "rule": "@storybook/addon-a11y / test-runner reports no critical/serious violations for the story.",
       "verifier": "EXT:sb:test" },                                                // NEW (test-runner)
 
-    // ── Surface 4 · REGISTRY ITEM (forge-ui add) ──
+    // ── Surface 4 · REGISTRY ITEM (eidos add) ──
     { "id": "C-registry",        "surface": "registry","gate": "block", "appliesTo": ["component","ai"],
       "rule": "A registry item exists; public/r/<name>.json builds; $schema valid; registryDependencies acyclic and all present; files[].source paths exist.",
       "verifier": "check-registry" },                                             // NEW (validation; build is EXISTING)
     { "id": "C-registry-sync",   "surface": "registry","gate": "block", "appliesTo": ["component","ai"],
-      "rule": "Registry source (surfaces.registrySrc) matches its bound @forge/ui source (surfaces.exportFile) — no drift. Per the explicit mapping, NOT a filename convention.",
+      "rule": "Registry source (surfaces.registrySrc) matches its bound @eidos/ui source (surfaces.exportFile) — no drift. Per the explicit mapping, NOT a filename convention.",
       "verifier": "check-registry" },                                             // NEW
     { "id": "C-cli-install",     "surface": "registry","gate": "block", "appliesTo": ["component","ai"],
-      "rule": "forge-ui add <name> resolves the FULL transitive registryDependency graph and refuses to write if any dep is missing.",
+      "rule": "eidos add <name> resolves the FULL transitive registryDependency graph and refuses to write if any dep is missing.",
       "verifier": "EXT:cli:test" },                                               // EXISTING e2e + NEW guard (§9)
 
     // ── Cross / visual / tokens ──
@@ -255,7 +255,7 @@ Every new script: support `--component <name>`, `--all`, `--strict`, `--json`, a
 1. **`scripts/check-ds-page-structure.mjs`** — TS-parse every `src/ds/migrated/**/*.tsx`; extract `<SubHead meta=…>` order and JSX class markers; verify against the **machine-readable `docs/ds-page-standard.json`** (graft from C2 — author this as the data derivation of `DS-PAGE-STANDARD.md` so the *rules live as data, not re-encoded in the script*). Assert: (a) canonical section sequence + order, (b) `a11y` section present with keyboard/aria/contrast/motion keywords, (c) `<Frame dir="rtl">` present or waived, (d) `.ana` + `.ana-list` anatomy, (e) `.dd-grid`, (f) `<AutoPropsTable>` (no hand-table) when documenting a real export, (g) lede ≤220 chars & no markup. Honors waivers. `--strict` exits nonzero. Satisfies `C-docs-sections / C-a11y-section / C-rtl-frame / C-anatomy / C-do-dont / C-autopropstable / C-lede`.
 2. **`scripts/check-no-page-style.mjs`** — grep/parse `src/ds/migrated/**` + `src/ds/examples/**` for `<style>` and inline `style={{ … }}` carrying color/size/spacing/background (skip demo renders inside `<Frame>`); also flag raw `#hex`/`rgba(`/`Npx` in `packages/ui/src/**/*.tsx`. **Whitelist `packages/ui/styles/{tokens.css,ds.css,ai.css}`** as the only place those values live. Satisfies `C-no-page-style`. (This is the *correct* Forge form of the draft's "no-raw-values" idea; a blanket regex would break the token files.)
 3. **`scripts/check-4-surface-parity.mjs`** — the keystone. For each `components[]` entry, verify all four bound surfaces resolve using the **explicit `surfaces` mapping** (docs file exists + imports `@/ds/core`; `export` name present in the barrel via `exportFile`; `story` file exists; `public/r/<name>.json` exists). Emit per-component booleans. `--strict` fails if a non-waived component is missing ≥1 surface. Satisfies `C-export` (parity half). **This is the keystone parity gate the consolidation-audit only computed read-only.**
-4. **`scripts/check-stories.mjs`** — assert every `@forge/ui` export has a CSF3 story; **READ `storySort.order` from `apps/storybook/.storybook/preview.ts`** (do NOT embed a hardcoded list — the real order is `['Introduction','Primitives','Forms','Elements','Blocks','Overlays','Device','AI','Icons','Docs']`, **no Charts group**); validate `meta.title` prefix ∈ that order AND matches the folder group; require `tags: ['autodocs']`; (advisory) count variant×state stories + a States story. Satisfies `C-story / C-story-matrix`.
+4. **`scripts/check-stories.mjs`** — assert every `@eidos/ui` export has a CSF3 story; **READ `storySort.order` from `apps/storybook/.storybook/preview.ts`** (do NOT embed a hardcoded list — the real order is `['Introduction','Primitives','Forms','Elements','Blocks','Overlays','Device','AI','Icons','Docs']`, **no Charts group**); validate `meta.title` prefix ∈ that order AND matches the folder group; require `tags: ['autodocs']`; (advisory) count variant×state stories + a States story. Satisfies `C-story / C-story-matrix`.
 5. **`scripts/check-registry.mjs`** — JSON-schema-validate `registry.json` + every `public/r/*.json` against the shadcn registry-item schema; DFS `registryDependencies` for cycles + missing refs; verify every `files[].source` resolves. For `C-registry-sync`, diff `surfaces.registrySrc` against the **bound** `surfaces.exportFile` region (NOT `ui/src/<comp>.tsx == registry/src/forge/<comp>.tsx` by filename — exports live in grouped barrels). **This checksum gate is INTERIM.** The real fix (graft from the winner's stated end-state, §2.2.5) is to make `build-registry.mjs` inline directly from the canonical `packages/ui/src` source so the `src/forge/<name>.tsx` copies disappear entirely. Satisfies `C-registry / C-registry-sync`.
 6. **`scripts/check-contrast-fill.mjs`** — **targeted, not blanket axe.** Headless-screenshot each route; for elements rendered on an accent/elevated fill (`.btn`, `.pill`/`.badge` on tone, `.chip`, status dots, brand tiles, accent buttons), sample fg vs bg pixels and compute WCAG ratio; warn/fail when foreground equals/near-equals its background (the "ember-on-ember" sin) or < threshold. Keep `--fg-subtle/--fg-faint` token tiers advisory. Start advisory; graduate `gate` to `block` once clean. Satisfies `C-contrast-fill`.
 7. **`scripts/check-slop.mjs`** — consolidated anti-AI-slop lint over `src/ds/**` + `packages/ui/src/**/*.tsx`: emoji feature-icons (U+1F300+ inside `<h*>/<button>/<li>/[class*=icon]`), invented-metric regex, filler strings, placeholder-CDN hosts, hardcoded `font-family` outside `var(--font-*)`. `advisory` gate (warns, doesn't block — these are review tells). Satisfies `C-no-slop`.
@@ -263,7 +263,7 @@ Every new script: support `--component <name>`, `--all`, `--strict`, `--json`, a
 
 ### 2.2.5 Registry-sync end-state (the real fix, not the checksum)
 
-> The checksum (`C-registry-sync`) ships **first** as an interim gate. The end-state, per the settled architecture, is to **delete the manual `packages/registry/src/forge/*` copies** and have `build-registry.mjs` inline `files[].content` **directly from the canonical `@forge/ui` source** (resolving grouped-barrel exports via `surfaces.exportFile`). When that lands, `C-registry-sync` collapses to "the inlined content equals the live source at build time," and drift becomes structurally impossible. Track this as the registry surface's exit condition.
+> The checksum (`C-registry-sync`) ships **first** as an interim gate. The end-state, per the settled architecture, is to **delete the manual `packages/registry/src/forge/*` copies** and have `build-registry.mjs` inline `files[].content` **directly from the canonical `@eidos/ui` source** (resolving grouped-barrel exports via `surfaces.exportFile`). When that lands, `C-registry-sync` collapses to "the inlined content equals the live source at build time," and drift becomes structurally impossible. Track this as the registry surface's exit condition.
 
 > **Stop re-proposing:** lede length, typography scale, protect-generated, nav integrity, frame parse, tsc gate, gen-props, DTCG export, visual regression, CI jobs — **already done**. This upgrade only *aggregates* and *fills the parity/structure/story/contrast/registry gaps*.
 

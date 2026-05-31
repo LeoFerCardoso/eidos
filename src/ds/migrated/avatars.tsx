@@ -1,6 +1,6 @@
 'use client';
-// Forge DS — Components / Avatars.
-// Initials-first by default — Forge surfaces are dense, and a circle of
+// Eidos DS — Components / Avatars.
+// Initials-first by default — Eidos surfaces are dense, and a circle of
 // initials reads faster than a low-res face. Image variant for product
 // surfaces where photo identity matters; status dot for presence.
 import { Avatar, Frame, Icons, Pill, OwnerPill, PropsTable, Section, SubHead, TabbedCode, installTabs, Lede, Mono, AutoPropsTable, Skeleton, Alert, AlertTitle, AlertDescription, Kbd } from '@/ds/core';
@@ -46,7 +46,7 @@ export default function Avatars() {
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('avatar')} ariaLabel="package manager"/>
       <Lede>
-        Ships <Mono>Avatar</Mono>, <Mono>Avatar.Group</Mono>, and <Mono>Avatar.StatusDot</Mono> — plain React over the Forge CSS layer, with deterministic image fallback to initials.
+        Ships <Mono>Avatar</Mono>, <Mono>Avatar.Group</Mono>, and <Mono>Avatar.StatusDot</Mono> — plain React over the Eidos CSS layer, with deterministic image fallback to initials.
       </Lede>
 
       {/* 2. USAGE */}

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Counter } from '@forge/ui';
+import { Counter } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/Counter',

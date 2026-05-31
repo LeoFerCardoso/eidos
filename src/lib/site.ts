@@ -18,5 +18,5 @@ export const DS_VERSIONS: Record<string, string> = {
 /** Back-compat fallback (core's version) for non-DS contexts. */
 export const DS_VERSION = DS_VERSIONS.core;
 export const DS_CHANNEL = 'Stable';
-export const SITE_NAME = 'Forge';
+export const SITE_NAME = 'Eidos';
 export const SITE_TAGLINE = 'Design System';

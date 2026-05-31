@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Status & semantics
+// Eidos DS — Components / Status & semantics
 // The mapping between tone and meaning. Owns the *semantics* of the six tones
 // (ember · success · warning · danger · ice · neutral) — Pills & Chips, Alerts,
 // Notifications, Buttons, and Badges all spend the same vocabulary.
@@ -20,11 +20,11 @@ export function Demo() {
 
   const muted = { color: 'var(--fg)' };
 
-  // Status semantics classes (.st-*) live in ds.css — Forge invariant: never
+  // Status semantics classes (.st-*) live in ds.css — Eidos invariant: never
   // page-local CSS; compose ds.css. (Promoted verbatim from a former block.)
 
   const tones = [
-    { id: 'ember',   name: 'Ember',   tok: '--ember',   soft: '--ember-soft',   noun: "Forge is doing work",                 mean: 'Action in flight, primary CTA, the live thing.', ex: ['deploying', 'live', 'active', 'boosted'] },
+    { id: 'ember',   name: 'Ember',   tok: '--ember',   soft: '--ember-soft',   noun: "Eidos is doing work",                 mean: 'Action in flight, primary CTA, the live thing.', ex: ['deploying', 'live', 'active', 'boosted'] },
     { id: 'success', name: 'Success', tok: '--success', soft: '--success-soft', noun: 'Pass — steady state',                 mean: 'Healthy / approved / merged. Calm, not celebratory.', ex: ['healthy', 'merged', 'gate passed', 'verified'] },
     { id: 'warning', name: 'Warning', tok: '--warning', soft: '--warning-soft', noun: 'Degraded — action recommended',       mean: 'Soft alarm. The thing still works, but attention pays off.', ex: ['degraded', 'stale', 'on-call', 'expiring'] },
     { id: 'danger',  name: 'Danger',  tok: '--danger',  soft: '--danger-soft',  noun: 'Failed — action required',            mean: 'Down / blocked / breaking. Reserved for outright failure.', ex: ['down', 'failed', 'rollback', 'blocked'] },
@@ -64,7 +64,7 @@ export default function Status() {
 
       {/* Lede */}
       <Lede>
-        Tone in Forge is a <b style={muted}>noun</b>, not an adjective. <Mono>--success</Mono> doesn't mean &quot;good&quot;, it means &quot;this thing is in a passing state&quot;. <Mono>--warning</Mono> doesn't mean &quot;yellow&quot;, it means &quot;degraded — a human should look soon, but nothing is on fire&quot;. Picking the right tone is mostly a vocabulary problem: name the state in plain English, then look up the column.
+        Tone in Eidos is a <b style={muted}>noun</b>, not an adjective. <Mono>--success</Mono> doesn't mean &quot;good&quot;, it means &quot;this thing is in a passing state&quot;. <Mono>--warning</Mono> doesn't mean &quot;yellow&quot;, it means &quot;degraded — a human should look soon, but nothing is on fire&quot;. Picking the right tone is mostly a vocabulary problem: name the state in plain English, then look up the column.
       </Lede>
 
       {/* Master semantic table */}

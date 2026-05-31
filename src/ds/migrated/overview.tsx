@@ -1,9 +1,9 @@
 'use client';
-// Forge DS — Get Started / Introduction (also the project entry surface).
+// Eidos DS — Get Started / Introduction (also the project entry surface).
 //
 // Owns the rich landing — hero, principles, philosophy, FAQ. The full
 // component catalog has moved to its own page (components-catalog) so this
-// stays focused on "what is Forge." Reuses the existing .ds-hero / .surface /
+// stays focused on "what is Eidos." Reuses the existing .ds-hero / .surface /
 // .comp-tile / .ds-grid classes — no new styles are introduced here.
 import * as React from 'react';
 import { Icons, SubHead, Alert, AlertTitle, AlertDescription, Kbd } from '@/ds/core';
@@ -54,7 +54,7 @@ const useHeroStats = () => {
     // Defer one tick — getComputedStyle returns blank if read before stylesheets parse.
     const id = requestAnimationFrame(() => {
       const n = countTokens();
-      // Zero resolved variables can only mean the read failed (Forge always
+      // Zero resolved variables can only mean the read failed (Eidos always
       // ships dozens) — treat it as the error path, never a real count.
       if (n > 0) { setTokens(n); setStatus('ready'); }
       else { setStatus('error'); }
@@ -95,7 +95,7 @@ const PRINCIPLES = [
 ];
 
 // Adapted from shadcn/ui's intro voice — open, composable, owned.
-// Same shape (4 short philosophy paragraphs) but in Forge's tone.
+// Same shape (4 short philosophy paragraphs) but in Eidos's tone.
 const PHILOSOPHY = [
   {
     t: 'Open code.',
@@ -107,7 +107,7 @@ const PHILOSOPHY = [
   },
   {
     t: 'Distribution.',
-    d: 'The Tailwind preset is the canonical distribution. Drop it in any Forge product and you get the full token graph — colors, type, spacing, motion — without copying CSS variables by hand.'
+    d: 'The Tailwind preset is the canonical distribution. Drop it in any Eidos product and you get the full token graph — colors, type, spacing, motion — without copying CSS variables by hand.'
   },
   {
     t: 'Beautiful defaults.',
@@ -118,10 +118,10 @@ const PHILOSOPHY = [
 const FAQS = [
   {
     q: 'Is this a component library?',
-    a: 'No. It is a system: a set of tokens, primitives, and patterns the Forge product is built on. Some of those primitives ship as React components in this repo, others as Tailwind utilities, others as plain CSS classes.'
+    a: 'No. It is a system: a set of tokens, primitives, and patterns the Eidos product is built on. Some of those primitives ship as React components in this repo, others as Tailwind utilities, others as plain CSS classes.'
   },
   {
-    q: 'How do I add Forge to a new product?',
+    q: 'How do I add Eidos to a new product?',
     a: 'Install the Tailwind v4 preset, link tokens.css and ds.css, and pick the components you need from this site. Copy the JSX into your project — the system is meant to be owned, not imported.'
   },
   {
@@ -139,8 +139,8 @@ export default function Overview() {
   const reducedMotion = usePrefersReducedMotion();
   return (
   <section id="overview" className="ds-section" style={{paddingTop: 24}}>
-    <div className="ds-h-eyebrow">Forge / Design System</div>
-    <h1 className="ds-h1">Build Forge products.</h1>
+    <div className="ds-h-eyebrow">Eidos / Design System</div>
+    <h1 className="ds-h1">Build Eidos products.</h1>
     <p className="ds-lede">
       A set of beautifully-designed, copy-and-paste components, tokens, and patterns for the Equifax Brasil platform. Open code. Calm density. Dark-first. Use it for every internal product.
     </p>
@@ -153,7 +153,7 @@ export default function Overview() {
         <div>
           <div className="ds-h-eyebrow" style={{marginBottom: 14}}>v1.0 · Stable · Updated May 2026</div>
           <h2 className="t-h2" style={{marginBottom: 14}}>
-            Forge is sharp, dense, and dark-first.<br/>
+            Eidos is sharp, dense, and dark-first.<br/>
             <span style={{color:'var(--fg-muted)'}}>Built on Geist + Tailwind v4.</span>
           </h2>
           <p className="t-small" style={{color:'var(--fg-muted)', maxWidth: '52ch'}}>
@@ -172,7 +172,7 @@ export default function Overview() {
           {HERO_STATS.map((s) => {
             // The Tokens count is read from the live stylesheet, not typed into copy.
             // LOADING → em-dash + faint ink; READY → counted number + ember spark
-            // (the one micro-moment that argues Forge's "honest by construction"
+            // (the one micro-moment that argues Eidos's "honest by construction"
             // thesis — numbers come from disk, never from marketing); ERROR → "n/a"
             // in danger ink + the recovery banner below.
             const live = s.live;
@@ -232,7 +232,7 @@ export default function Overview() {
     <div style={{marginTop: 56}}>
       <SubHead meta="4 axes">Philosophy</SubHead>
       <p className="ds-caption wide" style={{marginTop: 0, marginBottom: 22}}>
-        This is not a component library. It is how Forge is built. The four ideas below shape every choice in the system.
+        This is not a component library. It is how Eidos is built. The four ideas below shape every choice in the system.
       </p>
       <div className="ds-grid cols-2">
         {PHILOSOPHY.map((p) => (
@@ -363,7 +363,7 @@ export default function Overview() {
     <div style={{marginTop: 56, padding: 24, border:'1px solid var(--border)', borderRadius: 'var(--radius-xl)', background:'var(--bg-elevated)', display:'flex', alignItems:'center', justifyContent:'space-between', gap: 16, flexWrap:'wrap'}}>
       <div>
         <div className="t-body" style={{fontWeight: 600, letterSpacing:'-0.01em'}}>Building something new?</div>
-        <div className="t-small" style={{color:'var(--fg-muted)', marginTop: 4}}>Start from the Tailwind preset — it ships every token Forge uses.</div>
+        <div className="t-small" style={{color:'var(--fg-muted)', marginTop: 4}}>Start from the Tailwind preset — it ships every token Eidos uses.</div>
       </div>
       <div style={{display:'flex', gap: 8}}>
         <a className="btn ghost" href="/a11y">Accessibility</a>

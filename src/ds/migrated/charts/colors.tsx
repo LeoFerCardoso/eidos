@@ -1,5 +1,5 @@
 'use client';
-// Forge Charts — Foundations / Colors. The data-visualization palette, relocated here from
+// Eidos Charts — Foundations / Colors. The data-visualization palette, relocated here from
 // the core Color page: categorical, sequential, diverging, plus the chart chrome tokens.
 import { Section, SubHead, Frame, Icons, ForgeChart, ForgeTooltipContent, useChartColors, forgeGridProps, forgeXAxisProps, forgeYAxisProps, Recharts, Mono, Lede } from '@/ds/core';
 

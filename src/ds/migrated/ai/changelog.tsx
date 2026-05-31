@@ -2,9 +2,9 @@
 import { ChangelogView, type ChangelogEntry } from '@/components/docs';
 
 const CHANGELOG: ChangelogEntry[] = [
-  // ─── v1.29.0 — AI surfaces promoted to @forge/ui + stories + parity (2026-05-30) ──────
-  { version: 'v1.29.0', date: '2026-05-30', type: 'feat', scope: 'ai', title: 'AI surfaces promoted to @forge/ui exports + CSF3 stories',
-    summary: 'The AI components (Tool, Reasoning, Plan, Context, History, Sources, ModelSelector, AskUser, AgentIdentity and the rest) are now first-class @forge/ui exports with Storybook stories and registry items, restructured to the contract harness four-surface parity. API tables are generated from the typed props (<AutoPropsTable>), and the AI styling ships via the forge-ai registry item (ai.css). forge-ui add <component> now installs any AI surface component-by-component.' },
+  // ─── v1.29.0 — AI surfaces promoted to @eidos/ui + stories + parity (2026-05-30) ──────
+  { version: 'v1.29.0', date: '2026-05-30', type: 'feat', scope: 'ai', title: 'AI surfaces promoted to @eidos/ui exports + CSF3 stories',
+    summary: 'The AI components (Tool, Reasoning, Plan, Context, History, Sources, ModelSelector, AskUser, AgentIdentity and the rest) are now first-class @eidos/ui exports with Storybook stories and registry items, restructured to the contract harness four-surface parity. API tables are generated from the typed props (<AutoPropsTable>), and the AI styling ships via the forge-ai registry item (ai.css). eidos add <component> now installs any AI surface component-by-component.' },
 
   // ─── v1.28.1 — Chat history routing per-thread + project tile destinations ──────
   { version: 'v1.28.1', date: '2026-05-28', type: 'fix', scope: 'examples', title: 'Chat history rows route per-thread — "breaker" goes to the Artifacts demo',
@@ -168,7 +168,7 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.21.0', date: '2026-05-28', type: 'feat', scope: 'audio-player', title: 'AudioPlayer — richer controls (skip ±10s, speed pill, cover, peaks waveform)',
     summary: 'AudioPlayer was reshaped to match the elements.ai-sdk.dev pattern: skip-back / play / skip-forward triplet (▲ ▶ ▼ icons added to icons.tsx), a speed pill that cycles through 0.75× / 1× / 1.25× / 1.5× / 2×, optional cover artwork slot, optional subtitle line, and an optional peaks array that renders a real waveform (played portion tints ember, tail stays neutral). The scrubber is now click-to-seek with ← → keyboard skip and Home/End jumps. Pass skipSeconds to override the ±10s default.' },
   { version: 'v1.21.0', date: '2026-05-28', type: 'docs', scope: 'ai', title: 'Terminal — replaced traffic-light dots with the terminal icon',
-    summary: 'The Terminal header swapped the three macOS-style traffic-light dots for a single ember Icons.terminal — more Forge, less skeuomorphic.' },
+    summary: 'The Terminal header swapped the three macOS-style traffic-light dots for a single ember Icons.terminal — more Eidos, less skeuomorphic.' },
 
   // ─── v1.20.0 — Ask UX rebuild + SpeechInput compact (2026-05-28) ──────
   { version: 'v1.20.0', date: '2026-05-28', type: 'feat', scope: 'ai', title: 'Ask — full UX rebuild with stepped flow, slide transitions, Back/keyboard nav',
@@ -208,7 +208,7 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.18.0', date: '2026-05-28', type: 'feat', scope: 'citations', title: 'Sources — chevron disclosure + pagination',
     summary: 'Sources panel now has a chevron-triggered open/close header (matching ChainOfThought) and paginates when sources.length > 5 (perPage prop). Leading/trailing arrow buttons with a "1–5 of 12" position indicator.' },
   { version: 'v1.18.0', date: '2026-05-28', type: 'feat', scope: 'ai', title: 'Ask — clean-room rebuild after fluidfunctionalism',
-    summary: 'AskUser rebuilt from scratch to mirror the fluidfunctionalism.com Ask component, customizing colors to Forge. Sans throughout (no mono uppercase eyebrows), demure "Question N of M" header, confident 20px semibold title, options as flat rows separated by whitespace, selection by ember-soft background fill (no tick icons, title stays var(--fg) — the fill IS the cue). New inline layout for short descriptions. Filled ember Next/Finish CTA with ⌃↵ keyboard hint.' },
+    summary: 'AskUser rebuilt from scratch to mirror the fluidfunctionalism.com Ask component, customizing colors to Eidos. Sans throughout (no mono uppercase eyebrows), demure "Question N of M" header, confident 20px semibold title, options as flat rows separated by whitespace, selection by ember-soft background fill (no tick icons, title stays var(--fg) — the fill IS the cue). New inline layout for short descriptions. Filled ember Next/Finish CTA with ⌃↵ keyboard hint.' },
 
   // ─── v1.17.1 — Flat refinement (2026-05-28) ──────
   { version: 'v1.17.1', date: '2026-05-28', type: 'docs', scope: 'ai', title: 'Ask · Sources · Checkpoint · Chain of Thought refined to a flatter, typographic style',
@@ -247,7 +247,7 @@ const CHANGELOG: ChangelogEntry[] = [
     summary: 'Every AI page got a sharpened lede and a required Accessibility section with surface-specific guidance: aria-live="polite" for streaming, focus order and roles for the conversation/prompt input, the disclosure/expanded state for tool calls and reasoning, and a reduced-motion fallback that drops the typing caret to instant text.' },
 
   // ─── v1.9.0 — AI becomes its own sub-DS (2026-05-21) ──────
-  { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'ai', title: 'Forge AI split into its own sub-DS at /ai',
+  { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'ai', title: 'Eidos AI split into its own sub-DS at /ai',
     summary: 'Message, conversation, prompt input, streaming, markdown, reasoning, tool, agents, contexts, citations, errors, history, suggestion and AI Label moved into a dedicated AI sub-DS, route-prefixed at /ai. No new palette — AI surfaces compose the same core primitives, tokens and ember accent.' },
   { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'overview', title: 'Overview rebuilt — a live streaming chat in the hero',
     summary: 'New Introduction-style Overview whose hero is a working mini chat: a user bubble, a "getServiceHealth · done" tool chip, and an assistant answer that types out token-by-token with the streaming caret (fixed-width surface, looping).' },
@@ -270,8 +270,8 @@ export default function AiChangelog() {
     <ChangelogView
       entries={CHANGELOG}
       title="Changelog"
-      desc="Every change to Forge AI — searchable, filterable, scoped per surface."
-      dsName="Forge AI"
+      desc="Every change to Eidos AI — searchable, filterable, scoped per surface."
+      dsName="Eidos AI"
     />
   );
 }

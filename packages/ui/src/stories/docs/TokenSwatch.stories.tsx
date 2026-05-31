@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { TokenSwatch } from '@forge/ui';
+import { TokenSwatch } from '@eidos/ui';
 
 const meta = {
   title: 'Docs/TokenSwatch',

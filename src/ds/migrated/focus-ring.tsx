@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Foundations / Focus Ring
+// Eidos DS — Foundations / Focus Ring
 //
 // The single canonical interactive focus indicator used by every component.
 // Goal: one affordance, one set of tokens, one behaviour — whether the user
@@ -50,7 +50,7 @@ export default function FocusRing() {
       desc="One affordance, every component. Keyboard and pointer interactions share the same offset outline so users always see the focused target — regardless of how they got there."
     >
       <Lede>
-        Every interactive element in Forge — buttons, inputs, triggers, the command palette, the file drop zone, even the checkbox box — uses the <b style={{color:'var(--fg)'}}>same</b> focus ring. A solid 2px outline painted just outside the element, with a 2px gap that shows through to whatever sits behind. No more "I tabbed here but the ring is different from when I clicked." No more browser-default blue rings sneaking through. One affordance, one pattern, no per-component drift.
+        Every interactive element in Eidos — buttons, inputs, triggers, the command palette, the file drop zone, even the checkbox box — uses the <b style={{color:'var(--fg)'}}>same</b> focus ring. A solid 2px outline painted just outside the element, with a 2px gap that shows through to whatever sits behind. No more "I tabbed here but the ring is different from when I clicked." No more browser-default blue rings sneaking through. One affordance, one pattern, no per-component drift.
       </Lede>
 
       {/* ────────────────────────────────────────────────────────────────
@@ -126,7 +126,7 @@ export default function FocusRing() {
           THE PATTERN
           ──────────────────────────────────────────────────────────────── */}
       <SubHead meta="copy-paste pattern">The pattern</SubHead>
-      <Frame label="One block, every interactive component. Drop into your CSS verbatim." lang="css" code={`/* The canonical Forge focus ring.
+      <Frame label="One block, every interactive component. Drop into your CSS verbatim." lang="css" code={`/* The canonical Eidos focus ring.
    Wire :focus-visible (keyboard) AND any stateful "open" marker
    (.is-open, [aria-expanded="true"]) to the same declaration so
    pointer and keyboard reach the SAME affordance. */
@@ -320,7 +320,7 @@ outline-offset:
           ──────────────────────────────────────────────────────────────── */}
       <SubHead meta="audit">Component scorecard</SubHead>
       <Lede>
-        Every interactive component in Forge ships with the canonical outline-offset ring. Reach for these patterns when authoring a new one.
+        Every interactive component in Eidos ships with the canonical outline-offset ring. Reach for these patterns when authoring a new one.
       </Lede>
       <table className="spec">
         <thead><tr><th>Component</th><th>Ring carrier</th><th>Notes</th></tr></thead>
@@ -365,7 +365,7 @@ outline-offset:
       <ul style={{margin: 0, padding: 0, listStyle:'none', display:'flex', flexDirection:'column', gap: 10, maxWidth: '72ch'}}>
         <li style={{display:'flex', gap: 10, color:'var(--fg-muted)', lineHeight: 1.6}}>
           <Icons.check size={14} style={{color:'var(--success)', flex:'0 0 auto', marginTop: 4}}/>
-          <span><b style={{color:'var(--fg)'}}>WCAG 2.4.7 (Focus Visible).</b> Every keyboard-reachable element shows a focus indicator. Forge does this with the canonical outline on every component.</span>
+          <span><b style={{color:'var(--fg)'}}>WCAG 2.4.7 (Focus Visible).</b> Every keyboard-reachable element shows a focus indicator. Eidos does this with the canonical outline on every component.</span>
         </li>
         <li style={{display:'flex', gap: 10, color:'var(--fg-muted)', lineHeight: 1.6}}>
           <Icons.check size={14} style={{color:'var(--success)', flex:'0 0 auto', marginTop: 4}}/>

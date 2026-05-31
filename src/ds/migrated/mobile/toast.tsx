@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Toast / snackbar (scaffold). A transient message that rises above the
+// Eidos Mobile — Toast / snackbar (scaffold). A transient message that rises above the
 // bottom edge (over the tab bar / home indicator) with an optional single action.
 import * as React from 'react';
 import { Section, SubHead, Frame, CodeBlock, DeviceFrame, Icons, Lede, Mono } from '@/ds/core';

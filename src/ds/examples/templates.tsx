@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Counter, Icons, LangBadge, MOCKS, OwnerPill, RelativeTime } from '@/ds/core';
 import { FPageHeader, FShell } from './example-shell';
-// Forge IDP — Example: Templates gallery (Backstage-style scaffolders).
+// Eidos IDP — Example: Templates gallery (Backstage-style scaffolders).
 
   
   
@@ -15,18 +15,18 @@ import { FPageHeader, FShell } from './example-shell';
 
   // 12 templates — superset of MOCKS.TEMPLATES with more variety
   const TEMPLATES = [
-    { id: 'go-grpc-svc',       name: 'go-grpc-svc',       desc: 'Production-grade Go service with gRPC + REST, sqlc + pgx, canary-ready Helm chart. Pre-wired to Forge quality gates.',  lang: 'Go',          framework: ['gRPC','Helm','sqlc'],     maturity: 'Stable',       maintainer: personByPrefix('Rafael'),  usage: 96,  version: '3.2.0', featured: true },
+    { id: 'go-grpc-svc',       name: 'go-grpc-svc',       desc: 'Production-grade Go service with gRPC + REST, sqlc + pgx, canary-ready Helm chart. Pre-wired to Eidos quality gates.',  lang: 'Go',          framework: ['gRPC','Helm','sqlc'],     maturity: 'Stable',       maintainer: personByPrefix('Rafael'),  usage: 96,  version: '3.2.0', featured: true },
     { id: 'nestjs-microservice',name: 'nestjs-microservice', desc: 'NestJS microservice scaffold · gRPC + REST · OTLP traces · pre-wired SAST + risk gates · zero-config CI.',  lang: 'TypeScript',  framework: ['NestJS','gRPC','OTLP'],   maturity: 'Stable',       maintainer: personByPrefix('Camila'),  usage: 142, version: '2.8.1', featured: true },
-    { id: 'nextjs-app',        name: 'nextjs-app',        desc: 'Next.js 15 App Router · Tailwind · Forge auth shim · server actions · type-safe API contracts.',  lang: 'TypeScript',  framework: ['Next.js 15','Tailwind'],  maturity: 'Stable',       maintainer: personByPrefix('Diego'),   usage: 84,  version: '4.0.2' },
+    { id: 'nextjs-app',        name: 'nextjs-app',        desc: 'Next.js 15 App Router · Tailwind · Eidos auth shim · server actions · type-safe API contracts.',  lang: 'TypeScript',  framework: ['Next.js 15','Tailwind'],  maturity: 'Stable',       maintainer: personByPrefix('Diego'),   usage: 84,  version: '4.0.2' },
     { id: 'data-pipeline',     name: 'data-pipeline',     desc: 'Dagster pipeline · ClickHouse sink · per-asset cost guardrails · partition-aware retries.',  lang: 'Python',      framework: ['Dagster','ClickHouse'],   maturity: 'Stable',       maintainer: personByPrefix('Larissa'), usage: 38,  version: '1.6.0' },
     { id: 'ml-model-svc',      name: 'ml-model-svc',      desc: 'FastAPI · model registry · drift alarms · ABACUS sampling · ONNX export by default.',  lang: 'Python',      framework: ['FastAPI','MLflow'],       maturity: 'Stable',       maintainer: personByPrefix('Beatriz'), usage: 27,  version: '0.9.3' },
     { id: 'rust-edge-svc',     name: 'rust-edge-svc',     desc: 'Rust edge service · axum + tonic · zero-copy serialization · cgroup-aware autoscale.',  lang: 'Rust',        framework: ['axum','tonic'],           maturity: 'Beta',         maintainer: personByPrefix('Diego'),   usage: 14,  version: '0.4.1' },
-    { id: 'forge-agent',       name: 'forge-agent',       desc: 'Forge AI agent · MCP server scaffold · streaming responses · tool-calling boilerplate · OpenTelemetry traces.',  lang: 'TypeScript',  framework: ['MCP','AI SDK'],           maturity: 'Beta',         maintainer: personByPrefix('Camila'),  usage: 22,  version: '0.7.0' },
+    { id: 'forge-agent',       name: 'forge-agent',       desc: 'Eidos AI agent · MCP server scaffold · streaming responses · tool-calling boilerplate · OpenTelemetry traces.',  lang: 'TypeScript',  framework: ['MCP','AI SDK'],           maturity: 'Beta',         maintainer: personByPrefix('Camila'),  usage: 22,  version: '0.7.0' },
     { id: 'java-spring-svc',   name: 'java-spring-svc',   desc: 'Spring Boot 3 · Java 21 · OTLP · Resilience4j circuit breakers · containerized with jlink slim image.',  lang: 'Java',        framework: ['Spring Boot 3'],          maturity: 'Stable',       maintainer: personByPrefix('Thiago'),  usage: 58,  version: '5.1.0' },
     { id: 'event-handler',     name: 'event-handler',     desc: 'Event-driven consumer · Kafka or SQS · idempotency keys · DLQ replay tooling pre-baked.',  lang: 'Go',          framework: ['Kafka','SQS'],            maturity: 'Stable',       maintainer: personByPrefix('Larissa'), usage: 44,  version: '2.3.4' },
     { id: 'cron-job',          name: 'cron-job',          desc: 'Scheduled batch job · cost-aware concurrency · SLO-aware retries · Slack notifications on long runs.',  lang: 'Python',      framework: ['k8s CronJob'],            maturity: 'Stable',       maintainer: personByPrefix('Mariana'), usage: 31,  version: '1.4.2' },
     { id: 'edge-gateway',      name: 'edge-gateway',      desc: 'BFF gateway · API stitching · rate-limit + per-tenant quotas · WAF rules layer.',  lang: 'TypeScript',  framework: ['Hono','Envoy'],           maturity: 'Experimental', maintainer: personByPrefix('Diego'),   usage: 6,   version: '0.2.0' },
-    { id: 'cli-tool',          name: 'cli-tool',          desc: 'Forge CLI plugin scaffold · oclif · auto-publish to internal registry · drift-tested binaries.',  lang: 'TypeScript',  framework: ['oclif'],                  maturity: 'Beta',         maintainer: personByPrefix('Leonardo'),usage: 18,  version: '0.6.1' },
+    { id: 'cli-tool',          name: 'cli-tool',          desc: 'Eidos CLI plugin scaffold · oclif · auto-publish to internal registry · drift-tested binaries.',  lang: 'TypeScript',  framework: ['oclif'],                  maturity: 'Beta',         maintainer: personByPrefix('Leonardo'),usage: 18,  version: '0.6.1' },
   ];
 
   const FEATURED = TEMPLATES.filter(t => t.featured || ['nextjs-app','forge-agent'].includes(t.id)).slice(0, 3);
@@ -58,11 +58,11 @@ import { FPageHeader, FShell } from './example-shell';
     return (
       <FShell
         nav="templates"
-        crumbs={[{ label: 'Forge', href: '/example/ai-insights' }, 'Templates']}>
+        crumbs={[{ label: 'Eidos', href: '/example/ai-insights' }, 'Templates']}>
 
         <FPageHeader
           title="Templates"
-          subtitle="18 templates · owned, opinionated scaffolds — every template ships with Forge quality gates pre-wired."
+          subtitle="18 templates · owned, opinionated scaffolds — every template ships with Eidos quality gates pre-wired."
           actions={
             <>
               <button className="btn ghost"><Icons.book size={13}/> Authoring guide</button>

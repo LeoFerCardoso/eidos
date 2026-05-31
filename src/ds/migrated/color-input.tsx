@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Color Input.
+// Eidos DS — Components / Color Input.
 //
 // A trigger that shows the current color as a swatch + hex code, opening
 // a popover with a real H/S/V picker — saturation/value square, hue slider,

@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Stepper. A −/value/+ control for adjusting a small integer by one tap at
+// Eidos Mobile — Stepper. A −/value/+ control for adjusting a small integer by one tap at
 // a time: replicas, retries, concurrency. Use it when the range is tight and the exact
 // number matters; for a wide or approximate range, use a Slider.
 import * as React from 'react';

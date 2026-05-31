@@ -1,14 +1,14 @@
 'use client';
-// Forge AI — Streaming. Token-by-token assistant output with the blinking caret,
+// Eidos AI — Streaming. Token-by-token assistant output with the blinking caret,
 // composed from the .ai-* prose surface + the core AICaret primitive.
 import * as React from 'react';
 import { Section, SubHead, Frame, CodeBlock, AICaret, Icons, Lede, Mono } from '@/ds/core';
 
 const SAMPLE =
-  'Streaming keeps the surface alive while the model thinks. Forge renders each token as it arrives, with a blinking caret trailing the text so the reader knows generation is still in flight. When the stream ends, the caret simply disappears.';
+  'Streaming keeps the surface alive while the model thinks. Eidos renders each token as it arrives, with a blinking caret trailing the text so the reader knows generation is still in flight. When the stream ends, the caret simply disappears.';
 
 const SAMPLE_AR =
-  'يُبقي البث السطح حيًّا أثناء تفكير النموذج. تعرض Forge كل رمز فور وصوله، مع مؤشر وامض يتبع النص ليعرف القارئ أن التوليد ما زال جاريًا. وعندما ينتهي البث، يختفي المؤشر ببساطة.';
+  'يُبقي البث السطح حيًّا أثناء تفكير النموذج. تعرض Eidos كل رمز فور وصوله، مع مؤشر وامض يتبع النص ليعرف القارئ أن التوليد ما زال جاريًا. وعندما ينتهي البث، يختفي المؤشر ببساطة.';
 
 function StreamDemo({ sample = SAMPLE, statusLabel }: { sample?: string; statusLabel?: { live: string; done: string } }) {
   const [n, setN] = React.useState(0);
@@ -129,7 +129,7 @@ function Thread() {
           <div className="ana" style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="stage" style={{ position: 'relative', width: 440 }} aria-hidden="true">
               <div className="surface" style={{ padding: 18, fontSize: 'var(--text-md)', lineHeight: 1.6, color: 'var(--fg)' }}>
-                Forge renders each token as it arrives<AICaret />
+                Eidos renders each token as it arrives<AICaret />
               </div>
               {/* leads */}
               <span className="lead h" style={{ top: 30, left: -32, width: 28 }}/>

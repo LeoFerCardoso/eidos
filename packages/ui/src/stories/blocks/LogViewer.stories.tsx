@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { LogViewer } from '@forge/ui';
+import { LogViewer } from '@eidos/ui';
 
 const SAMPLE_LINES = [
   { id: 1,  time: '02:14:01.012', level: 'info',  message: 'pix-router started on :8080' },

@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Progress
+// Eidos DS — Components / Progress
 // Linear bar, circular ring, segmented stepper — all backed by the same .prog-* primitive.
 // Determinate when you can measure; indeterminate only when you genuinely cannot.
 import * as React from 'react';
@@ -120,7 +120,7 @@ export default function ProgressPage() {
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('progress')} ariaLabel="package manager" />
       <Lede>
-        Forge Progress ships three forms from one component: a continuous bar, a circular ring,
+        Eidos Progress ships three forms from one component: a continuous bar, a circular ring,
         and a segmented stepper. All visuals live in <Mono>ds.css</Mono> under the{' '}
         <Mono>.prog-*</Mono> namespace so Alert, AI error meters, and table footers compose
         the same primitive without duplicating styles.

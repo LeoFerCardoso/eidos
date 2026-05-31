@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Floating action button. One ember circle pinned above the content for the
+// Eidos Mobile — Floating action button. One ember circle pinned above the content for the
 // single most-likely action on a screen (new service, new deploy). The icon is dark ink on
 // the ember fill. At most one per screen; it clears the Tab bar and the safe-area inset.
 import * as React from 'react';

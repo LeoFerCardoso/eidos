@@ -1,8 +1,8 @@
 'use client';
-// Forge DS — Get Started / Components catalog.
+// Eidos DS — Get Started / Components catalog.
 //
 // The full list of every component, foundation, pattern, and resource that
-// ships with Forge. Auto-generated from the typed NAV (single source of truth
+// ships with Eidos. Auto-generated from the typed NAV (single source of truth
 // in nav-config.js → src/lib/nav.ts), so adding a new page in nav-config lights
 // up here automatically. The only per-page authoring is the one-line DESC
 // dictionary below, which gives each tile a real blurb instead of just a slug.
@@ -292,7 +292,7 @@ export default function Components() {
       <div style={{marginBlockStart:'var(--space-16)', padding:'var(--space-5)', border:'1px solid var(--border)', borderRadius:'var(--radius-xl)', background:'var(--bg-elevated)', display:'flex', alignItems:'center', justifyContent:'space-between', gap:'var(--space-4)', flexWrap:'wrap'}}>
         <div>
           <div className="t-body" style={{fontWeight: 600}}>Missing something?</div>
-          <div className="t-small" style={{color:'var(--fg-muted)', marginBlockStart:'var(--space-1)'}}>The catalog grows as the product grows. Open a request in the Forge platform repo.</div>
+          <div className="t-small" style={{color:'var(--fg-muted)', marginBlockStart:'var(--space-1)'}}>The catalog grows as the product grows. Open a request in the Eidos platform repo.</div>
         </div>
         <a className="btn" href="/changelog">See changelog <Icons.arrowRight size={14}/></a>
       </div>

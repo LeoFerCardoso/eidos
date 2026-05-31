@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Mermaid diagrams in replies (§2.2 component-page standard).
+// Eidos AI — Mermaid diagrams in replies (§2.2 component-page standard).
 // The DS ships the `Diagram` surface slot; this page renders Mermaid live via
 // dynamic import inside useEffect (never at module load) and drops the SVG
 // into `<Diagram caption=…>`. Mermaid touches the DOM — it must never run
@@ -278,7 +278,7 @@ export default function AiMermaid() {
 
       <SubHead meta="dependency note">Dependency</SubHead>
       <CodeBlock
-        label="Mermaid is not bundled by Forge — add it to your app"
+        label="Mermaid is not bundled by Eidos — add it to your app"
         lang="bash"
         code={`pnpm add mermaid
 # or

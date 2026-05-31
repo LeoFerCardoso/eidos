@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / JSONInspector
+// Eidos DS — Components / JSONInspector
 // Collapsible JSON tree with colour-coded primitives.
 import { AutoPropsTable, Frame, Section, SubHead, TabbedCode, installTabs, JSONInspector, Icons, Lede, Mono } from '@/ds/core';
 
@@ -150,7 +150,7 @@ export default function Page() {
           </div>
           <div className="ana-list" style={{ maxWidth: 560, margin: '56px auto 0' }}>
             <span className="num">1</span><span><b style={{ color: 'var(--fg)' }}>Key.</b> Always <Mono>var(--ember)</Mono> — the one consistent structural colour across all tree depths. Identifies the property name; reads in both light and dark surfaces.</span>
-            <span className="num">2</span><span><b style={{ color: 'var(--fg)' }}>String value.</b> Forge success green — picks a hue far from ember so keys and values are immediately distinguishable. Quoted in the display; selectable as plain text for easy copy.</span>
+            <span className="num">2</span><span><b style={{ color: 'var(--fg)' }}>String value.</b> Eidos success green — picks a hue far from ember so keys and values are immediately distinguishable. Quoted in the display; selectable as plain text for easy copy.</span>
             <span className="num">3</span><span><b style={{ color: 'var(--fg)' }}>Number / boolean value.</b> Cyan (<Mono>--ice</Mono>) for numerics, warm amber (<Mono>--warning</Mono>) for booleans. Each primitive type gets its own hue — not arbitrary, but mapped once in the inspector's token sheet so overrides are a one-line change.</span>
             <span className="num">4</span><span><b style={{ color: 'var(--fg)' }}>Fold toggle.</b> The bracket glyph on any <Mono>{'{ }'}</Mono> or <Mono>{'[ ]'}</Mono> branch is the <Mono>{'<button>'}</Mono> — collapsed, it shows the opening bracket + item count (<Mono>{'{ … 3 }'}</Mono>) so the shape is visible without expanding. The key and values beside it are sibling selectable text, not part of the hit target.</span>
             <span className="num">5</span><span><b style={{ color: 'var(--fg)' }}>Null.</b> <Mono>--fg-muted</Mono> — the quietest colour in the set, intentionally de-emphasised. The absence of a value carries no status tint; the literal text <Mono>null</Mono> is sufficient. It is the muted (not faint) tier, so the word stays legible against the inspector surface.</span>

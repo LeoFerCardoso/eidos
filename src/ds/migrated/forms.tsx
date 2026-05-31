@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Forms (inputs · selects · search · checkbox)
+// Eidos DS — Components / Forms (inputs · selects · search · checkbox)
 import * as React from 'react';
 import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Lede, Mono } from '@/ds/core';
 
@@ -22,12 +22,12 @@ export default function Forms() {
     color: 'var(--fg)', fontSize: 'var(--text-base)', width: '100%',
   };
   return (
-    <Section id="forms" num="11" title="Forms" desc="The shared field grammar behind every Forge input — label, control, helper, and error in one predictable rhythm. Text fields, selects, switches, checkboxes, and radios all read and validate the same.">
+    <Section id="forms" num="11" title="Forms" desc="The shared field grammar behind every Eidos input — label, control, helper, and error in one predictable rhythm. Text fields, selects, switches, checkboxes, and radios all read and validate the same.">
       {/* 1. INSTALLATION */}
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('forms')} ariaLabel="package manager"/>
       <Lede>
-        Bundles <Mono>Input</Mono>, <Mono>Textarea</Mono>, <Mono>Label</Mono>, and the field-state CSS. Forms in Forge stay quiet — surface backgrounds, hairline borders, ember focus ring.
+        Bundles <Mono>Input</Mono>, <Mono>Textarea</Mono>, <Mono>Label</Mono>, and the field-state CSS. Forms in Eidos stay quiet — surface backgrounds, hairline borders, ember focus ring.
       </Lede>
 
       {/* 2. USAGE */}

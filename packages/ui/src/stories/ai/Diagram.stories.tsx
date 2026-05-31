@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Diagram } from '@forge/ui';
+import { Diagram } from '@eidos/ui';
 
 const meta = {
   title: 'AI/Diagram',

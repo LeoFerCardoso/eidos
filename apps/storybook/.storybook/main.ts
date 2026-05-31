@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
 import { fileURLToPath } from 'node:url';
 
 const config: StorybookConfig = {
-  // Stories are co-located inside the @forge/ui package source.
+  // Stories are co-located inside the @eidos/ui package source.
   stories: ['../../../packages/ui/src/**/*.stories.@(ts|tsx)'],
   // Serve the docs app's public/ so photo avatars (/avatars/person-*.jpg) resolve in stories.
   staticDirs: ['../../../public'],

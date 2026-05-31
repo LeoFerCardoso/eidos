@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Drawer, MOCKS } from '@forge/ui';
+import { Drawer, MOCKS } from '@eidos/ui';
 
 const meta = {
   title: 'Overlays/Drawer',

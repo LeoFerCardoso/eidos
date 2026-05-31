@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Empty state
+// Eidos DS — Components / Empty state
 // The surface a user sees when there is nothing to show: a fresh inbox, a
 // filtered table with no matches, a brand-new project. Title + description
 // + primary action — and one quiet illustrative cue (an icon, never an

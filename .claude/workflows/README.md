@@ -14,7 +14,7 @@ Restructure (or build) **one** component across all three surfaces, consistently
    Charts · Overlays · Device · AI · Icons · Docs), Default + every variant/state + InContext + autodocs.
 3. **Install / registry** → the component is a curated `FAMILIES` entry, its registry item has the right
    `registryDependencies` + npm deps, and any page-local CSS is promoted to the shared `tokens.css` so
-   `forge-ui add <name>` ships it styled.
+   `eidos add <name>` ships it styled.
 
 ### Flow
 `Resolve & audit` (read-only; emits one shared inventory) → `Restructure` (3 parallel rebuilds fed the
@@ -48,4 +48,4 @@ Workflow({ name: 'restructure-component', args: {
 - It edits the live repo (doc page, story file, `extract-registry.mjs`, sometimes `tokens.css`/barrel).
   Run on a clean working tree so the diff is reviewable.
 - The verify phase is the safety net: it won't report green unless typecheck + registry + Storybook +
-  docs build all pass and `forge-ui add` installs a tree that compiles.
+  docs build all pass and `eidos add` installs a tree that compiles.

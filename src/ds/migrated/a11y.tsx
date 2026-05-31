@@ -16,7 +16,7 @@ const tdNote = { color: 'var(--fg-muted)' };
 //    only when the consumer follows the prescribed pattern.
 // ==========================================================================
 const WCAG_ROWS = [
-  { id: '1.1.1',  name: 'Non-text Content',           status: 'success', note: 'Every Forge icon ships with an aria-label or aria-hidden flag. Icon-only Buttons require aria-label.', ref: 'Button · IconButton' },
+  { id: '1.1.1',  name: 'Non-text Content',           status: 'success', note: 'Every Eidos icon ships with an aria-label or aria-hidden flag. Icon-only Buttons require aria-label.', ref: 'Button · IconButton' },
   { id: '1.3.1',  name: 'Info and Relationships',     status: 'success', note: 'Form fields wired through .in-field → label/control/helper. Tables use semantic <th scope>.', ref: 'Input · DataTable' },
   { id: '1.3.2',  name: 'Meaningful Sequence',        status: 'success', note: 'DOM order matches visual order on every page. No tabindex > 0 anywhere in the system.', ref: 'global' },
   { id: '1.3.5',  name: 'Identify Input Purpose',     status: 'warning', note: 'autoComplete tokens (name, email, tel, postal-code) are documented per Input variant. Consumers must opt in.', ref: 'Input' },
@@ -48,7 +48,7 @@ const wcagPill = (status) => {
 };
 
 // ==========================================================================
-// 2. Component × ARIA — the contract every Forge primitive must satisfy.
+// 2. Component × ARIA — the contract every Eidos primitive must satisfy.
 //    Sourced from WAI-ARIA Authoring Practices 1.2 patterns.
 // ==========================================================================
 const ARIA_ROWS = [
@@ -97,7 +97,7 @@ const contrastPill = (r) => {
 };
 
 // ==========================================================================
-// 4. Keyboard map — the global Forge surface area.
+// 4. Keyboard map — the global Eidos surface area.
 // ==========================================================================
 const KEYS_ROWS = [
   { keys: ['Tab'],                  action: 'Move to next focusable element',          scope: 'global' },
@@ -159,7 +159,7 @@ const REDUCED_MOTION_CSS = `@media (prefers-reduced-motion: reduce) {
     scroll-behavior: auto !important;
   }
 
-  /* Forge-specific — kill decorative loops outright */
+  /* Eidos-specific — kill decorative loops outright */
   .ember-pulse,
   .page-enter,
   .ai-caret,
@@ -245,7 +245,7 @@ export default function A11y() {
       id="a11y"
       num="22"
       title="Accessibility"
-      desc="WCAG 2.2 AA is the floor. Every Forge component ships keyboard-first, screen-reader-honest, and renders identically in dark and light. This page is the contract — and the audit log."
+      desc="WCAG 2.2 AA is the floor. Every Eidos component ships keyboard-first, screen-reader-honest, and renders identically in dark and light. This page is the contract — and the audit log."
     >
 
       {/* ====================================================================
@@ -295,7 +295,7 @@ export default function A11y() {
         The 23 AA criteria most relevant to a UI component library. Of WCAG 2.2's 50 total Level A + AA criteria, the rest are content-author responsibilities (alt text quality, language of page, etc.) the system can't satisfy on the consumer's behalf.
       </Lede>
       <div className="ds-frame">
-        <div className="ds-frame-head"><span className="label">2.2 success criteria — applied to Forge</span></div>
+        <div className="ds-frame-head"><span className="label">2.2 success criteria — applied to Eidos</span></div>
         <div style={{overflowX: 'auto'}}>
           <table className="tbl" style={{margin: 0}}>
             <thead>
@@ -303,7 +303,7 @@ export default function A11y() {
                 <th style={{width: 72}}>SC</th>
                 <th style={{width: 200}}>Criterion</th>
                 <th style={{width: 130}}>Status</th>
-                <th>Forge approach</th>
+                <th>Eidos approach</th>
                 <th style={{width: 180}}>Reference</th>
               </tr>
             </thead>
@@ -420,7 +420,7 @@ export default function A11y() {
           ==================================================================== */}
       <SubHead meta="global shortcuts">Keyboard map</SubHead>
       <Lede up>
-        The shortcuts every Forge surface listens for. Component-local keys (Combobox arrows, Calendar PgUp/PgDn) live in the ARIA contract table above.
+        The shortcuts every Eidos surface listens for. Component-local keys (Combobox arrows, Calendar PgUp/PgDn) live in the ARIA contract table above.
       </Lede>
       <div className="ds-frame">
         <div className="ds-frame-head"><span className="label">keyboard surface area</span></div>
@@ -467,7 +467,7 @@ export default function A11y() {
 
       <Frame label="focus.css — the contract" lang="css" code={FOCUS_CSS}>
         <div style={{fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', lineHeight: 1.6}}>
-          Apply globally. Forge ships these rules in <Mono>tokens.css</Mono>. Per-component overrides only widen the ring (Slider thumb, Switch track) — never narrow it.
+          Apply globally. Eidos ships these rules in <Mono>tokens.css</Mono>. Per-component overrides only widen the ring (Slider thumb, Switch track) — never narrow it.
         </div>
       </Frame>
 

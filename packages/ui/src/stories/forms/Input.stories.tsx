@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Input, Icons } from '@forge/ui';
+import { Input, Icons } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/Input',

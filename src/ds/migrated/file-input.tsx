@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / File Input.
+// Eidos DS — Components / File Input.
 //
 // Upload + manage files. Built from a drag-and-drop zone wrapping a hidden
 // `<input type="file">` plus a list of selected files with thumbnails,
@@ -610,7 +610,7 @@ export function Demo() {
             <div className="surface" style={{padding: 16}}>
               <div style={{fontWeight: 600, marginBlockEnd: 8}}>API import</div>
               <p style={{fontSize: 'var(--text-sm)', color:'var(--fg-muted)', margin: 0, lineHeight: 1.55}}>
-                Bulk / scheduled imports from S3, GCS, FTP — or via a Forge integration. Manual upload doesn't scale past a few dozen files.
+                Bulk / scheduled imports from S3, GCS, FTP — or via a Eidos integration. Manual upload doesn't scale past a few dozen files.
               </p>
             </div>
           </div>

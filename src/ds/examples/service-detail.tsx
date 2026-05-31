@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Avatar, Banner, CopyChip, HealthBadge, Icons, LangBadge, MOCKS, OwnerPill, Pipeline, RelativeTime, SeverityPill, Sparkline, StatusDot, Tabs, TierBadge, Timeline, Trend } from '@/ds/core';
 import { FKpi, FPageHeader, FSection, FShell, IconBubble, useQueryParam } from './example-shell';
-// Forge IDP — Example: Service detail (Backstage-style entity page).
+// Eidos IDP — Example: Service detail (Backstage-style entity page).
 
   
   
@@ -54,7 +54,7 @@ import { FKpi, FPageHeader, FSection, FShell, IconBubble, useQueryParam } from '
       icon: 'deploy',
       tone: 'done',
       title: <>Deploy <span style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>v{svc.version}</span> promoted to Ring 4</>,
-      meta: 'Canary clean — auto-promoted by Forge gates',
+      meta: 'Canary clean — auto-promoted by Eidos gates',
       at: ago(2),
     },
     {
@@ -109,7 +109,7 @@ import { FKpi, FPageHeader, FSection, FShell, IconBubble, useQueryParam } from '
       <FShell
         nav="services"
         crumbs={[
-          { label: 'Forge', href: '/example/ai-insights' },
+          { label: 'Eidos', href: '/example/ai-insights' },
           { label: 'Catalog', href: '/example/service-catalog' },
           'Services',
           svc.name,

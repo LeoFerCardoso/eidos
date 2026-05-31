@@ -8,7 +8,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, PropsTable,
   // ResponseActions → <MessageActions surface="response"/>.
 
   // ─── code snippets shown in the page ─────────────────────────────────────
-  const USAGE_CODE = `<Response meta={<>Forge AI · 14:02 · gpt-5</>}>
+  const USAGE_CODE = `<Response meta={<>Eidos AI · 14:02 · gpt-5</>}>
   <h2>What changed in 0421</h2>
   <p>Three things shipped together — none of them broke in
      isolation, but their interaction is why on-call paged.</p>
@@ -19,7 +19,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, PropsTable,
   </ol>
 </Response>`;
 
-  const RICH_CODE = `<Response meta={<>Forge AI · 14:02</>}>
+  const RICH_CODE = `<Response meta={<>Eidos AI · 14:02</>}>
   <h2>Migration plan</h2>
   <p>Run the dry-run first, then promote in two steps:</p>
   <ProseCode lang="bash">{
@@ -43,7 +43,7 @@ forge migrate --promote --canary=100%\`
   </blockquote>
 </Response>`;
 
-  const DIAGRAM_CODE = `<Response meta={<>Forge AI</>}>
+  const DIAGRAM_CODE = `<Response meta={<>Eidos AI</>}>
   <h2>How the request flows</h2>
   <figure className="ai-diagram">
     {/* Drop any SVG, Mermaid render, or custom drawing here. */}
@@ -55,7 +55,7 @@ forge migrate --promote --canary=100%\`
   const STREAMING_CODE = `// The caret is injected as the LAST inline child of the LAST
 // rendered block — so it sits next to the character that just
 // printed, not on the line below.
-<Response streaming meta={<>Forge AI · streaming…</>}>
+<Response streaming meta={<>Eidos AI · streaming…</>}>
   <h3>Three things to check</h3>
   <p>Each is reversible — start with the cheapest first.</p>
   <ul>
@@ -71,7 +71,7 @@ forge migrate --promote --canary=100%\`
     <div style={{ width: '100%' }}>{children}</div>
   );
 
-  // The diagram below is hand-drawn SVG that uses Forge tokens — no
+  // The diagram below is hand-drawn SVG that uses Eidos tokens — no
   // dependency on Mermaid, but the same slot accepts it.
   const FlowDiagram = () => (
     <svg viewBox="0 0 600 220" width="100%" style={{ maxWidth: 600, height: 'auto' }} aria-hidden="true">
@@ -117,7 +117,7 @@ forge migrate --promote --canary=100%\`
   // The hero/usage example — same demo we use to anchor the page.
   const HeroResponse = () => (
     <Response meta={<>
-      <span className="name">Forge AI</span>
+      <span className="name">Eidos AI</span>
       <span className="dot"/>
       <span>14:02 · gpt-5</span>
     </>}>
@@ -138,7 +138,7 @@ forge migrate --promote --canary=100%\`
     return (
       <Response
         meta={<>
-          <span className="name">Forge AI</span>
+          <span className="name">Eidos AI</span>
           <span className="dot"/>
           <span>14:08 · gpt-5</span>
         </>}
@@ -186,7 +186,7 @@ forge migrate --promote --canary=100%`}</ProseCode>
 
   // Diagram demo — Response with a figure slot.
   const DiagramResponse = () => (
-    <Response meta={<><span className="name">Forge AI</span></>}>
+    <Response meta={<><span className="name">Eidos AI</span></>}>
       <h2>How the request flows</h2>
       <p>The retry storm comes from the <code>edge → billing-svc</code> path. Identity is touched on every hop but stays cold.</p>
       <figure className="ai-diagram">
@@ -254,7 +254,7 @@ forge migrate --promote --canary=100%`}</ProseCode>
       <Response
         streaming={!done}
         meta={<>
-          <span className="name">Forge AI</span>
+          <span className="name">Eidos AI</span>
           <span className="dot"/>
           <span>{done ? 'just now' : 'streaming…'}</span>
         </>}
@@ -327,7 +327,7 @@ export default function ResponsePage() {
         <DiagramResponse/>
       </Frame>
       <Lede>
-        <Mono>.ai-diagram</Mono> is a bordered surface — Forge doesn't bundle Mermaid, but the slot accepts whatever you render. Pair every diagram with a mono <Mono>&lt;figcaption&gt;</Mono> so the figure has a name when it travels.
+        <Mono>.ai-diagram</Mono> is a bordered surface — Eidos doesn't bundle Mermaid, but the slot accepts whatever you render. Pair every diagram with a mono <Mono>&lt;figcaption&gt;</Mono> so the figure has a name when it travels.
       </Lede>
 
       {/* STREAMING */}
@@ -374,7 +374,7 @@ export default function ResponsePage() {
       <Frame label="dir=&quot;rtl&quot; — headings, lists, blockquote all read from start" height={380}>
         <div dir="rtl" style={{ width: '100%' }}>
           <Response meta={<>
-            <span className="name">Forge AI</span>
+            <span className="name">Eidos AI</span>
             <span className="dot"/>
             <span>14:02</span>
           </>}>
@@ -404,7 +404,7 @@ export default function ResponsePage() {
             <div className="stage" style={{ position: 'relative', width: 520 }} aria-hidden="true">
               <Response
                 meta={<>
-                  <span className="name">Forge AI</span>
+                  <span className="name">Eidos AI</span>
                   <span className="dot"/>
                   <span>just now</span>
                 </>}
@@ -449,7 +449,7 @@ export default function ResponsePage() {
           <div className="head"><Icons.check size={12}/> Do — use Response when the answer needs structure</div>
           <div className="body" style={{ padding: 14 }}>
             <Sample>
-              <Response meta={<><span className="name">Forge AI</span></>}>
+              <Response meta={<><span className="name">Eidos AI</span></>}>
                 <h3>Three things to check</h3>
                 <ul>
                   <li><code>grpc.toml</code> — retry budget</li>
@@ -482,7 +482,7 @@ export default function ResponsePage() {
           <div className="head"><Icons.check size={12}/> Do — let wide blocks escape the prose cap</div>
           <div className="body" style={{ padding: 14 }}>
             <Sample>
-              <Response meta={<><span className="name">Forge AI</span></>}>
+              <Response meta={<><span className="name">Eidos AI</span></>}>
                 <p>Latency by service:</p>
                 <table>
                   <thead><tr><th>svc</th><th className="num">p99</th></tr></thead>

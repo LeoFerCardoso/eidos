@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { Avatar, Banner, HealthBadge, Icons, MOCKS, MetricCard, OwnerPill, RelativeTime, SeverityPill, Sparkline, StatusDot, Trend } from '@/ds/core';
 import { FKpi, FPageHeader, FSection, FShell, IconBubble } from './example-shell';
-// Forge IDP — Example: AI Insights home (Forge agent's daily consolidated view).
+// Eidos IDP — Example: AI Insights home (Eidos agent's daily consolidated view).
 //
-// This is the landing page of Forge. The Forge agent watches the entire tech
+// This is the landing page of Eidos. The Eidos agent watches the entire tech
 // estate and surfaces the 5–8 things that matter today: arch drift, risky PRs,
 // cost spikes, gate violations, suggested actions. The user lands here in the
 // morning instead of crawling 7 dashboards.
@@ -19,7 +19,7 @@ import { FKpi, FPageHeader, FSection, FShell, IconBubble } from './example-shell
   const SERVICES = MOCKS.SERVICES || [];
   const PRS = MOCKS.PRS || [];
 
-  // ---------- Hero stripe — Forge agent says ---------- //
+  // ---------- Hero stripe — Eidos agent says ---------- //
   const HERO_HEADLINE = '3 things demand attention today';
   const HERO_LINES = [
     {
@@ -99,7 +99,7 @@ import { FKpi, FPageHeader, FSection, FShell, IconBubble } from './example-shell
   const PRIORITIES = [
     { id: 'p1', title: 'Approve GMUD-2026-0418 · pix-router 100% rollout', meta: 'Window opens Wed 02:00 BRT', kind: 'gmud' },
     { id: 'p2', title: 'Review PR #7418 · biometric step-up (no ADR yet)', meta: 'Needs your decision', kind: 'pr' },
-    { id: 'p3', title: 'Sign off ADR-007 · Forge as system of record', meta: 'Proposed by Leonardo', kind: 'adr' },
+    { id: 'p3', title: 'Sign off ADR-007 · Eidos as system of record', meta: 'Proposed by Leonardo', kind: 'adr' },
     { id: 'p4', title: 'Triage cost spike · data-export egress +340%', meta: 'Owner notified', kind: 'cost' },
   ];
 
@@ -120,21 +120,21 @@ import { FKpi, FPageHeader, FSection, FShell, IconBubble } from './example-shell
     return (
       <FShell
         nav="home"
-        crumbs={['Forge', 'Home']}
+        crumbs={['Eidos', 'Home']}
         onAgentChat={() => { window.location.href = '/example/agent-chat'; }}>
 
         <FPageHeader
           title={<><Icons.sparkle size={20} style={{color:'var(--ember)'}}/> Good morning, Leonardo</>}
-          subtitle="Forge agent has scanned 142 services, 18 tribes, 8,402 events since you last checked"
+          subtitle="Eidos agent has scanned 142 services, 18 tribes, 8,402 events since you last checked"
           actions={
             <>
               <button className="btn ghost"><Icons.refresh size={13}/> Refresh</button>
               <button className="btn ghost"><Icons.calendar size={13}/> Today</button>
-              <a className="btn primary" href="/example/agent-chat"><Icons.sparkle size={13}/> Ask Forge</a>
+              <a className="btn primary" href="/example/agent-chat"><Icons.sparkle size={13}/> Ask Eidos</a>
             </>
           }/>
 
-        {/* ---------- Hero: Forge agent summary ---------- */}
+        {/* ---------- Hero: Eidos agent summary ---------- */}
         <div className="fp-hero--ember">
           <div style={{display:'flex', alignItems:'center', gap: 10, marginBottom: 14}}>
             <IconBubble icon="sparkle" size={28}/>
@@ -236,7 +236,7 @@ import { FKpi, FPageHeader, FSection, FShell, IconBubble } from './example-shell
                           <Icons.eye size={11}/> Open
                         </button>
                         <button className="btn ghost" style={{fontSize: 'var(--text-xs)'}}>
-                          <Icons.sparkle size={11}/> Ask Forge
+                          <Icons.sparkle size={11}/> Ask Eidos
                         </button>
                         <button className="btn ghost" style={{fontSize: 'var(--text-xs)'}}>
                           <Icons.check size={11}/> Mark resolved
@@ -313,10 +313,10 @@ import { FKpi, FPageHeader, FSection, FShell, IconBubble } from './example-shell
             <div className="fp-card fp-card--ember">
               <div style={{display:'flex', alignItems:'center', gap: 8, marginBottom: 8}}>
                 <Icons.sparkle size={14} style={{color:'var(--ember)'}}/>
-                <strong style={{fontSize: 'var(--text-base)'}}>Forge weekly digest</strong>
+                <strong style={{fontSize: 'var(--text-base)'}}>Eidos weekly digest</strong>
               </div>
               <p style={{fontSize: 'var(--text-sm)', color:'var(--fg-muted)', lineHeight: 1.6, margin: 0, marginBottom: 10}}>
-                MTTR is down 54% this quarter and AI Adoption crossed the 75 threshold. 38 manual gates were auto-promoted by Forge — saving an estimated 14 engineering hours.
+                MTTR is down 54% this quarter and AI Adoption crossed the 75 threshold. 38 manual gates were auto-promoted by Eidos — saving an estimated 14 engineering hours.
               </p>
               <button className="btn ghost" style={{fontSize: 'var(--text-xs)'}}>
                 Read full digest <Icons.arrowRight size={11}/>

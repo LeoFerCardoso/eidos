@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ContextGauge, PromptInput } from '@forge/ui';
+import { ContextGauge, PromptInput } from '@eidos/ui';
 
 // ── ContextGauge ──────────────────────────────────────────────────────────────
 // @deprecated backward-compat export. Prefer <Context variant="gauge"> for new code.

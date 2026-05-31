@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Radio. Single-select from a mutually exclusive group,
+// Eidos Mobile — Radio. Single-select from a mutually exclusive group,
 // rendered as inset list rows. Two idioms: iOS-style trailing checkmark
 // (clean, less visual noise), and leading radio-dot (more explicit affordance
 // for dense option sets). States: selected, unselected, disabled.

@@ -8,7 +8,7 @@ import {
 
 // ── Usage code ────────────────────────────────────────────────────────────────
 
-const USAGE_CODE = `import { AlertDialog } from "@forge/ui";
+const USAGE_CODE = `import { AlertDialog } from "@eidos/ui";
 
 export function Demo() {
   const [open, setOpen] = React.useState(false);

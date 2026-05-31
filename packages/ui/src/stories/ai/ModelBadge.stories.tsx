@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ModelBadge } from '@forge/ui';
+import { ModelBadge } from '@eidos/ui';
 
 const meta = {
   title: 'AI/ModelBadge',

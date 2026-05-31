@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Sparkline } from '@forge/ui';
+import { Sparkline } from '@eidos/ui';
 
 // Realistic spark datasets — ETI pillar trends from MOCKS.ETI_PILLARS shape
 const VELOCITY  = [76, 79, 82, 85, 88, 87, 90];

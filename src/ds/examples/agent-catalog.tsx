@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { AgentCard, HealthBadge, Icons, RelativeTime, Sparkline } from '@/ds/core';
 import { FPageHeader, FShell } from './example-shell';
-// Forge IDP — Example: Agent catalog (HF hub × GitHub repos inspired).
+// Eidos IDP — Example: Agent catalog (HF hub × GitHub repos inspired).
 
   
   
@@ -83,7 +83,7 @@ import { FPageHeader, FShell } from './example-shell';
     return (
       <FShell
         nav="agents"
-        crumbs={[{ label: 'Forge', href: '/example/ai-insights' }, 'Agents']}>
+        crumbs={[{ label: 'Eidos', href: '/example/ai-insights' }, 'Agents']}>
 
         <FPageHeader
           title="Agents"

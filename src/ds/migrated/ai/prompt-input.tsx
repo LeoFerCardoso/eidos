@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Prompt Input (§2.2 component-page standard).
+// Eidos AI — Prompt Input (§2.2 component-page standard).
 // The composer at the bottom of every chat surface. An auto-sizing multi-line
 // textarea, an optional attachment header, a toolbar (attach · model · custom
 // tools), and a status-driven submit button. Covers every state from idle to

@@ -1,4 +1,4 @@
-// forge-ui full-catalog E2E — install components across every family into a throwaway
+// eidos full-catalog E2E — install components across every family into a throwaway
 // project against the locally-built registry, then typecheck the installed tree to prove
 // dependency resolution produced a coherent, compiling component set. No network.
 import { mkdtempSync, existsSync, writeFileSync, readdirSync, rmSync } from 'node:fs';
@@ -8,7 +8,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const CLI = resolve(HERE, '..', 'bin', 'forge-ui.mjs');
+const CLI = resolve(HERE, '..', 'bin', 'eidos.mjs');
 const REGISTRY = resolve(HERE, '..', '..', 'registry', 'public', 'r');
 const ROOT = resolve(HERE, '..', '..', '..');
 

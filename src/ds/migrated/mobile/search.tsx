@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Search (scaffold). A full-width search field with leading icon and an
+// Eidos Mobile — Search (scaffold). A full-width search field with leading icon and an
 // inline Cancel, over recent queries and live results.
 import * as React from 'react';
 import { Section, SubHead, Frame, CodeBlock, DeviceFrame, Icons, Lede, Mono } from '@/ds/core';

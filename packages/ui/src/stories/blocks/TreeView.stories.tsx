@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 // Story-parity: the docs page (src/ds/migrated/idp/tree-view.tsx) documents ForgeTree —
 // the @pierre/trees wrapper at src/components/pierre-tree.tsx — NOT the nodes-based
-// @forge/ui TreeView. We document the SAME surface here: a path-first file tree with a
+// @eidos/ui TreeView. We document the SAME surface here: a path-first file tree with a
 // git-status lane, fuzzy search, drag-and-drop, context menus, flatten-empty-directories,
 // window chrome and RTL. ForgeTree loads via next/dynamic({ ssr:false }) and depends on
 // @pierre/trees, so it renders client-side (Storybook supports this).

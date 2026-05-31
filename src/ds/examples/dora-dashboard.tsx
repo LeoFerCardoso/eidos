@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Banner, DataTable, HealthBadge, Icons, MOCKS, OwnerPill, RelativeTime, Sparkline, StatusDot, Trend } from '@/ds/core';
 import { FKpi, FPageHeader, FSection, FShell } from './example-shell';
-// Forge IDP — Example: DORA Engineering Pulse dashboard.
+// Eidos IDP — Example: DORA Engineering Pulse dashboard.
 
   
   
@@ -72,7 +72,7 @@ import { FKpi, FPageHeader, FSection, FShell } from './example-shell';
   const App = () => (
     <FShell
       nav="dora"
-      crumbs={[{ label: 'Forge', href: '/example/ai-insights' }, 'DORA', 'Engineering pulse']}>
+      crumbs={[{ label: 'Eidos', href: '/example/ai-insights' }, 'DORA', 'Engineering pulse']}>
 
       <FPageHeader
         title="DORA · Engineering pulse"
@@ -89,7 +89,7 @@ import { FKpi, FPageHeader, FSection, FShell } from './example-shell';
         tone="success"
         icon="shield"
         title="Window of stability"
-        message="No P0 incidents in the trailing 7 days. Deploy throughput +24%, MTTR -54%. Forge auto-promote saved 38 manual gates."/>
+        message="No P0 incidents in the trailing 7 days. Deploy throughput +24%, MTTR -54%. Eidos auto-promote saved 38 manual gates."/>
 
       {/* 4 KPI row */}
       <div className="fp-grid fp-grid-4" style={{marginTop: 18}}>

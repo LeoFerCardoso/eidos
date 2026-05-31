@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Navigation drawer. A panel that slides in from the inline-start edge over a
+// Eidos Mobile — Navigation drawer. A panel that slides in from the inline-start edge over a
 // scrim, holding top-level destinations and account context. Use it when there are more areas
 // than a Tab bar's 3–5 slots; reach for it from a hamburger in the app bar, never as the only
 // way to reach a primary screen.
@@ -84,7 +84,7 @@ function Drawer({ open, onClose, active = 1 }: { open: boolean; onClose: () => v
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '0 8px 14px', marginBlockEnd: 8, borderBlockEnd: '1px solid var(--border)' }}>
           <span style={{ display: 'grid', placeItems: 'center', width: 36, height: 36, borderRadius: 10, background: 'var(--surface-active)', color: 'var(--fg)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>F</span>
-          <span><span style={{ display: 'block', fontWeight: 700, fontSize: 'var(--text-sm)' }}>Forge Platform</span><span style={{ display: 'block', fontSize: 'var(--text-base)', color: 'var(--fg-muted)' }}>acme-prod</span></span>
+          <span><span style={{ display: 'block', fontWeight: 700, fontSize: 'var(--text-sm)' }}>Eidos Platform</span><span style={{ display: 'block', fontSize: 'var(--text-base)', color: 'var(--fg-muted)' }}>acme-prod</span></span>
         </div>
         {NAV.map((it, i) => (
           <button
@@ -170,7 +170,7 @@ export default function MobileDrawer() {
             <div className="stage" style={{ position: 'relative', width: 300 }} aria-hidden="true">
               <div style={{ position: 'relative', height: 240, borderRadius: 14, overflow: 'hidden', border: '1px solid var(--border)', background: 'rgba(8,9,10,0.4)' }}>
                 <div style={{ position: 'absolute', insetBlock: 0, insetInlineStart: 0, width: '76%', background: 'var(--bg-elevated)', borderInlineEnd: '1px solid var(--border)', padding: '12px 10px', display: 'flex', flexDirection: 'column', gap: 4 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingBlockEnd: 10, borderBlockEnd: '1px solid var(--border)' }}><span style={{ width: 28, height: 28, borderRadius: 8, background: 'var(--accent)', color: 'var(--ember-fg)', display: 'grid', placeItems: 'center', fontWeight: 800, fontSize: 12 }}>F</span><span style={{ fontWeight: 700, fontSize: 12 }}>Forge Platform</span></div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingBlockEnd: 10, borderBlockEnd: '1px solid var(--border)' }}><span style={{ width: 28, height: 28, borderRadius: 8, background: 'var(--accent)', color: 'var(--ember-fg)', display: 'grid', placeItems: 'center', fontWeight: 800, fontSize: 12 }}>F</span><span style={{ fontWeight: 700, fontSize: 12 }}>Eidos Platform</span></div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, height: 34, padding: '0 8px', borderRadius: 8, background: 'var(--surface-active)', fontSize: 12, fontWeight: 650 }}><Icons.server size={14} color="var(--accent)" /> Services</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, height: 34, padding: '0 8px', fontSize: 'var(--text-base)', color: 'var(--fg-muted)' }}><Icons.rocket size={14} /> <span style={{ flex: 1 }}>Deploys</span><span style={{ minWidth: 16, height: 16, borderRadius: 999, background: 'var(--accent)', color: 'var(--ember-fg)', fontSize: 10, fontWeight: 700, display: 'grid', placeItems: 'center' }}>3</span></div>
                 </div>

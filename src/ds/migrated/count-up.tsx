@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / CountUp
+// Eidos DS — Components / CountUp
 // Number that ticks from 0 → target as it scrolls into view. Promoted from
 // the legacy `Counter` atom — name aligns with industry vocabulary
 // (CountUp.js, react-countup). Counter remains exported as an alias.

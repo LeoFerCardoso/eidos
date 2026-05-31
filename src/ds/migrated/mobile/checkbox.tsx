@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Checkbox. A tappable row combining a label and a square
+// Eidos Mobile — Checkbox. A tappable row combining a label and a square
 // box with a checkmark for multi-select lists (settings panels, filter
 // sheets, bulk-action drawers). States: unchecked, checked, indeterminate,
 // disabled. The ember fill with dark-ink checkmark meets WCAG AA; the full

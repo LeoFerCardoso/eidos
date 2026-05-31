@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Foundations / Grid. A 4-column grid with 16px margins + gutters that
+// Eidos Mobile — Foundations / Grid. A 4-column grid with 16px margins + gutters that
 // every tile layout snaps to.
 import { Section, SubHead, Frame, CodeBlock, SpecRow, DeviceFrame, Lede, Mono, Icons } from '@/ds/core';
 

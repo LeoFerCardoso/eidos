@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Textarea, Card, CardHeader, CardTitle, CardDescription, CardContent } from '@forge/ui';
+import { Textarea, Card, CardHeader, CardTitle, CardDescription, CardContent } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/Textarea',

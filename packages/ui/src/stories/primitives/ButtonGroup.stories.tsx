@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { ButtonGroup } from '@forge/ui';
+import { ButtonGroup } from '@eidos/ui';
 
 // NOTE: The stories render raw .btn / .btn-group CSS classes directly — in a
 // real app you would use the full <Button> component. The ButtonGroup component

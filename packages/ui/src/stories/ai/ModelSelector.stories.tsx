@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ModelSelector, ModelPicker, PromptInput, Icons } from '@forge/ui';
+import { ModelSelector, ModelPicker, PromptInput, Icons } from '@eidos/ui';
 
 const MODELS = [
   { id: 'forge-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: '$3 / 1M' },

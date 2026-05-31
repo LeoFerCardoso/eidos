@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Toolbar
+// Eidos DS — Components / Toolbar
 // Page layout:
 //   1. Installation     (ComponentInstall)
 //   2. Usage            (Frame: import + minimal render)

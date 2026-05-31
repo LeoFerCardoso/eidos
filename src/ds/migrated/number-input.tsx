@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Number Input.
+// Eidos DS — Components / Number Input.
 //
 // Numeric entry — currency, percentages, integer ranges, units, ports.
 // Wraps `<input type="number">` with our shell, hides the native browser
@@ -27,7 +27,7 @@ export function Demo() {
 }`;
 
   // ─── Reusable NumberInput component with optional stepper ───────────────
-  // Mirrors the shipped @forge/ui NumberInput surface (forms.tsx): stepper +
+  // Mirrors the shipped @eidos/ui NumberInput surface (forms.tsx): stepper +
   // layout('stacked'|'split'), an optional progress `meter` within [min,max],
   // and the docs-API `onValueChange` alias.
   type NumberInputProps = {

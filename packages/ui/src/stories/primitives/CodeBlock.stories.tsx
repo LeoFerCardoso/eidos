@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { CodeBlock, CollapsibleCode, Prose, ProseCode, Icons } from '@forge/ui';
+import { CodeBlock, CollapsibleCode, Prose, ProseCode, Icons } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/CodeBlock',

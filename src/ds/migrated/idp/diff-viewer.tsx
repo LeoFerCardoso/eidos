@@ -1,8 +1,8 @@
 'use client';
-// Forge DS — Components / DiffViewer
+// Eidos DS — Components / DiffViewer
 // The real diffs.com engine (@pierre/diffs): Shiki syntax highlighting,
 // word-level intra-line diffs, split/unified, hunk separators — re-skinned to
-// Forge tokens (colours + typography only) via the `--diffs-*` custom props.
+// Eidos tokens (colours + typography only) via the `--diffs-*` custom props.
 import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Lede, Mono } from '@/ds/core';
 import { PierreDiff } from '@/components/pierre-diff';
 
@@ -86,7 +86,7 @@ const FLAG_LINES = [
 ];
 const flagsFile = (lines: string[]) => ({
   name: 'feature-flags.ts',
-  contents: `// Forge platform feature flags — evaluated at boot.\nexport const FLAGS = {\n${lines.join('\n')}\n} as const;\n`,
+  contents: `// Eidos platform feature flags — evaluated at boot.\nexport const FLAGS = {\n${lines.join('\n')}\n} as const;\n`,
 });
 const FLAGS_OLD = flagsFile(FLAG_LINES);
 // Three edits, far apart, so the long unchanged runs between them collapse.
@@ -140,7 +140,7 @@ const REVIEW = {
 };
 const AUTH_ANNOTATIONS = [{ side: 'additions', lineNumber: 9, metadata: REVIEW }];
 
-// A Forge-styled review thread, rendered under the annotated line. Inline styles
+// A Eidos-styled review thread, rendered under the annotated line. Inline styles
 // (token vars) so it renders identically whether slotted in light or shadow DOM.
 function CommentThread({ comments }: { comments: { who: string; when: string; text: string }[] }) {
   const ink = (s: string) => {
@@ -173,8 +173,8 @@ function CommentThread({ comments }: { comments: { who: string; when: string; te
 
 export default function DiffViewerPage() {
   return (
-    <Section id="diff-viewer" title="Diff viewer" desc="The diffs.com engine (@pierre/diffs), re-skinned to Forge — Shiki syntax highlighting, word-level intra-line diffs, split or unified layout, and collapsible hunks.">
-      <p style={intro}>It computes the diff straight from the before/after file contents — built for PR detail pages, deploy previews, and agent-proposed-change cards. Forge themes <b style={{color:'var(--fg)'}}>only colours and typography</b> through the library's <Mono>--diffs-*</Mono> custom properties: additions take Forge success, deletions take danger, code is Geist Mono. The diff logic and layout are the library's, untouched.</p>
+    <Section id="diff-viewer" title="Diff viewer" desc="The diffs.com engine (@pierre/diffs), re-skinned to Eidos — Shiki syntax highlighting, word-level intra-line diffs, split or unified layout, and collapsible hunks.">
+      <p style={intro}>It computes the diff straight from the before/after file contents — built for PR detail pages, deploy previews, and agent-proposed-change cards. Eidos themes <b style={{color:'var(--fg)'}}>only colours and typography</b> through the library's <Mono>--diffs-*</Mono> custom properties: additions take Eidos success, deletions take danger, code is Geist Mono. The diff logic and layout are the library's, untouched.</p>
 
       <SubHead meta="package">Installation</SubHead>
       <TabbedCode tabs={installTabs('diff-viewer', '@pierre/diffs')} ariaLabel="package manager"/>
@@ -219,7 +219,7 @@ export default function DiffViewerPage() {
           lineAnnotations={AUTH_ANNOTATIONS}
           renderAnnotation={(a: any) => <CommentThread comments={a.metadata.comments}/>}/>
       </Frame>
-      <Lede>Pass <Mono>lineAnnotations</Mono> (each <Mono>{`{ side, lineNumber, metadata }`}</Mono>) and a <Mono>renderAnnotation</Mono> that returns your own React — line comments, CI findings, AI review notes. The thread here is composed from Forge tokens.</Lede>
+      <Lede>Pass <Mono>lineAnnotations</Mono> (each <Mono>{`{ side, lineNumber, metadata }`}</Mono>) and a <Mono>renderAnnotation</Mono> that returns your own React — line comments, CI findings, AI review notes. The thread here is composed from Eidos tokens.</Lede>
 
       <SubHead meta="a11y">Accessibility</SubHead>
       <div className="ds-grid cols-2" style={{marginTop: 12}}>
@@ -229,7 +229,7 @@ export default function DiffViewerPage() {
         </div>
         <div className="surface" style={{padding: 18}}>
           <div style={{fontWeight: 600, marginBottom: 6}}>Status, not colour alone</div>
-          <div style={{color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.55}}>Add / delete is encoded several ways at once — a coloured change bar (<code>bars</code> indicators), the asymmetric old/new line numbers, and the row tint — so the diff is readable in greyscale or with colour-blindness. The Forge success/danger tints meet AA against the mono code on top of them.</div>
+          <div style={{color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.55}}>Add / delete is encoded several ways at once — a coloured change bar (<code>bars</code> indicators), the asymmetric old/new line numbers, and the row tint — so the diff is readable in greyscale or with colour-blindness. The Eidos success/danger tints meet AA against the mono code on top of them.</div>
         </div>
         <div className="surface" style={{padding: 18}}>
           <div style={{fontWeight: 600, marginBottom: 6}}>Density &amp; focus</div>
@@ -248,7 +248,7 @@ export default function DiffViewerPage() {
         </div>
       </Frame>
       <Lede>
-        Wrapping the viewer in <Mono>dir="rtl"</Mono> flips the toolbar controls and the file-header text to align from the right — the Forge chrome respects the container direction. The code body (line numbers, gutter, syntax tokens) retains its left-to-right orientation because source code is a language-agnostic technical artefact, not natural prose.
+        Wrapping the viewer in <Mono>dir="rtl"</Mono> flips the toolbar controls and the file-header text to align from the right — the Eidos chrome respects the container direction. The code body (line numbers, gutter, syntax tokens) retains its left-to-right orientation because source code is a language-agnostic technical artefact, not natural prose.
       </Lede>
 
       {/* ====================================================================
@@ -279,9 +279,9 @@ export default function DiffViewerPage() {
             </div>
           </div>
           <div className="ana-list" style={{ maxWidth: 560, margin: '56px auto 0' }}>
-            <span className="num">1</span><span><b style={{ color: 'var(--fg)' }}>File header.</b> Filename + hunk range (<Mono>@@ -N,N +N,N @@</Mono>). Mono, <Mono>--fg-faint</Mono>. Theming via <Mono>--diffs-hunk-header-color</Mono> — Forge sets this once in <Mono>ds.css</Mono>.</span>
-            <span className="num">2</span><span><b style={{ color: 'var(--fg)' }}>Addition line.</b> Full-row Forge success tint (<Mono>--diffs-bg-addition</Mono>) with a <Mono>+</Mono> change bar. Changed tokens inside the line get a stronger highlight — only the words that differ light up.</span>
-            <span className="num">3</span><span><b style={{ color: 'var(--fg)' }}>Deletion line.</b> Full-row Forge danger tint (<Mono>--diffs-bg-deletion</Mono>) with a <Mono>−</Mono> change bar. Encoding is redundant: tint + bar + asymmetric line numbers, so it reads in greyscale.</span>
+            <span className="num">1</span><span><b style={{ color: 'var(--fg)' }}>File header.</b> Filename + hunk range (<Mono>@@ -N,N +N,N @@</Mono>). Mono, <Mono>--fg-faint</Mono>. Theming via <Mono>--diffs-hunk-header-color</Mono> — Eidos sets this once in <Mono>ds.css</Mono>.</span>
+            <span className="num">2</span><span><b style={{ color: 'var(--fg)' }}>Addition line.</b> Full-row Eidos success tint (<Mono>--diffs-bg-addition</Mono>) with a <Mono>+</Mono> change bar. Changed tokens inside the line get a stronger highlight — only the words that differ light up.</span>
+            <span className="num">3</span><span><b style={{ color: 'var(--fg)' }}>Deletion line.</b> Full-row Eidos danger tint (<Mono>--diffs-bg-deletion</Mono>) with a <Mono>−</Mono> change bar. Encoding is redundant: tint + bar + asymmetric line numbers, so it reads in greyscale.</span>
             <span className="num">4</span><span><b style={{ color: 'var(--fg)' }}>Line number gutter.</b> Old and new numbers side by side, <Mono>--fg-faint</Mono> mono tabular. Blank on the side where the line doesn't exist (deletion has no new number; addition has no old number).</span>
             <span className="num">5</span><span><b style={{ color: 'var(--fg)' }}>Word-level highlight.</b> The engine isolates the exact tokens that changed within a modified line. Only those tokens get the stronger word-diff tint (<Mono>--diffs-word-addition</Mono> / <Mono>--diffs-word-deletion</Mono>).</span>
           </div>
@@ -298,7 +298,7 @@ export default function DiffViewerPage() {
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — override the diff colours per-instance</div>
           <div className="body" style={{ fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-faint)' }}>style={`{{ '--diffs-bg-addition-override': 'lime' }}`} ❌</div>
-          <div className="note">Addition/deletion colours are set once, from Forge success/danger, in ds.css. Re-tinting per instance breaks the system's status semantics.</div>
+          <div className="note">Addition/deletion colours are set once, from Eidos success/danger, in ds.css. Re-tinting per instance breaks the system's status semantics.</div>
         </div>
       </div>
 
@@ -317,10 +317,10 @@ export default function DiffViewerPage() {
           { prop: 'lineAnnotations', type: 'Annotation[]', description: 'Each: { side, lineNumber, metadata } — pairs with renderAnnotation.' },
           { prop: 'renderAnnotation', type: '(a) => ReactNode', description: 'Render your own content (comments, CI findings) under a line.' },
           { prop: 'toolbar', type: 'boolean', default: 'false', description: 'Render the live control bar; the viewer owns layout/indicator/toggle state.' },
-          { prop: 'theme', type: 'string', default: '"forge"', description: 'Shiki theme for syntax tokens (Forge data-viz palette). Diff chrome is themed via Forge tokens regardless.' },
+          { prop: 'theme', type: 'string', default: '"forge"', description: 'Shiki theme for syntax tokens (Eidos data-viz palette). Diff chrome is themed via Eidos tokens regardless.' },
         ]}
       />
-      <Lede>Built on <Mono>@pierre/diffs</Mono> (the engine behind <a href="https://diffs.com" target="_blank" rel="noreferrer" style={{color:'var(--ice)'}}>diffs.com</a>). Forge sets only the <Mono>--diffs-*</Mono> colour + font custom properties in <Mono>ds.css</Mono>; the diff logic and layout are the library's.</Lede>
+      <Lede>Built on <Mono>@pierre/diffs</Mono> (the engine behind <a href="https://diffs.com" target="_blank" rel="noreferrer" style={{color:'var(--ice)'}}>diffs.com</a>). Eidos sets only the <Mono>--diffs-*</Mono> colour + font custom properties in <Mono>ds.css</Mono>; the diff logic and layout are the library's.</Lede>
     </Section>
   );
 }

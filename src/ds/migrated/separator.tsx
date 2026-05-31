@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Separator
+// Eidos DS — Components / Separator
 // Section order (DS-PAGE-STANDARD §2.2):
 //   1. Installation
 //   2. Usage
@@ -27,7 +27,7 @@ export function Demo() {
 }`;
 
 const VERTICAL_CODE = `<div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-  <span>Forge Cloud</span>
+  <span>Eidos Cloud</span>
   <Separator orientation="vertical" />
   <span>us-east-1</span>
   <Separator orientation="vertical" />
@@ -109,7 +109,7 @@ export default function SeparatorPage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: 14, border: '1px solid var(--border)', borderRadius: 'var(--radius-xl)', background: 'var(--surface)' }}>
           <div>
             <div className="t-mono-label">Workspace</div>
-            <div style={{ fontSize: 'var(--text-md)', fontWeight: 600, marginTop: 2 }}>Forge Cloud</div>
+            <div style={{ fontSize: 'var(--text-md)', fontWeight: 600, marginTop: 2 }}>Eidos Cloud</div>
           </div>
           <Separator orientation="vertical" />
           <div>
@@ -157,7 +157,7 @@ export default function SeparatorPage() {
       <Frame label="settings card — horizontal separators between rows">
         <div style={{ width: 360, border: '1px solid var(--border)', borderRadius: 'var(--radius-xl)', overflow: 'hidden', background: 'var(--bg)' }}>
           <div style={{ padding: '16px 20px' }}>
-            <div style={{ fontWeight: 600, fontSize: 'var(--text-md)', marginBottom: 4 }}>Forge Cloud</div>
+            <div style={{ fontWeight: 600, fontSize: 'var(--text-md)', marginBottom: 4 }}>Eidos Cloud</div>
             <div style={{ fontSize: 'var(--text-base)', color: 'var(--fg-muted)' }}>Manage your workspace settings</div>
           </div>
           <Separator />
@@ -243,7 +243,7 @@ export default function SeparatorPage() {
               <div style={{ padding: '10px 0', fontSize: 'var(--text-base)', color: 'var(--fg-muted)' }}>Profile</div>
               <Separator orientation="horizontal" variant="solid" />
               <div style={{ padding: '10px 0', fontSize: 'var(--text-base)', color: 'var(--fg-muted)', display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span>Forge Cloud</span>
+                <span>Eidos Cloud</span>
                 <Separator orientation="vertical" />
                 <span>us-east-1</span>
               </div>
@@ -299,7 +299,7 @@ export default function SeparatorPage() {
           <div className="head"><Icons.check size={12} /> Do — use vertical for inline clusters</div>
           <div className="body">
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 0' }}>
-              <span style={{ fontSize: 'var(--text-base)' }}>Forge Cloud</span>
+              <span style={{ fontSize: 'var(--text-base)' }}>Eidos Cloud</span>
               <Separator orientation="vertical" />
               <span style={{ fontSize: 'var(--text-base)' }}>us-east-1</span>
             </div>

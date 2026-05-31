@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { AspectRatio } from '@forge/ui';
+import { AspectRatio } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/AspectRatio',

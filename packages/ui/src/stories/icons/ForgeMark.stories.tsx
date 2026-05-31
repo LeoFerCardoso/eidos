@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ForgeMark } from '@forge/ui';
+import { ForgeMark } from '@eidos/ui';
 
 const VARIANTS = ['solid', 'outline', 'expressive'] as const;
 

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { RelativeTime } from '@forge/ui';
+import { RelativeTime } from '@eidos/ui';
 
 // Stable past offsets so stories don't flicker
 const NOW = Date.now();

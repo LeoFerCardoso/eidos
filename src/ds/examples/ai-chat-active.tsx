@@ -1,5 +1,5 @@
 'use client';
-// Forge IDP — AI Chat (active thread).
+// Eidos IDP — AI Chat (active thread).
 //
 // The page a user lands on after clicking a chat in the sidebar's Recents
 // or Yesterday bucket. Reads ?chat=<id> from the URL, picks a title +
@@ -96,7 +96,7 @@ const App = () => {
     <ChatShell
       side="recent"
       activeChat={chatId}
-      crumbs={['Forge', 'AI', 'Recents', chatTitle]}
+      crumbs={['Eidos', 'AI', 'Recents', chatTitle]}
     >
       <div className="aic-thread">
         <div className="msg-thread fluid">
@@ -115,7 +115,7 @@ const App = () => {
             from="assistant"
             meta={
               <>
-                <span className="t-mono-label">Forge AI</span> ·
+                <span className="t-mono-label">Eidos AI</span> ·
                 <span style={{ color: 'var(--fg-faint)', marginInlineStart: 6 }}>Opus 4.7</span>
                 <span style={{ color: 'var(--fg-faint)', marginInlineStart: 6 }}>· 14:02</span>
               </>
@@ -240,7 +240,7 @@ forge cli release identity-svc --db aurora`}</ProseCode>
             from="assistant"
             meta={
               <>
-                <span className="t-mono-label">Forge AI</span> ·
+                <span className="t-mono-label">Eidos AI</span> ·
                 <span style={{ color: 'var(--fg-faint)', marginInlineStart: 6 }}>Opus 4.7</span>
                 <span style={{ color: 'var(--fg-faint)', marginInlineStart: 6 }}>· 14:06</span>
               </>

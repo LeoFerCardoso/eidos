@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Breadcrumb.
+// Eidos DS — Components / Breadcrumb.
 // A hierarchical trail of links from root to current page. Use for nested
 // content (Service → Deploy → Logs), not for linear flows (use a stepper).
 import * as React from 'react';
@@ -143,10 +143,10 @@ const LONG_ITEMS = [
 ];
 
 const INSTALL_TABS = [
-  { label: 'pnpm',   code: 'pnpm dlx forge-ui@latest add breadcrumb', lang: 'bash' },
-  { label: 'npm',    code: 'npx forge-ui@latest add breadcrumb',       lang: 'bash' },
-  { label: 'yarn',   code: 'yarn dlx forge-ui@latest add breadcrumb',  lang: 'bash' },
-  { label: 'bun',    code: 'bunx forge-ui@latest add breadcrumb',      lang: 'bash' },
+  { label: 'pnpm',   code: 'pnpm dlx eidos@latest add breadcrumb', lang: 'bash' },
+  { label: 'npm',    code: 'npx eidos@latest add breadcrumb',       lang: 'bash' },
+  { label: 'yarn',   code: 'yarn dlx eidos@latest add breadcrumb',  lang: 'bash' },
+  { label: 'bun',    code: 'bunx eidos@latest add breadcrumb',      lang: 'bash' },
   { label: 'shadcn', code: 'npx shadcn@latest add https://forge.equifax.dev/r/breadcrumb.json', lang: 'bash' },
 ];
 

@@ -1,6 +1,6 @@
 export const meta = {
   name: 'promote-batch',
-  description: 'Promote a batch of docs-only Forge DS patterns into real @forge/ui components: per-component build in parallel (each writes ONLY its own new component file + story + docs-page rewrite, and RETURNS the shared-file snippets), then ONE serialized integrator applies all barrel/FAMILIES/CSS edits, then one full verify gate (auto-fix), then parallel adversarial critique. Pass args = { batchName, items: [{slug, displayName, suggestedExports, file, npmDeps, intraDeps, notes}] }.',
+  description: 'Promote a batch of docs-only Forge DS patterns into real @eidos/ui components: per-component build in parallel (each writes ONLY its own new component file + story + docs-page rewrite, and RETURNS the shared-file snippets), then ONE serialized integrator applies all barrel/FAMILIES/CSS edits, then one full verify gate (auto-fix), then parallel adversarial critique. Pass args = { batchName, items: [{slug, displayName, suggestedExports, file, npmDeps, intraDeps, notes}] }.',
   whenToUse: 'Phases 2-5 of the Forge DS Storybook-completion program.',
   phases: [
     { title: 'Build components' },
@@ -20,7 +20,7 @@ const STANDARDS = `
 You are a senior Forge DS engineer building a PRODUCTION component. Repo: ${REPO}.
 Read these before writing (do not guess): docs/DS-PAGE-STANDARD.md; src/ds/migrated/buttons.tsx (gold doc page); packages/ui/src/badge.tsx + select.tsx + combobox.tsx (the canonical NEW-component style — mirror their structure); packages/ui/src/stories/blocks/Banner.stories.tsx + atoms/StatusDot.stories.tsx (CSF3 story template).
 
-COMPONENT-LAYER CONTRACT (how a real @forge/ui component is written):
+COMPONENT-LAYER CONTRACT (how a real @eidos/ui component is written):
 - File header imports: \`import * as React from 'react';\` then \`import { cn } from './lib/utils';\` then \`import { Icons } from './icons';\` (Icons only if used). Cross-component use: \`import { Modal } from './modal';\` (a sibling in this same batch is fine — it resolves at build time).
 - Framework-agnostic React over the SEMANTIC CSS layer. NO Tailwind utilities, NO Radix, NO next/* — pure React + CSS classes + cn(). Overlays render via React.createPortal to document.body; positioning is self-contained (position:fixed + getBoundingClientRect with a flip, like select.tsx/combobox.tsx already do) — do NOT introduce a new shared lib dependency.
 - Typed props interface exported (e.g. ModalProps). Controlled + uncontrolled where sensible. Custom value components use \`value\` + \`onValueChange:(v)=>void\` (native wrappers keep native onChange). Compound components export their parts (e.g. Card, CardHeader, CardTitle, CardContent, CardFooter) from the same file.
@@ -71,7 +71,7 @@ const BUILD_ITEM = {
     docsPage: { type: 'string' },
     docRoute: { type: 'string', description: 'e.g. /modal' },
     registryNames: { type: 'array', items: { type: 'string' } },
-    intraDeps: { type: 'array', items: { type: 'string' }, description: 'Sibling @forge/ui components imported (their export names).' },
+    intraDeps: { type: 'array', items: { type: 'string' }, description: 'Sibling @eidos/ui components imported (their export names).' },
     npmDeps: { type: 'array', items: { type: 'string' } },
     notes: { type: 'string' },
   },
@@ -106,7 +106,7 @@ STEPS:
 1. Read src/ds/migrated/${it.slug}.tsx — it contains the existing inline implementation + page-local <style>/CSS classes. Extract the behavior + the CSS. Also grep tokens.css/ds.css for any related classes already present (reuse them; only return NEW css).
 2. Write packages/ui/src/${it.file}: the real, typed, production component (full keyboard/focus/ARIA/RTL/reduced-motion per the contract). Mirror badge.tsx/select.tsx style.
 3. Decide cssTarget + cssBlock: the CSS the component needs that is NOT already in the stylesheet, de-indented, prefixed with a "/* <Component> — promoted from <slug>.tsx */" section comment. (Do NOT edit the css file — return the block.)
-4. Write the CSF3 story at packages/ui/src/stories/<group>/<Comp>.stories.tsx — Default + one per real variant/size/state + an InContext story; stateful demos use a React.useState wrapper in render; rely on the global theme/RTL/a11y toolbars; import ONLY from '@forge/ui'.
+4. Write the CSF3 story at packages/ui/src/stories/<group>/<Comp>.stories.tsx — Default + one per real variant/size/state + an InContext story; stateful demos use a React.useState wrapper in render; rely on the global theme/RTL/a11y toolbars; import ONLY from '@eidos/ui'.
 5. Rewrite src/ds/migrated/${it.slug}.tsx to import the real component from '@/ds/core', drop the inline impl + <style>, and conform to DS-PAGE-STANDARD (keep/upgrade Installation, Usage, Variants, In context, Accessibility, RTL, visual Anatomy, Do/Don't, <AutoPropsTable component="${(it.suggestedExports && it.suggestedExports[0]) || it.displayName}"/>).
 6. Return the structured BUILD_ITEM with EXACT snippets (barrelLine, familyFile, familiesOnly, cssTarget, cssBlock, registryNames, intraDeps, npmDeps). registry name = kebab of each familiesOnly entry.
 Report nothing else — just the structured result.`,

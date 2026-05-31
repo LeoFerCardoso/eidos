@@ -5,7 +5,7 @@ import {
   NavigationMenuItem,
   NavigationMenuContent,
   NavigationMenuLink,
-} from '@forge/ui';
+} from '@eidos/ui';
 
 const meta = {
   title: 'Elements/NavigationMenu',

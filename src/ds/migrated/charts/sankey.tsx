@@ -53,7 +53,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Fo
     ],
   };
 
-  // Forge node renderer — gives every block a Forge-toned rectangle + label.
+  // Eidos node renderer — gives every block a Eidos-toned rectangle + label.
   const PALETTE = ['var(--viz-cat-1)','var(--viz-cat-2)','var(--viz-cat-3)','var(--viz-cat-4)','var(--success)','var(--warning)','var(--danger)'];
   const ForgeNode = (props) => {
     const x = props.x, y = props.y, width = props.width, height = props.height;

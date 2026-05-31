@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Icon Button. A 44 × 44 px tappable icon-only control used in nav bars and
+// Eidos Mobile — Icon Button. A 44 × 44 px tappable icon-only control used in nav bars and
 // toolbars. Three visual weights — plain (ghost), tinted (ember-soft bg), filled (ember) —
 // give it a clear hierarchy role. Every instance MUST carry an aria-label; the icon is
 // always decorative.

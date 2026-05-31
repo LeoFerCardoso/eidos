@@ -7,7 +7,7 @@ import {
   AlertMeta,
   AlertExtra,
   AlertActions,
-} from '@forge/ui';
+} from '@eidos/ui';
 
 const TONES = ['neutral', 'info', 'success', 'warning', 'danger'] as const;
 
@@ -43,7 +43,7 @@ export const Default: Story = {
   render: (args) => (
     <Alert {...args}>
       <AlertTitle>Heads up</AlertTitle>
-      <AlertDescription>A new Tailwind preset is available. Update @forge/design-system to v1.1.</AlertDescription>
+      <AlertDescription>A new Tailwind preset is available. Update @eidos/design-system to v1.1.</AlertDescription>
     </Alert>
   ),
 };
@@ -58,7 +58,7 @@ export const AllTones: Story = {
       </Alert>
       <Alert tone="info">
         <AlertTitle>Heads up</AlertTitle>
-        <AlertDescription>A new Tailwind preset is available. Update @forge/design-system to v1.1.</AlertDescription>
+        <AlertDescription>A new Tailwind preset is available. Update @eidos/design-system to v1.1.</AlertDescription>
       </Alert>
       <Alert tone="success">
         <AlertTitle>Deployment succeeded</AlertTitle>
@@ -195,7 +195,7 @@ export const RTL: Story = {
     <div dir="rtl" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <Alert tone="info" onDismiss={() => {}}>
         <AlertTitle>إعداد Tailwind جديد متاح</AlertTitle>
-        <AlertDescription>حدّث @forge/design-system إلى الإصدار 1.1 للحصول على جميع المكونات الجديدة.</AlertDescription>
+        <AlertDescription>حدّث @eidos/design-system إلى الإصدار 1.1 للحصول على جميع المكونات الجديدة.</AlertDescription>
       </Alert>
       <Alert tone="warning">
         <AlertTitle>تغييرات غير محفوظة</AlertTitle>

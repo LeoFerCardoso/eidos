@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { DatePicker } from '@forge/ui';
+import { DatePicker } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/DatePicker',

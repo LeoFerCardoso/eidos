@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Notification, Toaster, useToast } from '@forge/ui';
-import type { ToasterPosition, ToastTone } from '@forge/ui';
+import { Notification, Toaster, useToast } from '@eidos/ui';
+import type { ToasterPosition, ToastTone } from '@eidos/ui';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Notification — Forge DS
@@ -17,7 +17,7 @@ import type { ToasterPosition, ToastTone } from '@forge/ui';
 //
 // The story file is bound to the `Notification` export, so meta.component
 // stays Notification; the Toaster surface is exercised through render-only
-// stories (Toaster + useToast both ship from @forge/ui via the same module).
+// stories (Toaster + useToast both ship from @eidos/ui via the same module).
 // ═══════════════════════════════════════════════════════════════════════════
 
 // ── Meta ──────────────────────────────────────────────────────────────────────

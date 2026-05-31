@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { RingBar } from '@forge/ui';
+import { RingBar } from '@eidos/ui';
 
 const RINGS_INFLIGHT = [
   { label: 'Ring 0', audience: 'Internal · 100 nodes', percent: 100, status: 'done' },

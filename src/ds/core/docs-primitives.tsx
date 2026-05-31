@@ -2,7 +2,7 @@
 import * as React from 'react';
 // Docs-shell primitives — the three page wrappers that depend on docs-app concerns
 // (the nav registry + the current route + the generated props map) and therefore
-// cannot live in the framework-agnostic @forge/ui package:
+// cannot live in the framework-agnostic @eidos/ui package:
 //
 //   Section          — reads the current route (usePathname) + NAV_FLAT/DESIGN_SYSTEMS
 //                      to render the page eyebrow (group · subgroup · num).
@@ -11,8 +11,8 @@ import * as React from 'react';
 //   AutoPropsTable   — reads GENERATED_PROPS (built by scripts/gen-props.mjs).
 //
 // Everything they compose (SubHead, TabbedCode, installTabs, PropsTable) is a pure
-// primitive imported from @forge/ui.
-import { SubHead, TabbedCode, installTabs, PropsTable } from '@forge/ui';
+// primitive imported from @eidos/ui.
+import { SubHead, TabbedCode, installTabs, PropsTable } from '@eidos/ui';
 import { usePathname } from 'next/navigation';
 import { NAV_FLAT, DESIGN_SYSTEMS } from '@/lib/nav';
 import { GENERATED_PROPS } from './props.generated';
@@ -36,7 +36,7 @@ const Section = ({ id, num, title, desc, autoInstall = false, installPeers, chil
   const pathname = usePathname();
   const item = NAV_FLAT.find((i) => i.href === pathname) || NAV_FLAT.find((i) => i.slug === id) || null;
   const ds = (item && DESIGN_SYSTEMS.find((d) => d.id === item.ds)) || null;
-  const group = (item && item.group) || (ds && ds.id !== 'core' ? ds.label : 'Forge');
+  const group = (item && item.group) || (ds && ds.id !== 'core' ? ds.label : 'Eidos');
   const subgroup = item && item.subgroup;
   const installable = autoInstall && item && (group === 'Components' || group === 'AI');
   return (
@@ -68,7 +68,7 @@ const Section = ({ id, num, title, desc, autoInstall = false, installPeers, chil
 
 // ---- ComponentInstall — opinionated drop-in Installation block ------------
 // `peers` overrides the per-slug npm dependency list shown in the Manual tab.
-// Forge components are SEMANTIC-CLASS React (no Radix, no CVA) — the baseline is
+// Eidos components are SEMANTIC-CLASS React (no Radix, no CVA) — the baseline is
 // the cn() helper (clsx + tailwind-merge, the installTabs default). Only list a
 // real extra library when the component genuinely needs one.
 const PEER_OVERRIDES: Record<string, string> = {
@@ -101,7 +101,7 @@ const ComponentInstall = ({ slug, peers, label }: {
       <SubHead meta="cli">Installation</SubHead>
       <TabbedCode tabs={installTabs(cliName, peerList)} ariaLabel="package manager"/>
       <p className="ds-caption">
-        Drop <code style={{fontFamily:'var(--font-mono)', fontSize:'var(--text-sm)', color:'var(--ember)'}}>{componentLabel}</code> into any Forge product. The CLI copies the component file into your repo — Forge is owned, not imported. The Manual tab shows the dependencies and source files for hand-installation.
+        Drop <code style={{fontFamily:'var(--font-mono)', fontSize:'var(--text-sm)', color:'var(--ember)'}}>{componentLabel}</code> into any Eidos product. The CLI copies the component file into your repo — Eidos is owned, not imported. The Manual tab shows the dependencies and source files for hand-installation.
       </p>
     </>
   );

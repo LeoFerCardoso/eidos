@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Mono } from '@forge/ui';
+import { Mono } from '@eidos/ui';
 
 const meta = {
   title: 'Docs/Mono',

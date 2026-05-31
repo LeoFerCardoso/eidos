@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Transcription, Persona } from '@forge/ui';
-import type { TranscriptTurn } from '@forge/ui';
+import { Transcription, Persona } from '@eidos/ui';
+import type { TranscriptTurn } from '@eidos/ui';
 
 // ── Fixtures ─────────────────────────────────────────────────────────────────
 

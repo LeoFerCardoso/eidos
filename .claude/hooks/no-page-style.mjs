@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // PreToolUse(Edit|Write|MultiEdit) guard — the in-edit twin of scripts/check-no-page-style.mjs.
 // HARD BLOCK (exit 2) when an edit introduces a per-page <style> block or a hardcoded
-// color in an inline style in a docs page (src/ds/migrated/**) or a @forge/ui component
+// color in an inline style in a docs page (src/ds/migrated/**) or a @eidos/ui component
 // (packages/ui/src/**/*.tsx). The ONLY place raw color/oklch/hex lives is the token CSS
 // (tokens.css / ds.css / ai.css) — those are whitelisted. Backs clause C-no-page-style.
 // Not a blanket hex/px ban (that would flag the token source).

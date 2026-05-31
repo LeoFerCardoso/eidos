@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Video Player. An inline video surface with a poster frame, a centre
+// Eidos Mobile — Video Player. An inline video surface with a poster frame, a centre
 // play/pause control, and a bottom control bar: play/pause, a scrubber with buffered
 // and elapsed tracks, time labels, and a fullscreen button. Single ember accent on the
 // elapsed fill — the play button itself is white/translucent so the accent stays singular.

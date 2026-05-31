@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Citations: inline Citation chip + hover popover (§2.2 standard).
+// Eidos AI — Citations: inline Citation chip + hover popover (§2.2 standard).
 // This page covers the INLINE chip only. For the standalone Sources panel
 // (the numbered list below an answer), see /ai/sources.
 import * as React from 'react';
@@ -91,7 +91,7 @@ timeout in <code>billing-svc</code><Citation n={1} source={sources[0]}/>.</p>`;
             >{k} density</button>
           ))}
         </div>
-        <RespFrame meta={<><span className="name">Forge AI</span><span className="dot"/><span>density: {d}</span></>}>
+        <RespFrame meta={<><span className="name">Eidos AI</span><span className="dot"/><span>density: {d}</span></>}>
           {para}
         </RespFrame>
         <p className="ds-caption" style={{ marginTop: 14 }}>
@@ -105,7 +105,7 @@ timeout in <code>billing-svc</code><Citation n={1} source={sources[0]}/>.</p>`;
 
   // ─── live demos ─────────────────────────────────────────────────────────
   const InlineDemo = () => (
-    <RespFrame meta={<><span className="name">Forge AI</span><span className="dot"/><span>14:02</span></>}>
+    <RespFrame meta={<><span className="name">Eidos AI</span><span className="dot"/><span>14:02</span></>}>
       <p>The on-call paged because the retry budget on <code>grpc.toml</code> was bumped from 3 to 8<Citation n={2} source={SOURCES[1]}/>, which masked a downstream timeout in <code>billing-svc</code><Citation n={1} source={SOURCES[0]}/>. The runbook recommends reverting the most recent canary first<Citation n={3} source={SOURCES[2]}/>.</p>
       <p>Hover any chip to preview the source. Click to open it in a new tab.</p>
     </RespFrame>
@@ -126,7 +126,7 @@ timeout in <code>billing-svc</code><Citation n={1} source={sources[0]}/>.</p>`;
         {/* grounded — popover-capable */}
         <div>
           <div className="ds-caption" style={{ marginBottom: 8 }}>Grounded — has a source</div>
-          <RespFrame meta={<><span className="name">Forge AI</span></>}>
+          <RespFrame meta={<><span className="name">Eidos AI</span></>}>
             <p>Retry budget bumped to 8<Citation n={2} source={SOURCES[1]}/>.</p>
           </RespFrame>
           <p className="ds-caption" style={{ marginTop: 8 }}>Hover, focus, or click the chip to open the source popover.</p>
@@ -134,7 +134,7 @@ timeout in <code>billing-svc</code><Citation n={1} source={sources[0]}/>.</p>`;
         {/* silenced — no source, no popover */}
         <div>
           <div className="ds-caption" style={{ marginBottom: 8 }}>Silenced — no source</div>
-          <RespFrame meta={<><span className="name">Forge AI</span></>}>
+          <RespFrame meta={<><span className="name">Eidos AI</span></>}>
             <p>See gRPC retry-budget docs<Citation n={5} tone="neutral"/>.</p>
           </RespFrame>
           <p className="ds-caption" style={{ marginTop: 8 }}>Omit <Mono>source</Mono> and the chip renders without a popover — a bare rank that still maps to the panel.</p>
@@ -142,7 +142,7 @@ timeout in <code>billing-svc</code><Citation n={1} source={sources[0]}/>.</p>`;
         {/* streaming — chip arrives with the text */}
         <div>
           <div className="ds-caption" style={{ marginBottom: 8 }}>Streaming — chip arrives with the text</div>
-          <RespFrame meta={<><span className="name">Forge AI</span><span className="dot"/><span>{streaming ? 'streaming…' : 'complete'}</span></>}>
+          <RespFrame meta={<><span className="name">Eidos AI</span><span className="dot"/><span>{streaming ? 'streaming…' : 'complete'}</span></>}>
             {streaming
               ? <p>Retry budget bumped to 8<AICaret/></p>
               : <p>Retry budget bumped to 8<Citation n={2} source={SOURCES[1]}/>.</p>}
@@ -158,7 +158,7 @@ timeout in <code>billing-svc</code><Citation n={1} source={sources[0]}/>.</p>`;
 
   const FullDemo = () => (
     <div style={{ width: '100%', maxWidth: 720 }}>
-      <RespFrame meta={<><span className="name">Forge AI</span><span className="dot"/><span>14:02 · with sources</span></>}>
+      <RespFrame meta={<><span className="name">Eidos AI</span><span className="dot"/><span>14:02 · with sources</span></>}>
         <h2>What changed in 0421</h2>
         <p>Three things shipped together — none broke in isolation, but their interaction is why on-call paged at 02:14<Citation n={1} source={SOURCES[0]}/>.</p>
         <ul>
@@ -174,7 +174,7 @@ timeout in <code>billing-svc</code><Citation n={1} source={sources[0]}/>.</p>`;
   );
 
   const QuoteDemo = () => (
-    <RespFrame meta={<><span className="name">Forge AI</span></>}>
+    <RespFrame meta={<><span className="name">Eidos AI</span></>}>
       <p>The runbook is explicit on the order of operations:</p>
       <blockquote>
         Revert the most recent canary first. Only after p99 returns to baseline should you drop the retry budget back to 3.
@@ -235,7 +235,7 @@ export default function CitationsPage() {
       <SubHead meta="ember · neutral">Tone variants</SubHead>
       <Frame label="ember (grounded claim) · neutral (ungrounded / supplemental reference)" height={180}>
         <div style={{ maxWidth: 560, width: '100%' }}>
-          <RespFrame meta={<><span className="name">Forge AI</span></>}>
+          <RespFrame meta={<><span className="name">Eidos AI</span></>}>
             <p>
               The retry storm is confirmed in the trace data<Citation n={1} source={SOURCES[0]} tone="ember"/>.
               See also the general gRPC docs<Citation n={2} tone="neutral"/> for background on retry budgets.
@@ -308,7 +308,7 @@ export default function CitationsPage() {
       <SubHead meta="RTL · العربية">RTL</SubHead>
       <Frame label="dir=&quot;rtl&quot; — chip + popover anchor mirror automatically" height={380}>
         <div dir="rtl" style={{ width: '100%' }}>
-          <RespFrame meta={<><span className="name">Forge AI</span></>}>
+          <RespFrame meta={<><span className="name">Eidos AI</span></>}>
             <p>تم رفع ميزانية إعادة المحاولة في <code>grpc.toml</code> من 3 إلى 8<Citation n={2} source={SOURCES[1]}/>، مما أخفى مهلة منتهية في <code>billing-svc</code><Citation n={1} source={SOURCES[0]}/>.</p>
           </RespFrame>
           <div style={{ marginTop: 18 }}>
@@ -324,7 +324,7 @@ export default function CitationsPage() {
         <div className="ds-frame-body" style={{ padding: '72px 36px 60px' }}>
           <div className="ana" style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="stage" style={{ position: 'relative', width: 520 }} aria-hidden="true">
-              <RespFrame meta={<><span className="name">Forge AI</span></>}>
+              <RespFrame meta={<><span className="name">Eidos AI</span></>}>
                 <p>The retry budget bump<span className="ai-cite-chip" style={{ marginInlineStart: 2 }}>2</span> masked a timeout in billing-svc.</p>
               </RespFrame>
               <div style={{ marginTop: 14 }}>
@@ -355,7 +355,7 @@ export default function CitationsPage() {
         <div className="dd-card do">
           <div className="head"><Icons.check size={12}/> Do — cite once per claim</div>
           <div className="body" style={{ padding: 14 }}>
-            <RespFrame meta={<><span className="name">Forge AI</span></>}>
+            <RespFrame meta={<><span className="name">Eidos AI</span></>}>
               <p>Retry budget went from 3 to 8<Citation n={2} source={SOURCES[1]}/>. Pool size doubled<Citation n={3} source={SOURCES[2]}/>.</p>
             </RespFrame>
           </div>
@@ -364,7 +364,7 @@ export default function CitationsPage() {
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — citation-bomb every sentence</div>
           <div className="body" style={{ padding: 14 }}>
-            <RespFrame meta={<><span className="name">Forge AI</span></>}>
+            <RespFrame meta={<><span className="name">Eidos AI</span></>}>
               <p>The<Citation n={1} source={SOURCES[0]}/> retry<Citation n={2} source={SOURCES[1]}/> budget<Citation n={2} source={SOURCES[1]}/> went<Citation n={1} source={SOURCES[0]}/> from<Citation n={2} source={SOURCES[1]}/> 3<Citation n={2} source={SOURCES[1]}/> to<Citation n={2} source={SOURCES[1]}/> 8<Citation n={2} source={SOURCES[1]}/>.</p>
             </RespFrame>
           </div>
@@ -375,7 +375,7 @@ export default function CitationsPage() {
           <div className="head"><Icons.check size={12}/> Do — keep numbers consistent across surfaces</div>
           <div className="body" style={{ padding: 14 }}>
             <div style={{ width: '100%' }}>
-              <RespFrame meta={<><span className="name">Forge AI</span></>}>
+              <RespFrame meta={<><span className="name">Eidos AI</span></>}>
                 <p>See sources [1] and [3]<Citation n={1} source={SOURCES[0]}/><Citation n={3} source={SOURCES[2]}/></p>
               </RespFrame>
               <div style={{ marginTop: 12 }}>

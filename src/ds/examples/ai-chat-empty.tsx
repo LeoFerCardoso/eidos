@@ -2,14 +2,14 @@
 import * as React from 'react';
 import { ForgeMark, Icons, Message } from '@/ds/core';
 import { FShell } from './example-shell';
-// Forge IDP — Example: AI · New chat (empty state).
+// Eidos IDP — Example: AI · New chat (empty state).
 //
 // The "AI" entry in the product rail opens this surface. It is intentionally
 // the *empty* new-chat state — there is no conversation yet, no second header,
 // no right side panel. Just two things on the page:
 //
 //   1. A quiet, centred hero (brand mark + greeting + CTA prompt)
-//   2. The canonical Forge Prompt Input, constrained to a comfortable width
+//   2. The canonical Eidos Prompt Input, constrained to a comfortable width
 //
 // The left sidebar is preserved and "New chat" is its active row, since this
 // IS the new-chat surface. Historical chats in the sidebar remain present as
@@ -165,7 +165,7 @@ import { FShell } from './example-shell';
     };
 
     return (
-      <FShell nav="ai" crumbs={['Forge', 'AI', 'New chat']} fullBleed>
+      <FShell nav="ai" crumbs={['Eidos', 'AI', 'New chat']} fullBleed>
         <div className="ai-ex-app">
           {/* ─── Left column · AI sidebar ────────────────────────────────── */}
           <aside className="ai-ex-side" aria-label="AI Chat navigation">
@@ -236,10 +236,10 @@ import { FShell } from './example-shell';
                 <ForgeMark size={56} variant="outline" color="currentColor" strokeWidth={1.6} />
               </div>
               <h1 className="ai-ex-empty-title">Hello, Leonardo</h1>
-              <p className="ai-ex-empty-sub">What can Forge AI help you with today?</p>
+              <p className="ai-ex-empty-sub">What can Eidos AI help you with today?</p>
             </div>
 
-            {/* Composer — canonical Forge Prompt Input. Markup matches the
+            {/* Composer — canonical Eidos Prompt Input. Markup matches the
                 spec page (pages/ai/prompt-input.html · Minimal example) so
                 both surfaces share the .pi-* CSS in ds.css. The .pi-tab
                 banner peeks above as a tab; .pi keeps full 4-corner radius. */}
@@ -276,7 +276,7 @@ import { FShell } from './example-shell';
                         if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); onSubmit(); }
                       }}
                       placeholder="What do you want to ship today?"
-                      aria-label="Message Forge AI"
+                      aria-label="Message Eidos AI"
                       rows={2}
                       style={{ fontSize: 15 }}
                     />
@@ -297,7 +297,7 @@ import { FShell } from './example-shell';
               </div>
 
               <p className="pi-caption">
-                Forge AI is grounded in your service catalog — double-check before acting on production. <a href="#" onClick={(e) => e.preventDefault()}>Learn more</a>
+                Eidos AI is grounded in your service catalog — double-check before acting on production. <a href="#" onClick={(e) => e.preventDefault()}>Learn more</a>
               </p>
             </div>
           </main>
@@ -447,7 +447,7 @@ import { FShell } from './example-shell';
 
           /* ── Composer wrap — width-constrained, dock near bottom.
               The actual composer (.pi-wrap > .pi-tab + .pi · plus the
-              trailing .pi-caption) is the canonical Forge Prompt Input
+              trailing .pi-caption) is the canonical Eidos Prompt Input
               from ds.css. This wrap just constrains its width and centres
               it on the page. */
           .ai-ex-composer-wrap {

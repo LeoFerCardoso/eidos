@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Transcription. Speaker-labeled lines from an audio conversation.
+// Eidos AI — Transcription. Speaker-labeled lines from an audio conversation.
 // Optional timestamps, confidence scores, and a streaming live mode.
 import * as React from 'react';
 import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, PropsTable, installTabs, Lede, Transcription, Persona, Mono, Kbd } from '@/ds/core';
@@ -8,11 +8,11 @@ import type { TranscriptTurn } from '@/ds/core';
 
 // ── Demo data ─────────────────────────────────────────────────────────────
 const USAGE_TURNS: TranscriptTurn[] = [
-  { id: 't1', speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '09:01', text: 'Good morning. All platform services are green. Two incidents from overnight were auto-resolved at 02:14 UTC.' },
+  { id: 't1', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '09:01', text: 'Good morning. All platform services are green. Two incidents from overnight were auto-resolved at 02:14 UTC.' },
   { id: 't2', speaker: 'On-call SRE',  initials: 'SR', side: 'user',  time: '09:01', text: 'Any lingering alerts I should know about before the standup?' },
-  { id: 't3', speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '09:02', text: 'Three low-priority alerts remain open — all in the monitoring backlog, none customer-facing. I will include a summary in the standup digest.' },
+  { id: 't3', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '09:02', text: 'Three low-priority alerts remain open — all in the monitoring backlog, none customer-facing. I will include a summary in the standup digest.' },
   { id: 't4', speaker: 'On-call SRE',  initials: 'SR', side: 'user',  time: '09:02', text: 'Can you check the p99 on identity-svc? It was elevated yesterday afternoon.' },
-  { id: 't5', speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '09:02', text: 'p99 for identity-svc is 284 ms over the last 15 minutes — within the 400 ms SLO. Yesterday\'s spike peaked at 612 ms at 15:47 UTC and resolved after the deploy at 16:03.' },
+  { id: 't5', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '09:02', text: 'p99 for identity-svc is 284 ms over the last 15 minutes — within the 400 ms SLO. Yesterday\'s spike peaked at 612 ms at 15:47 UTC and resolved after the deploy at 16:03.' },
 ];
 
 const CONFIDENCE_TURNS: TranscriptTurn[] = USAGE_TURNS.map((t, i) => ({
@@ -21,25 +21,25 @@ const CONFIDENCE_TURNS: TranscriptTurn[] = USAGE_TURNS.map((t, i) => ({
 }));
 
 const LONG_TURNS: TranscriptTurn[] = [
-  { id: 'l1',  speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '10:00', text: 'Daily briefing: 14 services healthy, 1 degraded (billing-svc — p95 elevated).' },
+  { id: 'l1',  speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '10:00', text: 'Daily briefing: 14 services healthy, 1 degraded (billing-svc — p95 elevated).' },
   { id: 'l2',  speaker: 'Lead SRE',    initials: 'LS', side: 'user',  time: '10:00', text: 'What\'s causing the billing-svc degradation?' },
-  { id: 'l3',  speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '10:01', text: 'A spike in checkout volume at 09:52 UTC triggered the autoscaler. New instances are warm — p95 should recover within 3 minutes.' },
+  { id: 'l3',  speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '10:01', text: 'A spike in checkout volume at 09:52 UTC triggered the autoscaler. New instances are warm — p95 should recover within 3 minutes.' },
   { id: 'l4',  speaker: 'Lead SRE',    initials: 'LS', side: 'user',  time: '10:01', text: 'Should I page the billing team?' },
-  { id: 'l5',  speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '10:01', text: 'Not yet. The autoscaler is handling it. Suggest a 5-minute window before escalation.' },
+  { id: 'l5',  speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '10:01', text: 'Not yet. The autoscaler is handling it. Suggest a 5-minute window before escalation.' },
   { id: 'l6',  speaker: 'Lead SRE',    initials: 'LS', side: 'user',  time: '10:02', text: 'Agreed. What\'s the on-call rotation look like this week?' },
-  { id: 'l7',  speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '10:02', text: 'Primary: Reza (platform). Secondary: Ana (infra). Escalation: Leo (team lead). No swaps flagged.' },
+  { id: 'l7',  speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '10:02', text: 'Primary: Reza (platform). Secondary: Ana (infra). Escalation: Leo (team lead). No swaps flagged.' },
   { id: 'l8',  speaker: 'Lead SRE',    initials: 'LS', side: 'user',  time: '10:03', text: 'All good. Anything else for the standup?' },
-  { id: 'l9',  speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '10:03', text: 'One deploy window at 14:00 UTC — feature-flags service, patch release. Low risk, 10-minute rollout.' },
+  { id: 'l9',  speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '10:03', text: 'One deploy window at 14:00 UTC — feature-flags service, patch release. Low risk, 10-minute rollout.' },
   { id: 'l10', speaker: 'Lead SRE',    initials: 'LS', side: 'user',  time: '10:03', text: 'Noted. I\'ll mention it. Thanks.' },
-  { id: 'l11', speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '10:04', text: 'Standup digest has been posted to #platform-oncall.' },
+  { id: 'l11', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '10:04', text: 'Standup digest has been posted to #platform-oncall.' },
 ];
 
 const LIVE_SCRIPT: TranscriptTurn[] = [
-  { id: 'v1', speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '11:00', text: 'Voice session started. How can I help you today?' },
+  { id: 'v1', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '11:00', text: 'Voice session started. How can I help you today?' },
   { id: 'v2', speaker: 'You',         initials: 'YO', side: 'user',  time: '11:00', text: 'Check the status of the payment pipeline.' },
-  { id: 'v3', speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '11:00', text: 'Payment pipeline is healthy. All 6 stages are processing normally with a p99 of 210 ms.' },
+  { id: 'v3', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '11:00', text: 'Payment pipeline is healthy. All 6 stages are processing normally with a p99 of 210 ms.' },
   { id: 'v4', speaker: 'You',         initials: 'YO', side: 'user',  time: '11:01', text: 'Any failed transactions in the last hour?' },
-  { id: 'v5', speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '11:01', text: '3 failed transactions — all flagged as fraud, not system errors. No action needed.' },
+  { id: 'v5', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '11:01', text: '3 failed transactions — all flagged as fraud, not system errors. No action needed.' },
   { id: 'v6', speaker: 'You',         initials: 'YO', side: 'user',  time: '11:01', text: 'Great. End session.' },
 ];
 
@@ -108,7 +108,7 @@ export default function AiTranscriptionPage() {
 import type { TranscriptTurn } from "@/ds/core"
 
 const turns: TranscriptTurn[] = [
-  { id: 't1', speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '09:01',
+  { id: 't1', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '09:01',
     text: 'Good morning. All platform services are green…' },
   { id: 't2', speaker: 'On-call SRE', initials: 'SR', side: 'user',  time: '09:01',
     text: 'Any lingering alerts I should know about?' },
@@ -191,12 +191,12 @@ React.useEffect(() => {
         label="Persona above Transcription — the canonical audio-conversation transcript surface"
         height={400}
         code={`<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
-  <Persona state="speaking" size={96} label="Forge Agent"/>
+  <Persona state="speaking" size={96} label="Eidos Agent"/>
   <Transcription turns={turns} showTime/>
 </div>`}
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24, width: '100%' }}>
-          <Persona state="speaking" size={96} label="Forge Agent"/>
+          <Persona state="speaking" size={96} label="Eidos Agent"/>
           <Transcription turns={USAGE_TURNS} showTime/>
         </div>
       </Frame>
@@ -225,7 +225,7 @@ React.useEffect(() => {
         <div className="surface" style={{ padding: 18 }}>
           <div style={{ fontWeight: 600, marginBottom: 6 }}>Roles &amp; identity</div>
           <div style={{ color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.55 }}>
-            The list is an ordered <Mono>{'<ol>'}</Mono>; each turn is an <Mono>{'<li>'}</Mono> whose speaker name and text are real visible text, not aria-only — so the reader announces "Forge Agent: All platform services are green." The confidence chip renders its numeric value as text (e.g. "97%"), never hue alone, so low-confidence turns are flagged under colour blindness or forced-colours mode.
+            The list is an ordered <Mono>{'<ol>'}</Mono>; each turn is an <Mono>{'<li>'}</Mono> whose speaker name and text are real visible text, not aria-only — so the reader announces "Eidos Agent: All platform services are green." The confidence chip renders its numeric value as text (e.g. "97%"), never hue alone, so low-confidence turns are flagged under colour blindness or forced-colours mode.
           </div>
         </div>
         <div className="surface" style={{ padding: 18 }}>
@@ -242,9 +242,9 @@ React.useEffect(() => {
         <div dir="rtl" style={{ width: '100%' }}>
           <Transcription
             turns={[
-              { id: 'r1', speaker: 'وكيل Forge', initials: 'FA', side: 'agent', time: '09:01', text: 'صباح الخير. جميع خدمات المنصة سليمة.' },
+              { id: 'r1', speaker: 'وكيل Eidos', initials: 'FA', side: 'agent', time: '09:01', text: 'صباح الخير. جميع خدمات المنصة سليمة.' },
               { id: 'r2', speaker: 'مهندس النوبة', initials: 'SR', side: 'user',  time: '09:01', text: 'هل هناك تنبيهات معلقة قبل الاجتماع؟' },
-              { id: 'r3', speaker: 'وكيل Forge', initials: 'FA', side: 'agent', time: '09:02', text: 'ثلاثة تنبيهات منخفضة الأولوية — لا تؤثر على العملاء.' },
+              { id: 'r3', speaker: 'وكيل Eidos', initials: 'FA', side: 'agent', time: '09:02', text: 'ثلاثة تنبيهات منخفضة الأولوية — لا تؤثر على العملاء.' },
             ]}
             showTime
           />
@@ -301,19 +301,19 @@ React.useEffect(() => {
           <div className="body" style={{ padding: 14 }}>
             <Transcription
               turns={[
-                { id: 'dd1', speaker: 'Forge Agent', initials: 'FA', side: 'agent', text: 'p99 is within SLO.' },
+                { id: 'dd1', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', text: 'p99 is within SLO.' },
                 { id: 'dd2', speaker: 'On-call SRE', initials: 'SR', side: 'user',  text: 'Thanks — all clear.' },
               ]}
             />
           </div>
-          <div className="note">Real names let the viewer identify speakers in a post-incident review. "Forge Agent" and "Ana" are more auditable than "AI" and "User".</div>
+          <div className="note">Real names let the viewer identify speakers in a post-incident review. "Eidos Agent" and "Ana" are more auditable than "AI" and "User".</div>
         </div>
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — strip timestamps</div>
           <div className="body" style={{ padding: 14 }}>
             <Transcription
               turns={[
-                { id: 'dd3', speaker: 'Forge Agent', initials: 'FA', side: 'agent', text: 'All services healthy.' },
+                { id: 'dd3', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', text: 'All services healthy.' },
                 { id: 'dd4', speaker: 'Lead SRE',    initials: 'LS', side: 'user',  text: 'Copy that.' },
               ]}
               showTime={false}
@@ -326,7 +326,7 @@ React.useEffect(() => {
           <div className="head"><Icons.check size={12}/> Do — show confidence for review workflows</div>
           <div className="body" style={{ padding: 14 }}>
             <Transcription
-              turns={[{ id: 'dd5', speaker: 'Forge Agent', initials: 'FA', side: 'agent', confidence: 0.68, text: 'billing-svc is at 6-hundred milliseconds.' }]}
+              turns={[{ id: 'dd5', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', confidence: 0.68, text: 'billing-svc is at 6-hundred milliseconds.' }]}
               showConfidence
             />
           </div>

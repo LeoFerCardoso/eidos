@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Banner, CopyChip, HealthBadge, Icons, LogViewer, MOCKS, OwnerPill, Pipeline, RelativeTime, StatusDot, Tabs } from '@/ds/core';
 import { FPageHeader, FShell } from './example-shell';
-// Forge IDP — Example: Pipeline Console.
+// Eidos IDP — Example: Pipeline Console.
 // Split-view operator console — pipeline runs list on the left, full live log
 // of the selected run on the right, with status pipeline header + step list.
 
@@ -199,7 +199,7 @@ import { FPageHeader, FShell } from './example-shell';
     return (
       <FShell
         nav="pipelines"
-        crumbs={[{ label: 'Forge', href: '/example/ai-insights' }, 'Pipelines', 'Console']}>
+        crumbs={[{ label: 'Eidos', href: '/example/ai-insights' }, 'Pipelines', 'Console']}>
 
         <FPageHeader
           title="Pipeline console"

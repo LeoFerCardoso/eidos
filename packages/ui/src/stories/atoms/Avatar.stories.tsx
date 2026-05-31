@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Avatar } from '@forge/ui';
+import { Avatar } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/Avatar',

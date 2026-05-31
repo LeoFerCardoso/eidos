@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Shimmer } from '@forge/ui';
+import { Shimmer } from '@eidos/ui';
 
 // ── Shimmer ───────────────────────────────────────────────────────────────────
 // A gradient sweep over a short text label — used for the "before first token"

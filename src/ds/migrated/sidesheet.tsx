@@ -751,7 +751,7 @@ export default function Sidesheet() {
           API REFERENCE
           ==================================================================== */}
       <SubHead meta="DrawerProps">API reference</SubHead>
-      <Lede>This pattern ships as <Mono>{'<Drawer />'}</Mono> from <Mono>@forge/ui</Mono>. A right-edge sidesheet is <Mono>{'<Drawer side="right" />'}</Mono> (the default). Chrome is supplied through the <Mono>title</Mono>, <Mono>desc</Mono> and <Mono>footer</Mono> props — the scrolling body is <Mono>children</Mono>; there are no sub-slot components.</Lede>
+      <Lede>This pattern ships as <Mono>{'<Drawer />'}</Mono> from <Mono>@eidos/ui</Mono>. A right-edge sidesheet is <Mono>{'<Drawer side="right" />'}</Mono> (the default). Chrome is supplied through the <Mono>title</Mono>, <Mono>desc</Mono> and <Mono>footer</Mono> props — the scrolling body is <Mono>children</Mono>; there are no sub-slot components.</Lede>
       <PropsTable
         label="<Drawer />"
         rows={[

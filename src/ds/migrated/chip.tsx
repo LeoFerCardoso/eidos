@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Chip
+// Eidos DS — Components / Chip
 // Page layout:
 //   1. Installation     (TabbedCode: pnpm · npm · yarn · bun · Manual)
 //   2. Usage            (Frame: import + minimal render)
@@ -36,7 +36,7 @@ import {
 // ==========================================================================
 // 2. USAGE
 // ==========================================================================
-const USAGE_CODE = `import { Chip } from "@forge/ui"
+const USAGE_CODE = `import { Chip } from "@eidos/ui"
 
 export function Demo() {
   return (
@@ -95,7 +95,7 @@ const ICON_CODE = `{/* Language-colour dot as leading icon — use var(--*) toke
 // 3d. REMOVABLE
 // ==========================================================================
 const REMOVABLE_CODE = `import { useState } from "react"
-import { Chip } from "@forge/ui"
+import { Chip } from "@eidos/ui"
 
 const DEFAULT = ['region:us-east-1', 'tier:T1', 'lang:Go']
 
@@ -232,8 +232,8 @@ export default function ChipPage() {
       <TabbedCode tabs={installTabs('chip')} ariaLabel="package manager" />
       <Lede>
         Ships alongside <Mono>Pill</Mono> and <Mono>Badge</Mono> from the same{' '}
-        <Mono>@forge/ui</Mono> package. The CLI copies the component file into
-        your repo — Forge is source-shipped, not a locked dependency. Pick the{' '}
+        <Mono>@eidos/ui</Mono> package. The CLI copies the component file into
+        your repo — Eidos is source-shipped, not a locked dependency. Pick the{' '}
         <em>Manual</em> tab if you need to hand-install.
       </Lede>
 

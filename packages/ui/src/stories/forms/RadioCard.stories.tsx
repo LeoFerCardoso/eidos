@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { RadioCard } from '@forge/ui';
+import { RadioCard } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/RadioCard',

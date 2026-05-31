@@ -1,11 +1,11 @@
 {
-  "name": "forge-ui",
+  "name": "eidos",
   "version": "0.1.0",
   "description": "The Forge Design System CLI — own the code, copied not imported. Install Forge components into any React project.",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "forge-ui": "bin/forge-ui.mjs"
+    "eidos": "bin/eidos.mjs"
   },
   "files": [
     "bin",

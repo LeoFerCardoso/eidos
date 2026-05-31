@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Chip, Icons } from '@forge/ui';
+import { Chip, Icons } from '@eidos/ui';
 
 const TONES = ['neutral', 'ok', 'bad', 'warn', 'ember', 'tier-t1', 'tier-t2', 'tier-t3'] as const;
 

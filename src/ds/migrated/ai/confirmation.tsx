@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Confirmation. The agent asks before doing something consequential.
+// Eidos AI — Confirmation. The agent asks before doing something consequential.
 // A pending card with Confirm/Cancel; resolves to a settled result line.
 import * as React from 'react';
 import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs, Lede, Confirmation, Message, Mono } from '@/ds/core';

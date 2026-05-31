@@ -1,6 +1,6 @@
 import { Section, SubHead, Lede, CodeBlock, TabbedCode, Mono, installTabs, Alert, AlertTitle, AlertDescription, AlertMeta, Spinner } from '@/ds/core';
 
-// Inline code reference, subtle tone by default. The Forge accent (ember) caps
+// Inline code reference, subtle tone by default. The Eidos accent (ember) caps
 // at ~2× per screen, so this page — which names a token/flag/file in almost
 // every sentence — would massively overspend it if every ref were ember. Spend
 // the single accent on the install-step markers + the success state, and let
@@ -12,23 +12,23 @@ export default function Page() {
     <Section
       id="installation"
       title="Installation"
-      desc="Forge is distributed as copy-in components — you own the code, not a black-box dependency. Install the base layer once, then add components with the forge-ui CLI.">
+      desc="Eidos is distributed as copy-in components — you own the code, not a black-box dependency. Install the base layer once, then add components with the eidos CLI.">
 
       {/* ── Quick start ──────────────────────────────────────────────────── */}
       <SubHead meta="cli">Quick start</SubHead>
       <Lede up>
-        Two steps. <Code>init</Code> installs the Forge base layer (design tokens,
+        Two steps. <Code>init</Code> installs the Eidos base layer (design tokens,
         the <Code>ds.css</Code> component styles, and the <Code>cn()</Code> helper) once;{' '}
         <Code>add</Code> copies a component's source into your repo and resolves its
         component + npm dependencies automatically.
       </Lede>
       <CodeBlock
         label="terminal"
-        code={`# 1 — install the Forge base layer once
-npx forge-ui@latest init
+        code={`# 1 — install the Eidos base layer once
+npx eidos@latest init
 
 # 2 — add components (deps resolved automatically)
-npx forge-ui@latest add metric-card
+npx eidos@latest add metric-card
 #   → also copies trend + sparkline (its component deps)`}
         lang="bash"
       />
@@ -51,7 +51,7 @@ npx forge-ui@latest add metric-card
       {/* ── shadcn-compatible ────────────────────────────────────────────── */}
       <SubHead meta="compat">shadcn-compatible</SubHead>
       <Lede up>
-        The Forge registry follows the shadcn <Code>registry-item.json</Code> schema,
+        The Eidos registry follows the shadcn <Code>registry-item.json</Code> schema,
         so the stock shadcn CLI works against it too — point it at a component URL:
       </Lede>
       <CodeBlock
@@ -63,13 +63,13 @@ npx forge-ui@latest add metric-card
       {/* ── How it resolves ──────────────────────────────────────────────── */}
       <SubHead meta="setup">What gets installed</SubHead>
       <Lede up>
-        Forge is plain React over a semantic CSS layer — no Tailwind utilities baked
+        Eidos is plain React over a semantic CSS layer — no Tailwind utilities baked
         into components, no Radix. An install lands exactly three kinds of file.
       </Lede>
       <div className="ds-grid cols-3" style={{ alignItems: 'stretch', marginBlock: 'var(--space-3) var(--space-6)' }}>
         {[
-          { n: '1', title: 'Base layer (once)', body: <><Code>forge-ui init</Code> writes the design tokens, <Code>ds.css</Code>, and the <Code>cn()</Code> helper. Required before any component.</> },
-          { n: '2', title: 'Component source', body: <>Each <Code>add</Code> drops a self-contained <Code>.tsx</Code> into <Code>components/forge/</Code>, plus any Forge components it depends on.</> },
+          { n: '1', title: 'Base layer (once)', body: <><Code>eidos init</Code> writes the design tokens, <Code>ds.css</Code>, and the <Code>cn()</Code> helper. Required before any component.</> },
+          { n: '2', title: 'Component source', body: <>Each <Code>add</Code> drops a self-contained <Code>.tsx</Code> into <Code>components/forge/</Code>, plus any Eidos components it depends on.</> },
           { n: '3', title: 'Fonts', body: <>Load Geist Sans + Geist Mono (a Google Fonts <Code>&lt;link&gt;</Code> or your framework's font loader) so <Code>--font-sans</Code> / <Code>--font-mono</Code> resolve.</> },
         ].map((c) => (
           <div key={c.n} className="surface" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', padding: 'var(--space-5)', blockSize: '100%' }}>
@@ -82,7 +82,7 @@ npx forge-ui@latest add metric-card
       {/* ── Install states (what the CLI actually reports) ───────────────── */}
       <SubHead meta="states">Install states</SubHead>
       <Lede up>
-        <Code>forge-ui add</Code> resolves the dependency graph, then copies files. Here
+        <Code>eidos add</Code> resolves the dependency graph, then copies files. Here
         are the three outcomes it reports — what each looks like in your terminal and how
         to recover from the one that fails.
       </Lede>
@@ -116,7 +116,7 @@ npx forge-ui@latest add metric-card
         <Alert tone="danger">
           <AlertTitle>Base layer not found</AlertTitle>
           <AlertDescription>
-            No <Code>styles/forge/</Code> in this project. Run <Code>forge-ui init</Code>{' '}
+            No <Code>styles/forge/</Code> in this project. Run <Code>eidos init</Code>{' '}
             once to write the tokens, <Code>ds.css</Code>, and the <Code>cn()</Code> helper,
             then re-run <Code>add</Code>. Nothing was copied — the install is atomic.
           </AlertDescription>
@@ -141,7 +141,7 @@ npx forge-ui@latest add metric-card
       <CodeBlock
         label="components/forge/metric-card.tsx"
         code={`// 1. Copy styles/forge/{tokens,ds}.css + lib/utils.ts (the base layer).
-// 2. Copy the component file (and any Forge deps it imports).
+// 2. Copy the component file (and any Eidos deps it imports).
 // 3. Install its npm peers, e.g.  npm install clsx tailwind-merge
 //    (charts → recharts · AI → ai react-markdown).
 // 4. Import the layer once at your app root:
@@ -154,7 +154,7 @@ import { MetricCard } from '@/components/forge/metric-card';`}
       {/* ── Layout & responsiveness ──────────────────────────────────────── */}
       <SubHead meta="layout">Layout &amp; responsiveness</SubHead>
       <Lede up>
-        Forge components style themselves; <em>arranging</em> them is your call. You do
+        Eidos components style themselves; <em>arranging</em> them is your call. You do
         <strong> not</strong> need Tailwind for grids or responsiveness — the design
         system ships semantic layout helpers and the components use logical CSS
         properties, so they adapt to viewport and direction out of the box.
@@ -167,7 +167,7 @@ import { MetricCard } from '@/components/forge/metric-card';`}
 </div>
 
 /* Responsive: plain CSS media queries in your own stylesheet —
-   compose Forge classes, collapse columns where you need to. */
+   compose Eidos classes, collapse columns where you need to. */
 @media (max-width: 760px) {
   .ds-grid.cols-3 { grid-template-columns: 1fr; }
 }
@@ -185,17 +185,17 @@ import { MetricCard } from '@/components/forge/metric-card';`}
       {/* ── Optional Tailwind ────────────────────────────────────────────── */}
       <SubHead meta="optional">Optional: Tailwind</SubHead>
       <Lede up>
-        Tailwind is <strong>optional</strong>. Forge components carry zero Tailwind
+        Tailwind is <strong>optional</strong>. Eidos components carry zero Tailwind
         utilities, so they work in any React project (or Vue/Svelte/plain HTML) with or
         without it. If your app already uses Tailwind v4, opt into a token bridge so
         utilities like <Code>bg-surface</Code> / <Code>text-fg-muted</Code> resolve to the
-        live, theme-aware Forge tokens:
+        live, theme-aware Eidos tokens:
       </Lede>
       <CodeBlock
         label="app.css — optional Tailwind token bridge"
         code={`@import "tailwindcss";
 
-/* Map Forge tokens → Tailwind utilities (theme-aware: tracks light/dark). */
+/* Map Eidos tokens → Tailwind utilities (theme-aware: tracks light/dark). */
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
@@ -209,36 +209,36 @@ import { MetricCard } from '@/components/forge/metric-card';`}
         lang="css"
       />
       <p className="ds-caption">
-        With the bridge in place you can mix Forge components and Tailwind utilities for
+        With the bridge in place you can mix Eidos components and Tailwind utilities for
         bespoke screens — but it's never required to use the design system.
       </p>
 
       {/* ── CLI reference ───────────────────────────────────────────────── */}
       <SubHead meta="cli">CLI reference</SubHead>
       <Lede up>
-        The <Code>forge-ui</Code> CLI mirrors the shadcn ergonomics — own the code, copied
+        The <Code>eidos</Code> CLI mirrors the shadcn ergonomics — own the code, copied
         not imported.
       </Lede>
       <CodeBlock
         label="terminal"
         code={`# install the base layer (run once per project)
-forge-ui init
+eidos init
 
 # add one or more components (component + npm deps resolved)
-forge-ui add metric-card data-table tool
+eidos add metric-card data-table tool
 
 # list everything available in the registry
-forge-ui list
+eidos list
 
 # diff local components against the registry (drift check)
-forge-ui diff metric-card`}
+eidos diff metric-card`}
         lang="bash"
       />
 
       {/* ── Accessibility (true to this page's interactive surfaces) ──────── */}
       <SubHead meta="a11y">Accessibility</SubHead>
       <Lede up>
-        This page is itself built from Forge primitives. The interactive surfaces above —
+        This page is itself built from Eidos primitives. The interactive surfaces above —
         the package-manager tabs, every copy button, and the three install-state alerts —
         carry their real semantics.
       </Lede>

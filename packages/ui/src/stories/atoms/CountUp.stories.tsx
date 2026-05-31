@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { CountUp } from '@forge/ui';
+import { CountUp } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/CountUp',

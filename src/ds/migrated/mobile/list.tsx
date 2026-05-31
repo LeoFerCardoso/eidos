@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — List (scaffold). Grouped, inset list rows — the spine of settings,
+// Eidos Mobile — List (scaffold). Grouped, inset list rows — the spine of settings,
 // detail, and menu screens. Leading icon, label, optional value/toggle, chevron.
 import * as React from 'react';
 import { Section, SubHead, Frame, CodeBlock, DeviceFrame, Icons, Lede, Mono, Skeleton, Spinner, Empty, Alert, AlertTitle, AlertDescription, AlertActions } from '@/ds/core';

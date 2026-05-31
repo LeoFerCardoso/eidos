@@ -200,7 +200,7 @@
         "component",
         "ai"
       ],
-      "rule": "tsc --noEmit clean for @forge/ui.",
+      "rule": "tsc --noEmit clean for @eidos/ui.",
       "verifier": "EXT:ui:typecheck",
       "since": "1.0.0"
     },
@@ -264,7 +264,7 @@
         "component",
         "ai"
       ],
-      "rule": "Registry source (surfaces.registrySrc) matches its bound @forge/ui source (surfaces.exportFile) — no drift. Bound via the explicit mapping, not a filename convention.",
+      "rule": "Registry source (surfaces.registrySrc) matches its bound @eidos/ui source (surfaces.exportFile) — no drift. Bound via the explicit mapping, not a filename convention.",
       "verifier": "check-registry",
       "since": "1.0.0"
     },
@@ -277,7 +277,7 @@
         "component",
         "ai"
       ],
-      "rule": "forge-ui add <name> resolves the FULL transitive registryDependency graph and refuses to write if any dep is missing.",
+      "rule": "eidos add <name> resolves the FULL transitive registryDependency graph and refuses to write if any dep is missing.",
       "verifier": "EXT:cli:test",
       "since": "1.0.0"
     },
@@ -3326,13 +3326,13 @@
     {
       "component": "tree-view",
       "clause": "C-export",
-      "reason": "Surface reconciliation in flight: docs + story + export binding now name ONE component (ForgeTree, the @pierre/trees wrapper at src/components/pierre-tree.tsx). ForgeTree is not yet re-exported from the @forge/ui index.ts barrel, so check-4-surface-parity cannot resolve the export until the serialized integrator adds the barrel export and re-runs `npm run gen:contract`. Waived (not green) until then.",
+      "reason": "Surface reconciliation in flight: docs + story + export binding now name ONE component (ForgeTree, the @pierre/trees wrapper at src/components/pierre-tree.tsx). ForgeTree is not yet re-exported from the @eidos/ui index.ts barrel, so check-4-surface-parity cannot resolve the export until the serialized integrator adds the barrel export and re-runs `npm run gen:contract`. Waived (not green) until then.",
       "expires": "2026-08-31"
     },
     {
       "component": "tree-view",
       "clause": "C-registry-sync",
-      "reason": "Surface reconciliation in flight: docs/story/export now describe ForgeTree (paths-based @pierre/trees wrapper) while the registry item tree-view + src/forge/tree-view.tsx still ship the original nodes-based @forge/ui TreeView. They are kept as-is to avoid deleting shipped functionality; the integrator must add the ForgeTree registry source and re-run `npm run gen:contract` so registrySrc matches its bound export. Waived (not green) until then.",
+      "reason": "Surface reconciliation in flight: docs/story/export now describe ForgeTree (paths-based @pierre/trees wrapper) while the registry item tree-view + src/forge/tree-view.tsx still ship the original nodes-based @eidos/ui TreeView. They are kept as-is to avoid deleting shipped functionality; the integrator must add the ForgeTree registry source and re-run `npm run gen:contract` so registrySrc matches its bound export. Waived (not green) until then.",
       "expires": "2026-08-31"
     }
   ]

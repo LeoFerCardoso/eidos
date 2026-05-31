@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Terminal (doc page 21).
+// Eidos AI — Terminal (doc page 21).
 // Documents the Terminal component: a focused mono command surface for
 // showing what the agent ran and what came back. Line kinds: in / out /
 // err / note. Status: idle / running / done / error.

@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Collapsible
+// Eidos DS — Components / Collapsible
 // Single disclosure: one trigger + one animated region.
 // The atom beneath Accordion — reach for it when only one optional block is involved.
 import * as React from 'react';
@@ -18,7 +18,7 @@ import { ComponentInstall, AutoPropsTable } from '@/ds/core';
 
 // ── Code samples ──────────────────────────────────────────────────────────────
 
-const USAGE_CODE = `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@forge/ui";
+const USAGE_CODE = `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@eidos/ui";
 import * as React from "react";
 
 export function Demo() {
@@ -123,7 +123,7 @@ export default function CollapsiblePage() {
       {/* ── 1. INSTALLATION ─────────────────────────────────────────────── */}
       <ComponentInstall slug="collapsible" />
       <Lede>
-        Plain React over the Forge CSS layer — no Radix, no measuring. Height
+        Plain React over the Eidos CSS layer — no Radix, no measuring. Height
         animates via <Mono>grid-template-rows: 0fr {'→'} 1fr</Mono> so no{' '}
         <Mono>ResizeObserver</Mono> is needed. The trigger and content IDs wire{' '}
         themselves through shared context so <Mono>aria-controls</Mono> and{' '}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ModelPicker } from '@forge/ui';
-import type { ModelOption } from '@forge/ui';
+import { ModelPicker } from '@eidos/ui';
+import type { ModelOption } from '@eidos/ui';
 
 // ── Shared model catalogs ────────────────────────────────────────────────────
 

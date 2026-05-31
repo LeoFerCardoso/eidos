@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Sidebar
+// Eidos DS — Components / Sidebar
 // The collapsible vertical nav rail for app shells. Different from the
 // design-system's own sidenav (which is a docs primitive); this page
 // documents the GENERIC sidebar pattern: expanded vs collapsed, sections,
@@ -33,7 +33,7 @@ const DemoNav = ({ open, children }: { open: boolean; children?: React.ReactNode
   >
     <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 8px 14px' }}>
       <ForgeMark size={20} />
-      {open && <span style={{ fontWeight: 600, fontSize: 'var(--text-md)' }}>Forge Studio</span>}
+      {open && <span style={{ fontWeight: 600, fontSize: 'var(--text-md)' }}>Eidos Studio</span>}
     </div>
     <SidebarSection label="Workspace">
       <SidebarItem icon={<Icons.home size={14} />} active href="#" onClick={(e) => e.preventDefault()}>Home</SidebarItem>
@@ -70,7 +70,7 @@ const BORDER_WRAP: React.CSSProperties = {
 
 const USAGE_CODE = `import {
   Sidebar, SidebarSection, SidebarItem, SidebarFooter
-} from "@forge/ui"
+} from "@eidos/ui"
 
 export function AppShell() {
   return (
@@ -190,7 +190,7 @@ export default function SidebarPage() {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 8px 14px' }}>
               <ForgeMark size={20} />
-              {interactive && <span style={{ fontWeight: 600, fontSize: 'var(--text-md)' }}>Forge Studio</span>}
+              {interactive && <span style={{ fontWeight: 600, fontSize: 'var(--text-md)' }}>Eidos Studio</span>}
             </div>
             <SidebarSection label="Workspace">
               <SidebarItem icon={<Icons.home size={14} />} active href="#" onClick={(e) => e.preventDefault()}>Home</SidebarItem>
@@ -231,7 +231,7 @@ export default function SidebarPage() {
           <Sidebar collapsible="none" style={{ height: 340 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 8px 14px' }}>
               <ForgeMark size={20} />
-              <span style={{ fontWeight: 600, fontSize: 'var(--text-md)' }}>Forge Studio</span>
+              <span style={{ fontWeight: 600, fontSize: 'var(--text-md)' }}>Eidos Studio</span>
             </div>
             <SidebarSection label="Platform">
               <SidebarGroup label="Infrastructure">
@@ -266,7 +266,7 @@ export default function SidebarPage() {
           <Sidebar collapsible="offcanvas" open={offcanvasOpen} onOpenChange={setOffcanvasOpen} style={{ height: '100%', position: 'absolute', insetBlockStart: 0, insetInlineStart: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 10px 16px' }}>
               <ForgeMark size={20} />
-              <span style={{ fontWeight: 600, fontSize: 'var(--text-md)' }}>Forge Studio</span>
+              <span style={{ fontWeight: 600, fontSize: 'var(--text-md)' }}>Eidos Studio</span>
             </div>
             <SidebarSection label="Workspace">
               <SidebarItem icon={<Icons.home size={14} />} active href="#" onClick={(e) => e.preventDefault()}>Home</SidebarItem>
@@ -385,7 +385,7 @@ export default function SidebarPage() {
                 {/* Brand */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 8px 14px' }}>
                   <ForgeMark size={20} />
-                  <span style={{ fontWeight: 600, fontSize: 'var(--text-md)' }}>Forge Studio</span>
+                  <span style={{ fontWeight: 600, fontSize: 'var(--text-md)' }}>Eidos Studio</span>
                 </div>
                 {/* Section label */}
                 <div style={{ padding: '6px 10px 2px', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Workspace</div>
@@ -428,7 +428,7 @@ export default function SidebarPage() {
             </div>
           </div>
           <div className="ana-list" style={{ maxWidth: 560, margin: '56px auto 0' }}>
-            <span className="num">1</span><span><b style={{ color: 'var(--fg)' }}>Brand block.</b> Forge mark + product name at the top. Hidden when the rail collapses to 56 px.</span>
+            <span className="num">1</span><span><b style={{ color: 'var(--fg)' }}>Brand block.</b> Eidos mark + product name at the top. Hidden when the rail collapses to 56 px.</span>
             <span className="num">2</span><span><b style={{ color: 'var(--fg)' }}>Section heading.</b> Mono uppercase label (Workspace, Account). Groups items by intent; hidden when collapsed.</span>
             <span className="num">3</span><span><b style={{ color: 'var(--fg)' }}>Nav row.</b> 14 px icon + label, with an optional trailing count badge. Label reads via <Mono>aria-label</Mono> when icon-only.</span>
             <span className="num">4</span><span><b style={{ color: 'var(--fg)' }}>Active state.</b> <Mono>aria-current="page"</Mono> + <Mono>surface-hover</Mono> tint so the current route is visible by shape, not colour alone.</span>

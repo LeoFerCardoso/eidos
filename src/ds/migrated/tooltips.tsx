@@ -8,7 +8,7 @@ import { Tooltip } from '@/ds/core';
 
 // ── Code snippets ─────────────────────────────────────────────────────────────
 
-const USAGE_CODE = `import { Tooltip } from "@forge/ui"
+const USAGE_CODE = `import { Tooltip } from "@eidos/ui"
 
 export function Demo() {
   return (
@@ -94,7 +94,7 @@ export default function Tooltips() {
       <TabbedCode tabs={installTabs('tooltip')} ariaLabel="package manager" />
       <Lede>
         The CLI copies <Mono>tooltip.tsx</Mono> and its CSS into your project so you can edit them.
-        Forge ships source — not a black-box dependency. Pick the <em>Manual</em> tab to paste the
+        Eidos ships source — not a black-box dependency. Pick the <em>Manual</em> tab to paste the
         files by hand.
       </Lede>
 

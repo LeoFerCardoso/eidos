@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { OwnerPill, MOCKS } from '@forge/ui';
+import { OwnerPill, MOCKS } from '@eidos/ui';
 
 const PEOPLE = MOCKS.PEOPLE;
 

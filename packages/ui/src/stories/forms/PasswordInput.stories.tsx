@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { PasswordInput, PasswordField, DEFAULT_PASSWORD_REQUIREMENTS } from '@forge/ui';
+import { PasswordInput, PasswordField, DEFAULT_PASSWORD_REQUIREMENTS } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/PasswordInput',

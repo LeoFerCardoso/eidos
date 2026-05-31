@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Card
+// Eidos DS — Components / Card
 // Page layout:
 //   1. Installation     (TabbedCode)
 //   2. Usage            (Frame: hello world)

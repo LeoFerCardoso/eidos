@@ -2,7 +2,7 @@
 //
 // One place defines: where the contract lives, the registry of known verifiers,
 // the surface-resolution helpers, and the slug normaliser that joins a component
-// across its FOUR surfaces (docs page · @forge/ui export · Storybook story ·
+// across its FOUR surfaces (docs page · @eidos/ui export · Storybook story ·
 // registry item). forge-verify / forge-gen / forge-health / check-contract all
 // import from here so the bar can never drift between tools.
 //

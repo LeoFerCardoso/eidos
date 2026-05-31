@@ -581,21 +581,21 @@ const SpecRow = ({ token, value, usage }: {
 const DEFAULT_PEERS = 'clsx tailwind-merge';
 const installTabs = (name, peers = DEFAULT_PEERS) => {
   const manual = `# 1. Install the Forge base layer once (design tokens + ds.css + cn).
-npx forge-ui@latest init
+npx eidos@latest init
 
 # 2. Add this component — the CLI copies its source into components/forge/
 #    and resolves any component + npm dependencies.
-npx forge-ui@latest add ${name}
+npx eidos@latest add ${name}
 ${peers !== DEFAULT_PEERS ? `\n#    (pulls npm deps: ${peers})` : ''}
 
 # Manual alternative: copy components/forge/${name}.tsx + lib/utils.ts from the
 # Forge source, run \`npm install ${peers}\`, and import the Forge stylesheet layer
-# (@forge/ui/styles/tokens.css → ds.css) so the semantic classes resolve.`;
+# (@eidos/ui/styles/tokens.css → ds.css) so the semantic classes resolve.`;
   return [
-    { label: 'pnpm',   code: `pnpm dlx forge-ui@latest add ${name}`, lang: 'bash' },
-    { label: 'npm',    code: `npx forge-ui@latest add ${name}`,      lang: 'bash' },
-    { label: 'yarn',   code: `yarn dlx forge-ui@latest add ${name}`, lang: 'bash' },
-    { label: 'bun',    code: `bunx forge-ui@latest add ${name}`,     lang: 'bash' },
+    { label: 'pnpm',   code: `pnpm dlx eidos@latest add ${name}`, lang: 'bash' },
+    { label: 'npm',    code: `npx eidos@latest add ${name}`,      lang: 'bash' },
+    { label: 'yarn',   code: `yarn dlx eidos@latest add ${name}`, lang: 'bash' },
+    { label: 'bun',    code: `bunx eidos@latest add ${name}`,     lang: 'bash' },
     // The Forge registry is shadcn registry-item.json compatible, so the stock
     // shadcn CLI installs the same component (resolving its deps) too.
     { label: 'shadcn', code: `npx shadcn@latest add https://forge.equifax.dev/r/${name}.json`, lang: 'bash' },

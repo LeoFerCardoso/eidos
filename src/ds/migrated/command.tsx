@@ -79,7 +79,7 @@ export default function CommandPage() {
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('command')} ariaLabel="package manager" />
       <Lede>
-        The CLI copies <Mono>command.tsx</Mono> and its CSS into your repo — Forge is
+        The CLI copies <Mono>command.tsx</Mono> and its CSS into your repo — Eidos is
         source-shipped, not a black-box dependency. Use the{' '}
         <em>Manual</em> tab to copy the files by hand. No third-party deps beyond the{' '}
         <Mono>cn()</Mono> helper.

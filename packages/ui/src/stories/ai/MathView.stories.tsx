@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { MathView } from '@forge/ui';
+import { MathView } from '@eidos/ui';
 
 // ── MathView ──────────────────────────────────────────────────────────────────
 // Styled surface for rendered TeX expressions inside a model reply.

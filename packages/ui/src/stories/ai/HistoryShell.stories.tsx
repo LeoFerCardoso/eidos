@@ -4,8 +4,8 @@ import {
   HistoryShell,
   HistoryGroup,
   HistoryItem,
-} from '@forge/ui';
-import type { HistoryThread } from '@forge/ui';
+} from '@eidos/ui';
+import type { HistoryThread } from '@eidos/ui';
 
 // ── Fixtures ──────────────────────────────────────────────────────────────────
 

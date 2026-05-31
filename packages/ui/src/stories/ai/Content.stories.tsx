@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { ImageView, Diagram, MathView } from '@forge/ui';
+import { ImageView, Diagram, MathView } from '@eidos/ui';
 
 // ── ImageView meta ────────────────────────────────────────────────────────────
 // NOTE: Shimmer stories have moved to Shimmer.stories.tsx (title 'AI/Shimmer').

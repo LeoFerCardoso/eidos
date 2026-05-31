@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { Banner, Code, CopyChip, HealthBadge, Icons, MOCKS, OwnerPill, Pipeline, StatusDot } from '@/ds/core';
 import { FPageHeader, FSection, FShell, useQueryParam } from './example-shell';
-// Forge IDP — Example: Service Scaffold wizard.
-// Multi-step flow for spinning up a new service from a Forge template:
+// Eidos IDP — Example: Service Scaffold wizard.
+// Multi-step flow for spinning up a new service from a Eidos template:
 // 1. Template   → choose a scaffold
 // 2. Repository → name + visibility + owners
 // 3. CI / CD    → pipeline + ring strategy
@@ -83,7 +83,7 @@ import { FPageHeader, FSection, FShell, useQueryParam } from './example-shell';
       <FShell
         nav="templates"
         crumbs={[
-          { label: 'Forge', href: '/example/ai-insights' },
+          { label: 'Eidos', href: '/example/ai-insights' },
           { label: 'Templates', href: '/example/templates' },
           'Scaffold service',
         ]}>
@@ -328,7 +328,7 @@ import { FPageHeader, FSection, FShell, useQueryParam } from './example-shell';
               <div className="fp-card" style={{padding: 22}}>
                 <div className="fp-card-title" style={{marginBottom: 12}}>Auto-provision</div>
                 <div style={{fontSize: 'var(--text-sm)', color:'var(--fg-muted)', marginBottom: 14, lineHeight: 1.55}}>
-                  Forge will create these resources from the chosen template. Toggle any off if your service doesn't need them.
+                  Eidos will create these resources from the chosen template. Toggle any off if your service doesn't need them.
                 </div>
                 {[
                   ['Datadog service · APM', true, 'apm'],
@@ -366,7 +366,7 @@ import { FPageHeader, FSection, FShell, useQueryParam } from './example-shell';
               tone="success"
               icon="check"
               title="Ready to scaffold"
-              message={`Forge will generate 23 files, open a PR, create the pipeline, register the SLO at ${slo}%, and set up the on-call rotation. Estimated 90 seconds.`}
+              message={`Eidos will generate 23 files, open a PR, create the pipeline, register the SLO at ${slo}%, and set up the on-call rotation. Estimated 90 seconds.`}
             />
             <FSection title="05 — Review and ship" style={{marginTop: 18}}>
               <div className="fp-grid fp-grid-2x1" style={{gap: 18}}>
@@ -385,7 +385,7 @@ import { FPageHeader, FSection, FShell, useQueryParam } from './example-shell';
                 </div>
                 {/* Files preview */}
                 <div className="fp-card" style={{padding: 22}}>
-                  <div className="fp-card-title" style={{marginBottom: 14}}>Files Forge will create</div>
+                  <div className="fp-card-title" style={{marginBottom: 14}}>Files Eidos will create</div>
                   <div style={{display:'flex', flexDirection:'column', gap: 4, fontFamily:'var(--font-mono)', fontSize: 'var(--text-sm)', color:'var(--fg-muted)'}}>
                     {[
                       '+ src/index.ts',
@@ -409,7 +409,7 @@ import { FPageHeader, FSection, FShell, useQueryParam } from './example-shell';
                   <div style={{marginTop: 16, padding: 12, background:'var(--bg)', borderRadius: 'var(--radius-xl)', border:'1px solid var(--border)'}}>
                     <div className="t-mono-label" style={{marginBottom: 6}}>Estimated cost</div>
                     <div style={{fontSize: 'var(--text-sm)', color:'var(--fg-muted)', lineHeight: 1.55}}>
-                      ~$28 / mo at expected baseline traffic. Forge bills are itemized on the service detail page after first deploy.
+                      ~$28 / mo at expected baseline traffic. Eidos bills are itemized on the service detail page after first deploy.
                     </div>
                   </div>
                 </div>

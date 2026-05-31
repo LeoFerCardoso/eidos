@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Select, Icons } from '@forge/ui';
+import { Select, Icons } from '@eidos/ui';
 
 // ── Realistic demo data ───────────────────────────────────────────────────────
 

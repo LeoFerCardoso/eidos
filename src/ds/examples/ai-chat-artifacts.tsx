@@ -1,5 +1,5 @@
 'use client';
-// Forge IDP — AI Chat · Conversation with Artifacts.
+// Eidos IDP — AI Chat · Conversation with Artifacts.
 //
 // Same chat surface as the active thread, but the assistant produced an
 // artifact (in this case a runbook document) and the side panel is docked
@@ -96,7 +96,7 @@ const App = () => {
     <ChatShell
       side="recent"
       activeChat="breaker"
-      crumbs={['Forge', 'AI', 'Recents', 'Runbook draft — identity-svc']}
+      crumbs={['Eidos', 'AI', 'Recents', 'Runbook draft — identity-svc']}
       // The artifact panel is the focal surface — when it's open, collapse
       // the chat-history sidebar to give the panel + conversation the full
       // horizontal room. Close the artifact and the sidebar comes back.
@@ -118,7 +118,7 @@ const App = () => {
               from="assistant"
               meta={
                 <>
-                  <span className="t-mono-label">Forge AI</span> ·
+                  <span className="t-mono-label">Eidos AI</span> ·
                   <span style={{ color: 'var(--fg-faint)', marginInlineStart: 6 }}>Opus 4.7</span>
                   <span style={{ color: 'var(--fg-faint)', marginInlineStart: 6 }}>· 14:05</span>
                 </>
@@ -167,7 +167,7 @@ const App = () => {
               from="assistant"
               meta={
                 <>
-                  <span className="t-mono-label">Forge AI</span> ·
+                  <span className="t-mono-label">Eidos AI</span> ·
                   <span style={{ color: 'var(--ember)', marginInlineStart: 6 }}>updating runbook…</span>
                 </>
               }

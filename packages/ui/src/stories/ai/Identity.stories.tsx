@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { AILabel, AILabelWithPopover, AgentAvatar, AgentIdentity } from '@forge/ui';
+import { AILabel, AILabelWithPopover, AgentAvatar, AgentIdentity } from '@eidos/ui';
 
 // ── AILabel meta ──────────────────────────────────────────────────────────────
 

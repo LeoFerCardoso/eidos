@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Page Indicator. The iOS page-control dots that show how many slides exist and
+// Eidos Mobile — Page Indicator. The iOS page-control dots that show how many slides exist and
 // which is current. The active dot is ember-filled; others are muted. Three variants: dots,
 // dots with a count badge for many pages, and a progress-bar style. Pairs with Page Controller.
 import * as React from 'react';
@@ -138,7 +138,7 @@ function ProgressBarIndicator({ total, current }: { total: number; current: numb
 
 // ── Live demo screen ─────────────────────────────────────────────────────────────────────────
 const ONBOARDING = [
-  { title: 'Deploy in seconds', body: 'Push to main and Forge CI handles the rest — no config files, no waiting.', icon: 'rocket' },
+  { title: 'Deploy in seconds', body: 'Push to main and Eidos CI handles the rest — no config files, no waiting.', icon: 'rocket' },
   { title: 'Monitor every service', body: 'Real-time health, P50/P99 latency, and error budgets in a single view.', icon: 'activity' },
   { title: 'Ship with confidence', body: 'Progressive rollouts with automatic rollback keep production safe.', icon: 'shield' },
 ];

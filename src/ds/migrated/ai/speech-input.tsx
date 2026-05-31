@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Speech Input. Mic button + waveform + transcription preview.
+// Eidos AI — Speech Input. Mic button + waveform + transcription preview.
 // Four states: idle / listening / processing / error.
 // Compose inside a PromptInput footerTools slot or standalone on a voice surface.
 import * as React from 'react';

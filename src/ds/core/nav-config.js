@@ -1,4 +1,4 @@
-// Forge DS — navigation config (single source of truth).
+// Eidos DS — navigation config (single source of truth).
 //
 // Every entry MUST have an `href` resolvable from the project root.
 // At runtime, each HTML page sets <base href="..."> so these relative
@@ -124,7 +124,7 @@
         // Atoms-as-pill compositions (severity / health) moved to Elements.
         // Heatmap moved to Charts. Score/metric/service/agent/stat cards
         // moved to Elements.
-        // (IDP Blocks moved to the Forge IDP design system.)
+        // (IDP Blocks moved to the Eidos IDP design system.)
         { subgroup: 'Display & Media', items: [
           { id: 'aspect-ratio',  label: 'Aspect Ratio',       href: 'pages/components/aspect-ratio.html' },
           { id: 'avatars',       label: 'Avatar',             href: 'pages/components/avatars.html',        badge: 'updated' },
@@ -145,7 +145,7 @@
           { id: 'toggle-group',  label: 'Toggle Group',       href: 'pages/components/toggle-group.html' },
         ]},
       ]},
-      // Charts — Recharts-powered visualisations, themed with Forge tokens.
+      // Charts — Recharts-powered visualisations, themed with Eidos tokens.
       // Each page is a thin wrapper over a Recharts primitive plus 2-4
       // variants. Heatmap was moved here from IDP Blocks (it's a chart, not
       // a workflow primitive).
@@ -176,7 +176,7 @@
         { id: 'score-gauge',  label: 'Score gauge',  href: 'pages/elements/score-gauge.html',  badge: 'new' },
         { id: 'service-card', label: 'Service card', href: 'pages/elements/service-card.html', badge: 'new' },
       ]},
-      // Forge Blocks DS — generic page-level sections (hero/page-headers moved from IDP).
+      // Eidos Blocks DS — generic page-level sections (hero/page-headers moved from IDP).
       { group: 'Blocks', ds: 'blocks', items: [
         { id: 'overview',      label: 'Overview',      href: 'pages/blocks/overview.html',      badge: 'new' },
         { id: 'hero',          label: 'Hero',          href: 'pages/blocks/hero.html',          badge: 'new' },
@@ -200,7 +200,7 @@
         { id: 'timeline',       label: 'Timeline',       href: 'pages/idp/timeline.html',       badge: 'updated' },
         { id: 'tree-view',      label: 'Tree view',      href: 'pages/idp/tree-view.html',      badge: 'updated' },
       ]},
-      // AI — the surface a Forge product needs when it's wired to a model:
+      // AI — the surface a Eidos product needs when it's wired to a model:
       // message threads, prompt entry, model reasoning traces, tool calls.
       // Built on top of the regular Components — every AI page composes
       // existing primitives (pill, btn, in-group, collapsible, surface).
@@ -331,8 +331,8 @@
         { id: 'screens',   label: 'Example screens',   href: 'pages/mobile/screens.html',   badge: 'new' },
       ]},
       // Examples — full-product screens assembled exclusively from existing
-      // Forge components. Each entry is a STANDALONE page (no DS shell) that
-      // simulates the Forge IDP. Marked `external: true` so the shell opens
+      // Eidos components. Each entry is a STANDALONE page (no DS shell) that
+      // simulates the Eidos IDP. Marked `external: true` so the shell opens
       // them in a new tab — the engineer returns to the DS manually.
       // AI examples (standalone screens) — belong to the AI DS.
       { group: 'Examples', ds: 'ai', items: [

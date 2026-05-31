@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { HistoryItem } from '@forge/ui';
-import type { HistoryThread } from '@forge/ui';
+import { HistoryItem } from '@eidos/ui';
+import type { HistoryThread } from '@eidos/ui';
 
 const THREAD_DEFAULT: HistoryThread = {
   id: 'thread-001',

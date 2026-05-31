@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Ask. The agent turns the question around: instead of guessing,
+// Eidos AI — Ask. The agent turns the question around: instead of guessing,
 // it asks the user with selectable options. Stepped flow only — single-
 // or multi-select, free-text "other" escape, skippable questions, back/
 // keyboard nav, restartable completion.
@@ -66,7 +66,7 @@ const HERO_Qs = [
     allowOther: true,
     otherPlaceholder: 'Somewhere else — describe…',
     options: [
-      { id: 'k8s',    title: 'Kubernetes',      description: 'Container-orchestrated — standard for Forge services.' },
+      { id: 'k8s',    title: 'Kubernetes',      description: 'Container-orchestrated — standard for Eidos services.' },
       { id: 'lambda', title: 'AWS Lambda',     description: 'Serverless — pay per invoke.' },
       { id: 'vm',     title: 'VM / bare metal', description: 'Full control, needed for GPU or high-IO workloads.' },
     ],
@@ -289,7 +289,7 @@ export default function AiAskPage() {
       <SubHead meta="inside a Message">In context</SubHead>
       <Frame label="AskUser dropped into an assistant Message bubble" height={460}>
         <div style={{ width: '100%', maxWidth: 620 }}>
-          <Message from="assistant" meta={<>Forge AI · 14:02</>}>
+          <Message from="assistant" meta={<>Eidos AI · 14:02</>}>
             I have a couple of clarifying questions before I scaffold the service.
             <div style={{ marginTop: 14 }}>
               <ReplayableAsk questions={AUTH_Q} hideReset/>

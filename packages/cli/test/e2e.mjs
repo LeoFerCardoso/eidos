@@ -1,4 +1,4 @@
-// forge-ui E2E — prove init + add against the locally-built registry, end to end,
+// eidos E2E — prove init + add against the locally-built registry, end to end,
 // with no network. Creates a throwaway consumer project, runs the CLI, and asserts
 // every file landed with the right content + that dependency resolution worked.
 import { mkdtempSync, existsSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
@@ -8,7 +8,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const CLI = resolve(HERE, '..', 'bin', 'forge-ui.mjs');
+const CLI = resolve(HERE, '..', 'bin', 'eidos.mjs');
 const REGISTRY = resolve(HERE, '..', '..', 'registry', 'public', 'r');
 
 const results = [];

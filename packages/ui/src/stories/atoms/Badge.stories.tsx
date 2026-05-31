@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Badge } from '@forge/ui';
+import { Badge } from '@eidos/ui';
 
 // All six documented tones (see Components / Badges doc page).
 const TONES = ['neutral', 'new', 'ice', 'success', 'warning', 'danger'] as const;

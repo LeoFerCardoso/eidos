@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ScrollArea } from '@forge/ui';
+import { ScrollArea } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/ScrollArea',

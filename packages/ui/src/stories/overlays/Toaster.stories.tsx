@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Toaster, useToast, Notification } from '@forge/ui';
+import { Toaster, useToast, Notification } from '@eidos/ui';
 
 // ── Helper wrapper ────────────────────────────────────────────────────────────
 // Toaster now accepts children and provides context to them.

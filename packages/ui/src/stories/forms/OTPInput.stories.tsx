@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { OTPInput } from '@forge/ui';
+import { OTPInput } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/OTPInput',

@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Pull to refresh. Drag the list down past the threshold to reload.
+// Eidos Mobile — Pull to refresh. Drag the list down past the threshold to reload.
 import * as React from 'react';
 import { Section, SubHead, Frame, CodeBlock, DeviceFrame, Icons, Lede, Mono } from '@/ds/core';
 

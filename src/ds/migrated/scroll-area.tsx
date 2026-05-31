@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Scroll Area
+// Eidos DS — Components / Scroll Area
 // DS-PAGE-STANDARD §2.2 (Component template):
 //   Installation → Usage → Variants → In context → Accessibility → RTL → Anatomy → Do/Don't → API reference
 import * as React from 'react';

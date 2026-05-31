@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Page Controller. The horizontally swipeable paged container (UIPageViewController
+// Eidos Mobile — Page Controller. The horizontally swipeable paged container (UIPageViewController
 // idiom) — full-width cards that users swipe through, with a Page Indicator at the bottom.
 // Demos a 3-card onboarding carousel. Paging direction inverts under RTL. Cross-links to Page Indicator.
 import * as React from 'react';
@@ -39,7 +39,7 @@ const CARDS = [
   {
     icon: 'rocket',
     title: 'Ship faster',
-    body: 'Forge CI builds, tests, and deploys on every push. No YAML wrangling — your pipeline is ready the moment you push.',
+    body: 'Eidos CI builds, tests, and deploys on every push. No YAML wrangling — your pipeline is ready the moment you push.',
     cta: 'Next',
     bg: 'var(--surface)',
   },
@@ -260,7 +260,7 @@ export default function MobilePageController() {
                   </div>
                   <div style={{ textAlign: 'center', padding: '0 20px' }}>
                     <div style={{ fontSize: 15, fontWeight: 600, letterSpacing: '-0.01em' }}>Ship faster</div>
-                    <div style={{ fontSize: 11, color: 'var(--fg-muted)', marginTop: 4, lineHeight: 1.45 }}>Push to main, Forge handles the rest.</div>
+                    <div style={{ fontSize: 11, color: 'var(--fg-muted)', marginTop: 4, lineHeight: 1.45 }}>Push to main, Eidos handles the rest.</div>
                   </div>
                 </div>
                 {/* Controls */}
@@ -324,7 +324,7 @@ export default function MobilePageController() {
         <div className="dd-card do">
           <div className="head"><Icons.check size={12} /> Do — sequential, full-screen flow</div>
           <div className="body" style={{ flexDirection: 'column', gap: 8, color: 'var(--fg-muted)', fontSize: 'var(--text-base)' }}>
-            <span><Mono>1</Mono> — What Forge does</span>
+            <span><Mono>1</Mono> — What Eidos does</span>
             <span><Mono>2</Mono> — How it keeps you safe</span>
             <span><Mono>3</Mono> — Get started</span>
           </div>

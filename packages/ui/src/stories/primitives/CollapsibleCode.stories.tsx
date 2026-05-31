@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { CollapsibleCode } from '@forge/ui';
+import { CollapsibleCode } from '@eidos/ui';
 
 // A short snippet — under the 8-line threshold; renders plain with no toggle.
-const SHORT_CODE = `import { Button } from '@forge/ui';\n\n<Button variant="primary">Ship it</Button>`;
+const SHORT_CODE = `import { Button } from '@eidos/ui';\n\n<Button variant="primary">Ship it</Button>`;
 
 // A long snippet — over 8 lines; clipped initially with a "Show code" toggle.
-const LONG_CODE = `import * as React from 'react';\nimport { Button, Frame, Code } from '@forge/ui';\n\n// Forge pattern: Frame wraps the live preview + CollapsibleCode\n// so long examples do not dominate the page rhythm.\nexport function ButtonDemo() {\n  const [loading, setLoading] = React.useState(false);\n  const handleClick = async () => {\n    setLoading(true);\n    await new Promise((r) => setTimeout(r, 1200));\n    setLoading(false);\n  };\n  return (\n    <Frame label="Loading state" center>\n      <Button variant="primary" disabled={loading} onClick={handleClick}>\n        {loading ? 'Shipping…' : 'Ship it'}\n      </Button>\n    </Frame>\n  );\n}`;
+const LONG_CODE = `import * as React from 'react';\nimport { Button, Frame, Code } from '@eidos/ui';\n\n// Forge pattern: Frame wraps the live preview + CollapsibleCode\n// so long examples do not dominate the page rhythm.\nexport function ButtonDemo() {\n  const [loading, setLoading] = React.useState(false);\n  const handleClick = async () => {\n    setLoading(true);\n    await new Promise((r) => setTimeout(r, 1200));\n    setLoading(false);\n  };\n  return (\n    <Frame label="Loading state" center>\n      <Button variant="primary" disabled={loading} onClick={handleClick}>\n        {loading ? 'Shipping…' : 'Ship it'}\n      </Button>\n    </Frame>\n  );\n}`;
 
 const meta = {
   title: 'Primitives/CollapsibleCode',

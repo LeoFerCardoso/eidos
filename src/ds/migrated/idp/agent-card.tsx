@@ -144,7 +144,7 @@ export default function AgentCardPage() {
           {AGENTS.map(a => <AgentCard key={a.name} agent={a}/>)}
         </div>
       </Frame>
-      <Lede>The three agents above are the canonical mix for a Forge demo: one PR reviewer (reads code), one runbook executor (takes action), one observer (watches cost). The catalog usually shows ten of each.</Lede>
+      <Lede>The three agents above are the canonical mix for a Eidos demo: one PR reviewer (reads code), one runbook executor (takes action), one observer (watches cost). The catalog usually shows ten of each.</Lede>
 
       <SubHead meta="status states">Health roll-up</SubHead>
       <Frame label="status drives the badge in the header · degraded gets the pulse"

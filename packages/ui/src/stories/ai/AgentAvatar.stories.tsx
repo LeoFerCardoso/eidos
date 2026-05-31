@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { AgentAvatar } from '@forge/ui';
-import { Icons } from '@forge/ui';
+import { AgentAvatar } from '@eidos/ui';
+import { Icons } from '@eidos/ui';
 
 const meta = {
   title: 'AI/AgentAvatar',

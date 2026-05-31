@@ -1,12 +1,12 @@
 'use client';
-// Forge IDP — AI Module shell.
+// Eidos IDP — AI Module shell.
 //
 // Shared sidebar + topbar + improved PromptInput composer used by every
 // AI example surface. Two-pane layout (left rail ~272px · main).
 // Theme is reactive: a sun/moon button at the rail foot flips
 // [data-theme="light"|"dark"] on <html>, persisted to localStorage.
 //
-// Composes existing Forge primitives only — Avatar, Icons, .btn, .pill,
+// Composes existing Eidos primitives only — Avatar, Icons, .btn, .pill,
 // .in-* input chrome. No new tokens introduced.
 import * as React from 'react';
 import { Icons } from '@/ds/core';
@@ -99,10 +99,10 @@ const AISidebar = ({ activeNav, onToggleSidebar }: { activeNav?: any; onToggleSi
   };
 
   return (
-    <aside className="ai-side" aria-label="Forge AI navigation">
+    <aside className="ai-side" aria-label="Eidos AI navigation">
       {/* Brand row */}
       <div className="ai-side-brand">
-        <a className="ai-brand-tile" href="/" title="Forge — back to docs">
+        <a className="ai-brand-tile" href="/" title="Eidos — back to docs">
           <Icons.flame size={18} color="#fff"/>
         </a>
         <button

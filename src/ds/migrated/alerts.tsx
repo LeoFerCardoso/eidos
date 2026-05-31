@@ -1,8 +1,8 @@
 'use client';
-// Forge DS — Components / Alerts
+// Eidos DS — Components / Alerts
 // Inline callouts for scoped, in-context state — five semantic tones,
 // compound slots (meta / extra / actions), and an optional dismiss button.
-// This page imports the real Alert family from @/ds/core (→ @forge/ui).
+// This page imports the real Alert family from @/ds/core (→ @eidos/ui).
 import * as React from 'react';
 import {
   Icons, Frame, Section, SubHead, Lede, Mono, TabbedCode, installTabs,
@@ -14,7 +14,7 @@ import {
 // ─────────────────────────────────────────────────────────────────────────────
 const USAGE_CODE = `import {
   Alert, AlertTitle, AlertDescription,
-} from "@forge/ui"
+} from "@eidos/ui"
 
 export function Demo() {
   return (
@@ -26,7 +26,7 @@ export function Demo() {
 }`;
 
 const DISMISSIBLE_CODE = `import * as React from "react"
-import { Alert, AlertTitle, AlertDescription } from "@forge/ui"
+import { Alert, AlertTitle, AlertDescription } from "@eidos/ui"
 
 export function Demo() {
   const [open, setOpen] = React.useState(true)
@@ -130,7 +130,7 @@ export default function Alerts() {
             <AlertTitle>Heads up</AlertTitle>
             <AlertDescription>
               A new Tailwind preset is available. Update{' '}
-              <code style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)' }}>@forge/design-system</code>{' '}
+              <code style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)' }}>@eidos/design-system</code>{' '}
               to v1.1.
             </AlertDescription>
           </Alert>
@@ -338,7 +338,7 @@ export default function Alerts() {
             <AlertTitle>إعداد Tailwind جديد متاح</AlertTitle>
             <AlertDescription>
               حدّث{' '}
-              <code style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)' }}>@forge/design-system</code>{' '}
+              <code style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)' }}>@eidos/design-system</code>{' '}
               إلى الإصدار 1.1 للحصول على جميع المكونات الجديدة.
             </AlertDescription>
           </Alert>

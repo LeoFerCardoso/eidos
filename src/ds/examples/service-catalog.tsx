@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { FilterPanel, HealthBadge, Icons, LangBadge, MOCKS, OwnerPill, ServiceCard, Sparkline, Tabs, TierBadge } from '@/ds/core';
 import { FPageHeader, FSection, FShell } from './example-shell';
-// Forge IDP — Example: Service catalog (Backstage-style).
-// Standalone page. Uses only existing Forge primitives.
+// Eidos IDP — Example: Service catalog (Backstage-style).
+// Standalone page. Uses only existing Eidos primitives.
 
   
   
@@ -54,7 +54,7 @@ import { FPageHeader, FSection, FShell } from './example-shell';
     return (
       <FShell
         nav="services"
-        crumbs={[{ label: 'Forge', href: '/example/ai-insights' }, 'Catalog']}>
+        crumbs={[{ label: 'Eidos', href: '/example/ai-insights' }, 'Catalog']}>
 
         <FPageHeader
           title="Catalog"

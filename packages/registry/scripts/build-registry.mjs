@@ -6,7 +6,7 @@
 //   node scripts/build-registry.mjs
 //
 // Source resolution: a file `source` is read relative to the registry package
-// root; `styles/*` sources fall back to the canonical @forge/ui package so the
+// root; `styles/*` sources fall back to the canonical @eidos/ui package so the
 // design tokens + ds.css layer stay single-sourced.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';

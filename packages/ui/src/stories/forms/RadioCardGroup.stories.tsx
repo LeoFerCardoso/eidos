@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { RadioCardGroup } from '@forge/ui';
+import { RadioCardGroup } from '@eidos/ui';
 
 // ── Shared option sets ─────────────────────────────────────────────────────────
 

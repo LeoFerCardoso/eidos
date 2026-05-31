@@ -1,8 +1,8 @@
 'use client';
-// Forge DS — Components / RelativeTime
-// Humanised time-ago label. Updates every 60s. Opt-in Forge tooltip reveals the
+// Eidos DS — Components / RelativeTime
+// Humanised time-ago label. Updates every 60s. Opt-in Eidos tooltip reveals the
 // absolute datetime with seconds — on hover, and on keyboard focus when the
-// wrapper is given a tab stop (see TimeTip / the Forge-tooltip demo below).
+// wrapper is given a tab stop (see TimeTip / the Eidos-tooltip demo below).
 import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs, RelativeTime, Avatar, Lede, Mono } from '@/ds/core';
 
   const row  = { display: 'flex', alignItems: 'center', gap: 8 };
@@ -58,7 +58,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs
 
 export default function RelativeTimePage() {
   return (
-    <Section id="relative-time" title="Relative time" desc="Humanised time-ago label that updates every 60 seconds. The absolute datetime is exposed via a native browser tooltip — opt into the Forge .tt tooltip for a designed bubble with seconds-precision.">
+    <Section id="relative-time" title="Relative time" desc="Humanised time-ago label that updates every 60 seconds. The absolute datetime is exposed via a native browser tooltip — opt into the Eidos .tt tooltip for a designed bubble with seconds-precision.">
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('relative-time')} ariaLabel="package manager"/>
       <Lede>Renders inside a semantic <Mono>&lt;time&gt;</Mono> element. Pass <Mono>tooltip</Mono> to wrap the time in a <Mono>.tt</Mono> tooltip — hover reveals the full date, time and seconds. Pass <Mono>absolute</Mono> to show both inline.</Lede>
@@ -71,7 +71,7 @@ export default function RelativeTimePage() {
         </span>
       </Frame>
 
-      <SubHead meta="hover OR Tab to the cell">Forge tooltip</SubHead>
+      <SubHead meta="hover OR Tab to the cell">Eidos tooltip</SubHead>
       <Frame label="hover — or Tab — the cell · .tt bubble shows full datetime · seconds" row>
         <span style={row}>
           <span style={{ color:'var(--fg-muted)' }}>last deploy</span>

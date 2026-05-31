@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Foundations / Motion (quiet, deterministic, ember-led)
+// Eidos DS — Foundations / Motion (quiet, deterministic, ember-led)
 import * as React from 'react';
 import { Icons, Frame, Section, SubHead, SpecRow, Mono } from '@/ds/core';
 
@@ -7,9 +7,9 @@ export default function Motion() {
   const [pulse, setPulse] = React.useState(0);
   const [demoOn, setDemoOn] = React.useState(true);
   return (
-    <Section id="motion" num="07" title="Motion" desc="Three durations, one ease — the whole vocabulary. Motion in Forge confirms actions or guides attention; it never decorates. Every transition respects reduced-motion.">
+    <Section id="motion" num="07" title="Motion" desc="Three durations, one ease — the whole vocabulary. Motion in Eidos confirms actions or guides attention; it never decorates. Every transition respects reduced-motion.">
       <p style={{fontSize:'var(--text-body)', color:'var(--fg-muted)', maxWidth:'68ch', marginBottom: 24, lineHeight: 1.6}}>
-        Motion in Forge is a <b style={{color:'var(--fg)'}}>layer of meaning</b>, not decoration. We use one ease and three durations everywhere, and reserve the ember pulse for the literal "this is live" moments. Hover transitions are short. Surface changes are decisive. Loading states are real progress, never indeterminate spinners. The product moves only when something has changed.
+        Motion in Eidos is a <b style={{color:'var(--fg)'}}>layer of meaning</b>, not decoration. We use one ease and three durations everywhere, and reserve the ember pulse for the literal "this is live" moments. Hover transitions are short. Surface changes are decisive. Loading states are real progress, never indeterminate spinners. The product moves only when something has changed.
       </p>
 
       {/* Philosophy */}
@@ -324,7 +324,7 @@ export default function Motion() {
               ✨ NEW FEATURE
             </div>
           </div>
-          <div className="note">Bouncing badges, sparkles, swelling pills — all marketing tropes. Forge announces with copy, not animation.</div>
+          <div className="note">Bouncing badges, sparkles, swelling pills — all marketing tropes. Eidos announces with copy, not animation.</div>
         </div>
       </div>
     </Section>

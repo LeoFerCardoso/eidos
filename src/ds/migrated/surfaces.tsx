@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Surfaces (card · hairline · divider · code block)
+// Eidos DS — Components / Surfaces (card · hairline · divider · code block)
 import { Alert, AlertDescription, AlertTitle, Empty, Frame, Icons, LangBadge, Lede, Mono, MOCKS, PropsTable, Section, Skeleton, Spinner, SubHead, TabbedCode, TierBadge, installTabs } from '@/ds/core';
 
 const USAGE_CODE = `import { Surface } from "@/components/forge/surface"

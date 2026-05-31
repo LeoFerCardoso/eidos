@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { HistoryGroup } from '@forge/ui';
-import type { HistoryThread } from '@forge/ui';
+import { HistoryGroup } from '@eidos/ui';
+import type { HistoryThread } from '@eidos/ui';
 
 // ── Fixtures ──────────────────────────────────────────────────────────────────
 

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, ForgeChart, ForgeTooltipContent, useChartColors, forgeGridProps, forgeXAxisProps, forgeYAxisProps, Lede, Recharts, Mono, Skeleton } from '@/ds/core';
   const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Cell } = Recharts;
 
-  // Mirrors the Forge motion convention (see bar chart / atoms CountUp / tooltip):
+  // Mirrors the Eidos motion convention (see bar chart / atoms CountUp / tooltip):
   // the grow-up enter animation is gated on the user's reduced-motion preference,
   // so the Accessibility "Motion" claim is enforced in code, not just asserted.
   // SSR-safe (defaults to false), then syncs + subscribes on mount.

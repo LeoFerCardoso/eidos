@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Citation, Sources } from '@forge/ui';
-import type { CitationSource } from '@forge/ui';
+import { Citation, Sources } from '@eidos/ui';
+import type { CitationSource } from '@eidos/ui';
 
 // ── Fixtures ──────────────────────────────────────────────────────────────────
 
@@ -261,7 +261,7 @@ export const InContext: Story = {
           "The doc page's headline pattern: response prose above the numbered Sources panel. " +
           'Chip `n=1..4` maps one-to-one to the panel entries (`id` 1..4) — the shared ' +
           'numbering contract is the whole thesis of the component. Compose `Citation` with ' +
-          'the sibling `Sources` panel from @forge/ui.',
+          'the sibling `Sources` panel from @eidos/ui.',
       },
     },
   },

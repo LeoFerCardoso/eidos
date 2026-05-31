@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Accordion
+// Eidos DS — Components / Accordion
 // Vertically stacked expandable rows. Compound API: <Accordion> wraps
 // <AccordionItem>, <AccordionTrigger>, and <AccordionContent>.
 import * as React from 'react';
@@ -24,12 +24,12 @@ import {
 const FAQ = [
   {
     value: 'q1',
-    q: 'Is Forge a component library or a design system?',
+    q: 'Is Eidos a component library or a design system?',
     a: 'A design system. The components are the most visible surface, but the tokens, type scale, motion curves, and copy voice are what hold it together.',
   },
   {
     value: 'q2',
-    q: 'Can I use Forge with my own framework?',
+    q: 'Can I use Eidos with my own framework?',
     a: 'Yes. Tokens ship as plain CSS variables; the Tailwind preset is opt-in. The React examples on this site are for demonstration — copy them into your stack of choice.',
   },
   {
@@ -40,7 +40,7 @@ const FAQ = [
   {
     value: 'q4',
     q: 'Where do I report a missing component?',
-    a: 'Open an issue in the Forge platform repo. The catalog grows as the product grows.',
+    a: 'Open an issue in the Eidos platform repo. The catalog grows as the product grows.',
   },
 ];
 
@@ -66,7 +66,7 @@ const SHIPPING = [
 const HELP = [
   {
     value: 'install',
-    q: 'How do I install a Forge component?',
+    q: 'How do I install a Eidos component?',
     a: 'Run the add command for the component slug — it copies the source straight into your repo. There is no runtime package to track; you own the files from that point on.',
   },
   {
@@ -89,11 +89,11 @@ export function Demo() {
   return (
     <Accordion type="single" defaultValue="q1" collapsible>
       <AccordionItem value="q1">
-        <AccordionTrigger>Is Forge a component library or a design system?</AccordionTrigger>
+        <AccordionTrigger>Is Eidos a component library or a design system?</AccordionTrigger>
         <AccordionContent>A design system — tokens, type scale, motion curves, copy voice.</AccordionContent>
       </AccordionItem>
       <AccordionItem value="q2">
-        <AccordionTrigger>Can I use Forge with my own framework?</AccordionTrigger>
+        <AccordionTrigger>Can I use Eidos with my own framework?</AccordionTrigger>
         <AccordionContent>Yes. Tokens ship as CSS variables; the Tailwind preset is opt-in.</AccordionContent>
       </AccordionItem>
     </Accordion>
@@ -259,7 +259,7 @@ export default function Page() {
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('accordion')} ariaLabel="package manager" />
       <Lede>
-        Keyboard-correct WAI-ARIA semantics (<Mono>button</Mono> headers, <Mono>aria-expanded</Mono>, region panels) are built in — plain React over the Forge CSS layer, no Radix runtime. Pick the <em>Manual</em> tab to paste the source files instead.
+        Keyboard-correct WAI-ARIA semantics (<Mono>button</Mono> headers, <Mono>aria-expanded</Mono>, region panels) are built in — plain React over the Eidos CSS layer, no Radix runtime. Pick the <em>Manual</em> tab to paste the source files instead.
       </Lede>
 
       {/* 2. USAGE */}
@@ -282,7 +282,7 @@ export default function Page() {
         label="one row open at a time"
         code={`<Accordion type="single" defaultValue="q1" collapsible>
   <AccordionItem value="q1">
-    <AccordionTrigger>Is Forge a component library or a design system?</AccordionTrigger>
+    <AccordionTrigger>Is Eidos a component library or a design system?</AccordionTrigger>
     <AccordionContent>A design system. The components are the most visible surface…</AccordionContent>
   </AccordionItem>
   {/* … */}

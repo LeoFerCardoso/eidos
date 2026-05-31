@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Tool, ToolInput, ToolOutput } from '@forge/ui';
+import { Tool, ToolInput, ToolOutput } from '@eidos/ui';
 
 // Realistic fintech tool-call params used across stories.
 const SEARCH_PARAMS = {

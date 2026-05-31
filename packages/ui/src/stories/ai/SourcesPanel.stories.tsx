@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { SourcesPanel } from '@forge/ui';
-import type { CitationSource } from '@forge/ui';
+import { SourcesPanel } from '@eidos/ui';
+import type { CitationSource } from '@eidos/ui';
 
 // ── Fixtures ─────────────────────────────────────────────────────────────────
 

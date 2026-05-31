@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ScoreGauge } from '@forge/ui';
+import { ScoreGauge } from '@eidos/ui';
 
 const meta = {
   title: 'Elements/ScoreGauge',

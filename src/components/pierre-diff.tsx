@@ -1,9 +1,9 @@
 'use client';
-// Forge DS — DiffViewer, backed by the real diffs.com engine (@pierre/diffs).
+// Eidos DS — DiffViewer, backed by the real diffs.com engine (@pierre/diffs).
 //
 // We render Pierre's actual MultiFileDiff (Shiki syntax highlighting, word-level
 // intra-line diffs, split/unified, collapsible hunks, annotations) and re-skin
-// ONLY the colours and typography to Forge via the `--diffs-*` custom properties
+// ONLY the colours and typography to Eidos via the `--diffs-*` custom properties
 // on `.pierre-diff` (they inherit through the component's Shadow DOM). See
 // `.pierre-diff` in ds.css. Controls live OUTSIDE the diff card, in our own bar.
 //
@@ -14,8 +14,8 @@ import * as React from 'react';
 import dynamic from 'next/dynamic';
 import type { FileContents } from '@pierre/diffs/react';
 
-// Forge syntax theme — a Shiki CSS-variables theme whose token colours are the
-// Forge data-viz tokens (`--viz-*`, defined on :root, inherited into the diff's
+// Eidos syntax theme — a Shiki CSS-variables theme whose token colours are the
+// Eidos data-viz tokens (`--viz-*`, defined on :root, inherited into the diff's
 // Shadow DOM). No hard-coded hex: keyword=violet, fn=ice, string=warning-yellow,
 // number/const=teal, comment=faint. Green/red are reserved for add/del, so no
 // syntax token uses them (they'd clash with the row tint).
@@ -34,7 +34,7 @@ const FORGE_SYNTAX_DEFAULTS: Record<string, string> = {
 };
 let forgeThemeRegistered = false;
 
-// Load Pierre's React entry AND register the Forge CSS-variables theme before
+// Load Pierre's React entry AND register the Eidos CSS-variables theme before
 // the component highlights — both inside the dynamic chunk so Shiki never lands
 // in the main bundle and never runs during static generation.
 const MultiFileDiff = dynamic(
@@ -88,7 +88,7 @@ export interface PierreDiffProps {
   renderAnnotation?: (annotation: any) => React.ReactNode;
   /** Render the live diffs.com-style control bar (the viewer owns that state). */
   toolbar?: boolean;
-  /** Shiki theme for syntax tokens — defaults to the Forge data-viz theme. */
+  /** Shiki theme for syntax tokens — defaults to the Eidos data-viz theme. */
   theme?: string;
 }
 

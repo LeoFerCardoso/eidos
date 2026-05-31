@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { DeviceFrame, PhoneTop, StatusBar } from '@forge/ui';
+import { DeviceFrame, PhoneTop, StatusBar } from '@eidos/ui';
 
 const meta = {
   title: 'Device/DeviceFrame',

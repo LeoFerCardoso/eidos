@@ -9,14 +9,14 @@ Forge components are **copied into the consuming product's repo** via a CLI, the
 docs already present installation:
 
 ```
-pnpm dlx forge-ui@latest add button     # copies button.tsx + its CSS into your repo
+pnpm dlx eidos@latest add button     # copies button.tsx + its CSS into your repo
 ```
 
 The component source becomes *yours* — editable, reviewable in your PRs, no version-locked
 dependency to fight. This is the contract the docs already state ("Forge is source-shipped, not
 a black-box dependency", `buttons.tsx`) and what the Installation page's tabs implement.
 
-**Why source-shipped (over a published `@forge/core` package):**
+**Why source-shipped (over a published `@eidos/core` package):**
 - The DS is a *family* of design systems on one token base; products take only the pieces they
   need and adapt them. A monolithic package would ship everything.
 - Components compose plain CSS classes (`.ds-*` + `tokens.css`/`ds.css`), not a runtime API
@@ -52,7 +52,7 @@ a black-box dependency", `buttons.tsx`) and what the Installation page's tabs im
 ## If a published package is ever wanted (the reversible alternative)
 
 Nothing here precludes also publishing a package later. The steps would be:
-1. Extract `src/ds/core/**` into a workspace package `@forge/core`, mark `package.json`
+1. Extract `src/ds/core/**` into a workspace package `@eidos/core`, mark `package.json`
    `"private": false`, add an `exports` map (`"./button"`, `"./tokens"`, …) and `sideEffects: ["*.css"]`.
 2. Type-clean already holds (tsc is 0 / blocking), so the package would ship real types.
 3. Publish on the `/release` tag via `npm publish` + changesets.
@@ -62,7 +62,7 @@ for teams that prefer a dependency.
 ## Consumer workflow (source-shipped)
 
 1. Add the Forge token + base CSS layer once (`tokens.css` + `ds.css`).
-2. `forge-ui add <component>` (or copy from `src/ds/core/**` + the Manual tab instructions).
+2. `eidos add <component>` (or copy from `src/ds/core/**` + the Manual tab instructions).
 3. Pull `tokens/forge.tokens.json` into your design tooling so Figma/Style-Dictionary stay in
    sync with code (the tokens are the shared contract even though components are copied).
 4. Re-sync periodically against a Forge git tag; your local edits are yours to reconcile.

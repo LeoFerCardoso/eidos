@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Data display
+// Eidos DS — Components / Data display
 // The numeric layer of the system: KPI tiles, deltas, stat groups, sparklines,
 // bar / line / area / stacked / donut / heatmap / bullet / funnel / gauge.
 // All charts are pure SVG so they render without dependencies and inherit DS

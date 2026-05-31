@@ -5,7 +5,7 @@
 //   node scripts/forge-gen.mjs component <slug> --ds <ds>   # (scaffold — see §4, Phase 3)
 //
 // `contract --sync` is the keystone of the harness: it joins every installable unit
-// across its FOUR surfaces (registry item · @forge/ui export · Storybook story · docs
+// across its FOUR surfaces (registry item · @eidos/ui export · Storybook story · docs
 // page) by a normalised slug and writes the bound `components[]` the verifiers read.
 // It preserves clauses + waivers; it only rewrites `components` and the `generated` flag.
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -14,7 +14,7 @@ import {
   ROOT, abs, CONTRACT_PATH, loadContract, walk, toSlug, metaTitle,
 } from './forge-lib.mjs';
 
-// ── parse @forge/ui exports → where each symbol is DEFINED ──────────────────────
+// ── parse @eidos/ui exports → where each symbol is DEFINED ──────────────────────
 function exportMap() {
   const files = walk('packages/ui/src', (p) => /\.tsx?$/.test(p) && !/\.stories\./.test(p) && !p.includes(`${sep}stories${sep}`));
   const byName = new Map(); // ExportName → relpath (first definition wins)

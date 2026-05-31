@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Segmented control. The mobile sibling of Tabs: 2–4 mutually
+// Eidos Mobile — Segmented control. The mobile sibling of Tabs: 2–4 mutually
 // exclusive options in a pill track, the active one lifted onto a surface. The
 // track composes the shipped `.m-segmented` class (focus ring, active lift, and
 // reduced-motion live in ds.css) — the page only supplies the roving-tabindex

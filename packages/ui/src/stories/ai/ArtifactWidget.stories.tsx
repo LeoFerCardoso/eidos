@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ArtifactWidget } from '@forge/ui';
-import type { ArtifactRef } from '@forge/ui';
+import { ArtifactWidget } from '@eidos/ui';
+import type { ArtifactRef } from '@eidos/ui';
 
 const DOC_ARTIFACT: ArtifactRef = {
   id: 'art-001',

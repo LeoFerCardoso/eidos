@@ -72,7 +72,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, AutoPropsTable,
   const InMessageDemo = () => (
     <div style={{ width: '100%', maxWidth: 640, display: 'flex', flexDirection: 'column', gap: 10 }}>
       <div className="t-mono-label">
-        Forge AI <span style={{ marginInline: 6, color: 'var(--fg-faint)' }}>·</span> just now
+        Eidos AI <span style={{ marginInline: 6, color: 'var(--fg-faint)' }}>·</span> just now
       </div>
       <Tool name="listDeploys" ns="forge.ai" state="output-available" ms={412} defaultOpen>
         <ToolInput params={{ since: '24h', tier: 'T1', limit: 10 }}/>
@@ -135,9 +135,9 @@ export default function ToolPage() {
     >
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('ai-tool')} ariaLabel="package manager"/>
-      <Lede>Render the output in the right Forge primitive — a Table, the Code highlighter, an Alert — never a bespoke tool style.</Lede>
+      <Lede>Render the output in the right Eidos primitive — a Table, the Code highlighter, an Alert — never a bespoke tool style.</Lede>
       <Lede>
-        Composes the <a href="/collapsible" style={{ color: 'var(--ember)' }}>Collapsible</a> primitive for the disclosure shell, the Forge <Mono>Code</Mono> highlighter for JSON params, and the canonical <a href="/pills" style={{ color: 'var(--ember)' }}>pill</a> shape for the status badge (warning · ice · success · danger).
+        Composes the <a href="/collapsible" style={{ color: 'var(--ember)' }}>Collapsible</a> primitive for the disclosure shell, the Eidos <Mono>Code</Mono> highlighter for JSON params, and the canonical <a href="/pills" style={{ color: 'var(--ember)' }}>pill</a> shape for the status badge (warning · ice · success · danger).
       </Lede>
 
       <SubHead meta="hello world · live">Usage</SubHead>
@@ -228,7 +228,7 @@ export default function ToolPage() {
             <span className="num">1</span><span><b style={{ color: 'var(--fg)' }}>Header.</b> Icon tile + namespaced name in mono. The full tool path (<Mono>forge.ai.listDeploys</Mono>) reads like an import, never a label.</span>
             <span className="num">2</span><span><b style={{ color: 'var(--fg)' }}>Status + duration.</b> Pill colour maps to the four-state machine; <Mono>--success</Mono>, <Mono>--ice</Mono>, <Mono>--warning</Mono>, <Mono>--danger</Mono>. Duration in mono <Mono>ms</Mono>.</span>
             <span className="num">3</span><span><b style={{ color: 'var(--fg)' }}>Input section.</b> Formatted JSON of the params the model called the tool with. While streaming, shimmer placeholders fill the slot.</span>
-            <span className="num">4</span><span><b style={{ color: 'var(--fg)' }}>Output section.</b> Rendered any way the tool wants — table, code, paragraph, error card. Reuses existing Forge primitives, never bespoke.</span>
+            <span className="num">4</span><span><b style={{ color: 'var(--fg)' }}>Output section.</b> Rendered any way the tool wants — table, code, paragraph, error card. Reuses existing Eidos primitives, never bespoke.</span>
           </div>
         </div>
       </div>
@@ -258,7 +258,7 @@ export default function ToolPage() {
         </div>
 
         <div className="dd-card do">
-          <div className="head"><Icons.check size={12}/> Do — render the result in the right Forge primitive</div>
+          <div className="head"><Icons.check size={12}/> Do — render the result in the right Eidos primitive</div>
           <div className="body" style={{ padding: 14 }}>
             <SimpleVariant state="output-available"/>
           </div>
@@ -292,7 +292,7 @@ export default function ToolPage() {
         rows={[
           { prop: 'label', type: 'string', default: '"Output"', description: 'Section label. Switch to "Error" when state = output-error.' },
           { prop: 'meta', type: 'string', default: undefined, description: 'Right-aligned meta — row count, HTTP status, etc.' },
-          { prop: 'children', type: 'ReactNode', required: true, description: 'Rendered result. Use Forge primitives — Table, Code, plain prose, error card.' },
+          { prop: 'children', type: 'ReactNode', required: true, description: 'Rendered result. Use Eidos primitives — Table, Code, plain prose, error card.' },
         ]}
       />
     </Section>

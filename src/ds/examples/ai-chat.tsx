@@ -1,5 +1,5 @@
 'use client';
-// Forge IDP — AI Chat (empty / new-chat surface).
+// Eidos IDP — AI Chat (empty / new-chat surface).
 //
 // The page the "Chat" rail item lands on. Centred ForgeMark hero +
 // suggestion chips + the canonical <PromptInput/> with a <PromptBanner/>
@@ -45,7 +45,7 @@ const App = () => {
   };
 
   return (
-    <ChatShell side="new" crumbs={['Forge', 'AI', 'New chat']}>
+    <ChatShell side="new" crumbs={['Eidos', 'AI', 'New chat']}>
       <div className="aic-empty">
         <div className="aic-empty-hero">
           <div className="aic-empty-mark" aria-hidden="true">
@@ -53,7 +53,7 @@ const App = () => {
           </div>
           <h1 className="aic-empty-title">Hello, Leonardo</h1>
           <p className="aic-empty-sub">
-            What can Forge AI help you with today? Ask about a service, draft a
+            What can Eidos AI help you with today? Ask about a service, draft a
             runbook, or kick off an incident review.
           </p>
         </div>
@@ -91,7 +91,7 @@ const App = () => {
                 cta="Upgrade →"
                 onDismiss={() => setBannerShown(false)}
               >
-                Access premium models &amp; agents on Forge Pro
+                Access premium models &amp; agents on Eidos Pro
               </PromptBanner>
             ) : undefined}
             actions={[
@@ -101,7 +101,7 @@ const App = () => {
               { id: 'tools',  icon: 'terminal', label: 'Run a tool',             description: 'Pick a tool the agent should call (file, shell, web…)' },
             ]}
             footerHint={
-              <>Forge AI is grounded in your service catalog — double-check before acting on production.</>
+              <>Eidos AI is grounded in your service catalog — double-check before acting on production.</>
             }
           />
         </div>

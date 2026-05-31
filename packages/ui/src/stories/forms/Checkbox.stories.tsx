@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Checkbox } from '@forge/ui';
+import { Checkbox } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/Checkbox',

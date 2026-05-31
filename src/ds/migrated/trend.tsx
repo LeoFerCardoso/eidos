@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Trend
+// Eidos DS — Components / Trend
 // Tiny delta indicator. 4 visual variants share the same colour mapping.
 import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs, Trend, Lede, Mono } from '@/ds/core';
 

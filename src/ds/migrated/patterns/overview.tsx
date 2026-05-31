@@ -1,5 +1,5 @@
 'use client';
-// Forge Patterns — Overview. Introduction-style landing; the hero is a grid of textures.
+// Eidos Patterns — Overview. Introduction-style landing; the hero is a grid of textures.
 import type { ReactNode } from 'react';
 import { DsOverview } from '@/components/docs';
 import { Icons } from '@/ds/core';
@@ -63,12 +63,12 @@ const D: Record<string, string> = {
 export default function PatternsOverview() {
   return (
     <DsOverview
-      eyebrow="Forge / Patterns"
+      eyebrow="Eidos / Patterns"
       title="Texture & depth."
       lede="Decorative surfaces that lift other components — grids, gradients, glows, grain. Pure CSS and SVG painted over the same token graph; they never introduce a new accent and never become a page-level shell."
       hero={{
         eyebrow: 'CSS / SVG · token-driven',
-        heading: 'The quietest layer in Forge.',
+        heading: 'The quietest layer in Eidos.',
         subtitle: 'Pure CSS & SVG over the tokens.',
         body: 'Reach for a texture to anchor a hero or warm an empty state — one per screen, behind one focal element. Every pattern derives from --ember / --ice / surface tokens, so it re-tints with the theme automatically.',
         actions: (
@@ -89,8 +89,8 @@ export default function PatternsOverview() {
       tiles={PATTERNS.map(([slug, label]) => ({ href: `/patterns/${slug}`, label, desc: D[slug] }))}
       footer={{
         title: 'Composing a landing?',
-        body: 'Pair a pattern backdrop with a Hero or CTA from Forge Blocks.',
-        actions: <a className="btn" href="/blocks/overview">Forge Blocks <Icons.arrowRight size={14} /></a>,
+        body: 'Pair a pattern backdrop with a Hero or CTA from Eidos Blocks.',
+        actions: <a className="btn" href="/blocks/overview">Eidos Blocks <Icons.arrowRight size={14} /></a>,
       }}
     />
   );

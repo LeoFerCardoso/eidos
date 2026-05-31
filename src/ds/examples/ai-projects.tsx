@@ -1,5 +1,5 @@
 'use client';
-// Forge IDP — AI Chat · Projects gallery.
+// Eidos IDP — AI Chat · Projects gallery.
 //
 // Click "Projects" in the chat sidebar (or visit the page directly) to land
 // here. Grid of project tiles, each opens its detail view. Uses ChatShell
@@ -43,14 +43,14 @@ const App = () => {
   );
 
   return (
-    <ChatShell side="projects" crumbs={['Forge', 'AI', 'Projects']}>
+    <ChatShell side="projects" crumbs={['Eidos', 'AI', 'Projects']}>
       <div className="aic-projects">
         {/* Page header — eyebrow + title + lede + CTA. Eyebrow uses the
             mono caption convention from the DS so the page locates itself
             in the IA without a big breadcrumb-style bar. */}
         <header className="aic-projects-head">
           <div className="head-left">
-            <span className="eyebrow">Forge AI · Projects</span>
+            <span className="eyebrow">Eidos AI · Projects</span>
             <h1>Your project workspaces</h1>
             <p className="lede">
               Group conversations, docs and runbooks by scope. Each project keeps its

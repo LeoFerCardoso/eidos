@@ -4,7 +4,7 @@ import {
   Command,
   CommandDialog,
   type CommandGroup,
-} from '@forge/ui';
+} from '@eidos/ui';
 
 // ── Shared sample data ─────────────────────────────────────────────────────────
 

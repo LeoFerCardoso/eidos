@@ -24,7 +24,7 @@ import { Icons, Frame, Section, SubHead, AutoPropsTable, Lede, History, HistoryS
       { id: 'm2', title: 'Idea: token-budget overlay', preview: 'Overlay the prompt budget on top of the composer so the user sees the cost live.' },
     ],
     older: [
-      { id: 'o1', title: 'Original design crit · Forge DS', preview: 'Tokens, then atoms, then primitives. Theme via [data-theme].' },
+      { id: 'o1', title: 'Original design crit · Eidos DS', preview: 'Tokens, then atoms, then primitives. Theme via [data-theme].' },
     ],
   };
 
@@ -133,7 +133,7 @@ import { Icons, Frame, Section, SubHead, AutoPropsTable, Lede, History, HistoryS
   // grouped by project / folder
   const ByProject = () => {
     const projects = [
-      { id: 'p1', name: 'Forge — Design system', color: 'ember', threads: (SAMPLE.today.slice(0, 2) as any[]).concat(SAMPLE.yesterday.slice(0, 1)) },
+      { id: 'p1', name: 'Eidos — Design system', color: 'ember', threads: (SAMPLE.today.slice(0, 2) as any[]).concat(SAMPLE.yesterday.slice(0, 1)) },
       { id: 'p2', name: 'Tier-1 oncall',         color: 'warning', threads: SAMPLE.last7.slice(0, 2) },
       { id: 'p3', name: 'SRE onboarding',        color: 'ice',     threads: SAMPLE.last7.slice(2, 3) },
     ];
@@ -222,7 +222,7 @@ import { Icons, Frame, Section, SubHead, AutoPropsTable, Lede, History, HistoryS
           {/* simulated app bar */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', borderBlockEnd: '1px solid var(--border)', background: 'var(--surface)' }}>
             <button className="ai-hist-icon-btn" type="button" aria-label="Open conversation history" aria-expanded={open} onClick={() => setOpen(true)}><Icons.menu size={14}/></button>
-            <span style={{ fontWeight: 600, fontSize: 'var(--text-base)', color: 'var(--fg)' }}>Forge AI</span>
+            <span style={{ fontWeight: 600, fontSize: 'var(--text-base)', color: 'var(--fg)' }}>Eidos AI</span>
             <span style={{ flex: 1 }}/>
             <button className="ai-hist-icon-btn" type="button" aria-label="More options"><Icons.more size={14}/></button>
           </div>

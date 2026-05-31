@@ -5,9 +5,9 @@ import { withThemeByDataAttribute } from '@storybook/addon-themes';
 // by these semantic stylesheets — without them every story renders unstyled.
 // ai.css carries the 176 `.ai-*` selectors that style the AI sub-DS, so it must
 // load too (the docs app imports all three; Storybook mirrors that order).
-import '@forge/ui/styles/tokens.css';
-import '@forge/ui/styles/ds.css';
-import '@forge/ui/styles/ai.css';
+import '@eidos/ui/styles/tokens.css';
+import '@eidos/ui/styles/ds.css';
+import '@eidos/ui/styles/ai.css';
 import './preview.css';
 
 // RTL is a first-class Forge invariant — toggle `dir` on <html> from the toolbar

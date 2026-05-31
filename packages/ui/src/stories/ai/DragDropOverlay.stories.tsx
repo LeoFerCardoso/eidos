@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { DragDropOverlay } from '@forge/ui';
+import { DragDropOverlay } from '@eidos/ui';
 
 const meta = {
   title: 'AI/DragDropOverlay',

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { CommandDialog, type CommandGroup } from '@forge/ui';
+import { CommandDialog, type CommandGroup } from '@eidos/ui';
 
 // ── Shared sample data ─────────────────────────────────────────────────────────
 

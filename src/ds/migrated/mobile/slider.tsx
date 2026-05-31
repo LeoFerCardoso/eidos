@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Slider. A draggable thumb on a track for choosing an approximate value
+// Eidos Mobile — Slider. A draggable thumb on a track for choosing an approximate value
 // across a continuous range: traffic split, budget, threshold. The filled portion is the
 // one ember accent; a live value label removes the guesswork.
 import * as React from 'react';

@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Resizable
+// Eidos DS — Components / Resizable
 // Section order: Installation → Usage → Variants → In context → Accessibility → RTL → Anatomy → Do/Don't → API reference
 import * as React from 'react';
 import {
@@ -293,7 +293,7 @@ export default function ResizablePage() {
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={INSTALL_TABS} ariaLabel="package manager" />
       <Lede>
-        Zero external dependencies — built directly on pointer events and the Forge CSS layer.
+        Zero external dependencies — built directly on pointer events and the Eidos CSS layer.
         The compound API uses <Mono>{'<ResizablePanel>'}</Mono> and <Mono>{'<ResizableHandle />'}</Mono>
         as direct children of <Mono>{'<Resizable>'}</Mono>. Sizing, the handle, and
         <Mono>aria-controls</Mono> wiring are all managed by the root component.
@@ -688,7 +688,7 @@ export default function ResizablePage() {
                           lineHeight: 1.5,
                         }}
                       >{`export default function Page() {
-  return <h1>Hello Forge</h1>
+  return <h1>Hello Eidos</h1>
 }`}</pre>
                     </div>,
                     <div
@@ -771,7 +771,7 @@ export default function ResizablePage() {
             Focus &amp; contrast
           </div>
           <div className="t-small" style={{ color: 'var(--fg-muted)', lineHeight: 1.55 }}>
-            The handle shows the Forge offset focus ring (<Mono>--ring</Mono>) on keyboard
+            The handle shows the Eidos offset focus ring (<Mono>--ring</Mono>) on keyboard
             focus and widens its hit area to a comfortable target even though the visible
             seam is only 1px. The seam and the hover / active state clear AA contrast
             against both adjoining panel surfaces.

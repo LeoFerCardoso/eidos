@@ -11,7 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   Icons,
-} from '@forge/ui';
+} from '@eidos/ui';
 
 const meta = {
   title: 'Overlays/DropdownMenu',

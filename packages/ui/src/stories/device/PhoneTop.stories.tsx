@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { PhoneTop } from '@forge/ui';
+import { PhoneTop } from '@eidos/ui';
 
 const meta = {
   title: 'Device/PhoneTop',

@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Audio Player. Minimal play/pause/scrub/mute over a real <audio>.
+// Eidos AI — Audio Player. Minimal play/pause/scrub/mute over a real <audio>.
 // Use it whenever an agent responds with a spoken narration or summary.
 // Pair it with Transcription for the canonical audio-reply pattern.
 import * as React from 'react';
@@ -14,10 +14,10 @@ const PLACEHOLDER_SRC = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAR
 
 // Demo transcript for the paired audio+transcription surface
 const SUMMARY_TURNS: TranscriptTurn[] = [
-  { id: 's1', speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '14:00', text: 'Good afternoon. Here is your daily standup recap.' },
-  { id: 's2', speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '14:00', text: 'All platform services are green. The deploy of the feature-flags service at 14:03 completed successfully with zero rollback risk.' },
-  { id: 's3', speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '14:01', text: 'One low-priority alert remains open in the monitoring backlog — not customer-facing. No action required before end of day.' },
-  { id: 's4', speaker: 'Forge Agent', initials: 'FA', side: 'agent', time: '14:01', text: 'The next scheduled deploy is tomorrow at 10:00 UTC — identity-svc minor release.' },
+  { id: 's1', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '14:00', text: 'Good afternoon. Here is your daily standup recap.' },
+  { id: 's2', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '14:00', text: 'All platform services are green. The deploy of the feature-flags service at 14:03 completed successfully with zero rollback risk.' },
+  { id: 's3', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '14:01', text: 'One low-priority alert remains open in the monitoring backlog — not customer-facing. No action required before end of day.' },
+  { id: 's4', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', time: '14:01', text: 'The next scheduled deploy is tomorrow at 10:00 UTC — identity-svc minor release.' },
 ];
 
 export default function AiAudioPlayerPage() {
@@ -102,7 +102,7 @@ export default function AiAudioPlayerPage() {
   src={audioUrl}
   cover={<img src="/cover.png" alt=""/>}
   title="Daily standup recap"
-  subtitle="Forge platform team · 2 min"
+  subtitle="Eidos platform team · 2 min"
   peaks={peaks}
 />`}
       >
@@ -110,7 +110,7 @@ export default function AiAudioPlayerPage() {
           <AudioPlayer
             src={PLACEHOLDER_SRC}
             title="Daily standup recap"
-            subtitle="Forge platform team · 2 min"
+            subtitle="Eidos platform team · 2 min"
             duration={127}
             cover={<Icons.flame size={22}/>}
             peaks={Array.from({ length: 60 }, (_, i) => {
@@ -287,7 +287,7 @@ export default function AiAudioPlayerPage() {
           <div className="body" style={{ padding: 14, flexDirection: 'column', gap: 10 }}>
             <AudioPlayer src={PLACEHOLDER_SRC} title="Standup recap · 2 min"/>
             <Transcription
-              turns={[{ id: 'p1', speaker: 'Forge Agent', initials: 'FA', side: 'agent', text: 'All services green. Deploy successful.' }]}
+              turns={[{ id: 'p1', speaker: 'Eidos Agent', initials: 'FA', side: 'agent', text: 'All services green. Deploy successful.' }]}
               showTime={false}
             />
           </div>

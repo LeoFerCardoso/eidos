@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Icons } from '@/ds/core';
 import { AIPromptInput, AIShell } from './ai-shell';
-// Forge IDP — AI Module · Chat thread (animated).
+// Eidos IDP — AI Module · Chat thread (animated).
 //
 // Simulated chat: turns arrive on a timer with a streaming-caret on
 // assistant messages while their text fills in. Each user/assistant

@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Calendar.
+// Eidos DS — Components / Calendar.
 // Unified single-date and range picker backed by a single Calendar primitive.
 // Both modes use the same 6x7 month grid; pass selectionMode="range" for the
 // two-click range variant with hover-preview band.
@@ -8,14 +8,14 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, AutoPropsTable,
 import { Calendar } from '@/ds/core';
 import type { DateRange } from '@/ds/core';
 
-const USAGE_CODE = `import { Calendar } from "@forge/ui"
+const USAGE_CODE = `import { Calendar } from "@eidos/ui"
 
 export function Demo() {
   const [date, setDate] = React.useState(new Date());
   return <Calendar value={date} onValueChange={setDate} />;
 }`;
 
-const RANGE_CODE = `import { Calendar } from "@forge/ui"
+const RANGE_CODE = `import { Calendar } from "@eidos/ui"
 
 export function Demo() {
   const [range, setRange] = React.useState({ start: null, end: null });

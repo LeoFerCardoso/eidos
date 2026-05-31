@@ -55,7 +55,7 @@ export default function MetricCardPage() {
     <Section id="el-metric-card" title="Metric card" desc="KPI tile for the DORA grid, the hero metric on a service page, and period comparisons. MetricCard owns the label-row chrome, trend mapping, sparkline scale, and footer so they are never re-implemented inline.">
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('metric-card')} ariaLabel="package manager"/>
-      <Lede>Every KPI on a Forge surface flows through <Mono>&lt;MetricCard/&gt;</Mono>. The component owns the label-row chrome, the trend mapping, the sparkline scale, and the footer line — never re-implement these inline.</Lede>
+      <Lede>Every KPI on a Eidos surface flows through <Mono>&lt;MetricCard/&gt;</Mono>. The component owns the label-row chrome, the trend mapping, the sparkline scale, and the footer line — never re-implement these inline.</Lede>
 
       <SubHead meta="hello world">Usage</SubHead>
       <Lede>Composes Card + Trend + Sparkline. For &ldquo;lower is better&rdquo; KPIs (lead time, MTTR, latency) set <Mono>inverted</Mono> — the trend colour follows the verdict, not the sign, so a falling latency reads green instead of red.</Lede>

@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Buttons
+// Eidos DS — Components / Buttons
 // Page layout:
 //   1. Installation     (TabbedCode: pnpm · npm · yarn · bun · Manual)
 //   2. Usage            (Frame: import + minimal render)
@@ -20,23 +20,23 @@ const lede   = { fontSize: 'var(--text-body)', color: 'var(--fg-muted)', marginT
 // 1.  INSTALLATION — Tabbed CLI command per package manager.
 //     "Manual" is the last tab; it stays hidden until the user picks it.
 // ==========================================================================
-const INSTALL_PNPM = `pnpm dlx forge-ui@latest add button`;
-const INSTALL_NPM  = `npx forge-ui@latest add button`;
-const INSTALL_YARN = `yarn dlx forge-ui@latest add button`;
-const INSTALL_BUN  = `bunx forge-ui@latest add button`;
-// The Forge registry is shadcn registry-item.json compatible — the stock CLI works too.
+const INSTALL_PNPM = `pnpm dlx eidos@latest add button`;
+const INSTALL_NPM  = `npx eidos@latest add button`;
+const INSTALL_YARN = `yarn dlx eidos@latest add button`;
+const INSTALL_BUN  = `bunx eidos@latest add button`;
+// The Eidos registry is shadcn registry-item.json compatible — the stock CLI works too.
 const INSTALL_SHADCN = `npx shadcn@latest add https://forge.equifax.dev/r/button.json`;
 
-// Manual install — Forge components are semantic-class React (no Radix, no CVA);
+// Manual install — Eidos components are semantic-class React (no Radix, no CVA);
 // the only baseline dep is the cn() helper. Shown when the user picks "Manual".
-const INSTALL_MANUAL = `# 1. Install the Forge base layer once (design tokens + ds.css + cn).
-npx forge-ui@latest init
+const INSTALL_MANUAL = `# 1. Install the Eidos base layer once (design tokens + ds.css + cn).
+npx eidos@latest init
 
-# 2. Copy components/forge/button.tsx from the Forge source
+# 2. Copy components/forge/button.tsx from the Eidos source
 #    into your repo (https://github.com/forge/design-system) — or just run
-#    \`forge-ui add button\` to do steps 1–2 for you.
+#    \`eidos add button\` to do steps 1–2 for you.
 
-# 3. Import the Forge stylesheet layer at your app root so the .btn classes
+# 3. Import the Eidos stylesheet layer at your app root so the .btn classes
 #    resolve:  styles/forge/tokens.css → styles/forge/ds.css
 #    (npm install clsx tailwind-merge if you copied by hand).`;
 
@@ -75,7 +75,7 @@ export default function Buttons() {
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={INSTALL_TABS} ariaLabel="package manager"/>
       <Lede>
-        The CLI copies <Mono>button.tsx</Mono> and its CSS into your repo so you can edit them — Forge is source-shipped, not a black-box dependency. Pick the <em>Manual</em> tab if you'd rather paste the files by hand.
+        The CLI copies <Mono>button.tsx</Mono> and its CSS into your repo so you can edit them — Eidos is source-shipped, not a black-box dependency. Pick the <em>Manual</em> tab if you'd rather paste the files by hand.
       </Lede>
 
       {/* ====================================================================

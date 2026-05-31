@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Sources, SourcesPanel, Citation, Empty, Icons } from '@forge/ui';
-import type { CitationSource } from '@forge/ui';
+import { Sources, SourcesPanel, Citation, Empty, Icons } from '@eidos/ui';
+import type { CitationSource } from '@eidos/ui';
 
 // ── Fixtures ──────────────────────────────────────────────────────────────────
 

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { CopyButton } from '@forge/ui';
+import { CopyButton } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/CopyButton',
@@ -14,7 +14,7 @@ const meta = {
       },
     },
   },
-  args: { text: 'npm install @forge/ui', label: 'Copy' },
+  args: { text: 'npm install @eidos/ui', label: 'Copy' },
   argTypes: {
     text: { control: 'text', description: 'The string that will be written to the clipboard.' },
     label: { control: 'text', description: 'Button label — defaults to "Copy".' },

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { MessageActions } from '@forge/ui';
+import { MessageActions } from '@eidos/ui';
 
 const meta = {
   title: 'AI/MessageActions',

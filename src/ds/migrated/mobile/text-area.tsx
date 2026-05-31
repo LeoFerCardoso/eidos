@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Text Area. A multi-line text input that grows with its content:
+// Eidos Mobile — Text Area. A multi-line text input that grows with its content:
 // persistent label above, character counter in the footer, helper/error below.
 // Focus rings in ember. The container owns the ring so the inner <textarea>
 // runs outline:none. Use for incident notes, PR comments, free-form descriptions.

@@ -1,12 +1,12 @@
 'use client';
-// Forge Blocks — Feature grid. A three-up section of icon + title + copy cards.
+// Eidos Blocks — Feature grid. A three-up section of icon + title + copy cards.
 import { Section, SubHead, Frame, CodeBlock, Icons, Lede, Mono, Skeleton } from '@/ds/core';
 
 
 const FEATURES = [
   { icon: 'rocket', title: 'Ship faster', body: 'Scaffold a service, wire CI, and deploy across rings from one CLI.' },
   { icon: 'server', title: 'Own your infra', body: 'Every service is described in code — owners, tiers, budgets, runbooks.' },
-  { icon: 'sparkle', title: 'Agent-assisted', body: 'The Forge agent watches the estate and surfaces what matters today.' },
+  { icon: 'sparkle', title: 'Agent-assisted', body: 'The Eidos agent watches the estate and surfaces what matters today.' },
 ];
 
 // RTL sample — the same three capabilities in Arabic. Logical CSS means the
@@ -14,7 +14,7 @@ const FEATURES = [
 const FEATURES_RTL = [
   { icon: 'rocket', title: 'اشحن أسرع', body: 'هيّئ خدمة، اربط الـ CI، وانشرها عبر الحلقات من سطر أوامر واحد.' },
   { icon: 'server', title: 'تحكّم ببنيتك', body: 'كل خدمة موصوفة في الكود — المالكون، المستويات، الميزانيات.' },
-  { icon: 'sparkle', title: 'بمساعدة الوكيل', body: 'يراقب وكيل Forge المنظومة ويُبرز ما يهمّك اليوم.' },
+  { icon: 'sparkle', title: 'بمساعدة الوكيل', body: 'يراقب وكيل Eidos المنظومة ويُبرز ما يهمّك اليوم.' },
 ];
 
 // Loading state — feature copy is often config / registry-driven, so the grid

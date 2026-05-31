@@ -1,4 +1,4 @@
-// extract-registry.mjs — slice the family-grouped @forge/ui source into ONE
+// extract-registry.mjs — slice the family-grouped @eidos/ui source into ONE
 // self-contained file per component, for shadcn-style per-component install.
 //
 // For each public component C in its family file, we compute the reachability
@@ -191,14 +191,14 @@ function sliceComponent(name, fam) {
   }
   // external libs (recharts / react-dom) — reuse the original import statement text.
   // Also handle ./lib/utils and similar local-but-non-component imports by rewriting
-  // the source to the consumer alias (@/lib/utils → installed by `forge-ui init`).
+  // the source to the consumer alias (@/lib/utils → installed by `eidos init`).
   const extByStmt = new Map();
   for (const b of usedImports) {
     const imp = imports.get(b);
     if (!imp) continue;
     if (imp.source === 'react') continue; // handled above
     if (imp.source.startsWith('.')) {
-      // Rewrite ./lib/utils → @/lib/utils (installed by forge-ui init).
+      // Rewrite ./lib/utils → @/lib/utils (installed by eidos init).
       // Other relative-local paths are inlined via the boundary system; skip them.
       if (imp.source === './lib/utils' || imp.source.endsWith('/lib/utils')) {
         const rewritten = imp.stmtText.replace(/'[^']*lib\/utils'/, "'@/lib/utils'");

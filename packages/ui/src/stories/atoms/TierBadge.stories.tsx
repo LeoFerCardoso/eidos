@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { TierBadge } from '@forge/ui';
+import { TierBadge } from '@eidos/ui';
 
 const TIERS = ['T1', 'T2', 'T3'] as const;
 

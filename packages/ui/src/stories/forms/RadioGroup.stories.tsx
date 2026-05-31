@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { RadioGroup } from '@forge/ui';
+import { RadioGroup } from '@eidos/ui';
 
 const ROLLOUT = [
   { label: 'All at once', value: 'all' },

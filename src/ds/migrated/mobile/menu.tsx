@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Menu. A small popover of actions anchored to its trigger (an overflow ⋯ or
+// Eidos Mobile — Menu. A small popover of actions anchored to its trigger (an overflow ⋯ or
 // a labelled button), opening beside it rather than from the screen edge. Use it for a few
 // inline actions where the anchor matters; for a longer object-scoped list, use the Action sheet.
 import * as React from 'react';

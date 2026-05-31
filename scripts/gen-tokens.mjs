@@ -7,7 +7,7 @@
 //   node scripts/gen-tokens.mjs --check   # fail (exit 1) if the committed file is stale
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 
-// Canonical source moved to the @forge/ui package post-monorepo. Fall back to the
+// Canonical source moved to the @eidos/ui package post-monorepo. Fall back to the
 // legacy in-app path only if the canonical one is absent (keeps old checkouts working).
 const SOURCES = ['packages/ui/styles/tokens.css', 'src/styles/tokens.css'];
 const SOURCE = SOURCES.find((p) => existsSync(p));

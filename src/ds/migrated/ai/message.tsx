@@ -22,7 +22,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, Message, Me
 <Message from="system">Session opened · forge-ai/sonnet-4-6</Message>`;
 
   const MARKDOWN_CODE = `<Message from="assistant" meta={<>
-  <span className="name">Forge AI</span>
+  <span className="name">Eidos AI</span>
   <span className="dot"/> <span>just now</span>
 </>}>
   Three things to check first:
@@ -54,7 +54,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, Message, Me
 </Message>`;
 
   const AI_LABEL_CODE = `<Message from="assistant" meta={<>
-  <span className="name">Forge AI</span>
+  <span className="name">Eidos AI</span>
   <AILabel variant="pill" size="sm">AI</AILabel>
   <span className="dot"/> <span>2 min ago</span>
 </>}>
@@ -72,7 +72,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, Message, Me
       <Message
         from="assistant"
         meta={<>
-          <span className="name">Forge AI</span>
+          <span className="name">Eidos AI</span>
           <span className="dot"/>
           <span>just now</span>
         </>}
@@ -99,7 +99,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, Message, Me
   };
 
   // The "Marked as AI" demo composes the real <AILabel variant="pill" size="sm"/>
-  // straight from @forge/ui — no local clone, so the page always tracks the
+  // straight from @eidos/ui — no local clone, so the page always tracks the
   // shipped badge contract (and stays on the type scale).
 
   // ─── page ────────────────────────────────────────────────────────────────
@@ -120,7 +120,7 @@ export default function MessagePage() {
       <Lede up>
         Ships the <Mono>Message</Mono> shell plus an opinionated
         action toolbar. Markdown rendering, attachments, and the streaming
-        caret are all built-in — no extra peer deps beyond the Forge baseline.
+        caret are all built-in — no extra peer deps beyond the Eidos baseline.
       </Lede>
 
       {/* 2. USAGE */}
@@ -130,7 +130,7 @@ export default function MessagePage() {
           <Message from="user">
             Where do I find the Tier-1 incident runbooks?
           </Message>
-          <Message from="assistant" meta={<><span className="name">Forge AI</span><span className="dot"/><span>just now</span></>}>
+          <Message from="assistant" meta={<><span className="name">Eidos AI</span><span className="dot"/><span>just now</span></>}>
             In <code>docs/runbooks/tier-1/</code> — each service has its own Markdown file with the on-call rotation, dashboards, and rollback steps for the last three releases.
           </Message>
         </Sample>
@@ -147,7 +147,7 @@ export default function MessagePage() {
       <Frame label="user · assistant · system" code={VARIANTS_CODE} height={260}>
         <Sample>
           <Message from="user">Where are the runbooks?</Message>
-          <Message from="assistant" meta={<><span className="name">Forge AI</span></>}>
+          <Message from="assistant" meta={<><span className="name">Eidos AI</span></>}>
             In <code>docs/runbooks/tier-1/</code>.
           </Message>
           <Message from="system">Session opened · forge-ai/sonnet-4-6</Message>
@@ -166,7 +166,7 @@ export default function MessagePage() {
           <div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.08em', color: 'var(--fg-subtle)', textTransform: 'uppercase', marginBottom: 8 }}>bubble — default chat turn</div>
             <Sample>
-              <Message from="assistant" meta={<><span className="name">Forge AI</span></>}>
+              <Message from="assistant" meta={<><span className="name">Eidos AI</span></>}>
                 Retry budget on <code>grpc.toml</code> went from 3 to 8.
               </Message>
             </Sample>
@@ -174,7 +174,7 @@ export default function MessagePage() {
           <div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.08em', color: 'var(--fg-subtle)', textTransform: 'uppercase', marginBottom: 8 }}>compact — sidebars, dense threads</div>
             <Sample>
-              <Message from="assistant" variant="compact" meta={<><span className="name">Forge AI</span></>}>
+              <Message from="assistant" variant="compact" meta={<><span className="name">Eidos AI</span></>}>
                 Retry budget on <code>grpc.toml</code> went from 3 to 8.
               </Message>
             </Sample>
@@ -182,7 +182,7 @@ export default function MessagePage() {
           <div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.08em', color: 'var(--fg-subtle)', textTransform: 'uppercase', marginBottom: 8 }}>plain — no bubble (use sparingly)</div>
             <Sample>
-              <Message from="assistant" variant="plain" meta={<><span className="name">Forge AI</span></>}>
+              <Message from="assistant" variant="plain" meta={<><span className="name">Eidos AI</span></>}>
                 Retry budget on <code>grpc.toml</code> went from 3 to 8.
               </Message>
             </Sample>
@@ -197,7 +197,7 @@ export default function MessagePage() {
       <SubHead meta="lists · code · links">Rich body</SubHead>
       <Frame label="assistant reply with inline code, list, and a follow-up" code={MARKDOWN_CODE} height={260}>
         <Sample>
-          <Message from="assistant" meta={<><span className="name">Forge AI</span><span className="dot"/><span>just now</span></>}>
+          <Message from="assistant" meta={<><span className="name">Eidos AI</span><span className="dot"/><span>just now</span></>}>
             Three things to check first:
             <ul>
               <li><code>config/grpc.toml</code> for the retry budget</li>
@@ -248,7 +248,7 @@ export default function MessagePage() {
         <Sample>
           <Message from="assistant" meta={
             <>
-              <span className="name">Forge AI</span>
+              <span className="name">Eidos AI</span>
               <AILabel variant="pill" size="sm">AI</AILabel>
               <span className="dot"/>
               <span>2 min ago</span>
@@ -266,7 +266,7 @@ export default function MessagePage() {
       <SubHead meta="streaming">Streaming</SubHead>
       <Frame label="caret blinks while the model is still emitting tokens" code={STREAMING_CODE} height={140}>
         <Sample>
-          <Message from="assistant" streaming meta={<><span className="name">Forge AI</span></>}>
+          <Message from="assistant" streaming meta={<><span className="name">Eidos AI</span></>}>
             Looking at the last three deploy diffs
           </Message>
         </Sample>
@@ -279,7 +279,7 @@ export default function MessagePage() {
           <Message
             from="assistant"
             error="Model timed out after 8s. Click regenerate to try again."
-            meta={<><span className="name">Forge AI</span></>}
+            meta={<><span className="name">Eidos AI</span></>}
           >
             I was checking your incident traces when…
           </Message>
@@ -295,7 +295,7 @@ export default function MessagePage() {
         </div>
         <div className="surface" style={{padding: 18}}>
           <div style={{fontWeight: 600, marginBottom: 6}}>Screen reader</div>
-          <div style={{color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.55}}>Each turn carries the role in its accessible name (the avatar derives an <code style={{fontFamily:'var(--font-mono)'}}>alt</code> from <code style={{fontFamily:'var(--font-mono)'}}>from</code>, e.g. "Forge AI said"), so user / assistant / system is spoken, not just shown by alignment. A streaming assistant turn sits in an <code style={{fontFamily:'var(--font-mono)'}}>aria-live="polite"</code> region and is marked <code style={{fontFamily:'var(--font-mono)'}}>aria-busy="true"</code> until tokens stop; the error string is announced via <code style={{fontFamily:'var(--font-mono)'}}>role="alert"</code>, and vote buttons expose <code style={{fontFamily:'var(--font-mono)'}}>aria-pressed</code>.</div>
+          <div style={{color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.55}}>Each turn carries the role in its accessible name (the avatar derives an <code style={{fontFamily:'var(--font-mono)'}}>alt</code> from <code style={{fontFamily:'var(--font-mono)'}}>from</code>, e.g. "Eidos AI said"), so user / assistant / system is spoken, not just shown by alignment. A streaming assistant turn sits in an <code style={{fontFamily:'var(--font-mono)'}}>aria-live="polite"</code> region and is marked <code style={{fontFamily:'var(--font-mono)'}}>aria-busy="true"</code> until tokens stop; the error string is announced via <code style={{fontFamily:'var(--font-mono)'}}>role="alert"</code>, and vote buttons expose <code style={{fontFamily:'var(--font-mono)'}}>aria-pressed</code>.</div>
         </div>
         <div className="surface" style={{padding: 18}}>
           <div style={{fontWeight: 600, marginBottom: 6}}>Focus &amp; contrast</div>
@@ -313,7 +313,7 @@ export default function MessagePage() {
         <div dir="rtl" style={{ width: '100%' }}>
           <Sample>
             <Message from="user">أين أجد كتيبات الحوادث؟</Message>
-            <Message from="assistant" meta={<><span className="name">Forge AI</span></>}>
+            <Message from="assistant" meta={<><span className="name">Eidos AI</span></>}>
               في <code>docs/runbooks/tier-1/</code> — لكل خدمة ملف Markdown خاص بها.
             </Message>
           </Sample>
@@ -327,7 +327,7 @@ export default function MessagePage() {
         <div className="ds-frame-body" style={{ padding: '72px 36px 60px' }}>
           <div className="ana" style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="stage" style={{ position: 'relative', width: 380 }} aria-hidden="true">
-              <Message from="assistant" meta={<><span className="name">Forge AI</span><span className="dot"/><span>just now</span></>}
+              <Message from="assistant" meta={<><span className="name">Eidos AI</span><span className="dot"/><span>just now</span></>}
                        actions={
                          <>
                            <button className="msg-action"><Icons.copy size={13}/></button>
@@ -364,7 +364,7 @@ export default function MessagePage() {
           <div className="body" style={{ padding: 14 }}>
             <Sample>
               <Message from="user">Where?</Message>
-              <Message from="assistant" meta={<><span className="name">Forge AI</span></>}>In <code>docs/runbooks/tier-1/</code>.</Message>
+              <Message from="assistant" meta={<><span className="name">Eidos AI</span></>}>In <code>docs/runbooks/tier-1/</code>.</Message>
             </Sample>
           </div>
           <div className="note">Role decides fill, alignment, and avatar in one go — the caller picks <Mono>from</Mono>, the system handles the rest.</div>
@@ -394,7 +394,7 @@ export default function MessagePage() {
             <Sample>
               <Message from="system">Session opened</Message>
               <Message from="user">Stuck on this — log attached.</Message>
-              <Message from="assistant" meta={<><span className="name">Forge AI</span></>}>Looking — give me a moment.</Message>
+              <Message from="assistant" meta={<><span className="name">Eidos AI</span></>}>Looking — give me a moment.</Message>
             </Sample>
           </div>
           <div className="note">18px gap between rows is enough to read the thread without a separator on every turn.</div>
@@ -405,7 +405,7 @@ export default function MessagePage() {
             <div style={{ width: '100%' }}>
               <Message from="user">Stuck on this.</Message>
               <div style={{ height: 1, background: 'var(--border-strong)', margin: '10px 0' }}/>
-              <Message from="assistant" meta={<><span className="name">Forge AI</span></>}>Looking.</Message>
+              <Message from="assistant" meta={<><span className="name">Eidos AI</span></>}>Looking.</Message>
               <div style={{ height: 1, background: 'var(--border-strong)', margin: '10px 0' }}/>
               <Message from="user">Anything?</Message>
             </div>

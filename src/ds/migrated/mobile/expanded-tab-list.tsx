@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Expanded Tab List. The "All tabs / More" sheet: a vertical or wrapped
+// Eidos Mobile — Expanded Tab List. The "All tabs / More" sheet: a vertical or wrapped
 // grid of destinations with icon + label, one selected in ember. Used when the app has more
 // sections than the bottom Tab Bar can hold. Cross-links to Tab bar.
 import * as React from 'react';

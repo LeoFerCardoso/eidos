@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Pulldown. An iOS-style pull-down menu button: a control with a label
+// Eidos Mobile — Pulldown. An iOS-style pull-down menu button: a control with a label
 // and trailing chevron that, when tapped, reveals a menu of choices anchored below it.
 // Single-select; the active choice gets a leading checkmark. Use for sort/filter/view options.
 // NOT pull-to-refresh (see PullRefresh). The open menu is role="menu" with menuitemradio items.

@@ -1,7 +1,7 @@
-// @forge/ui — the Forge Design System component library.
+// @eidos/ui — the Forge Design System component library.
 //
 // Framework-agnostic React + a shared semantic CSS layer (import the stylesheets
-// from "@forge/ui/styles/*"). Each module imports its dependencies directly
+// from "@eidos/ui/styles/*"). Each module imports its dependencies directly
 // (icons → atoms/blocks; recharts → charts; ai → primitives/atoms/icons), so there
 // is no load-order side-effect and no `window` registry. The package is marked
 // `sideEffects: ["*.css"]` so this barrel tree-shakes (recharts only ships in chart

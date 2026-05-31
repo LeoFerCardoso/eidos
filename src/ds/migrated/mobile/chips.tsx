@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Filter chips. A horizontally-scrolling row of selectable
+// Eidos Mobile — Filter chips. A horizontally-scrolling row of selectable
 // filters above a list — the mobile equivalent of a filter bar.
 import * as React from 'react';
 import { Section, SubHead, Frame, CodeBlock, DeviceFrame, Icons, Lede, Mono, AutoPropsTable, Skeleton, Spinner, Alert, AlertTitle, AlertDescription, AlertActions } from '@/ds/core';

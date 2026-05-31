@@ -1,5 +1,5 @@
 'use client';
-// Forge IDP — shared ChatShell for every AI Chat example.
+// Eidos IDP — shared ChatShell for every AI Chat example.
 //
 // Wraps the standard FShell (rail + topbar) and adds a fixed 264px column
 // of chat-history navigation BETWEEN the rail and the main content. The
@@ -209,7 +209,7 @@ export const ChatShell = ({
   children: React.ReactNode;
 }) => {
   return (
-    <FShell nav="chat" crumbs={crumbs || ['Forge', 'AI', 'New chat']} fullBleed>
+    <FShell nav="chat" crumbs={crumbs || ['Eidos', 'AI', 'New chat']} fullBleed>
       <div className={'cs-app' + (sidebarCollapsed ? ' is-side-collapsed' : '')}>
         <ChatHistorySidebar side={side} activeChat={activeChat}/>
         <section className="cs-main">{children}</section>

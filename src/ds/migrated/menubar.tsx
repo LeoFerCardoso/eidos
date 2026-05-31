@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Menubar
+// Eidos DS — Components / Menubar
 // Section order (DS-PAGE-STANDARD §2.2):
 //   1. Installation
 //   2. Usage
@@ -144,7 +144,7 @@ export default function MenubarPage() {
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('menubar')} ariaLabel="package manager" />
       <Lede>
-        Forge's Menubar handles the full WAI-ARIA menubar keyboard model — roving tabindex across triggers, type-ahead in both the bar and panels, and correct arrow/Escape handling — as plain React over the Forge CSS layer. No Radix runtime. The CLI ships <Mono>menubar.tsx</Mono>; pick <em>Manual</em> to copy the file yourself.
+        Eidos's Menubar handles the full WAI-ARIA menubar keyboard model — roving tabindex across triggers, type-ahead in both the bar and panels, and correct arrow/Escape handling — as plain React over the Eidos CSS layer. No Radix runtime. The CLI ships <Mono>menubar.tsx</Mono>; pick <em>Manual</em> to copy the file yourself.
       </Lede>
 
       {/* ===================================================================
@@ -198,7 +198,7 @@ export default function MenubarPage() {
         <div style={{ inlineSize: '100%', border: '1px solid var(--border)', borderRadius: 'var(--radius-xl)', overflow: 'hidden', background: 'var(--surface)' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBlock: 'var(--space-2)', paddingInline: 'var(--space-3)', borderBlockEnd: '1px solid var(--border)', background: 'var(--bg-elevated)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
-              <span style={{ fontWeight: 600, fontSize: 'var(--text-base)' }}>Forge Studio</span>
+              <span style={{ fontWeight: 600, fontSize: 'var(--text-base)' }}>Eidos Studio</span>
               <Menubar>
                 <DemoMenu label="File"  items={FILE_ITEMS} />
                 <DemoMenu label="Edit"  items={EDIT_ITEMS} />

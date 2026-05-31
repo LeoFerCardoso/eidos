@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { DataTable, Icons, LangBadge, MOCKS, OwnerPill, ScoreGauge, Sparkline, TierBadge, Trend } from '@/ds/core';
 import { FKpi, FPageHeader, FSection, FShell } from './example-shell';
-// Forge IDP — Example: Service score cards (Backstage Tech Insights-style).
+// Eidos IDP — Example: Service score cards (Backstage Tech Insights-style).
 
   
   
@@ -95,7 +95,7 @@ import { FKpi, FPageHeader, FSection, FShell } from './example-shell';
     return (
       <FShell
         nav="scores"
-        crumbs={[{ label: 'Forge', href: '/example/ai-insights' }, 'Score cards']}>
+        crumbs={[{ label: 'Eidos', href: '/example/ai-insights' }, 'Score cards']}>
 
         <FPageHeader
           title="Service score cards · 142 services · 18 tribes"

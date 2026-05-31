@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Text field. A single-line input sized for a thumb and the on-screen
+// Eidos Mobile — Text field. A single-line input sized for a thumb and the on-screen
 // keyboard: a persistent label above the box, an optional leading icon, a clear affordance,
 // and a helper line that becomes the error message in place. Never a placeholder-as-label.
 import * as React from 'react';

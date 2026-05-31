@@ -1,5 +1,5 @@
 'use client';
-// Forge IDP — Overview. Introduction-style landing; the hero shows the platform LIVE:
+// Eidos IDP — Overview. Introduction-style landing; the hero shows the platform LIVE:
 // a real service card (the detailed recipe — header health, latency spark, team footer)
 // over a deploy pipeline that advances build → test → deploy → done, the same "make the
 // platform legible while it works" thesis the AI overview argues with its streaming hero.
@@ -118,14 +118,14 @@ const D: Record<string, string> = {
 export default function IdpOverview() {
   return (
     <DsOverview
-      eyebrow="Forge / IDP"
+      eyebrow="Eidos / IDP"
       title="Run the platform."
       lede="The mid-level compositions a Backstage-class internal developer platform needs — data tables, pipelines, log and diff viewers, service and score cards — assembled entirely from core primitives, ready to drop into a console."
       hero={{
         eyebrow: 'Blocks · Elements · screens',
         heading: 'Platform surfaces, pre-baked.',
         subtitle: 'Tables, pipelines, cards — from core primitives.',
-        body: 'A service card is a Card + Pill + Avatar + Sparkline; a pipeline is a stage graph over status tokens. Forge IDP codifies the compositions that repeat across a developer platform so every console reads the same.',
+        body: 'A service card is a Card + Pill + Avatar + Sparkline; a pipeline is a stage graph over status tokens. Eidos IDP codifies the compositions that repeat across a developer platform so every console reads the same.',
         actions: (
           <>
             <a className="btn ember" href="/idp/data-table">Browse blocks <Icons.arrowRight size={14} /></a>

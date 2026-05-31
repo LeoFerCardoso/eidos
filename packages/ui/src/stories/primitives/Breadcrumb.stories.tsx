@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Breadcrumb, Icons } from '@forge/ui';
+import { Breadcrumb, Icons } from '@eidos/ui';
 
 // ── Shared fixtures ───────────────────────────────────────────────────────────
 

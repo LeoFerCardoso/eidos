@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   DataTable, HealthBadge, TierBadge, LangBadge, OwnerPill, SeverityPill,
   Sparkline, Trend, CopyChip, RelativeTime, Pipeline, Icons, MOCKS,
-} from '@forge/ui';
+} from '@eidos/ui';
 
 // ──────────────────────────────────────────────────────────────────────────
 // The bound DataTableColumn type only types `align` as the physical

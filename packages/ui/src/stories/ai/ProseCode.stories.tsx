@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ProseCode } from '@forge/ui';
+import { ProseCode } from '@eidos/ui';
 
 const meta = {
   title: 'AI/ProseCode',
@@ -46,7 +46,7 @@ export const TypeScript: Story = {
   args: {
     lang: 'ts',
     children: [
-      "import { deployctl } from '@forge/infra';",
+      "import { deployctl } from '@eidos/infra';",
       '',
       'async function rollback(service: string, version: string): Promise<void> {',
       '  await deployctl.rollback({',
@@ -102,7 +102,7 @@ export const Variants: Story = {
 
       <ProseCode lang="ts">
         {[
-          "import { IncidentClient } from '@forge/ops';",
+          "import { IncidentClient } from '@eidos/ops';",
           '',
           'const client = new IncidentClient({ region: \'sa-east-1\' });',
           "const incident = await client.open({ severity: 'p1', service: 'fraud-engine' });",

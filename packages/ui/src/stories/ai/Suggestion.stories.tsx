@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Suggestion, Icons } from '@forge/ui';
+import { Suggestion, Icons } from '@eidos/ui';
 
 const meta = {
   title: 'AI/Suggestion',

@@ -339,7 +339,7 @@ upgraded meta-prompt distilled from the `HARNESS.md` "Eidos" draft — kept the 
 the stack-mismatched parts: no cva/Style-Dictionary/changesets/MDX/pnpm). The harness now has a
 single machine-readable spine instead of scattered checks.
 - **The spine:** `packages/registry/forge.contract.json` (+ `forge.contract.schema.json`) defines
-  "a component is Done" as **25 clauses** across the **4 surfaces** (docs page · `@forge/ui` export
+  "a component is Done" as **25 clauses** across the **4 surfaces** (docs page · `@eidos/ui` export
   · Storybook story · registry item). Each clause names a verifier; `scripts/check-contract.mjs`
   validates the contract (dependency-free schema validator + dsVersion==`site.ts` + verifier
   resolution). `docs/ds-page-standard.json` is the machine-readable derivation of
@@ -386,7 +386,7 @@ tsc + SSG-prerender of all 247 pages) and `npm run sb:build` as the gates — ev
 blind-edited:
 - **Stories (35):** built the missing CSF3 stories (workflow); C-story 49→0; `sb:build` green.
 - **AutoPropsTable (46→0):** swapped hand `<PropsTable>` → `<AutoPropsTable>` across ~40 docs pages; for
-  24 components whose `@forge/ui` props were typed-but-undocumented (or incomplete), an 8-agent
+  24 components whose `@eidos/ui` props were typed-but-undocumented (or incomplete), an 8-agent
   per-file workflow promoted them to named `<Export>Props` interfaces + ported the hand-table copy into
   **JSDoc** (comment-only, runtime-safe) so the generated table is authoritative. `build` green.
 - **Section-order / lede / RTL / anatomy / Do-Don't:** fixed `ai-label` (mislabelled `meta="rules"` on a
@@ -425,7 +425,7 @@ Acted on the 2 docs↔impl mismatches instead of leaving them waived, plus an at
   AutoPropsTable, cross-linked to Pill/Badge), added the `chip` nav entry, relabelled the old
   "Pills & Chips" nav to **Pill**, and **slimmed `pills.tsx` to Pill-only** (removed the Chips/Filter-chips
   sections + ChipProps table, kept a "Pill·Chip·Badge — when to use which" orientation + cross-links).
-  Now pill/chip/badge each own 1:1 docs↔export↔story↔registry (atomic, matching `forge-ui add <x>`).
+  Now pill/chip/badge each own 1:1 docs↔export↔story↔registry (atomic, matching `eidos add <x>`).
 - **Alphabetical sidebars (user request):** `gen-nav.mjs` now sorts items A→Z by label within each
   (sub)group, pinning `overview` first and leaving "Get Started" in its pedagogical order; Storybook
   `preview.ts` storySort gained `method: 'alphabetical'` (group order fixed, stories A→Z within).

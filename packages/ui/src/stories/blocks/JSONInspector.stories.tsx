@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { JSONInspector, MOCKS } from '@forge/ui';
+import { JSONInspector, MOCKS } from '@eidos/ui';
 
 const DEPLOY_PAYLOAD = {
   id: 'D-9182',

@@ -14,8 +14,8 @@
 - [ ] **`History`** — props `groupBy`/`projects` tipadas mas ignoradas; `HistoryDrawer` documentado e não exportado. Mesmo tratamento.
 
 ## Estrutural — Lote 6 (programa próprio, não trivial)
-- [ ] **Promover Mobile/Charts/Patterns/block-examples a `@forge/ui` + stories** — ~76 páginas doc-only (sem export/story). Via `promote-batch`. Decisão estratégica pendente (pode ser intencionalmente doc-only).
-- [ ] **`tree-view`** — docs+story já apontam para o `ForgeTree` real (`src/components/pierre-tree.tsx`, wrapper @pierre/trees). **Waivers `C-export` e `C-registry-sync` expiram 2026-08-31** — antes disso: re-exportar `ForgeTree` do barrel `@forge/ui` + criar o registry source, e rodar `npm run gen:contract`. (Senão renovar/decidir.)
+- [ ] **Promover Mobile/Charts/Patterns/block-examples a `@eidos/ui` + stories** — ~76 páginas doc-only (sem export/story). Via `promote-batch`. Decisão estratégica pendente (pode ser intencionalmente doc-only).
+- [ ] **`tree-view`** — docs+story já apontam para o `ForgeTree` real (`src/components/pierre-tree.tsx`, wrapper @pierre/trees). **Waivers `C-export` e `C-registry-sync` expiram 2026-08-31** — antes disso: re-exportar `ForgeTree` do barrel `@eidos/ui` + criar o registry source, e rodar `npm run gen:contract`. (Senão renovar/decidir.)
 
 ## Polish opcional (rubric-honesto deixar em "forte 7")
 - [ ] Empurrar **Detalhe** (152 págs em 7) e **Inovação** (≈133 não-utilitárias em 7) para 8.0 — só onde servir; risco de over-design nas utilitárias. Média atual já é saudável.

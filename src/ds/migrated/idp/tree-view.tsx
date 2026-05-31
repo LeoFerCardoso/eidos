@@ -1,8 +1,8 @@
 'use client';
-// Forge DS — Components / TreeView, backed by the real trees.software engine.
+// Eidos DS — Components / TreeView, backed by the real trees.software engine.
 // We render Pierre's @pierre/trees FileTree (path-first model, virtualized rows,
 // git-status lane, search, drag-and-drop, context menus, keyboard a11y) and
-// re-skin ONLY colours, typography and shapes to Forge via the `--trees-*-override`
+// re-skin ONLY colours, typography and shapes to Eidos via the `--trees-*-override`
 // custom props. See `.forge-tree` in ds.css and the wrapper in
 // src/components/pierre-tree.tsx.
 import * as React from 'react';
@@ -139,8 +139,8 @@ function ContextMenuDemo() {
 
 export default function TreeViewPage() {
   return (
-    <Section id="tree-view" title="Tree view" desc="The @pierre/trees engine re-skinned to Forge — path-first file tree with virtualized rows, per-language icons, git-status lane, fuzzy search, drag-and-drop, inline rename, and context menus.">
-      <Lede>How the platform renders any nested structure a developer browses — monorepo file trees, service-and-domain taxonomies, dependency graphs. Forge themes colours, typography and shapes through the library&rsquo;s <Mono>--trees-*-override</Mono> custom properties: selection accent and focus ring are ember, the git lane maps to Forge success / danger / warning. The tree model, virtualization, layout and keyboard a11y are the library&rsquo;s, untouched.</Lede>
+    <Section id="tree-view" title="Tree view" desc="The @pierre/trees engine re-skinned to Eidos — path-first file tree with virtualized rows, per-language icons, git-status lane, fuzzy search, drag-and-drop, inline rename, and context menus.">
+      <Lede>How the platform renders any nested structure a developer browses — monorepo file trees, service-and-domain taxonomies, dependency graphs. Eidos themes colours, typography and shapes through the library&rsquo;s <Mono>--trees-*-override</Mono> custom properties: selection accent and focus ring are ember, the git lane maps to Eidos success / danger / warning. The tree model, virtualization, layout and keyboard a11y are the library&rsquo;s, untouched.</Lede>
 
       {/* ── INSTALLATION ─────────────────────────────────────────────── */}
       <SubHead meta="package">Installation</SubHead>
@@ -236,7 +236,7 @@ export default function TreeViewPage() {
 
       {/* ── CONTEXT MENU ─────────────────────────────────────────────── */}
       <SubHead meta="renderContextMenu">Context menu</SubHead>
-      <p style={{ ...lede, marginTop: 0 }}>Right-click a row (or use the per-row trigger button) for new file, new folder, rename and delete. The menu is a plain Forge surface — your app supplies its own. Switch the trigger mode and try it:</p>
+      <p style={{ ...lede, marginTop: 0 }}>Right-click a row (or use the per-row trigger button) for new file, new folder, rename and delete. The menu is a plain Eidos surface — your app supplies its own. Switch the trigger mode and try it:</p>
       <Frame label="right-click · trigger button · both — new file/folder, rename, delete">
         <ContextMenuDemo/>
       </Frame>
@@ -269,7 +269,7 @@ export default function TreeViewPage() {
       <div className="ds-grid cols-2" style={{marginTop: 12}}>
         <div className="surface" style={{padding: 18}}>
           <div style={{fontWeight: 600, marginBottom: 6}}>Keyboard</div>
-          <div style={{color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.55}}>A single roving <code>Tab</code> stop enters the tree, then arrow keys move within it: <code>↓</code>/<code>↑</code> step between visible rows, <code>→</code> expands a collapsed folder (or moves to its first child), <code>←</code> collapses an open folder (or moves to its parent). <code>Enter</code>/<code>Space</code> selects; type-ahead jumps to a name. The library owns this — Forge only re-skins it.</div>
+          <div style={{color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.55}}>A single roving <code>Tab</code> stop enters the tree, then arrow keys move within it: <code>↓</code>/<code>↑</code> step between visible rows, <code>→</code> expands a collapsed folder (or moves to its first child), <code>←</code> collapses an open folder (or moves to its parent). <code>Enter</code>/<code>Space</code> selects; type-ahead jumps to a name. The library owns this — Eidos only re-skins it.</div>
         </div>
         <div className="surface" style={{padding: 18}}>
           <div style={{fontWeight: 600, marginBottom: 6}}>Screen reader</div>
@@ -378,14 +378,14 @@ export default function TreeViewPage() {
           { prop: 'initialSearchQuery', type: 'string', description: 'Pre-populate the search field (e.g. to demo a mode at rest).' },
           { prop: 'dragAndDrop', type: 'boolean', default: 'false', description: 'Enable drag-to-move between folders and to the root. Disabled while searching.' },
           { prop: 'lockedPaths', type: 'string[]', description: 'Paths that cannot be dragged (canDrag=false); each also gets a "locked" tag.' },
-          { prop: 'contextMenu', type: 'boolean', default: 'false', description: 'Mount the Forge context menu (new file/folder, rename, delete) wired to the model.' },
+          { prop: 'contextMenu', type: 'boolean', default: 'false', description: 'Mount the Eidos context menu (new file/folder, rename, delete) wired to the model.' },
           { prop: 'contextMenuTrigger', type: '"both" | "right-click" | "button"', default: '"both"', description: 'How the context menu opens.' },
           { prop: 'chrome', type: 'string', description: 'Render an IDE-style window chrome header (traffic lights, repo title, search + new-file actions).' },
           { prop: 'density', type: '"compact" | "default" | "relaxed" | number', default: '"default"', description: 'Row height + spacing preset (or an explicit item height in px).' },
           { prop: 'height', type: 'number | string', default: '320', description: 'Fixed panel height; rows virtualize and scroll inside it.' },
         ]}
       />
-      <Lede>Built on <Mono>@pierre/trees</Mono> (the engine behind <a href="https://trees.software" target="_blank" rel="noreferrer" style={{color:'var(--ice)'}}>trees.software</a>). Forge sets only the <Mono>--trees-*-override</Mono> colour, type + shape custom properties in <Mono>ds.css</Mono>; the model, virtualization and a11y are the library&rsquo;s.</Lede>
+      <Lede>Built on <Mono>@pierre/trees</Mono> (the engine behind <a href="https://trees.software" target="_blank" rel="noreferrer" style={{color:'var(--ice)'}}>trees.software</a>). Eidos sets only the <Mono>--trees-*-override</Mono> colour, type + shape custom properties in <Mono>ds.css</Mono>; the model, virtualization and a11y are the library&rsquo;s.</Lede>
     </Section>
   );
 }

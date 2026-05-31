@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { SpeechInput, PromptInput } from '@forge/ui';
+import { SpeechInput, PromptInput } from '@eidos/ui';
 
 // ── Waveform fixtures (mirror the doc page bar-count variants) ────────────────
 const LEVELS_6: number[]  = [0.50, 0.82, 0.44, 0.91, 0.63, 0.37];

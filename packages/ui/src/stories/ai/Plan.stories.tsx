@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Plan, Message } from '@forge/ui';
+import { Plan, Message } from '@eidos/ui';
 
 // Plan types `items` as any[]; this local shape keeps the demo data type-checked
 // against the documented "pending" | "active" | "done" status union.
@@ -139,7 +139,7 @@ export const LiveTicking: Story = {
 
 /**
  * In context — the Plan sits at the top of an assistant turn, before the first
- * tool call, composed inside a Message bubble from @forge/ui.
+ * tool call, composed inside a Message bubble from @eidos/ui.
  */
 export const InContext: Story = {
   render: () => (

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Reasoning, Message } from '@forge/ui';
+import { Reasoning, Message } from '@eidos/ui';
 
 const TRACE_CONTENT = (
   <>

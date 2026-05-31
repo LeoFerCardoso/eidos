@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Foundations / Layout. Safe areas, side margins, vertical rhythm, targets.
+// Eidos Mobile — Foundations / Layout. Safe areas, side margins, vertical rhythm, targets.
 import { Section, SubHead, Frame, CodeBlock, SpecRow, DeviceFrame, Icons, Lede, Mono } from '@/ds/core';
 
 const guide = { position: 'absolute', insetBlock: 0, width: 1, background: 'var(--ember)', opacity: 0.4, pointerEvents: 'none' } as const;

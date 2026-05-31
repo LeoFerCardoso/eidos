@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Aspect Ratio
+// Eidos DS — Components / Aspect Ratio
 // Section order (DS-PAGE-STANDARD §2.2):
 //   1. Installation
 //   2. Usage
@@ -52,7 +52,7 @@ export function Demo() {
       {!loaded && <Skeleton variant="box" label="Loading hero" />}
       <img
         src="/hero.jpg"
-        alt="Forge ring rollout — canary to 100% with health gates"
+        alt="Eidos ring rollout — canary to 100% with health gates"
         onLoad={() => setLoaded(true)}
         style={{ opacity: loaded ? 1 : 0, transition: "opacity .25s" }}
       />
@@ -145,7 +145,7 @@ function UsageDemo() {
           /* nonce cache-busts so Reload re-triggers a real decode */
           key={nonce}
           src={`${IMG_HERO}#${nonce}`}
-          alt="Forge ring rollout — canary to 100% with health gates"
+          alt="Eidos ring rollout — canary to 100% with health gates"
           onLoad={() => setLoaded(true)}
           style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
         />

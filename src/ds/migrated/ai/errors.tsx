@@ -147,7 +147,7 @@ import { Icons, Frame, Section, SubHead, PropsTable, Lede, Mono } from '@/ds/cor
     <div className="ai-resp" style={{ width: '100%', maxWidth: 640 }}>
       <div className="ai-resp-stack">
         <div className="ai-resp-meta">
-          <span className="name">Forge AI</span>
+          <span className="name">Eidos AI</span>
           <span className="dot"/>
           <span>14:08 · partial</span>
         </div>

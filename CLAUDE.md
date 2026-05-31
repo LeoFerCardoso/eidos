@@ -10,8 +10,8 @@ A Forge component is **Done** iff `npm run forge:verify -- --component <slug> --
 exits 0 — the green gate beats any opinion; reviewers and builders never self-certify. The
 single machine-readable definition of "Done" is **`packages/registry/forge.contract.json`**
 (+ `forge.contract.schema.json`), spanning a component's **four surfaces**: the docs page
-(`src/ds/migrated/**`), the `@forge/ui` export (`packages/ui/src`), the Storybook story
-(`packages/ui/src/stories`), and the registry item (`packages/registry` → `forge-ui add`).
+(`src/ds/migrated/**`), the `@eidos/ui` export (`packages/ui/src`), the Storybook story
+(`packages/ui/src/stories`), and the registry item (`packages/registry` → `eidos add`).
 Each clause maps to a deterministic verifier in `scripts/` (the existing `check-*`/`gen-*`
 plus `check-ds-page-structure`, `check-4-surface-parity`, `check-stories`, `check-registry`,
 `check-no-page-style`, `check-slop`); `scripts/forge-verify.mjs` aggregates them and writes

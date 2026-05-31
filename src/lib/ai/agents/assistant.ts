@@ -1,4 +1,4 @@
-// Reference Forge IDP assistant — a type-safe AI SDK v6 ToolLoopAgent.
+// Reference Eidos IDP assistant — a type-safe AI SDK v6 ToolLoopAgent.
 //
 // Pattern (see the `ai-agent-scaffold` skill):
 //   - tools via `tool({ inputSchema: z…, execute })`
@@ -36,7 +36,7 @@ const getServiceHealth = tool({
 export const assistantAgent = new ToolLoopAgent({
   model: SMART_MODEL,
   instructions:
-    'You are the Forge IDP assistant. Help platform engineers inspect services, deploys, ' +
+    'You are the Eidos IDP assistant. Help platform engineers inspect services, deploys, ' +
     'and scorecards. Be concise and precise. Use tools to fetch real data instead of guessing. ' +
     'When you report a service, lead with its status and health score.',
   tools: { getServiceHealth },

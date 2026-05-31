@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { SubHead } from '@forge/ui';
+import { SubHead } from '@eidos/ui';
 
 const meta = {
   title: 'Docs/SubHead',

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ForgeChart, ForgeTooltipContent, Recharts } from '@forge/ui';
+import { ForgeChart, ForgeTooltipContent, Recharts } from '@eidos/ui';
 
 // Local series fixture — ForgeChart is a container; the chart type is
 // determined by the Recharts child you pass in, not a prop on ForgeChart.

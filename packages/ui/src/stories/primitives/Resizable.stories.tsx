@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Resizable, ResizablePanel, ResizableHandle } from '@forge/ui';
+import { Resizable, ResizablePanel, ResizableHandle } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/Resizable',

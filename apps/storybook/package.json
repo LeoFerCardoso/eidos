@@ -1,5 +1,5 @@
 {
-  "name": "@forge/storybook",
+  "name": "@eidos/storybook",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -9,7 +9,7 @@
     "build-storybook": "storybook build -o storybook-static"
   },
   "dependencies": {
-    "@forge/ui": "*"
+    "@eidos/ui": "*"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^10.4.1",

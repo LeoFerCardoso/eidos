@@ -1,5 +1,5 @@
 'use client';
-// Forge Blocks — Split feature. A two-column section: copy on one side, a visual on the
+// Eidos Blocks — Split feature. A two-column section: copy on one side, a visual on the
 // other. Alternate the sides down a page to keep the rhythm.
 import { Section, SubHead, Frame, CodeBlock, Icons, Mono, Lede, Kbd } from '@/ds/core';
 

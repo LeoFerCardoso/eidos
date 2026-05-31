@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Avatar, Banner, DataTable, HealthBadge, Icons, MOCKS, Message, OwnerPill, RelativeTime, SeverityPill, Sparkline, StatusDot, TierBadge, Trend } from '@/ds/core';
 import { FKpi, FPageHeader, FSection, FShell, useQueryParam } from './example-shell';
-// Forge IDP — Example: Forge Agent · ChatGPT-in-the-platform drawer.
+// Eidos IDP — Example: Eidos Agent · ChatGPT-in-the-platform drawer.
 //
 // Pattern: the product is visible at left (a real page — service detail), and
 // the right-side Drawer is the agent surface. The agent can read context from
@@ -33,7 +33,7 @@ import { FKpi, FPageHeader, FSection, FShell, useQueryParam } from './example-sh
           <div style={{fontSize: 'var(--text-base)', marginBottom: 6, fontWeight: 600}}>Hi Leonardo — I&apos;m caught up.</div>
           <div style={{color:'var(--fg-muted)', fontSize: 'var(--text-sm)', lineHeight: 1.6}}>
             I&apos;ve read the last 7 days of <span className="mono">pix-router</span> activity, its ADRs, dependent
-            services, recent PRs, and the last 3 incidents. Ask me anything — I can also propose actions on Forge.
+            services, recent PRs, and the last 3 incidents. Ask me anything — I can also propose actions on Eidos.
           </div>
           <div style={{display:'flex', gap: 6, flexWrap:'wrap', marginTop: 12}}>
             <button className="chip" style={{fontSize: 'var(--text-xs)', cursor:'pointer'}}>Why is p95 climbing?</button>
@@ -324,8 +324,8 @@ ${result}`}
         tone="warning"
         icon="alert"
         title="p95 latency is trending up"
-        message="Last 7 days +28%. Forge agent has a hypothesis — open the drawer to discuss."
-        action="Ask Forge"/>
+        message="Last 7 days +28%. Eidos agent has a hypothesis — open the drawer to discuss."
+        action="Ask Eidos"/>
 
       <div className="fp-grid fp-grid-4" style={{marginTop: 18}}>
         <FKpi label="p95 latency" value="142ms"
@@ -409,7 +409,7 @@ ${result}`}
             <Icons.sparkle size={14}/>
           </span>
           <div style={{flex:1, minWidth: 0}}>
-            <div style={{fontWeight: 600, fontSize: 'var(--text-base)'}}>Forge agent</div>
+            <div style={{fontWeight: 600, fontSize: 'var(--text-base)'}}>Eidos agent</div>
             <div style={{fontSize: 'var(--text-xs)', color:'var(--fg-muted)', display:'flex', alignItems:'center', gap: 6}}>
               <StatusDot tone="done" size="sm" pulse/>
               <span>Reading <span className="mono">pix-router</span> context</span>
@@ -504,7 +504,7 @@ ${result}`}
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask Forge anything about pix-router, or propose an action…"
+              placeholder="Ask Eidos anything about pix-router, or propose an action…"
               style={{
                 width: '100%',
                 minHeight: 56,
@@ -529,7 +529,7 @@ ${result}`}
             </div>
           </div>
           <div style={{display:'flex', justifyContent:'space-between', marginTop: 8, fontSize: 'var(--text-xs)', color:'var(--fg-faint)', fontFamily:'var(--font-mono)'}}>
-            <span>Forge agent · GPT-5 · grounded in pix-router</span>
+            <span>Eidos agent · GPT-5 · grounded in pix-router</span>
             <span>⌘↵ to send</span>
           </div>
         </div>
@@ -553,16 +553,16 @@ ${result}`}
         crumbs={
           cameFromAgentCatalog
             ? [
-                { label: 'Forge', href: '/example/ai-insights' },
+                { label: 'Eidos', href: '/example/ai-insights' },
                 { label: 'Agents', href: '/example/agent-catalog' },
                 agentId || 'pr-reviewer',
                 'pix-router',
               ]
             : [
-                { label: 'Forge', href: '/example/ai-insights' },
+                { label: 'Eidos', href: '/example/ai-insights' },
                 { label: 'Services', href: '/example/service-catalog' },
                 { label: 'pix-router', href: '/example/service-detail?id=' + (serviceId || 'pix-router') },
-                'Forge agent',
+                'Eidos agent',
               ]
         }
         onAgentChat={() => setDrawerOpen(true)}>

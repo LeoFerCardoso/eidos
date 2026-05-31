@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { HoverCard } from '@forge/ui';
+import { HoverCard } from '@eidos/ui';
 
 // ── Shared demo helpers ────────────────────────────────────────────────────────
 

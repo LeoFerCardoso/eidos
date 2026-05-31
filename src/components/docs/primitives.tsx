@@ -1,10 +1,10 @@
 'use client';
 // Re-export the real DS primitives so MDX/docs components can use them. This file
 // used to host legacy duplicates; it now points at the single source of truth —
-// the @forge/ui package (pure primitives) + the docs-shell wrappers (Section /
+// the @eidos/ui package (pure primitives) + the docs-shell wrappers (Section /
 // ComponentInstall / AutoPropsTable), both surfaced through the '@/ds/core' barrel.
 // New/migrated pages import from '@/components/docs' and get the real, typed primitives.
-export { Icons, ForgeMark, installTabs } from '@forge/ui';
+export { Icons, ForgeMark, installTabs } from '@eidos/ui';
 export {
   Section,
   SubHead,

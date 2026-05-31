@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Foundations / Severity (semantic state vocabulary)
+// Eidos DS — Foundations / Severity (semantic state vocabulary)
 // Sibling of color.jsx — color defines WHAT the tokens are, this page
 // defines WHEN to reach for severity vs status vs health vs risk.
 // Critical for an IDP because every product surface combines two or
@@ -71,7 +71,7 @@ export default function Severity() {
 
       {/* Severity in depth */}
       <SubHead meta="P0 → P3">Severity in depth</SubHead>
-      <Frame label="incident.io / PagerDuty conventions, mapped to Forge tokens">
+      <Frame label="incident.io / PagerDuty conventions, mapped to Eidos tokens">
         <div style={{display:'flex', flexDirection:'column', gap: 12, width:'100%'}}>
           {[
             ['P0', 'severity-p0', '--severity-p0', '#FB5252', '#B91C1C', 'CRITICAL', 'Outage, data loss, security incident. Pages on-call regardless of business hours. Examples: forge-api 5xx > 50%, customer-data leaked, prod database unreachable.'],
@@ -155,7 +155,7 @@ export default function Severity() {
       {/* Composition — all four families in one row */}
       <SubHead meta="composition">All four together</SubHead>
       <Lede up>
-        A real Forge view: a service row that uses all four families at once. Read left-to-right — the catalog tells you what the service <em>is</em> (health), the row's badge tells you about the active <em>event</em> (severity), the deploy strip shows where the latest <em>change</em> is (status), and the right column scores the next <em>change</em>'s risk.
+        A real Eidos view: a service row that uses all four families at once. Read left-to-right — the catalog tells you what the service <em>is</em> (health), the row's badge tells you about the active <em>event</em> (severity), the deploy strip shows where the latest <em>change</em> is (status), and the right column scores the next <em>change</em>'s risk.
       </Lede>
       <Frame label="forge-api in the catalog — four token families in one row">
         <div style={{display:'flex', flexDirection:'column', gap: 10, width:'100%'}}>

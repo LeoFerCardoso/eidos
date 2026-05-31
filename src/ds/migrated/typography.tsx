@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Foundations / Typography (Geist + Geist Mono)
+// Eidos DS — Foundations / Typography (Geist + Geist Mono)
 import { Icons, Frame, Section, SubHead, Lede, Mono } from '@/ds/core';
 
 export default function Typography() {
@@ -51,7 +51,7 @@ export default function Typography() {
       </Lede>
       <div className="surface" style={{padding: '4px 22px'}}>
         {[
-          ['t-display-xl','Forge platform.', '4.5rem / 72px', '1.02', '600', '-0.04em'],
+          ['t-display-xl','Eidos platform.', '4.5rem / 72px', '1.02', '600', '-0.04em'],
           ['t-display-lg','Ship safely. Faster.', '3.5rem / 56px', '1.05', '600', '-0.03em'],
           ['t-h1','Service catalog', '2.25rem / 36px', '1.15', '600', '-0.02em'],
           ['t-h2','Open GMUDs', '1.75rem / 28px', '1.2', '600', '-0.02em'],
@@ -117,15 +117,15 @@ export default function Typography() {
       <Frame label="inline code · code block" code={`Use <code>--ember</code> for primary actions.
 
 \`\`\`bash
-$ npm i @forge/design-system
+$ npm i @eidos/design-system
 \`\`\``}>
         <div style={{display:'flex', flexDirection:'column', gap: 14, width:'100%', maxWidth: 540}}>
           <div style={{fontSize: 'var(--text-md)', color:'var(--fg)', lineHeight: 1.6}}>
             Use <code style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-base)', color:'var(--ember)', background:'var(--ember-soft)', padding:'2px 6px', borderRadius: 'var(--radius-sm)'}}>--ember</code> for primary actions.
           </div>
           <pre style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-sm)', color:'var(--fg-muted)', background:'var(--bg)', border:'1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: 14, margin: 0, lineHeight: 1.5}}>
-{`$ npm i @forge/design-system
-+ @forge/design-system@4.18.2
+{`$ npm i @eidos/design-system
++ @eidos/design-system@4.18.2
 + added 1 package in 1.4s`}
           </pre>
         </div>
@@ -167,7 +167,7 @@ $ npm i @forge/design-system
         <div style={{maxWidth: 560}}>
           <div className="t-mono-label" style={{padding: 0, marginBottom: 8}}>Service catalog · Section</div>
           <div className="t-h1" style={{marginBottom: 10}}>Service catalog</div>
-          <div className="t-body-lg" style={{color:'var(--fg-muted)', lineHeight: 1.55}}>The single registry of every service Forge runs. Click a service to see its SLOs, oncall, runbook, and the last 30 deploys.</div>
+          <div className="t-body-lg" style={{color:'var(--fg-muted)', lineHeight: 1.55}}>The single registry of every service Eidos runs. Click a service to see its SLOs, oncall, runbook, and the last 30 deploys.</div>
         </div>
       </Frame>
 
@@ -269,7 +269,7 @@ $ npm i @forge/design-system
             <div style={{fontSize: 'var(--text-xl)', fontFamily:'serif', fontStyle:'italic'}}>identity-svc</div>
             <div style={{fontFamily:'cursive', fontSize: 'var(--text-md)', color:'var(--fg-subtle)'}}>p95 142ms</div>
           </div>
-          <div className="note">Forge ships only Geist + Geist Mono. Don't introduce serifs or display faces.</div>
+          <div className="note">Eidos ships only Geist + Geist Mono. Don't introduce serifs or display faces.</div>
         </div>
         <div className="dd-card do">
           <div className="head"><Icons.check size={12}/> Do — tabular numerics in tables</div>

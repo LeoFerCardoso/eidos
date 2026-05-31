@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Foundations / Iconography (Lucide-style, 1.5 stroke)
+// Eidos DS — Foundations / Iconography (Lucide-style, 1.5 stroke)
 import { CodeBlock, Frame, Icons, Lede, Mono, PropsTable, Section, SubHead } from '@/ds/core';
 
 // Domain groupings — keeps the IDP / agent vocabulary visible in one place.
@@ -26,7 +26,7 @@ export default function Iconography() {
   return (
     <Section id="iconography" num="06" title="Iconography" desc={`One coherent set of ${all.length} Lucide-style glyphs — a single 1.5px stroke, a square optical box, and five fixed sizes. Icons clarify a label, never replace it; directional ones mirror under RTL while static ones hold still.`}>
       <Lede wide>
-        One library, one stroke, one set of rules. Every icon in Forge is on a <b style={{color:'var(--fg)'}}>24×24 viewBox</b> with a <b style={{color:'var(--fg)'}}>1.5px stroke</b>, <b style={{color:'var(--fg)'}}>round caps and joins</b>, and <b style={{color:'var(--fg)'}}>no fills</b>. Icons inherit <Mono>currentColor</Mono>, so the same SVG renders in every foreground token without per-icon work. Hand-drawn brand SVGs (the Forge mark, illustrations) sit outside this rule.
+        One library, one stroke, one set of rules. Every icon in Eidos is on a <b style={{color:'var(--fg)'}}>24×24 viewBox</b> with a <b style={{color:'var(--fg)'}}>1.5px stroke</b>, <b style={{color:'var(--fg)'}}>round caps and joins</b>, and <b style={{color:'var(--fg)'}}>no fills</b>. Icons inherit <Mono>currentColor</Mono>, so the same SVG renders in every foreground token without per-icon work. Hand-drawn brand SVGs (the Eidos mark, illustrations) sit outside this rule.
       </Lede>
 
       {/* Philosophy */}

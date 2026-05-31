@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Label
+// Eidos DS — Components / Label
 // Page: Installation → Usage → Variants → In context → Accessibility → RTL →
 //        Anatomy → Do/Don't → API reference
 import {

@@ -11,7 +11,7 @@ import {
   Lede,
   Mono,
 } from '@/ds/core';
-import { HoverCard } from '@forge/ui';
+import { HoverCard } from '@eidos/ui';
 
 // ── Demo content helpers (shared across sections) ─────────────────────────────
 
@@ -43,7 +43,7 @@ const ProfileCard = ({ name = 'Ada Lovelace', handle = '@ada', bio = 'Working on
     <div style={{ flex: 1, minWidth: 0 }}>
       <div style={{ fontWeight: 600, color: 'var(--fg)', fontSize: 'var(--text-body)' }}>{name}</div>
       <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)', marginTop: 2 }}>
-        {handle} · Forge Platform
+        {handle} · Eidos Platform
       </div>
       <div style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', marginTop: 8, lineHeight: 1.5 }}>{bio}</div>
       <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
@@ -113,7 +113,7 @@ export default function HoverCardPage() {
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('hover-card')} ariaLabel="package manager" />
       <Lede>
-        The CLI copies <Mono>hover-card.tsx</Mono> and its CSS into your repo so you can edit them directly — Forge is source-shipped, not a black-box dependency. Pick the <em>Manual</em> tab to copy the source files instead.
+        The CLI copies <Mono>hover-card.tsx</Mono> and its CSS into your repo so you can edit them directly — Eidos is source-shipped, not a black-box dependency. Pick the <em>Manual</em> tab to copy the source files instead.
       </Lede>
 
       {/* ── 2. USAGE ────────────────────────────────────────────────────── */}
@@ -223,7 +223,7 @@ export default function HoverCardPage() {
                     <AvatarCircle initials={initials} size={36} />
                     <div>
                       <div style={{ fontWeight: 600, color: 'var(--fg)', fontSize: 'var(--text-body)' }}>{name}</div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)', marginTop: 2 }}>{handle} · Forge Platform</div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)', marginTop: 2 }}>{handle} · Eidos Platform</div>
                     </div>
                   </div>
                 </HoverCard>
@@ -328,7 +328,7 @@ export default function HoverCardPage() {
               <AvatarCircle initials="AL" />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontWeight: 600, color: 'var(--fg)', fontSize: 'var(--text-body)' }}>Ada Lovelace</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)', marginTop: 2 }}>@ada · Forge Platform</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)', marginTop: 2 }}>@ada · Eidos Platform</div>
                 <div style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', marginTop: 8, lineHeight: 1.5 }}>
                   تعمل على مسار النشر. متاحة على ‎#platform-eng.
                 </div>
@@ -361,7 +361,7 @@ export default function HoverCardPage() {
                   <AvatarCircle initials="AL" size={36} />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontWeight: 600, color: 'var(--fg)', fontSize: 'var(--text-body)' }}>Ada Lovelace</div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)', marginTop: 2 }}>@ada · Forge</div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)', marginTop: 2 }}>@ada · Eidos</div>
                     <div style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', marginTop: 6, lineHeight: 1.5 }}>Working on the deploy pipeline.</div>
                     <div style={{ marginTop: 8 }}>
                       <button className="btn xs ember" tabIndex={-1} style={{ cursor: 'default' }}>Follow</button>

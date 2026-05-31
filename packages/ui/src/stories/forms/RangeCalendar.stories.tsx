@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { RangeCalendar } from '@forge/ui';
-import type { DateRange } from '@forge/ui';
+import { RangeCalendar } from '@eidos/ui';
+import type { DateRange } from '@eidos/ui';
 
 // Fixed "today" keeps snapshots deterministic.
 const TODAY = new Date(2026, 5, 15); // 15 Jun 2026

@@ -3,7 +3,7 @@
 //   registryDependencies acyclic + all present; every files[].source resolves.
 // C-registry-sync (block, INTERIM): the built item's inlined content equals the
 //   current registrySrc on disk (i.e. the registry build is not stale). The end-state
-//   (§2.2.5) is to inline build-registry directly from the canonical @forge/ui source
+//   (§2.2.5) is to inline build-registry directly from the canonical @eidos/ui source
 //   so the src/forge/* copies disappear — then this gate becomes build-time equality.
 // Backs C-registry / C-registry-sync.
 //
@@ -17,7 +17,7 @@ function loadRegistry() {
   return { reg, byName };
 }
 
-// replicate build-registry source resolution (styles/* falls back to @forge/ui)
+// replicate build-registry source resolution (styles/* falls back to @eidos/ui)
 function sourceResolves(source) {
   if (existsSync(abs(`packages/registry/${source}`))) return true;
   if (source.startsWith('styles/') && existsSync(abs(`packages/ui/${source}`))) return true;

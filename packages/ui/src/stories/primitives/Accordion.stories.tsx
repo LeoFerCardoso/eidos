@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@forge/ui';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@eidos/ui';
 
 // ── Shared sample data ────────────────────────────────────────────────────────
 

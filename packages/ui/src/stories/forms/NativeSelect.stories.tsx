@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { NativeSelect } from '@forge/ui';
+import { NativeSelect } from '@eidos/ui';
 
 const TIERS = [
   { label: 'T1 — Critical', value: 't1' },

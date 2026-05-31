@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Agent. How an agent shows up in the UI: its mark (AgentAvatar),
+// Eidos AI — Agent. How an agent shows up in the UI: its mark (AgentAvatar),
 // its inline identity (AgentIdentity), the AI badge (AILabel), the richer
 // AgentCard (reused from core/blocks), and the run loop made legible.
 import * as React from 'react';
@@ -7,7 +7,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, CodeBlock, PropsTable, inst
 
 
 const DEMO_AGENT = {
-  name: 'Forge Platform Agent',
+  name: 'Eidos Platform Agent',
   model: 'anthropic/claude-sonnet-4.5',
   status: 'up',
   summary: 'Triages incidents, checks service health, and drafts remediation steps across the platform.',
@@ -61,17 +61,17 @@ export default function AiAgents() {
       <TabbedCode tabs={installTabs('ai-agent')} ariaLabel="package manager"/>
       <Lede>Identify an agent the same way everywhere — the avatar, the inline name+model line, or the full card — so users always know which agent they&rsquo;re talking to and what it can do. Render every turn of its run as an auditable step.</Lede>
       <Lede>
-        Ships <Mono>AgentAvatar</Mono>, <Mono>AgentIdentity</Mono> and the <Mono>AILabel</Mono> badge, and re-exports the richer <Mono>AgentCard</Mono> from the core block layer. Identity composes the same <Mono>.avatar</Mono> chrome and ember accent as the rest of Forge — no new palette.
+        Ships <Mono>AgentAvatar</Mono>, <Mono>AgentIdentity</Mono> and the <Mono>AILabel</Mono> badge, and re-exports the richer <Mono>AgentCard</Mono> from the core block layer. Identity composes the same <Mono>.avatar</Mono> chrome and ember accent as the rest of Eidos — no new palette.
       </Lede>
 
       {/* 2. USAGE */}
       <SubHead meta="hello world">Usage</SubHead>
       <Frame label="AgentIdentity — avatar · name · model · presence" row code={`<AgentIdentity agent={{
-  name: 'Forge Platform Agent',
+  name: 'Eidos Platform Agent',
   model: 'anthropic/claude-sonnet-4.5',
   status: 'online',
 }}/>`}>
-        <AgentIdentity agent={{ name: 'Forge Platform Agent', model: 'anthropic/claude-sonnet-4.5', status: 'online' }}/>
+        <AgentIdentity agent={{ name: 'Eidos Platform Agent', model: 'anthropic/claude-sonnet-4.5', status: 'online' }}/>
       </Frame>
       <Lede>
         The canonical way an agent is identified: a squircle mark, the agent's name, its model on a mono line, and a presence dot. Drop it in a chat header, a meta row, or a settings list.
@@ -118,7 +118,7 @@ export default function AiAgents() {
       {/* CARD */}
       <SubHead meta="composition">Card</SubHead>
       <Frame label="AgentCard (core block) — identity + health + capabilities + run stats" code={`<AgentCard agent={{
-  name: 'Forge Platform Agent',
+  name: 'Eidos Platform Agent',
   model: 'anthropic/claude-sonnet-4.5',
   status: 'up',
   summary: 'Triages incidents, checks service health…',
@@ -130,7 +130,7 @@ export default function AiAgents() {
         </div>
       </Frame>
       <Lede>
-        For a directory, a picker, or an agent's settings page, the full card carries everything: the identity, a one-line summary, a live <Mono>HealthBadge</Mono>, the tools it can call, and its run record. It's the existing core <Mono>AgentCard</Mono> — Forge AI reuses it, it doesn't fork it.
+        For a directory, a picker, or an agent's settings page, the full card carries everything: the identity, a one-line summary, a live <Mono>HealthBadge</Mono>, the tools it can call, and its run record. It's the existing core <Mono>AgentCard</Mono> — Eidos AI reuses it, it doesn't fork it.
       </Lede>
 
       {/* IN CONTEXT — the loop */}
@@ -152,7 +152,7 @@ export default function AiAgents() {
 
 const agent = new Agent({
   model: 'anthropic/claude-sonnet-4.5',
-  system: 'You are the Forge platform agent.',
+  system: 'You are the Eidos platform agent.',
   tools: { getServiceHealth, openIncident },
   stopWhen: stepCountIs(8),
 });
@@ -189,9 +189,9 @@ const { text, steps } = await agent.generate({ prompt });
       <SubHead meta="RTL · العربية">RTL</SubHead>
       <Frame label="dir=&quot;rtl&quot; — avatar leads from the start edge, model line mirrors" row>
         <div dir="rtl" style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'flex-start' }}>
-          <AgentIdentity agent={{ name: 'وكيل منصة Forge', model: 'anthropic/claude-sonnet-4.5', status: 'online' }} label/>
+          <AgentIdentity agent={{ name: 'وكيل منصة Eidos', model: 'anthropic/claude-sonnet-4.5', status: 'online' }} label/>
           <div style={{ width: '100%', maxWidth: 340 }}>
-            <AgentCard agent={{ ...DEMO_AGENT, name: 'وكيل منصة Forge', summary: 'يفرز الحوادث ويفحص صحة الخدمات ويقترح خطوات الإصلاح.' }}/>
+            <AgentCard agent={{ ...DEMO_AGENT, name: 'وكيل منصة Eidos', summary: 'يفرز الحوادث ويفحص صحة الخدمات ويقترح خطوات الإصلاح.' }}/>
           </div>
         </div>
       </Frame>
@@ -206,7 +206,7 @@ const { text, steps } = await agent.generate({ prompt });
         <div className="ds-frame-body" style={{ padding: '72px 36px 60px' }}>
           <div className="ana" style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="stage" style={{ position: 'relative' }} aria-hidden="true">
-              <AgentIdentity agent={{ name: 'Forge Platform Agent', model: 'anthropic/claude-sonnet-4.5', status: 'online' }} size={40} label/>
+              <AgentIdentity agent={{ name: 'Eidos Platform Agent', model: 'anthropic/claude-sonnet-4.5', status: 'online' }} size={40} label/>
               <span className="lead v" style={{ top: -22, left: 18, height: 18 }}/>
               <span className="lead v" style={{ top: -22, left: 44, height: 18 }}/>
               <span className="lead h" style={{ top: 12, right: -30, width: 26 }}/>
@@ -232,7 +232,7 @@ const { text, steps } = await agent.generate({ prompt });
         <div className="dd-card do">
           <div className="head"><Icons.check size={12}/> Do — identify the agent and its model</div>
           <div className="body" style={{ padding: 'var(--space-4)' }}>
-            <AgentIdentity agent={{ name: 'Forge Platform Agent', model: 'anthropic/claude-sonnet-4.5', status: 'online' }}/>
+            <AgentIdentity agent={{ name: 'Eidos Platform Agent', model: 'anthropic/claude-sonnet-4.5', status: 'online' }}/>
           </div>
           <div className="note">Name + model + presence. Users always know which agent — and which model — is answering.</div>
         </div>
@@ -290,7 +290,7 @@ const { text, steps } = await agent.generate({ prompt });
         ]}
       />
       <Lede>
-        The richer <Mono>&lt;AgentCard agent={`{…}`}/&gt;</Mono> (summary, capabilities, health, run stats, <Mono>onOpen</Mono>) is documented in the core block layer — Forge AI reuses it directly.
+        The richer <Mono>&lt;AgentCard agent={`{…}`}/&gt;</Mono> (summary, capabilities, health, run stats, <Mono>onOpen</Mono>) is documented in the core block layer — Eidos AI reuses it directly.
       </Lede>
     </Section>
   );

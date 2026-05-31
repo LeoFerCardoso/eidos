@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Modal } from '@forge/ui';
+import { Modal } from '@eidos/ui';
 
 const meta = {
   title: 'Overlays/Modal',

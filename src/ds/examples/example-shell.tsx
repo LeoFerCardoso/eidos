@@ -1,6 +1,6 @@
 'use client';
-// Forge IDP — Example Shell
-// Renders the simulated Forge product chrome (rail · topbar · main). Each
+// Eidos IDP — Example Shell
+// Renders the simulated Eidos product chrome (rail · topbar · main). Each
 // example page mounts an FShell with a `nav` slug + breadcrumb +
 // optional headerActions. The page body is passed as children.
 //
@@ -72,8 +72,8 @@ const IconBubble = ({ icon, size = 36, tone = 'ember', children }: {
 };
 
 const FRail = ({ active = 'home' }: { active?: string }) => (
-  <aside className="fp-rail" aria-label="Forge primary nav">
-    <a className="fp-rail-brand" href={(typeof document !== 'undefined' && document.baseURI ? new URL('/example/ai-insights', document.baseURI).toString() : '/example/ai-insights')} title="Forge — back to Home">F</a>
+  <aside className="fp-rail" aria-label="Eidos primary nav">
+    <a className="fp-rail-brand" href={(typeof document !== 'undefined' && document.baseURI ? new URL('/example/ai-insights', document.baseURI).toString() : '/example/ai-insights')} title="Eidos — back to Home">F</a>
     {RAIL.map((it) => {
       const Icon = Icons[it.icon] || Icons.circle;
       return (
@@ -188,7 +188,7 @@ const ThemeToggle = ({ theme, setTheme }: { theme?: string; setTheme?: any }) =>
   </div>
 );
 
-// Path back to the Forge Design System home (the DS docs shell).
+// Path back to the Eidos Design System home (the DS docs shell).
 const dsHomeHref = () => '/';
 
 const FTopbar = ({ crumbs, onSearch, onAgentChat, theme, setTheme }: {
@@ -199,11 +199,11 @@ const FTopbar = ({ crumbs, onSearch, onAgentChat, theme, setTheme }: {
   setTheme?: any;
 }) => (
   <header className="fp-topbar">
-    <a className="fp-topbar-back" href={dsHomeHref()} title="Back to the Forge Design System" aria-label="Back to the Forge Design System">
+    <a className="fp-topbar-back" href={dsHomeHref()} title="Back to the Eidos Design System" aria-label="Back to the Eidos Design System">
       <Icons.chevronLeft size={12}/>
       <span>Design system</span>
     </a>
-    <FCrumbs crumbs={crumbs || ['Forge', 'Home']}/>
+    <FCrumbs crumbs={crumbs || ['Eidos', 'Home']}/>
     <div className="fp-topbar-search" role="button" tabIndex={0} onClick={onSearch}>
       <Icons.search size={13}/>
       <span className="label">Search services, agents, deploys...</span>
@@ -212,7 +212,7 @@ const FTopbar = ({ crumbs, onSearch, onAgentChat, theme, setTheme }: {
     <div className="fp-topbar-actions">
       <ThemeToggle theme={theme} setTheme={setTheme}/>
       {onAgentChat && (
-        <button className="fp-topbar-icon" title="Open Forge agent" aria-label="Forge agent" onClick={onAgentChat}>
+        <button className="fp-topbar-icon" title="Open Eidos agent" aria-label="Eidos agent" onClick={onAgentChat}>
           <Icons.sparkle size={16}/>
         </button>
       )}
@@ -344,7 +344,7 @@ const buildCommandIndex = () => {
   }));
   [
     ['service-detail',   'Service detail',   'server'],
-    ['agent-chat',       'Forge agent chat', 'sparkle'],
+    ['agent-chat',       'Eidos agent chat', 'sparkle'],
     ['pipeline-view',    'Pipeline run',     'pipeline'],
     ['ring-deployment',  'Ring rollout',     'ring'],
     ['service-scaffold', 'Scaffold service', 'rocket'],
@@ -364,7 +364,7 @@ const buildCommandIndex = () => {
     { id: 'act-deploy',   label: 'View deploy run #9384',           group: 'Action', href: '/example/pipeline-view',  icon: 'pipeline' },
     { id: 'act-scaffold', label: 'Scaffold a new service',          group: 'Action', href: '/example/service-scaffold', icon: 'rocket' },
     { id: 'act-flags',    label: 'Manage feature flags',            group: 'Action', href: '/example/feature-flags', icon: 'flag' },
-    { id: 'act-agent',    label: 'Ask Forge agent',                 group: 'Action', href: '/example/agent-chat',    icon: 'sparkle' },
+    { id: 'act-agent',    label: 'Ask Eidos agent',                 group: 'Action', href: '/example/agent-chat',    icon: 'sparkle' },
   ].forEach(a => idx.push(a));
   return idx.map(it => ({
     ...it,
@@ -450,7 +450,7 @@ const CommandPalette = ({ open, onClose }: { open?: boolean; onClose?: () => voi
 const AgentDrawerStub = ({ open, onClose }: { open?: boolean; onClose?: () => void }) => {
   if (!open) return null;
   return (
-    <aside className="fp-drawer" role="dialog" aria-label="Forge agent" aria-modal="false">
+    <aside className="fp-drawer" role="dialog" aria-label="Eidos agent" aria-modal="false">
       <div className="fp-drawer-head">
         <span style={{
           width: 28, height: 28, borderRadius: 'var(--radius-xl)',
@@ -460,7 +460,7 @@ const AgentDrawerStub = ({ open, onClose }: { open?: boolean; onClose?: () => vo
           <Icons.sparkle size={14}/>
         </span>
         <div style={{flex: 1, minWidth: 0}}>
-          <div style={{fontSize: 'var(--text-sm)', fontWeight: 600}}>Forge agent</div>
+          <div style={{fontSize: 'var(--text-sm)', fontWeight: 600}}>Eidos agent</div>
           <div style={{fontSize: 'var(--text-xs)', color:'var(--fg-muted)'}}>Reading this page · ask anything</div>
         </div>
         <a className="btn ghost sm" href="/example/agent-chat" title="Open full chat">
@@ -498,9 +498,9 @@ const AgentDrawerStub = ({ open, onClose }: { open?: boolean; onClose?: () => vo
       <div className="fp-drawer-foot" style={{display:'flex', alignItems:'center', gap: 8}}>
         <input
           className="in-control"
-          placeholder="Ask Forge anything…"
+          placeholder="Ask Eidos anything…"
           style={{flex: 1}}
-          aria-label="Message Forge agent"
+          aria-label="Message Eidos agent"
         />
         <button className="btn ember sm" title="Send">
           <Icons.arrowRight size={12}/>

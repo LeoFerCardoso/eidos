@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ToolOutput } from '@forge/ui';
+import { ToolOutput } from '@eidos/ui';
 
 const meta = {
   title: 'AI/ToolOutput',

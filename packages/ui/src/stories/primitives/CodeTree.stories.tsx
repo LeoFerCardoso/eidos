@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { CodeTree } from '@forge/ui';
+import { CodeTree } from '@eidos/ui';
 
 // Shared fixture files used across stories.
 const BUTTON_FILES = [

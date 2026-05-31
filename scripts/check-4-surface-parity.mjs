@@ -1,5 +1,5 @@
 // check-4-surface-parity.mjs — THE keystone gate. For each component the contract
-// binds, verify all four surfaces resolve on disk: docs page · @forge/ui export ·
+// binds, verify all four surfaces resolve on disk: docs page · @eidos/ui export ·
 // Storybook story · registry item. A component that exists on only 1–2 surfaces is
 // broken — the registry/CLI promise is "install any component, component-by-component".
 // Backs clause C-export. Honors waivers via forge-verify.

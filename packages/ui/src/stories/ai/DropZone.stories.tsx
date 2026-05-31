@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { DropZone } from '@forge/ui';
+import { DropZone } from '@eidos/ui';
 
 const meta = {
   title: 'AI/DropZone',

@@ -85,7 +85,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs
     return (
       <div style={{ width: '100%', maxWidth: 640, display: 'flex', flexDirection: 'column', gap: 10 }}>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--fg-subtle)' }}>
-          Forge AI <span style={{ marginInline: 6, color: 'var(--fg-faint)' }}>·</span> just now
+          Eidos AI <span style={{ marginInline: 6, color: 'var(--fg-faint)' }}>·</span> just now
         </div>
 
         <Reasoning streaming={streaming} duration={d}>
@@ -128,7 +128,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs
   </p>
 </Reasoning>`;
 
-  const COMP_CODE = `<Message from="assistant" meta={<>Forge AI · just now</>}>
+  const COMP_CODE = `<Message from="assistant" meta={<>Eidos AI · just now</>}>
   <Reasoning streaming={streaming} duration={d}>
     <p>The p99 spike sits on identity-svc — only the pool-size change touches it.</p>
   </Reasoning>

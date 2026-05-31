@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Avatar. A compact stand-in for a person or service: initials by default, an
+// Eidos Mobile — Avatar. A compact stand-in for a person or service: initials by default, an
 // icon for non-human actors, an optional presence dot, and an overlapping stack for groups.
 // Initials sit in dark or light ink chosen against the tile — never low-contrast on its fill.
 import * as React from 'react';
@@ -69,8 +69,8 @@ function AvatarScreen() {
         </div>
       ))}
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingBlockStart: 16 }}>
-        <Avatar icon={<Icons.bot size={18} />} accent label="Forge Agent" />
-        <div style={{ flex: 1, minWidth: 0 }}><div style={{ fontWeight: 600, fontSize: 'var(--text-body)', lineHeight: 1.3 }}>Forge Agent</div><div style={{ fontSize: 'var(--text-base)', lineHeight: 1.4, color: 'var(--fg-muted)' }}>Automation</div></div>
+        <Avatar icon={<Icons.bot size={18} />} accent label="Eidos Agent" />
+        <div style={{ flex: 1, minWidth: 0 }}><div style={{ fontWeight: 600, fontSize: 'var(--text-body)', lineHeight: 1.3 }}>Eidos Agent</div><div style={{ fontSize: 'var(--text-base)', lineHeight: 1.4, color: 'var(--fg-muted)' }}>Automation</div></div>
         <Stack names={['Jordan Diaz', 'Sam Okafor', 'Lina Park', 'Ravi N', 'Mei L']} />
       </div>
     </div>
@@ -100,7 +100,7 @@ export default function MobileAvatar() {
             <Avatar name="Jordan Diaz" size="lg" />
           </div>
           <div style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
-            <Avatar icon={<Icons.bot size={18} />} accent label="Forge Agent" />
+            <Avatar icon={<Icons.bot size={18} />} accent label="Eidos Agent" />
             <Avatar name="Sam Okafor" status="online" />
             <Avatar name="Lina Park" status="busy" />
             <Avatar name="Ravi N" status="offline" />
@@ -189,7 +189,7 @@ export default function MobileAvatar() {
         <div dir="rtl" style={{ display: 'flex', gap: 18, alignItems: 'center', padding: 24 }}>
           <Avatar name="Sam Okafor" status="online" />
           <Avatar name="Lina Park" status="busy" />
-          <Avatar icon={<Icons.bot size={18} />} accent label="Forge Agent" />
+          <Avatar icon={<Icons.bot size={18} />} accent label="Eidos Agent" />
           <Stack names={['Jordan Diaz', 'Sam Okafor', 'Lina Park', 'Ravi N', 'Mei L']} />
         </div>
       </Frame>
@@ -202,7 +202,7 @@ export default function MobileAvatar() {
           <div className="body" style={{ gap: 14, justifyContent: 'center' }}>
             <Avatar name="Jordan Diaz" />
             <Avatar name="Sam Okafor" status="online" />
-            <Avatar icon={<Icons.bot size={18} />} accent label="Forge Agent" />
+            <Avatar icon={<Icons.bot size={18} />} accent label="Eidos Agent" />
           </div>
           <div className="note">People in neutral tiles; the agent gets the single ember tile so the automated actor stands out.</div>
         </div>

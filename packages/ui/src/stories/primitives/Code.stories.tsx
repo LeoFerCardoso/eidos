@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Code } from '@forge/ui';
+import { Code } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/Code',
@@ -17,7 +17,7 @@ const meta = {
   },
   args: {
     lang: 'jsx',
-    children: `import { Button } from '@forge/ui';\n\nexport default function App() {\n  return <Button variant="primary">Ship it</Button>;\n}`,
+    children: `import { Button } from '@eidos/ui';\n\nexport default function App() {\n  return <Button variant="primary">Ship it</Button>;\n}`,
   },
   argTypes: {
     lang: {
@@ -47,7 +47,7 @@ export const CssSnippet: Story = {
 export const BashSnippet: Story = {
   args: {
     lang: 'bash',
-    children: `# Install the Forge UI library\npnpm dlx forge-ui@latest add button\n\n# Start the dev server\nnpm run dev`,
+    children: `# Install the Forge UI library\npnpm dlx eidos@latest add button\n\n# Start the dev server\nnpm run dev`,
   },
 };
 

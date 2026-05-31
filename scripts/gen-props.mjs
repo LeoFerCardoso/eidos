@@ -17,7 +17,7 @@ function walk(dir) {
     else if (/\.tsx?$/.test(p) && !p.endsWith('.generated.ts') && !p.endsWith('.stories.tsx') && n !== 'index.ts') FILES.push(p);
   }
 }
-// The docs-free component modules were extracted to the @forge/ui workspace
+// The docs-free component modules were extracted to the @eidos/ui workspace
 // package; the docs-shell primitives + AI sub-DS are still local. Walk both so
 // GENERATED_PROPS (consumed by <AutoPropsTable/>) covers the whole catalog.
 for (const root of ['src/ds/core', 'packages/ui/src']) {

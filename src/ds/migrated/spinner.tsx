@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Spinner
+// Eidos DS — Components / Spinner
 // Page layout:
 //   1. Installation     (TabbedCode: pnpm · npm · yarn · bun · Manual)
 //   2. Usage            (Frame: import + minimal render)

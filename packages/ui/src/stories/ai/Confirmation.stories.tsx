@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Confirmation } from '@forge/ui';
+import { Confirmation } from '@eidos/ui';
 
 const meta = {
   title: 'AI/Confirmation',

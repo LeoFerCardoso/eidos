@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Pill
+// Eidos DS — Components / Pill
 // A pill is a small inline status label that declares the current condition of
 // one thing: healthy, deploying, degraded. Distinct from Chip (attribute token)
 // and Badge (count marker).
@@ -7,7 +7,7 @@ import React from 'react';
 import { Icons, Pill, TierBadge, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs, Lede, Mono } from '@/ds/core';
 
 
-  const USAGE_CODE = `import { Pill } from "@forge/ui"
+  const USAGE_CODE = `import { Pill } from "@eidos/ui"
 
 export function Demo() {
   return (

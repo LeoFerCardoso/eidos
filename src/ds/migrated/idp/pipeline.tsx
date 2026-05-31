@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Pipeline
+// Eidos DS — Components / Pipeline
 // Two horizontal visual variants for build → test → deploy flow:
 //   stepper · chevron
 // For top-down (vertical) sequences, use <Timeline/> instead.
@@ -37,10 +37,10 @@ export default function PipelinePage() {
     <Section id="pipeline" title="Pipeline" desc="Left-to-right tracker for a build → test → deploy run — the CI/CD bar on a deploy page, the inline status cell in a deploy table, the hero on a release dashboard. Two variants: stepper and chevron.">
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('pipeline')} ariaLabel="package manager"/>
-      <Lede>One <Mono>steps</Mono> input drives both variants. The <Mono>status</Mono> of each step is mapped to a Forge <Mono>--status-*</Mono> token — running pulses, done is green, error is red.</Lede>
+      <Lede>One <Mono>steps</Mono> input drives both variants. The <Mono>status</Mono> of each step is mapped to a Eidos <Mono>--status-*</Mono> token — running pulses, done is green, error is red.</Lede>
 
       <SubHead meta="hello world">Usage</SubHead>
-      <Lede>Stepper and chevron share one step model — each step&rsquo;s status maps to a Forge status token. Compose one of the two variants instead of hand-drawing an arrow row, and reach for Timeline for vertical, time-ordered sequences.</Lede>
+      <Lede>Stepper and chevron share one step model — each step&rsquo;s status maps to a Eidos status token. Compose one of the two variants instead of hand-drawing an arrow row, and reach for Timeline for vertical, time-ordered sequences.</Lede>
       <Frame label="stepper · default" code={USAGE}>
         <Pipeline steps={STEPS}/>
       </Frame>

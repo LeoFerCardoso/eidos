@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FilterPanel, MOCKS } from '@forge/ui';
+import { FilterPanel, MOCKS } from '@eidos/ui';
 
 // Build facet groups from the real SERVICES fixture
 const ALL_TRIBES = [...new Set(MOCKS.SERVICES.map((s) => s.tribe))].sort();

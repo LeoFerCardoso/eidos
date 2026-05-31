@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Select
+// Eidos DS — Components / Select
 // Custom-rendered single-value picker. Reach for it when the native
 // <select> isn't enough — when you need icons, descriptions, or grouped
 // options. For typeahead and multi-select, see Combobox.
@@ -56,7 +56,7 @@ const TEAM_GROUPS = [
 
 // ── Code snippets ─────────────────────────────────────────────────────────────
 
-const USAGE_CODE = `import { Select } from "@forge/ui"
+const USAGE_CODE = `import { Select } from "@eidos/ui"
 
 export function Demo() {
   const [value, setValue] = React.useState('open');

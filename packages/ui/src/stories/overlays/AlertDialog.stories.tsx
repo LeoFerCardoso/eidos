@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { AlertDialog } from '@forge/ui';
+import { AlertDialog } from '@eidos/ui';
 
 const meta = {
   title: 'Overlays/AlertDialog',

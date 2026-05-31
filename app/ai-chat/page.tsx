@@ -5,7 +5,7 @@
 //   - render message.parts, switching on part.type; the typed tool part
 //     `tool-getServiceHealth` is gated on part.state so we never read input/output
 //     before they exist.
-//   - styled with the Forge ai-shell.css / ds.css classes — no per-page <style>.
+//   - styled with the Eidos ai-shell.css / ds.css classes — no per-page <style>.
 import { useState } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
@@ -29,7 +29,7 @@ export default function AIChatPage() {
   return (
     <div className="ai-thread" style={{ maxWidth: 760, margin: '0 auto', padding: '32px 20px', minHeight: '100dvh' }}>
       <header style={{ marginBottom: 20 }}>
-        <h1 style={{ fontSize: 22, margin: 0 }}>Forge IDP Assistant</h1>
+        <h1 style={{ fontSize: 22, margin: 0 }}>Eidos IDP Assistant</h1>
         <p style={{ color: 'var(--fg-muted)', fontSize: 13, marginTop: 4 }}>
           Reference chat-with-agents (AI SDK v6 · tool calling · streaming). Try: “How healthy is payments-api?”
         </p>

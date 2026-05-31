@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Queue, Message, Empty, Icons } from '@forge/ui';
+import { Queue, Message, Empty, Icons } from '@eidos/ui';
 
 const SAMPLE_ITEMS = [
   'What is the p95 latency trend for ledger-svc this week?',

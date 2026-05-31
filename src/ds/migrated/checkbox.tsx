@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Checkbox.
+// Eidos DS — Components / Checkbox.
 // Native <input type="checkbox"> with a styled visual sibling. Supports
 // checked, indeterminate, disabled, and error states. Sizes sm / md / lg.
 import * as React from 'react';
@@ -44,7 +44,7 @@ const Checkbox = (props) => {
         aria-describedby={props.desc ? id + '-desc' : undefined}
         aria-invalid={props.error || undefined}
         onChange={(e) => {
-          // Mirror the shipped @forge/ui API: native onChange (event) plus the
+          // Mirror the shipped @eidos/ui API: native onChange (event) plus the
           // onCheckedChange alias that hands back the next boolean directly.
           props.onChange && props.onChange(e);
           props.onCheckedChange && props.onCheckedChange(e.target.checked);

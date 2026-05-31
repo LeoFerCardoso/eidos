@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Trend } from '@forge/ui';
+import { Trend } from '@eidos/ui';
 
 const VARIANTS = ['arrow', 'triangle', 'badge', 'bar'] as const;
 

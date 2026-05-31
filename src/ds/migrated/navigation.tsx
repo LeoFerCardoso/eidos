@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Navigation Menu
+// Eidos DS — Components / Navigation Menu
 // Page standard: Installation → Usage → Variants → In context → Accessibility → RTL → Anatomy → Do/Don't → API reference
 import * as React from 'react';
 import {
@@ -122,7 +122,7 @@ function InContextDemo() {
       <div style={{ display: 'flex', alignItems: 'center', padding: '0 16px', height: 44, borderBottom: '1px solid var(--border)', gap: 8 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginInlineEnd: 12 }}>
           <ForgeMark size={14} />
-          <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 'var(--text-sm)', color: 'var(--fg)' }}>Forge</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 'var(--text-sm)', color: 'var(--fg)' }}>Eidos</span>
         </div>
         <NavigationMenu>
           {[
@@ -322,7 +322,7 @@ export default function Navigation() {
               {/* Anatomy specimen — topbar with nav items */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 2, padding: '10px 14px', background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 'var(--radius-xl)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 'var(--text-sm)', color: 'var(--fg)', marginInlineEnd: 12 }}>
-                  <ForgeMark size={14} /> Forge
+                  <ForgeMark size={14} /> Eidos
                 </div>
                 {/* Nav item — active */}
                 <div style={{ position: 'relative', padding: '6px 12px', fontSize: 'var(--text-sm)', color: 'var(--fg)', fontWeight: 600, cursor: 'default' }}>
@@ -399,7 +399,7 @@ export default function Navigation() {
         <div className="dd do">
           <div className="label">Do</div>
           <div className="body" style={{ padding: '12px' }}>
-            <Mono>aria-label="Main navigation"</Mono> on the <Mono>{'<nav>'}</Mono> — Forge applies this automatically. On pages with multiple navigations, use distinct labels so screen-reader users can distinguish them.
+            <Mono>aria-label="Main navigation"</Mono> on the <Mono>{'<nav>'}</Mono> — Eidos applies this automatically. On pages with multiple navigations, use distinct labels so screen-reader users can distinguish them.
           </div>
           <p>Let the component manage ARIA roles and attributes — override only when you have a second nav landmark on the same page.</p>
         </div>

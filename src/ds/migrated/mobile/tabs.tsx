@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Tabs. A horizontal strip under the app bar that switches the view below it,
+// Eidos Mobile — Tabs. A horizontal strip under the app bar that switches the view below it,
 // with a sliding underline on the active label. Unlike the Tab bar (top-level destinations,
 // fixed at the bottom) tabs live inside one screen; unlike Segmented control they scroll when
 // the set is long and read as section headers, not a pill toggle.
@@ -7,7 +7,7 @@ import * as React from 'react';
 import { Section, SubHead, Frame, CodeBlock, DeviceFrame, Icons, Lede, Mono } from '@/ds/core';
 
 // Page-scoped reduced-motion flag — there is no global motion guard, so the inline
-// underline/colour transitions are gated on this (matches @forge/ui's matchMedia pattern).
+// underline/colour transitions are gated on this (matches @eidos/ui's matchMedia pattern).
 function useReducedMotion() {
   const [reduced, setReduced] = React.useState(false);
   React.useEffect(() => {

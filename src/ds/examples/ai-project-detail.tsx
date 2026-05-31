@@ -1,5 +1,5 @@
 'use client';
-// Forge IDP — AI Chat · Project detail.
+// Eidos IDP — AI Chat · Project detail.
 //
 // The page a user lands on after clicking a Pinned project in the chat
 // sidebar. Reads ?project=<id> from the URL, picks the project's name +
@@ -67,7 +67,7 @@ const PROJECT_PAYLOAD: Record<string, ProjectPayload> = {
       { kind: 'csv', name: 'incidents-2026Q1.csv' },
     ],
     instructions:
-      'Draft postmortems in the Forge IC template. Keep tone neutral and blameless. Always include a timeline, contributing factors, and 3–5 corrective actions with owners.',
+      'Draft postmortems in the Eidos IC template. Keep tone neutral and blameless. Always include a timeline, contributing factors, and 3–5 corrective actions with owners.',
     chats: [
       { id: 'inc-1', title: 'Postmortem — payments outage 04/12', preview: 'Drafting timeline + corrective actions…',          when: '09:14' },
       { id: 'inc-2', title: 'Sev-1 review queue triage',           preview: 'Found 3 reviews missing owners…',                   when: 'Yesterday' },
@@ -113,7 +113,7 @@ const App = () => {
     <ChatShell
       side="recent"
       activeChat={project.id}
-      crumbs={['Forge', 'AI', 'Projects', project.label]}
+      crumbs={['Eidos', 'AI', 'Projects', project.label]}
     >
       <div className="aipd">
         {/* Back link — pinned to the leading edge, mono caption */}

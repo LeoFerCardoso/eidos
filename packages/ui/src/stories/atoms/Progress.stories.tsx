@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Progress } from '@forge/ui';
+import { Progress } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/Progress',

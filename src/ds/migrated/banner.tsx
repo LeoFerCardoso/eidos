@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Banner
+// Eidos DS — Components / Banner
 // Full-width attention bar. Lives at the top of a page (or inside a card)
 // to surface a system-wide event — maintenance window, version upgrade,
 // open incident, freeze, custom announcement. Replaces the old `AlertBar`.
@@ -61,7 +61,7 @@ export default function BannerPage() {
       <SubHead meta="5 tones">All tones</SubHead>
       <Frame label="info · success · warning · danger · neutral">
         <div style={{display:'flex', flexDirection:'column', gap: 12}}>
-          <Banner tone="info"    title="Heads up"      message="Forge CLI 4.2 is available — see what's new."/>
+          <Banner tone="info"    title="Heads up"      message="Eidos CLI 4.2 is available — see what's new."/>
           <Banner tone="success" title="Promoted"      message="forge-api v2.1.7 promoted to production. Rollback available for 24h."/>
           <Banner tone="warning" title="Freeze"        message="Non-critical merges paused until Fri 18:00 UTC."/>
           <Banner tone="danger"  title="Active incident" message="INC-4137 — fraud-engine latency p99 spiking. Status: investigating." action="Open incident"/>
@@ -121,7 +121,7 @@ export default function BannerPage() {
   fg="#fff"
   accent="#fff"
   icon="rocket"
-  title="Forge 5.0 — public beta"
+  title="Eidos 5.0 — public beta"
   message="Self-serve onboarding · workflow templates · MCP agent catalog."
   action="Read the changelog"
 />`}>
@@ -129,7 +129,7 @@ export default function BannerPage() {
           <Banner tone="custom"
                   bg="linear-gradient(135deg, oklch(58% 0.16 35) 0%, oklch(65% 0.16 50) 100%)"
                   fg="#fff" accent="#fff" icon="rocket"
-                  title="Forge 5.0 — public beta"
+                  title="Eidos 5.0 — public beta"
                   message="Self-serve onboarding · workflow templates · MCP agent catalog."
                   action="Read the changelog"/>
           <Banner tone="custom"
@@ -147,7 +147,7 @@ export default function BannerPage() {
         <div style={{display:'flex', flexDirection:'column', gap: 16}}>
           <div>
             <div className="t-mono-label" style={{ marginBlockEnd: 8 }}>Top of page</div>
-            <Banner tone="info" title="Welcome to Forge" message="Take the 5-minute tour to wire your first service to the IDP." action="Start tour"/>
+            <Banner tone="info" title="Welcome to Eidos" message="Take the 5-minute tour to wire your first service to the IDP." action="Start tour"/>
           </div>
           <div>
             <div className="t-mono-label" style={{ marginBlockEnd: 8 }}>Inside a card</div>
@@ -188,13 +188,13 @@ export default function BannerPage() {
       <Frame
         label={'dir="rtl" — leading icon flips to the right, action/close to the left'}
         code={`<div dir="rtl">
-  <Banner tone="info" title="مرحبًا بك في Forge"
+  <Banner tone="info" title="مرحبًا بك في Eidos"
     message="ابدأ الجولة لربط خدمتك الأولى." action="ابدأ الجولة" />
 </div>`}
         lang="tsx"
       >
         <div dir="rtl">
-          <Banner tone="info" title="مرحبًا بك في Forge" message="ابدأ الجولة لربط خدمتك الأولى بمنصة المطوّرين الداخلية." action="ابدأ الجولة"/>
+          <Banner tone="info" title="مرحبًا بك في Eidos" message="ابدأ الجولة لربط خدمتك الأولى بمنصة المطوّرين الداخلية." action="ابدأ الجولة"/>
         </div>
       </Frame>
       <Lede>
@@ -250,7 +250,7 @@ export default function BannerPage() {
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — fight for primary action</div>
           <div className="body">
-            <Banner tone="info" title="Try Forge AI" message="Get insights in one click."
+            <Banner tone="info" title="Try Eidos AI" message="Get insights in one click."
                     actions={<><button className="btn ember sm">Open AI</button><button className="btn ember sm">Subscribe</button><button className="btn ember sm">Learn more</button></>}/>
           </div>
           <div className="note">Banners are <em>announcements</em>. Multiple primary CTAs turn them into ads.</div>

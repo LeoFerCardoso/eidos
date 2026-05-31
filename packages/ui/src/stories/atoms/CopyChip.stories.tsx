@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { CopyChip } from '@forge/ui';
+import { CopyChip } from '@eidos/ui';
 
 const TONES = ['default', 'ember', 'ice'] as const;
 

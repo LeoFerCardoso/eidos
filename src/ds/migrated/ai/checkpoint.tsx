@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Checkpoint. A save-point between turns the user can restore.
+// Eidos AI — Checkpoint. A save-point between turns the user can restore.
 // A centered chip on a hairline rule marks where the conversation can be
 // rewound, with an optional time stamp and a Restore affordance.
 import * as React from 'react';

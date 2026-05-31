@@ -1,5 +1,5 @@
 'use client';
-// Forge Blocks — Stat band. A row of headline metrics with sparklines.
+// Eidos Blocks — Stat band. A row of headline metrics with sparklines.
 import { Section, SubHead, Frame, CodeBlock, Sparkline, Trend, Lede, Mono } from '@/ds/core';
 
 

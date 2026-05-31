@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Table
+// Eidos DS — Components / Table
 // DS-PAGE-STANDARD §2.2 — Component template.
 // Sections: Installation → Usage → Variants → In context → Accessibility → RTL → Anatomy → Do/Don't → API reference
 import * as React from 'react';
@@ -35,7 +35,7 @@ const { useState, useMemo } = React;
 const USAGE_CODE = `import {
   Table, TableHeader, TableBody,
   TableRow, TableHead, TableCell,
-} from "@forge/ui";
+} from "@eidos/ui";
 
 export function Demo() {
   return (
@@ -808,7 +808,7 @@ const someOn = sel.size > 0 && !allOn
             <span className="num">4</span>
             <span><b style={{ color: 'var(--fg)' }}>Row.</b> 12 px vertical padding · 1 px hairline divider · transitions to <Mono>--surface-hover</Mono> on hover. <Mono>selected</Mono> applies ember-soft background.</span>
             <span className="num">5</span>
-            <span><b style={{ color: 'var(--fg)' }}>Inline tokens.</b> Any Forge primitive — TierBadge, LangBadge, Pill, StatusDot — lands in a cell without wrapper surgery. The <Mono>align</Mono> prop handles RTL-aware column alignment.</span>
+            <span><b style={{ color: 'var(--fg)' }}>Inline tokens.</b> Any Eidos primitive — TierBadge, LangBadge, Pill, StatusDot — lands in a cell without wrapper surgery. The <Mono>align</Mono> prop handles RTL-aware column alignment.</span>
           </div>
         </div>
       </div>

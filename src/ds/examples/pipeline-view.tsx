@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Avatar, Banner, CopyChip, HealthBadge, Icons, LogViewer, MOCKS, OwnerPill, Pipeline, RelativeTime, StatusDot } from '@/ds/core';
 import { FPageHeader, FSection, FShell, IconBubble } from './example-shell';
-// Forge IDP — Example: Pipeline / deploy run view.
+// Eidos IDP — Example: Pipeline / deploy run view.
 
   
   
@@ -59,7 +59,7 @@ import { FPageHeader, FSection, FShell, IconBubble } from './example-shell';
     <FShell
       nav="pipelines"
       crumbs={[
-        { label: 'Forge', href: '/example/ai-insights' },
+        { label: 'Eidos', href: '/example/ai-insights' },
         { label: 'Pipelines', href: '/example/pipeline-console' },
         'identity-svc',
         '#9384',
@@ -90,7 +90,7 @@ import { FPageHeader, FSection, FShell, IconBubble } from './example-shell';
       <Banner
         tone="info"
         icon="sparkle"
-        title="Forge auto-promote enabled"
+        title="Eidos auto-promote enabled"
         message="If canary health holds for 8 more minutes, this run will promote to Ring 2 automatically. No human gate required at this risk score."/>
 
       {/* Stage strip */}

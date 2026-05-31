@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Shimmer (§2.2 component-page standard).
+// Eidos AI — Shimmer (§2.2 component-page standard).
 // Documents the Shimmer text placeholder: an animated gradient sweep over a
 // short label that bridges the "before first token" beat. TEXT-ONLY.
 // Image loading placeholders are handled by ImageView (image.tsx) and Skeleton.
@@ -58,7 +58,7 @@ function InContextDemo() {
           <Icons.sparkle size={16} style={{ color: 'var(--ember)' }}/>
         </span>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <span className="t-mono-label" style={{ display: 'block', marginBottom: 8 }}>Forge platform agent</span>
+          <span className="t-mono-label" style={{ display: 'block', marginBottom: 8 }}>Eidos platform agent</span>
           {phase === 'shimmer' && (
             <Shimmer>Searching the codebase…</Shimmer>
           )}

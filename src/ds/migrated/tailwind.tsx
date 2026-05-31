@@ -255,7 +255,7 @@ export default function Tailwind() {
       id="tailwind"
       num="05"
       title="Tailwind"
-      desc="Forge is built CSS-first. Drop the @theme block into your tailwind.css and every Forge token becomes a Tailwind utility — bg-ember, text-fg-muted, rounded-lg, animate-ember-pulse, ease-forge."
+      desc="Eidos is built CSS-first. Drop the @theme block into your tailwind.css and every Eidos token becomes a Tailwind utility — bg-ember, text-fg-muted, rounded-lg, animate-ember-pulse, ease-forge."
     >
       {/* Path picker */}
       <SubHead meta="pick one">Which preset do you need?</SubHead>
@@ -283,7 +283,7 @@ export default function Tailwind() {
       {/* v4 — primary path */}
       <SubHead meta="recommended">Tailwind v4 — the @theme preset</SubHead>
       <Lede up>
-        v4 reads tokens straight from CSS. Paste this block into your <Mono>tailwind.css</Mono> entry and every Forge token becomes a utility. No <Mono>tailwind.config.js</Mono>, no JS, no plugin hop.
+        v4 reads tokens straight from CSS. Paste this block into your <Mono>tailwind.css</Mono> entry and every Eidos token becomes a utility. No <Mono>tailwind.config.js</Mono>, no JS, no plugin hop.
       </Lede>
       <Frame label="tailwind.css" lang="css" code={TW_V4}>
         <div style={{display:'flex', gap: 'var(--space-2)', flexWrap:'wrap'}}>
@@ -328,7 +328,7 @@ export default function Tailwind() {
           <tr><td>One <code style={{fontFamily:'var(--font-mono)'}}>bg-ember</code> per surface</td><td>Ember signals attention. More than one cancels itself out.</td></tr>
           <tr><td><code style={{fontFamily:'var(--font-mono)'}}>ease-forge</code> + <code style={{fontFamily:'var(--font-mono)'}}>duration-normal</code> on every transition</td><td>Single ease, three durations. No bespoke timings in components.</td></tr>
           <tr><td>Numbers in <code style={{fontFamily:'var(--font-mono)'}}>font-mono</code> + <code style={{fontFamily:'var(--font-mono)', fontVariantNumeric:'tabular-nums'}}>tnum</code></td><td>p95, versions, counts must be tabular so digits don't dance on update.</td></tr>
-          <tr><td>Borders are hairlines (<code style={{fontFamily:'var(--font-mono)'}}>border-border</code>)</td><td>Forge doesn't use 2px borders or thick dividers anywhere.</td></tr>
+          <tr><td>Borders are hairlines (<code style={{fontFamily:'var(--font-mono)'}}>border-border</code>)</td><td>Eidos doesn't use 2px borders or thick dividers anywhere.</td></tr>
         </tbody>
       </table>
 

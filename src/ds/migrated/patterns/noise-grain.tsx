@@ -35,7 +35,7 @@ export default function NoiseGrainPage() {
           <div style={{position:'relative'}}>
             <div className="ds-h-eyebrow" style={{marginBottom: 10}}>Welcome back, Mariana</div>
             <div style={{fontSize: 'var(--text-2xl)', fontWeight: 600, letterSpacing:'-0.02em', lineHeight: 1.2, maxWidth: '24ch'}}>3 services need your attention today.</div>
-            <p style={{fontSize: 'var(--text-base)', color:'var(--fg-muted)', maxWidth: '46ch', marginTop: 10, lineHeight: 1.55}}>Two SLO burns, one PR pending Risk review. Forge prioritised them for you.</p>
+            <p style={{fontSize: 'var(--text-base)', color:'var(--fg-muted)', maxWidth: '46ch', marginTop: 10, lineHeight: 1.55}}>Two SLO burns, one PR pending Risk review. Eidos prioritised them for you.</p>
             <button className="btn ember sm" style={{marginTop: 14}}>Open my inbox <Icons.arrowRight size={12}/></button>
           </div>
         </div>

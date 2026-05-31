@@ -1,7 +1,7 @@
 'use client';
-// Forge DS — Components / Button Group
+// Eidos DS — Components / Button Group
 // Visually joined buttons — segmented toolbar feel.
-// Real component imported from @forge/ui (packages/ui/src/button-group.tsx).
+// Real component imported from @eidos/ui (packages/ui/src/button-group.tsx).
 import { ButtonGroup, Icons, Frame, Section, SubHead, TabbedCode, installTabs, Lede, Mono, AutoPropsTable } from '@/ds/core';
 
 const USAGE_CODE = `import { ButtonGroup } from "@/components/forge/button-group"

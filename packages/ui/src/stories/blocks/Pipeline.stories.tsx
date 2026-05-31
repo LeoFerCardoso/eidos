@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Pipeline, MOCKS } from '@forge/ui';
+import { Pipeline, MOCKS } from '@eidos/ui';
 
 // An in-flight run: built/tested/scanned, canary advancing, full deploy queued.
 const RUNNING_STEPS = [

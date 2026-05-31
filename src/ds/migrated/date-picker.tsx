@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Date Picker.
+// Eidos DS — Components / Date Picker.
 // Canonical popover DatePicker (trigger + Calendar grid) as the primary component;
 // DateInput (native <input type=date>) as the native alternative.
 import * as React from 'react';
@@ -49,7 +49,7 @@ const Page = () => {
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('date-picker')} ariaLabel="package manager" />
       <Lede>
-        Composes the Forge <Mono>Calendar</Mono> with a fixed-position popover trigger.
+        Composes the Eidos <Mono>Calendar</Mono> with a fixed-position popover trigger.
         Pick the <em>Manual</em> tab to copy the source files.
       </Lede>
 
@@ -304,7 +304,7 @@ const Page = () => {
       {/* DateInput — native alternative */}
       <SubHead meta="native alternative">DateInput — native date field</SubHead>
       <Lede>
-        <Mono>DateInput</Mono> wraps a native <Mono>{'<input type="date">'}</Mono> in the Forge field shell.
+        <Mono>DateInput</Mono> wraps a native <Mono>{'<input type="date">'}</Mono> in the Eidos field shell.
         One DS calendar icon is shown; the browser's native indicator is hidden to fix dark-mode contrast.
         Use this when the OS date picker is acceptable and you want zero JS.
       </Lede>

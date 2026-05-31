@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / CopyChip
+// Eidos DS — Components / CopyChip
 // .chip with click-to-copy affordance. Used for SHAs, service refs,
 // k8s namespaces, tokens, API keys — anywhere a row exposes an identifier
 // the reader will paste elsewhere.

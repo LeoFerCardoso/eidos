@@ -1,12 +1,12 @@
 'use client';
-// Forge DS — Components / Combobox.
+// Eidos DS — Components / Combobox.
 // Searchable single/multi-select with a fixed-position popover panel that
 // escapes parent overflow:hidden (e.g. .ds-frame). Always-visible search,
 // free-text filter, and multi-select with a chip row.
 import * as React from 'react';
 import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs, Lede, Mono, Combobox } from '@/ds/core';
 
-const USAGE_CODE = `import { Combobox } from "@forge/ui"
+const USAGE_CODE = `import { Combobox } from "@eidos/ui"
 
 export function Demo() {
   const [value, setValue] = React.useState<string | null>(null);
@@ -84,7 +84,7 @@ export default function Page() {
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('combobox')} ariaLabel="package manager"/>
       <Lede>
-        Ships a custom-built searchable picker — no cmdk or Radix required. CSS classes (<Mono>.cb-*</Mono>) live in <Mono>tokens.css</Mono> and are included in the <Mono>forge-ui init</Mono> base layer. Pick the <em>Manual</em> tab to copy the source files instead.
+        Ships a custom-built searchable picker — no cmdk or Radix required. CSS classes (<Mono>.cb-*</Mono>) live in <Mono>tokens.css</Mono> and are included in the <Mono>eidos init</Mono> base layer. Pick the <em>Manual</em> tab to copy the source files instead.
       </Lede>
 
       {/* 2. USAGE */}

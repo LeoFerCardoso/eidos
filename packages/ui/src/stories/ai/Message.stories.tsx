@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Message, MessageActions, Response, Conversation } from '@forge/ui';
+import { Message, MessageActions, Response, Conversation } from '@eidos/ui';
 
 // ── Message ──────────────────────────────────────────────────────────────────
 

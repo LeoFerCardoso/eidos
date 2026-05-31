@@ -1,5 +1,5 @@
 'use client';
-// Forge Charts — Overview. Introduction-style landing; the hero shows real charts.
+// Eidos Charts — Overview. Introduction-style landing; the hero shows real charts.
 import { DsOverview } from '@/components/docs';
 import { Sparkline, Trend, ScoreGauge, Icons } from '@/ds/core';
 
@@ -11,7 +11,7 @@ const TRIBES: { name: string; deploys: number; pct: number }[] = [
   { name: 'Cobalt', deploys: 44, pct: 54 },
   { name: 'Delta', deploys: 81, pct: 100 },
   { name: 'Echo', deploys: 59, pct: 73 },
-  { name: 'Forge', deploys: 33, pct: 41 },
+  { name: 'Eidos', deploys: 33, pct: 41 },
   { name: 'Grove', deploys: 65, pct: 80 },
 ];
 const PEAK = TRIBES.reduce((a, b) => (b.deploys > a.deploys ? b : a));
@@ -72,14 +72,14 @@ const DESC: Record<string, string> = {
 export default function ChartsOverview() {
   return (
     <DsOverview
-      eyebrow="Forge / Charts"
+      eyebrow="Eidos / Charts"
       title="See the data."
-      lede="Recharts wrapped in Forge tokens. Every chart reads the same --viz-* palette, the mono axis font, and the one ember accent — so a dashboard built from a dozen of them looks like one product, not twelve widgets."
+      lede="Recharts wrapped in Eidos tokens. Every chart reads the same --viz-* palette, the mono axis font, and the one ember accent — so a dashboard built from a dozen of them looks like one product, not twelve widgets."
       hero={{
         eyebrow: 'Recharts · themed · responsive',
         heading: 'Honest encodings, calm surfaces.',
-        subtitle: 'Recharts, dressed in Forge tokens.',
-        body: 'Bars for comparison, lines for trend, gauges for a single number against a target. Forge picks the encoding the eye reads fastest and tints it with the platform palette — never decoration for its own sake.',
+        subtitle: 'Recharts, dressed in Eidos tokens.',
+        body: 'Bars for comparison, lines for trend, gauges for a single number against a target. Eidos picks the encoding the eye reads fastest and tints it with the platform palette — never decoration for its own sake.',
         actions: (
           <>
             <a className="btn ember" href="/charts/bar">Browse charts <Icons.arrowRight size={14} /></a>
@@ -98,8 +98,8 @@ export default function ChartsOverview() {
       tiles={CHARTS.map(([slug, label]) => ({ href: `/charts/${slug}`, label, desc: DESC[slug] }))}
       footer={{
         title: 'Building a dashboard?',
-        body: 'Compose Metric cards and Score gauges from Forge IDP around these charts.',
-        actions: <a className="btn" href="/idp/overview">Forge IDP <Icons.arrowRight size={14} /></a>,
+        body: 'Compose Metric cards and Score gauges from Eidos IDP around these charts.',
+        actions: <a className="btn" href="/idp/overview">Eidos IDP <Icons.arrowRight size={14} /></a>,
       }}
     />
   );

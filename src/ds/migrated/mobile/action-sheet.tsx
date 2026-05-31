@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Action sheet. A bottom-anchored list of actions on a single object,
+// Eidos Mobile — Action sheet. A bottom-anchored list of actions on a single object,
 // triggered by a "more" affordance. Unlike the Bottom sheet (which holds content) it is a
 // short verb menu; unlike the Dialog it doesn't block — it's reachable and tap-to-dismiss.
 import * as React from 'react';

@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Tag Input
+// Eidos DS — Components / Tag Input
 //
 // Page standard (DS-PAGE-STANDARD §2.2):
 //   1. Installation    (TabbedCode)
@@ -104,7 +104,7 @@ export default function TagInputPage() {
         </div>
       </Frame>
       <Lede>
-        The field sits inside the standard <Mono>.in-group</Mono> shell so it shares the same focus ring and baseline as every other Forge input. Chips wrap naturally; clicking anywhere in the field focuses the bare input.
+        The field sits inside the standard <Mono>.in-group</Mono> shell so it shares the same focus ring and baseline as every other Eidos input. Chips wrap naturally; clicking anywhere in the field focuses the bare input.
       </Lede>
 
       {/* ------------------------------------------------------------------

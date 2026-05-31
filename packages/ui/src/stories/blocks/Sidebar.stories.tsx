@@ -8,7 +8,7 @@ import {
   SidebarFooter,
   Icons,
   ForgeMark,
-} from '@forge/ui';
+} from '@eidos/ui';
 
 const meta = {
   title: 'Blocks/Sidebar',

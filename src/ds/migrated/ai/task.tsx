@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Task. A single unit of agent work with status and optional
+// Eidos AI — Task. A single unit of agent work with status and optional
 // sub-steps. Documents the Task component.
 import * as React from 'react';
 import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, AutoPropsTable, installTabs, Task, Lede, Mono } from '@/ds/core';
@@ -190,7 +190,7 @@ export default function TaskPage() {
       <Frame label="stack of 3 Tasks — the agent's live to-do feed during a multi-tool run" height={360}>
         <div style={{ width: '100%', maxWidth: 580, display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--fg-subtle)' }}>
-            Forge AI <span style={{ margin: '0 6px', color: 'var(--fg-faint)' }}>·</span> just now
+            Eidos AI <span style={{ margin: '0 6px', color: 'var(--fg-faint)' }}>·</span> just now
           </div>
           <div aria-live="polite" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {FEED_ITEMS.map((t, i) => (

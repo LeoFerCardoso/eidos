@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { InputGroup, InputAddon, Icons } from '@forge/ui';
+import { InputGroup, InputAddon, Icons } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/InputGroup',

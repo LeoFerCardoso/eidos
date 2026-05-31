@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Toggle } from '@forge/ui';
-import { Icons } from '@forge/ui';
+import { Toggle } from '@eidos/ui';
+import { Icons } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/Toggle',

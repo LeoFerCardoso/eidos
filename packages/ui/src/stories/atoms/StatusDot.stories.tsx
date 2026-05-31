@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { StatusDot } from '@forge/ui';
+import { StatusDot } from '@eidos/ui';
 
 // The full set of status tones backed by ds.css (`.s-dot.<tone>`).
 const TONES = [

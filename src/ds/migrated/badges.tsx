@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Badges
+// Eidos DS — Components / Badges
 // Tier · language · numeric · 'new' — small inline markers attached to text or a UI affordance.
 // For keyboard chords see Kbd. For an avatar attached to a name see Owner pill (under Avatar).
 import * as React from 'react';
@@ -42,7 +42,7 @@ function CountPlayground() {
   );
 }
 
-  const USAGE_CODE = `import { Badge, TierBadge, LangBadge } from "@forge/ui"
+  const USAGE_CODE = `import { Badge, TierBadge, LangBadge } from "@eidos/ui"
 
 export function Demo() {
   return (

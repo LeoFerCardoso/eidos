@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Action Button. The primary call-to-action on a mobile screen — full-width
+// Eidos Mobile — Action Button. The primary call-to-action on a mobile screen — full-width
 // or prominent ember button anchored above the safe area. One ember CTA per screen; secondary
 // and destructive variants stay visually distinct so hierarchy reads at a glance.
 import * as React from 'react';

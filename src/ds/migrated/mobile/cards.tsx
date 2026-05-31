@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Cards / feed. A vertical scroll of content cards: KPI, service, incident.
+// Eidos Mobile — Cards / feed. A vertical scroll of content cards: KPI, service, incident.
 //
 // Reuse policy (compose, never reinvent): the KPI card IS the core MetricCard recipe, so it
 // composes <MetricCard/> directly rather than hand-rolling label+delta+value+sparkline. The

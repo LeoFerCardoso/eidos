@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Sources panel/list (§2.2 component-page standard).
+// Eidos AI — Sources panel/list (§2.2 component-page standard).
 // Documents the standalone `Sources` surface: the numbered list of retrieved
 // documents shown below an AI answer (rank · title · domain · snippet ·
 // retrieved-at timestamp). For the INLINE Citation chip + popover, see the
@@ -160,7 +160,7 @@ const InContextDemo = () => (
     <div className="ai-resp">
       <div className="ai-resp-stack">
         <div className="ai-resp-meta">
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--fg-subtle)' }}>Forge AI</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--fg-subtle)' }}>Eidos AI</span>
           <span style={{ color: 'var(--fg-faint)', margin: '0 6px' }}>·</span>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', fontVariantNumeric: 'tabular-nums', color: 'var(--fg-faint)' }}>14:02</span>
         </div>

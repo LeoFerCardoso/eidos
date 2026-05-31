@@ -24,11 +24,11 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
       <div className="conv-body" tabIndex={0} role="log" aria-live="polite" aria-relevant="additions" aria-label="Incident replay · 0421">
         <M from="system">Session opened · forge-ai/sonnet-4-6</M>
         <M from="user">Where do I find the Tier-1 incident runbooks?</M>
-        <M from="assistant" meta={<>Forge AI · 14:02</>}>
+        <M from="assistant" meta={<>Eidos AI · 14:02</>}>
           In <code>docs/runbooks/tier-1/</code> — each service has its own Markdown file with the on-call rotation, dashboards, and rollback steps for the last three releases.
         </M>
         <M from="user">And for the last deploy diff?</M>
-        <M from="assistant" meta={<>Forge AI · 14:02</>}>
+        <M from="assistant" meta={<>Eidos AI · 14:02</>}>
           <code>git log -p --since="3 days" -- services/identity-svc</code> shows the diff for that window scoped to the service.
         </M>
       </div>
@@ -66,7 +66,7 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
     const [turns, setTurns] = React.useState<Array<{ id: number; from: 'user' | 'assistant' | 'system'; body: string; meta?: React.ReactNode }>>([
       { id: 0, from: 'system',    body: 'Session opened · forge-ai/sonnet-4-6' },
       { id: 1, from: 'user',      body: 'Stuck on grpc retries — anything jump out?' },
-      { id: 2, from: 'assistant', meta: <>Forge AI · 14:02</>, body: 'Retry budget on grpc.toml was bumped from 3 to 8 in the last deploy.' },
+      { id: 2, from: 'assistant', meta: <>Eidos AI · 14:02</>, body: 'Retry budget on grpc.toml was bumped from 3 to 8 in the last deploy.' },
       { id: 3, from: 'assistant', body: 'That can mask a downstream timeout — billing-svc looks like the suspect.' },
     ]);
     const [unread, setUnread] = React.useState(0);
@@ -106,10 +106,10 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
     React.useEffect(() => {
       const sample: any[] = [
         { from: 'user',      body: 'And what about the deploy after?' },
-        { from: 'assistant', meta: <>Forge AI · 14:04</>, body: 'That one only touched the migration runner — safe to roll back independently.' },
+        { from: 'assistant', meta: <>Eidos AI · 14:04</>, body: 'That one only touched the migration runner — safe to roll back independently.' },
         { from: 'user',      body: 'Got it.' },
         { from: 'user',      body: 'Anything else worth checking?' },
-        { from: 'assistant', meta: <>Forge AI · 14:06</>, body: 'Watch the p99 on identity-svc — the same retry-bump cascades there too.' },
+        { from: 'assistant', meta: <>Eidos AI · 14:06</>, body: 'Watch the p99 on identity-svc — the same retry-bump cascades there too.' },
         { from: 'assistant', body: 'And re-bind the Datadog alert before next deploy.' },
       ];
       let i = 0;
@@ -185,10 +185,10 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
     const [turns, setTurns] = React.useState<Array<{ id: number; from: string; meta?: React.ReactNode; body: React.ReactNode; streaming?: boolean }>>([
       { id: 0, from: 'system',    body: 'Session opened · forge-ai/sonnet-4-6' },
       { id: 1, from: 'user',      body: 'What changed in the 0421 release?' },
-      { id: 2, from: 'assistant', meta: <>Forge AI · 14:02</>, body: <>Three migrations were promoted in the 0421 release — none of them touched the retry budget directly, but one bumped <code>identity-svc</code>'s default pool size from 8 to 32.</> },
+      { id: 2, from: 'assistant', meta: <>Eidos AI · 14:02</>, body: <>Three migrations were promoted in the 0421 release — none of them touched the retry budget directly, but one bumped <code>identity-svc</code>'s default pool size from 8 to 32.</> },
       { id: 3, from: 'assistant', body: <>The retry-budget bump masked a downstream timeout in <code>billing-svc</code>. Because the alert rename silently un-bound the alert, the page didn't fire until error rate hit 4%.</> },
       { id: 4, from: 'user',      body: 'Got it. Anything to monitor for 0422?' },
-      { id: 5, from: 'assistant', meta: <>Forge AI · 14:08</>, body: <>Watch <code>identity-svc</code> p99 — the same retry-bump cascades there. I'd also re-bind the Datadog alert before next deploy.</> },
+      { id: 5, from: 'assistant', meta: <>Eidos AI · 14:08</>, body: <>Watch <code>identity-svc</code> p99 — the same retry-bump cascades there. I'd also re-bind the Datadog alert before next deploy.</> },
     ]);
     const bodyRef = React.useRef<HTMLDivElement>(null);
     const timers = React.useRef<ReturnType<typeof setTimeout>[]>([]);
@@ -205,7 +205,7 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
       setTurns(prev => ([
         ...prev,
         { id: prev.length,     from: 'user',      body: value },
-        { id: prev.length + 1, from: 'assistant', meta: <>Forge AI · 14:09</>, body: 'Pulling the deploy diff and the alert bindings…', streaming: true },
+        { id: prev.length + 1, from: 'assistant', meta: <>Eidos AI · 14:09</>, body: 'Pulling the deploy diff and the alert bindings…', streaming: true },
       ]));
       timers.current.push(setTimeout(() => {
         setTurns(prev => prev.map((t, i) =>
@@ -247,7 +247,7 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
             value={text}
             onChange={setText}
             onSubmit={() => send()}
-            placeholder={pending ? 'Forge AI is replying…' : 'Ask anything about the 0421 release…'}
+            placeholder={pending ? 'Eidos AI is replying…' : 'Ask anything about the 0421 release…'}
             status={pending ? 'submitted' : 'ready'}
             disabled={pending}
           />
@@ -271,11 +271,11 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
         <ForgeMark size={16}/>
         <span className="title">Incident replay · 0421</span>
         <span className="spacer"/>
-        <span className="conv-state" aria-live="polite"><Spinner size="sm" aria-label="Forge AI is thinking"/> thinking…</span>
+        <span className="conv-state" aria-live="polite"><Spinner size="sm" aria-label="Eidos AI is thinking"/> thinking…</span>
       </div>
       <div className="conv-body" tabIndex={0} role="log" aria-live="polite" aria-relevant="additions" aria-busy="true" aria-label="Incident replay · 0421">
         <M from="user">Roll back 0421 safely — what's the order?</M>
-        <Message from="assistant" meta={<>Forge AI · 14:09</>} streaming>
+        <Message from="assistant" meta={<>Eidos AI · 14:09</>} streaming>
           <Skeleton lines={2} width="100%"/>
         </Message>
       </div>
@@ -319,14 +319,14 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
       </div>
       <div className="conv-body" tabIndex={0} role="log" aria-label="Incident replay · 0421">
         <M from="user">Roll back 0421 safely — what's the order?</M>
-        <M from="assistant" meta={<>Forge AI · 14:09</>}>Reverting the migration runner first keeps the retry budget untouched.</M>
+        <M from="assistant" meta={<>Eidos AI · 14:09</>}>Reverting the migration runner first keeps the retry budget untouched.</M>
       </div>
       <div className="conv-foot">
         <PromptInput
           value=""
           onChange={() => {}}
           onSubmit={() => {}}
-          placeholder="Reconnecting to Forge AI…"
+          placeholder="Reconnecting to Eidos AI…"
           status="error"
           disabled
         />
@@ -352,7 +352,7 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
         </div>
         <div>
           <div className="conv-doc-a-meta">
-            <span className="name">Forge AI</span>
+            <span className="name">Eidos AI</span>
             <span className="dot"/>
             <span>14:02 · gpt-5</span>
           </div>
@@ -395,7 +395,7 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
         </div>
         <div>
           <div className="conv-doc-a-meta">
-            <span className="name">Forge AI</span>
+            <span className="name">Eidos AI</span>
             <span className="dot"/>
             <span>14:08 · gpt-5</span>
           </div>
@@ -442,7 +442,7 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
       Walk me through the 0421 release post-mortem…
     </Message>
     {/* Assistant turn — full Response (long-form prose) */}
-    <Response meta={<>Forge AI · 14:02 · gpt-5</>}>
+    <Response meta={<>Eidos AI · 14:02 · gpt-5</>}>
       <h2>What changed in 0421</h2>
       <p>Three things shipped together…</p>
       <Table>…</Table>
@@ -571,7 +571,7 @@ export default function ConversationPage() {
       <Frame label="thread padding · turn gap · follow-up gap · avatar gap" height={520}>
         <div className="msg-thread" style={{ width: '100%', maxWidth: 520, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)' }}>
           <Message from="user">Generate a service health card component.</Message>
-          <Message from="assistant" meta={<><span className="name">Forge AI</span><span className="dot"/><span>14:02</span></>}>
+          <Message from="assistant" meta={<><span className="name">Eidos AI</span><span className="dot"/><span>14:02</span></>}>
             Here is a compact health card. Click to preview:
           </Message>
           <Message from="assistant">
@@ -652,7 +652,7 @@ export default function ConversationPage() {
             </div>
             <div className="conv-body">
               <M from="user">أين أجد كتيبات الحوادث؟</M>
-              <M from="assistant" meta={<>Forge AI · 14:02</>}>
+              <M from="assistant" meta={<>Eidos AI · 14:02</>}>
                 في <code>docs/runbooks/tier-1/</code> — لكل خدمة ملف Markdown خاص بها.
               </M>
             </div>
@@ -676,7 +676,7 @@ export default function ConversationPage() {
                 </div>
                 <div className="conv-body">
                   <M from="user">Where are the runbooks?</M>
-                  <M from="assistant" meta={<>Forge AI</>}>In <code>docs/runbooks/tier-1/</code>.</M>
+                  <M from="assistant" meta={<>Eidos AI</>}>In <code>docs/runbooks/tier-1/</code>.</M>
                 </div>
                 <button className="conv-jump"><span className="n">2</span><span>new</span></button>
               </div>
@@ -707,9 +707,9 @@ export default function ConversationPage() {
             <div className="conv" style={{ height: 180, maxWidth: 320 }}>
               <div className="conv-body">
                 <M from="user">Ping?</M>
-                <M from="assistant" meta={<>Forge AI</>}>Pong.</M>
+                <M from="assistant" meta={<>Eidos AI</>}>Pong.</M>
                 <M from="user">Again?</M>
-                <M from="assistant" meta={<>Forge AI</>}>Pong.</M>
+                <M from="assistant" meta={<>Eidos AI</>}>Pong.</M>
               </div>
             </div>
           </div>
@@ -735,7 +735,7 @@ export default function ConversationPage() {
                 <span className="title">Bounded</span>
                 <span className="spacer"/>
               </div>
-              <div className="conv-body"><M from="user">…</M><M from="assistant" meta={<>Forge</>}>…</M></div>
+              <div className="conv-body"><M from="user">…</M><M from="assistant" meta={<>Eidos</>}>…</M></div>
             </div>
           </div>
           <div className="note">A fixed-height shell with internal scroll. The page scrolls past the thread, not through it.</div>

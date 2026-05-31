@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Slider.
+// Eidos DS — Components / Slider.
 // Inspired by shadcn/ui's Slider (Radix). Single value or range, sizes,
 // vertical orientation, marks, paired with inputs, RTL, and invalid state.
 import * as React from 'react';

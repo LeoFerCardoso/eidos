@@ -37,7 +37,7 @@ const SettingsBody = () => (
   <div style={{display: 'flex', flexDirection: 'column', gap: 18}}>
     <div className="in-field">
       <label className="in-label">Workspace name</label>
-      <div className="in-group"><input className="in-control" defaultValue="Acme Forge"/></div>
+      <div className="in-group"><input className="in-control" defaultValue="Acme Eidos"/></div>
     </div>
     <div className="in-field">
       <label className="in-label">Description</label>
@@ -143,7 +143,7 @@ export default function Page() {
       <SubHead meta="package managers">Installation</SubHead>
       <TabbedCode tabs={installTabs('drawer', 'vaul clsx tailwind-merge')} ariaLabel="package manager"/>
       <Lede>
-        Forge's Drawer is built on <Mono>vaul</Mono> — drag-to-dismiss, momentum, and snap points work out of the box. The CLI drops <Mono>drawer.tsx</Mono> and <Mono>utils.ts</Mono> into your project. Pick the <em>Manual</em> tab to copy the source by hand.
+        Eidos's Drawer is built on <Mono>vaul</Mono> — drag-to-dismiss, momentum, and snap points work out of the box. The CLI drops <Mono>drawer.tsx</Mono> and <Mono>utils.ts</Mono> into your project. Pick the <em>Manual</em> tab to copy the source by hand.
       </Lede>
 
       {/* 2. USAGE */}
@@ -209,7 +209,7 @@ export default function Page() {
       <SubHead meta="navigation">From the left · navigation</SubHead>
       <Frame
         label='side="left" — best for navigation surfaces, off-canvas menus'
-        code={`<Drawer open={open} side="left" title="Forge" onClose={…}>
+        code={`<Drawer open={open} side="left" title="Eidos" onClose={…}>
   <NavList items={…}/>
 </Drawer>`}
       >
@@ -220,7 +220,7 @@ export default function Page() {
         </div>
         <Drawer
           open={left} side="left"
-          title="Forge"
+          title="Eidos"
           desc="Project navigation"
           onClose={() => setLeft(false)}
         >

@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Progress. Two shapes for "work is happening": a linear bar for a known share
+// Eidos Mobile — Progress. Two shapes for "work is happening": a linear bar for a known share
 // of a task (upload, rollout) and a circular spinner for an unknown wait. Determinate shows the
 // real percentage; indeterminate just animates. The fill is the page's one ember accent.
 import * as React from 'react';

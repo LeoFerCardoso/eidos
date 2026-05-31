@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Swipe actions. Drag a row left to reveal trailing actions (archive, delete).
+// Eidos Mobile — Swipe actions. Drag a row left to reveal trailing actions (archive, delete).
 import * as React from 'react';
 import { Section, SubHead, Frame, CodeBlock, DeviceFrame, Icons, Lede, Mono, Skeleton, Spinner, Empty, Alert, AlertTitle, AlertDescription, AlertActions } from '@/ds/core';
 

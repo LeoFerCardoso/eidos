@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ContextBar, PromptInput } from '@forge/ui';
+import { ContextBar, PromptInput } from '@eidos/ui';
 
 // ── ContextBar ────────────────────────────────────────────────────────────────
 // @deprecated preset — forwards all props to <Context variant="bar" />.

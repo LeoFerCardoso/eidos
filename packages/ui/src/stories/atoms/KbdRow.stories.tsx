@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { KbdRow } from '@forge/ui';
+import { KbdRow } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/KbdRow',

@@ -181,7 +181,7 @@ export function NativeSelect({ label, help, error, options, placeholder, id, cla
 /**
  * @deprecated Renamed to `NativeSelect`. This alias will be removed in the next
  * major release. Use `NativeSelect` for the native <select> or `Select` (from
- * `@forge/ui`) for the custom dropdown.
+ * `@eidos/ui`) for the custom dropdown.
  */
 export const SelectNative = NativeSelect;
 

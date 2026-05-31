@@ -1,6 +1,6 @@
 'use client';
-// Forge Mobile — Tooltip. A transient explanatory callout shown on hover or keyboard focus
-// of a control, with a pointer toward its anchor. The shipped @forge/ui Tooltip portals to
+// Eidos Mobile — Tooltip. A transient explanatory callout shown on hover or keyboard focus
+// of a control, with a pointer toward its anchor. The shipped @eidos/ui Tooltip portals to
 // document.body (position:fixed) and auto-flips at the viewport edge. On touch there is no
 // hover, so a mobile surface drives it with the controlled `open` prop (tap toggles) or relies
 // on focus. For rich help content use a Popover instead. Dismissible per WCAG 1.4.13 — Escape
@@ -244,7 +244,7 @@ export default function MobileTooltip() {
       <CodeBlock
         label="tooltip"
         lang="tsx"
-        code={`import { Tooltip } from '@forge/ui';
+        code={`import { Tooltip } from '@eidos/ui';
 
 // Hover / focus (default) — opens after delayDuration, ESC dismisses
 <Tooltip content="Rollback to last good build" side="top">

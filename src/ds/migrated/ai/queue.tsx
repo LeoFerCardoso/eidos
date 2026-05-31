@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Queue (§2.2 component-page standard, num "17").
+// Eidos AI — Queue (§2.2 component-page standard, num "17").
 // Prompts the user has lined up while the agent is busy. An ordered,
 // removable list — users keep typing; the agent works through one at a time.
 import * as React from 'react';
@@ -96,7 +96,7 @@ const InContextDemo = () => {
     <div style={{ width: '100%', maxWidth: 580, display: 'flex', gap: 20, alignItems: 'flex-start' }}>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--fg-faint)', marginBottom: 10 }}>Streaming</div>
-        <Message from="assistant" streaming meta="Forge AI · now">
+        <Message from="assistant" streaming meta="Eidos AI · now">
           Checking the incident queue for tier-1 services over the last 24 hours…
         </Message>
       </div>
@@ -315,7 +315,7 @@ export default function AiQueuePage() {
           <div className="body" style={{ padding: 14 }}>
             <div style={{ width: '100%' }}>
               <div style={{ marginBottom: 10 }}>
-                <Message from="assistant" streaming meta="Forge AI · now">
+                <Message from="assistant" streaming meta="Eidos AI · now">
                   Pulling deploy history for all tier-1 services…
                 </Message>
               </div>
@@ -331,7 +331,7 @@ export default function AiQueuePage() {
           <div className="head"><Icons.x size={12}/> Don't — auto-collapse the queue out of sight</div>
           <div className="body" style={{ padding: 14 }}>
             <div style={{ width: '100%' }}>
-              <Message from="assistant" streaming meta="Forge AI · now">
+              <Message from="assistant" streaming meta="Eidos AI · now">
                 Pulling deploy history…
               </Message>
               <div style={{ marginTop: 10, fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)', textAlign: 'center' }}>

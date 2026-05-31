@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Chain of Thought. A collapsible, multi-step reasoning trace
+// Eidos AI — Chain of Thought. A collapsible, multi-step reasoning trace
 // where each step has a kind (think/search/observe/plan/read/done) and its
 // own icon. Richer than Reasoning's single prose blob.
 import * as React from 'react';
@@ -180,7 +180,7 @@ export default function ChainOfThoughtPage() {
       <Frame label="ChainOfThought above, then the Response — the canonical 'show your work then answer' pattern" height={420}>
         <div style={{ width: '100%', maxWidth: 580, display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div className="t-mono-label">
-            Forge AI <span style={{ marginInline: 6, color: 'var(--fg-faint)' }}>·</span> just now
+            Eidos AI <span style={{ marginInline: 6, color: 'var(--fg-faint)' }}>·</span> just now
           </div>
           <ChainOfThought
             title="Chain of thought"

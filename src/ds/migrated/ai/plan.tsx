@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Plan. The agent's commitment: an ordered checklist it ticks off
+// Eidos AI — Plan. The agent's commitment: an ordered checklist it ticks off
 // as it works. Documents the Plan component (Plan({ title, items })).
 import * as React from 'react';
 import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, AutoPropsTable, installTabs, Plan, Lede, Mono } from '@/ds/core';
@@ -157,7 +157,7 @@ export default function PlanPage() {
           <div className="msg">
             <div className="msg-stack" style={{ maxWidth: '100%' }}>
               <div className="msg-meta">
-                <span className="name">Forge AI</span>
+                <span className="name">Eidos AI</span>
                 <span className="dot"/>
                 <span>just now</span>
               </div>

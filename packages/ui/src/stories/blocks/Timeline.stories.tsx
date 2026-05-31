@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Timeline } from '@forge/ui';
+import { Timeline } from '@eidos/ui';
 
 const NOW = Date.now();
 const ago = (ms: number) => new Date(NOW - ms);

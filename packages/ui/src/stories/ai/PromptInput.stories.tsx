@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { PromptInput, PromptBanner, Conversation, Message } from '@forge/ui';
+import { PromptInput, PromptBanner, Conversation, Message } from '@eidos/ui';
 
 const meta = {
   title: 'AI/PromptInput',

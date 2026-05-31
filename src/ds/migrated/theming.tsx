@@ -68,7 +68,7 @@ export default function Theming() {
       id="theming"
       num="04"
       title="Theming"
-      desc="Forge ships dark and light. Both share one token graph — light is not a translation, it's the same hierarchy seen on paper. Customise per-product by overriding individual tokens."
+      desc="Eidos ships dark and light. Both share one token graph — light is not a translation, it's the same hierarchy seen on paper. Customise per-product by overriding individual tokens."
     >
       {/* Toggle behavior */}
       <SubHead meta="how it works">The data-theme attribute</SubHead>
@@ -101,7 +101,7 @@ export default function Theming() {
       {/* Customising tokens */}
       <SubHead meta="customising">Override a token</SubHead>
       <Lede up>
-        Override any token in your product's CSS — Forge tokens are CSS variables, so the cascade does the work. Scope the override to <Mono>:root</Mono> for a global change or to a specific selector for a sub-tree.
+        Override any token in your product's CSS — Eidos tokens are CSS variables, so the cascade does the work. Scope the override to <Mono>:root</Mono> for a global change or to a specific selector for a sub-tree.
       </Lede>
       <CodeBlock label="theme-overrides.css" lang="css" code={`/* Replace ember with a product-specific accent */
 :root[data-theme="dark"] {
@@ -206,7 +206,7 @@ export default function Theming() {
             <div>--ember: ...</div>
             <div>--font-display: ...</div>
           </div>
-          <div className="note">If your product needs every token rewritten, you don't want Forge — start a separate system.</div>
+          <div className="note">If your product needs every token rewritten, you don't want Eidos — start a separate system.</div>
         </div>
       </div>
     </Section>

@@ -1,6 +1,6 @@
 'use client';
-// Forge Mobile — Top Navigation. The bar at the top of a screen (left icon area · flexible
-// title · right icon area) over the OS status bar. Modelled on LINE LDSG, rebuilt in Forge
+// Eidos Mobile — Top Navigation. The bar at the top of a screen (left icon area · flexible
+// title · right icon area) over the OS status bar. Modelled on LINE LDSG, rebuilt in Eidos
 // tokens. Page follows the DS component standard: every example is a Frame (preview + code),
 // the code is React Native usage, and previews are constrained to a handset width.
 import * as React from 'react';
@@ -8,7 +8,7 @@ import { Section, SubHead, Frame, CodeBlock, Lede, Mono, PropsTable, Icons, Stat
 
 const DEVICE_W = 372;
 
-/* LDSG uses a heart in the trailing area; the Forge icon set has none, so it's drawn here. */
+/* LDSG uses a heart in the trailing area; the Eidos icon set has none, so it's drawn here. */
 const Heart = ({ size = 24 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M12 20.2s-7.2-4.6-9.4-9C1 8 2.4 4.7 5.8 4.7c2.1 0 3.4 1.3 4.2 2.5.8-1.2 2.1-2.5 4.2-2.5 3.4 0 4.8 3.3 3.2 6.5-2.2 4.6-9.4 9-9.4 9Z" />
@@ -174,8 +174,8 @@ function OverflowPreview() {
 }
 
 // ── React Native usage snippets ──────────────────────────────────────────────
-const IMPORT = `import { TopNavigation } from '@forge/mobile';
-import { ChevronLeft, Home, Star, Settings, Close, Heart, Share } from '@forge/mobile/icons';`;
+const IMPORT = `import { TopNavigation } from '@eidos/mobile';
+import { ChevronLeft, Home, Star, Settings, Close, Heart, Share } from '@eidos/mobile/icons';`;
 
 const RN_USAGE = `${IMPORT}
 
@@ -334,12 +334,12 @@ export default function MobileTopNavigation() {
       desc="The bar at the top of a screen — leading icon area, flexible title, trailing icon area. iOS centres the title; Android left-aligns it. Close is always present; the rest are configurable."
     >
       <SubHead meta="package managers">Installation</SubHead>
-      <Lede>Top Navigation ships in <Mono>@forge/mobile</Mono>. Import the component and the icons each screen uses.</Lede>
+      <Lede>Top Navigation ships in <Mono>@eidos/mobile</Mono>. Import the component and the icons each screen uses.</Lede>
       <CodeBlock label="import" lang="tsx" code={IMPORT} />
 
       <SubHead meta="hello world">Usage</SubHead>
       <Lede>
-        Import <Mono>TopNavigation</Mono> from <Mono>@forge/mobile</Mono> and pass <Mono>leading</Mono> / <Mono>trailing</Mono> action arrays plus a <Mono>title</Mono>. The bar adapts to the <Mono>platform</Mono> automatically — toggle it below.
+        Import <Mono>TopNavigation</Mono> from <Mono>@eidos/mobile</Mono> and pass <Mono>leading</Mono> / <Mono>trailing</Mono> action arrays plus a <Mono>title</Mono>. The bar adapts to the <Mono>platform</Mono> automatically — toggle it below.
       </Lede>
       <Frame label="Full-flex · adapts to the platform" center code={RN_USAGE} lang="tsx">
         <UsagePreview />

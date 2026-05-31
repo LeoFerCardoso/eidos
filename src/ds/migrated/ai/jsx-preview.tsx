@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — JSX Preview (doc page 22).
+// Eidos AI — JSX Preview (doc page 22).
 // Documents the JSX Preview pattern: a live source → rendered output split.
 // The DS ships no JSX evaluator — this page demonstrates a SAFE in-page
 // new-Function eval on hardcoded source strings (not user input) for the
@@ -98,7 +98,7 @@ function BasicUsageDemo() {
 }
 
 // ── Demo 2: DS primitives scope ──────────────────────────────────────────────
-// The model produced a snippet that uses a Forge pill + status dot. We pass
+// The model produced a snippet that uses a Eidos pill + status dot. We pass
 // the primitives into the eval scope so the evaluated code can reference them.
 
 // Simple inline pill and dot components for the scope demo
@@ -289,7 +289,7 @@ function JsxPreviewDemo({ defaultSrc }: { defaultSrc: string }) {
       {/* 3a. DS PRIMITIVES IN SCOPE */}
       <SubHead meta="eval scope">Reusing DS primitives</SubHead>
       <Frame
-        label="Pass Forge components into the eval scope so snippets can reference them"
+        label="Pass Eidos components into the eval scope so snippets can reference them"
         height={260}
         code={`// Pass your DS primitives into the scope object:
 const scope = {

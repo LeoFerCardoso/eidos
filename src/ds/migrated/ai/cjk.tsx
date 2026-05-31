@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — CJK (Chinese / Japanese / Korean) text handling in AI surfaces
+// Eidos AI — CJK (Chinese / Japanese / Korean) text handling in AI surfaces
 // (§2.2 component-page standard). No new component — this documents how Prose
 // and Message handle CJK via the :lang() rules already in ai.css: looser
 // line-height (1.85), line-break: strict, overflow-wrap: anywhere, and a
@@ -192,7 +192,7 @@ export default function AiCJK() {
             </Message>
           </div>
           <div lang="ja">
-            <Message from="assistant" meta={<><span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)' }}>Forge AI</span></>}>
+            <Message from="assistant" meta={<><span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)' }}>Eidos AI</span></>}>
               identity-svc はカナリアリングで正常に動作しています。p95 レイテンシは 142ms で、エラーバジェットは 94% 残っています。25% リングへの昇格を推奨します。
             </Message>
           </div>

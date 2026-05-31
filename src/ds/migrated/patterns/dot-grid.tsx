@@ -6,7 +6,7 @@ const HeroDemo = () => (
   <div className="pat-demo is-tall pat-dot-grid" style={{position:'relative'}}>
     <div className="pat-ember-glow is-lg" style={{top: -120, insetInlineEnd: -120}}/>
     <div style={{position:'relative', textAlign:'center'}}>
-      <div className="ds-h-eyebrow" style={{marginBottom: 8}}>Forge / 2026</div>
+      <div className="ds-h-eyebrow" style={{marginBottom: 8}}>Eidos / 2026</div>
       <div style={{fontSize:'var(--text-2xl)', lineHeight:1.2, fontWeight: 600, letterSpacing:'-0.02em'}}>
         Ship safely. <span style={{color:'var(--fg-muted)'}}>Faster.</span>
       </div>
@@ -59,7 +59,7 @@ export default function DotGridPage() {
         <div className="pat-demo is-tall pat-dot-grid is-ember" style={{position:'relative'}}>
           <div className="pat-ember-glow is-pulse" style={{top:'50%', insetInlineStart:'50%', transform:'translate(-50%, -50%)'}}/>
           <div style={{position:'relative', textAlign:'center'}}>
-            <div className="ds-h-eyebrow">Forge / brand surface</div>
+            <div className="ds-h-eyebrow">Eidos / brand surface</div>
             <div style={{fontSize:'var(--text-xl)', lineHeight:1.3, fontWeight: 600, marginTop: 8, letterSpacing:'-0.015em'}}>Engineered. Visible.</div>
           </div>
         </div>
@@ -125,7 +125,7 @@ export default function DotGridPage() {
 </div>`}>
         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap: 'var(--space-4)', width:'100%'}}>
           <div className="pat-dot-grid" style={{padding:'var(--space-6)', border:'1px solid var(--border)', borderRadius: 'var(--radius-lg)'}}>
-            <div className="ds-h-eyebrow" style={{marginBottom: 8}}>Welcome to Forge</div>
+            <div className="ds-h-eyebrow" style={{marginBottom: 8}}>Welcome to Eidos</div>
             <div style={{fontSize:'var(--text-lg)', lineHeight:1.3, fontWeight: 600}}>No services yet</div>
             <div style={{fontSize: 'var(--text-sm)', color:'var(--fg-muted)', marginTop: 6, lineHeight: 1.55}}>Scaffold your first one from a template — takes 2 minutes.</div>
             <button className="btn ember sm" style={{marginTop: 12}}>Browse templates</button>

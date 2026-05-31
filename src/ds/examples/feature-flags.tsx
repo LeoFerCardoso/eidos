@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Banner, DataTable, Icons, MOCKS, OwnerPill, RelativeTime, Sparkline, StatusDot, Trend } from '@/ds/core';
 import { FPageHeader, FSection, FShell } from './example-shell';
-// Forge IDP — Example: Feature flag console.
+// Eidos IDP — Example: Feature flag console.
 
   
   
@@ -167,7 +167,7 @@ import { FPageHeader, FSection, FShell } from './example-shell';
     return (
       <FShell
         nav="flags"
-        crumbs={[{ label: 'Forge', href: '/example/ai-insights' }, 'Feature flags']}>
+        crumbs={[{ label: 'Eidos', href: '/example/ai-insights' }, 'Feature flags']}>
 
         <FPageHeader
           title="Feature flags"
@@ -183,7 +183,7 @@ import { FPageHeader, FSection, FShell } from './example-shell';
         <Banner
           tone="info"
           icon="flag"
-          title="Forge auto-targets to rings"
+          title="Eidos auto-targets to rings"
           message="Flags marked with the ring-rollout chip inherit traffic targeting from the active ring deployment. Click the chip to open the rollout."
           onDismiss={() => {}}/>
 

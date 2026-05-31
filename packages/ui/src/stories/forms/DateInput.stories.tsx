@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { DateInput } from '@forge/ui';
+import { DateInput } from '@eidos/ui';
 
 /**
  * `DateInput` is the native `<input type="date">` wrapper in the Forge field

@@ -209,7 +209,7 @@ export default function Page() {
       <TabbedCode tabs={installTabs('menu')} ariaLabel="package manager" />
       <Lede>
         The CLI copies <Mono>menu.tsx</Mono> and its CSS into your repo so you own the source.
-        Pick the <em>Manual</em> tab to paste the files by hand. No Radix runtime — Forge handles
+        Pick the <em>Manual</em> tab to paste the files by hand. No Radix runtime — Eidos handles
         focus order, roving tabindex, type-ahead, and panel positioning itself.
       </Lede>
 
@@ -374,7 +374,7 @@ export default function Page() {
             Roving tabindex: only the currently active item holds <Mono>tabIndex=0</Mono>; all
             others are <Mono>tabIndex=-1</Mono>. Focus moves into the menu on open and returns
             to the trigger on close (ESC, Tab, or item activation). The active item renders the
-            standard Forge focus ring — it is never obscured by <Mono>box-shadow:none</Mono>.
+            standard Eidos focus ring — it is never obscured by <Mono>box-shadow:none</Mono>.
           </div>
         </div>
         <div className="surface" style={{ padding: 18 }}>

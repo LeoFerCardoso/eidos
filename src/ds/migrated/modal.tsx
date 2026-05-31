@@ -44,7 +44,7 @@ const HERO_CODE = `<Modal
   onOpenChange={setOpen}
   size="lg"
   hero={<div className="mdl-hero" />}
-  title="Forge 2026.06"
+  title="Eidos 2026.06"
   desc="Cache Components, AI Gateway routing, and a faster Build Command."
   footer={…}
 >
@@ -129,8 +129,8 @@ export default function Page() {
       {/* 1. INSTALLATION ─────────────────────────────────────────────────── */}
       <ComponentInstall slug="modal" />
       <Lede>
-        Forge's Modal handles the focus trap, scroll lock, and portal for you — plain React
-        over the Forge CSS layer, no Radix runtime. The CLI copies <Mono>modal.tsx</Mono> into
+        Eidos's Modal handles the focus trap, scroll lock, and portal for you — plain React
+        over the Eidos CSS layer, no Radix runtime. The CLI copies <Mono>modal.tsx</Mono> into
         your repo. Pick the <em>Manual</em> tab to paste the source files yourself.
       </Lede>
 
@@ -247,7 +247,7 @@ export default function Page() {
         >
           {Array.from({ length: 8 }).map((_, i) => (
             <p key={i}>
-              <b style={{ color: 'var(--fg)' }}>{i + 1}.</b> Forge is a substrate for
+              <b style={{ color: 'var(--fg)' }}>{i + 1}.</b> Eidos is a substrate for
               production systems — its features are intended for engineers operating real
               infrastructure. You agree not to use the platform to attack third parties,
               distribute malware, store unlawful content, or hammer the API beyond the
@@ -274,7 +274,7 @@ export default function Page() {
           onOpenChange={setOpenHero}
           size="lg"
           hero={<div className="mdl-hero" />}
-          title="Forge 2026.06"
+          title="Eidos 2026.06"
           desc="Cache Components, AI Gateway routing, and a faster Build Command."
           footer={
             <>
@@ -549,7 +549,7 @@ export default function Page() {
                 <div className="mdl-titles"><h2 className="mdl-title">Acceptable use</h2></div>
               </div>
               <div className="mdl-mini-body scroll">
-                Forge is a substrate for production systems. You agree not to attack third parties, distribute malware, or hammer the API beyond the documented per-org rate limits…
+                Eidos is a substrate for production systems. You agree not to attack third parties, distribute malware, or hammer the API beyond the documented per-org rate limits…
               </div>
               <div className="mdl-footer">
                 <button className="btn ghost xs">Decline</button>

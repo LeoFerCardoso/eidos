@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Badge. A small overlay on an icon or avatar that signals "something changed":
+// Eidos Mobile — Badge. A small overlay on an icon or avatar that signals "something changed":
 // a bare dot for presence, a count for quantity. On the ember fill the number is dark ink, never
 // ember-on-ember. Use it for unseen items; for status that needs a word, use a labelled pill.
 import * as React from 'react';

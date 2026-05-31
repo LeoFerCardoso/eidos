@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ToggleGroup, ToggleGroupItem } from '@forge/ui';
-import { Icons } from '@forge/ui';
+import { ToggleGroup, ToggleGroupItem } from '@eidos/ui';
+import { Icons } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/ToggleGroup',

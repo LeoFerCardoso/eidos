@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Image (§2.2 component-page standard).
+// Eidos AI — Image (§2.2 component-page standard).
 // Documents ImageView: the bordered, rounded, aspect-locked image surface for
 // AI replies. Handles loading shimmer, error fallback, and captions. Demos
 // use inline SVG data-URIs so everything renders offline without bundled assets.
@@ -30,7 +30,7 @@ const USAGE_CODE = `import { ImageView } from "@/ds/core"
 
 <ImageView
   src="/images/deploy-diagram.png"
-  alt="Forge ring rollout — canary, 25%, 100% stages with health gates"
+  alt="Eidos ring rollout — canary, 25%, 100% stages with health gates"
   caption="Ring rollout model — gates at each stage check the error budget before auto-promoting."
   aspect="16 / 9"
 />`;
@@ -72,7 +72,7 @@ export default function AiImage() {
         <div style={{ width: '100%', maxWidth: 520 }}>
           <ImageView
             src={SVG_WIDE}
-            alt="Forge ring rollout — canary, 25%, 100% stages with health gates"
+            alt="Eidos ring rollout — canary, 25%, 100% stages with health gates"
             caption="Ring rollout model — gates at each stage check the error budget before auto-promoting."
             aspect="16 / 9"
           />
@@ -178,7 +178,7 @@ export default function AiImage() {
               <Icons.sparkle size={16} style={{ color: 'var(--ember)' }}/>
             </span>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <span className="t-mono-label" style={{ display: 'block', marginBottom: 8 }}>Forge platform agent</span>
+              <span className="t-mono-label" style={{ display: 'block', marginBottom: 8 }}>Eidos platform agent</span>
               <Prose>
                 <p>Here is the ring rollout architecture for <code>identity-svc</code> as of the last deployment:</p>
               </Prose>

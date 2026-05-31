@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Icons } from '@forge/ui';
+import { Icons } from '@eidos/ui';
 
 // Icons is a plain record — each value is a standalone SVG component that
 // accepts { size?, color?, strokeWidth? }. There is no single root component

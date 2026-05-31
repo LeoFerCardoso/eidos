@@ -1,9 +1,9 @@
 'use client';
-// Forge DS — TreeView, backed by the real trees.software engine (@pierre/trees).
+// Eidos DS — TreeView, backed by the real trees.software engine (@pierre/trees).
 //
 // We render Pierre's actual FileTree web component (path-first model, virtualized
 // rows, git-status lane, search, drag-and-drop, context menus, keyboard a11y) and
-// re-skin ONLY the colours, typography and shapes to Forge via the
+// re-skin ONLY the colours, typography and shapes to Eidos via the
 // `--trees-*-override` custom properties on `.forge-tree` (they inherit through
 // the component's Shadow DOM). See `.forge-tree` in ds.css. The tree logic,
 // layout and a11y are the library's.
@@ -49,7 +49,7 @@ export interface ForgeTreeProps {
   dragAndDrop?: boolean;
   /** Paths that cannot be dragged (canDrag=false) — also get a "locked" tag. */
   lockedPaths?: string[];
-  /** Mount a Forge-styled context menu (new file/folder, rename, delete). */
+  /** Mount a Eidos-styled context menu (new file/folder, rename, delete). */
   contextMenu?: boolean;
   /** How the context menu opens. */
   contextMenuTrigger?: ContextMenuTriggerMode;
@@ -73,7 +73,7 @@ interface MenuContext {
   anchorRect: { top: number; right: number; bottom: number; left: number; width: number; height: number };
 }
 
-// Forge-styled context menu. The tree clips its own overflow (rounded card +
+// Eidos-styled context menu. The tree clips its own overflow (rounded card +
 // scroll), so the menu is PORTALED to <body> and positioned from the anchor
 // rect — it escapes the container. Marked data-file-tree-context-menu-root so
 // the library doesn't treat in-menu clicks as outside-clicks. We own the look

@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Pagination.
+// Eidos DS — Components / Pagination.
 // Page navigation for tables and long lists. Numbered (compact / full),
 // page-of-pages, simple prev/next, with optional page-size and "showing
 // N–M of T" indicator.
@@ -17,7 +17,7 @@ export function Demo() {
 }`;
 
 // Neutral inline-code treatment for prose tokens — keeps tags like
-// <nav>/aria-current in the Forge mono type system without burning an ember
+// <nav>/aria-current in the Eidos mono type system without burning an ember
 // use (that is reserved for the active page + the section eyebrows).
 const codeStyle: React.CSSProperties = {
   fontFamily: 'var(--font-mono)',

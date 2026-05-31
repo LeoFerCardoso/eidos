@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Terminal } from '@forge/ui';
-import type { TerminalLine } from '@forge/ui';
+import { Terminal } from '@eidos/ui';
+import type { TerminalLine } from '@eidos/ui';
 
 // ── Fixtures ─────────────────────────────────────────────────────────────────
 

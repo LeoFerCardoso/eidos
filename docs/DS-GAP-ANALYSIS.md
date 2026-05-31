@@ -204,7 +204,7 @@ changelogs, and a real multi-DS family architecture. These are genuine different
    Tokens Format + Style Dictionary** so tokens can export to JSON/Figma/iOS/Android and become
    the single source of truth (today CSS is the only source).
 2. **No published package / semver enforcement.** `DS_VERSION` is a hand-edited string; releases
-   are manual. If the DS is meant to be consumed (not only copy-pasted), publish `@forge/core`
+   are manual. If the DS is meant to be consumed (not only copy-pasted), publish `@eidos/core`
    with semver + changesets; if it stays copy-paste, document that explicitly as the model.
 3. **No automated a11y / visual / interaction tests** (covered in §4).
 4. ~~No CONTRIBUTING / RFC model~~ → ✅ **`CONTRIBUTING.md` added** (route ritual, invariants,
@@ -337,7 +337,7 @@ an inline `Skeleton` (`<div>`) inside a `<p>` — swapped for an inline `<span c
     **source-shipped** (shadcn-style CLI copies component source into the consumer repo), the
     model the Installation flow already implements; the shared single-sources-of-truth are the
     DTCG **tokens** + the base CSS, versioned via `DS_VERSION` + `/release` + per-DS changelogs.
-    The published-`@forge/core`-package path is documented as a reversible additive alternative.
+    The published-`@eidos/core`-package path is documented as a reversible additive alternative.
     Also added **`CONTRIBUTING.md`** (closes the §6 "no contribution model" gap): route ritual,
     invariants, and the full gate list. *(Figma linkage removed from scope by decision 2026-05-29.)*
 

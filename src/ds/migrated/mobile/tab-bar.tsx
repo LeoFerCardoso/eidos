@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Tab bar (scaffold). Bottom navigation for handsets: 3–5 destinations,
+// Eidos Mobile — Tab bar (scaffold). Bottom navigation for handsets: 3–5 destinations,
 // one active (ember), thumb-reachable, safe-area aware.
 import * as React from 'react';
 import { Section, SubHead, Frame, CodeBlock, DeviceFrame, StatusBar, platformOf, Icons, Lede, Mono, Spinner, Skeleton, Alert, AlertTitle, AlertDescription } from '@/ds/core';

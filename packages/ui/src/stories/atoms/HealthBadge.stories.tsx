@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { HealthBadge } from '@forge/ui';
+import { HealthBadge } from '@eidos/ui';
 
 const STATES = ['up', 'degraded', 'down', 'unknown'] as const;
 

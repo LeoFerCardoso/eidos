@@ -8,8 +8,8 @@ import {
   MenubarItem,
   MenubarSeparator,
   MenubarShortcut,
-} from '@forge/ui';
-import { Icons } from '@forge/ui';
+} from '@eidos/ui';
+import { Icons } from '@eidos/ui';
 
 const meta = {
   title: 'Overlays/Menubar',

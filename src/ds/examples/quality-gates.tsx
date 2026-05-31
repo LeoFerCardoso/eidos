@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Banner, DataTable, Icons, MOCKS, OwnerPill, RelativeTime, ScoreGauge, SeverityPill, Stat, StatusDot } from '@/ds/core';
 import { FPageHeader, FSection, FShell } from './example-shell';
-// Forge IDP — Example: Quality gates + Change risk score (pre-merge view).
+// Eidos IDP — Example: Quality gates + Change risk score (pre-merge view).
 
   
   
@@ -121,7 +121,7 @@ import { FPageHeader, FSection, FShell } from './example-shell';
   const App = () => (
     <FShell
       nav="gates"
-      crumbs={[{ label: 'Forge', href: '/example/ai-insights' }, 'Quality gates']}>
+      crumbs={[{ label: 'Eidos', href: '/example/ai-insights' }, 'Quality gates']}>
 
       <FPageHeader
         title="Quality gates · pre-merge · 24 hours"
@@ -151,7 +151,7 @@ import { FPageHeader, FSection, FShell } from './example-shell';
             <ScoreGauge variant="speedo" value={284} min={0} max={1000} ticks labels size={360} label="Aggregate risk · all open PRs"/>
           </div>
           <p style={{fontSize: 'var(--text-sm)', color:'var(--fg-muted)', lineHeight: 1.6, textAlign:'center', maxWidth: 460, margin: 0}}>
-            Risk under 300 is the <strong style={{color:'var(--success)'}}>healthy</strong> band. Forge auto-merges PRs under 200 if all P0 gates pass — 38 merges saved manual review this week.
+            Risk under 300 is the <strong style={{color:'var(--success)'}}>healthy</strong> band. Eidos auto-merges PRs under 200 if all P0 gates pass — 38 merges saved manual review this week.
           </p>
         </div>
 

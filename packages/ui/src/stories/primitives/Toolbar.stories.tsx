@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarSeparator } from '@forge/ui';
-import { Icons } from '@forge/ui';
+import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarSeparator } from '@eidos/ui';
+import { Icons } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/Toolbar',

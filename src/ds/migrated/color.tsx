@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Foundations / Color (six families, one accent)
+// Eidos DS — Foundations / Color (six families, one accent)
 import { Section, SubHead, TokenSwatch, CopyButton, Frame, Mono, Kbd, Icons } from '@/ds/core';
 
 // Every token value, ratio, and metric on this page is a number that must
@@ -9,7 +9,7 @@ const monoTok: React.CSSProperties = { fontFamily: 'var(--font-mono)', fontSize:
 const monoFaint: React.CSSProperties = { fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontVariantNumeric: 'tabular-nums' };
 
 export default function Color() {
-  /* Surfaces — canonical 7-tier ladder (Forge v1.1). Order goes from
+  /* Surfaces — canonical 7-tier ladder (Eidos v1.1). Order goes from
      deepest (canvas, behind floating layers) to lightest (active). The
      swatches pull live from CSS so flipping the theme updates them. */
   const surfaces = [
@@ -42,7 +42,7 @@ export default function Color() {
   return (
     <Section id="color" num="02" title="Color" desc="Semantic, theme-driven palette in OKLCH — a seven-tier surface ladder, four foreground steps, the single ember accent, and a success / warning / danger trio. Tokens name a role, never a hue.">
       <p style={{color:'var(--fg-muted)', maxWidth:'68ch', marginBottom: 22, lineHeight: 1.6}}>
-        Forge v1.1 redefines the surface scale in <b style={{color:'var(--fg)'}}>OKLCH</b> with a subtle warm undertone (~60° hue, very low chroma). The page background is <b style={{color:'var(--fg)'}}>not pure black</b> — true black is reserved for <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--canvas</code>, used only behind floating layers so the modal/sidesheet feels lifted. Seven tiers from canvas to overlay let UI compose real depth even in dark mode. The severity / run-status / health / risk vocabularies live on their own pages.
+        Eidos v1.1 redefines the surface scale in <b style={{color:'var(--fg)'}}>OKLCH</b> with a subtle warm undertone (~60° hue, very low chroma). The page background is <b style={{color:'var(--fg)'}}>not pure black</b> — true black is reserved for <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--canvas</code>, used only behind floating layers so the modal/sidesheet feels lifted. Seven tiers from canvas to overlay let UI compose real depth even in dark mode. The severity / run-status / health / risk vocabularies live on their own pages.
       </p>
 
       {/* Philosophy */}
@@ -400,7 +400,7 @@ export default function Color() {
       </Frame>
       <p className="ds-caption">The spinner uses the shared <Mono>.ds-spin</Mono> utility — under <Mono>prefers-reduced-motion: reduce</Mono> its rotation becomes a calm opacity pulse, and the <Mono>aria-busy</Mono> on the field still carries the loading state to assistive tech. The invalid field pairs <Mono>aria-invalid</Mono> with a <Mono>role="alert"</Mono> message, so the error is colour <i>and</i> announced text — never colour alone.</p>
 
-      {/* Borders — 4 hairline tiers (Forge v1.1 added border-subtle) */}
+      {/* Borders — 4 hairline tiers (Eidos v1.1 added border-subtle) */}
       <SubHead meta="hairlines, 4 tiers">Borders</SubHead>
       <p style={{marginTop: -6, marginBottom: 14, fontSize: 'var(--text-body)', color:'var(--fg-muted)', maxWidth:'68ch', lineHeight: 1.6}}>
         Four opacities of pure white (dark) / slate ink (light). <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--border-subtle</code> is for barely-there row separators inside a table; <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--border</code> is the everyday hairline; the stronger pair wraps inputs and focus halos.

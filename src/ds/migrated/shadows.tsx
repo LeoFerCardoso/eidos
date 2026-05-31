@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Foundations / Elevation (surfaces + borders + shadows)
+// Eidos DS — Foundations / Elevation (surfaces + borders + shadows)
 import { Icons, Frame, Section, SubHead, Mono, Lede } from '@/ds/core';
 
 
@@ -8,7 +8,7 @@ import { Icons, Frame, Section, SubHead, Mono, Lede } from '@/ds/core';
    Render order intentionally mirrors visual elevation: deepest at the
    bottom, highest at the top, so reading down the table feels like
    diving into the page. */
-/* Seven tiers × current theme — the canonical Forge v1.1 ladder. */
+/* Seven tiers × current theme — the canonical Eidos v1.1 ladder. */
 const SURFACE_LADDER = [
   ['surface-active',  'Pressed / selected',   'Active state — clearly the lightest tier in dark mode.'],
   ['surface-overlay', 'Floating layer',       'Popover · dropdown · modal body · sidesheet.'],
@@ -23,7 +23,7 @@ export default function Elevation() {
   return (
     <Section id="shadows" num="05" title="Elevation" desc="Depth via surface tones, border weights, and shadow tiers — not drop-shadow soup. Lift with tone and a hairline first; reserve real shadow for surfaces that genuinely float.">
       <Lede wide>
-        <b style={{color:'var(--fg)'}}>Elevation in Forge is a recipe, not a token.</b> Every raised layer
+        <b style={{color:'var(--fg)'}}>Elevation in Eidos is a recipe, not a token.</b> Every raised layer
         combines three things — a <b style={{color:'var(--fg)'}}>surface tone</b>, a <b style={{color:'var(--fg)'}}>border</b>, and an optional <b style={{color:'var(--fg)'}}>shadow</b>. The
         canvas is a soft dark grey (never pure black), so a card lifting one
         notch above it reads as <i>on the page</i>, not floating. Floating is
@@ -142,7 +142,7 @@ export default function Elevation() {
           this scale — depth is doing the work. */}
       <SubHead meta="stacked demo">The tiers, layered</SubHead>
       <Lede wide up>
-        The core idea of Forge v1.1: <b style={{color:'var(--fg)'}}>depth in dark mode is real</b>. Each elevation is a combination of (1) a lighter surface tier, (2) a 1px inset highlight on the top edge, and (3) a soft drop shadow underneath. The inset highlight is what tells the eye "this is above the surface" without resorting to thick borders. Toggle the topbar pill to verify the same layering reads in light.
+        The core idea of Eidos v1.1: <b style={{color:'var(--fg)'}}>depth in dark mode is real</b>. Each elevation is a combination of (1) a lighter surface tier, (2) a 1px inset highlight on the top edge, and (3) a soft drop shadow underneath. The inset highlight is what tells the eye "this is above the surface" without resorting to thick borders. Toggle the topbar pill to verify the same layering reads in light.
       </Lede>
       <Frame label="canvas → bg → bg-elevated → surface → surface-hover">
         {(() => {
@@ -379,7 +379,7 @@ export default function Elevation() {
           ─────────────────────────────────────────────────────────────────── */}
       <SubHead meta="recipe">Elevation = surface + border + shadow</SubHead>
       <Lede wide up>
-        Every interactive surface in Forge picks one row from this table.
+        Every interactive surface in Eidos picks one row from this table.
         Reading left-to-right: <i>what is it</i> → <i>which tone</i> → <i>which hairline</i> → <i>which halo</i>. The
         further down the table, the more genuinely the element floats.
       </Lede>

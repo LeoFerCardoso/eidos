@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Persona, SpeechInput, AgentIdentity } from '@forge/ui';
+import { Persona, SpeechInput, AgentIdentity } from '@eidos/ui';
 
 // ── Persona meta ─────────────────────────────────────────────────────────────
 

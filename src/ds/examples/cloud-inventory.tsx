@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { CopyChip, DataTable, HealthBadge, Icons, MOCKS, OwnerPill, Sparkline, Trend } from '@/ds/core';
 import { FKpi, FPageHeader, FShell } from './example-shell';
-// Forge IDP — Example: Cloud resource inventory dashboard.
+// Eidos IDP — Example: Cloud resource inventory dashboard.
 
   
   
@@ -127,7 +127,7 @@ import { FKpi, FPageHeader, FShell } from './example-shell';
     return (
       <FShell
         nav="cloud"
-        crumbs={[{ label: 'Forge', href: '/example/ai-insights' }, 'Cloud', 'Inventory']}>
+        crumbs={[{ label: 'Eidos', href: '/example/ai-insights' }, 'Cloud', 'Inventory']}>
 
         <FPageHeader
           title="Cloud inventory · sa-east-1 · 1.4k resources"

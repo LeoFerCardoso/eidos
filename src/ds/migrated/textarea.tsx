@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Textarea
+// Eidos DS — Components / Textarea
 // Multi-line text input. Built on .in-field / .in-group so it inherits the
 // focus ring, helper text, and invalid state from the rest of the form
 // system.

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { AgentCard } from '@forge/ui';
+import { AgentCard } from '@eidos/ui';
 
 const NOW = Date.now();
 const ago = (ms: number) => new Date(NOW - ms);

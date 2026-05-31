@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — TeX / math in replies via KaTeX → MathView (§2.2 standard).
+// Eidos AI — TeX / math in replies via KaTeX → MathView (§2.2 standard).
 // Import KaTeX CSS at the page level so Next bundles it into this page's chunk.
 // KaTeX renderToString is dynamic-imported inside useEffect — it accesses the
 // DOM for measurement and must not run at build time.
@@ -455,14 +455,14 @@ export default function AiMath() {
 
       <SubHead meta="dependency note">Dependency</SubHead>
       <CodeBlock
-        label="KaTeX is not bundled by Forge — add it to your app"
+        label="KaTeX is not bundled by Eidos — add it to your app"
         lang="bash"
         code={`pnpm add katex
 # or
 npm install katex`}
       />
       <Lede>
-        KaTeX is kept out of the Forge core so it does not inflate every page's bundle. It only loads on pages that use <Mono>MathView</Mono>. The CSS import at the page top ensures KaTeX's glyph and symbol styles are available without a separate link tag.
+        KaTeX is kept out of the Eidos core so it does not inflate every page's bundle. It only loads on pages that use <Mono>MathView</Mono>. The CSS import at the page top ensures KaTeX's glyph and symbol styles are available without a separate link tag.
       </Lede>
 
       {/* ACCESSIBILITY */}

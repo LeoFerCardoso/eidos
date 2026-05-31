@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / Notification
+// Eidos DS — Components / Notification
 // Section order: Installation → Usage → Variants → Positions → In context →
 //   Accessibility → RTL → Anatomy → Do/Don't → API reference
 import * as React from 'react';

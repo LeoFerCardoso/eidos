@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Empty } from '@forge/ui';
+import { Empty } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/Empty',

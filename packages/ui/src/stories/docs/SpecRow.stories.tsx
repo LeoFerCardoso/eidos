@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { SpecRow } from '@forge/ui';
+import { SpecRow } from '@eidos/ui';
 
 const meta = {
   title: 'Docs/SpecRow',

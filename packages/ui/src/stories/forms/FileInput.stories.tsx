@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FileInput, Input, Textarea } from '@forge/ui';
+import { FileInput, Input, Textarea } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/FileInput',

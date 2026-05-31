@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Markdown surface (§2.2 component-page standard).
+// Eidos AI — Markdown surface (§2.2 component-page standard).
 // Prose is the rendering target for all assistant markdown output — headings,
 // paragraphs, lists, tables, code blocks, blockquotes, task lists, links, and
 // inline formatting. The DS ships .ai-prose chrome; consumers bring their own
@@ -14,7 +14,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, CodeBlock, PropsTable, inst
 // so there is no SSR concern. DO NOT move react-markdown into core/ai.
 const DEMO_MD = `# Deploying a service
 
-A **Forge deployment** pushes one or more _services_ through a graduated ring
+A **Eidos deployment** pushes one or more _services_ through a graduated ring
 rollout: canary → 25 % → 100 %. Use \`forge deploy\` from the repo root.
 
 ## Prerequisites
@@ -42,7 +42,7 @@ Before you deploy, confirm:
 > **Tip:** pin a ring with \`--hold\` to pause auto-promotion while you
 > watch metrics.
 >
-> — Forge Platform team
+> — Eidos Platform team
 
 ---
 
@@ -184,7 +184,7 @@ export default function AiMarkdown() {
       id="markdown"
       num="05"
       title="Markdown"
-      desc="The rendering target for all assistant output — pipe the model's text through a markdown renderer into the Prose surface. Headings, lists, tables, code blocks, and links inherit the Forge type scale automatically."
+      desc="The rendering target for all assistant output — pipe the model's text through a markdown renderer into the Prose surface. Headings, lists, tables, code blocks, and links inherit the Eidos type scale automatically."
     >
       {/* 1. INSTALLATION */}
       <SubHead meta="package managers">Installation</SubHead>

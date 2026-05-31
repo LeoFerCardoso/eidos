@@ -6,7 +6,7 @@ import { EXAMPLES_REG } from '@/ds/examples/registry';
 
 // Standalone IDP example screens — rendered full-screen, OUTSIDE the docs shell.
 // Each example is an idiomatic TSX module (default export) that composes the
-// Forge shells + core primitives directly; no window registry.
+// Eidos shells + core primitives directly; no window registry.
 export function ExampleLoader({ name }: { name: string }) {
   const [view, setView] = useState<{ C: ComponentType } | null>(null);
 

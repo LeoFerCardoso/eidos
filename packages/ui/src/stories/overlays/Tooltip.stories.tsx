@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Tooltip, Icons, DeviceFrame } from '@forge/ui';
+import { Tooltip, Icons, DeviceFrame } from '@eidos/ui';
 
 const meta = {
   title: 'Overlays/Tooltip',

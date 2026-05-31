@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Dialog. A centered, modal interruption that demands a decision before
+// Eidos Mobile — Dialog. A centered, modal interruption that demands a decision before
 // anything else continues: a destructive confirm, an auth step, a blocking error. Use it
 // sparingly — for a list of choices or non-blocking detail, the Action sheet fits the thumb better.
 import * as React from 'react';

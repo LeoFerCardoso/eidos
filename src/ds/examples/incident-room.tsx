@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Avatar, Banner, CopyChip, HealthBadge, Icons, MOCKS, OwnerPill, RelativeTime, SeverityPill, StatusDot, Timeline } from '@/ds/core';
 import { FKpi, FPageHeader, FSection, FShell, IconBubble } from './example-shell';
-// Forge IDP — Example: Incident war-room (P1 active incident).
+// Eidos IDP — Example: Incident war-room (P1 active incident).
 
   
   
@@ -68,7 +68,7 @@ import { FKpi, FPageHeader, FSection, FShell, IconBubble } from './example-shell
     <FShell
       nav="incidents"
       crumbs={[
-        { label: 'Forge', href: '/example/ai-insights' },
+        { label: 'Eidos', href: '/example/ai-insights' },
         'Incidents',
         'INC-1247',
       ]}>

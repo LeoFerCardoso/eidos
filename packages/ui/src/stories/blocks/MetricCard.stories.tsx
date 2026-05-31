@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { MetricCard } from '@forge/ui';
+import { MetricCard } from '@eidos/ui';
 
 const SERIES = [12, 18, 15, 22, 19, 28, 24, 31, 27, 35, 30, 38];
 

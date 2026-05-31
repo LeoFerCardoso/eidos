@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { DiffViewer, Badge } from '@forge/ui';
+import { DiffViewer, Badge } from '@eidos/ui';
 
 // Realistic diff fixture — pix-router idempotency key PR
 const HUNKS_PIX = [

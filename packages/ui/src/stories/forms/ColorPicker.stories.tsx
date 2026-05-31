@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { ColorPicker, ColorInput } from '@forge/ui';
+import { ColorPicker, ColorInput } from '@eidos/ui';
 
 // ── Curated palettes ────────────────────────────────────────────────────────
 // Brand / semantic tokens representative of a real IDP / DevEx design system.

@@ -6,9 +6,9 @@ import { Icons, Section, SubHead, CodeBlock, Lede } from '@/ds/core';
 // a markdown-shaped, link-first catalog with one-line descriptions. Keep
 // it terse — descriptions must fit on one wrapped line in a 1024-token
 // context window. Long-form lives in FORGE-DS-REFERENCE.md.
-const LLMS_TXT = `# Forge Design System
+const LLMS_TXT = `# Eidos Design System
 
-> Forge is the design system that powers Equifax/Boa Vista's internal developer platform. It's CSS-first (Tailwind v4 + token CSS variables), framework-agnostic at the class layer, and ships React reference components meant to be copy-pasted into product code. There is no npm package to install — own your copy of every component.
+> Eidos is the design system that powers Equifax/Boa Vista's internal developer platform. It's CSS-first (Tailwind v4 + token CSS variables), framework-agnostic at the class layer, and ships React reference components meant to be copy-pasted into product code. There is no npm package to install — own your copy of every component.
 
 ## Principles
 
@@ -16,7 +16,7 @@ const LLMS_TXT = `# Forge Design System
 - Compose existing classes and components. Never reinvent something that already lives in tokens.css / ds.css.
 - Logical CSS properties everywhere (inset-inline-*, padding-inline-*, margin-inline-*). RTL is a first-class requirement, not an after-thought.
 - Tokens live in packages/ui/styles/tokens.css; component classes live in packages/ui/styles/ds.css (AI surfaces in ai.css). No per-page style blocks — compose existing classes or extend those stylesheets.
-- The React core is the @forge/ui package (icons → atoms → primitives → blocks → charts → device → drawer → ai). It is a plain ES-module barrel with no load-order side effects and no window globals; pages import their primitives from '@/ds/core', which re-exports @forge/ui plus the docs-shell wrappers.
+- The React core is the @eidos/ui package (icons → atoms → primitives → blocks → charts → device → drawer → ai). It is a plain ES-module barrel with no load-order side effects and no window globals; pages import their primitives from '@/ds/core', which re-exports @eidos/ui plus the docs-shell wrappers.
 
 ## Files an LLM should read first
 
@@ -28,7 +28,7 @@ const LLMS_TXT = `# Forge Design System
 
 ## Docs
 
-- [Introduction](design-system.html): What Forge is, who maintains it, how it ships.
+- [Introduction](design-system.html): What Eidos is, who maintains it, how it ships.
 - [Installation](/installation): Tailwind v4 preset + React copy-paste workflow. No npm install.
 - [Components catalog](/components-catalog): Searchable grid of every component with previews.
 - [Theming](/theming): Light/dark via data-theme, custom accents via CSS variables.
@@ -43,7 +43,7 @@ const LLMS_TXT = `# Forge Design System
 - [Typography](/typography): Geist sans + Geist Mono, display-xl through mono-label scale.
 - [Spacing & Radius](/spacing): 4px base scale; radius xs (3px) through 2xl (12px).
 - [Shadows & Borders](/shadows): Elevation 1/2/3 + alpha border tokens.
-- [Iconography](/iconography): 95+ icons exported as Icons from @forge/ui, 12–20px sizes, 1.5px stroke, currentColor.
+- [Iconography](/iconography): 95+ icons exported as Icons from @eidos/ui, 12–20px sizes, 1.5px stroke, currentColor.
 - [Motion](/motion): cubic-bezier(0.16, 1, 0.3, 1) — durations fast (120ms), normal (220ms), slow (360ms).
 
 ## Components — Form & Input
@@ -145,7 +145,7 @@ const LLMS_TXT = `# Forge Design System
 
 ## Charts
 
-Recharts wrappers themed with Forge tokens — viz palette lives in tokens.css. Use only for data visualization; not for layout decoration.
+Recharts wrappers themed with Eidos tokens — viz palette lives in tokens.css. Use only for data visualization; not for layout decoration.
 
 - [Overview](/charts/overview): Palette, color order, and shared options for every chart.
 - [Area chart](/charts/area): Filled time-series; supports stacked.
@@ -174,7 +174,7 @@ Recharts wrappers themed with Forge tokens — viz palette lives in tokens.css. 
 
 ## AI
 
-Surfaces a Forge product needs once it's wired to a model. Every page composes existing components (pill, btn, in-group, collapsible, surface) — no new primitives.
+Surfaces a Eidos product needs once it's wired to a model. Every page composes existing components (pill, btn, in-group, collapsible, surface) — no new primitives.
 
 - [Citations](/ai/citations): Source citation pattern with hover preview.
 - [Conversation](/ai/conversation): Full thread layout — header, scroll area, composer.
@@ -241,7 +241,7 @@ Full-product screens assembled exclusively from existing components. Reference t
 6. RTL: logical properties everywhere (inset-inline-*, padding-inline-*, margin-inline-*, border-inline-*, text-align: start). The only physical-property exception is transform: translateX(…) — that needs a [dir="rtl"] override.
 7. Adding a new page is two coordinated changes: (1) append { id, label, href } to the right DS section in src/ds/core/nav-config.js; (2) create src/ds/migrated/<slug>.tsx (core) or src/ds/migrated/<ds>/<slug>.tsx (sub-DS) — a 'use client' module with a default export that imports its primitives from '@/ds/core'. The gen scripts (gen-nav / gen-migrated / gen-examples) auto-run on dev/build and regenerate src/lib/nav.ts + the MIGRATED registry. Restart next dev after nav/DS changes.
 8. Version bumps live in one source of truth: DS_VERSION in src/lib/site.ts (the topbar VersionBadge reads it). Bump it there; the /release command also sweeps stale nav badges.
-9. Pages are idiomatic TSX compiled by SWC — there is no .babelrc, no <script> tags, and no window bridge. Components are plain ES modules from @forge/ui (re-exported by '@/ds/core'); share nothing through globals.
+9. Pages are idiomatic TSX compiled by SWC — there is no .babelrc, no <script> tags, and no window bridge. Components are plain ES modules from @eidos/ui (re-exported by '@/ds/core'); share nothing through globals.
 10. Common gotchas: JSX text must stay SWC-valid — escape a literal > as {'>'}. Doubled focus ring → suppress on inner inputs with box-shadow: none !important. Dropdown clipped → .ds-frame has overflow: hidden; use position: fixed + getBoundingClientRect() to escape.
 `;
 
@@ -252,12 +252,12 @@ export default function LLM() {
       id="llm"
       num="07"
       title="LLM"
-      desc="A plain-text catalog of Forge for AI coding assistants. Drop it into Claude, Cursor, or ChatGPT to give the model an accurate picture of the system before it writes any code."
+      desc="A plain-text catalog of Eidos for AI coding assistants. Drop it into Claude, Cursor, or ChatGPT to give the model an accurate picture of the system before it writes any code."
     >
       {/* What this is */}
       <SubHead meta="what">Why this file exists</SubHead>
       <Lede up>
-        Large language models guess what&apos;s in your design system. They invent classes that don&apos;t exist, mix Material with Tailwind, and reach for purple gradients when your brand is ember. Forge solves this by publishing a short, link-first catalog that fits in the model&apos;s context window — every component, every token, every page, with a one-line description. Paste it once at the start of a session and the model has the same map you do.
+        Large language models guess what&apos;s in your design system. They invent classes that don&apos;t exist, mix Material with Tailwind, and reach for purple gradients when your brand is ember. Eidos solves this by publishing a short, link-first catalog that fits in the model&apos;s context window — every component, every token, every page, with a one-line description. Paste it once at the start of a session and the model has the same map you do.
       </Lede>
 
       {/* Files */}
@@ -305,7 +305,7 @@ export default function LLM() {
             <span style={{fontSize: 'var(--text-base)', fontWeight: 600}}>ChatGPT / Web Claude</span>
           </div>
           <div style={{color:'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.5}}>
-            Copy the block below and paste it as the first message of a new conversation, prefixed with &ldquo;Use this as the Forge DS context.&rdquo;
+            Copy the block below and paste it as the first message of a new conversation, prefixed with &ldquo;Use this as the Eidos DS context.&rdquo;
           </div>
         </div>
         <div className="surface" style={{padding: 16}}>
@@ -314,7 +314,7 @@ export default function LLM() {
             <span style={{fontSize: 'var(--text-base)', fontWeight: 600}}>API integrations</span>
           </div>
           <div style={{color:'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.5}}>
-            Fetch <code style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-subtle)'}}>forge-design-system/llms.txt</code> from the docs build and prepend it to the system prompt of every Forge-adjacent agent.
+            Fetch <code style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-subtle)'}}>forge-design-system/llms.txt</code> from the docs build and prepend it to the system prompt of every Eidos-adjacent agent.
           </div>
         </div>
       </div>
@@ -324,14 +324,14 @@ export default function LLM() {
       <Lede up>
         Wrap the file in a short instruction so the model knows what to do with it. Anything that pins down &ldquo;compose, don&apos;t invent&rdquo; and &ldquo;match the conventions&rdquo; works.
       </Lede>
-      <CodeBlock label="paste as first user message" lang="markdown" code={`You are helping me design and build UI for a Forge product. The text block below
-is the full catalog of the Forge Design System — every component, every token,
+      <CodeBlock label="paste as first user message" lang="markdown" code={`You are helping me design and build UI for a Eidos product. The text block below
+is the full catalog of the Eidos Design System — every component, every token,
 every page, with a one-line description. Treat it as the source of truth.
 
 Rules:
 1. Compose what exists. If a UI can be built from Card + Pill + Avatar + Trend,
    build it that way. Never invent classes.
-2. Use Forge tokens for color and type — ember (#FF6B35) is the only accent,
+2. Use Eidos tokens for color and type — ember (#FF6B35) is the only accent,
    used at most twice per screen.
 3. Logical CSS properties only (inset-inline-*, padding-inline-*, etc).
 4. Cite specific pages when relevant ("see /buttons").
@@ -363,7 +363,7 @@ Rules:
           ['Logical CSS for RTL',                 'inset-inline-*, padding-inline-*, margin-inline-*, text-align: start. Only physical exception: transform: translateX(…).'],
           ['New page = two coordinated changes',  'Append to the right DS section in src/ds/core/nav-config.js + create src/ds/migrated/<slug>.tsx (default export, imports from @/ds/core). gen-nav / gen-migrated auto-run; restart next dev.'],
           ['Version bumps in one place',          'Bump DS_VERSION in src/lib/site.ts (the topbar VersionBadge reads it). The /release command also sweeps stale nav badges.'],
-          ['Idiomatic TSX, compiled by SWC',      'No .babelrc, no <script> tags, no window bridge. Components are plain ES modules from @forge/ui (re-exported by @/ds/core). Escape a literal > as {\'>\'} in JSX text.'],
+          ['Idiomatic TSX, compiled by SWC',      'No .babelrc, no <script> tags, no window bridge. Components are plain ES modules from @eidos/ui (re-exported by @/ds/core). Escape a literal > as {\'>\'} in JSX text.'],
           ['Common gotchas',                      'Doubled focus ring → box-shadow: none !important on inner inputs. Clipped dropdown → .ds-frame has overflow: hidden; use position: fixed + getBoundingClientRect.'],
         ].map(([title, body], i) => (
           <div key={i} className="surface" style={{padding: 14}}>
@@ -389,7 +389,7 @@ Rules:
         </div>
         <div className="surface" style={{padding: 18}}>
           <div style={{fontSize: 'var(--text-base)', fontWeight: 600, marginBottom: 6}}>Focus &amp; contrast</div>
-          <div style={{color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.5}}>The file points models at Forge&apos;s tokens, so generated UI inherits the shared focus ring and the AA-tuned light / dark colour pairings instead of inventing ad-hoc values. Body and metadata text on this page all clear AA on their surface; the single ember accent is the &ldquo;short index&rdquo; pill, which uses the contrast-safe <span style={{fontFamily:'var(--font-mono)', fontSize:'var(--text-xs)', color:'var(--fg-subtle)'}}>--ember-text</span> ink on a soft tint.</div>
+          <div style={{color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.5}}>The file points models at Eidos&apos;s tokens, so generated UI inherits the shared focus ring and the AA-tuned light / dark colour pairings instead of inventing ad-hoc values. Body and metadata text on this page all clear AA on their surface; the single ember accent is the &ldquo;short index&rdquo; pill, which uses the contrast-safe <span style={{fontFamily:'var(--font-mono)', fontSize:'var(--text-xs)', color:'var(--fg-subtle)'}}>--ember-text</span> ink on a soft tint.</div>
         </div>
         <div className="surface" style={{padding: 18}}>
           <div style={{fontSize: 'var(--text-base)', fontWeight: 600, marginBottom: 6}}>Motion</div>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { PromptBanner, PromptInput } from '@forge/ui';
+import { PromptBanner, PromptInput } from '@eidos/ui';
 
 // PromptBanner renders as Fragment children so Storybook wraps it inside PromptInput.
 // We use a thin wrapper to satisfy the component prop requirement while keeping each

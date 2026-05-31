@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { SeverityPill } from '@forge/ui';
+import { SeverityPill } from '@eidos/ui';
 
 const LEVELS = ['p0', 'p1', 'p2', 'p3'] as const;
 

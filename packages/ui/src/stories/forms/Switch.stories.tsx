@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Switch } from '@forge/ui';
+import { Switch } from '@eidos/ui';
 
 const meta = {
   title: 'Forms/Switch',

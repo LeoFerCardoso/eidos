@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { TabbedCode, installTabs } from '@forge/ui';
+import { TabbedCode, installTabs } from '@eidos/ui';
 
 const meta = {
   title: 'Primitives/TabbedCode',

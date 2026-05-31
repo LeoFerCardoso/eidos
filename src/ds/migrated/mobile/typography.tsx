@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Foundations / Typography. The mobile type scale: larger than the desktop
+// Eidos Mobile — Foundations / Typography. The mobile type scale: larger than the desktop
 // docs because a handset is read at arm's length and tapped, not pointed at.
 import * as React from 'react';
 import { Section, SubHead, Frame, CodeBlock, DeviceFrame, StatusBar, Icons, Lede, Mono } from '@/ds/core';
@@ -45,7 +45,7 @@ export default function MobileTypography() {
             <div key={r.name} style={{ display: 'grid', gridTemplateColumns: '120px 1fr auto', gap: 20, alignItems: 'baseline', padding: '16px 4px', borderBottom: i < SCALE.length - 1 ? '1px solid var(--border)' : 'none' }}>
               <span className="t-mono-label" style={{ padding: 0 }}>{r.name}</span>
               <span style={{ fontFamily: r.mono ? 'var(--font-mono)' : 'var(--font-sans)', fontSize: r.size, fontWeight: r.weight, letterSpacing: r.ls, lineHeight: r.lh, color: 'var(--fg)', minWidth: 0 }}>
-                {r.mono ? 'p95 · 9:41 · v4.18' : 'Build Forge products'}
+                {r.mono ? 'p95 · 9:41 · v4.18' : 'Build Eidos products'}
               </span>
               <span className="t-mono" style={{ color: 'var(--fg-subtle)', fontSize: 'var(--text-base)', whiteSpace: 'nowrap' }}>{r.size} / {r.weight} / {r.ls}</span>
             </div>

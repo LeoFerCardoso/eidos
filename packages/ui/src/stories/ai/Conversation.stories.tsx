@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Conversation, Message, MessageActions, Response } from '@forge/ui';
+import { Conversation, Message, MessageActions, Response } from '@eidos/ui';
 
 const meta = {
   title: 'AI/Conversation',
@@ -156,7 +156,7 @@ export const DocumentMode: Story = {
 /**
  * Empty state — a new chat with no turns. Composes the documented empty surface (ember tile,
  * title, lede, and 1–3 starter pills) inside the thread shell. NOTE: ConversationEmptyState is
- * documented but not exported from @forge/ui, so the markup is composed here.
+ * documented but not exported from @eidos/ui, so the markup is composed here.
  */
 export const EmptyState: Story = {
   args: { title: undefined },

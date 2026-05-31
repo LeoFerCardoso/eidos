@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Checkpoint } from '@forge/ui';
+import { Checkpoint } from '@eidos/ui';
 
 const meta = {
   title: 'AI/Checkpoint',

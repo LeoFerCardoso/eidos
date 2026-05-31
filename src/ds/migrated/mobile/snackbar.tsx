@@ -1,7 +1,7 @@
 'use client';
-// Forge Mobile — Snackbar. A transient bottom message bar with a single inline action
+// Eidos Mobile — Snackbar. A transient bottom message bar with a single inline action
 // (e.g. Undo), anchored above the safe area and auto-dismissed after ~4s. Distinct
-// from Toast (Forge Mobile: Toast = brief status confirmation, no required action,
+// from Toast (Eidos Mobile: Toast = brief status confirmation, no required action,
 // status-dot carries tone). Snackbar = a message describing what happened PLUS one
 // required-but-optional action the user can take — the action is the whole point.
 // The bar uses a full-width pill, slightly taller than a Toast, with the action in

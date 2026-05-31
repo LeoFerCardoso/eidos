@@ -1,5 +1,5 @@
 'use client';
-// Forge DS — Components / DataTable
+// Eidos DS — Components / DataTable
 // Dense .tbl-data variant. Composes existing .tbl chrome. Now with sortable
 // headers, sticky header, dense mode, sparkline columns, footer slot.
 import * as React from 'react';

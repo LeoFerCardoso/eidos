@@ -10,7 +10,7 @@ import {
   TableCell,
   TableCaption,
   Checkbox,
-} from '@forge/ui';
+} from '@eidos/ui';
 
 // ── Shared sample data ────────────────────────────────────────────────────────
 

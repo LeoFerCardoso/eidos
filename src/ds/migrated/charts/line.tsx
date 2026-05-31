@@ -66,7 +66,7 @@ export default function Page() {
       <Section id="chart-line" title="Line chart" desc="Connects ordered points to show how a continuous value moves over time — slope is the message. Reach for it when trend and rate of change matter most: RPS, latency percentiles, queue depth, SLO compliance.">
         <SubHead meta="package managers">Installation</SubHead>
         <TabbedCode tabs={installTabs('chart-line')} ariaLabel="package manager"/>
-        <Lede>Wrap a Recharts <Mono>&lt;LineChart&gt;</Mono> in <Mono>&lt;ForgeChart&gt;</Mono> to get the Forge card chrome (header, padding, ResponsiveContainer). Spread <Mono>forgeGridProps</Mono>, <Mono>forgeXAxisProps</Mono>, <Mono>forgeYAxisProps</Mono> for sensible defaults.</Lede>
+        <Lede>Wrap a Recharts <Mono>&lt;LineChart&gt;</Mono> in <Mono>&lt;ForgeChart&gt;</Mono> to get the Eidos card chrome (header, padding, ResponsiveContainer). Spread <Mono>forgeGridProps</Mono>, <Mono>forgeXAxisProps</Mono>, <Mono>forgeYAxisProps</Mono> for sensible defaults.</Lede>
 
         <SubHead meta="hello world">Usage</SubHead>
         <Lede>Prefer a bar chart for comparing discrete categories. The Y domain may be clipped to reveal small movements — a line communicates change, not proportion — but label the axis bounds clearly so a tight wobble is not mistaken for a cliff.</Lede>

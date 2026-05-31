@@ -207,7 +207,7 @@ export default function Page() {
           label="<RadialBar /> + <RadialBarChart />"
           rows={[
             { prop: 'dataKey',          type: 'string',  description: 'Numeric field per arc.' },
-            { prop: 'background',       type: 'boolean | object', default: 'true', description: 'Empty-track fill. Pass {{ fill: "var(--viz-grid)" }} for the Forge look.' },
+            { prop: 'background',       type: 'boolean | object', default: 'true', description: 'Empty-track fill. Pass {{ fill: "var(--viz-grid)" }} for the Eidos look.' },
             { prop: 'cornerRadius',     type: 'number',  default: '0', description: 'Round arc ends. 8 looks crafted, 0 reads as raw.' },
             { prop: 'innerRadius / outerRadius', type: 'string | number', description: 'Percentage of chart size. Inner ≥ 20% keeps the center readable.' },
             { prop: 'startAngle / endAngle', type: 'number', description: '90 / -270 = full ring. 180 / 0 = hemisphere.' },

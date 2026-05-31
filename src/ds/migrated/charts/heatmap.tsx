@@ -199,7 +199,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Fo
     </div>
   );
 
-  const USAGE = `// Each cell opens the same Forge-styled popover on hover OR keyboard focus,
+  const USAGE = `// Each cell opens the same Eidos-styled popover on hover OR keyboard focus,
 // so the chart is fully reachable by Tab (like AILabelWithPopover).
 function CalendarHeatmap({ data, cellSize = 12, gap = 3 }) {
   const [active, setActive] = useState(null)

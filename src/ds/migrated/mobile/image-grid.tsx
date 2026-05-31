@@ -1,5 +1,5 @@
 'use client';
-// Forge Mobile — Image Grid. A gap-tight grid of square thumbnails in the Photos-app
+// Eidos Mobile — Image Grid. A gap-tight grid of square thumbnails in the Photos-app
 // idiom. Supports 3-up and 4-up column counts, an optional overflow "+N" tile, and a
 // lead/hero tile that spans two columns. Use for screenshots, asset galleries, attachment
 // grids, and media pickers. Tiles never use real <img> — placeholder gradients with a

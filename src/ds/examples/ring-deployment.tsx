@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Banner, CopyChip, HealthBadge, Icons, MOCKS, OwnerPill, RelativeTime, RingBar, Sparkline, StatusDot, Trend } from '@/ds/core';
 import { FPageHeader, FSection, FShell, IconBubble } from './example-shell';
-// Forge IDP — Example: Ring deployment console.
+// Eidos IDP — Example: Ring deployment console.
 
   
   
@@ -16,7 +16,7 @@ import { FPageHeader, FSection, FShell, IconBubble } from './example-shell';
   // Ring state — currently on ring 3
   const CURRENT = 3;
   const RINGS = [
-    { label: 'Ring 0 · Internal',  audience: 'Forge employees',          percent: 100, status: 'done',    err: '0.04%', p95: '128ms', pods: 8,   slo: 'pass' },
+    { label: 'Ring 0 · Internal',  audience: 'Eidos employees',          percent: 100, status: 'done',    err: '0.04%', p95: '128ms', pods: 8,   slo: 'pass' },
     { label: 'Ring 1 · 1%',         audience: 'Synthetic + dogfood',     percent: 100, status: 'done',    err: '0.11%', p95: '134ms', pods: 12,  slo: 'pass' },
     { label: 'Ring 2 · 10%',        audience: 'Early access tier',       percent: 100, status: 'done',    err: '0.18%', p95: '141ms', pods: 24,  slo: 'pass' },
     { label: 'Ring 3 · 35%',        audience: 'Standard accounts BR-SE', percent: 100, status: 'running', err: '0.22%', p95: '146ms', pods: 86,  slo: 'pass' },
@@ -51,7 +51,7 @@ import { FPageHeader, FSection, FShell, IconBubble } from './example-shell';
     <FShell
       nav="services"
       crumbs={[
-        { label: 'Forge', href: '/example/ai-insights' },
+        { label: 'Eidos', href: '/example/ai-insights' },
         { label: 'Services', href: '/example/service-catalog' },
         { label: 'identity-svc', href: '/example/service-detail?id=identity-svc' },
         'Ring rollout',
@@ -84,7 +84,7 @@ import { FPageHeader, FSection, FShell, IconBubble } from './example-shell';
         tone="info"
         icon="sparkle"
         title="Ring 3 of 5"
-        message={<span>Currently at <strong style={{color:'var(--fg)'}}>35% traffic</strong>. If error budget holds, Forge will auto-promote to Ring 4 (100%) in <strong style={{color:'var(--ember)'}}>18 minutes</strong>.</span>}/>
+        message={<span>Currently at <strong style={{color:'var(--fg)'}}>35% traffic</strong>. If error budget holds, Eidos will auto-promote to Ring 4 (100%) in <strong style={{color:'var(--ember)'}}>18 minutes</strong>.</span>}/>
 
       {/* Ring visualization */}
       <FSection title="Rings" style={{marginTop: 18}}>

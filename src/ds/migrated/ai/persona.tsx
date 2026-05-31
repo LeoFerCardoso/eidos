@@ -1,5 +1,5 @@
 'use client';
-// Forge AI — Persona. The voice orb avatar for audio conversations.
+// Eidos AI — Persona. The voice orb avatar for audio conversations.
 // Visualises four states: idle / listening / thinking / speaking.
 // Compose with SpeechInput on a dedicated audio surface.
 import * as React from 'react';
@@ -46,7 +46,7 @@ function LiveCycle() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, width: '100%' }}>
-      <Persona state={state} size={160} label="Forge Voice Agent"/>
+      <Persona state={state} size={160} label="Eidos Voice Agent"/>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
         <span className="t-mono-label" style={{ color: 'var(--ember)' }}>{state}</span>
         <span className="t-small" style={{ color: 'var(--fg-muted)' }}>
@@ -104,10 +104,10 @@ export default function AiPersonaPage() {
         row
         code={`import { Persona } from "@/ds/core"
 
-<Persona state="listening" size={96} label="Forge Voice Agent"/>`}
+<Persona state="listening" size={96} label="Eidos Voice Agent"/>`}
       >
         <div style={{ ...stack, gap: 12 }}>
-          <Persona state="listening" size={96} label="Forge Voice Agent"/>
+          <Persona state="listening" size={96} label="Eidos Voice Agent"/>
           <span className="t-small" style={{ color: 'var(--fg-muted)' }}>Listening to you…</span>
         </div>
       </Frame>
@@ -128,7 +128,7 @@ React.useEffect(() => {
   return () => clearInterval(id)
 }, [])
 
-<Persona state={STATES[i]} size={160} label="Forge Voice Agent"/>`}
+<Persona state={STATES[i]} size={160} label="Eidos Voice Agent"/>`}
       >
         <LiveCycle/>
       </Frame>
@@ -145,13 +145,13 @@ React.useEffect(() => {
       >
         {STATES.map(s => (
           <div key={s} style={stack}>
-            <Persona state={s} size={96} label="Forge Voice Agent"/>
+            <Persona state={s} size={96} label="Eidos Voice Agent"/>
             <span className="t-mono-label">{s.toUpperCase()}</span>
           </div>
         ))}
       </Frame>
       <Lede>
-        Always label the state semantically — the <Mono>aria-label</Mono> combines <Mono>label</Mono> + <Mono>state</Mono>, so a screen reader announces "Forge Voice Agent — listening" rather than relying on the animation.
+        Always label the state semantically — the <Mono>aria-label</Mono> combines <Mono>label</Mono> + <Mono>state</Mono>, so a screen reader announces "Eidos Voice Agent — listening" rather than relying on the animation.
       </Lede>
 
       {/* SIZES */}
@@ -163,7 +163,7 @@ React.useEffect(() => {
       >
         {SIZES.map(n => (
           <div key={n} style={stack}>
-            <Persona state="idle" size={n} label="Forge Voice Agent"/>
+            <Persona state="idle" size={n} label="Eidos Voice Agent"/>
             <span className="t-mono-label">{n}</span>
           </div>
         ))}
@@ -178,12 +178,12 @@ React.useEffect(() => {
         label="Persona (size 200) above SpeechInput — canonical audio-only screen layout"
         height={320}
         code={`<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
-  <Persona state="listening" size={200} label="Forge Voice Agent"/>
+  <Persona state="listening" size={200} label="Eidos Voice Agent"/>
   <SpeechInput state="listening" levels={[0.4,0.7,0.9,0.6,0.8,0.5,0.7,0.9,0.4,0.6,0.8,0.5,0.7,0.6]}/>
 </div>`}
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32, width: '100%' }}>
-          <Persona state="listening" size={200} label="Forge Voice Agent"/>
+          <Persona state="listening" size={200} label="Eidos Voice Agent"/>
           <SpeechInput
             state="listening"
             levels={[0.4, 0.7, 0.9, 0.6, 0.8, 0.5, 0.7, 0.9, 0.4, 0.6, 0.8, 0.5, 0.7, 0.6]}
@@ -200,18 +200,18 @@ React.useEffect(() => {
         label="Choose Persona on audio surfaces · AgentIdentity in chat headers and lists"
         row
         code={`{/* audio surface */}
-<Persona state="speaking" size={96} label="Forge Voice Agent"/>
+<Persona state="speaking" size={96} label="Eidos Voice Agent"/>
 
 {/* chat header / settings list */}
-<AgentIdentity agent={{ name: 'Forge Voice Agent', model: 'anthropic/claude-sonnet-4.5', status: 'online' }}/>`}
+<AgentIdentity agent={{ name: 'Eidos Voice Agent', model: 'anthropic/claude-sonnet-4.5', status: 'online' }}/>`}
       >
         <div style={{ display: 'flex', gap: 48, alignItems: 'flex-start', flexWrap: 'wrap' }}>
           <div style={stack}>
-            <Persona state="speaking" size={96} label="Forge Voice Agent"/>
+            <Persona state="speaking" size={96} label="Eidos Voice Agent"/>
             <span className="t-small" style={{ color: 'var(--fg-muted)' }}>audio surface</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, justifyContent: 'center', paddingBlockStart: 12 }}>
-            <AgentIdentity agent={{ name: 'Forge Voice Agent', model: 'anthropic/claude-sonnet-4.5', status: 'online' }}/>
+            <AgentIdentity agent={{ name: 'Eidos Voice Agent', model: 'anthropic/claude-sonnet-4.5', status: 'online' }}/>
             <span className="t-small" style={{ color: 'var(--fg-muted)', marginBlockStart: 4 }}>chat header / settings list</span>
           </div>
         </div>
@@ -226,7 +226,7 @@ React.useEffect(() => {
         <div className="surface" style={{ padding: 18 }}>
           <div className="t-h3" style={{ marginBottom: 8 }}>Role and label</div>
           <p className="t-small" style={{ color: 'var(--fg-muted)', lineHeight: 1.55, margin: 0 }}>
-            The orb renders as <Mono>role="img"</Mono> with <Mono>aria-label</Mono> combining the <Mono>label</Mono> prop and the current <Mono>state</Mono> — e.g. "Forge Voice Agent — listening". The inner SVG is <Mono>aria-hidden</Mono>. The orb is not interactive, so it carries no keyboard role and is not in the tab order.
+            The orb renders as <Mono>role="img"</Mono> with <Mono>aria-label</Mono> combining the <Mono>label</Mono> prop and the current <Mono>state</Mono> — e.g. "Eidos Voice Agent — listening". The inner SVG is <Mono>aria-hidden</Mono>. The orb is not interactive, so it carries no keyboard role and is not in the tab order.
           </p>
         </div>
         <div className="surface" style={{ padding: 18 }}>
@@ -285,7 +285,7 @@ React.useEffect(() => {
         <div className="ds-frame-body" style={{ padding: '80px 36px 64px' }}>
           <div className="ana" style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="stage" style={{ position: 'relative', display: 'inline-block' }} aria-hidden="true">
-              <Persona state="listening" size={120} label="Forge Voice Agent"/>
+              <Persona state="listening" size={120} label="Eidos Voice Agent"/>
               {/* Outer ring pin */}
               <span className="lead v" style={{ top: -22, left: 10, height: 18 }}/>
               <div className="pin" style={{ top: -42, left: 10, transform: 'translateX(-50%)' }}>1</div>
@@ -311,7 +311,7 @@ React.useEffect(() => {
         <div className="dd-card do">
           <div className="head"><Icons.check size={12}/> Do — centre the orb when it is the surface</div>
           <div className="body" style={{ padding: 14, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
-            <Persona state="listening" size={80} label="Forge Voice Agent"/>
+            <Persona state="listening" size={80} label="Eidos Voice Agent"/>
             <span className="t-small" style={{ color: 'var(--fg-muted)' }}>Listening to you…</span>
           </div>
           <div className="note">On a dedicated voice screen the orb is the protagonist — centre it, give it space, and let the animation carry the state.</div>
@@ -319,7 +319,7 @@ React.useEffect(() => {
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — shrink the orb below 48 px</div>
           <div className="body" style={{ padding: 14, alignItems: 'center', justifyContent: 'center' }}>
-            <Persona state="speaking" size={28} label="Forge Voice Agent"/>
+            <Persona state="speaking" size={28} label="Eidos Voice Agent"/>
             <span className="t-small" style={{ color: 'var(--fg-muted)', marginInlineStart: 8 }}>Voice Agent</span>
           </div>
           <div className="note">Below 48 px the ring detail and gradient collapse — the orb loses its identity and looks like a plain coloured dot. Use AgentIdentity for compact identity in lists.</div>
@@ -328,8 +328,8 @@ React.useEffect(() => {
         <div className="dd-card do">
           <div className="head"><Icons.check size={12}/> Do — pass a meaningful label prop</div>
           <div className="body" style={{ padding: 14, flexDirection: 'column', gap: 6 }}>
-            <code style={{ ...mono, fontSize: 'var(--text-xs)' }}>{'<Persona state="listening" label="Forge Voice Agent"/>'}</code>
-            <span className="t-mono-label" style={{ color: 'var(--fg-muted)', textTransform: 'none', letterSpacing: 0 }}>→ aria-label: "Forge Voice Agent — listening"</span>
+            <code style={{ ...mono, fontSize: 'var(--text-xs)' }}>{'<Persona state="listening" label="Eidos Voice Agent"/>'}</code>
+            <span className="t-mono-label" style={{ color: 'var(--fg-muted)', textTransform: 'none', letterSpacing: 0 }}>→ aria-label: "Eidos Voice Agent — listening"</span>
           </div>
           <div className="note">The label and state together form the accessible name. Always pass the agent's real name so screen readers can announce who is speaking.</div>
         </div>
@@ -337,7 +337,7 @@ React.useEffect(() => {
           <div className="head"><Icons.x size={12}/> Don't — use Persona in a chat header</div>
           <div className="body" style={{ padding: 14, alignItems: 'center', gap: 10 }}>
             <Persona state="idle" size={32} label="Agent"/>
-            <span className="t-small" style={{ fontWeight: 600 }}>Forge Agent</span>
+            <span className="t-small" style={{ fontWeight: 600 }}>Eidos Agent</span>
           </div>
           <div className="note">In a chat header or settings list, use AgentIdentity — it is designed for that context, with a stable size and an optional AI label.</div>
         </div>

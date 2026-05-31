@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { SelectNative } from '@forge/ui';
+import { SelectNative } from '@eidos/ui';
 
 // ── Shared fixtures ─────────────────────────────────────────────────────────────
 

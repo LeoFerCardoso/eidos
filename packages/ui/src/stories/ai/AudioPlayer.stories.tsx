@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { AudioPlayer } from '@forge/ui';
+import { AudioPlayer } from '@eidos/ui';
 
 // ── Fixtures ─────────────────────────────────────────────────────────────────
 // A freely-available audio file that loads without network (data URI stub) is
