@@ -211,6 +211,7 @@ export const DropdownMenuTrigger = React.forwardRef<HTMLButtonElement, DropdownM
     if (asChild && React.isValidElement(children)) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return React.cloneElement(children as React.ReactElement<any>, {
+        ref, // forward the trigger ref so the panel can anchor + restore focus
         onClick: handleClick,
         onKeyDown: handleKeyDown,
         'aria-haspopup': 'menu',

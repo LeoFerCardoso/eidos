@@ -1,35 +1,44 @@
 'use client';
 
-import { Select } from '@eidos/ui';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  Icons,
+} from '@eidos/ui';
 import { useColorTheme, type ColorTheme } from '@/components/color-theme-provider';
 
 /**
- * Color-theme picker — built on the DS <Select> (a closed 3-option set needs a
- * select, not a searchable combobox). Each option carries its accent swatch as
- * the leading icon, so you preview the colour before choosing; the trigger
- * shows the active theme's swatch + name; the selected row gets a trailing
- * check (the slot is reserved on every row, so they stay aligned). Data-driven
+ * Color-theme picker — a compact PILL trigger that opens the DS context menu
+ * (<DropdownMenu>). The pill stays small (swatch + name); the menu panel sizes
+ * to its content, so options are never clipped. Each row shows the theme's
+ * accent swatch + name; the active theme gets a trailing check. Data-driven
  * from COLOR_THEMES. The switch is GLOBAL (re-themes every sub-DS at once).
  */
 export function ThemePicker() {
   const { theme, setTheme, themes } = useColorTheme();
-
-  const options = themes.map((t) => ({
-    value: t.id,
-    label: t.label,
-    // Select's icon is a component; bind each theme's fixed preview swatch.
-    icon: () => <span className="ds-theme-dot" style={{ background: t.swatch }} aria-hidden="true" />,
-  }));
+  const current = themes.find((t) => t.id === theme) ?? themes[0];
 
   return (
-    <div className="ds-theme-picker">
-      <Select
-        size="sm"
-        width="160px"
-        options={options}
-        value={theme}
-        onValueChange={(v) => setTheme(v as ColorTheme)}
-      />
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger className="ds-theme-pill" aria-label={`Color theme: ${current.label}`}>
+        <span className="ds-theme-dot" style={{ background: current.swatch }} aria-hidden="true" />
+        <span className="label">{current.label}</span>
+        <Icons.chevronDown size={13} />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        {themes.map((t) => (
+          <DropdownMenuItem
+            key={t.id}
+            icon={() => <span className="ds-theme-dot" style={{ background: t.swatch }} aria-hidden="true" />}
+            shortcut={t.id === theme ? '✓' : undefined}
+            onSelect={() => setTheme(t.id)}
+          >
+            {t.label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
