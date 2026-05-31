@@ -4,17 +4,19 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   Icons,
 } from '@eidos/ui';
 import { useColorTheme, type ColorTheme } from '@/components/color-theme-provider';
 
 /**
  * Color-theme picker — a compact PILL trigger that opens the DS context menu
- * (<DropdownMenu>). The pill stays small (swatch + name); the menu panel sizes
- * to its content, so options are never clipped. Each row shows the theme's
- * accent swatch + name; the active theme gets a trailing check. Data-driven
- * from COLOR_THEMES. The switch is GLOBAL (re-themes every sub-DS at once).
+ * (<DropdownMenu>). Single-select, so it uses the canonical RadioGroup pattern:
+ * each row is a <DropdownMenuRadioItem> whose built-in radio indicator marks the
+ * active theme (no bespoke check). Each row also shows the theme's accent swatch
+ * so you preview the colour. Data-driven from COLOR_THEMES; switch is GLOBAL.
  */
 export function ThemePicker() {
   const { theme, setTheme, themes } = useColorTheme();
@@ -28,16 +30,17 @@ export function ThemePicker() {
         <Icons.chevronDown size={13} />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {themes.map((t) => (
-          <DropdownMenuItem
-            key={t.id}
-            icon={() => <span className="ds-theme-dot" style={{ background: t.swatch }} aria-hidden="true" />}
-            shortcut={t.id === theme ? '✓' : undefined}
-            onSelect={() => setTheme(t.id)}
-          >
-            {t.label}
-          </DropdownMenuItem>
-        ))}
+        <DropdownMenuLabel>Theme</DropdownMenuLabel>
+        <DropdownMenuRadioGroup value={theme} onValueChange={(v) => setTheme(v as ColorTheme)}>
+          {themes.map((t) => (
+            <DropdownMenuRadioItem key={t.id} value={t.id}>
+              <span className="ds-theme-opt">
+                <span className="ds-theme-dot" style={{ background: t.swatch }} aria-hidden="true" />
+                {t.label}
+              </span>
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
