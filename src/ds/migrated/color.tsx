@@ -315,9 +315,9 @@ export default function Color() {
       </p>
 
       {/* Info role — the cool accent, now first-class */}
-      <SubHead meta="role set · sky">Info (the cool accent role)</SubHead>
+      <SubHead meta={'role set · ' + (theme === 'iris' ? 'cyan' : 'sky')}>Info (the cool accent role)</SubHead>
       <p style={{marginTop: -6, marginBottom: 14, fontSize: 'var(--text-body)', color:'var(--fg-muted)', maxWidth:'68ch', lineHeight: 1.6}}>
-        Alongside ember and the status trio, <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>info</code> is a first-class role for informational / AI-assisted surfaces (a sky blue; <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--info-text</code> is the legacy <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--ice</code>). Like every functional role it implements the same 7-token contract — solid · strong · soft · subtle · border · text · fg — so an alert or badge reads its tint, border, and on-solid ink from one family. <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--violet</code> stays the premium-tier signal.
+        Alongside the accent and the status trio, <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>info</code> is a first-class role for informational / AI-assisted surfaces — it rides the theme&rsquo;s cool accent ({theme === 'iris' ? 'cyan in Iris' : 'sky-blue in Forge'}; <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--info-text</code> resolves through <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--ice</code>). Like every functional role it implements the same 7-token contract — solid · strong · soft · subtle · border · text · fg — so an alert or badge reads its tint, border, and on-solid ink from one family. <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--violet</code> ({theme === 'iris' ? 'fuchsia' : 'lavender'}) stays the premium-tier signal.
       </p>
       <div className="ds-grid cols-3">
         {[
@@ -326,7 +326,7 @@ export default function Color() {
           ['Border', '--info-border', 'hairline on a soft info surface'],
           ['Text', '--info-text', 'in-hue text on the page (= --ice)'],
           ['On solid', '--info-fg', 'ink on a solid info fill'],
-          ['Violet', '--violet', 'premium-tier signal — never in place of info'],
+          [theme === 'iris' ? 'Fuchsia' : 'Violet', '--violet', 'premium-tier signal — never in place of info'],
         ].map(([name, tok, role]) => (
           <div key={tok} className="surface" style={{padding: 16}}>
             <div style={{height: 40, borderRadius:'var(--radius-lg)', background:`var(${tok})`, border:'1px solid var(--border)', marginBottom: 10}}/>

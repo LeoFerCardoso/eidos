@@ -689,6 +689,15 @@
   --ice:      #22D3EE;
   --ice-soft: rgba(34,211,238,0.16);
   --violet:   #E879F9;
+
+  /* ── INFO role — tracks the cool accent, so it reads cyan under Iris ────── */
+  --info:        #22D3EE;
+  --info-strong: #06B6D4;
+  --info-soft:   rgba(34,211,238,0.14);
+  --info-subtle: rgba(34,211,238,0.07);
+  --info-border: rgba(34,211,238,0.30);
+  /* --info-text already resolves through var(--ice); --info-fg (dark ink) is
+     inherited from :root — correct on the bright cyan solid. */
 }
 
 [data-ds-theme="iris"][data-mode="light"] {
@@ -724,6 +733,13 @@
   --ice:      #0891B2;
   --ice-soft: rgba(8,145,178,0.10);
   --violet:   #C026D3;
+
+  /* ── INFO role — deeper cyan to hit AA on white (white ink inherited) ───── */
+  --info:        #0891B2;
+  --info-strong: #0E7490;
+  --info-soft:   rgba(8,145,178,0.10);
+  --info-subtle: rgba(8,145,178,0.05);
+  --info-border: rgba(8,145,178,0.28);
 }
 
 * { box-sizing: border-box; }
