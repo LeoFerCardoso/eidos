@@ -35,7 +35,7 @@ const fileExtDot = (path) => {
   // Color-coded dot in the file tree — quick visual cue per language.
   if (ext === 'tsx' || ext === 'jsx') return 'var(--ember-glow)';
   if (ext === 'ts' || ext === 'js')   return '#93C5FD';
-  if (ext === 'css' || ext === 'scss') return 'var(--violet)';
+  if (ext === 'css' || ext === 'scss') return 'var(--accent-3)';
   if (ext === 'html')                  return 'var(--success)';
   if (ext === 'json')                  return 'var(--warning)';
   return 'var(--fg-faint)';
