@@ -5,7 +5,7 @@ export const meta = {
   phases: [{ title: 'Final audit' }, { title: 'Integrity' }],
 }
 
-const REPO = '/Users/leocardoso/Projects/forge-ds'
+const REPO = '/Users/leocardoso/Projects/eidos'
 
 const RUBRIC = `
 You are doing a FINAL adversarial DS review. Repo: ${REPO}. Read the component source (packages/ui/src/<file>.tsx), its docs page (src/ds/migrated/<slug>.tsx), and the promoted CSS in packages/ui/styles/{tokens,ds}.css. Be adversarial — assume a defect exists and find it — but report ONLY CONFIRMED P0s (cite file:line; if you can't cite it, don't report it). Categories to hunt:

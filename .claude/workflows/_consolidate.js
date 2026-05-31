@@ -12,7 +12,7 @@ export const meta = {
   ],
 }
 
-const REPO = '/Users/leocardoso/Projects/forge-ds'
+const REPO = '/Users/leocardoso/Projects/eidos'
 
 const STANDARDS = `
 You are a Eidos DS engineer. Repo: ${REPO}. Obey these conventions (read the files, do not guess):

@@ -18,7 +18,7 @@ const COMPONENT = input.component || input.slug || input.name
 if (!COMPONENT) throw new Error('restructure-component: pass a component name/slug — e.g. Workflow({ name: "restructure-component", args: "badge" })')
 const DRY = !!input.dryRun
 
-const REPO = '/Users/leocardoso/Projects/forge-ds'
+const REPO = '/Users/leocardoso/Projects/eidos'
 const STANDARDS = `
 Authoritative conventions to obey (read them — do not guess):
 - docs/DS-PAGE-STANDARD.md — the canonical page anatomy + class vocabulary.

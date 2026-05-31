@@ -10,7 +10,7 @@ export const meta = {
   ],
 }
 
-const REPO = '/Users/leocardoso/Projects/forge-ds'
+const REPO = '/Users/leocardoso/Projects/eidos'
 const A = typeof args === 'string' ? JSON.parse(args) : (args || {})
 const BATCH = A.batchName || 'batch'
 const ITEMS = A.items || []

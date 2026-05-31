@@ -5,7 +5,7 @@ export const meta = {
   phases: [{ title: 'Fix pages' }, { title: 'Verify' }],
 }
 
-const REPO = '/Users/leocardoso/Projects/forge-ds'
+const REPO = '/Users/leocardoso/Projects/eidos'
 const STD = `
 DS-PAGE-STANDARD component-page section ORDER (read docs/DS-PAGE-STANDARD.md + src/ds/migrated/buttons.tsx as the gold reference):
   Header(Section) → Installation → Usage → Variants/Sizes/States → In context → Accessibility → RTL → Anatomy → Do/Don't → API reference (LAST).

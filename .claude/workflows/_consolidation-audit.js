@@ -10,7 +10,7 @@ export const meta = {
   ],
 }
 
-const REPO = '/Users/leocardoso/Projects/forge-ds'
+const REPO = '/Users/leocardoso/Projects/eidos'
 
 const GROUND = `
 GROUND TRUTH (verify against disk — packages/ui/src/index.ts barrel, packages/ui/src/stories/**, packages/registry/registry.generated.json — but use this to move fast):
