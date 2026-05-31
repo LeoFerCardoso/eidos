@@ -682,6 +682,13 @@
   --ai-streaming-caret: #9B8CFF;
   --viz-cat-1:   #9B8CFF;
   --viz-seq-mid: #9B8CFF;
+
+  /* ── COOL ACCENTS — Iris swaps Forge's sky+lavender for a cyan+fuchsia pair
+        that frames the violet primary (lavender would collide with it). --ice
+        stays the AI/automated signal; --violet is the premium-tier signal. ── */
+  --ice:      #22D3EE;
+  --ice-soft: rgba(34,211,238,0.16);
+  --violet:   #E879F9;
 }
 
 [data-ds-theme="iris"][data-mode="light"] {
@@ -712,6 +719,11 @@
   --ai-streaming-caret: #6D28D9;
   --viz-cat-1:   #6D28D9;
   --viz-seq-mid: #6D28D9;
+
+  /* ── COOL ACCENTS — Iris light: deeper cyan + fuchsia so they hit AA on white ── */
+  --ice:      #0891B2;
+  --ice-soft: rgba(8,145,178,0.10);
+  --violet:   #C026D3;
 }
 
 * { box-sizing: border-box; }

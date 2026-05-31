@@ -1,6 +1,7 @@
 'use client';
 // Eidos DS — Foundations / Color (six families, one accent)
 import { Section, SubHead, TokenSwatch, CopyButton, Frame, Mono, Kbd, Icons } from '@/ds/core';
+import { useColorTheme } from '@/components/color-theme-provider';
 
 // Every token value, ratio, and metric on this page is a number that must
 // align across rows — so each mono/value span opts into tabular figures.
@@ -9,6 +10,7 @@ const monoTok: React.CSSProperties = { fontFamily: 'var(--font-mono)', fontSize:
 const monoFaint: React.CSSProperties = { fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontVariantNumeric: 'tabular-nums' };
 
 export default function Color() {
+  const { theme } = useColorTheme();
   /* Surfaces — canonical 7-tier ladder (Eidos v1.1). Order goes from
      deepest (canvas, behind floating layers) to lightest (active). The
      swatches pull live from CSS so flipping the theme updates them. */
@@ -27,13 +29,19 @@ export default function Color() {
     ['Foreground subtle', '--fg-subtle', '#756F66', '#78736D', 'Metadata, placeholders, disabled.'],
     ['Foreground faint',  '--fg-faint',  '#524C44', '#A8A39B', 'Decorative only — never required reading.'],
   ];
-  const accents = [
-    ['Ember',      '--ember',      '#FF6B35', '#E85A28'],
-    ['Ember glow', '--ember-glow', '#FF8C42', '#FF6B35'],
-    ['Ember deep', '--ember-deep', '#E04E1A', '#C24A1F'],
-    ['Ice',        '--ice',        '#7DD3FC', '#0EA5E9'],
-    ['Violet',     '--violet',     '#A78BFA', '#7C3AED'],
-  ];
+  // Cool / secondary accents are theme-specific. Forge pairs sky-blue + lavender
+  // against its warm ember; Iris swaps to cyan + fuchsia to frame its violet
+  // primary (a lavender would collide with it). Same token slots (--ice =
+  // AI/automated signal, --violet = premium-tier signal), different hues.
+  const cool = theme === 'iris'
+    ? [
+        ['Cyan',    '--ice',    '#22D3EE', '#0891B2'],
+        ['Fuchsia', '--violet', '#E879F9', '#C026D3'],
+      ]
+    : [
+        ['Ice',    '--ice',    '#7DD3FC', '#0EA5E9'],
+        ['Violet', '--violet', '#A78BFA', '#7C3AED'],
+      ];
   const status = [
     ['Success', '--success', '#34D399', '#059669'],
     ['Warning', '--warning', '#FBBF24', '#D97706'],
@@ -253,13 +261,13 @@ export default function Color() {
       </Frame>
       <p className="ds-caption">Component authors: when you paint <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>background: var(--ember)</code>, always pair it with <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>color: var(--ember-fg)</code>. Never hardcode <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>#0A0907</code> or <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>#FFFFFF</code> — the token does the theme work for you.</p>
 
-      {/* Cool accents */}
-      <SubHead meta={accents.length+' tokens'}>Cool accents</SubHead>
+      {/* Cool / secondary accents — theme-specific */}
+      <SubHead meta={(theme === 'iris' ? 'Iris' : 'Forge') + ' · ' + cool.length + ' tokens'}>Cool accents</SubHead>
       <p style={{marginTop: -6, marginBottom: 14, fontSize: 'var(--text-body)', color:'var(--fg-muted)', maxWidth:'68ch', lineHeight: 1.6}}>
-        The three ember values plus two cool sparingly-used hues — <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--ice</code> for AI/automated content, <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--violet</code> for premium tier signals. Never use either in place of ember.
+        Two cool, sparingly-used hues that complement the primary accent — <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--ice</code> signals AI / automated content, <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--violet</code> signals premium tier. They are <b style={{color:'var(--fg)'}}>theme-specific</b>: <b style={{color:'var(--fg)'}}>Forge</b> pairs sky-blue + lavender against its warm ember; <b style={{color:'var(--fg)'}}>Iris</b> swaps to cyan + fuchsia to frame its violet primary. Switch the theme in the topbar to see the pair below change. Never use either in place of the accent.
       </p>
       <div className="ds-grid cols-3">
-        {accents.map(([name,v,val,lightVal]) => <TokenSwatch key={v} name={name} varName={v} value={val} lightValue={lightVal}/>)}
+        {cool.map(([name,v,val,lightVal]) => <TokenSwatch key={v} name={name} varName={v} value={val} lightValue={lightVal}/>)}
       </div>
 
       {/* Status */}
