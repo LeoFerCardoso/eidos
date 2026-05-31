@@ -4,8 +4,9 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { ComponentProps } from 'react';
 
 // Wraps next-themes, configured to share the legacy contract: the `data-mode`
-// attribute + the `eidos-mode` localStorage key. This keeps the new layout's
-// ThemeToggle and the legacy DSShell theme logic converged on the same value.
+// attribute + the `eidos-mode` localStorage key. This keeps the topbar's
+// appearance menu (ThemePicker) and the legacy DSShell theme logic converged
+// on the same value.
 export function ThemeProvider({ children, ...props }: ComponentProps<typeof NextThemesProvider>) {
   return (
     <NextThemesProvider

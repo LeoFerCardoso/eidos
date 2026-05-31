@@ -5,6 +5,14 @@ import { ChangelogView, type ChangelogEntry } from '@/components/docs';
 // Newest first. Group by version; if a single version touched several
 // components, list one entry per scope so search can pinpoint changes.
 const CHANGELOG: ChangelogEntry[] = [
+  // ─── v1.16.0 — Unified topbar appearance menu (2026-05-31) ──────
+  { version: 'v1.16.0', date: '2026-05-31', type: 'feat', scope: 'shell', title: 'Topbar appearance menu — one DS context menu for mode + accent',
+    summary: 'The two separate header controls — a colour-accent pill and a hand-rolled moon/sun segmented toggle — were folded into a single DropdownMenu with two labelled radio groups: Appearance (Light/Dark, with sun/moon glyphs) and Accent (Forge/Dusk/Fjord). Accent swatches are now rounded square chips, visually distinct from the round selection indicator (the old design double-stacked a radio dot + a same-colour swatch), with each theme’s hint in the trailing slot. The bespoke ThemeToggle component and its .ds-theme-toggle CSS were removed; both axes stay global.' },
+  { version: 'v1.16.0', date: '2026-05-31', type: 'feat', scope: 'overlays', title: 'DropdownMenuRadioGroup — opt-in check-mark indicator',
+    summary: 'DropdownMenuRadioGroup gained an indicator?: \'dot\' | \'check\' prop (default \'dot\', so every existing radio menu in the catalog is unchanged). With indicator="check" the selected item renders a check mark instead of the radio bullet — natural for settings-style single-select menus — while keeping the menuitemradio role and a11y intact. The new topbar appearance menu uses it.' },
+  { version: 'v1.16.0', date: '2026-05-31', type: 'fix', scope: 'core', title: 'Version badge synced to v1.16.0 (core)',
+    summary: 'DS_VERSIONS.core bumped to 1.16.0 in src/lib/site.ts; the DS-aware VersionBadge picks it up on the core surface.' },
+
   // ─── v1.15.0 — Catalog-wide design-critique remediation (2026-05-31) ──────
   { version: 'v1.15.0', date: '2026-05-31', type: 'fix', scope: 'core', title: 'Design-critique remediation across all 217 doc pages',
     summary: 'A full design audit (every doc page + every Storybook story) drove a fix program closed against eidos:verify (0 block-fail) + headless render. 11 P0 corrected: contrast on the Color ember-scale, Severity tiles, Textarea counter and mobile Snackbar — now token-driven and AA in both themes; emoji slop removed from Response/Pagination; status.tsx’s page-local CSS block promoted into ds.css. The single ember-on-fill invariant and the ≤220-char lede budget hold catalog-wide.' },

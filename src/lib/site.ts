@@ -6,7 +6,7 @@
 // the DS you're currently viewing. The /release command bumps the right DS here
 // and adds the matching changelog entry.
 export const DS_VERSIONS: Record<string, string> = {
-  core: '1.15.0',
+  core: '1.16.0',
   charts: '1.11.0',
   ai: '1.29.0',
   idp: '1.12.0',

@@ -82,6 +82,14 @@ export interface DropdownMenuRadioItemProps extends Omit<DropdownMenuItemProps, 
 export interface DropdownMenuRadioGroupProps {
   value?: string;
   onValueChange?: (value: string) => void;
+  /**
+   * Selection indicator for the group's items. `'dot'` (default) is the
+   * canonical radio bullet; `'check'` shows a check mark instead — useful for
+   * settings-style single-select menus (appearance, sort order, …) where a
+   * check reads more naturally than a radio dot. The role stays
+   * `menuitemradio` either way; only the glyph changes.
+   */
+  indicator?: 'dot' | 'check';
   children: React.ReactNode;
 }
 
@@ -118,6 +126,7 @@ const useMenu = () => {
 interface RadioCtx {
   value?: string;
   onValueChange?: (v: string) => void;
+  indicator?: 'dot' | 'check';
 }
 const RadioContext = React.createContext<RadioCtx>({});
 
@@ -573,9 +582,10 @@ DropdownMenuCheckboxItem.displayName = 'DropdownMenuCheckboxItem';
 export const DropdownMenuRadioGroup: React.FC<DropdownMenuRadioGroupProps> = ({
   value,
   onValueChange,
+  indicator = 'dot',
   children,
 }) => (
-  <RadioContext.Provider value={{ value, onValueChange }}>
+  <RadioContext.Provider value={{ value, onValueChange, indicator }}>
     {children}
   </RadioContext.Provider>
 );
@@ -600,7 +610,7 @@ export const DropdownMenuRadioItem = React.forwardRef<
     ref,
   ) => {
     const { setOpen, triggerRef } = useMenu();
-    const { value: groupValue, onValueChange } = React.useContext(RadioContext);
+    const { value: groupValue, onValueChange, indicator = 'dot' } = React.useContext(RadioContext);
     const stableId = React.useId();
     const checked = groupValue === value;
 
@@ -631,7 +641,7 @@ export const DropdownMenuRadioItem = React.forwardRef<
       >
         <span className="dm-item-left">
           <span className="dm-item-check" aria-hidden="true">
-            {checked && <span className="dm-radio-dot" />}
+            {checked && (indicator === 'check' ? <Icons.check size={12} /> : <span className="dm-radio-dot" />)}
           </span>
           <span className="dm-item-label">{children}</span>
         </span>

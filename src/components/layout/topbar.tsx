@@ -1,13 +1,12 @@
 'use client';
 
 import { Breadcrumb } from './breadcrumb';
-import { ThemeToggle } from './theme-toggle';
 import { ThemePicker } from './theme-picker';
 import { DSIcon } from './ds-icon';
 import { useActiveDs } from './use-active-ds';
 import { DS_VERSIONS, DS_VERSION } from '@/lib/site';
 
-/** Top header — breadcrumb on the lead, command-search + theme toggle trailing. */
+/** Top header — breadcrumb on the lead, command-search + appearance menu trailing. */
 export function Topbar({ onOpenPalette }: { onOpenPalette: () => void }) {
   const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform || '');
   const activeDs = useActiveDs();
@@ -33,7 +32,6 @@ export function Topbar({ onOpenPalette }: { onOpenPalette: () => void }) {
         <span className="ds-topbar-div" aria-hidden="true" />
 
         <ThemePicker />
-        <ThemeToggle />
       </div>
     </div>
   );
