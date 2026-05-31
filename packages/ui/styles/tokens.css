@@ -58,7 +58,7 @@
   --ember-softer: rgba(255,107,53,0.07);
   /* Canonical accent alias. `--ember` is the Forge theme's accent; `--accent`
      is the theme-NEUTRAL handle every component should reach for. It tracks the
-     active color theme automatically (Forge ember / Iris violet) because it
+     active color theme automatically (Forge ember / Dusk violet) because it
      resolves through var(--ember), which each theme redefines. */
   --accent: var(--ember);
   /* Foreground that rides on top of ember/danger surfaces. Dark mode keeps
@@ -84,7 +84,7 @@
 
   /* ── SECONDARY ACCENTS — used sparingly. Named by ROLE, not hue: --accent-2
         is the AI / automated-content signal, --accent-3 the premium-tier signal.
-        Each theme defines its own pair (Forge: sky + lavender; Iris: cyan +
+        Each theme defines its own pair (Forge: sky + lavender; Dusk: cyan +
         fuchsia) so a color name never lies. */
   --accent-2:      #7DD3FC;
   --accent-2-soft: rgba(125,211,252,0.14);
@@ -640,23 +640,23 @@
 }
 
 /* ============================================================================
- * IRIS THEME — second color theme (multi-theme validation).
- * Eidos is the design system; "Forge" (the :root default above) and "Iris"
+ * DUSK THEME — second color theme (multi-theme validation).
+ * Eidos is the design system; "Forge" (the :root default above) and "Dusk"
  * are interchangeable COLOR themes selected via [data-ds-theme] on <html>.
  * Structural tokens (space/radius/type/motion/z/shadows-geometry) live in the
  * shared :root and are NOT redefined here — a theme only swaps colors.
  *
- * Iris = a violet/indigo accent in place of ember + cool-leaning surfaces.
+ * Dusk = a violet/indigo accent in place of ember + cool-leaning surfaces.
  * It is a COMPACT override: everything it doesn't set (borders, fg, status,
  * semantic roles, severity/health/risk, most data-viz) is inherited from the
  * Forge default, so the two themes stay structurally identical.
  *
  * The dark-ink-on-bright / white-on-deep accent-foreground invariant is
  * preserved for free: --ember-fg is NOT overridden, so it inherits the dark
- * ink (#0A0907) in dark mode — correct for the BRIGHT iris accent — and white
- * (#FFFFFF) in light mode — correct for the DEEP iris accent.
+ * ink (#0A0907) in dark mode — correct for the BRIGHT dusk accent — and white
+ * (#FFFFFF) in light mode — correct for the DEEP dusk accent.
  * ========================================================================== */
-[data-ds-theme="iris"] {
+[data-ds-theme="dusk"] {
   /* ── SURFACES — dark, cool violet tint (mirrors Forge dark L, hue 285) ─── */
   --canvas:           oklch(0.13 0.008 285);
   --bg:               oklch(0.165 0.010 285);
@@ -686,14 +686,14 @@
   --viz-cat-1:   #9B8CFF;
   --viz-seq-mid: #9B8CFF;
 
-  /* ── COOL ACCENTS — Iris swaps Forge's sky+lavender for a cyan+fuchsia pair
+  /* ── COOL ACCENTS — Dusk swaps Forge's sky+lavender for a cyan+fuchsia pair
         that frames the violet primary (lavender would collide with it). --accent-2
         stays the AI/automated signal; --accent-3 is the premium-tier signal. ── */
   --accent-2:      #22D3EE;
   --accent-2-soft: rgba(34,211,238,0.16);
   --accent-3:   #E879F9;
 
-  /* ── INFO role — tracks the cool accent, so it reads cyan under Iris ────── */
+  /* ── INFO role — tracks the cool accent, so it reads cyan under Dusk ────── */
   --info:        #22D3EE;
   --info-strong: #06B6D4;
   --info-soft:   rgba(34,211,238,0.14);
@@ -703,7 +703,7 @@
      inherited from :root — correct on the bright cyan solid. */
 }
 
-[data-ds-theme="iris"][data-mode="light"] {
+[data-ds-theme="dusk"][data-mode="light"] {
   /* ── SURFACES — light, cool violet tint (mirrors Forge light L, hue 285) ─ */
   --canvas:           oklch(0.93 0.006 285);
   --bg:               oklch(0.97 0.005 285);
@@ -732,7 +732,7 @@
   --viz-cat-1:   #6D28D9;
   --viz-seq-mid: #6D28D9;
 
-  /* ── COOL ACCENTS — Iris light: deeper cyan + fuchsia so they hit AA on white ── */
+  /* ── COOL ACCENTS — Dusk light: deeper cyan + fuchsia so they hit AA on white ── */
   --accent-2:      #0891B2;
   --accent-2-soft: rgba(8,145,178,0.10);
   --accent-3:   #C026D3;
@@ -746,13 +746,13 @@
 }
 
 /* ============================================================================
- * TIDE THEME — calm teal. Primary is a cyan-leaning teal (kept distinct from
+ * FJORD THEME — calm teal. Primary is a cyan-leaning teal (kept distinct from
  * the emerald --success); secondary accents are a clear blue (--accent-2, the
  * AI/info signal) + a coral pop (--accent-3, premium-tier). Same compact-
- * override pattern as Iris; --ember-fg is inherited so dark-ink-on-bright /
+ * override pattern as Dusk; --ember-fg is inherited so dark-ink-on-bright /
  * white-on-deep holds automatically.
  * ========================================================================== */
-[data-ds-theme="tide"] {
+[data-ds-theme="fjord"] {
   /* ── SURFACES — dark, cool teal tint (mirrors Forge dark L, hue 195) ───── */
   --canvas:           oklch(0.13 0.008 195);
   --bg:               oklch(0.165 0.010 195);
@@ -794,7 +794,7 @@
   --info-border: rgba(96,165,250,0.30);
 }
 
-[data-ds-theme="tide"][data-mode="light"] {
+[data-ds-theme="fjord"][data-mode="light"] {
   /* ── SURFACES — light, cool teal tint (mirrors Forge light L, hue 195) ─── */
   --canvas:           oklch(0.93 0.006 195);
   --bg:               oklch(0.97 0.005 195);

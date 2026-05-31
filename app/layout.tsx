@@ -12,7 +12,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { ColorThemeProvider } from '@/components/color-theme-provider';
 
 // Sets the color theme (data-ds-theme) from localStorage before first paint so
-// the Iris theme doesn't flash Forge. Mirrors what next-themes does for mode.
+// the Dusk theme doesn't flash Forge. Mirrors what next-themes does for mode.
 const NO_FOUC_THEME = `(function(){try{var t=localStorage.getItem('eidos-theme');if(t&&/^[a-z0-9-]+$/.test(t)){document.documentElement.setAttribute('data-ds-theme',t);}}catch(e){}})();`;
 
 export const metadata: Metadata = {
