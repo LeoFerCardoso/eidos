@@ -1,8 +1,8 @@
-// forge-gen.mjs — contract data layer + scaffold.
+// eidos-gen.mjs — contract data layer + scaffold.
 //
-//   node scripts/forge-gen.mjs contract --sync   # rebuild contract.components[] from disk
-//   node scripts/forge-gen.mjs contract --check   # fail if the contract is out of sync
-//   node scripts/forge-gen.mjs component <slug> --ds <ds>   # (scaffold — see §4, Phase 3)
+//   node scripts/eidos-gen.mjs contract --sync   # rebuild contract.components[] from disk
+//   node scripts/eidos-gen.mjs contract --check   # fail if the contract is out of sync
+//   node scripts/eidos-gen.mjs component <slug> --ds <ds>   # (scaffold — see §4, Phase 3)
 //
 // `contract --sync` is the keystone of the harness: it joins every installable unit
 // across its FOUR surfaces (registry item · @eidos/ui export · Storybook story · docs
@@ -12,7 +12,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { basename, relative, sep } from 'node:path';
 import {
   ROOT, abs, CONTRACT_PATH, loadContract, walk, toSlug, metaTitle,
-} from './forge-lib.mjs';
+} from './eidos-lib.mjs';
 
 // ── parse @eidos/ui exports → where each symbol is DEFINED ──────────────────────
 function exportMap() {
@@ -171,6 +171,6 @@ if (cmd === 'contract') {
   console.error('forge gen component <slug> — scaffold lands in Phase 3 (§4). Use the `new-component` skill meanwhile.');
   process.exit(2);
 } else {
-  console.error('usage: forge-gen.mjs contract --sync|--check  |  component <slug> --ds <ds>');
+  console.error('usage: eidos-gen.mjs contract --sync|--check  |  component <slug> --ds <ds>');
   process.exit(2);
 }

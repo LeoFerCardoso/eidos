@@ -9,7 +9,7 @@
 //
 //   node scripts/check-registry.mjs [--json] [--strict]
 import { readFileSync, existsSync } from 'node:fs';
-import { abs, loadContract, STATUS } from './forge-lib.mjs';
+import { abs, loadContract, STATUS } from './eidos-lib.mjs';
 
 function loadRegistry() {
   const reg = JSON.parse(readFileSync(abs('packages/registry/registry.json'), 'utf8'));

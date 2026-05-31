@@ -1,5 +1,5 @@
-// check-contract.mjs — validates packages/registry/forge.contract.json against
-// forge.contract.schema.json (dependency-free subset validator) PLUS the semantic
+// check-contract.mjs — validates packages/registry/eidos.contract.json against
+// eidos.contract.schema.json (dependency-free subset validator) PLUS the semantic
 // invariants no schema can express: dsVersion mirrors src/lib/site.ts, every clause
 // names a verifier the harness knows about, clause ids are unique, every waiver has
 // a non-empty reason. Backs clause C-contract-valid.
@@ -10,7 +10,7 @@
 import { readFileSync } from 'node:fs';
 import {
   ROOT, abs, CONTRACT_PATH, SCHEMA_PATH, dsVersion, resolveVerifier,
-} from './forge-lib.mjs';
+} from './eidos-lib.mjs';
 
 // ── minimal JSON-Schema validator (the subset our schema uses) ─────────────────
 function validate(node, schema, path, errs) {

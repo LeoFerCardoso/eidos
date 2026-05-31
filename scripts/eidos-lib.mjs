@@ -1,4 +1,4 @@
-// forge-lib.mjs — shared spine for the Forge contract harness.
+// eidos-lib.mjs — shared spine for the Eidos contract harness.
 //
 // One place defines: where the contract lives, the registry of known verifiers,
 // the surface-resolution helpers, and the slug normaliser that joins a component
@@ -17,11 +17,11 @@ import { spawnSync } from 'node:child_process';
 const HERE = dirname(fileURLToPath(import.meta.url));
 export const ROOT = resolve(HERE, '..');
 
-export const CONTRACT_PATH = 'packages/registry/forge.contract.json';
-export const SCHEMA_PATH = 'packages/registry/forge.contract.schema.json';
+export const CONTRACT_PATH = 'packages/registry/eidos.contract.json';
+export const SCHEMA_PATH = 'packages/registry/eidos.contract.schema.json';
 export const PAGE_STANDARD_PATH = 'docs/ds-page-standard.json';
 export const STATE_PATH = 'reports/state.json';
-export const HEALTH_PATH = 'FORGE-HEALTH.md';
+export const HEALTH_PATH = 'EIDOS-HEALTH.md';
 
 export const abs = (p) => (p && p.startsWith('/') ? p : join(ROOT, p));
 

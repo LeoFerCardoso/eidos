@@ -6,7 +6,7 @@
 //
 //   node scripts/check-4-surface-parity.mjs [--json] [--strict]
 import { existsSync } from 'node:fs';
-import { abs, loadContract, STATUS } from './forge-lib.mjs';
+import { abs, loadContract, STATUS } from './eidos-lib.mjs';
 
 // Which surfaces a given kind/ds must have. Sub-utilities (no docs of their own) are
 // expected to carry a waiver rather than be silently green.

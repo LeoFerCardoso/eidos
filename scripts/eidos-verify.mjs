@@ -1,13 +1,13 @@
-// forge-verify.mjs — THE aggregate gate. The single layer the harness was missing,
+// eidos-verify.mjs — THE aggregate gate. The single layer the harness was missing,
 // and the only thing that may declare a component "Done".
 //
-//   forge:verify [--component <slug> | --all] [--surface <s>] [--clause <C-id>]
+//   eidos:verify [--component <slug> | --all] [--surface <s>] [--clause <C-id>]
 //                [--strict] [--dry] [--json] [--heavy] [--fix]
 //
-// Reads packages/registry/forge.contract.json, runs check-contract first, then for
+// Reads packages/registry/eidos.contract.json, runs check-contract first, then for
 // each in-scope component x applicable clause executes the clause's verifier ONCE
 // (memoized), applies waivers, and emits reports/state.json + regenerates
-// FORGE-HEALTH.md. Exit nonzero (under --strict) iff a gate:"block" clause is `fail`
+// EIDOS-HEALTH.md. Exit nonzero (under --strict) iff a gate:"block" clause is `fail`
 // (not waived/skip) for an in-scope component. --dry resolves the plan without
 // executing (Phase-0 gate). --fix runs only safe gen-* generators then re-verifies.
 import { writeFileSync, mkdirSync } from 'node:fs';
@@ -15,8 +15,8 @@ import { dirname } from 'node:path';
 import {
   ROOT, abs, loadContract, dsVersion, resolveVerifier, VERIFIERS,
   STATE_PATH, STATUS, findWaiver, clauseApplies, sh, runNpm,
-} from './forge-lib.mjs';
-import { renderHealth } from './forge-health.mjs';
+} from './eidos-lib.mjs';
+import { renderHealth } from './eidos-health.mjs';
 
 const C = { g: (s) => `\x1b[32m${s}\x1b[0m`, r: (s) => `\x1b[31m${s}\x1b[0m`, y: (s) => `\x1b[33m${s}\x1b[0m`, d: (s) => `\x1b[2m${s}\x1b[0m`, b: (s) => `\x1b[1m${s}\x1b[0m` };
 
@@ -98,7 +98,7 @@ async function main() {
   // ── DRY: resolve the plan, do not execute ──
   if (flags.dry) {
     let unresolved = 0;
-    console.log(C.b(`forge:verify --dry · ${clauses.length} clauses · ${components.length || allComponents.length} components`));
+    console.log(C.b(`eidos:verify --dry · ${clauses.length} clauses · ${components.length || allComponents.length} components`));
     for (const cl of clauses) {
       const v = resolveVerifier(cl.verifier);
       const tag = !v ? C.r('UNRESOLVED') : v.ready ? (isHeavy(v, cl.verifier) ? C.y('ready·heavy') : C.g('ready')) : C.y('pending');
@@ -173,12 +173,12 @@ async function main() {
   // 4) write state + regenerate health
   mkdirSync(dirname(abs(STATE_PATH)), { recursive: true });
   writeFileSync(abs(STATE_PATH), JSON.stringify(state, null, 2) + '\n');
-  writeFileSync(abs('FORGE-HEALTH.md'), renderHealth(state, contract));
+  writeFileSync(abs('EIDOS-HEALTH.md'), renderHealth(state, contract));
 
   // 5) report + exit
   if (flags.json) { console.log(JSON.stringify(state, null, 2)); }
   else {
-    console.log(C.b(`\nforge:verify · contract ${state.contractVersion} · DS ${state.dsVersion}`));
+    console.log(C.b(`\neidos:verify · contract ${state.contractVersion} · DS ${state.dsVersion}`));
     if (!scope.components.length) console.log(C.y('  (no components in contract yet — run `npm run gen:contract` to sync them)'));
     console.log(`  ${state.summary.done}/${state.summary.components} done · ${C.r(state.summary.blockFails + ' block-fail')} · ${C.y(state.summary.waived + ' waived')} · ${state.summary.advisoryFails} advisory · ${C.d(state.summary.skipped + ' skipped')}`);
     // repo-gate one-liners for unbound/repo clauses
@@ -188,7 +188,7 @@ async function main() {
       const mark = r.status === 'pass' ? C.g('✔') : r.status === 'skip' ? C.d('·') : (cl.gate === 'block' ? C.r('✘') : C.y('!'));
       console.log(`  ${mark} ${cl.id.padEnd(20)} ${C.d(r.detail || r.status)}`);
     }
-    console.log(C.d(`\n  → reports/state.json · FORGE-HEALTH.md`));
+    console.log(C.d(`\n  → reports/state.json · EIDOS-HEALTH.md`));
   }
 
   const hardFail = state.summary.blockFails > 0 ||

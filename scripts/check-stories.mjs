@@ -7,7 +7,7 @@
 //   node scripts/check-stories.mjs [--json] [--strict]
 import { readFileSync, existsSync } from 'node:fs';
 import { sep } from 'node:path';
-import { abs, loadContract, metaTitle, STATUS } from './forge-lib.mjs';
+import { abs, loadContract, metaTitle, STATUS } from './eidos-lib.mjs';
 
 // canonical group order — READ from preview.ts (the real source), do not embed.
 function storyGroups() {
@@ -60,7 +60,7 @@ export function run({ components, clause } = {}) {
     else {
       // taxonomy lock: the title GROUP must be a real story group from preview.ts
       // storySort.order. (The physical stories/<folder>/ need not equal the group —
-      // Forge files e.g. atoms/ stories under the "Primitives" group by design.)
+      // Eidos files e.g. atoms/ stories under the "Primitives" group by design.)
       const prefix = s.title.split('/')[0];
       if (!groups.includes(prefix)) probs.push(`title group "${prefix}" not in preview.ts storySort.order`);
     }

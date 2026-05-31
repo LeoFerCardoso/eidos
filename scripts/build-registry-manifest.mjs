@@ -60,7 +60,7 @@ for (const it of gen.items) {
 const out = {
   $schema: 'https://ui.shadcn.com/schema/registry.json',
   name: 'forge',
-  homepage: 'https://forge.equifax.dev',
+  homepage: 'https://eidos.equifax.dev',
   items,
 };
 writeFileSync(join(REG, 'registry.json'), JSON.stringify(out, null, 2) + '\n');

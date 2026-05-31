@@ -5,7 +5,7 @@
 //
 //   node scripts/check-slop.mjs [--json]
 import { readFileSync, existsSync } from 'node:fs';
-import { abs, loadContract, STATUS } from './forge-lib.mjs';
+import { abs, loadContract, STATUS } from './eidos-lib.mjs';
 
 const stripTemplates = (s) => s.replace(/`(?:\\.|[^`\\])*`/g, '``');
 

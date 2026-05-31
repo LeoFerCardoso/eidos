@@ -1,5 +1,5 @@
 {
-  "$schema": "./forge.contract.schema.json",
+  "$schema": "./eidos.contract.schema.json",
   "version": "1.0.0",
   "dsVersion": "1.28.1",
   "generated": true,
@@ -344,7 +344,7 @@
       "appliesTo": [
         "all"
       ],
-      "rule": "forge.contract.json validates against forge.contract.schema.json; dsVersion == src/lib/site.ts DS_VERSION; every clause names a known verifier.",
+      "rule": "eidos.contract.json validates against eidos.contract.schema.json; dsVersion == src/lib/site.ts DS_VERSION; every clause names a known verifier.",
       "verifier": "check-contract",
       "since": "1.0.0"
     }

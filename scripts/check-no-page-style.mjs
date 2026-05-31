@@ -6,7 +6,7 @@
 //
 //   node scripts/check-no-page-style.mjs [--json] [--strict]
 import { readFileSync, existsSync } from 'node:fs';
-import { abs, loadContract, STATUS } from './forge-lib.mjs';
+import { abs, loadContract, STATUS } from './eidos-lib.mjs';
 
 // strip Frame `code` template literals + comments so we only scan real page JSX chrome
 // (a `<style>` mentioned in a // comment or a demo string is not a violation).

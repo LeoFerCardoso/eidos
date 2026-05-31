@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://forge.equifax.dev/forge.contract.schema.json",
+  "$id": "https://eidos.equifax.dev/eidos.contract.schema.json",
   "title": "Forge component contract",
   "description": "The single machine-readable definition of 'a Forge component is Done', spanning four surfaces: docs page, @eidos/ui export, Storybook story, registry item. Validated by scripts/check-contract.mjs.",
   "type": "object",
@@ -23,7 +23,7 @@
           "title": { "type": "string" },
           "surface": { "enum": ["docs", "export", "story", "registry", "cross", "tokens"] },
           "rule": { "type": "string", "description": "One-line plain statement of the invariant." },
-          "verifier": { "type": "string", "description": "Verifier id (see scripts/forge-lib.mjs VERIFIERS) or EXT:<npm-script>." },
+          "verifier": { "type": "string", "description": "Verifier id (see scripts/eidos-lib.mjs VERIFIERS) or EXT:<npm-script>." },
           "gate": { "enum": ["block", "advisory"], "description": "block = exits CI/Stop nonzero on fail; advisory = reported only." },
           "appliesTo": {
             "type": "array",

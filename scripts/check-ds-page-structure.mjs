@@ -6,7 +6,7 @@
 //
 //   node scripts/check-ds-page-structure.mjs [--json] [--strict]
 import { readFileSync, existsSync } from 'node:fs';
-import { abs, loadContract, readJSON, PAGE_STANDARD_PATH, STATUS } from './forge-lib.mjs';
+import { abs, loadContract, readJSON, PAGE_STANDARD_PATH, STATUS } from './eidos-lib.mjs';
 
 const STD = readJSON(PAGE_STANDARD_PATH);
 
