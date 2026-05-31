@@ -128,12 +128,15 @@ const Select = (props: SelectProps) => {
       setPanelPos({ top: r.bottom + 4, left: r.left, width: r.width });
     };
     place();
-    const close = () => setOpen(false);
-    window.addEventListener('scroll', close, true);
-    window.addEventListener('resize', close);
+    // Reposition the fixed panel as the page scrolls/resizes — do NOT close
+    // (closing on any scroll fired spuriously, e.g. when focus scrolled an
+    // ancestor, slamming the panel shut). Closing is owned by outside-click /
+    // Escape / selection.
+    window.addEventListener('scroll', place, true);
+    window.addEventListener('resize', place);
     return () => {
-      window.removeEventListener('scroll', close, true);
-      window.removeEventListener('resize', close);
+      window.removeEventListener('scroll', place, true);
+      window.removeEventListener('resize', place);
     };
   }, [open]);
 

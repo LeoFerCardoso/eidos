@@ -308,14 +308,12 @@ export const Combobox = (props: ComboboxProps) => {
           role="option"
           aria-selected={isSelected(o) || undefined}
         >
-          {o.icon && o.icon}
-          <span className="label">{o.label}</span>
-          {o.meta && <span className="meta">{o.meta}</span>}
-          {/* Trailing check with a permanently-reserved slot, so every row aligns
-              whether or not it is the selected one. */}
           <span className="check">
             {isSelected(o) && <Icons.check size={14} />}
           </span>
+          {o.icon && o.icon}
+          <span className="label">{o.label}</span>
+          {o.meta && <span className="meta">{o.meta}</span>}
         </button>
       );
     });
@@ -373,7 +371,6 @@ export const Combobox = (props: ComboboxProps) => {
         aria-disabled={disabled || undefined}
         aria-invalid={invalid || undefined}
       >
-        {!multiple && selectedSingle?.icon}
         <span className={['label', hasValue ? '' : 'placeholder'].filter(Boolean).join(' ')}>
           {triggerLabel}
         </span>
