@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "plan",
+  "type": "registry:ui",
+  "title": "Plan",
+  "description": "Forge Plan component.",
+  "dependencies": [
+    "ai"
+  ],
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons",
+    "status-dot"
+  ],
+  "files": [
+    {
+      "path": "components/forge/plan.tsx",
+      "target": "components/forge/plan.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\nimport { StatusDot } from '@/components/forge/status-dot';\n\nconst Plan = ({\n  title = 'Plan', items = [],\n}: {\n  /** Header label. Use \"Plan\" for the primary plan; override for named sub-plans. */\n  title?: string;\n  /** Ordered list of steps. Rendered as a semantic ol so screen readers announce position. */\n  items?: any[];\n}) => {\n  const done = items.filter((i) => i.status === 'done').length;\n  return (\n    <div className=\"ai-plan\">\n      <div className=\"ai-plan-head\">\n        <span className=\"ico\"><Icons.target size={13}/></span>\n        <span className=\"label\">{title}</span>\n        <span className=\"count\">{done}/{items.length}</span>\n      </div>\n      <ol className=\"ai-plan-list\">\n        {items.map((it, i) => (\n          <li key={i} className=\"ai-plan-item\" data-status={it.status || 'pending'}>\n            <span className=\"ai-plan-mark\">\n              {it.status === 'done'\n                ? <Icons.check size={11}/>\n                : it.status === 'active'\n                  ? <StatusDot tone=\"running\" size=\"sm\" pulse/>\n                  : <span className=\"ai-plan-num\">{i + 1}</span>}\n            </span>\n            <div className=\"ai-plan-content\">\n              <div className=\"ai-plan-title\">{it.title}</div>\n              {it.detail && <div className=\"ai-plan-detail\">{it.detail}</div>}\n            </div>\n          </li>\n        ))}\n      </ol>\n    </div>\n  );\n};\n\nexport { Plan };\n"
+    }
+  ]
+}

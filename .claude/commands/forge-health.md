@@ -1,0 +1,33 @@
+---
+name: forge-health
+description: Render the Forge DS health wall (FORGE-HEALTH.md) from the contract gate and surface the prioritized debt — block-fails first, then advisory — with the fewest-clauses-to-green ranking.
+allowed-tools: [Bash, Read]
+---
+
+# /forge-health — the health wall
+
+Generates `FORGE-HEALTH.md` from `reports/state.json` (per-component, per-clause status
+across docs · export · story · registry · cross · tokens) — the "health wall" of the DS.
+
+## Steps
+
+1. Sync the contract bindings if needed: `npm run gen:contract`.
+2. Run the full sweep and render the wall:
+   ```
+   npm run forge:verify -- --all
+   npm run forge:health
+   ```
+   (Add `--heavy` to `forge:verify` to include the route-level a11y/visual/render gates.)
+3. Read `FORGE-HEALTH.md`.
+
+## Report
+
+Lead with the headline (`N / total done · block-fails · waived · advisory`). Then surface:
+- **Per-surface coverage** (docs / export / story / registry %), so the operator sees which
+  surface is the weakest link.
+- **The debt table**, block-fails first, grouped so the components closest to green
+  (fewest failing clauses) are actionable first. For each cluster, name the builder skill
+  that closes it (`promote-batch` for missing components/stories, `restructure-component`
+  for a single component's three surfaces, `ds-a11y-rtl-review` for a11y/RTL, the doc
+  section sweep for structure clauses).
+- Any **waivers** that are expiring within 30 days.

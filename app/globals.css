@@ -1,0 +1,19 @@
+/* App-level resets layered on top of the DS stylesheets. tokens.css/ds.css
+   own the real visual system; this only guarantees the root fills the viewport
+   and that there is no default body margin around the DS shell. */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100dvh;
+  background: var(--bg, #0b0b0d);
+}
+
+/* Fill the viewport for the app SHELL only — not arbitrary children of body.
+   This rule was too greedy: `body > div` matched anything portaled into body
+   (e.g. a ModelSelector dropdown rendered via createPortal), forcing it to
+   100dvh. Scoping to `:first-child` leaves portals at their natural size. */
+#__next,
+body > div:first-child {
+  min-height: 100dvh;
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "drop-zone",
+  "type": "registry:ui",
+  "title": "Drop Zone",
+  "description": "Forge Drop Zone component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons",
+    "model-selector",
+    "prompt-submit"
+  ],
+  "files": [
+    {
+      "path": "components/forge/drop-zone.tsx",
+      "target": "components/forge/drop-zone.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\nimport { ModelSelector } from '@/components/forge/model-selector';\nimport { PromptSubmit } from '@/components/forge/prompt-submit';\n\nconst DropZone = ({\n  onDrop,\n  modelValue = 'forge-sonnet-4-6',\n  onModelChange,\n  children,\n}: {\n  onDrop?: (files: FileList) => void;\n  modelValue?: string;\n  onModelChange?: (id: string) => void;\n  children?: React.ReactNode;\n}) => {\n  const [drag, setDrag] = React.useState(false);\n  return (\n    <div\n      className={'pi' + (drag ? ' is-dragging' : '')}\n      onDragEnter={e => { e.preventDefault(); setDrag(true); }}\n      onDragOver={e => { e.preventDefault(); }}\n      onDragLeave={() => setDrag(false)}\n      onDrop={e => {\n        e.preventDefault();\n        setDrag(false);\n        if (onDrop) onDrop(e.dataTransfer.files);\n      }}\n    >\n      {children || (\n        <div className=\"pi-body\">\n          <textarea className=\"pi-textarea\" placeholder=\"Drag a file anywhere on this composer…\" rows={2}/>\n        </div>\n      )}\n      {drag ? (\n        <div className=\"pi-drop-hint\">\n          <Icons.upload size={14}/> Drop to attach\n        </div>\n      ) : (\n        <div className=\"pi-foot\">\n          <button className=\"pi-tool\"><Icons.paperclip size={15}/></button>\n          {onModelChange && (\n            <ModelSelector value={modelValue} onChange={onModelChange}/>\n          )}\n          <span className=\"spacer\"/>\n          <PromptSubmit status=\"ready\" hasText={false} onClick={() => {}}/>\n        </div>\n      )}\n    </div>\n  );\n};\n\nexport { DropZone };\n"
+    }
+  ]
+}

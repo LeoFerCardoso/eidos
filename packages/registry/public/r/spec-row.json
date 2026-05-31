@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spec-row",
+  "type": "registry:ui",
+  "title": "Spec Row",
+  "description": "Forge Spec Row component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/spec-row.tsx",
+      "target": "components/forge/spec-row.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst SpecRow = ({ token, value, usage }: {\n  token?: React.ReactNode;\n  value?: React.ReactNode;\n  usage?: React.ReactNode;\n}) => (\n  <tr>\n    <td className=\"tok-name\">{token}</td>\n    <td className=\"mono\">{value}</td>\n    <td>{usage}</td>\n  </tr>\n);\n\nexport { SpecRow };\n"
+    }
+  ]
+}

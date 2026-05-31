@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "metric-card",
+  "type": "registry:ui",
+  "title": "Metric Card",
+  "description": "Forge Metric Card component.",
+  "registryDependencies": [
+    "forge",
+    "trend",
+    "sparkline"
+  ],
+  "files": [
+    {
+      "path": "components/forge/metric-card.tsx",
+      "target": "components/forge/metric-card.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Sparkline } from '@/components/forge/sparkline';\nimport { Trend } from '@/components/forge/trend';\n\nconst fmtValue = (v) => {\n  if (typeof v !== 'number' || !isFinite(v)) return v;\n  if (Number.isInteger(v)) return v.toLocaleString();\n  return v.toLocaleString(undefined, { maximumFractionDigits: 2 });\n};\n\nconst MetricCard = ({\n  label, value, suffix, unit, prefix,\n  delta, deltaUnit = '%', inverted = false,\n  series, sparkColor,\n  foot, tone, size = 'md',\n}: {\n  /** Metric name, shown as the uppercase mono eyebrow. */\n  label?: React.ReactNode;\n  /** The headline number (auto-formatted with locale grouping). */\n  value?: number | string;\n  /** Appended directly after the value (e.g. \"%\"). */\n  suffix?: React.ReactNode;\n  /** Unit shown beside the value in muted type (e.g. \"ms\"). */\n  unit?: React.ReactNode;\n  /** Rendered before the value (e.g. \"$\"). */\n  prefix?: React.ReactNode;\n  /** Period-over-period change; renders a colored Trend chip. */\n  delta?: number;\n  /** Unit for the delta chip. */\n  deltaUnit?: string;\n  /** For \"lower is better\" metrics (lead time, MTTR) — flips the trend color so it follows the verdict, not the sign. */\n  inverted?: boolean;\n  /** Sparkline data points under the value. */\n  series?: number[];\n  /** Sparkline stroke color (defaults to the ember accent). */\n  sparkColor?: string;\n  /** Footer line — comparison window or SLO context. */\n  foot?: React.ReactNode;\n  /** Surface tone modifier. */\n  tone?: string;\n  /** Card density. */\n  size?: 'sm' | 'md' | 'lg';\n}) => {\n  const cls = ['metric-card', 'size-' + size];\n  if (tone) cls.push('tone-' + tone);\n  return (\n    <div className={cls.join(' ')}>\n      <div className=\"mc-head\">\n        <span className=\"mc-label\">{label}</span>\n        {typeof delta === 'number' && <Trend delta={delta} unit={deltaUnit} inverted={inverted}/>}\n      </div>\n      <div className=\"mc-value-row\">\n        <span className=\"mc-value\">\n          {prefix ? <span className=\"mc-affix\">{prefix}</span> : null}\n          <span>{fmtValue(value)}</span>\n          {suffix ? <span className=\"mc-affix\">{suffix}</span> : null}\n        </span>\n        {unit ? <span className=\"mc-unit\">{unit}</span> : null}\n      </div>\n      {series && series.length > 0 && (\n        <div className=\"mc-spark\">\n          <Sparkline data={series} w={size === 'lg' ? 240 : 180} h={size === 'lg' ? 40 : 32} color={sparkColor}/>\n        </div>\n      )}\n      {foot ? <div className=\"mc-foot\">{foot}</div> : null}\n    </div>\n  );\n};\n\nexport { MetricCard };\n"
+    }
+  ]
+}

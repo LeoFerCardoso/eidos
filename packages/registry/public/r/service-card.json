@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "service-card",
+  "type": "registry:ui",
+  "title": "Service Card",
+  "description": "Forge Service Card component.",
+  "registryDependencies": [
+    "forge",
+    "icons",
+    "health-badge",
+    "sparkline",
+    "lang-badge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/service-card.tsx",
+      "target": "components/forge/service-card.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { HealthBadge } from '@/components/forge/health-badge';\nimport { Icons } from '@/components/forge/icons';\nimport { LangBadge } from '@/components/forge/lang-badge';\nimport { Sparkline } from '@/components/forge/sparkline';\n\ntype ServiceData = {\n  name?: string;\n  version?: string;\n  deploys?: string;\n  alert?: boolean;\n  lang?: string;\n  p95?: number | string;\n};\n\ntype Contributor = { name: string; initials?: string; ember?: boolean };\n\nconst ServiceCard = ({\n  service, contributors, sparkSeries, onOpen,\n  variant = 'default',\n}: {\n  /** Service record — name, tier, lang, version, p95, deploys, alert. */\n  service?: ServiceData;\n  /** Team avatars in the footer. Shows up to 3 + a \"+N\" overflow counter. */\n  contributors?: Contributor[];\n  /** Sparkline data. Only rendered in the detailed variant. */\n  sparkSeries?: number[];\n  /** Click handler. Wires the tile as a button (with keyboard handling). */\n  onOpen?: () => void;\n  /** Visual layout — compact for slim rows, default for grids, detailed for the service-detail surface. */\n  variant?: 'compact' | 'default' | 'detailed';\n}) => {\n  if (!service) return null;\n  const health = service.alert ? 'degraded' : 'up';\n  const showSpark = variant === 'detailed' && sparkSeries && sparkSeries.length > 0;\n  const team = contributors || [];\n  const teamShown = team.slice(0, 3);\n  const teamExtra = Math.max(0, team.length - teamShown.length);\n  const showFoot = (variant !== 'compact') && (team.length > 0 || service.lang != null);\n\n  return (\n    <div\n      className={'service-card variant-' + variant}\n      role={onOpen ? 'button' : undefined}\n      tabIndex={onOpen ? 0 : undefined}\n      onClick={onOpen}\n      onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && onOpen) onOpen(); }}\n    >\n      <header className=\"sc-head\">\n        <span className=\"sc-avatar\" aria-hidden=\"true\">\n          <Icons.server size={20}/>\n        </span>\n        <div className=\"sc-id\">\n          <span className=\"sc-name\">{service.name}</span>\n          {(service.version || service.deploys) && (\n            <span className=\"sc-version\">\n              {service.version && <>v{service.version}</>}\n              {service.version && service.deploys && <span className=\"sc-version-sep\"> · </span>}\n              {service.deploys && <>{service.deploys}</>}\n            </span>\n          )}\n        </div>\n        <HealthBadge state={health} pulse={health === 'degraded'}/>\n      </header>\n\n      {showSpark && (\n        <div className=\"sc-spark\">\n          <div className=\"sc-spark-head\">\n            <span className=\"sc-spark-lab\">Latency · last 24h</span>\n            {service.p95 != null && (\n              <span className=\"sc-spark-val\">\n                <span className=\"lbl\">p95</span>\n                <span className=\"v\">{service.p95}<span className=\"unit\">ms</span></span>\n              </span>\n            )}\n          </div>\n          <Sparkline data={sparkSeries} w={260} h={32}/>\n        </div>\n      )}\n\n      {showFoot && (\n        <footer className=\"sc-foot\">\n          <div className=\"sc-foot-team\">\n            {teamShown.length > 0 && (\n              <div className=\"avatar-group\">\n                {teamShown.map((p) => (\n                  <span\n                    key={p.name}\n                    className={'avatar' + (p.ember ? ' ember' : '')}\n                    title={p.name}\n                  >{p.initials}</span>\n                ))}\n                {teamExtra > 0 && (\n                  <span className=\"avatar\" title={`${teamExtra} more`}>\n                    +{teamExtra}\n                  </span>\n                )}\n              </div>\n            )}\n          </div>\n          {service.lang && (\n            <span className=\"sc-foot-lang\">\n              <LangBadge lang={service.lang}/>\n            </span>\n          )}\n        </footer>\n      )}\n    </div>\n  );\n};\n\nexport { ServiceCard };\n"
+    }
+  ]
+}

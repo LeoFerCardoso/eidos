@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "simple-pagination",
+  "type": "registry:ui",
+  "title": "Simple Pagination",
+  "description": "Forge Simple Pagination component.",
+  "registryDependencies": [
+    "forge",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/simple-pagination.tsx",
+      "target": "components/forge/simple-pagination.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\ntype SimplePaginationProps = {\n  total?: number;\n  current?: number;\n  onChange?: (page: number) => void;\n};\n\nconst SimplePagination = (props: SimplePaginationProps) => {\n  const total = props.total || 1;\n  const current = props.current || 1;\n  const onChange = props.onChange || (() => {});\n  return (\n    <div className=\"pg\">\n      <button className=\"pg-btn outline\" disabled={current === 1} onClick={() => onChange(current - 1)}>\n        <Icons.chevronLeft size={14} className=\"ico-prev\"/>\n        <span>Previous</span>\n      </button>\n      <span className=\"pg-ellipsis\" style={{font:'400 12px/1 var(--font-mono)', color:'var(--fg-faint)', minWidth: 100}}>\n        Page {current} of {total}\n      </span>\n      <button className=\"pg-btn outline\" disabled={current === total} onClick={() => onChange(current + 1)}>\n        <span>Next</span>\n        <Icons.chevronRight size={14} className=\"ico-next\"/>\n      </button>\n    </div>\n  );\n};\n\nexport { SimplePagination };\n"
+    }
+  ]
+}

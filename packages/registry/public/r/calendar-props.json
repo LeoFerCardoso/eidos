@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "calendar-props",
+  "type": "registry:ui",
+  "title": "Calendar Props",
+  "description": "Forge Calendar Props component.",
+  "registryDependencies": [
+    "forge",
+    "date-range"
+  ],
+  "files": [
+    {
+      "path": "components/forge/calendar-props.tsx",
+      "target": "components/forge/calendar-props.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { DateRange } from '@/components/forge/date-range';\n\ninterface CalendarProps {\n  /**\n   * Selection behaviour. 'single' (default) picks one date; 'range' picks a\n   * start+end pair with hover preview. 'multiple' is reserved for a future\n   * release and is not yet implemented.\n   */\n  selectionMode?: 'single' | 'range';\n\n  // ── Single-mode value ──────────────────────────────────────────────────────\n  /**\n   * Controlled selected date (single mode). When omitted the component manages\n   * its own state (uncontrolled); seed it with `defaultValue`.\n   */\n  value?: Date | DateRange;\n  /** Uncontrolled initial value (single: Date, range: DateRange). */\n  defaultValue?: Date | DateRange;\n  /**\n   * Called with the new value whenever the user confirms a selection.\n   * - single: `(date: Date) => void`\n   * - range:  `(range: DateRange) => void`\n   */\n  onValueChange?: ((date: Date) => void) | ((range: DateRange) => void);\n\n  /**\n   * @deprecated Use `onValueChange` instead.\n   * @alias onValueChange\n   */\n  onChange?: ((date: Date) => void) | ((range: DateRange) => void);\n\n  // ── Cell modifiers ─────────────────────────────────────────────────────────\n  /**\n   * Predicate for disabling individual cells (e.g. past dates, unavailable\n   * slots). Matching cells get opacity .3, are not tabbable, and cannot be\n   * selected.\n   */\n  disabled?: (date: Date) => boolean;\n  /**\n   * Cells before this date are disabled AND the Prev month button is locked\n   * when the cursor is already at or before this month.\n   */\n  minDate?: Date;\n  /**\n   * Cells after this date are disabled AND the Next month button is locked\n   * when the cursor is at or after this month.\n   */\n  maxDate?: Date;\n\n  // ── Display ────────────────────────────────────────────────────────────────\n  /**\n   * The date to mark as \"today\" — shows an ember dot + bold weight.\n   * Defaults to `new Date()`. Override for deterministic testing / SSR.\n   */\n  today?: Date;\n  /** BCP-47 locale for month title + day-of-week abbreviations. Default 'en-US'. */\n  locale?: string;\n  /** Week start day: 1 = Monday (ISO, default), 0 = Sunday. */\n  weekStartsOn?: 0 | 1;\n  /** Optional node rendered below the calendar grid (e.g. a \"Today\" shortcut). */\n  footer?: React.ReactNode;\n  /** Extra class names merged onto the root `.cal` element. */\n  className?: string;\n  /** Accessible label for the calendar widget. Defaults to \"Calendar\". */\n  'aria-label'?: string;\n}\n\nexport { CalendarProps };\n"
+    }
+  ]
+}

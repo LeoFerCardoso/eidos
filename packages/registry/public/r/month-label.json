@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "month-label",
+  "type": "registry:ui",
+  "title": "Month Label",
+  "description": "Forge Month Label component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/month-label.tsx",
+      "target": "components/forge/month-label.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nfunction monthLabel(d: Date, locale: string = 'en-US'): string {\n  return d.toLocaleString(locale, { month: 'long', year: 'numeric' });\n}\n\nexport { monthLabel };\n"
+    }
+  ]
+}

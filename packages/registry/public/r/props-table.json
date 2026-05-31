@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "props-table",
+  "type": "registry:ui",
+  "title": "Props Table",
+  "description": "Forge Props Table component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/props-table.tsx",
+      "target": "components/forge/props-table.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst PropsTable = ({ rows, label = 'props' }: {\n  rows: { prop: string; type?: string; default?: string; required?: boolean; description?: React.ReactNode }[];\n  label?: string;\n}) => (\n  <div className=\"ds-frame ds-props-frame\">\n    <div className=\"ds-frame-head\">\n      <span className=\"label\">{label}</span>\n    </div>\n    <div className=\"ds-props-wrap\">\n      <table className=\"ds-props-table\">\n        <thead>\n          <tr>\n            <th>Prop</th>\n            <th>Type</th>\n            <th>Default</th>\n            <th>Description</th>\n          </tr>\n        </thead>\n        <tbody>\n          {rows.map((r, i) => (\n            <tr key={r.prop + ':' + i}>\n              <td className=\"prop\">\n                <code>{r.prop}</code>\n                {r.required && <span className=\"req\" aria-label=\"required\">*</span>}\n              </td>\n              <td className=\"type\"><code>{r.type}</code></td>\n              <td className=\"default\">\n                {r.default\n                  ? <code>{r.default}</code>\n                  : <span className=\"dim\">—</span>}\n              </td>\n              <td className=\"desc\">{r.description || ''}</td>\n            </tr>\n          ))}\n        </tbody>\n      </table>\n    </div>\n  </div>\n);\n\nexport { PropsTable };\n"
+    }
+  ]
+}

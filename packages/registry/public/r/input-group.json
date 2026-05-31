@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-group",
+  "type": "registry:ui",
+  "title": "Input Group",
+  "description": "Forge Input Group component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/input-group.tsx",
+      "target": "components/forge/input-group.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\n\ninterface InputGroupProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /**\n   * Height scale — matches the Button and Input size scale.\n   * sm = 28px / md = 36px (default) / lg = 44px.\n   */\n  size?: 'sm' | 'md' | 'lg';\n  /**\n   * Paints the danger ring on the group shell.\n   * Pair with a helper-text line below.\n   */\n  invalid?: boolean;\n  /**\n   * Disables every interactive child at once.\n   * Sets aria-disabled on the group and propagates disabled + tabIndex={-1}\n   * to child buttons and selects via context so they are not tab-reachable.\n   */\n  disabled?: boolean;\n  /** Expand to 100% of the container width (default: true). */\n  full?: boolean;\n  children: React.ReactNode;\n  className?: string;\n}\n\ninterface InputGroupContextValue {\n  size: 'sm' | 'md' | 'lg';\n  disabled: boolean;\n  invalid: boolean;\n}\n\nconst InputGroupCtx = React.createContext<InputGroupContextValue>({\n  size: 'md',\n  disabled: false,\n  invalid: false,\n});\n\nconst InputGroup = React.forwardRef<HTMLSpanElement, InputGroupProps>(\n  (\n    {\n      size = 'md',\n      invalid = false,\n      disabled = false,\n      full = true,\n      children,\n      className,\n      ...rest\n    },\n    ref,\n  ) => {\n    return (\n      <InputGroupCtx.Provider value={{ size, disabled, invalid }}>\n        <span\n          ref={ref}\n          role=\"group\"\n          aria-disabled={disabled || undefined}\n          className={cn(\n            'in-group',\n            size !== 'md' && size,\n            invalid && 'is-invalid',\n            disabled && 'is-disabled',\n            full && 'fluid',\n            className,\n          )}\n          {...rest}\n        >\n          {children}\n        </span>\n      </InputGroupCtx.Provider>\n    );\n  },\n);\n\nexport { InputGroup };\n"
+    }
+  ]
+}

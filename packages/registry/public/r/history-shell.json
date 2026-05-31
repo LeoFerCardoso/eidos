@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "history-shell",
+  "type": "registry:ui",
+  "title": "History Shell",
+  "description": "Forge History Shell component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "history"
+  ],
+  "files": [
+    {
+      "path": "components/forge/history-shell.tsx",
+      "target": "components/forge/history-shell.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { History } from '@/components/forge/history';\n\nconst HistoryShell = History;\n\nexport { HistoryShell };\n"
+    }
+  ]
+}

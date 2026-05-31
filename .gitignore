@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+.turbo/
+
+# Cache
+.eslint*
+*.tsbuildinfo
+*.log
+
+# Local env / secrets
+.env*.local
+.env.local
+.npmrc
+
+# Vercel
+.vercel
+
+# Generated (do not edit — regenerated on dev/build)
+src/lib/nav.ts
+reports/
+
+# Backups / archives (not source — kept locally, out of version control)
+Forge-DS.zip
+.backup-premonorepo/
+1180

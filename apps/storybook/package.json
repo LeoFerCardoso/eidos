@@ -1,0 +1,26 @@
+{
+  "name": "@forge/storybook",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build": "storybook build -o storybook-static",
+    "build-storybook": "storybook build -o storybook-static"
+  },
+  "dependencies": {
+    "@forge/ui": "*"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^10.4.1",
+    "@storybook/addon-docs": "^10.4.1",
+    "@storybook/addon-themes": "^10.4.1",
+    "@storybook/react-vite": "^10.4.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "recharts": "^2.15.4",
+    "storybook": "^10.4.1",
+    "vite": "^8.0.0",
+    "vite-tsconfig-paths": "^6.1.1"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabbed-code",
+  "type": "registry:ui",
+  "title": "Tabbed Code",
+  "description": "Forge Tabbed Code component.",
+  "registryDependencies": [
+    "forge",
+    "copy-button",
+    "code"
+  ],
+  "files": [
+    {
+      "path": "components/forge/tabbed-code.tsx",
+      "target": "components/forge/tabbed-code.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Code } from '@/components/forge/code';\nimport { CopyButton } from '@/components/forge/copy-button';\n\nconst TabSwitch = ({ tabs, active, onSelect, ariaLabel }: {\n  tabs: string[];\n  active?: number;\n  onSelect?: (i: number) => void;\n  ariaLabel?: string;\n}) => (\n  <div className=\"ds-tabs\" role=\"tablist\" aria-label={ariaLabel}>\n    {tabs.map((t, i) => (\n      <button\n        key={t}\n        type=\"button\"\n        role=\"tab\"\n        aria-selected={i === active}\n        tabIndex={i === active ? 0 : -1}\n        className={'ds-tab' + (i === active ? ' active' : '')}\n        onClick={() => onSelect?.(i)}\n      >\n        {t}\n      </button>\n    ))}\n  </div>\n);\n\nconst TabbedCode = ({ tabs, defaultIndex = 0, ariaLabel = 'package manager' }: {\n  tabs: { label: string; code: string; lang?: string }[];\n  defaultIndex?: number;\n  ariaLabel?: string;\n}) => {\n  const [active, setActive] = React.useState(defaultIndex);\n  const tab = tabs[active] || tabs[0];\n  return (\n    <div className=\"ds-frame ds-frame-codeonly\">\n      <div className=\"ds-frame-head ds-frame-head-tabs\">\n        <TabSwitch\n          tabs={tabs.map(t => t.label)}\n          active={active}\n          onSelect={setActive}\n          ariaLabel={ariaLabel}\n        />\n        <div className=\"actions\">\n          <CopyButton text={tab.code} />\n        </div>\n      </div>\n      <Code lang={tab.lang || 'bash'}>{tab.code}</Code>\n    </div>\n  );\n};\n\nexport { TabbedCode };\n"
+    }
+  ]
+}

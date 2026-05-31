@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "native-select",
+  "type": "registry:ui",
+  "title": "Native Select",
+  "description": "Forge Native Select component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/native-select.tsx",
+      "target": "components/forge/native-select.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ninterface NativeSelectOption { label: string; value: string; disabled?: boolean }\n\ninterface NativeSelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'> {\n  label?: React.ReactNode;\n  help?: React.ReactNode;\n  error?: React.ReactNode;\n  /** Options to render. Omit to provide your own <option> children. */\n  options?: NativeSelectOption[];\n  /** Placeholder option shown first (disabled, empty value). */\n  placeholder?: string;\n}\n\nfunction NativeSelect({ label, help, error, options, placeholder, id, className = '', children, ...rest }: NativeSelectProps) {\n  const reactId = React.useId();\n  const fid = id || reactId;\n  const describedBy = error ? `${fid}-err` : help ? `${fid}-help` : undefined;\n  return (\n    <div className=\"in-field\">\n      {label && <label className=\"in-label\" htmlFor={fid}>{label}</label>}\n      <span className={`in-group${error ? ' is-invalid' : ''}`} aria-invalid={error ? true : undefined}>\n        <select\n          id={fid}\n          className={`in-control ${className}`.trim()}\n          aria-invalid={error ? true : undefined}\n          aria-describedby={describedBy}\n          {...rest}\n        >\n          {placeholder && <option value=\"\" disabled>{placeholder}</option>}\n          {options\n            ? options.map((o) => <option key={o.value} value={o.value} disabled={o.disabled}>{o.label}</option>)\n            : children}\n        </select>\n      </span>\n      {(help || error) && (\n        <span className=\"in-helprow\">\n          {error\n            ? <span className=\"in-error\" id={`${fid}-err`}>{error}</span>\n            : <span className=\"in-help\" id={`${fid}-help`}>{help}</span>}\n        </span>\n      )}\n    </div>\n  );\n}\n\nexport { NativeSelect };\n"
+    }
+  ]
+}

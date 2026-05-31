@@ -1,0 +1,4303 @@
+/* ============================================================================
+ * Forge — Design Tokens  (Color system rewritten from scratch, v1.2)
+ *
+ * Color philosophy:
+ *   • OKLCH everywhere — perceptually uniform stepping in lightness
+ *   • Warm undertone, hue 50° (a hair of peach), very low chroma 0.004
+ *   • 7 surface tiers, monotonic light progression: deeper → lighter
+ *   • Foregrounds are warm-leaning neutrals so text on warm surfaces never
+ *     reads as cold grey
+ *   • Ember is the single accent, tuned per theme so the CTA always sings
+ *
+ * Naming map (canonical → role):
+ *   --canvas         deepest, behind modal/sidesheet backdrops
+ *   --bg             page background — NOT pure black
+ *   --bg-elevated    topbar, sidebar, code well inside a frame
+ *   --surface        default card / frame / panel container
+ *   --surface-hover  row hover, button hover
+ *   --surface-overlay  popover · dropdown · modal body · sidesheet
+ *   --surface-active selected / pressed
+ * ============================================================================ */
+:root {
+  /* ── SURFACES — dark mode ────────────────────────────────────────────────
+     Wider tier gaps than v1.1 (≥0.045 ΔL between adjacent steps) so
+     stacked elements stay distinguishable even three or four levels deep. */
+  --canvas:           oklch(0.13 0.005 60);
+  --bg:               oklch(0.165 0.006 60);
+  --bg-elevated:      oklch(0.2 0.006 60);
+  --surface:          oklch(0.235 0.007 60);
+  --surface-hover:    oklch(0.275 0.008 60);
+  --surface-overlay:  oklch(0.255 0.007 60);
+  --surface-active:   oklch(0.32 0.009 60);
+  --surface-selected: oklch(0.255 0.030 40);  /* ember-tinged selection */
+
+  /* Back-compat aliases for the previous v1.0 ladder. New code: prefer
+     the canonical names. */
+  --surface-base:    var(--surface);
+  --surface-canvas:  var(--bg);
+  --surface-sunken:  var(--bg-elevated);
+  --surface-raised:  var(--surface-overlay);
+
+  /* ── BORDERS — 4 tiers (pure white at increasing alpha) ──────────────── */
+  --border-subtle:   rgba(255,255,255,0.04);
+  --border:          rgba(255,255,255,0.08);
+  --border-strong:   rgba(255,255,255,0.14);
+  --border-stronger: rgba(255,255,255,0.22);
+
+  /* ── FOREGROUND — warm-leaning neutrals (chroma 0 keeps text crisp) ─── */
+  --fg:        #F2EEE8;  /* primary text — warm white */
+  --fg-muted:  #A8A39B;  /* secondary — descriptions, helper */
+  --fg-subtle: #756F66;  /* tertiary — metadata, placeholders */
+  --fg-faint:  #524C44;  /* quaternary — decorative only, never required */
+
+  /* ── EMBER — the single accent. Bright in dark, deep in light ────────── */
+  --ember:        #FF6B35;
+  --ember-glow:   #FF8C42;
+  --ember-deep:   #E04E1A;
+  --ember-soft:   rgba(255,107,53,0.14);
+  --ember-softer: rgba(255,107,53,0.07);
+  /* Foreground that rides on top of ember/danger surfaces. Dark mode keeps
+     a dark text on the bright accent (high-contrast hot CTA). */
+  --ember-fg:  #0A0907;
+  --danger-fg: #0A0907;
+  /* Snackbar / toast: a fixed dark inverse surface in BOTH themes (snackbars
+     read as elevated overlays, not page chrome), so the single ember action
+     keeps AA contrast everywhere (≈6.9:1 dark ember / ≈4.7:1 light ember). */
+  --snackbar-bg:  #0A0907;
+  --snackbar-fg:  #F2EEE8;
+  /* Fixed dark ink for foregrounds on a THEME-INDEPENDENT bright fill (e.g. the
+     hardcoded ember-scale swatches). Unlike --ember-fg it never flips to white,
+     so it stays AA on bright oranges/ambers in both themes. */
+  --ink-fixed:  #0A0907;
+  /* Switch knob — the always-white thumb the .fc-toggle-thumb pattern uses
+     (shadcn "thumb is the page background color"). White in BOTH themes so it
+     keeps contrast on the OFF track (--surface-active) and the ON ember track. */
+  --switch-thumb: #FFFFFF;
+  /* Scrim — the dim overlay painted behind modals / sheets. Tokenized so the
+     overlay alpha is tuned in one place instead of inline rgba per surface. */
+  --scrim: rgba(8,9,10,0.45);
+
+  /* ── COOL ACCENTS — theme-stable, used sparingly ─────────────────────── */
+  --ice:     #7DD3FC;
+  --ice-soft: rgba(125,211,252,0.14);
+  --violet:  #A78BFA;
+
+  /* ── STATUS — three semantic tokens + soft pill bg ──────────────────── */
+  --success:      #34D399;
+  --success-soft: rgba(52,211,153,0.14);
+  --warning:      #FBBF24;
+  --warning-soft: rgba(251,191,36,0.14);
+  --danger:       #F87171;
+  --danger-soft:  rgba(248,113,113,0.14);
+
+  /* ── SEMANTIC ROLE SET (DS-PAGE/COLOR proposal §4) ───────────────────────
+     Every functional role implements the same 7-token contract:
+       --{r}        solid          --{r}-strong  deeper solid (hover/emphasis)
+       --{r}-soft   ~14% tint bg   --{r}-subtle  ~7% tint bg
+       --{r}-border ~30% hairline  --{r}-text    in-hue text on the page
+       --{r}-fg     ink ON the solid
+     ember/danger keep their existing -fg meaning. Additive — nothing repurposed. */
+  /* ember (the one brand accent) */
+  --ember-strong: var(--ember-deep);
+  --ember-subtle: var(--ember-softer);
+  --ember-border: rgba(255,107,53,0.30);
+  --ember-text:   var(--ember-glow);
+  /* info (sky) — promotes --ice */
+  --info:         #38BDF8;
+  --info-strong:  #0EA5E9;
+  --info-soft:    rgba(56,189,248,0.14);
+  --info-subtle:  rgba(56,189,248,0.07);
+  --info-border:  rgba(56,189,248,0.30);
+  --info-text:    var(--ice);
+  --info-fg:      #06141C;
+  /* success */
+  --success-strong: #10B981;
+  --success-subtle: rgba(52,211,153,0.07);
+  --success-border: rgba(52,211,153,0.30);
+  --success-text:   #6EE7B7;
+  --success-fg:     #05140E;
+  /* warning */
+  --warning-strong: #F59E0B;
+  --warning-subtle: rgba(251,191,36,0.07);
+  --warning-border: rgba(251,191,36,0.30);
+  --warning-text:   #FCD34D;
+  --warning-fg:     #1A1206;
+  /* danger (--danger-fg already defined above) */
+  --danger-strong: #EF4444;
+  --danger-subtle: rgba(248,113,113,0.07);
+  --danger-border: rgba(248,113,113,0.30);
+  --danger-text:   #FCA5A5;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 120ms;
+  --dur: 220ms;
+  --dur-slow: 360ms;
+
+  /* ── FOCUS RING — the single canonical interactive focus indicator ────
+     One pattern, one set of tokens, every component. A solid offset
+     OUTLINE painted just outside the element, with a transparent gap
+     between the element's edge and the ring. The same affordance fires
+     on :focus-visible (keyboard) AND on stateful "open" markers
+     (combobox open, date-picker open, popover trigger open, etc.) so
+     the focus reads the same whether the user reached the element with
+     the keyboard or with a pointer.
+
+     Why outline (not box-shadow)?
+       • The gap is transparent — whatever is behind the element shows
+         through, so the ring works on every surface (canvas, card,
+         elevated, ember solid) without per-surface tokens.
+       • Doesn't compose with elevation shadows; never conflicts with
+         other box-shadow stacks.
+       • Browsers transition outline-color natively.
+
+     Token contract:
+       --ring-width    Stroke thickness of the ring (2px workhorse)
+       --ring-offset   Gap between element edge and ring start (2px)
+       --ring          Default ring color — solid ember
+       --ring-danger   Invalid / error variant — solid danger
+
+     The paste-in pattern (memorise this — every component does it):
+       .foo                       { outline: none; }
+       .foo:focus-visible,
+       .foo.is-open               { outline: var(--ring-width) solid var(--ring);
+                                    outline-offset: var(--ring-offset); }
+       .foo.is-invalid:focus-visible,
+       .foo.is-invalid.is-open    { outline: var(--ring-width) solid var(--ring-danger);
+                                    outline-offset: var(--ring-offset); }
+
+     Inside editable areas (input, textarea, command palette search
+     row), the OUTER container owns the ring via :focus-within — the
+     inner native element runs outline:none so the affordance is one.
+
+     See: pages/foundations/focus-ring.html for usage + Do/Don't. */
+  --ring-width:   2px;
+  --ring-offset:  2px;
+  --ring:         var(--ember);
+  --ring-danger:  var(--danger);
+
+  --font-sans: 'Geist', 'Inter', -apple-system, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Spacing — 4px base. Whole numbers up to 6 (4-step), then 8/10/12/16/24
+     for layout breathing room. Keep this set short — every increment a
+     designer doesn't need is one less micro-decision in code review. */
+  --space-0:   0;
+  --space-px:  1px;
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-24:  96px;
+
+  /* Radii — match the Spacing & Radius foundation page documentation. */
+  --radius-xs:  3px;  /* code chips, inline kbd                            */
+  --radius-sm:  4px;  /* tags, micro-affordances                           */
+  --radius-md:  5px;  /* nav items                                         */
+  --radius-lg:  6px;  /* default surface, button, input — the workhorse    */
+  --radius-xl:  8px;  /* toolbar, fc-card, frame                           */
+  --radius-2xl: 12px; /* modal, drawer, sidesheet, hero                    */
+  --radius-full: 9999px; /* pill, dot, status                              */
+
+  /* Type scale — px-pinned variables that the .t-* utilities consume.
+     EVERY token snaps to one of the 9 canonical steps (see Foundations/
+     Typography). --text-sm and --text-md are kept as aliases onto the
+     nearest step (13 / 15) so legacy inline usage stays on-scale — there
+     is no 12.5 or 14 in the system. Pages should prefer the .t-* classes;
+     inline var(--text-*) is the escape hatch for custom <td>/<span>. */
+  --text-xs:    11px;  /* t-mono-label — eyebrows, column headers           */
+  --text-sm:    13px;  /* alias → t-small (was 12.5; snapped to scale)      */
+  --text-base:  13px;  /* t-small — helper text, captions, card body        */
+  --text-md:    15px;  /* alias → t-body (was 14; snapped to scale)         */
+  --text-body:  15px;  /* t-body — default paragraph, table cells, intros   */
+  --text-lg:    17px;  /* t-body-lg — lede below display / page header      */
+  --text-xl:    20px;  /* h3                                               */
+  --text-2xl:   28px;  /* h2 / page header                                 */
+  --text-3xl:   36px;  /* h1                                               */
+  --text-display:   56px;
+  --text-display-xl: 72px;
+
+  /* Z-index — 7 explicit layers. Higher numbers stack above lower ones.
+     Tooltip is intentionally above modal (a tooltip on a button inside a
+     modal must paint above the modal itself, not be clipped by it). */
+  --z-base:     0;
+  --z-sticky:   20;
+  --z-dropdown: 40;
+  --z-popover:  60;
+  --z-modal:    100;
+  --z-toast:    200;
+  --z-tooltip:  300;
+
+  /* Prose widths — measure caps for body copy. Use these instead of the
+     bare 64ch / 68ch / 72ch strings sprinkled across the pages. */
+  --prose-narrow:  56ch; /* short captions, do/don't notes               */
+  --prose-default: 64ch; /* lede, page intro                              */
+  --prose-wide:    72ch; /* long-form body, FAQ answers                   */
+
+  /* Motion — adds entry/exit/spring on top of the original ease so we can
+     name intent: out for entering elements, in for exiting, spring for
+     tactile feedback (toggle thumbs, slider knobs). */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-xs:      80ms;     /* hover tints, focus ring fade                */
+  --dur-stagger: 60ms;     /* gap between cascading siblings              */
+
+  /* ============================================================
+   * IDP / DX semantic palettes — added Phase 1 of the gap-analysis
+   * sweep. These power dashboards, pipelines, score cards, and any
+   * data-dense surface in the platform layer. They describe MEANING
+   * (severity, health, run status, risk) — NEVER use --ember / --danger
+   * directly to express any of these semantics; reach for the
+   * dedicated token so dark/light overrides stay coherent.
+   *
+   * Pattern: each role exposes a solid color and a soft (~14% alpha)
+   * variant for pill / chip backgrounds. Solids stay flat across
+   * themes; softs are re-derived under [data-theme="light"] below.
+   * ============================================================ */
+
+  /* Data viz — 12 categorical hues for charts. Order is meaningful:
+     viz-cat-1..4 are the most used (single-series, dual-series, …).
+     Picked to be perceptually distinct and to read at small dot sizes
+     on dark backgrounds. */
+  --viz-cat-1:  #FF6B35;  /* ember     */
+  --viz-cat-2:  #7DD3FC;  /* ice       */
+  --viz-cat-3:  #A78BFA;  /* violet    */
+  --viz-cat-4:  #34D399;  /* success   */
+  --viz-cat-5:  #FBBF24;  /* warning   */
+  --viz-cat-6:  #F472B6;  /* pink      */
+  --viz-cat-7:  #2DD4BF;  /* teal      */
+  --viz-cat-8:  #818CF8;  /* indigo    */
+  --viz-cat-9:  #BEF264;  /* lime      */
+  --viz-cat-10: #FB7185;  /* rose      */
+  --viz-cat-11: #67E8F9;  /* cyan      */
+  --viz-cat-12: #FDE047;  /* yellow    */
+
+  /* Sequential — single-hue ramp for ordinal data (load, cost, density). */
+  --viz-seq-low:  #1F2024;
+  --viz-seq-mid:  #FF8C42;
+  --viz-seq-high: #FFE5D4;
+
+  /* Diverging — for "centered-on-zero" data (perf delta, cost variance). */
+  --viz-div-neg:  #F87171;
+  --viz-div-zero: #4A4A4F;
+  --viz-div-pos:  #34D399;
+
+  /* Chart chrome */
+  --viz-grid:       rgba(255,255,255,0.04);
+  --viz-axis:       rgba(255,255,255,0.18);
+  --viz-tooltip-bg: rgba(8,9,10,0.92);
+
+  /* Severity — incident P0..P3 (PagerDuty / incident.io).
+     In dark mode the values are tuned for LUMINANCE, not for matching the
+     light-mode palette: a dark red on dark canvas reads as muddy, so P0 is
+     a brighter, more saturated red than --danger. Soft alphas bumped to
+     18% so the pill background actually registers against surface-base. */
+  --severity-p0:       #FB5252;  /* critical                */
+  --severity-p0-soft:  rgba(251,82,82,0.18);
+  --severity-p1:       #FB923C;  /* high                    */
+  --severity-p1-soft:  rgba(251,146,60,0.18);
+  --severity-p2:       #FBBF24;  /* medium                  */
+  --severity-p2-soft:  rgba(251,191,36,0.18);
+  --severity-p3:       #7DD3FC;  /* low / informational     */
+  --severity-p3-soft:  rgba(125,211,252,0.18);
+  /* Ink for a SOLID severity tile — follows the tile's own luminance, not the
+     ember polarity. Dark theme: every severity hue is bright, so dark ink. */
+  --severity-p0-ink:   #0A0907;
+  --severity-p1-ink:   #0A0907;
+  --severity-p2-ink:   #0A0907;
+  --severity-p3-ink:   #0A0907;
+
+  /* Pipeline / run status — replaces hardcoded oranges/greens in
+     ai/tool.jsx and chart.jsx. Use for any "step state" UI:
+     deploys, workflow nodes, quality gates, agent tool calls. */
+  --status-pending:       #6B6B70;
+  --status-pending-soft:  rgba(107,107,112,0.14);
+  --status-running:       #7DD3FC;
+  --status-running-soft:  rgba(125,211,252,0.14);
+  --status-done:          #34D399;
+  --status-done-soft:     rgba(52,211,153,0.14);
+  --status-error:         #F87171;
+  --status-error-soft:    rgba(248,113,113,0.14);
+  --status-skipped:       #4A4A4F;
+  --status-skipped-soft:  rgba(74,74,79,0.14);
+
+  /* Health — service uptime semantics for catalogs and dashboards. */
+  --health-up:            #34D399;
+  --health-up-soft:       rgba(52,211,153,0.14);
+  --health-degraded:      #FBBF24;
+  --health-degraded-soft: rgba(251,191,36,0.14);
+  --health-down:          #F87171;
+  --health-down-soft:     rgba(248,113,113,0.14);
+  --health-unknown:       #6B6B70;
+  --health-unknown-soft:  rgba(107,107,112,0.14);
+
+  /* Risk — Change Risk Score (CRS) / Quality Gate decision colors.
+     Risk-crit and risk-high share the same luminance-tuned reds/oranges as
+     severity-p0/p1 so the eye registers "extreme" with the same urgency
+     across the system. The token families are intentionally separate
+     because the semantic domain is different (severity describes an event,
+     risk describes a forecast). */
+  --risk-low:        #34D399;
+  --risk-low-soft:   rgba(52,211,153,0.14);
+  --risk-med:        #FBBF24;
+  --risk-med-soft:   rgba(251,191,36,0.14);
+  --risk-high:       #FB923C;
+  --risk-high-soft:  rgba(251,146,60,0.18);
+  --risk-crit:       #FB5252;
+  --risk-crit-soft:  rgba(251,82,82,0.18);
+
+  /* Responsive breakpoints — readable from CSS via
+     @media (min-width: var(--bp-md)) and from JS via getComputedStyle.
+     Aligned with Tailwind's ladder so contributors moving between them
+     don't need a mental conversion. */
+  --bp-sm:  640px;
+  --bp-md:  768px;
+  --bp-lg:  1024px;
+  --bp-xl:  1280px;
+  --bp-2xl: 1536px;
+
+  /* Numeric utilities — tabular nums + interaction opacities */
+  --tnum: 'tnum', 'zero';
+  --opacity-disabled: 0.45;
+  --opacity-hover:    0.86;
+  --opacity-focus:    1;
+  --opacity-dim:      0.65;
+
+  /* AI surface tokens — used by the AI section so identity can drift
+     intentionally from the rest of the system without forking the palette. */
+  --ai-bg:            var(--bg-elevated);
+  --ai-surface:       var(--surface);
+  --ai-fg:            var(--fg);
+  --ai-fg-muted:      var(--fg-muted);
+  --ai-border:        var(--border-strong);
+  --ai-accent:        var(--ember);
+  --ai-streaming-caret: var(--ember);
+
+  /* Elevation — dark mode (default).
+     Each level is a *composite* shadow: a sharper "key" shadow that suggests
+     directional light from above + a softer "ambient" shadow that suggests
+     general occlusion. The two together feel like real depth instead of a flat
+     line. Gradation roughly doubles per step so adjacent levels are clearly
+     different but never abrupt. */
+  /* Elevation — dark mode (Fluent-style 2-shadow ramp).
+     Each tier composes:
+       Shadow-1 (key)     : 0, Y = n/2, blur = n, opacity 28%
+       Shadow-2 (ambient) : 0, Y = n/2, blur = n, opacity 14%   ← low ramp
+                            0, Y = 0,   blur = 2, opacity 20%   ← high ramp
+     n = the tier number (2 / 4 / 8 / 16). Low (1,2) keeps the ambient riding
+     alongside the key for a quiet lift; high (3,4) swaps the ambient for a
+     tight contact halo so the element reads as truly floating.
+     elev-ember is the only coloured halo allowed in chrome — reserve it
+     for the primary CTA when it needs to demand attention. */
+  --elev-0: none;
+  --elev-1:
+    0 1px 2px rgba(0,0,0,0.28),
+    0 1px 2px rgba(0,0,0,0.14);
+  --elev-2:
+    0 2px 4px rgba(0,0,0,0.28),
+    0 2px 4px rgba(0,0,0,0.14);
+  --elev-3:
+    0 4px 8px rgba(0,0,0,0.28),
+    0 0 2px rgba(0,0,0,0.20);
+  --elev-4:
+    0 8px 16px rgba(0,0,0,0.28),
+    0 0 2px rgba(0,0,0,0.20);
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(255,107,53,0.18),
+    0 8px 24px rgba(255,107,53,0.25);
+
+  /* Back-compat aliases for the old --shadow-N ladder. The old scale had
+     6 tiers (0–5); 4 and 5 collapse onto elev-4 (modal). */
+  --shadow-0: var(--elev-0);
+  --shadow-1: var(--elev-1);
+  --shadow-2: var(--elev-2);
+  --shadow-3: var(--elev-3);
+  --shadow-4: var(--elev-4);
+  --shadow-5: var(--elev-4);
+}
+
+[data-theme="light"] {
+  /* ── SURFACES — light mode (mirror of dark) ──────────────────────────────
+     Same monotonic logic, deeper grey → pure white. Surface itself is #FFF
+     so paper-white cards read as the workspace; canvas drops well below for
+     the modal backdrop and sits as the deepest tone in the scale. */
+  --canvas:           oklch(0.93 0.003 75);
+  --bg:               oklch(0.97 0.003 75);
+  --bg-elevated:      oklch(0.995 0.001 75);
+  --surface:          oklch(1 0 0);
+  --surface-hover:    oklch(0.965 0.003 75);
+  --surface-overlay:  oklch(1 0 0);
+  --surface-active:   oklch(0.935 0.004 75);
+  --surface-selected: oklch(0.958 0.035 40);
+
+  /* Back-compat aliases */
+  --surface-base:    var(--surface);
+  --surface-canvas:  var(--bg);
+  --surface-sunken:  var(--bg-elevated);
+  --surface-raised:  var(--surface-overlay);
+
+  /* ── BORDERS — slate ink instead of black, 4 tiers ───────────────────── */
+  --border-subtle:   rgba(15,23,42,0.04);
+  --border:          rgba(15,23,42,0.08);
+  --border-strong:   rgba(15,23,42,0.14);
+  --border-stronger: rgba(15,23,42,0.24);
+
+  /* ── FOREGROUND — warm near-black, warmth carried through every tier ── */
+  --fg:        #0E0C09;
+  --fg-muted:  #595550;
+  --fg-subtle: #78736D;
+  --fg-faint:  #A8A39B;
+
+  /* ── EMBER — deeper in light so it doesn't bloom on white ─────────────── */
+  --ember:        #E85A28;
+  --ember-glow:   #FF6B35;
+  --ember-deep:   #C24A1F;
+  --ember-soft:   rgba(232,90,40,0.10);
+  --ember-softer: rgba(232,90,40,0.05);
+  /* White text on the deeper light-mode ember reads as a primary CTA; dark
+     text would muddy because the accent itself is already luminance-low. */
+  --ember-fg:  #FFFFFF;
+  --danger-fg: #FFFFFF;
+  /* Switch knob stays white in light mode too (matches the existing
+     [data-theme="light"] .fc-toggle-thumb hardcode). */
+  --switch-thumb: #FFFFFF;
+  /* Scrim — light theme overlay (mirrors the existing
+     [data-theme="light"] .mdl-overlay rgba(8,9,10,0.40)). */
+  --scrim: rgba(8,9,10,0.40);
+
+  /* ── COOL ACCENTS — same hues, slightly bumped chroma so they don't
+        wash out on white surfaces ─────────────────────────────────────── */
+  --ice:      #0EA5E9;
+  --ice-soft: rgba(14,165,233,0.10);
+  --violet:   #7C3AED;
+
+  /* ── STATUS — slightly deeper than dark so they hit AA on white ─────── */
+  --success:      #059669;
+  --success-soft: rgba(5,150,105,0.10);
+  --warning:      #D97706;
+  --warning-soft: rgba(217,119,6,0.10);
+  --danger:       #DC2626;
+  --danger-soft:  rgba(220,38,38,0.10);
+
+  /* ── SEMANTIC ROLE SET — light mirror (deeper solids, white ink on solid;
+        warning keeps dark ink; soft/subtle/border from the deeper hue) ──── */
+  --ember-strong: var(--ember-deep);
+  --ember-subtle: var(--ember-softer);
+  --ember-border: rgba(232,90,40,0.30);
+  --ember-text:   #C2410C;
+  --info:         #0284C7;
+  --info-strong:  #0369A1;
+  --info-soft:    rgba(2,132,199,0.10);
+  --info-subtle:  rgba(2,132,199,0.05);
+  --info-border:  rgba(2,132,199,0.28);
+  --info-text:    #0369A1;
+  --info-fg:      #FFFFFF;
+  --success-strong: #047857;
+  --success-subtle: rgba(5,150,105,0.05);
+  --success-border: rgba(5,150,105,0.28);
+  --success-text:   #047857;
+  --success-fg:     #FFFFFF;
+  --warning-strong: #B45309;
+  --warning-subtle: rgba(217,119,6,0.05);
+  --warning-border: rgba(217,119,6,0.28);
+  --warning-text:   #B45309;
+  --warning-fg:     #2A1D06;
+  --danger-strong: #B91C1C;
+  --danger-subtle: rgba(220,38,38,0.05);
+  --danger-border: rgba(220,38,38,0.28);
+  --danger-text:   #B91C1C;
+
+  /* Elevation — light mode. Shadows on a light page need to be tinted (not pure
+     black) and softer in opacity than dark mode, otherwise they look like grey
+     bruises. Slate-blue ink keeps them cool and quiet under cream surfaces. */
+  /* Elevation — light mode (Fluent-style 2-shadow ramp).
+     Mirrors dark mode formula but with slate-ink at lower opacities:
+       Low ramp  (1,2): key 14% + ambient 14% — both at (0, n/2, n)
+       High ramp (3,4): key 24% + ambient 20% — key at (0, n/2, n),
+                        ambient at (0, 0, 8) tight contact halo */
+  --elev-0: none;
+  --elev-1:
+    0 1px 2px rgba(15,23,42,0.14),
+    0 1px 2px rgba(15,23,42,0.14);
+  --elev-2:
+    0 2px 4px rgba(15,23,42,0.14),
+    0 2px 4px rgba(15,23,42,0.14);
+  --elev-3:
+    0 4px 8px rgba(15,23,42,0.24),
+    0 0 8px rgba(15,23,42,0.20);
+  --elev-4:
+    0 8px 16px rgba(15,23,42,0.24),
+    0 0 8px rgba(15,23,42,0.20);
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(232,90,40,0.14),
+    0 8px 24px rgba(232,90,40,0.18);
+
+  --shadow-0: var(--elev-0);
+  --shadow-1: var(--elev-1);
+  --shadow-2: var(--elev-2);
+  --shadow-3: var(--elev-3);
+  --shadow-4: var(--elev-4);
+  --shadow-5: var(--elev-4);
+
+  /* AI surface — re-derived for light theme so the AI section keeps the
+     same separation from the page that it has in dark mode. */
+  --ai-bg:            #FFFFFF;
+  --ai-surface:       #FAFAFA;
+  --ai-fg:            #0A0A0B;
+  --ai-fg-muted:      #52525B;
+  --ai-border:        rgba(0,0,0,0.10);
+  --ai-accent:        #E85A28;
+  --ai-streaming-caret: #E85A28;
+
+  /* IDP / DX semantic palettes — light-mode overrides.
+     Colors are shifted ~10% darker than dark-mode so they hit ~4.5:1 on
+     white. Softs go from 14% → 10% alpha because cream surfaces under
+     a 14% tint print too saturated. */
+  --viz-cat-1:  #E85A28;
+  --viz-cat-2:  #0284C7;
+  --viz-cat-3:  #7C3AED;
+  --viz-cat-4:  #059669;
+  --viz-cat-5:  #D97706;
+  --viz-cat-6:  #DB2777;
+  --viz-cat-7:  #0D9488;
+  --viz-cat-8:  #4F46E5;
+  --viz-cat-9:  #65A30D;
+  --viz-cat-10: #E11D48;
+  --viz-cat-11: #0891B2;
+  --viz-cat-12: #CA8A04;
+
+  --viz-seq-low:  #F4F4F5;
+  --viz-seq-mid:  #E85A28;
+  --viz-seq-high: #431407;
+
+  --viz-div-neg:  #DC2626;
+  --viz-div-zero: #A1A1AA;
+  --viz-div-pos:  #059669;
+
+  --viz-grid:       rgba(0,0,0,0.05);
+  --viz-axis:       rgba(0,0,0,0.18);
+  --viz-tooltip-bg: rgba(255,255,255,0.96);
+
+  --severity-p0:       #B91C1C;
+  --severity-p0-soft:  rgba(185,28,28,0.10);
+  --severity-p1:       #EA580C;
+  --severity-p1-soft:  rgba(234,88,12,0.14);
+  --severity-p2:       #EAB308;
+  --severity-p2-soft:  rgba(234,179,8,0.18);
+  --severity-p3:       #0EA5E9;
+  --severity-p3-soft:  rgba(14,165,233,0.14);
+  /* Light theme: only the deep-red P0 (#B91C1C) needs white; the orange/amber/
+     sky tiles are mid-bright and read with dark ink (white-on-amber fails AA). */
+  --severity-p0-ink:   #FFFFFF;
+  --severity-p1-ink:   #0A0907;
+  --severity-p2-ink:   #0A0907;
+  --severity-p3-ink:   #0A0907;
+
+  --status-pending:       #71717A;
+  --status-pending-soft:  rgba(113,113,122,0.10);
+  --status-running:       #0284C7;
+  --status-running-soft:  rgba(2,132,199,0.10);
+  --status-done:          #059669;
+  --status-done-soft:     rgba(5,150,105,0.10);
+  --status-error:         #DC2626;
+  --status-error-soft:    rgba(220,38,38,0.10);
+  --status-skipped:       #A1A1AA;
+  --status-skipped-soft:  rgba(161,161,170,0.10);
+
+  --health-up:            #059669;
+  --health-up-soft:       rgba(5,150,105,0.10);
+  --health-degraded:      #D97706;
+  --health-degraded-soft: rgba(217,119,6,0.10);
+  --health-down:          #DC2626;
+  --health-down-soft:     rgba(220,38,38,0.10);
+  --health-unknown:       #71717A;
+  --health-unknown-soft:  rgba(113,113,122,0.10);
+
+  --risk-low:        #059669;
+  --risk-low-soft:   rgba(5,150,105,0.10);
+  --risk-med:        #D97706;
+  --risk-med-soft:   rgba(217,119,6,0.10);
+  --risk-high:       #EA580C;
+  --risk-high-soft:  rgba(234,88,12,0.10);
+  --risk-crit:       #B91C1C;
+  --risk-crit-soft:  rgba(185,28,28,0.10);
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'cv11', 'ss01';
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+/* Scoped: only the DS docs shell (which has #root/#ds-root) locks body scroll
+   and runs panes that scroll internally. Standalone pages (examples) keep
+   native page scroll. */
+body:has(#root), body:has(#ds-root) { overflow: hidden; }
+#root { height: 100vh; overflow: hidden; }
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; padding: 0; }
+input, textarea { font-family: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: var(--border-stronger); }
+
+/* Type scale utilities — now driven by --text-* tokens so a single source
+   of truth governs both the class and any inline `font-size: var(...)` use. */
+.t-display-xl { font-size: var(--text-display-xl); line-height: 1.02; letter-spacing: -0.04em; font-weight: 600; }
+.t-display-lg { font-size: var(--text-display);    line-height: 1.05; letter-spacing: -0.03em; font-weight: 600; }
+.t-h1         { font-size: var(--text-3xl);        line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; }
+.t-h2         { font-size: var(--text-2xl);        line-height: 1.2;  letter-spacing: -0.02em; font-weight: 600; }
+.t-h3         { font-size: var(--text-xl);         line-height: 1.3;  letter-spacing: -0.01em; font-weight: 500; }
+.t-body-lg    { font-size: var(--text-lg);         line-height: 1.55; }
+.t-body       { font-size: var(--text-body);       line-height: 1.55; }
+.t-small      { font-size: var(--text-base);       line-height: 1.5; }
+.t-mono       { font-family: var(--font-mono); font-feature-settings: 'tnum', 'zero'; }
+.t-mono-label { font-family: var(--font-mono); font-size: var(--text-xs); line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; color: var(--fg-subtle); }
+
+/* Caption — replaces the inline
+   `style={{fontSize:13.5,color:'var(--fg-muted)',marginTop:14,lineHeight:1.6,maxWidth:'64ch'}}`
+   pattern that appears 200+ times across pages. Use `<p className="ds-caption">` after a Frame. */
+.ds-caption {
+  font-size: var(--text-body); /* t-body 15 — section intro / lede prose */
+  color: var(--fg-muted);
+  line-height: 1.6;
+  margin-top: 14px;
+  max-width: var(--prose-default);
+}
+.ds-caption.narrow { max-width: var(--prose-narrow); }
+.ds-caption.wide   { max-width: var(--prose-wide); }
+/* Dim variant — used when the caption is secondary to a heavier explanation
+   nearby (e.g. inline note next to an Anatomy diagram). */
+.ds-caption.dim    { color: var(--fg-subtle); }
+
+/* Generic UI atoms */
+.surface { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; }
+.hairline { border: 1px solid var(--border); }
+.divider { height: 1px; background: var(--border); }
+.divider-v { width: 1px; background: var(--border); }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 22px; padding: 0 8px; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
+  border: 1px solid var(--border-strong); color: var(--fg-muted);
+  background: var(--surface);
+}
+.pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.pill.ember { color: var(--ember-text); border-color: rgba(255,107,53,0.3); background: var(--ember-soft); }
+.pill.ice { color: var(--ice); border-color: rgba(125,211,252,0.3); background: var(--ice-soft); }
+.pill.success { color: var(--success); border-color: rgba(52,211,153,0.3); background: var(--success-soft); }
+.pill.warning { color: var(--warning); border-color: rgba(251,191,36,0.3); background: var(--warning-soft); }
+.pill.danger { color: var(--danger); border-color: rgba(248,113,113,0.3); background: var(--danger-soft); }
+
+/* Semantic pill modifiers — Phase 1 (Gap Analysis).
+   Pill = status semantic. Use these for severity / status / health / risk
+   rather than the generic .ember / .success / .warning / .danger which
+   carry brand meaning. Each one points to a dedicated --token so dark/light
+   overrides stay coherent. See DEF-03 in the gap analysis for the
+   Pill (status) vs Badge (count) vs Chip (removable) contract. */
+.pill.severity-p0 { color: var(--severity-p0); border-color: color-mix(in oklab, var(--severity-p0) 30%, transparent); background: var(--severity-p0-soft); }
+.pill.severity-p1 { color: var(--severity-p1); border-color: color-mix(in oklab, var(--severity-p1) 30%, transparent); background: var(--severity-p1-soft); }
+.pill.severity-p2 { color: var(--severity-p2); border-color: color-mix(in oklab, var(--severity-p2) 30%, transparent); background: var(--severity-p2-soft); }
+.pill.severity-p3 { color: var(--severity-p3); border-color: color-mix(in oklab, var(--severity-p3) 30%, transparent); background: var(--severity-p3-soft); }
+
+/* Pill text overrides — light mode only. Yellow-on-yellow soft fails contrast
+   when the solid is bright (severity-p2 at #EAB308), so the pill text drops to
+   a darker yellow that reads on the soft tint while the SWATCH (solid bg)
+   keeps the vibrant value. Border also darkens to match. */
+[data-theme="light"] .pill.severity-p2 {
+  color: #854D0E;
+  border-color: color-mix(in oklab, #854D0E 35%, transparent);
+}
+
+.pill.status-pending { color: var(--status-pending); border-color: color-mix(in oklab, var(--status-pending) 30%, transparent); background: var(--status-pending-soft); }
+.pill.status-running { color: var(--status-running); border-color: color-mix(in oklab, var(--status-running) 30%, transparent); background: var(--status-running-soft); }
+.pill.status-done    { color: var(--status-done);    border-color: color-mix(in oklab, var(--status-done) 30%, transparent);    background: var(--status-done-soft); }
+.pill.status-error   { color: var(--status-error);   border-color: color-mix(in oklab, var(--status-error) 30%, transparent);   background: var(--status-error-soft); }
+.pill.status-skipped { color: var(--status-skipped); border-color: color-mix(in oklab, var(--status-skipped) 30%, transparent); background: var(--status-skipped-soft); }
+
+.pill.health-up        { color: var(--health-up);        border-color: color-mix(in oklab, var(--health-up) 30%, transparent);        background: var(--health-up-soft); }
+.pill.health-degraded  { color: var(--health-degraded);  border-color: color-mix(in oklab, var(--health-degraded) 30%, transparent);  background: var(--health-degraded-soft); }
+.pill.health-down      { color: var(--health-down);      border-color: color-mix(in oklab, var(--health-down) 30%, transparent);      background: var(--health-down-soft); }
+.pill.health-unknown   { color: var(--health-unknown);   border-color: color-mix(in oklab, var(--health-unknown) 30%, transparent);   background: var(--health-unknown-soft); }
+
+.pill.risk-low  { color: var(--risk-low);  border-color: color-mix(in oklab, var(--risk-low) 30%, transparent);  background: var(--risk-low-soft); }
+.pill.risk-med  { color: var(--risk-med);  border-color: color-mix(in oklab, var(--risk-med) 30%, transparent);  background: var(--risk-med-soft); }
+.pill.risk-high { color: var(--risk-high); border-color: color-mix(in oklab, var(--risk-high) 30%, transparent); background: var(--risk-high-soft); }
+.pill.risk-crit { color: var(--risk-crit); border-color: color-mix(in oklab, var(--risk-crit) 30%, transparent); background: var(--risk-crit-soft); }
+
+/* ─── Badge — Phase 1 (Gap Analysis DEF-03) ─────────────────────────────────
+   Inline numeric counter. Sits in nav rows, tab labels, sidebar items,
+   and anywhere a count needs to ride alongside a label without becoming
+   a status pill. Read the Pills page for the canonical contract:
+
+     Pill   = STATUS (success, P0, running, …). 22px tall, .pill.* tokens.
+     Badge  = COUNT  (3, 12, 99+). 16–18px, .badge / .badge.new variants.
+     Chip   = INLINE DATA TOKEN (mono, kbd-like, status/value tag).
+     in-tag = REMOVABLE FILTER CHIP. Lives inside an .in-group.
+   ─────────────────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 18px; height: 18px;
+  padding: 0 5px;
+  font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  background: var(--surface-active);
+  color: var(--fg-subtle);
+  border-radius: 4px;
+}
+.badge.lg { min-width: 22px; height: 22px; font-size: var(--text-xs); padding: 0 7px; }
+.badge.sm { min-width: 14px; height: 14px; font-size: 9px; padding: 0 4px; border-radius: 3px; }
+.badge.ember,
+.badge.new      { color: var(--ember);   background: var(--ember-soft); }
+.badge.ice      { color: var(--ice);     background: var(--ice-soft); }
+.badge.success  { color: var(--success); background: var(--success-soft); }
+.badge.warning  { color: var(--warning); background: var(--warning-soft); }
+.badge.danger   { color: var(--danger);  background: var(--danger-soft); }
+/* Dot variant — when the count is 0 but presence still matters. */
+.badge.dot {
+  min-width: 6px; width: 6px; height: 6px;
+  padding: 0; border-radius: 50%;
+  background: var(--ember);
+}
+/* Push-to-end — used inside flex rows (nav items, tab labels) where the
+   badge should hug the trailing edge. The legacy `.nav-item .badge`
+   rule already does this via cascade; this opt-in modifier is for callers
+   outside the nav. */
+.badge.push-end { margin-inline-start: auto; }
+
+/* ─── Chip — removable variant ──────────────────────────────────────────────
+   The base .chip stays as the "inline data token" it has always been
+   (inline mono, kbd-like). Add `.chip.removable` to attach a trailing
+   X button — typically used for filter chips next to a search input.
+   Keeps the class contract while filling the "removable tag" role
+   that the Pill / Badge / Chip vocabulary previously left ambiguous. */
+.chip.removable {
+  padding-inline-end: 4px;
+  gap: 4px;
+}
+.chip .chip-x {
+  width: 16px; height: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 3px;
+  color: var(--fg-faint);
+  background: transparent; border: none; outline: none;
+  appearance: none; -webkit-appearance: none;
+  cursor: pointer; padding: 0; font: inherit;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.chip .chip-x:hover { color: var(--fg); background: var(--surface-active); }
+.chip .chip-x:focus-visible { color: var(--ember); outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+
+/* ─── Chip tier modifiers (Consolidation Case 2) ────────────────────────────
+   T1 = ember fill with dark ink fg (never ember-on-ember).
+   T2 = warning fill (muted amber).
+   T3 = muted border-only ghost.
+   These power the TierBadge preset and the .chip.tier-* API. */
+.chip.tier-t1 {
+  color: var(--ember-text);
+  background: var(--ember-soft);
+  border-color: rgba(255,107,53,0.35);
+}
+.chip.tier-t2 {
+  color: var(--warning);
+  background: var(--warning-soft);
+  border-color: rgba(251,191,36,0.35);
+}
+.chip.tier-t3 {
+  color: var(--fg-subtle);
+  background: var(--surface);
+  border-color: var(--border-strong);
+}
+
+/* ─── Pill — live dot + remove button (promoted from pills.tsx) ─────────────
+   These live here (tokens.css) so any page consuming the CSS layer gets the
+   full Pill API without adding a <style> block. */
+.pill .ldot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor; box-shadow: 0 0 0 0 currentColor;
+  flex-shrink: 0;
+  animation: pl-pulse 1.6s var(--ease, ease-in-out) infinite;
+}
+@keyframes pl-pulse {
+  0%   { box-shadow: 0 0 0 0   currentColor; }
+  70%  { box-shadow: 0 0 0 6px transparent; }
+  100% { box-shadow: 0 0 0 0   transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pill .ldot { animation: none; opacity: 1; }
+}
+.pill .pl-x {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 14px; height: 14px;
+  margin-inline-start: 2px; margin-inline-end: -2px;
+  border-radius: 999px;
+  color: currentColor; opacity: .55;
+  background: transparent; border: 0; cursor: pointer; padding: 0; font: inherit;
+  transition: opacity 120ms var(--ease, ease-in-out), background 120ms var(--ease, ease-in-out);
+}
+.pill .pl-x:hover { opacity: 1; background: rgba(255,255,255,0.06); }
+[data-theme="light"] .pill .pl-x:hover { background: rgba(0,0,0,0.06); }
+.pill .pl-x:focus-visible { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+/* Icon wrapper — inline-flex so the SVG centers on the cap-height of the
+   pill label without a vertical-align baseline shift. line-height:0
+   collapses the span's own line-height contribution. */
+.pill-icon {
+  display: inline-flex; align-items: center;
+  flex-shrink: 0; line-height: 0;
+}
+.pill svg { display: block; color: currentColor; }
+
+/* ─── Chip — trend arrow + service-row layout (promoted from pills.tsx) ────── */
+.chip .ch-arrow {
+  display: inline-flex; align-items: center;
+}
+/* Service-catalog row that uses Pill + Chip columns */
+.chip-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 10px 12px;
+  border-block-end: 1px solid var(--border);
+  font-size: 13px; color: var(--fg-muted);
+}
+.chip-row:last-child { border-block-end: 0; }
+.chip-row .name { color: var(--fg); }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 32px; padding: 0 12px; border-radius: 6px;
+  font-size: 13px; font-weight: 500;
+  border: 1px solid var(--border-strong); background: var(--surface);
+  color: var(--fg); transition: all var(--dur) var(--ease);
+  white-space: nowrap;
+  cursor: pointer; user-select: none;
+  text-decoration: none;
+}
+.btn:hover { background: var(--surface-hover); border-color: var(--border-stronger); transform: translateY(-1px); }
+.btn:active { transform: translateY(0) scale(0.98); }
+.btn:focus-visible {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* Pressed / active toggle state — a first-class authored state across every
+   .btn variant (outline / ghost / icon). Generalizes the single-purpose
+   .btn.icon.ghost.is-pressed rule to the aria-pressed attribute used
+   throughout the button-group docs and demos, so the active segment renders
+   an authored fill rather than relying on per-page inline overrides. */
+.btn[aria-pressed="true"] {
+  background: var(--surface-hover);
+  border-color: var(--border-stronger);
+  color: var(--fg);
+}
+
+/* Variants */
+.btn.ember { background: var(--ember); border-color: var(--ember); color: var(--ember-fg); font-weight: 600; }
+.btn.ember:hover { background: var(--ember-glow); border-color: var(--ember-glow); color: var(--ember-fg); }
+
+.btn.ghost { background: transparent; border-color: transparent; color: var(--fg-muted); }
+.btn.ghost:hover { background: var(--surface-hover); border-color: transparent; color: var(--fg); }
+
+.btn.outline { background: transparent; border-color: var(--border-strong); color: var(--fg); }
+.btn.outline:hover { background: var(--surface-hover); border-color: var(--border-stronger); color: var(--fg); }
+
+.btn.link {
+  background: transparent; border-color: transparent; color: var(--ember);
+  height: auto; padding: 0; gap: 4px;
+  text-underline-offset: 3px; text-decoration-thickness: 1px;
+}
+.btn.link:hover { background: transparent; border-color: transparent; transform: none; text-decoration: underline; color: var(--ember-glow); }
+.btn.link:active { transform: none; }
+
+.btn.destructive {
+  background: var(--danger); border-color: var(--danger);
+  color: var(--danger-fg); font-weight: 600;
+}
+.btn.destructive:hover {
+  background: color-mix(in oklab, var(--danger) 88%, white);
+  border-color: color-mix(in oklab, var(--danger) 88%, white);
+  color: var(--danger-fg);
+}
+
+/* Sizes */
+.btn.lg { height: 40px; padding: 0 16px; font-size: 14px; }
+.btn.sm { height: 26px; padding: 0 10px; font-size: 12px; }
+.btn.xs { height: 22px; padding: 0 8px; font-size: var(--text-xs); gap: 6px; }
+
+/* Icon-only — square footprint matching the size's height */
+.btn.icon { padding: 0; width: 32px; gap: 0; justify-content: center; }
+.btn.icon.lg { width: 40px; }
+.btn.icon.sm { width: 26px; }
+.btn.icon.xs { width: 22px; }
+
+/* Button group — visually-joined row of buttons */
+.btn-group { display: inline-flex; }
+.btn-group .btn { border-radius: 0; }
+.btn-group .btn + .btn { margin-inline-start: -1px; }
+.btn-group .btn:first-child { border-start-start-radius: 6px; border-end-start-radius: 6px; }
+.btn-group .btn:last-child  { border-start-end-radius: 6px;   border-end-end-radius: 6px;   }
+.btn-group .btn:hover, .btn-group .btn:focus-visible { z-index: 1; }
+
+/* Reduced-motion guard — honour the OS preference for every .btn variant. */
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+  .btn:hover { transform: none; }
+  .btn:active { transform: none; }
+}
+
+/* Toolbar — row container holding btn-groups, separators, and toggles. */
+.toolbar {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+.toolbar-sep {
+  display: inline-block;
+  width: 1px; height: 18px;
+  background: var(--border);
+  margin: 0 4px;
+  flex: 0 0 auto;
+}
+
+/* Separator primitive — horizontal or vertical. Used standalone on the
+   Separator page and inside Toolbar, Menubar, Card footers, etc. */
+.separator { background: var(--border); flex: 0 0 auto; border: 0; margin: 0; }
+.separator.horizontal { width: 100%; height: 1px; }
+.separator.vertical { width: 1px; align-self: stretch; min-height: 18px; }
+.separator.dashed.horizontal { background: transparent; border-top: 1px dashed var(--border); height: 0; }
+
+.kbd {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 18px; height: 18px; padding: 0 5px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  background: var(--surface-hover); border: 1px solid var(--border);
+  border-radius: 3px; color: var(--fg-muted);
+}
+/* Chord — multiple keys joined with a 2-px gap, no "+" character */
+.kbd-chord { display: inline-flex; align-items: center; gap: 2px; }
+.kbd-chord.trailing { margin-inline-start: auto; }
+
+.focus-ring:focus-visible { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+
+/* Dot grid backgrounds */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+[data-theme="light"] .dot-grid { background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px); }
+
+/* Hover row */
+.row-hover { transition: background-color var(--dur) var(--ease); }
+.row-hover:hover { background: var(--surface-hover); }
+
+/* Animations */
+@keyframes fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ember-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,53,0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(255,107,53,0); }
+}
+@keyframes spark-trail {
+  0% { transform: translate(0,0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translate(var(--tx, 800px), var(--ty, 200px)); opacity: 0; }
+}
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes draw-stroke { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+@keyframes oncall-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251,191,36,0.6); }
+  50% { box-shadow: 0 0 0 4px rgba(251,191,36,0); }
+}
+@keyframes slide-in-right { from { transform: translateX(40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes progress { from { width: 0%; } to { width: 100%; } }
+
+/* Motion docs — duration-scale demo. The dot slides along its track using the
+   logical inset-inline-start so the motion reads with the reading direction
+   (RTL-correct). The page passes the duration inline via the animation
+   shorthand; the keyframe + dot helper live here so the page never authors a
+   per-page <style> block. */
+@keyframes motion-track-slide {
+  from { inset-inline-start: 4px; }
+  to   { inset-inline-start: calc(100% - 28px); }
+}
+.motion-track-dot {
+  position: absolute;
+  inset-block-start: 4px;
+  block-size: 24px; inline-size: 24px;
+  border-radius: var(--radius-sm);
+  background: var(--ember);
+}
+/* Motion docs — the 'Don't: animate look-at-me entries' anti-example. The page
+   references pulse-bounce by name via the inline animation shorthand. */
+@keyframes pulse-bounce {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+/* Reduced-motion — the motion-docs helpers must not animate when the OS asks
+   for reduced motion (the page's own a11y promise). */
+@media (prefers-reduced-motion: reduce) {
+  .motion-track-dot { animation: none; }
+}
+.hide-sb::-webkit-scrollbar { display: none; }
+.hide-sb { scrollbar-width: none; }
+
+.fade-in { animation: fade-in var(--dur-slow) var(--ease) both; }
+.ember-pulse { animation: ember-pulse 2s var(--ease) infinite; }
+
+/* Page transition */
+.page-enter { animation: fade-in 360ms var(--ease) both; }
+
+/* Code block */
+.code-block {
+  font-family: var(--font-mono); font-size: var(--text-sm);
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: 6px; padding: 14px 16px; overflow-x: auto;
+  color: var(--fg-muted); line-height: 1.6;
+}
+.code-block .k { color: var(--ice); }
+.code-block .s { color: #FBBF24; }
+.code-block .c { color: var(--fg-faint); font-style: italic; }
+.code-block .n { color: #A78BFA; }
+.code-block .f { color: var(--ember-glow); }
+
+/* Sidebar tier border */
+.tier-T1 { border-left: 2px solid var(--ember); }
+.tier-T2 { border-left: 2px solid var(--warning); }
+.tier-T3 { border-left: 2px solid var(--fg-subtle); }
+
+/* Modal backdrop */
+.backdrop {
+  position: fixed; inset: 0; background: rgba(8,9,10,0.6);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  z-index: var(--z-modal);
+  display: flex; align-items: center; justify-content: center;
+  animation: fade-in 180ms var(--ease) both;
+}
+
+/* Tooltip-ish */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 7px; border-radius: 4px;
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  background: var(--surface-hover); border: 1px solid var(--border);
+  color: var(--fg-muted);
+}
+.chip.ok { color: var(--success); background: var(--success-soft); border-color: rgba(52,211,153,0.2); }
+.chip.warn { color: var(--warning); background: var(--warning-soft); border-color: rgba(251,191,36,0.2); }
+.chip.bad { color: var(--danger); background: var(--danger-soft); border-color: rgba(248,113,113,0.2); }
+.chip.ember { color: var(--ember-text); background: var(--ember-soft); border-color: rgba(255,107,53,0.25); }
+.chip.ice { color: var(--ice); background: var(--ice-soft); border-color: rgba(125,211,252,0.25); }
+/* Borderless variant — no background/border chrome; the content (leading dot, text)
+   is the only affordance. Use for dense contexts where the chip border would add noise.
+   Example: LangBadge without border in a compact catalog cell. */
+.chip.chip-borderless { background: transparent; border-color: transparent; }
+
+/* Avatar
+ * NOTE: opaque base via background-color, tinted overlay via background-image.
+ * Keeps the .ember (and any other --*-soft) variant readable when stacked in
+ * a group — those tokens are alpha-12% and would let neighbours bleed through.
+ * No overflow:hidden on the wrapper so the status dot can sit outside the circle. */
+.avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background-color: var(--bg-elevated);
+  background-image: linear-gradient(var(--surface), var(--surface));
+  border: 1px solid var(--border-strong);
+  font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 600;
+  color: var(--fg-muted); letter-spacing: 0;
+  position: relative;
+  flex: 0 0 auto;
+}
+.avatar.ember {
+  color: var(--ember);
+  background-color: var(--bg-elevated);
+  background-image: linear-gradient(var(--ember-soft), var(--ember-soft));
+  border-color: rgba(255,107,53,0.25);
+}
+/* Image / decorative children: clip to the circle without losing overflow on the wrapper */
+.avatar > img,
+.avatar > .avatar-fill {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  border-radius: inherit;
+}
+
+/* Sizes */
+.avatar.xs { width: 20px; height: 20px; font-size: 9px; }
+.avatar.sm { width: 24px; height: 24px; font-size: 10px; }
+.avatar.lg { width: 36px; height: 36px; font-size: 13px; }
+.avatar.xl { width: 48px; height: 48px; font-size: 16px; }
+
+/* Status dot — sits at the 4:30 position, half-outside the circle.
+ * z-index keeps it above neighbours when avatars are grouped. */
+.avatar .status-dot {
+  position: absolute;
+  inset-block-end: 0; inset-inline-end: 0;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 2px var(--bg-elevated);
+  transform: translate(15%, 15%);
+  z-index: 2;
+}
+.avatar.lg .status-dot, .avatar.xl .status-dot { width: 11px; height: 11px; }
+.avatar .status-dot.away    { background: var(--warning); }
+.avatar .status-dot.offline { background: var(--fg-faint); }
+.avatar .status-dot.busy    { background: var(--danger); }
+
+/* Group — overlap avatars with a 2px ring matching surface.
+ * Each avatar gets a fresh stacking context (position relative + z-index)
+ * so the ring shows over its neighbour and there's no see-through. */
+.avatar-group { display: inline-flex; }
+.avatar-group .avatar {
+  box-shadow: 0 0 0 2px var(--bg-elevated);
+  position: relative;
+}
+.avatar-group .avatar + .avatar { margin-inline-start: -8px; }
+.avatar-group.tight .avatar + .avatar { margin-inline-start: -10px; }
+/* Later avatars sit on top — in LTR the rightmost avatar wins, in RTL the
+ * leftmost wins (because inline-flex reverses visual order under dir="rtl",
+ * which also moves the +N overflow tile to the left). */
+.avatar-group .avatar:nth-child(1)     { z-index: 1; }
+.avatar-group .avatar:nth-child(2)     { z-index: 2; }
+.avatar-group .avatar:nth-child(3)     { z-index: 3; }
+.avatar-group .avatar:nth-child(4)     { z-index: 4; }
+.avatar-group .avatar:nth-child(5)     { z-index: 5; }
+.avatar-group .avatar:nth-child(n+6)   { z-index: 6; }
+
+/* Avatar overflow counter — the "+N" chip shown after max avatars.
+ * Shares the same size + ring as sibling avatars. RTL: inline-flex
+ * reverses visual order so the counter naturally moves to the start. */
+.avatar-overflow {
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 auto; border-radius: 50%;
+  width: 28px; height: 28px; font-size: var(--text-xs);
+  background-color: var(--surface-active);
+  background-image: none;
+  border: 1px solid var(--border-strong);
+  font-family: var(--font-mono); font-weight: 600;
+  color: var(--fg-muted);
+  box-shadow: 0 0 0 2px var(--bg-elevated);
+  position: relative;
+  z-index: 7;
+  margin-inline-start: -8px;
+  user-select: none;
+}
+.avatar-group.tight .avatar-overflow { margin-inline-start: -10px; }
+
+/* Sparkline */
+.sparkline { width: 100%; height: 36px; }
+
+/* Grid backgrounds for hero */
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%);
+}
+
+/* Progress bar */
+.progress { height: 4px; background: var(--surface-hover); border-radius: 999px; overflow: hidden; }
+.progress > div { height: 100%; background: var(--ember); border-radius: 999px; transition: width 800ms var(--ease); }
+
+/* Sidesheet — logical properties so the panel anchors to the inline-end
+   (right in LTR, left in RTL) and the slide-in mirrors with reading direction. */
+.sidesheet {
+  position: fixed;
+  inset-block-start: 0; inset-block-end: 0;
+  inset-inline-end: 0;
+  width: 560px; max-width: 90vw;
+  background: var(--bg-elevated); border-inline-start: 1px solid var(--border-strong);
+  z-index: calc(var(--z-modal) + 10); overflow-y: auto;
+  animation: sheet-in var(--dur-slow) var(--ease) both;
+}
+@keyframes sheet-in { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+/* RTL — the sheet sits at the inline-end (visual left), so it enters from the
+   left; mirror the keyframe translate so the slide reads with the direction. */
+[dir="rtl"] .sidesheet { animation-name: sheet-in-rtl; }
+@keyframes sheet-in-rtl { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+/* Reduced-motion guard — appear in place, no slide. */
+@media (prefers-reduced-motion: reduce) {
+  .sidesheet { animation: none; }
+}
+
+/* Subtle glow */
+.ember-glow-bg {
+  position: absolute; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(255,107,53,0.18) 0%, transparent 60%);
+  filter: blur(20px);
+}
+
+/* Section header in sidebar */
+.nav-section { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); padding: 14px 14px 6px; }
+
+.nav-item {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  height: 32px; padding: 0 10px; border-radius: 5px;
+  color: var(--fg-muted); font-size: 13px; font-weight: 500;
+  transition: all var(--dur) var(--ease);
+  cursor: pointer; position: relative;
+}
+.nav-item:hover { background: var(--surface-hover); color: var(--fg); }
+.nav-item.active { background: var(--surface-active); color: var(--fg); font-weight: 600; }
+.nav-item.active:hover { background: var(--surface-active); color: var(--fg); }
+.nav-item.active::before {
+  content: ''; position: absolute; left: -2px; top: 6px; bottom: 6px; width: 2px; background: var(--ember); border-radius: 2px;
+}
+.nav-item .badge {
+  margin-left: auto; font-family: var(--font-mono); font-size: 9px;
+  padding: 1px 5px; border-radius: 3px;
+  background: var(--surface-active); color: var(--fg-subtle);
+  letter-spacing: 0.05em;
+}
+.nav-item .badge.new { color: var(--ember); background: var(--ember-soft); }
+.nav-item .badge.star { color: var(--ember); background: transparent; padding: 0; font-size: 11px; }
+
+/* Tilt utility */
+.tilt-3 { transform: perspective(1200px) rotateX(3deg); }
+
+/* Marquee for log strip */
+.fade-edges {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* Tabs */
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); }
+.tab {
+  padding: 10px 14px; font-size: 13px; color: var(--fg-muted);
+  border-bottom: 1px solid transparent; margin-bottom: -1px;
+  transition: all var(--dur) var(--ease); cursor: pointer;
+}
+.tab:hover { color: var(--fg); }
+.tab.active { color: var(--fg); border-bottom-color: var(--ember); }
+
+/* Card grid */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 6px; padding: 16px; transition: all var(--dur) var(--ease);
+}
+.card.hover:hover { background: var(--surface-hover); border-color: var(--border-strong); transform: translateY(-1px); }
+/* Reduced-motion guard — drop the hover lift; the tone/border shift still
+   conveys the hover state without the translate. */
+@media (prefers-reduced-motion: reduce) {
+  .card.hover:hover { transform: none; }
+}
+
+/* Table */
+.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: start; padding: 10px 12px; font-weight: 500; color: var(--fg-subtle); font-size: var(--text-xs); letter-spacing: 0.04em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+.tbl td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tbody tr { transition: background-color var(--dur) var(--ease); cursor: pointer; }
+.tbl tbody tr:hover { background: var(--surface-hover); }
+
+/* ----------------------------------------------------------------------
+ * Form controls — Checkbox / Radio / Toggle
+ *
+ * All three follow the same pattern: a real <input> sits visually-hidden
+ * under a styled <span> sibling. The label wraps everything so the entire
+ * row is the click target. Focus ring is rendered on :focus-visible of the
+ * input and projected onto the visual box via the `+` sibling selector.
+ * Same set of size modifiers (sm / md / lg) and the same disabled/error
+ * states across all three.
+ * --------------------------------------------------------------------- */
+.fc { position: relative; display: inline-flex; align-items: flex-start; gap: 10px; cursor: pointer; user-select: none; }
+.fc.block { display: flex; }
+/* Visually-hidden input that still hit-tests. Critical: do NOT use
+ * `clip-path: inset(50%)` to hide it — the CSS Masking spec defines
+ * clipped regions as not pointer-event-eligible, which would silently
+ * swallow clicks. Cover the whole label with an opacity:0 input instead;
+ * `.fc` is `position: relative` so the input is bounded by the label.
+ * Single-fire model: clicks land on the input directly (pointer-events:
+ * auto, full-bleed), not on the label, so we never depend on the
+ * label-wraps-input + htmlFor double-association that was double-firing
+ * onChange and thrashing React state. */
+.fc-input {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  margin: 0; padding: 0; border: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+  -webkit-appearance: none; appearance: none;
+}
+.fc-text { display: inline-flex; flex-direction: column; gap: 2px; min-width: 0; }
+.fc-label { font-size: var(--text-sm); line-height: 1.35; color: var(--fg); }
+.fc-desc  { font-size: var(--text-sm); line-height: 1.45; color: var(--fg-muted); }
+
+/* Checkbox -------------------------------------------------------------- */
+.fc-check-box {
+  flex: 0 0 auto;
+  width: 16px; height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid var(--border-stronger);
+  background: var(--surface);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ember-fg);
+  transition: background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  margin-top: 1px; /* optical alignment with the label baseline */
+}
+.fc-check-icon { opacity: 0; transform: scale(0.6); transform-origin: center; transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+.fc-check-dash { width: 8px; height: 1.5px; background: currentColor; border-radius: 1px; opacity: 0; transition: opacity var(--dur-fast) var(--ease); }
+.fc-input:checked + .fc-check-box { background: var(--ember); border-color: var(--ember); }
+.fc-input:checked + .fc-check-box .fc-check-icon { opacity: 1; transform: scale(1); }
+.fc-input.indeterminate + .fc-check-box,
+.fc-input:indeterminate + .fc-check-box { background: var(--ember); border-color: var(--ember); }
+.fc-input.indeterminate + .fc-check-box .fc-check-dash,
+.fc-input:indeterminate + .fc-check-box .fc-check-dash { opacity: 1; }
+.fc-input:focus-visible + .fc-check-box { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+.fc-input:disabled + .fc-check-box,
+.fc[aria-disabled="true"] .fc-check-box { opacity: 0.45; }
+.fc[aria-disabled="true"] { cursor: not-allowed; }
+.fc.error .fc-check-box { border-color: var(--danger); }
+.fc.error .fc-input:focus-visible + .fc-check-box { outline: var(--ring-width) solid var(--ring-danger); outline-offset: var(--ring-offset); }
+
+/* Sizes */
+.fc.sm .fc-check-box { width: 14px; height: 14px; border-radius: 3px; }
+.fc.lg .fc-check-box { width: 18px; height: 18px; border-radius: 5px; }
+.fc.lg .fc-label { font-size: 14px; }
+
+/* Radio ----------------------------------------------------------------- */
+.fc-radio-box {
+  flex: 0 0 auto;
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 1.5px solid var(--border-stronger);
+  background: var(--surface);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  margin-top: 1px;
+}
+.fc-radio-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ember); transform: scale(0); transition: transform var(--dur) cubic-bezier(0.34, 1.56, 0.64, 1); }
+/* Reduced-motion guard — the dot appears instantly with no spring/scale under
+   prefers-reduced-motion (matches the Radio a11y/Motion doc claim). */
+@media (prefers-reduced-motion: reduce) {
+  .fc-radio-dot { transition: none; }
+}
+.fc-input:checked + .fc-radio-box { border-color: var(--ember); }
+.fc-input:checked + .fc-radio-box .fc-radio-dot { transform: scale(1); }
+.fc-input:focus-visible + .fc-radio-box { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+.fc-input:disabled + .fc-radio-box,
+.fc[aria-disabled="true"] .fc-radio-box { opacity: 0.45; }
+
+/* Sizes */
+.fc.sm .fc-radio-box { width: 14px; height: 14px; }
+.fc.sm .fc-radio-dot { width: 6px; height: 6px; }
+.fc.lg .fc-radio-box { width: 18px; height: 18px; }
+.fc.lg .fc-radio-dot { width: 10px; height: 10px; }
+
+/* Radio cards — entire surface is the radio target */
+.fc-card {
+  position: relative;
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 14px; border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer; user-select: none;
+  transition: border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.fc-card:hover { background: var(--surface-hover); border-color: var(--border-strong); }
+.fc-card .fc-input:focus-visible + .fc-radio-box { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+.fc-card.checked { border-color: var(--ember); background: var(--ember-softer); }
+.fc-card.checked .fc-radio-box { border-color: var(--ember); }
+.fc-card.checked .fc-radio-dot { transform: scale(1); }
+
+/* Selection Cards (.sel-card*) — clickable card wrapping a checkbox or radio
+ * control. The ENTIRE card is the click target (a <label> element) — clicking
+ * anywhere toggles selection. Selected state: ember-soft tint + ember border.
+ * Orientation: horizontal (control + content in a row) or vertical (stacked).
+ *
+ * Usage:
+ *   <label class="sel-card [sel-card--vertical] [sel-card--checked] [sel-card--disabled]">
+ *     <input type="checkbox|radio" class="fc-input …" />
+ *     <span class="fc-check-box|fc-radio-box" …></span>
+ *     <span class="sel-card__body">
+ *       <span class="sel-card__icon">…</span>  (optional)
+ *       <span class="sel-card__title">…</span>
+ *       <span class="sel-card__desc">…</span>  (optional)
+ *     </span>
+ *   </label>
+ */
+.sel-card {
+  position: relative;
+  display: inline-flex; flex-direction: row; align-items: flex-start;
+  gap: 12px; padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer; user-select: none;
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+  outline: none;
+}
+/* The hidden native input handles focus — show the ring on the card */
+.sel-card:has(.fc-input:focus-visible) {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}
+.sel-card:hover:not(.sel-card--disabled) {
+  background: var(--surface-hover);
+  border-color: var(--border-strong);
+}
+/* Selected state: ember-soft tint + ember border */
+.sel-card--checked {
+  border-color: var(--ember);
+  background: var(--ember-softer);
+}
+.sel-card--checked:hover:not(.sel-card--disabled) {
+  background: var(--ember-soft);
+  border-color: var(--ember);
+}
+/* Disabled */
+.sel-card--disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+/* Vertical orientation — control on top, content below */
+.sel-card--vertical {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+.sel-card--vertical .sel-card__body { margin-block-start: 0; }
+
+/* Body — title + optional description */
+.sel-card__body {
+  display: flex; flex-direction: column; gap: 3px;
+  min-width: 0; flex: 1 1 auto;
+}
+.sel-card__icon {
+  display: inline-flex; align-items: center;
+  color: var(--fg-muted);
+  margin-block-end: 4px;
+  flex: 0 0 auto;
+}
+.sel-card__title {
+  font-size: var(--text-sm); font-weight: 500;
+  line-height: 1.35; color: var(--fg);
+}
+.sel-card__desc {
+  font-size: var(--text-sm); line-height: 1.45;
+  color: var(--fg-muted);
+}
+/* Keep foreground readable on ember-soft — no re-coloring needed in dark mode
+ * since --fg is already high-contrast; light mode also OK (dark fg on warm tint). */
+.sel-card--checked .sel-card__title { color: var(--fg); }
+.sel-card--checked .sel-card__desc  { color: var(--fg-muted); }
+
+/* RadioCardGroup layout — horizontal (default) and vertical */
+.sel-card-group {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.sel-card-group--horizontal {
+  flex-direction: row; flex-wrap: wrap; gap: 10px;
+}
+/* RTL mirrors are handled automatically by inline-flex + logical properties */
+
+/* Switch (formerly Toggle) ----------------------------------------------- *
+ * CSS classes keep the .fc-toggle-* names because they're the underlying
+ * primitives — the user-facing component is "Switch" (its own page lives at
+ * pages/components/switch.html). The light-mode rules below give the OFF
+ * state a distinctly lighter track + an opaque white thumb (shadcn-style),
+ * since dark-mode and light-mode were previously visually identical.
+ */
+.fc-toggle-track {
+  position: relative; flex: 0 0 auto;
+  box-sizing: border-box;
+  width: 40px; height: 22px; border-radius: 999px;
+  background: var(--surface-active);
+  border: 1px solid var(--border-strong);
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  margin-top: 0;
+}
+.fc-toggle-thumb {
+  position: absolute; top: 2px; inset-inline-start: 2px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--fg-muted);
+  /* Spring easing: small overshoot then settle. The (0.34, 1.56, 0.64, 1)
+   * curve emulates a UIKit-style spring. Combined with --dur (220ms) it
+   * gives a satisfying flick instead of a flat slide. */
+  transition: transform var(--dur) cubic-bezier(0.34, 1.56, 0.64, 1),
+              background-color var(--dur) var(--ease);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.18);
+}
+.fc-input:checked + .fc-toggle-track { background: var(--ember); border-color: var(--ember); }
+.fc-input:checked + .fc-toggle-track .fc-toggle-thumb { transform: translateX(18px); background: var(--ember-fg); }
+[dir="rtl"] .fc-input:checked + .fc-toggle-track .fc-toggle-thumb { transform: translateX(-18px); }
+.fc-input:focus-visible + .fc-toggle-track { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+.fc-input:disabled + .fc-toggle-track,
+.fc[aria-disabled="true"] .fc-toggle-track { opacity: 0.45; }
+
+/* Light-mode overrides — distinct from dark.
+ * Track OFF: zinc-200 surface (clearly lighter than the page) with inset shadow.
+ * Track ON: ember (same hue, slightly different shade than dark mode).
+ * Thumb: always white — both OFF and ON. Matches shadcn's "thumb is the page
+ * background color" pattern. The 1px shadow gives the floating-pill feel. */
+[data-theme="light"] .fc-toggle-track {
+  background: #E4E4E7;
+  border-color: rgba(0,0,0,0.06);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.04);
+}
+[data-theme="light"] .fc-toggle-thumb {
+  background: #FFFFFF;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.16), 0 0 0 0.5px rgba(0,0,0,0.04);
+}
+[data-theme="light"] .fc-input:checked + .fc-toggle-track {
+  background: var(--ember); border-color: var(--ember);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.10);
+}
+[data-theme="light"] .fc-input:checked + .fc-toggle-track .fc-toggle-thumb {
+  background: #FFFFFF;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.20), 0 0 0 0.5px rgba(0,0,0,0.04);
+}
+
+/* Invalid state — shadcn's `aria-invalid`. Switch label and track both
+ * pick up the danger token so the field reads as "needs attention" before
+ * the helper line below. Pair with .fc-error for the helper text. */
+.fc.invalid .fc-toggle-track,
+.fc[aria-invalid="true"] .fc-toggle-track {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 1px rgba(248,113,113,0.20);
+}
+.fc.invalid .fc-input:focus-visible + .fc-toggle-track,
+.fc[aria-invalid="true"] .fc-input:focus-visible + .fc-toggle-track {
+  outline: var(--ring-width) solid var(--ring-danger);
+  outline-offset: var(--ring-offset);
+  box-shadow: none;
+}
+.fc.invalid .fc-label,
+.fc[aria-invalid="true"] .fc-label { color: var(--danger); }
+
+/* Helper line — sits below an .fc when validation needs more than just a
+ * tinted label. Use ".fc-error" for danger; muted variant is just .fc-help. */
+.fc-help, .fc-error {
+  display: block;
+  font-size: 12px; line-height: 1.45;
+  margin-top: 6px;
+  color: var(--fg-subtle);
+}
+.fc-error { color: var(--danger); }
+
+/* Sizes — slide distance = (track-width − thumb − 2*top-pad − 2*border) */
+.fc.sm .fc-toggle-track { width: 32px; height: 18px; }
+.fc.sm .fc-toggle-thumb { width: 12px; height: 12px; }
+.fc.sm .fc-input:checked + .fc-toggle-track .fc-toggle-thumb { transform: translateX(14px); }
+[dir="rtl"] .fc.sm .fc-input:checked + .fc-toggle-track .fc-toggle-thumb { transform: translateX(-14px); }
+
+.fc.lg .fc-toggle-track { width: 48px; height: 26px; }
+.fc.lg .fc-toggle-thumb { width: 20px; height: 20px; }
+.fc.lg .fc-input:checked + .fc-toggle-track .fc-toggle-thumb { transform: translateX(22px); }
+[dir="rtl"] .fc.lg .fc-input:checked + .fc-toggle-track .fc-toggle-thumb { transform: translateX(-22px); }
+
+/* Reduced-motion guard — the thumb/track jump between ends instantly with no
+   slide/spring under prefers-reduced-motion (the Switch a11y doc's promise). */
+@media (prefers-reduced-motion: reduce) {
+  .fc-toggle-thumb,
+  .fc-toggle-track { transition: none; }
+}
+
+/* Settings row — a common composition: label/desc on the left, toggle on the right */
+.fc-row {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.fc-row:last-child { border-bottom: none; }
+.fc-row .fc-text { flex: 1 1 auto; }
+.fc-row .fc-text .fc-label { font-size: 14px; font-weight: 500; }
+
+/* Markdown-ish */
+.md h1, .md h2, .md h3 { letter-spacing: -0.02em; font-weight: 600; }
+.md h1 { font-size: 28px; margin: 0 0 12px; }
+.md h2 { font-size: 20px; margin: 28px 0 10px; }
+.md h3 { font-size: 16px; margin: 20px 0 8px; }
+.md p { color: var(--fg-muted); margin: 10px 0; }
+.md code { font-family: var(--font-mono); font-size: 13px; background: var(--surface); padding: 1px 5px; border-radius: 3px; border: 1px solid var(--border); }
+.md ul { color: var(--fg-muted); padding-left: 20px; }
+.md li { margin: 6px 0; }
+
+/* ---- Input building blocks ----------------------------------------------
+   Composable: <Field> wraps label + group + help; <InputGroup> is the
+   bordered shell; addons (text, icon, button, select) and the control
+   live as siblings inside the group. The whole group lights up on focus
+   so the inner <input> doesn't paint its own ring. */
+.in-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; max-width: 100%; }
+.in-field.fluid { width: 100%; }
+/* Stand-alone .in-group can also stretch to full width (e.g. InputGroup full=true). */
+.in-group.fluid { width: 100%; }
+
+.in-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: var(--fg);
+  letter-spacing: -0.005em;
+}
+.in-label .required-mark { color: var(--ember); font-weight: 600; }
+.in-label .opt {
+  font-size: var(--text-xs); font-weight: 400; color: var(--fg-muted);
+  margin-inline-start: 2px;
+}
+
+.in-help, .in-error, .in-counter {
+  display: block; font-size: 12px; line-height: 1.5;
+  color: var(--fg-subtle);
+}
+.in-error { color: var(--danger); display: inline-flex; align-items: center; gap: 6px; }
+/* Helper text used by migrated docs pages (textarea, etc.). Resolves to the
+   AA-passing secondary token instead of inheriting ambient page text color. */
+.in-helper { display: block; font-size: 12px; line-height: 1.5; color: var(--fg-muted); }
+.in-counter { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); margin-inline-start: auto; }
+.in-helprow { display: flex; align-items: center; gap: 12px; }
+.in-helprow .in-help { flex: 1 1 auto; }
+
+/* Group — the bordered shell that houses everything. */
+.in-group {
+  display: flex; align-items: stretch;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  min-height: 36px;
+}
+.in-group:hover { border-color: var(--border-stronger); }
+.in-group:focus-within {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}
+.in-group.is-invalid,
+.in-group[aria-invalid="true"] {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 1px rgba(248,113,113,0.18);
+}
+.in-group.is-invalid:focus-within,
+.in-group[aria-invalid="true"]:focus-within {
+  outline: var(--ring-width) solid var(--ring-danger);
+  outline-offset: var(--ring-offset);
+  box-shadow: none;
+}
+.in-group.is-disabled { opacity: 0.5; pointer-events: none; }
+.in-group.is-readonly { background: var(--bg-elevated); }
+
+/* Sizes — height + padding scale together. */
+.in-group.sm { min-height: 28px; }
+.in-group.md { min-height: 36px; }
+.in-group.lg { min-height: 44px; }
+
+/* The native <input> sits at the heart of the group. It must be
+   borderless / ring-less because the group paints those for it.
+   We let the input keep its natural single-line height (set explicitly via
+   `line-height`) and `align-self: center` it within the group — that way
+   text inside the input is always vertically centered, regardless of group
+   min-height (which addons can stretch). */
+.in-group .in-control {
+  flex: 1 1 auto; min-width: 0;
+  background: transparent;
+  border: none; outline: none;
+  color: var(--fg);
+  font-family: inherit; font-size: 13px;
+  line-height: 20px;
+  padding: 6px 12px;
+  align-self: center;
+}
+.in-group.sm .in-control { font-size: var(--text-sm); line-height: 16px; padding: 4px 10px; }
+.in-group.lg .in-control { font-size: 14px; line-height: 22px; padding: 8px 14px; }
+/* Numeric fields (NumberInput, byte/port/replica counters, prices, percentages)
+   are Geist Sans with proportional figures by default, so multi-digit values
+   misalign column-to-column and the field re-flows as you step. Tabular figures
+   lock the digit width so every NumberInput inherits aligned numerics without a
+   per-page override. */
+.in-group .in-control[type="number"] { font-variant-numeric: tabular-nums; }
+.in-group .in-control::placeholder { color: var(--fg-faint); }
+.in-group .in-control:disabled { cursor: not-allowed; }
+
+/* The global :where(input:focus) rule is specificity-0 so this wins
+   without !important — the group paints the ring; the inner input is silent. */
+.in-group .in-control:focus { border: none; box-shadow: none; }
+
+/* Reduced-motion guard — honour the OS preference for the group's
+   border-color / box-shadow transition (the a11y 'Motion' card promises
+   the focus chrome appears instantly under prefers-reduced-motion). */
+@media (prefers-reduced-motion: reduce) {
+  .in-group { transition: none; }
+}
+
+/* DateInput (.in-date) — hide the browser's native calendar icon (dark in dark
+   mode, double-indicator in some Chromium versions) and let the single DS icon
+   in .in-addon carry the affordance. The native picker still opens on click. */
+.in-group .in-control.in-date::-webkit-calendar-picker-indicator {
+  opacity: 0; cursor: pointer; position: absolute; inset: 0; width: 100%; height: 100%;
+}
+.in-group .in-control.in-date { color-scheme: dark light; }
+
+/* Addons — text labels, icons, buttons, selects, on either side. */
+.in-addon {
+  display: inline-flex; align-items: center; flex: 0 0 auto;
+  color: var(--fg-muted); padding: 0 10px;
+  font-size: 13px;
+}
+.in-addon.icon { padding: 0 10px; color: var(--fg-subtle); }
+.in-addon.text {
+  background: var(--bg-elevated);
+  color: var(--fg-muted);
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.in-addon.text + .in-control,
+.in-control + .in-addon.text { /* hairline divider between text addon + control */ }
+.in-addon.text:first-child { border-inline-end: 1px solid var(--border); }
+.in-addon.text:last-child  { border-inline-start: 1px solid var(--border); }
+.in-addon.btn {
+  padding: 0; align-self: stretch;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; color: var(--fg-faint);
+  background: transparent; cursor: pointer;
+  border: none; outline: none;
+  appearance: none; -webkit-appearance: none;
+  font: inherit;
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.in-group.sm .in-addon.btn { width: 28px; }
+.in-group.lg .in-addon.btn { width: 44px; }
+/* Hover stays FLAT — only color shifts. Background highlights would imply a
+   geometric change (and were perceived as the button "moving up"). */
+.in-addon.btn:hover { color: var(--fg); }
+/* When the addon button itself receives keyboard focus, the ring is painted
+   on the parent .in-group — not on the button. Reasoning: a 2px outline +
+   2px offset around an inside-the-group button has nowhere to render (the
+   group's border + adjacent siblings clip it on three sides). The group has
+   open space outside it, so the ring sits there cleanly; the button just
+   recolors to confirm focus. */
+.in-addon.btn:focus-visible {
+  color: var(--ember);
+  outline: none;
+}
+.in-group:has(.in-addon.btn:focus-visible),
+.in-group:has(.in-addon.stepper .step:focus-visible) {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}
+.in-addon.btn:disabled { cursor: not-allowed; opacity: 0.5; }
+.in-addon.btn.is-active { color: var(--ember); }
+
+/* Native <select> rendered as an addon on either edge. */
+.in-addon.select {
+  padding: 0 28px 0 12px;
+  background: var(--bg-elevated)
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23A1A1A6' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='3 5 6 8 9 5'/></svg>")
+    no-repeat right 8px center / 12px 12px;
+  border: none;
+  color: var(--fg); font-size: 13px; font-family: inherit;
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+}
+.in-addon.select:first-child { border-inline-end: 1px solid var(--border); }
+.in-addon.select:last-child  { border-inline-start: 1px solid var(--border); }
+.in-addon.select:focus { outline: none; }
+
+/* A native <select> used directly as the .in-control: suppress the browser's
+   built-in arrow (appearance:none isn't honored everywhere) and paint the DS
+   chevron as an inline-end background so there is exactly ONE, RTL-aware. */
+select.in-control {
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  padding-inline-end: 28px;
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23A1A1A6' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='3 5 6 8 9 5'/></svg>")
+    no-repeat right 4px center / 12px 12px;
+}
+select.in-control::-ms-expand { display: none; }
+[dir="rtl"] select.in-control { background-position: left 4px center; }
+
+/* Tag chips inside a multi-tag input.
+   The .in-group size class (sm/md/lg) flows to the .in-tags container which
+   carries all proportional adjustments — chip height, font, padding, and the
+   inline text input height all scale together. */
+.in-tags {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+  padding-block: 4px; padding-inline-start: 8px; padding-inline-end: 4px;
+  flex: 1 1 auto; min-width: 0;
+}
+/* Default (md) chip */
+.in-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding-block: 2px; padding-inline-start: 8px; padding-inline-end: 4px;
+  height: 22px;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--fg); font-size: 12px;
+}
+/* sm group: shorter, tighter chip */
+.in-group.sm .in-tag {
+  height: 18px;
+  padding-block: 1px; padding-inline-start: 6px; padding-inline-end: 3px;
+  font-size: 11px;
+  border-radius: 3px;
+}
+/* lg group: taller, more breathing room */
+.in-group.lg .in-tag {
+  height: 28px;
+  padding-block: 3px; padding-inline-start: 10px; padding-inline-end: 5px;
+  font-size: 13px;
+  border-radius: 5px;
+}
+.in-tag .tag-x {
+  width: 16px; height: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 3px;
+  color: var(--fg-faint);
+  background: transparent; border: none; outline: none;
+  appearance: none; -webkit-appearance: none;
+  cursor: pointer; padding: 0; font: inherit;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.in-group.sm .in-tag .tag-x { width: 12px; height: 12px; }
+.in-group.lg .in-tag .tag-x { width: 18px; height: 18px; border-radius: 4px; }
+.in-tag .tag-x:hover { color: var(--fg); }
+.in-tag .tag-x:focus-visible { color: var(--ember); outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+.in-tags .in-control {
+  flex: 1 1 80px; min-width: 80px; padding: 0 4px; height: 22px;
+}
+.in-group.sm .in-tags .in-control { height: 18px; }
+.in-group.lg .in-tags .in-control { height: 28px; }
+
+/* Spinner addon — same width as button addons. */
+.in-addon.spinner { width: 36px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+.in-group.sm .in-addon.spinner { width: 28px; }
+.in-group.lg .in-addon.spinner { width: 44px; }
+
+/* Hide native number spinners — they break the visual rhythm of the field
+   and conflict with our addon system. Use .in-addon.stepper for fields
+   that benefit from up/down stepping. */
+.in-group .in-control[type="number"]::-webkit-inner-spin-button,
+.in-group .in-control[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none; margin: 0;
+}
+.in-group .in-control[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+
+/* Vertical stepper — two stacked chevron buttons on the trailing edge of a
+   numeric field. Replaces the native browser spinner for numeric inputs.
+   Column is wider than the minimal 22px to give comfortable tap targets:
+   md = 28px, sm = 22px, lg = 34px. Each half-row is at least 14px tall. */
+.in-addon.stepper {
+  display: inline-flex; flex-direction: column;
+  width: 28px; padding: 0; align-self: stretch;
+  border-inline-start: 1px solid var(--border);
+}
+.in-group.sm .in-addon.stepper { width: 22px; }
+.in-group.lg .in-addon.stepper { width: 34px; }
+.in-addon.stepper .step {
+  flex: 1 1 0; min-height: 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; cursor: pointer;
+  border: none; outline: none;
+  appearance: none; -webkit-appearance: none;
+  color: var(--fg-faint); padding: 0; font: inherit;
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.in-addon.stepper .step + .step { border-block-start: 1px solid var(--border); }
+.in-addon.stepper .step:hover { color: var(--fg); background: var(--surface-hover); }
+.in-addon.stepper .step:focus-visible {
+  color: var(--ember);
+  outline: none;
+}
+.in-addon.stepper .step:disabled { cursor: not-allowed; opacity: 0.4; }
+
+/* OTP — codes-and-confirmations input. */
+.in-otp { display: inline-flex; align-items: center; gap: 6px; }
+.in-otp-cell {
+  width: 40px; height: 44px; text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  color: var(--fg);
+  font-family: var(--font-mono); font-size: 18px;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.in-otp-cell:focus { outline: none; border-color: var(--ember); box-shadow: 0 0 0 3px var(--ember-soft); }
+.in-otp-cell.is-invalid { border-color: var(--danger); box-shadow: 0 0 0 1px rgba(248,113,113,0.18); }
+.in-otp-cell:disabled { opacity: 0.5; cursor: not-allowed; }
+.in-otp-sep {
+  color: var(--fg-faint); font-family: var(--font-mono); font-size: 18px;
+  user-select: none;
+}
+.in-otp.sm .in-otp-cell { width: 32px; height: 36px; font-size: 15px; }
+.in-otp.lg .in-otp-cell { width: 48px; height: 52px; font-size: 22px; }
+
+/* Autocomplete dropdown — same chrome as Combobox panel. */
+.in-pop {
+  position: absolute; z-index: var(--z-dropdown);
+  top: calc(100% + 6px); inset-inline-start: 0; inset-inline-end: 0;
+  max-height: 280px; overflow-y: auto;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  box-shadow: var(--elev-3);
+  padding: 4px;
+  animation: in-pop-in var(--dur-fast) var(--ease) both;
+}
+/* In-input popover uses elev-3 token in both themes — no light override needed. */
+.in-pop-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 8px; border-radius: 5px;
+  color: var(--fg-muted); cursor: pointer;
+  font-size: 13px; width: 100%; text-align: start; background: transparent;
+}
+.in-pop-item:hover, .in-pop-item.is-active { background: var(--surface-hover); color: var(--fg); }
+.in-pop-item .match { color: var(--ember); }
+.in-pop-item .meta { margin-inline-start: auto; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-faint); }
+.in-pop-empty { padding: 14px; text-align: center; color: var(--fg-faint); font-size: var(--text-sm); }
+
+/* Position context for autocomplete */
+.in-field.has-pop { position: relative; }
+
+@keyframes in-pop-in {
+  from { opacity: 0; transform: translateY(-2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Light-mode tweaks */
+[data-theme="light"] .in-addon.text { background: #F4F4F5; }
+[data-theme="light"] .in-addon.select { background-color: #F4F4F5; }
+[data-theme="light"] .in-group.is-readonly { background: #FAFAFA; }
+
+/* ===== Slider ============================================================
+   Inspired by shadcn/ui Slider (Radix). Single thumb, range (two-thumbs),
+   sizes (sm/md/lg), vertical orientation, marks, and an invalid state.
+   Ember accent for the filled track + thumbs; spring on focus/active.
+   ----------------------------------------------------------------------- */
+.sl {
+  position: relative; display: flex; align-items: center;
+  width: 100%; height: 20px;
+  touch-action: none; user-select: none;
+}
+.sl-track {
+  position: relative; flex: 1; height: 6px;
+  background: var(--surface-active);
+  border-radius: 999px; overflow: hidden;
+}
+.sl-range {
+  position: absolute; inset-block: 0;
+  background: var(--ember);
+  border-radius: 999px;
+  transition: background var(--dur) var(--ease);
+}
+.sl-thumb {
+  position: absolute; top: 50%;
+  width: 16px; height: 16px;
+  background: var(--bg);
+  border: 2px solid var(--ember);
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  transition: transform var(--dur) cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+  z-index: 2;
+}
+.sl-thumb:hover { transform: translate(-50%, -50%) scale(1.10); }
+.sl-thumb:active,
+.sl-thumb.is-dragging { cursor: grabbing; transform: translate(-50%, -50%) scale(1.18); }
+.sl-thumb:focus-visible {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+  box-shadow: none;
+}
+
+/* Reduced-motion guard — drop the spring/fill transitions so the fill and thumb
+   snap straight to the new value (matches the Slider Motion a11y card). The
+   hover/active scale transforms still apply geometrically but no longer ease. */
+@media (prefers-reduced-motion: reduce) {
+  .sl-range,
+  .sl-thumb { transition: none; }
+}
+
+/* Sizes */
+.sl.sm { height: 16px; }
+.sl.sm .sl-track { height: 4px; }
+.sl.sm .sl-thumb { width: 12px; height: 12px; border-width: 2px; }
+.sl.lg { height: 24px; }
+.sl.lg .sl-track { height: 8px; }
+.sl.lg .sl-thumb { width: 20px; height: 20px; }
+
+/* Vertical orientation */
+.sl.vertical {
+  flex-direction: column;
+  width: 20px; height: 160px;
+}
+.sl.vertical .sl-track {
+  width: 6px; height: 100%; flex: 1;
+}
+.sl.vertical .sl-range {
+  inset-inline: 0; inset-block: auto;
+}
+.sl.vertical .sl-thumb {
+  top: auto; left: 50%;
+  transform: translate(-50%, 50%);
+}
+.sl.vertical .sl-thumb:hover { transform: translate(-50%, 50%) scale(1.10); }
+.sl.vertical .sl-thumb:active,
+.sl.vertical .sl-thumb.is-dragging { transform: translate(-50%, 50%) scale(1.18); }
+
+/* Marks (tick row below the track) */
+.sl-marks {
+  position: relative; display: block;
+  margin-top: 8px; height: 16px;
+  font: 500 11px/1 var(--mono);
+  color: var(--fg-faint);
+}
+.sl-mark {
+  position: absolute; top: 0;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.sl-mark::before {
+  content: ''; width: 1px; height: 4px;
+  background: var(--border);
+}
+.sl-mark.active { color: var(--fg-muted); }
+
+/* Disabled */
+.sl.is-disabled { opacity: 0.55; pointer-events: none; }
+
+/* Invalid */
+.sl.is-invalid .sl-range,
+.sl[aria-invalid="true"] .sl-range { background: var(--danger); }
+.sl.is-invalid .sl-thumb,
+.sl[aria-invalid="true"] .sl-thumb { border-color: var(--danger); }
+.sl.is-invalid .sl-thumb:focus-visible,
+.sl[aria-invalid="true"] .sl-thumb:focus-visible {
+  outline: var(--ring-width) solid var(--ring-danger);
+  outline-offset: var(--ring-offset);
+  box-shadow: none;
+}
+
+/* Light mode */
+[data-theme="light"] .sl-track { background: #E4E4E7; }
+[data-theme="light"] .sl-thumb {
+  background: #FFFFFF;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+}
+
+/* RTL — flip the value visualization. Thumb uses inset-inline-start (logical),
+   which becomes `right:` under RTL — its right edge anchors to the value.
+   The default translate(-50%, -50%) is physical and shifts further LEFT,
+   leaving a thumb-width gap between thumb and filled range. Mirror X. */
+[dir="rtl"] .sl-range { direction: rtl; }
+[dir="rtl"] .sl:not(.vertical) .sl-thumb { transform: translate(50%, -50%); }
+[dir="rtl"] .sl:not(.vertical) .sl-thumb:hover { transform: translate(50%, -50%) scale(1.10); }
+[dir="rtl"] .sl:not(.vertical) .sl-thumb:active,
+[dir="rtl"] .sl:not(.vertical) .sl-thumb.is-dragging { transform: translate(50%, -50%) scale(1.18); }
+
+/* ── File input — drop zone + selected-file list (promoted from the file-input
+   page so <FileInput> ships styled via forge-ui add). ─────────────────────── */
+.in-drop {
+  border: 1.5px dashed var(--border-strong);
+  border-radius: 10px;
+  padding: 28px 22px;
+  background: var(--bg-elevated);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 160ms var(--ease), border-color 160ms var(--ease), box-shadow 160ms var(--ease), transform 160ms var(--ease);
+  text-align: center;
+  position: relative;
+  outline: none;
+}
+.in-drop:hover { background: var(--surface-hover); border-color: var(--fg-faint); }
+/* Focus ring — the native <input type="file"> is overlaid with opacity:0,
+   so :focus-visible on the input projects the ring onto its parent
+   .in-drop via :focus-within. Keyboard users get the same affordance as
+   pointer users dragging a file in (.is-dragging). */
+.in-drop:focus-within {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}
+.in-drop.is-dragging {
+  border-color: var(--ember);
+  background: rgba(255,107,53,0.06);
+}
+.in-drop.is-invalid { border-color: var(--danger); background: rgba(248,113,113,0.04); }
+.in-drop.compact { padding: 14px 18px; flex-direction: row; gap: 14px; text-align: start; }
+.in-drop input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.in-drop-icon {
+  width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--fg-muted);
+  flex: 0 0 auto;
+}
+.in-drop.is-dragging .in-drop-icon { color: var(--ember); border-color: var(--ember); }
+.in-drop-title { font-size: var(--text-sm); font-weight: 500; color: var(--fg); }
+.in-drop-meta  { font-size: var(--text-base); color: var(--fg-muted); line-height: 1.55; font-variant-numeric: tabular-nums; }
+.in-drop-link  { color: var(--ember); cursor: pointer; }
+
+.in-files { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+.in-file {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  position: relative;
+}
+.in-file.is-error { border-color: rgba(248,113,113,0.4); background: rgba(248,113,113,0.04); }
+.in-file-thumb {
+  width: 40px; height: 40px;
+  flex: 0 0 auto;
+  border-radius: 6px;
+  background: var(--bg-elevated);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--fg-muted);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.in-file-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.in-file-body { flex: 1; min-width: 0; }
+.in-file-name {
+  font-size: var(--text-sm); font-weight: 500;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 100%;
+}
+.in-file-meta { font-size: var(--text-xs); color: var(--fg-muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
+.in-file-progress {
+  height: 3px; border-radius: 999px;
+  background: var(--bg-elevated);
+  overflow: hidden;
+  margin-top: 6px;
+  border: 1px solid var(--border);
+}
+.in-file-progress > span {
+  display: block; height: 100%;
+  background: var(--ember);
+  transition: width 160ms var(--ease);
+}
+.in-file.is-error .in-file-progress > span { background: var(--danger); }
+.in-file.is-success .in-file-progress > span { background: var(--success); }
+.in-file-x {
+  flex: 0 0 auto;
+  width: 28px; height: 28px;
+  border: none; outline: none; background: transparent;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 6px;
+  color: var(--fg-faint);
+  cursor: pointer;
+  transition: color 120ms var(--ease), background 120ms var(--ease);
+}
+.in-file-x:hover { color: var(--fg); background: var(--bg-elevated); }
+.in-file-x:focus-visible { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+
+/* ── Calendar (.cal-*) (promoted from the docs page so the component ships styled
+   via forge-ui add). ──────────────────────────────────────────────────── */
+.cal {
+  width: 280px;
+  border: 1px solid var(--border); border-radius: 10px;
+  background: var(--bg-elevated);
+  padding: 14px;
+  font-feature-settings: 'tnum';
+}
+.cal-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px; gap: 6px;
+}
+.cal-title { font-size: 13px; font-weight: 600; color: var(--fg); letter-spacing: -0.005em; }
+.cal-btn {
+  width: 26px; height: 26px; border-radius: 5px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--fg-muted); background: transparent; border: none;
+  cursor: pointer; transition: background var(--dur-fast) var(--ease);
+}
+.cal-btn:hover { background: var(--surface-hover); color: var(--fg); }
+.cal-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.cal-btn:disabled:hover { background: transparent; color: var(--fg-muted); }
+
+.cal-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px;
+}
+.cal-dow {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--fg-faint);
+  text-align: center; padding: 6px 0 8px;
+}
+.cal-day {
+  aspect-ratio: 1;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 5px;
+  font-size: var(--text-sm); color: var(--fg-muted);
+  background: transparent; border: none; cursor: pointer;
+  transition: all var(--dur-fast) var(--ease);
+  position: relative;
+}
+.cal-day:hover { background: var(--surface-hover); color: var(--fg); }
+.cal-day.outside { color: var(--fg-faint); }
+.cal-day.today { color: var(--ember); font-weight: 600; }
+.cal-day.today::after {
+  content: ''; position: absolute; bottom: 3px;
+  width: 3px; height: 3px; border-radius: 50%; background: var(--ember);
+}
+.cal-day.selected { background: var(--ember); color: var(--ember-fg); font-weight: 600; }
+.cal-day.selected.today::after { background: var(--ember-fg); }
+.cal-day.selected:hover { background: var(--ember-glow); }
+.cal-day:disabled { opacity: 0.3; cursor: not-allowed; }
+.cal-day:disabled:hover { background: transparent; color: var(--fg-muted); }
+
+/* Range — start and end use the selected style; days between use a
+   muted ember tint. Logical radii so range chrome mirrors under RTL. */
+@media (prefers-reduced-motion: reduce) {
+  .cal-day { transition: none; }
+}
+.cal-day.in-range { background: var(--ember-soft); color: var(--ember-text); border-radius: 0; }
+.cal-day.range-start {
+  background: var(--ember); color: var(--ember-fg);
+  border-start-end-radius: 0; border-end-end-radius: 0;
+}
+.cal-day.range-end {
+  background: var(--ember); color: var(--ember-fg);
+  border-start-start-radius: 0; border-end-start-radius: 0;
+}
+.cal-day.range-start.range-end { border-radius: 5px; }
+
+/* RTL — flip the prev/next chevrons so they always point with the
+   reading direction (forward = next month, backward = previous). */
+[dir="rtl"] .cal-head .cal-btn svg { transform: scaleX(-1); }
+
+/* Inline form variant — input with calendar trigger button on the trailing edge */
+.cal-input-wrap { position: relative; display: inline-flex; align-items: center; }
+.cal-input-wrap input {
+  width: 200px;
+  padding-block: 7px; padding-inline-start: 11px; padding-inline-end: 36px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--fg); font-size: 13px; font-family: var(--font-mono);
+  font-feature-settings: 'tnum';
+}
+.cal-input-wrap .cal-input-icon {
+  position: absolute; inset-inline-end: 8px;
+  width: 22px; height: 22px; border-radius: 4px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--fg-muted); background: transparent; border: none; cursor: pointer;
+}
+.cal-input-wrap .cal-input-icon:hover { background: var(--surface-hover); color: var(--fg); }
+
+/* Optional footer slot rendered below the calendar grid */
+.cal-footer {
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+
+/* ── DatePicker (.dp-*) (promoted from the docs page so the component ships styled
+   via forge-ui add). ──────────────────────────────────────────────────── */
+.dp { position: relative; display: inline-block; }
+.dp-trigger {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 36px; padding: 0 12px;
+  background: var(--surface); border: 1px solid var(--border-strong); border-radius: 6px;
+  color: var(--fg); font: 400 13px/1 var(--body); cursor: pointer; min-width: 240px;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  outline: none;
+}
+.dp-trigger:hover:not(.is-open):not(:disabled) { border-color: var(--border-stronger); }
+/* Canonical focus ring — keyboard (:focus-visible) and pointer-driven
+   open state share the same offset outline. */
+.dp-trigger:focus-visible,
+.dp-trigger.is-open {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}
+.dp-trigger.is-invalid { border-color: var(--danger); }
+.dp-trigger.is-invalid:focus-visible,
+.dp-trigger.is-invalid.is-open {
+  outline: var(--ring-width) solid var(--ring-danger);
+  outline-offset: var(--ring-offset);
+}
+.dp-trigger:disabled { opacity: 0.5; cursor: not-allowed; }
+.dp-trigger .label {
+  flex: 1; text-align: start;
+  font-family: var(--font-mono); font-feature-settings: 'tnum';
+  color: var(--fg);
+}
+.dp-trigger .label.placeholder { color: var(--fg-faint); font-family: var(--body); }
+.dp-trigger .ico { color: var(--fg-faint); display: inline-flex; }
+.dp-trigger.is-open .ico { color: var(--ember); }
+
+.dp-trigger.sm { min-height: 28px; padding: 0 10px; font-size: 12px; min-width: 200px; }
+.dp-trigger.lg { min-height: 44px; padding: 0 14px; font-size: 14px; }
+
+/* Popover — fixed-positioned at runtime so it escapes overflow:hidden frames */
+.dp-pop {
+  position: fixed; z-index: 1000;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,0.42);
+  padding: 4px; opacity: 0; transform: translateY(-4px);
+  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+  pointer-events: none;
+}
+.dp-pop.is-open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+[data-theme="light"] .dp-pop { box-shadow: 0 12px 32px rgba(0,0,0,0.10); }
+
+.dp-pop.range-pop { display: flex; gap: 4px; }
+.dp-pop.range-pop .cal { width: 268px; }
+
+.dp-presets {
+  display: flex; flex-direction: column; padding: 8px;
+  border-inline-end: 1px solid var(--border); min-width: 130px;
+}
+.dp-preset {
+  padding: 7px 10px; border-radius: 5px;
+  background: transparent; border: none;
+  color: var(--fg-muted); font-size: var(--text-sm);
+  text-align: start; cursor: pointer;
+  transition: all var(--dur-fast) var(--ease);
+}
+.dp-preset:hover { background: var(--surface-hover); color: var(--fg); }
+.dp-preset.is-active { background: var(--ember-soft); color: var(--ember); }
+
+.dp-actions {
+  display: flex; justify-content: space-between; gap: 8px;
+  padding: 8px 6px 4px; border-top: 1px solid var(--border);
+}
+.dp-actions .left { font-size: var(--text-xs); color: var(--fg-faint); align-self: center; font-family: var(--font-mono); }
+
+/* Reuse the .cal building block from calendar.jsx exactly */
+.dp .cal {
+  width: 268px;
+  border: none; border-radius: 0;
+  background: transparent;
+  padding: 12px;
+  font-feature-settings: 'tnum';
+}
+.dp .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 6px; }
+.dp .cal-title { font-size: 13px; font-weight: 600; color: var(--fg); }
+.dp .cal-btn {
+  width: 26px; height: 26px; border-radius: 5px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--fg-muted); background: transparent; border: none; cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+.dp .cal-btn:hover { background: var(--surface-hover); color: var(--fg); }
+.dp .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.dp .cal-dow {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-faint);
+  text-align: center; padding: 4px 0 6px;
+}
+.dp .cal-day {
+  aspect-ratio: 1;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 5px;
+  font-size: var(--text-sm); color: var(--fg-muted);
+  background: transparent; border: none; cursor: pointer;
+  transition: all var(--dur-fast) var(--ease); position: relative;
+}
+@media (prefers-reduced-motion: reduce) { .dp .cal-day { transition: none; } }
+.dp .cal-day:hover:not(:disabled) { background: var(--surface-hover); color: var(--fg); }
+.dp .cal-day.outside { color: var(--fg-faint); opacity: 0.55; }
+.dp .cal-day.today { color: var(--ember); font-weight: 600; }
+.dp .cal-day.today::after {
+  content: ''; position: absolute; bottom: 3px;
+  width: 3px; height: 3px; border-radius: 50%; background: var(--ember);
+}
+.dp .cal-day.selected { background: var(--ember); color: var(--ember-fg); font-weight: 600; }
+.dp .cal-day.selected.today::after { background: var(--ember-fg); }
+.dp .cal-day:disabled { opacity: 0.3; cursor: not-allowed; }
+.dp .cal-day.in-range { background: var(--ember-soft); color: var(--ember-text); border-radius: 0; }
+.dp .cal-day.range-start {
+  background: var(--ember); color: var(--ember-fg);
+  border-start-end-radius: 0; border-end-end-radius: 0;
+}
+.dp .cal-day.range-end {
+  background: var(--ember); color: var(--ember-fg);
+  border-start-start-radius: 0; border-end-start-radius: 0;
+}
+.dp .cal-day.range-start.range-end { border-radius: 5px; }
+
+[dir="rtl"] .dp .cal-head .cal-btn svg { transform: scaleX(-1); }
+
+/* ── Combobox (.cb-*) (promoted from the docs page so the component ships styled
+   via forge-ui add). ──────────────────────────────────────────────────── */
+.cb { position: relative; display: inline-flex; flex-direction: column; gap: 6px; width: 240px; max-width: 100%; }
+.cb.full { width: 100%; }
+
+.cb-trigger {
+  display: inline-flex; align-items: center; gap: 8px;
+  width: 100%; min-height: 36px; padding: 0 8px 0 12px;
+  background: var(--surface); border: 1px solid var(--border-strong);
+  border-radius: 6px; color: var(--fg);
+  font: 400 13px/1 var(--body); cursor: pointer; text-align: start;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  outline: none;
+}
+.cb-trigger:hover { border-color: var(--border-stronger); }
+/* Focus ring — fires on :focus-visible (keyboard) AND .is-open (pointer
+   opened the panel) so both interaction modes get the same affordance. */
+.cb-trigger:focus-visible,
+.cb-trigger.is-open {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}
+.cb-trigger.is-disabled { opacity: 0.5; pointer-events: none; }
+.cb-trigger .label { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cb-trigger .label.placeholder { color: var(--fg-faint); }
+.cb-trigger .chev { color: var(--fg-faint); flex: 0 0 auto; transition: transform var(--dur-fast) var(--ease); }
+.cb-trigger.is-open .chev { transform: rotate(180deg); }
+
+.cb-trigger.sm { min-height: 28px; padding: 0 6px 0 10px; font-size: 12px; }
+.cb-trigger.lg { min-height: 44px; padding: 0 10px 0 14px; font-size: 14px; }
+
+.cb-trigger.is-invalid { border-color: var(--danger); }
+.cb-trigger.is-invalid:focus-visible,
+.cb-trigger.is-invalid.is-open {
+  outline: var(--ring-width) solid var(--ring-danger);
+  outline-offset: var(--ring-offset);
+}
+
+/* multi: chips below trigger, wrapping inside the fixed-width container */
+.cb-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; width: 100%; }
+.cb-chip {
+  display: inline-flex; align-items: center; gap: 6px; max-width: 100%;
+  padding: 2px 4px 2px 8px;
+  background: var(--ember-soft); border: 1px solid rgba(255,107,53,0.30);
+  border-radius: 4px; color: var(--ember-text); font-size: 12px; line-height: 1;
+}
+.cb-chip .label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.cb-chip .x {
+  width: 16px; height: 16px; flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: none; background: transparent; color: var(--ember-text);
+  border-radius: 3px; cursor: pointer; padding: 0;
+}
+.cb-chip .x:hover { background: rgba(255,107,53,0.15); }
+
+/* panel — fixed positioning so it escapes parent overflow:hidden (e.g. .ds-frame) */
+.cb-panel {
+  position: fixed; z-index: 1000;
+  max-height: 320px; overflow: hidden;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  display: flex; flex-direction: column;
+  animation: cb-rise var(--dur-fast) var(--ease);
+}
+[data-theme="light"] .cb-panel { box-shadow: 0 8px 24px rgba(0,0,0,0.10); }
+@keyframes cb-rise { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .cb-panel { animation: none; } .cb-trigger .chev { transition: none; } }
+
+.cb-search {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 10px; border-bottom: 1px solid var(--border);
+  color: var(--fg-faint);
+}
+.cb-search input {
+  flex: 1; background: transparent; border: 0; outline: 0;
+  color: var(--fg); font: 400 13px/1.4 var(--body);
+}
+.cb-search input::placeholder { color: var(--fg-faint); }
+.cb-search input:focus { box-shadow: none !important; }
+
+.cb-list { padding: 4px; overflow-y: auto; max-height: 260px; min-height: 0; }
+.cb-empty { padding: 14px 12px; color: var(--fg-faint); font-size: 12px; text-align: center; }
+
+.cb-group-label {
+  padding: 8px 10px 4px; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint);
+}
+
+.cb-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 10px; border-radius: 5px;
+  color: var(--fg-muted); cursor: pointer;
+  background: transparent; border: 0; width: 100%; text-align: start;
+  font: 400 13px/1.4 var(--body);
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.cb-item:hover, .cb-item.is-active { background: var(--surface-hover); color: var(--fg); }
+.cb-item .check {
+  width: 14px; height: 14px; display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ember); flex: 0 0 auto;
+}
+.cb-item .label { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.cb-item .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); flex: 0 0 auto; }
+.cb-item.is-disabled { opacity: 0.5; pointer-events: none; }
+
+/* ── Select (.sel-*) (promoted from the docs page so the custom Select ships
+   styled via forge-ui add). ─────────────────────────────────────────────── */
+.sel-root { position: relative; display: inline-flex; flex-direction: column; min-width: 240px; max-width: 100%; }
+.sel-root.full { width: 100%; min-width: 0; }
+
+.sel-trigger {
+  display: inline-flex; align-items: center; gap: 8px; justify-content: space-between;
+  width: 100%;
+  height: 32px; padding: 0 10px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  color: var(--fg);
+  font-size: 13px; font-family: inherit;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  cursor: pointer; outline: none;
+}
+.sel-trigger:hover { border-color: var(--border-stronger); }
+.sel-trigger:focus-visible { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+.sel-trigger.is-open { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+.sel-trigger.is-empty { color: var(--fg-faint); }
+.sel-trigger .sel-value { display: inline-flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
+.sel-trigger .sel-value > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sel-trigger .sel-chev { color: var(--fg-faint); flex: 0 0 auto; transition: transform var(--dur-fast) var(--ease); }
+.sel-trigger.is-open .sel-chev { transform: rotate(180deg); }
+.sel-trigger:disabled, .sel-trigger.is-disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+.sel-trigger.is-invalid { border-color: var(--danger); }
+.sel-trigger.is-invalid:focus-visible, .sel-trigger.is-invalid.is-open {
+  outline: var(--ring-width) solid var(--ring-danger); outline-offset: var(--ring-offset);
+}
+/* Sizes */
+.sel-trigger.lg { height: 40px; padding: 0 12px; font-size: 14px; }
+.sel-trigger.sm { height: 26px; padding: 0 8px;  font-size: 12px; }
+
+/* Panel uses position:fixed — anchored via getBoundingClientRect() to escape overflow:hidden */
+.sel-panel {
+  position: fixed; z-index: 1000;
+  max-height: 320px; overflow: hidden;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+  display: flex; flex-direction: column;
+  animation: sel-in var(--dur-fast) var(--ease) both;
+}
+[data-theme="light"] .sel-panel { box-shadow: 0 12px 32px rgba(0,0,0,0.10); }
+@keyframes sel-in { from { opacity: 0; transform: translateY(-2px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .sel-panel { animation: none; } }
+
+.sel-search {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 10px; border-bottom: 1px solid var(--border);
+}
+.sel-search input {
+  flex: 1; min-width: 0;
+  background: transparent; border: none; outline: none;
+  color: var(--fg); font-size: 13px; font-family: inherit;
+}
+.sel-search input::placeholder { color: var(--fg-faint); }
+.sel-search input:focus { box-shadow: none !important; }
+
+.sel-list { overflow-y: auto; padding: 4px; flex: 1 1 auto; }
+
+.sel-group-label {
+  padding: 8px 8px 4px;
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+.sel-option {
+  display: flex; align-items: center; gap: 10px; justify-content: space-between;
+  padding: 6px 8px; border-radius: 5px;
+  color: var(--fg-muted);
+  background: transparent; border: 0;
+  cursor: pointer; width: 100%; text-align: start;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+  font-size: 13px; font-family: inherit;
+}
+.sel-option:hover, .sel-option.is-active { background: var(--surface-hover); color: var(--fg); }
+.sel-option.is-selected { color: var(--fg); }
+.sel-option .left { display: inline-flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+.sel-option .left .ico { color: var(--fg-faint); flex: 0 0 auto; }
+.sel-option:hover .left .ico, .sel-option.is-active .left .ico { color: var(--ember); }
+.sel-option .desc { font-size: 11px; color: var(--fg-faint); display: block; margin-top: 1px; }
+.sel-option .check { color: var(--ember); flex: 0 0 auto; opacity: 0; }
+.sel-option.is-selected .check { opacity: 1; }
+.sel-option[disabled], .sel-option.is-disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+
+.sel-empty { padding: 18px 12px; text-align: center; color: var(--fg-faint); font-size: 12px; }
+
+/* Field wrapper for label + helper text */
+.sel-field { display: flex; flex-direction: column; gap: 6px; }
+.sel-field-label { font-size: 13px; color: var(--fg-muted); font-weight: 500; }
+.sel-field-help { font-size: 11px; color: var(--fg-faint); }
+.sel-field.error .sel-trigger { border-color: var(--danger); }
+.sel-field.error .sel-field-help { color: var(--danger); }
+
+/* ── ColorInput (.cp-*) (promoted from the docs page so the component ships styled
+   via forge-ui add). ──────────────────────────────────────────────────── */
+.cp-trigger {
+  display: inline-flex; align-items: center; gap: 0;
+  padding: 0; height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer; user-select: none;
+  font-family: inherit;
+  transition: border-color 120ms var(--ease), box-shadow 120ms var(--ease);
+  outline: none;
+}
+.cp-trigger:hover { border-color: var(--border-strong); }
+.cp-trigger:focus-visible { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+.cp-trigger.sm { height: 28px; }
+.cp-trigger.lg { height: 44px; }
+.cp-swatch {
+  width: 28px; height: 28px; flex: 0 0 auto;
+  margin: 3px; border-radius: 4px;
+  background-image:
+linear-gradient(45deg, rgba(15,23,42,0.10) 25%, transparent 25%, transparent 75%, rgba(15,23,42,0.10) 75%),
+linear-gradient(45deg, rgba(15,23,42,0.10) 25%, transparent 25%, transparent 75%, rgba(15,23,42,0.10) 75%);
+  background-size: 8px 8px; background-position: 0 0, 4px 4px;
+  position: relative; overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(15,23,42,0.10);
+}
+.cp-trigger.sm .cp-swatch { width: 22px; height: 22px; }
+.cp-trigger.lg .cp-swatch { width: 36px; height: 36px; }
+.cp-swatch > span { position: absolute; inset: 0; }
+.cp-trigger-text {
+  font-family: var(--font-mono); font-size: var(--text-sm); font-weight: 500;
+  padding: 0 12px; color: var(--fg);
+  text-transform: uppercase;
+}
+.cp-trigger-divider { width: 1px; align-self: stretch; background: var(--border); margin: 0 0; }
+.cp-trigger-arrow { padding: 0 8px; color: var(--fg-faint); display: inline-flex; align-items: center; }
+
+.cp-pop {
+  position: fixed; z-index: 1000;
+  width: 288px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--elev-4);
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.cp-sv {
+  position: relative;
+  width: 100%; aspect-ratio: 1.6 / 1;
+  border-radius: 6px;
+  cursor: crosshair;
+  touch-action: none;
+  overflow: hidden;
+  /* Use an inset hairline instead of a border so the gradient doesn't bleed
+ past it (and so the "halo" line doesn't appear on the top/left in light). */
+  box-shadow: inset 0 0 0 1px rgba(15,23,42,0.10);
+}
+.cp-sv-thumb {
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  /* Theme-aware outer halo so the thumb reads on both light AND dark fills.
+ Light alpha keeps the cool look without painting a "dark mode" ring. */
+  box-shadow: 0 0 0 1px rgba(15,23,42,0.35), 0 1px 2px rgba(0,0,0,0.18);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.cp-bar {
+  position: relative;
+  height: 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  touch-action: none;
+  /* Same inset hairline trick — no theme-jarring border in light mode. */
+  box-shadow: inset 0 0 0 1px rgba(15,23,42,0.10);
+  overflow: hidden;
+}
+.cp-bar.hue {
+  background: linear-gradient(to right, #ff0000 0%, #ffff00 16.6%, #00ff00 33.3%, #00ffff 50%, #0000ff 66.6%, #ff00ff 83.3%, #ff0000 100%);
+}
+.cp-bar.alpha {
+  background-image:
+linear-gradient(45deg, rgba(15,23,42,0.10) 25%, transparent 25%, transparent 75%, rgba(15,23,42,0.10) 75%),
+linear-gradient(45deg, rgba(15,23,42,0.10) 25%, transparent 25%, transparent 75%, rgba(15,23,42,0.10) 75%);
+  background-size: 10px 10px; background-position: 0 0, 5px 5px;
+}
+.cp-bar.alpha > .cp-alpha-fill { position: absolute; inset: 0; }
+.cp-bar-thumb {
+  position: absolute;
+  top: 50%;
+  width: 14px; height: 14px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  /* Same halo system as the SV thumb so the visual language is one. */
+  box-shadow: 0 0 0 1px rgba(15,23,42,0.35), 0 1px 2px rgba(0,0,0,0.18);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.cp-row { display: flex; gap: 8px; align-items: flex-end; }
+.cp-input {
+  width: 100%;
+  font-family: var(--font-mono); font-size: 12px;
+  padding: 6px 8px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--fg);
+  outline: none;
+  transition: border-color 120ms var(--ease), box-shadow 120ms var(--ease);
+  -moz-appearance: textfield;
+  appearance: textfield;
+  -webkit-appearance: none;
+}
+/* Hide native number-spinners — they steal width and clip the value. */
+.cp-input::-webkit-inner-spin-button,
+.cp-input::-webkit-outer-spin-button {
+  -webkit-appearance: none; margin: 0;
+}
+.cp-input:focus { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); border-color: var(--border-strong); }
+/* Keyboard focus ring for the now-operable picker sliders (the .cp-sv area and
+   .cp-bar hue/alpha tracks carry tabIndex={0} + role="slider"). Use the
+   canonical ember --ring so keyboard focus matches the trigger / inputs /
+   eyedropper instead of the off-brand browser-default outline. */
+.cp-sv:focus-visible,
+.cp-bar:focus-visible { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+.cp-input.hex { text-transform: uppercase; }
+/* Wide enough for "255" + spinner-free padding. Center-aligned numerics
+   read like a stat readout — the old 38px clipped 3-digit values. */
+.cp-input-tiny { width: 48px; text-align: center; padding: 6px 4px; box-sizing: border-box; }
+.cp-input-label { font-family: var(--font-mono); font-size: 10px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.04em; text-align: center; }
+.cp-input-field { display: flex; flex-direction: column; gap: 4px; }
+
+.cp-swatches { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 6px; border-top: 1px solid var(--border); margin-top: 4px; }
+.cp-sw {
+  width: 22px; height: 22px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid rgba(15,23,42,0.15);
+  transition: transform 120ms var(--ease);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+.cp-sw:hover { transform: scale(1.12); }
+.cp-sw.is-active {
+  outline: 2px solid var(--ember); outline-offset: 2px;
+}
+/* Eyedropper — a compact icon button that aligns with the hue/alpha column. */
+.cp-eyedropper {
+  flex: 0 0 auto;
+  width: 28px; height: 28px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--fg-muted);
+  cursor: pointer;
+  outline: none;
+  transition: color 120ms var(--ease), border-color 120ms var(--ease), box-shadow 120ms var(--ease);
+}
+.cp-eyedropper:hover { color: var(--fg); border-color: var(--border-strong); }
+
+/* Modal — promoted from migrated/modal.tsx
+   All .mdl-* classes. Panel uses .mdl (not .md) to avoid the markdown-prose
+   rules in tokens.css. Sizes are data-attributes for the same reason. */
+
+/* Overlay — fades in/out */
+.mdl-overlay {
+  position: fixed; inset: 0; z-index: 80;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 220ms cubic-bezier(0.32, 0.72, 0, 1);
+  pointer-events: none;
+}
+[data-theme="light"] .mdl-overlay { background: rgba(8,9,10,0.40); }
+.mdl-root[data-state="open"] .mdl-overlay { opacity: 1; pointer-events: auto; }
+
+/* Stage — flex-centers the panel; clicks here are scrim clicks */
+.mdl-stage {
+  position: fixed; inset: 0; z-index: 81;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  pointer-events: none;
+}
+.mdl-root[data-state="open"] .mdl-stage { pointer-events: auto; }
+
+/* Panel */
+.mdl {
+  position: relative;
+  width: 100%; max-width: var(--mdl-w, 480px);
+  max-height: calc(100dvh - 48px);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 1px 0 rgba(255,255,255,0.04) inset;
+  display: flex; flex-direction: column;
+  opacity: 0; transform: translateY(8px) scale(0.985);
+  transition: opacity 220ms cubic-bezier(0.32, 0.72, 0, 1),
+              transform 220ms cubic-bezier(0.32, 0.72, 0, 1);
+  outline: none;
+}
+[data-theme="light"] .mdl { box-shadow: 0 24px 60px rgba(8,9,10,0.18); }
+.mdl-root[data-state="open"] .mdl { opacity: 1; transform: none; }
+
+.mdl[data-size="sm"] { --mdl-w: 380px; }
+.mdl[data-size="md"] { --mdl-w: 480px; }
+.mdl[data-size="lg"] { --mdl-w: 640px; }
+.mdl[data-size="xl"] { --mdl-w: 820px; }
+
+/* Reduced-motion — opacity only, no translate/scale */
+@media (prefers-reduced-motion: reduce) {
+  .mdl-overlay { transition: opacity 100ms linear; }
+  .mdl { transition: opacity 100ms linear; transform: none !important; }
+}
+
+/* Header */
+.mdl-header {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 22px 24px 12px;
+  flex: 0 0 auto;
+}
+.mdl-header.with-icon { padding-top: 22px; }
+.mdl-header .mdl-titles { flex: 1; min-width: 0; }
+.mdl-title {
+  font-size: 16px; font-weight: 600; line-height: 1.3;
+  color: var(--fg); letter-spacing: -0.01em; margin: 0;
+}
+.mdl-desc {
+  font-size: 13px; font-weight: 400; line-height: 1.55;
+  color: var(--fg-muted); margin: 4px 0 0;
+}
+.mdl-icon {
+  flex: 0 0 auto;
+  width: 36px; height: 36px; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.mdl-icon.info    { background: var(--ice-soft);     color: var(--ice); }
+.mdl-icon.success { background: var(--success-soft); color: var(--success); }
+.mdl-icon.warning { background: var(--warning-soft); color: var(--warning); }
+.mdl-icon.danger  { background: var(--danger-soft);  color: var(--danger); }
+
+/* Close button — flex child of the header; small negative margin aligns
+   the X visually with the title's cap-height. */
+.mdl-close {
+  flex: 0 0 auto;
+  width: 32px; height: 32px; border-radius: 6px;
+  margin-block-start: -4px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; border: none; cursor: pointer;
+  color: var(--fg-faint);
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.mdl-close:hover { background: var(--surface-hover); color: var(--fg); }
+.mdl-close:focus-visible { outline: 2px solid var(--ember); outline-offset: 1px; }
+
+/* Close button over hero — floats absolute, semi-transparent, always visible
+   over arbitrary imagery. Logical inset-inline-end mirrors under RTL. */
+.mdl-close.over-hero {
+  position: absolute;
+  inset-block-start: 16px;
+  inset-inline-end: 16px;
+  width: 32px; height: 32px;
+  margin-block-start: 0;
+  background: rgba(0,0,0,0.45);
+  color: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  z-index: 2;
+}
+.mdl-close.over-hero:hover { background: rgba(0,0,0,0.62); color: #fff; }
+.mdl-close.over-hero:focus-visible { outline-color: rgba(255,255,255,0.85); }
+
+/* Body — scrolls when content overflows */
+.mdl-body {
+  padding: 8px 24px 22px;
+  overflow-y: auto;
+  color: var(--fg);
+  font-size: 15px; font-weight: 400; line-height: 1.55;
+  flex: 1 1 auto;
+}
+.mdl-body p { margin: 0 0 12px; color: var(--fg-muted); }
+.mdl-body p:last-child { margin-bottom: 0; }
+
+/* Footer — pinned; Cancel leads, primary trails */
+.mdl-footer {
+  padding: 14px 18px;
+  background: var(--surface);
+  border-block-start: 1px solid var(--border);
+  border-radius: 0 0 11px 11px;
+  display: flex; gap: 8px;
+  justify-content: flex-end; align-items: center;
+  flex: 0 0 auto;
+}
+.mdl-footer.split { justify-content: space-between; }
+.mdl-footer .mdl-helper {
+  font-size: 13px; font-weight: 400; line-height: 1.45;
+  color: var(--fg-subtle);
+}
+
+/* Hero — full-bleed slot above the header */
+.mdl-hero {
+  height: 160px;
+  background: linear-gradient(135deg,
+    color-mix(in oklab, var(--ember) 22%, var(--bg-elevated)),
+    color-mix(in oklab, var(--accent-2, var(--ember)) 14%, var(--bg-elevated)));
+  border-radius: 12px 12px 0 0;
+  position: relative; overflow: hidden;
+  flex: 0 0 auto;
+}
+.mdl-hero::after {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 14px 14px;
+  mask-image: radial-gradient(120% 70% at 50% 0%, black, transparent 70%);
+  -webkit-mask-image: radial-gradient(120% 70% at 50% 0%, black, transparent 70%);
+}
+
+/* Form fields used in modal demos */
+.mdl-field { display: flex; flex-direction: column; gap: 6px; margin-block-end: 14px; }
+.mdl-field:last-child { margin-block-end: 0; }
+.mdl-field .mdl-label {
+  font-size: 12px; font-weight: 500; line-height: 1;
+  color: var(--fg-muted);
+}
+.mdl-field input, .mdl-field textarea, .mdl-field select {
+  width: 100%;
+  background: var(--surface); color: var(--fg);
+  border: 1px solid var(--border-strong); border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px; font-weight: 400; line-height: 1.4;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.mdl-field input:focus-visible, .mdl-field textarea:focus-visible, .mdl-field select:focus-visible {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+  box-shadow: none;
+}
+
+/* Trigger row — centers the demo buttons inside a Frame */
+.mdl-trigger-row {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  padding: 28px; align-items: center; justify-content: center;
+}
+
+/* Static anatomy panel — inline (no portal/animation); non-interactive */
+.mdl-static {
+  position: relative;
+  width: 480px; max-width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  pointer-events: none; user-select: none;
+}
+
+/* Modal Do/Don't miniatures — scaled, non-interactive mock panels for the
+   docs page Do/Don't grid. These replace the page's one-off inline style
+   objects so the modal vocabulary stays in one place; all values are logical
+   CSS + tokens (no physical left/right, no hardcoded hex). */
+.mdl-mini {
+  width: 320px; max-width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: none;
+  transform: scale(0.85);
+  transform-origin: inline-start center;
+  pointer-events: none; user-select: none;
+}
+.mdl-mini .mdl-title { font-size: var(--text-md); }
+.mdl-mini .mdl-footer { padding-block: 8px; padding-inline: 12px; }
+.mdl-mini-body {
+  padding-block-start: 8px; padding-block-end: 12px; padding-inline: 16px;
+  font-size: var(--text-sm); color: var(--fg-muted); line-height: 1.6;
+}
+.mdl-mini-body.scroll { max-block-size: 70px; overflow-y: auto; }
+/* Clipped variant — footer scrolled out of view (the 'Don't' anti-example). */
+.mdl-mini.clipped { overflow: hidden; block-size: 130px; position: relative; }
+.mdl-mini.clipped .mdl-footer.mdl-footer-clipped {
+  position: absolute;
+  inset-block-end: -36px; inset-inline-end: 16px;
+  border-block-start: 1px solid var(--danger);
+}
+/* Stacked-content modifier on .dd-card .body */
+.mdl-mini-stack { flex-direction: column; align-items: stretch; gap: 6px; }
+.mdl-mini-title {
+  padding-block: 10px; padding-inline: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  font-size: var(--text-md); font-weight: 600; color: var(--fg);
+}
+/* Stacked layers miniature — three insetting layers; .bad flags the anti-pattern. */
+.mdl-mini-stacked {
+  position: relative;
+  inline-size: 100%; max-inline-size: 280px; block-size: 110px;
+}
+.mdl-mini-stacked .layer {
+  position: absolute;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  background: var(--bg-elevated);
+}
+.mdl-mini-stacked .layer:nth-child(1) { inset: 0; }
+.mdl-mini-stacked .layer:nth-child(2) { inset: 14px; }
+.mdl-mini-stacked .layer:nth-child(3) { inset: 28px; }
+.mdl-mini-stacked .layer.bad { border-color: var(--danger); }
+/* Spot miniature — small panel with a pinned close button. */
+.mdl-mini-spot {
+  position: relative;
+  inline-size: 180px; block-size: 90px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+}
+.mdl-mini-spot .mdl-close {
+  position: absolute;
+  inset-block-start: 6px; inset-inline-end: 6px;
+  inline-size: 24px; block-size: 24px;
+}
+/* Centered miniature — column layout, centered copy. */
+.mdl-mini.mdl-mini-center {
+  flex-direction: column; align-items: center; text-align: center;
+  padding: 14px; gap: 4px; max-inline-size: 240px;
+}
+
+/* Decision-matrix table helpers */
+.mdl-matrix th, .mdl-matrix td { vertical-align: top; }
+.mdl-matrix .mono { font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted); }
+
+/* Responsive — give small screens edge-to-edge breathing room */
+@media (max-width: 540px) {
+  .mdl-stage  { padding: 12px; }
+  .mdl-header { padding: 18px 18px 10px; }
+  .mdl-body   { padding: 8px 18px 18px; }
+  .mdl-footer { padding: 12px 14px; }
+}
+
+/* Popover — promoted from popover.tsx
+   Panel: position:fixed, escapes .ds-frame overflow:hidden via getBoundingClientRect.
+   Sub-parts: pop-head · pop-title · pop-close · pop-body · pop-foot · pop-arrow
+   Docs-stage helpers: pop-stage · pop-label · pop-input
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Panel */
+.pop {
+  position: fixed;
+  z-index: var(--z-popover, 60);
+  min-width: 240px;
+  max-width: 360px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  box-shadow: var(--elev-3);
+  color: var(--fg);
+  font-size: 13px;
+  animation: pop-in var(--dur-fast) var(--ease) both;
+}
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.96) translateY(-2px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pop { animation: pop-fade var(--dur-fast) var(--ease) both; }
+  @keyframes pop-fade { from { opacity: 0; } to { opacity: 1; } }
+}
+
+/* Header row */
+.pop-head {
+  padding: 12px 14px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.pop-title {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: -0.005em;
+  color: var(--fg);
+}
+.pop-close {
+  color: var(--fg-faint);
+  padding: 2px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.pop-close:hover  { color: var(--fg); background: var(--surface-hover); }
+.pop-close:focus-visible { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+
+/* Body */
+.pop-body { padding: 12px 14px; }
+
+/* Footer */
+.pop-foot {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* Arrow — small rotated square bridging panel to trigger */
+.pop-arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  transform: rotate(45deg);
+}
+
+/* Form controls inside a popover body */
+.pop-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+}
+.pop-input {
+  width: 100%;
+  padding: 7px 9px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 5px;
+  color: var(--fg);
+  font-size: var(--text-sm);
+  font-family: inherit;
+}
+.pop-input:focus-visible {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+  box-shadow: none;
+}
+/* Hide native number spinners inside popovers — they break visual rhythm */
+.pop-input[type="number"]::-webkit-inner-spin-button,
+.pop-input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; appearance: none; margin: 0; }
+.pop-input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+
+/* Docs-page demo stage */
+.pop-stage {
+  position: relative;
+  min-height: 260px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle, var(--border-strong) 1px, transparent 1px) 0 0 / 16px 16px;
+  background-color: color-mix(in oklab, var(--surface) 60%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.cp-eyedropper:focus-visible { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
+
+/* Menubar — promoted from migrated/menubar.tsx
+   role=menubar row + anchored panels. Keyboard: roving tabindex on triggers,
+   Up/Down within panel, Left/Right switches menus, Esc returns to trigger.
+   Panel uses position:fixed (via getBoundingClientRect) so it escapes
+   parent overflow:hidden (e.g. .ds-frame). RTL: logical inset computed in JS.
+   Prefers-reduced-motion: animation skipped. */
+
+/* Bar */
+.mb-bar {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 2px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+}
+
+/* Per-menu wrapper — needed for relative context of absolute label */
+.mb-menu { position: relative; }
+
+/* Top-level trigger */
+.mb-trigger {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--fg);
+  font-size: var(--text-base);
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease);
+}
+.mb-trigger:hover { background: var(--surface-hover); }
+.mb-trigger.is-open { background: var(--surface-hover); }
+.mb-trigger:focus-visible {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}
+
+/* Open panel — fixed-positioned portal, escapes overflow:hidden */
+.mb-panel {
+  min-width: 240px;
+  padding: 4px;
+  border-radius: var(--radius-xl);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--elev-3);
+  animation: mb-in var(--dur-fast) var(--ease) both;
+}
+[data-theme="light"] .mb-panel { box-shadow: 0 12px 32px rgba(0,0,0,0.10); }
+@keyframes mb-in {
+  from { opacity: 0; transform: translateY(-3px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mb-panel { animation: mb-in-simple var(--dur-fast) var(--ease) both; }
+  @keyframes mb-in-simple {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+}
+
+/* Item row */
+.mb-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 7px 10px;
+  gap: 0;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-md);
+  color: var(--fg);
+  font-size: var(--text-base);
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  text-align: start;
+  transition: background var(--dur-fast) var(--ease);
+}
+.mb-item:hover,
+.mb-item:focus-visible {
+  background: var(--surface-hover);
+  outline: none;
+}
+.mb-item:focus-visible { box-shadow: inset 0 0 0 1px var(--ring); }
+.mb-item.is-disabled,
+.mb-item[disabled] { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+
+.mb-item-icon {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  color: var(--fg-muted);
+  margin-inline-end: 10px;
+}
+.mb-item:hover .mb-item-icon,
+.mb-item:focus-visible .mb-item-icon { color: var(--ember); }
+
+.mb-item-label {
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mb-item-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-inline-start: auto;
+  padding-inline-start: 12px;
+  flex: 0 0 auto;
+}
+
+/* Separator — promoted from separator.tsx */
+.separator.dashed.vertical { background: transparent; border-inline-start: 1px dashed var(--border); width: 0; }
+
+/* Separator — reuses .separator.horizontal from the base layer */
+.mb-sep {
+  margin: 4px 0;
+  border: 0;
+  height: 1px;
+  background: var(--border);
+}
+
+/* AspectRatio — promoted from aspect-ratio.tsx */
+.ar {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+/* Children fill the box edge-to-edge */
+.ar > img,
+.ar > video,
+.ar > iframe,
+.ar > .ar-fill {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  border: none;
+}
+
+/* Decorative fill — used by demos so we don't depend on external imagery */
+.ar .ar-fill {
+  background:
+    radial-gradient(circle at 30% 30%, oklch(70% 0.18 30 / 0.45), transparent 55%),
+    radial-gradient(circle at 75% 70%, oklch(60% 0.16 250 / 0.45), transparent 60%),
+    linear-gradient(135deg, oklch(35% 0.04 250) 0%, oklch(20% 0.02 250) 100%);
+}
+.ar .ar-fill.warm {
+  background:
+    radial-gradient(circle at 30% 30%, oklch(75% 0.20 60 / 0.55), transparent 60%),
+    radial-gradient(circle at 70% 70%, oklch(55% 0.18 30 / 0.55), transparent 60%),
+    linear-gradient(135deg, oklch(40% 0.10 30) 0%, oklch(20% 0.04 30) 100%);
+}
+.ar .ar-fill.cool {
+  background:
+    radial-gradient(circle at 30% 30%, oklch(75% 0.18 200 / 0.55), transparent 60%),
+    radial-gradient(circle at 70% 70%, oklch(60% 0.20 270 / 0.55), transparent 60%),
+    linear-gradient(135deg, oklch(35% 0.06 250) 0%, oklch(18% 0.02 250) 100%);
+}
+
+/* Caption overlay — trailing corner, direction-aware via logical insets */
+.ar .ar-label {
+  position: absolute;
+  inset-block-end: 8px;
+  inset-inline-end: 8px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: rgba(8, 9, 10, 0.55);
+  color: #EDEDED;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+
+/* ScrollArea — promoted from scroll-area.tsx
+   Thin, auto-hiding, themeable scrollbar wrapper using native browser scroll.
+   .sa         base viewport — hidden at rest (hover reveals)
+   .sa-always  scrollbar always visible with themed colors
+   .sa-auto    browser-native: appears only when content overflows
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Base — hidden at rest, reveals on hover/focus-within/keyboard-scroll */
+.sa {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 200ms var(--ease);
+  outline: none;
+}
+
+/* WebKit — thin track, auto-hiding thumb */
+.sa::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.sa::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: var(--radius-full);
+}
+.sa::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 200ms var(--ease);
+}
+
+/* Reveal on hover, focus-within (keyboard nav scrolls into view), or scroll */
+.sa:hover,
+.sa:focus-within {
+  scrollbar-color: var(--border-strong) transparent;
+}
+.sa:hover::-webkit-scrollbar-thumb,
+.sa:focus-within::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  background-clip: content-box;
+}
+.sa:active::-webkit-scrollbar-thumb {
+  background: var(--border-stronger);
+  background-clip: content-box;
+}
+
+/* Focus ring — keyboard only (not pointer) */
+.sa:focus-visible {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}
+
+/* type="always" — scrollbar always visible with themed colors */
+.sa.sa-always {
+  scrollbar-color: var(--border-strong) transparent;
+}
+.sa.sa-always::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  background-clip: content-box;
+}
+.sa.sa-always:active::-webkit-scrollbar-thumb {
+  background: var(--border-stronger);
+  background-clip: content-box;
+}
+
+/* type="auto" — delegate entirely to the browser (thin themed when visible) */
+.sa.sa-auto {
+  scrollbar-color: var(--border-strong) transparent;
+}
+.sa.sa-auto::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  background-clip: content-box;
+}
+
+/* prefers-reduced-motion — skip the fade-in animation for the scrollbar */
+@media (prefers-reduced-motion: reduce) {
+  .sa,
+  .sa::-webkit-scrollbar-thumb {
+    transition: none;
+  }
+}
+
+/* ButtonGroup — promoted from button-group.tsx */
+
+/* Vertical orientation — collapses block-axis seam instead of inline */
+.btn-group.vertical {
+  flex-direction: column;
+}
+.btn-group.vertical .btn + .btn {
+  margin-inline-start: 0;
+  margin-block-start: -1px;
+}
+.btn-group.vertical .btn:first-child {
+  border-start-start-radius: 6px;
+  border-start-end-radius: 6px;
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}
+.btn-group.vertical .btn:last-child {
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+  border-end-start-radius: 6px;
+  border-end-end-radius: 6px;
+}
+
+/* Size passthrough — propagate sm/lg to all child buttons */
+.btn-group.bg-size-sm .btn { height: 26px; padding: 0 10px; font-size: 12px; }
+.btn-group.bg-size-sm .btn.icon { width: 26px; padding: 0; }
+.btn-group.bg-size-lg .btn { height: 40px; padding: 0 16px; font-size: 14px; }
+.btn-group.bg-size-lg .btn.icon { width: 40px; padding: 0; }
+
+/* Toolbar — promoted from toolbar.tsx */
+
+/* Pressed state for .btn.icon.ghost toggle buttons (ToolbarButton with pressed=true).
+   Matches the hover fill to communicate active selection without colour alone. */
+.btn.icon.ghost.is-pressed {
+  background: var(--surface-hover);
+  border-color: transparent;
+  color: var(--fg);
+}
+
+/* Vertical orientation: stack items in a column. */
+.toolbar[aria-orientation="vertical"] {
+  flex-direction: column;
+  inline-size: fit-content;
+  block-size: auto;
+  flex-wrap: nowrap;
+}
+
+/* Separator inside a vertical toolbar flips to a horizontal hairline. */
+.toolbar[aria-orientation="vertical"] .toolbar-sep {
+  inline-size: 100%;
+  block-size: 1px;
+  margin: 4px 0;
+  align-self: stretch;
+}
+
+/* Reduced-motion: remove .btn.icon.ghost transitions inside the toolbar. */
+@media (prefers-reduced-motion: reduce) {
+  .toolbar .btn { transition: none; }
+  .toolbar .btn:hover { transform: none; }
+  .toolbar .btn:active { transform: none; }
+}
+
+/* Sidebar — promoted from sidebar.tsx */
+
+.sb-rail {
+  display: flex;
+  flex-direction: column;
+  width: 232px;
+  background: var(--bg-elevated);
+  border-inline-end: 1px solid var(--border);
+  padding: 8px;
+  transition: width var(--dur) var(--ease);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sb-rail.sb-collapsed {
+  width: 56px;
+}
+
+/* Off-canvas overlay */
+.sb-rail.sb-offcanvas {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: var(--z-modal);
+  width: 232px;
+  height: 100dvh;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.48);
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+
+/* Scrim */
+.sb-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-modal) - 1);
+  background: rgba(0, 0, 0, 0.48);
+}
+
+/* Collapse toggle */
+.sb-toggle {
+  align-self: flex-end;
+  flex-shrink: 0;
+}
+
+.sb-toggle-icon {
+  transition: transform var(--dur) var(--ease);
+}
+
+.sb-toggle-icon--open {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .sb-toggle-icon--open {
+  transform: scaleX(1);
+}
+
+[dir="rtl"] .sb-toggle-icon:not(.sb-toggle-icon--open) {
+  transform: scaleX(-1);
+}
+
+/* Section */
+.sb-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-block-start: 4px;
+}
+
+.sb-section-label {
+  padding: 6px 10px 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--fg-faint);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Group */
+.sb-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sb-group-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 6px 10px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-lg, 6px);
+  cursor: pointer;
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  font-family: inherit;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+
+.sb-group-toggle:hover {
+  background: var(--surface-hover);
+  color: var(--fg);
+}
+
+.sb-group-toggle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring, var(--ember));
+}
+
+.sb-group-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sb-group-chevron {
+  display: inline-flex;
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.sb-group-chevron--open {
+  transform: rotate(90deg);
+}
+
+.sb-group-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sb-group-body--hidden {
+  display: none;
+}
+
+/* Nav item */
+.sb-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: var(--radius-lg, 6px);
+  color: var(--fg-muted);
+  font-size: var(--text-base);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+  cursor: pointer;
+}
+
+.sb-item:hover {
+  background: var(--surface-hover);
+  color: var(--fg);
+}
+
+.sb-item:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring, var(--ember));
+}
+
+.sb-item--active {
+  background: var(--surface-selected, var(--surface-hover));
+  color: var(--fg);
+}
+
+.sb-item--collapsed {
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.sb-item-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sb-item-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sb-item-badge {
+  margin-inline-start: auto;
+  flex-shrink: 0;
+}
+
+/* Footer */
+.sb-footer {
+  margin-block-start: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sb-footer-hr {
+  border: none;
+  border-block-start: 1px solid var(--border);
+  margin: 10px 0;
+}
+
+/* RTL — off-canvas slides from the inline-end edge */
+[dir="rtl"] .sb-rail.sb-offcanvas {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+}
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .sb-rail,
+  .sb-toggle-icon,
+  .sb-group-chevron {
+    transition: none;
+  }
+}
+
+/* Accordion — promoted from accordion.tsx
+   Compound: .acc > .acc-row > .acc-heading > .acc-trigger + .acc-panel > .acc-content
+   ghost variant: .acc.ghost
+   RTL: logical padding + directional chevron mirror
+   Motion: component-scoped prefers-reduced-motion guard
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.acc {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+/* Adjacent accordions collapse their gap */
+.acc + .acc { margin-block-start: 0; }
+
+/* Row divider */
+.acc-row { border-block-start: 1px solid var(--border); }
+.acc-row:first-child { border-block-start: none; }
+
+/* Strip <h3> default margin so it doesn't add spacing */
+.acc-heading { margin: 0; padding: 0; }
+
+/* Trigger button */
+.acc-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding-block: 14px;
+  padding-inline: 16px;
+  font-size: var(--text-base); /* 13px — on scale */
+  font-weight: 500;
+  color: var(--fg);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: start;
+  line-height: 1.4;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.acc-trigger:hover { background: var(--surface-hover); }
+.acc-trigger:focus-visible {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: -2px;
+}
+
+/* Label span fills remaining space */
+.acc-trigger-label { flex: 1 1 0; min-width: 0; }
+
+/* Chevron indicator */
+.acc-chev {
+  flex: 0 0 auto;
+  color: var(--fg-faint);
+  transition: transform var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.acc-trigger[aria-expanded="true"] .acc-chev {
+  transform: rotate(180deg);
+  color: var(--ember);
+}
+
+/* RTL — chevron mirrors to the leading edge */
+[dir="rtl"] .acc-chev { transform: scaleX(-1); }
+[dir="rtl"] .acc-trigger[aria-expanded="true"] .acc-chev { transform: scaleX(-1) rotate(180deg); }
+
+/* Panel — outer grid wrapper; animates height via grid-template-rows 0fr→1fr.
+   Always mounted in the DOM so the transition can play.
+   overflow:hidden is REQUIRED on the outer grid so the 0fr row actually clips
+   the content (grid itself doesn't hide overflow by default).
+   aria-hidden + inert (set in JS) keep collapsed content out of the AT tree
+   and tab order without display:none (which would block the animation). */
+.acc-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 200ms var(--ease);
+}
+
+.acc-panel[data-state="open"],
+.acc-panel.is-open {
+  grid-template-rows: 1fr;
+}
+
+/* Panel-inner — the grid child. Must have NO padding of its own so that
+   grid-template-rows: 0fr collapses it fully to 0px. */
+.acc-panel-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Content — visual padding lives here (child of acc-panel-inner) so padding
+   doesn't inflate the grid child's minimum height when the panel is closing. */
+.acc-content {
+  padding-block-end: 14px;
+  padding-inline: 16px;
+  font-size: var(--text-base); /* 13px */
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+.acc-content p { margin: 0 0 8px; }
+.acc-content p:last-child { margin-bottom: 0; }
+
+/* Prefers-reduced-motion: disable grid-rows transition component-scoped */
+@media (prefers-reduced-motion: reduce) {
+  .acc-panel {
+    transition: none;
+  }
+}
+
+/* ── Ghost variant — borderless, dividers only ──────────────────────────── */
+.acc.ghost {
+  border: none;
+  background: transparent;
+  border-radius: 0;
+}
+.acc.ghost .acc-row { border-block-start: 1px solid var(--border); }
+.acc.ghost .acc-row:first-child { border-block-start: 1px solid var(--border); }
+.acc.ghost .acc-trigger {
+  padding-inline: 0;
+}
+.acc.ghost .acc-trigger:hover {
+  background: transparent;
+  color: var(--ember);
+}
+.acc.ghost .acc-content { padding-inline: 0; }
+
+/* ── Reduced motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .acc-trigger,
+  .acc-chev {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Carousel — promoted from carousel.tsx (.carx-* block) */
+
+/* Root wrapper — tabIndex={0} so ArrowLeft/Right keyboard nav fires on region focus */
+.carx {
+  position: relative;
+  width: 100%;
+  outline: none;
+}
+
+.carx:focus-visible {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Viewport — embla mounts here; clips overflow */
+.carx-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Vertical orientation */
+.carx-vp-vert {
+  overflow: hidden;
+}
+
+/* Track — flex (not grid) so slide widths are deterministic */
+.carx-track {
+  display: flex;
+  gap: 12px;
+  /* embla drives scrolling — no overflow:auto here */
+  user-select: none;
+  touch-action: pan-y pinch-zoom;
+}
+
+/* Vertical track */
+.carx-track-vert {
+  flex-direction: column;
+  touch-action: pan-x pinch-zoom;
+}
+
+/* Slide */
+.carx-slide {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+/* Hero variant — root modifier */
+.carx-hero .carx-slide {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+/* Controls overlay — prev + next */
+.carx-controls {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  inset-inline: 0;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+/* Arrow buttons */
+.carx-arrow {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: border-color var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease);
+}
+
+[data-theme="light"] .carx-arrow {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+}
+
+.carx-arrow:hover {
+  border-color: var(--ember);
+  color: var(--ember);
+}
+
+.carx-arrow:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ring-width, 2px) var(--ring, var(--ember));
+}
+
+.carx-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: auto;
+}
+
+.carx-arrow:disabled:hover {
+  border-color: var(--border);
+  color: var(--fg);
+}
+
+/* Position prev at the inline-start edge */
+.carx-prev {
+  margin-inline-start: -8px;
+}
+
+/* Position next at the inline-end edge */
+.carx-next {
+  margin-inline-end: -8px;
+}
+
+/* Flip directional chevrons under RTL so prev/next still track reading direction */
+[dir="rtl"] .carx-arrow svg {
+  transform: scaleX(-1);
+}
+
+/* Dot indicators */
+.carx-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-block-start: 14px;
+}
+
+.carx-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-strong);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--dur-fast) var(--ease),
+              width var(--dur-fast) var(--ease),
+              border-radius var(--dur-fast) var(--ease);
+}
+
+.carx-dot:hover {
+  background: var(--fg-muted);
+}
+
+.carx-dot:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ring-width, 2px) var(--ring, var(--ember));
+}
+
+/* Active dot: stretches into a pill — colour + shape so it's not colour-only */
+.carx-dot.active {
+  background: var(--ember);
+  width: 22px;
+  border-radius: 4px;
+}
+
+/* Reduced motion — disable all carx transitions/animations component-scoped */
+@media (prefers-reduced-motion: reduce) {
+  .carx-arrow,
+  .carx-dot {
+    transition: none;
+  }
+}
+
+/* Toggle — promoted from toggle.tsx */
+
+/* Base: ghost variant (no visible border at rest). Sized to match .btn md. */
+.tgl {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 32px; padding: 0 10px; border-radius: 6px;
+  font-size: var(--text-sm); font-weight: 500;
+  border: 1px solid transparent; background: transparent;
+  color: var(--fg-muted);
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  white-space: nowrap; cursor: pointer; user-select: none;
+}
+/* Square footprint when children is a single SVG icon */
+.tgl:has(svg:only-child) { padding: 0; width: 32px; }
+.tgl:hover { background: var(--surface-hover); color: var(--fg); }
+.tgl:active { opacity: 0.85; }
+.tgl:focus-visible {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}
+.tgl:disabled, .tgl[disabled] { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* Pressed — ghost/outline: surface fill + full fg (fill AND implicit border means not colour-only) */
+.tgl.is-pressed { background: var(--surface-hover); color: var(--fg); }
+
+/* Outline variant — always-visible border at rest */
+.tgl.outline { border-color: var(--border-strong); color: var(--fg); background: transparent; }
+.tgl.outline:hover { background: var(--surface-hover); border-color: var(--border-stronger); }
+.tgl.outline.is-pressed { background: var(--surface-active); border-color: var(--border-stronger); color: var(--fg); }
+
+/* Solid variant — opaque surface at rest; ember when pressed */
+.tgl.solid { background: var(--surface); border-color: var(--border-strong); color: var(--fg); }
+.tgl.solid:hover { background: var(--surface-hover); border-color: var(--border-stronger); }
+.tgl.solid.is-pressed { background: var(--ember); border-color: var(--ember); color: var(--ember-fg); font-weight: 600; }
+.tgl.solid.is-pressed:hover { background: var(--ember-glow); border-color: var(--ember-glow); }
+
+/* Sizes */
+.tgl.sm { height: 26px; padding: 0 8px; font-size: var(--text-xs); }
+.tgl.sm:has(svg:only-child) { padding: 0; width: 26px; }
+.tgl.lg { height: 40px; padding: 0 14px; font-size: var(--text-body); }
+.tgl.lg:has(svg:only-child) { padding: 0; width: 40px; }
+
+/* Reduced-motion — component-scoped; no global guard in this codebase */
+@media (prefers-reduced-motion: reduce) {
+  .tgl { transition: none; }
+  .tgl:hover { opacity: 1; }
+  .tgl:active { opacity: 1; }
+}
+
+/* Label — promoted from label.tsx */
+.in-label.sm { font-size: var(--text-xs); }
+.in-label.is-disabled,
+.in-label[data-disabled] { opacity: 0.5; }
+
+/* InputGroup — composes the existing .in-group / .in-addon / .in-control system.
+   Only new rules added below: .in-addon.button (full action button addon,
+   distinct from the icon-utility .in-addon.btn that already exists). */
+
+/* Full action-button addon — text label or icon+label, with primary/ember variant.
+   Distinct from .in-addon.btn which is the icon-only utility button (clear/show).
+
+   Sizing contract: the button stretches to fill the group height (align-self:stretch),
+   so it inherits whatever min-height the .in-group (sm/md/lg) establishes. Padding
+   is purely inline (left/right); block (top/bottom) comes from the stretch. The
+   outer corner (start or end of the group) matches the group radius; the inner seam
+   is flush (radius 0) so the group shell provides the only visible curve. */
+.in-addon.button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding-inline: 12px; align-self: stretch;
+  background: var(--surface); color: var(--fg);
+  border: none; border-inline-start: 1px solid var(--border-strong);
+  /* Outer corner rounds; inner seam is flat. */
+  border-start-start-radius: 0; border-end-start-radius: 0;
+  border-start-end-radius: 5px; border-end-end-radius: 5px;
+  cursor: pointer; font: inherit; font-size: 13px; font-weight: 500;
+  appearance: none; -webkit-appearance: none; white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+  /* Suppress any inherited outline/box-shadow from reset sheets. */
+  outline: none; box-shadow: none;
+}
+/* First child: leading addon — divider on the end side, outer radius on start side. */
+.in-addon.button:first-child {
+  border-inline-start: none;
+  border-inline-end: 1px solid var(--border-strong);
+  border-start-start-radius: 5px; border-end-start-radius: 5px;
+  border-start-end-radius: 0; border-end-end-radius: 0;
+}
+.in-addon.button:hover:not(:disabled) { background: var(--surface-hover); }
+.in-addon.button:active:not(:disabled) { background: var(--surface-active); }
+
+/* Ember primary action — solid fill, dark-ink foreground. */
+.in-addon.button.ember {
+  background: var(--ember);
+  color: var(--ember-fg);
+  border-color: var(--ember);
+  font-weight: 600;
+}
+.in-addon.button.ember:hover:not(:disabled) {
+  background: var(--ember-glow);
+  border-color: var(--ember-glow);
+  color: var(--ember-fg);
+}
+.in-addon.button.ember:active:not(:disabled) {
+  background: var(--ember-deep);
+  border-color: var(--ember-deep);
+  color: var(--ember-fg);
+}
+
+/* Focus: suppress inner outline; the parent .in-group gets the ring instead. */
+.in-addon.button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+.in-group:has(.in-addon.button:focus-visible) {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}
+
+.in-addon.button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* Size scale — font size, gap, and inline padding scale with the group. */
+.in-group.sm .in-addon.button { font-size: 12px; padding-inline: 10px; gap: 5px; }
+.in-group.lg .in-addon.button { font-size: 14px; padding-inline: 14px; gap: 7px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .in-addon.button { transition: none; }
+}
+
+/* PasswordInput — strength bar + requirements checklist (.pw-*)
+   ─────────────────────────────────────────────────────────────
+   All pw-* classes live below. The strength bar is a 4-segment flex row;
+   each segment gets a tone class when active (pw-seg--danger / warning /
+   success). The requirements list is a plain column of icon + label rows. */
+
+/* Feedback wrapper — sits immediately below the .in-group */
+.pw-feedback {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-block-start: 6px;
+}
+
+/* Strength bar ─────────────────────────────────────────────── */
+.pw-strength {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+/* Individual segment */
+.pw-seg {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border-strong);
+  transition: background var(--dur-normal) var(--ease);
+}
+
+/* Tone fills */
+.pw-seg--danger  { background: var(--danger); }
+.pw-seg--warning { background: var(--warning); }
+.pw-seg--success { background: var(--success); }
+
+/* Strength label — sits inline after the bar row */
+.pw-strength-label {
+  font-size: var(--text-xs);
+  color: var(--fg-subtle);
+  font-family: var(--font-mono);
+  line-height: 1;
+  min-height: 1em;
+  transition: color var(--dur-normal) var(--ease);
+}
+
+.pw-tone--danger  { color: var(--danger-text,  var(--danger)); }
+.pw-tone--warning { color: var(--warning-text, var(--warning)); }
+.pw-tone--success { color: var(--success-text, var(--success)); }
+
+/* Requirements list ────────────────────────────────────────── */
+.pw-reqs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pw-req {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-xs);
+  color: var(--fg-subtle);
+  transition: color var(--dur-normal) var(--ease);
+}
+
+.pw-req--met { color: var(--success-text, var(--success)); }
+
+/* Icon container — fixed 16px wide so labels stay aligned */
+.pw-req-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.pw-req--met .pw-req-icon { color: var(--success-text, var(--success)); }
+
+/* Reduced-motion — no animated transitions on strength bar or labels */
+@media (prefers-reduced-motion: reduce) {
+  .pw-seg,
+  .pw-strength-label,
+  .pw-req {
+    transition: none;
+  }
+}
+
+/* TagInput — promoted from tag-input.tsx */
+/* Chip entrance animation — fires when a new .in-tag is mounted. */
+@keyframes ti-chip-in {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.in-tags .in-tag {
+  animation: ti-chip-in var(--dur-fast) var(--ease) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .in-tags .in-tag { animation: none; }
+}

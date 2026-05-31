@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev)",
+      "Bash(npm run build)",
+      "Bash(npm run verify)",
+      "Bash(npm run forge:verify:*)",
+      "Bash(npm run forge:health)",
+      "Bash(npm run gen:contract)",
+      "Bash(npm run check:contract)",
+      "Bash(npm run check:*)",
+      "Bash(npm run gen:*)",
+      "Bash(npm run registry:build)",
+      "Bash(npm run sb:build)",
+      "Bash(node scripts/*)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout:*)",
+      "Bash(git switch:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(cat:*)"
+    ],
+    "ask": ["Bash(git push:*)", "Bash(npm publish:*)", "Bash(gh pr create:*)"],
+    "deny": ["Read(./.env)", "Read(./.env.*)", "Read(**/.env*)", "Bash(rm -rf:*)"]
+  },
+  "env": {
+    "FORGE_HARNESS": "1"
+  },
+  "skillListingBudgetFraction": 0.03,
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [{ "type": "command", "command": "node .claude/hooks/session-context.mjs" }]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          { "type": "command", "command": "node .claude/hooks/protect-generated.mjs" },
+          { "type": "command", "command": "node .claude/hooks/typography-scale.mjs" },
+          { "type": "command", "command": "node .claude/hooks/no-page-style.mjs" }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [{ "type": "command", "command": "node .claude/hooks/format-edited.mjs" }]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [{ "type": "command", "command": "node .claude/hooks/verify-on-stop.mjs" }]
+      }
+    ]
+  }
+}

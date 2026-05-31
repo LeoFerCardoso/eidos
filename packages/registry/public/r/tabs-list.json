@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs-list",
+  "type": "registry:ui",
+  "title": "Tabs List",
+  "description": "Forge Tabs List component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/tabs-list.tsx",
+      "target": "components/forge/tabs-list.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ninterface TabsContextValue {\n  value: string;\n  onValueChange: (value: string) => void;\n  orientation: 'horizontal' | 'vertical';\n  variant: 'line' | 'pills' | 'enclosed';\n  size: 'sm' | 'md';\n  manualActivation: boolean;\n  /** id prefix — all ids are `${uid}-tab-${value}` / `${uid}-panel-${value}` */\n  uid: string;\n  /** ordered list of trigger values (registered in DOM order by TabsTrigger) */\n  registerTrigger: (value: string, disabled: boolean) => void;\n  unregisterTrigger: (value: string) => void;\n  triggerList: React.MutableRefObject<{ value: string; disabled: boolean }[]>;\n}\n\nconst TabsContext = React.createContext<TabsContextValue | null>(null);\n\nfunction useTabsContext(component: string) {\n  const ctx = React.useContext(TabsContext);\n  if (!ctx) throw new Error(`<${component}> must be rendered inside <Tabs>`);\n  return ctx;\n}\n\ninterface TabsListProps {\n  className?: string;\n  children?: React.ReactNode;\n  /** Accessible label for the tablist. */\n  'aria-label'?: string;\n}\n\nconst TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(\n  ({ className, children, 'aria-label': ariaLabel, ...rest }, ref) => {\n    const { orientation, variant } = useTabsContext('TabsList');\n\n    const classes = [\n      'forge-tablist',\n      `forge-tablist--${variant}`,\n      className,\n    ]\n      .filter(Boolean)\n      .join(' ');\n\n    return (\n      <div\n        ref={ref}\n        role=\"tablist\"\n        aria-orientation={orientation}\n        aria-label={ariaLabel}\n        className={classes}\n        {...rest}\n      >\n        {children}\n      </div>\n    );\n  },\n);\n\nexport { TabsList };\n"
+    }
+  ]
+}

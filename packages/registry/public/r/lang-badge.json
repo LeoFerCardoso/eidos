@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "lang-badge",
+  "type": "registry:ui",
+  "title": "Lang Badge",
+  "description": "Forge Lang Badge component.",
+  "registryDependencies": [
+    "forge",
+    "chip"
+  ],
+  "files": [
+    {
+      "path": "components/forge/lang-badge.tsx",
+      "target": "components/forge/lang-badge.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Chip } from '@/components/forge/chip';\n\n// Inlined Forge mock palette (LangBadge) — keeps this file self-contained.\nconst MOCKS = { LANGS: { TypeScript: '#3178C6', Go: '#00ADD8', Java: '#F89820', Python: '#FFD43B', Rust: '#CE422B' } } as { LANGS: Record<string, string> };\n\nconst LangBadge = ({\n  lang,\n  className,\n}: {\n  lang?: string;\n  className?: string;\n}) => (\n  <Chip\n    icon={\n      <span\n        aria-hidden=\"true\"\n        style={{ display: 'inline-block', flex: '0 0 auto', width: 7, height: 7, borderRadius: '50%', background: MOCKS.LANGS[lang] || 'var(--fg-subtle)' }}\n      />\n    }\n    className={className}\n  >\n    {lang}\n  </Chip>\n);\n\nexport { LangBadge };\n"
+    }
+  ]
+}

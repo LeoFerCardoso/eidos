@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tier-badge",
+  "type": "registry:ui",
+  "title": "Tier Badge",
+  "description": "Forge Tier Badge component.",
+  "registryDependencies": [
+    "forge",
+    "chip"
+  ],
+  "files": [
+    {
+      "path": "components/forge/tier-badge.tsx",
+      "target": "components/forge/tier-badge.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Chip } from '@/components/forge/chip';\n\nconst TierBadge = ({\n  tier,\n  className,\n}: {\n  tier?: string;\n  className?: string;\n}) => {\n  const toneMap: Record<string, 'tier-t1' | 'tier-t2' | 'tier-t3'> = {\n    T1: 'tier-t1',\n    T2: 'tier-t2',\n    T3: 'tier-t3',\n  };\n  const tone = toneMap[tier ?? ''] ?? 'tier-t3';\n  return <Chip tone={tone} className={className}>{tier}</Chip>;\n};\n\nexport { TierBadge };\n"
+    }
+  ]
+}

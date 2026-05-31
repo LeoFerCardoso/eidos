@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tool-input",
+  "type": "registry:ui",
+  "title": "Tool Input",
+  "description": "Forge Tool Input component.",
+  "dependencies": [
+    "ai"
+  ],
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "code"
+  ],
+  "files": [
+    {
+      "path": "components/forge/tool-input.tsx",
+      "target": "components/forge/tool-input.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Code } from '@/components/forge/code';\n\nconst ToolInput = ({\n  params,\n  streaming,\n  paramsHint,\n}: {\n  /** Tool input args. Rendered as syntax-highlighted JSON. */\n  params: object;\n  /** When true, swap the JSON for shimmer placeholders while params stream in. */\n  streaming?: boolean;\n  /** Right-aligned meta text — e.g. \"3 args\" or \"streaming…\". */\n  paramsHint?: string;\n}) => (\n  <div className=\"tool-section\">\n    <div className=\"tool-section-label\">\n      <span>Input</span>\n      {paramsHint && <span className=\"meta\">{paramsHint}</span>}\n    </div>\n    {streaming ? (\n      <div className=\"tool-skel\">\n        <div className=\"ln\" style={{ width: '70%' }}/>\n        <div className=\"ln\" style={{ width: '88%' }}/>\n        <div className=\"ln\" style={{ width: '56%' }}/>\n      </div>\n    ) : (\n      <Code lang=\"json\">{JSON.stringify(params, null, 2)}</Code>\n    )}\n  </div>\n);\n\nexport { ToolInput };\n"
+    }
+  ]
+}

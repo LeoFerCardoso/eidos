@@ -1,0 +1,1280 @@
+{
+  "$description": "Forge Design System tokens — generated from packages/ui/styles/tokens.css. Do not edit by hand; edit the CSS and re-run scripts/gen-tokens.mjs.",
+  "color": {
+    "canvas": {
+      "$value": "oklch(0.13 0.005 60)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "oklch(0.93 0.003 75)"
+      }
+    },
+    "bg": {
+      "$value": "oklch(0.165 0.006 60)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "oklch(0.97 0.003 75)"
+      }
+    },
+    "bg-elevated": {
+      "$value": "oklch(0.2 0.006 60)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "oklch(0.995 0.001 75)"
+      }
+    },
+    "surface": {
+      "$value": "oklch(0.235 0.007 60)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "oklch(1 0 0)"
+      }
+    },
+    "surface-hover": {
+      "$value": "oklch(0.275 0.008 60)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "oklch(0.965 0.003 75)"
+      }
+    },
+    "surface-overlay": {
+      "$value": "oklch(0.255 0.007 60)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "oklch(1 0 0)"
+      }
+    },
+    "surface-active": {
+      "$value": "oklch(0.32 0.009 60)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "oklch(0.935 0.004 75)"
+      }
+    },
+    "surface-selected": {
+      "$value": "oklch(0.255 0.030 40)",
+      "$type": "color",
+      "$description": "ember-tinged selection",
+      "$extensions": {
+        "com.forge.theme.light": "oklch(0.958 0.035 40)"
+      }
+    },
+    "surface-base": {
+      "$value": "{color.surface}",
+      "$type": "color"
+    },
+    "surface-canvas": {
+      "$value": "{color.bg}",
+      "$type": "color"
+    },
+    "surface-sunken": {
+      "$value": "{color.bg-elevated}",
+      "$type": "color"
+    },
+    "surface-raised": {
+      "$value": "{color.surface-overlay}",
+      "$type": "color"
+    },
+    "border-subtle": {
+      "$value": "rgba(255,255,255,0.04)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(15,23,42,0.04)"
+      }
+    },
+    "border": {
+      "$value": "rgba(255,255,255,0.08)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(15,23,42,0.08)"
+      }
+    },
+    "border-strong": {
+      "$value": "rgba(255,255,255,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(15,23,42,0.14)"
+      }
+    },
+    "border-stronger": {
+      "$value": "rgba(255,255,255,0.22)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(15,23,42,0.24)"
+      }
+    },
+    "fg": {
+      "$value": "#F2EEE8",
+      "$type": "color",
+      "$description": "primary text — warm white",
+      "$extensions": {
+        "com.forge.theme.light": "#0E0C09"
+      }
+    },
+    "fg-muted": {
+      "$value": "#A8A39B",
+      "$type": "color",
+      "$description": "secondary — descriptions, helper",
+      "$extensions": {
+        "com.forge.theme.light": "#595550"
+      }
+    },
+    "fg-subtle": {
+      "$value": "#756F66",
+      "$type": "color",
+      "$description": "tertiary — metadata, placeholders",
+      "$extensions": {
+        "com.forge.theme.light": "#78736D"
+      }
+    },
+    "fg-faint": {
+      "$value": "#524C44",
+      "$type": "color",
+      "$description": "quaternary — decorative only, never required",
+      "$extensions": {
+        "com.forge.theme.light": "#A8A39B"
+      }
+    },
+    "ember": {
+      "$value": "#FF6B35",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#E85A28"
+      }
+    },
+    "ember-glow": {
+      "$value": "#FF8C42",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#FF6B35"
+      }
+    },
+    "ember-deep": {
+      "$value": "#E04E1A",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#C24A1F"
+      }
+    },
+    "ember-soft": {
+      "$value": "rgba(255,107,53,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(232,90,40,0.10)"
+      }
+    },
+    "ember-softer": {
+      "$value": "rgba(255,107,53,0.07)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(232,90,40,0.05)"
+      }
+    },
+    "ember-fg": {
+      "$value": "#0A0907",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#FFFFFF"
+      }
+    },
+    "danger-fg": {
+      "$value": "#0A0907",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#FFFFFF"
+      }
+    },
+    "snackbar-bg": {
+      "$value": "#0A0907",
+      "$type": "color"
+    },
+    "snackbar-fg": {
+      "$value": "#F2EEE8",
+      "$type": "color"
+    },
+    "ink-fixed": {
+      "$value": "#0A0907",
+      "$type": "color"
+    },
+    "switch-thumb": {
+      "$value": "#FFFFFF",
+      "$type": "color"
+    },
+    "scrim": {
+      "$value": "rgba(8,9,10,0.45)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(8,9,10,0.40)"
+      }
+    },
+    "ice": {
+      "$value": "#7DD3FC",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#0EA5E9"
+      }
+    },
+    "ice-soft": {
+      "$value": "rgba(125,211,252,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(14,165,233,0.10)"
+      }
+    },
+    "violet": {
+      "$value": "#A78BFA",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#7C3AED"
+      }
+    },
+    "success": {
+      "$value": "#34D399",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#059669"
+      }
+    },
+    "success-soft": {
+      "$value": "rgba(52,211,153,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(5,150,105,0.10)"
+      }
+    },
+    "warning": {
+      "$value": "#FBBF24",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#D97706"
+      }
+    },
+    "warning-soft": {
+      "$value": "rgba(251,191,36,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(217,119,6,0.10)"
+      }
+    },
+    "danger": {
+      "$value": "#F87171",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#DC2626"
+      }
+    },
+    "danger-soft": {
+      "$value": "rgba(248,113,113,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(220,38,38,0.10)"
+      }
+    },
+    "ember-strong": {
+      "$value": "{color.ember-deep}",
+      "$type": "color"
+    },
+    "ember-subtle": {
+      "$value": "{color.ember-softer}",
+      "$type": "color"
+    },
+    "ember-border": {
+      "$value": "rgba(255,107,53,0.30)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(232,90,40,0.30)"
+      }
+    },
+    "ember-text": {
+      "$value": "{color.ember-glow}",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#C2410C"
+      }
+    },
+    "info": {
+      "$value": "#38BDF8",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#0284C7"
+      }
+    },
+    "info-strong": {
+      "$value": "#0EA5E9",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#0369A1"
+      }
+    },
+    "info-soft": {
+      "$value": "rgba(56,189,248,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(2,132,199,0.10)"
+      }
+    },
+    "info-subtle": {
+      "$value": "rgba(56,189,248,0.07)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(2,132,199,0.05)"
+      }
+    },
+    "info-border": {
+      "$value": "rgba(56,189,248,0.30)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(2,132,199,0.28)"
+      }
+    },
+    "info-text": {
+      "$value": "{color.ice}",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#0369A1"
+      }
+    },
+    "info-fg": {
+      "$value": "#06141C",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#FFFFFF"
+      }
+    },
+    "success-strong": {
+      "$value": "#10B981",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#047857"
+      }
+    },
+    "success-subtle": {
+      "$value": "rgba(52,211,153,0.07)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(5,150,105,0.05)"
+      }
+    },
+    "success-border": {
+      "$value": "rgba(52,211,153,0.30)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(5,150,105,0.28)"
+      }
+    },
+    "success-text": {
+      "$value": "#6EE7B7",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#047857"
+      }
+    },
+    "success-fg": {
+      "$value": "#05140E",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#FFFFFF"
+      }
+    },
+    "warning-strong": {
+      "$value": "#F59E0B",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#B45309"
+      }
+    },
+    "warning-subtle": {
+      "$value": "rgba(251,191,36,0.07)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(217,119,6,0.05)"
+      }
+    },
+    "warning-border": {
+      "$value": "rgba(251,191,36,0.30)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(217,119,6,0.28)"
+      }
+    },
+    "warning-text": {
+      "$value": "#FCD34D",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#B45309"
+      }
+    },
+    "warning-fg": {
+      "$value": "#1A1206",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#2A1D06"
+      }
+    },
+    "danger-strong": {
+      "$value": "#EF4444",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#B91C1C"
+      }
+    },
+    "danger-subtle": {
+      "$value": "rgba(248,113,113,0.07)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(220,38,38,0.05)"
+      }
+    },
+    "danger-border": {
+      "$value": "rgba(248,113,113,0.30)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(220,38,38,0.28)"
+      }
+    },
+    "danger-text": {
+      "$value": "#FCA5A5",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#B91C1C"
+      }
+    },
+    "ring": {
+      "$value": "{color.ember}",
+      "$type": "color"
+    },
+    "ring-danger": {
+      "$value": "{color.danger}",
+      "$type": "color"
+    },
+    "viz-cat-1": {
+      "$value": "#FF6B35",
+      "$type": "color",
+      "$description": "ember",
+      "$extensions": {
+        "com.forge.theme.light": "#E85A28"
+      }
+    },
+    "viz-cat-2": {
+      "$value": "#7DD3FC",
+      "$type": "color",
+      "$description": "ice",
+      "$extensions": {
+        "com.forge.theme.light": "#0284C7"
+      }
+    },
+    "viz-cat-3": {
+      "$value": "#A78BFA",
+      "$type": "color",
+      "$description": "violet",
+      "$extensions": {
+        "com.forge.theme.light": "#7C3AED"
+      }
+    },
+    "viz-cat-4": {
+      "$value": "#34D399",
+      "$type": "color",
+      "$description": "success",
+      "$extensions": {
+        "com.forge.theme.light": "#059669"
+      }
+    },
+    "viz-cat-5": {
+      "$value": "#FBBF24",
+      "$type": "color",
+      "$description": "warning",
+      "$extensions": {
+        "com.forge.theme.light": "#D97706"
+      }
+    },
+    "viz-cat-6": {
+      "$value": "#F472B6",
+      "$type": "color",
+      "$description": "pink",
+      "$extensions": {
+        "com.forge.theme.light": "#DB2777"
+      }
+    },
+    "viz-cat-7": {
+      "$value": "#2DD4BF",
+      "$type": "color",
+      "$description": "teal",
+      "$extensions": {
+        "com.forge.theme.light": "#0D9488"
+      }
+    },
+    "viz-cat-8": {
+      "$value": "#818CF8",
+      "$type": "color",
+      "$description": "indigo",
+      "$extensions": {
+        "com.forge.theme.light": "#4F46E5"
+      }
+    },
+    "viz-cat-9": {
+      "$value": "#BEF264",
+      "$type": "color",
+      "$description": "lime",
+      "$extensions": {
+        "com.forge.theme.light": "#65A30D"
+      }
+    },
+    "viz-cat-10": {
+      "$value": "#FB7185",
+      "$type": "color",
+      "$description": "rose",
+      "$extensions": {
+        "com.forge.theme.light": "#E11D48"
+      }
+    },
+    "viz-cat-11": {
+      "$value": "#67E8F9",
+      "$type": "color",
+      "$description": "cyan",
+      "$extensions": {
+        "com.forge.theme.light": "#0891B2"
+      }
+    },
+    "viz-cat-12": {
+      "$value": "#FDE047",
+      "$type": "color",
+      "$description": "yellow",
+      "$extensions": {
+        "com.forge.theme.light": "#CA8A04"
+      }
+    },
+    "viz-seq-low": {
+      "$value": "#1F2024",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#F4F4F5"
+      }
+    },
+    "viz-seq-mid": {
+      "$value": "#FF8C42",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#E85A28"
+      }
+    },
+    "viz-seq-high": {
+      "$value": "#FFE5D4",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#431407"
+      }
+    },
+    "viz-div-neg": {
+      "$value": "#F87171",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#DC2626"
+      }
+    },
+    "viz-div-zero": {
+      "$value": "#4A4A4F",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#A1A1AA"
+      }
+    },
+    "viz-div-pos": {
+      "$value": "#34D399",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#059669"
+      }
+    },
+    "viz-grid": {
+      "$value": "rgba(255,255,255,0.04)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(0,0,0,0.05)"
+      }
+    },
+    "viz-axis": {
+      "$value": "rgba(255,255,255,0.18)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(0,0,0,0.18)"
+      }
+    },
+    "viz-tooltip-bg": {
+      "$value": "rgba(8,9,10,0.92)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(255,255,255,0.96)"
+      }
+    },
+    "severity-p0": {
+      "$value": "#FB5252",
+      "$type": "color",
+      "$description": "critical",
+      "$extensions": {
+        "com.forge.theme.light": "#B91C1C"
+      }
+    },
+    "severity-p0-soft": {
+      "$value": "rgba(251,82,82,0.18)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(185,28,28,0.10)"
+      }
+    },
+    "severity-p1": {
+      "$value": "#FB923C",
+      "$type": "color",
+      "$description": "high",
+      "$extensions": {
+        "com.forge.theme.light": "#EA580C"
+      }
+    },
+    "severity-p1-soft": {
+      "$value": "rgba(251,146,60,0.18)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(234,88,12,0.14)"
+      }
+    },
+    "severity-p2": {
+      "$value": "#FBBF24",
+      "$type": "color",
+      "$description": "medium",
+      "$extensions": {
+        "com.forge.theme.light": "#EAB308"
+      }
+    },
+    "severity-p2-soft": {
+      "$value": "rgba(251,191,36,0.18)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(234,179,8,0.18)"
+      }
+    },
+    "severity-p3": {
+      "$value": "#7DD3FC",
+      "$type": "color",
+      "$description": "low / informational",
+      "$extensions": {
+        "com.forge.theme.light": "#0EA5E9"
+      }
+    },
+    "severity-p3-soft": {
+      "$value": "rgba(125,211,252,0.18)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(14,165,233,0.14)"
+      }
+    },
+    "severity-p0-ink": {
+      "$value": "#0A0907",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#FFFFFF"
+      }
+    },
+    "severity-p1-ink": {
+      "$value": "#0A0907",
+      "$type": "color"
+    },
+    "severity-p2-ink": {
+      "$value": "#0A0907",
+      "$type": "color"
+    },
+    "severity-p3-ink": {
+      "$value": "#0A0907",
+      "$type": "color"
+    },
+    "status-pending": {
+      "$value": "#6B6B70",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#71717A"
+      }
+    },
+    "status-pending-soft": {
+      "$value": "rgba(107,107,112,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(113,113,122,0.10)"
+      }
+    },
+    "status-running": {
+      "$value": "#7DD3FC",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#0284C7"
+      }
+    },
+    "status-running-soft": {
+      "$value": "rgba(125,211,252,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(2,132,199,0.10)"
+      }
+    },
+    "status-done": {
+      "$value": "#34D399",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#059669"
+      }
+    },
+    "status-done-soft": {
+      "$value": "rgba(52,211,153,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(5,150,105,0.10)"
+      }
+    },
+    "status-error": {
+      "$value": "#F87171",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#DC2626"
+      }
+    },
+    "status-error-soft": {
+      "$value": "rgba(248,113,113,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(220,38,38,0.10)"
+      }
+    },
+    "status-skipped": {
+      "$value": "#4A4A4F",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#A1A1AA"
+      }
+    },
+    "status-skipped-soft": {
+      "$value": "rgba(74,74,79,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(161,161,170,0.10)"
+      }
+    },
+    "health-up": {
+      "$value": "#34D399",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#059669"
+      }
+    },
+    "health-up-soft": {
+      "$value": "rgba(52,211,153,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(5,150,105,0.10)"
+      }
+    },
+    "health-degraded": {
+      "$value": "#FBBF24",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#D97706"
+      }
+    },
+    "health-degraded-soft": {
+      "$value": "rgba(251,191,36,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(217,119,6,0.10)"
+      }
+    },
+    "health-down": {
+      "$value": "#F87171",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#DC2626"
+      }
+    },
+    "health-down-soft": {
+      "$value": "rgba(248,113,113,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(220,38,38,0.10)"
+      }
+    },
+    "health-unknown": {
+      "$value": "#6B6B70",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#71717A"
+      }
+    },
+    "health-unknown-soft": {
+      "$value": "rgba(107,107,112,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(113,113,122,0.10)"
+      }
+    },
+    "risk-low": {
+      "$value": "#34D399",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#059669"
+      }
+    },
+    "risk-low-soft": {
+      "$value": "rgba(52,211,153,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(5,150,105,0.10)"
+      }
+    },
+    "risk-med": {
+      "$value": "#FBBF24",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#D97706"
+      }
+    },
+    "risk-med-soft": {
+      "$value": "rgba(251,191,36,0.14)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(217,119,6,0.10)"
+      }
+    },
+    "risk-high": {
+      "$value": "#FB923C",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#EA580C"
+      }
+    },
+    "risk-high-soft": {
+      "$value": "rgba(251,146,60,0.18)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(234,88,12,0.10)"
+      }
+    },
+    "risk-crit": {
+      "$value": "#FB5252",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#B91C1C"
+      }
+    },
+    "risk-crit-soft": {
+      "$value": "rgba(251,82,82,0.18)",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(185,28,28,0.10)"
+      }
+    },
+    "ai-bg": {
+      "$value": "{color.bg-elevated}",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#FFFFFF"
+      }
+    },
+    "ai-surface": {
+      "$value": "{color.surface}",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#FAFAFA"
+      }
+    },
+    "ai-fg": {
+      "$value": "{color.fg}",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#0A0A0B"
+      }
+    },
+    "ai-fg-muted": {
+      "$value": "{color.fg-muted}",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#52525B"
+      }
+    },
+    "ai-border": {
+      "$value": "{color.border-strong}",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "rgba(0,0,0,0.10)"
+      }
+    },
+    "ai-accent": {
+      "$value": "{color.ember}",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#E85A28"
+      }
+    },
+    "ai-streaming-caret": {
+      "$value": "{color.ember}",
+      "$type": "color",
+      "$extensions": {
+        "com.forge.theme.light": "#E85A28"
+      }
+    }
+  },
+  "easing": {
+    "ease": {
+      "$value": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "$type": "cubicBezier"
+    },
+    "ease-out": {
+      "$value": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "$type": "cubicBezier"
+    },
+    "ease-in": {
+      "$value": "cubic-bezier(0.7, 0, 0.84, 0)",
+      "$type": "cubicBezier"
+    },
+    "ease-spring": {
+      "$value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+      "$type": "cubicBezier"
+    }
+  },
+  "duration": {
+    "dur-fast": {
+      "$value": "120ms",
+      "$type": "duration"
+    },
+    "dur": {
+      "$value": "220ms",
+      "$type": "duration"
+    },
+    "dur-slow": {
+      "$value": "360ms",
+      "$type": "duration"
+    },
+    "dur-xs": {
+      "$value": "80ms",
+      "$type": "duration",
+      "$description": "hover tints, focus ring fade"
+    },
+    "dur-stagger": {
+      "$value": "60ms",
+      "$type": "duration",
+      "$description": "gap between cascading siblings"
+    }
+  },
+  "dimension": {
+    "ring-width": {
+      "$value": "2px",
+      "$type": "dimension"
+    },
+    "ring-offset": {
+      "$value": "2px",
+      "$type": "dimension"
+    },
+    "z-base": {
+      "$value": "0",
+      "$type": "dimension"
+    },
+    "prose-narrow": {
+      "$value": "56ch",
+      "$type": "dimension",
+      "$description": "short captions, do/don't notes"
+    },
+    "prose-default": {
+      "$value": "64ch",
+      "$type": "dimension",
+      "$description": "lede, page intro"
+    },
+    "prose-wide": {
+      "$value": "72ch",
+      "$type": "dimension",
+      "$description": "long-form body, FAQ answers"
+    }
+  },
+  "fontFamily": {
+    "font-sans": {
+      "$value": "'Geist', 'Inter', -apple-system, system-ui, sans-serif",
+      "$type": "fontFamily"
+    },
+    "font-mono": {
+      "$value": "'Geist Mono', 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace",
+      "$type": "fontFamily"
+    }
+  },
+  "spacing": {
+    "space-0": {
+      "$value": "0",
+      "$type": "dimension"
+    },
+    "space-px": {
+      "$value": "1px",
+      "$type": "dimension"
+    },
+    "space-1": {
+      "$value": "4px",
+      "$type": "dimension"
+    },
+    "space-2": {
+      "$value": "8px",
+      "$type": "dimension"
+    },
+    "space-3": {
+      "$value": "12px",
+      "$type": "dimension"
+    },
+    "space-4": {
+      "$value": "16px",
+      "$type": "dimension"
+    },
+    "space-5": {
+      "$value": "20px",
+      "$type": "dimension"
+    },
+    "space-6": {
+      "$value": "24px",
+      "$type": "dimension"
+    },
+    "space-8": {
+      "$value": "32px",
+      "$type": "dimension"
+    },
+    "space-10": {
+      "$value": "40px",
+      "$type": "dimension"
+    },
+    "space-12": {
+      "$value": "48px",
+      "$type": "dimension"
+    },
+    "space-16": {
+      "$value": "64px",
+      "$type": "dimension"
+    },
+    "space-24": {
+      "$value": "96px",
+      "$type": "dimension"
+    }
+  },
+  "radius": {
+    "radius-xs": {
+      "$value": "3px",
+      "$type": "dimension",
+      "$description": "code chips, inline kbd"
+    },
+    "radius-sm": {
+      "$value": "4px",
+      "$type": "dimension",
+      "$description": "tags, micro-affordances"
+    },
+    "radius-md": {
+      "$value": "5px",
+      "$type": "dimension",
+      "$description": "nav items"
+    },
+    "radius-lg": {
+      "$value": "6px",
+      "$type": "dimension",
+      "$description": "default surface, button, input — the workhorse"
+    },
+    "radius-xl": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "toolbar, fc-card, frame"
+    },
+    "radius-2xl": {
+      "$value": "12px",
+      "$type": "dimension",
+      "$description": "modal, drawer, sidesheet, hero"
+    },
+    "radius-full": {
+      "$value": "9999px",
+      "$type": "dimension",
+      "$description": "pill, dot, status"
+    }
+  },
+  "fontSize": {
+    "text-xs": {
+      "$value": "11px",
+      "$type": "dimension",
+      "$description": "t-mono-label — eyebrows, column headers"
+    },
+    "text-sm": {
+      "$value": "13px",
+      "$type": "dimension",
+      "$description": "alias → t-small (was 12.5; snapped to scale)"
+    },
+    "text-base": {
+      "$value": "13px",
+      "$type": "dimension",
+      "$description": "t-small — helper text, captions, card body"
+    },
+    "text-md": {
+      "$value": "15px",
+      "$type": "dimension",
+      "$description": "alias → t-body (was 14; snapped to scale)"
+    },
+    "text-body": {
+      "$value": "15px",
+      "$type": "dimension",
+      "$description": "t-body — default paragraph, table cells, intros"
+    },
+    "text-lg": {
+      "$value": "17px",
+      "$type": "dimension",
+      "$description": "t-body-lg — lede below display / page header"
+    },
+    "text-xl": {
+      "$value": "20px",
+      "$type": "dimension",
+      "$description": "h3"
+    },
+    "text-2xl": {
+      "$value": "28px",
+      "$type": "dimension",
+      "$description": "h2 / page header"
+    },
+    "text-3xl": {
+      "$value": "36px",
+      "$type": "dimension",
+      "$description": "h1"
+    },
+    "text-display": {
+      "$value": "56px",
+      "$type": "dimension"
+    },
+    "text-display-xl": {
+      "$value": "72px",
+      "$type": "dimension"
+    }
+  },
+  "zIndex": {
+    "z-sticky": {
+      "$value": "20",
+      "$type": "number"
+    },
+    "z-dropdown": {
+      "$value": "40",
+      "$type": "number"
+    },
+    "z-popover": {
+      "$value": "60",
+      "$type": "number"
+    },
+    "z-modal": {
+      "$value": "100",
+      "$type": "number"
+    },
+    "z-toast": {
+      "$value": "200",
+      "$type": "number"
+    },
+    "z-tooltip": {
+      "$value": "300",
+      "$type": "number"
+    }
+  },
+  "breakpoint": {
+    "bp-sm": {
+      "$value": "640px",
+      "$type": "dimension"
+    },
+    "bp-md": {
+      "$value": "768px",
+      "$type": "dimension"
+    },
+    "bp-lg": {
+      "$value": "1024px",
+      "$type": "dimension"
+    },
+    "bp-xl": {
+      "$value": "1280px",
+      "$type": "dimension"
+    },
+    "bp-2xl": {
+      "$value": "1536px",
+      "$type": "dimension"
+    }
+  },
+  "other": {
+    "tnum": {
+      "$value": "'tnum', 'zero'"
+    },
+    "elev-0": {
+      "$value": "none"
+    },
+    "shadow-0": {
+      "$value": "{other.elev-0}"
+    }
+  },
+  "opacity": {
+    "opacity-disabled": {
+      "$value": "0.45",
+      "$type": "number"
+    },
+    "opacity-hover": {
+      "$value": "0.86",
+      "$type": "number"
+    },
+    "opacity-focus": {
+      "$value": "1",
+      "$type": "number"
+    },
+    "opacity-dim": {
+      "$value": "0.65",
+      "$type": "number"
+    }
+  },
+  "shadow": {
+    "elev-1": {
+      "$value": "0 1px 2px rgba(0,0,0,0.28),\n    0 1px 2px rgba(0,0,0,0.14)",
+      "$type": "shadow",
+      "$extensions": {
+        "com.forge.theme.light": "0 1px 2px rgba(15,23,42,0.14),\n    0 1px 2px rgba(15,23,42,0.14)"
+      }
+    },
+    "elev-2": {
+      "$value": "0 2px 4px rgba(0,0,0,0.28),\n    0 2px 4px rgba(0,0,0,0.14)",
+      "$type": "shadow",
+      "$extensions": {
+        "com.forge.theme.light": "0 2px 4px rgba(15,23,42,0.14),\n    0 2px 4px rgba(15,23,42,0.14)"
+      }
+    },
+    "elev-3": {
+      "$value": "0 4px 8px rgba(0,0,0,0.28),\n    0 0 2px rgba(0,0,0,0.20)",
+      "$type": "shadow",
+      "$extensions": {
+        "com.forge.theme.light": "0 4px 8px rgba(15,23,42,0.24),\n    0 0 8px rgba(15,23,42,0.20)"
+      }
+    },
+    "elev-4": {
+      "$value": "0 8px 16px rgba(0,0,0,0.28),\n    0 0 2px rgba(0,0,0,0.20)",
+      "$type": "shadow",
+      "$extensions": {
+        "com.forge.theme.light": "0 8px 16px rgba(15,23,42,0.24),\n    0 0 8px rgba(15,23,42,0.20)"
+      }
+    },
+    "elev-ember": {
+      "$value": "0 0 0 1px var(--ember),\n    0 0 0 4px rgba(255,107,53,0.18),\n    0 8px 24px rgba(255,107,53,0.25)",
+      "$type": "shadow",
+      "$extensions": {
+        "com.forge.theme.light": "0 0 0 1px var(--ember),\n    0 0 0 4px rgba(232,90,40,0.14),\n    0 8px 24px rgba(232,90,40,0.18)"
+      }
+    },
+    "shadow-1": {
+      "$value": "{shadow.elev-1}",
+      "$type": "shadow"
+    },
+    "shadow-2": {
+      "$value": "{shadow.elev-2}",
+      "$type": "shadow"
+    },
+    "shadow-3": {
+      "$value": "{shadow.elev-3}",
+      "$type": "shadow"
+    },
+    "shadow-4": {
+      "$value": "{shadow.elev-4}",
+      "$type": "shadow"
+    },
+    "shadow-5": {
+      "$value": "{shadow.elev-4}",
+      "$type": "shadow"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tool-status",
+  "type": "registry:ui",
+  "title": "Tool Status",
+  "description": "Forge Tool Status component.",
+  "dependencies": [
+    "ai"
+  ],
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons",
+    "pill"
+  ],
+  "files": [
+    {
+      "path": "components/forge/tool-status.tsx",
+      "target": "components/forge/tool-status.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\nimport { Pill } from '@/components/forge/pill';\n\nconst STATUS_META = {\n  'input-streaming':  { tone: 'ice'     as const, live: true,  label: 'Pending', icon: undefined },\n  'input-available':  { tone: 'warning' as const, live: true,  label: 'Running', icon: undefined },\n  'output-available': { tone: 'success' as const, live: false, label: 'Done',    icon: <Icons.check size={10}/> },\n  'output-error':     { tone: 'danger'  as const, live: false, label: 'Error',   icon: <Icons.alert size={10}/> },\n};\n\nconst ToolStatus = ({\n  state,\n}: {\n  /** Run-state key; one of the four STATUS_META entries. */\n  state: string;\n}) => {\n  const m = STATUS_META[state as keyof typeof STATUS_META] || STATUS_META['input-streaming'];\n  return (\n    <Pill tone={m.tone} live={m.live} icon={m.icon} dot={!m.icon && !m.live}>\n      {m.label}\n    </Pill>\n  );\n};\n\nexport { ToolStatus };\n"
+    }
+  ]
+}

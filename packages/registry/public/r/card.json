@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card",
+  "type": "registry:ui",
+  "title": "Card",
+  "description": "Forge Card component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/card.tsx",
+      "target": "components/forge/card.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\n\ntype CardVariant = 'outline' | 'elevated' | 'ghost';\n\ninterface CardProps extends React.HTMLAttributes<HTMLDivElement> {\n  /**\n   * Visual style.\n   * - `outline`  — bordered surface (default). Use for forms, settings, content blocks.\n   * - `elevated` — shadowlifted, no border. Use for tiles on flat canvas.\n   * - `ghost`    — transparent, no border. Use for grouped items inside an already-bounded region.\n   */\n  variant?: CardVariant;\n  /**\n   * Tighter padding for grid lists and stat tiles.\n   */\n  compact?: boolean;\n  /**\n   * Adds hover lift + cursor:pointer. Apply when the whole card is interactive\n   * (the Card renders as-is; wrap it in an `<a>` or give `onClick` + role=\"button\").\n   * Do NOT nest separate focusable controls inside an interactive card.\n   */\n  interactive?: boolean;\n  children?: React.ReactNode;\n  className?: string;\n}\n\nconst Card = React.forwardRef<HTMLDivElement, CardProps>(\n  (\n    {\n      variant = 'outline',\n      compact = false,\n      interactive = false,\n      children,\n      className,\n      ...rest\n    },\n    ref,\n  ) => (\n    <div\n      ref={ref}\n      className={cn(\n        'card-x',\n        variant !== 'outline' && variant,\n        compact && 'compact',\n        interactive && 'interactive',\n        className,\n      )}\n      {...rest}\n    >\n      {children}\n    </div>\n  ),\n);\n\nexport { Card };\n"
+    }
+  ]
+}

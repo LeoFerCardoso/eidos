@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "health-badge",
+  "type": "registry:ui",
+  "title": "Health Badge",
+  "description": "Forge Health Badge component.",
+  "registryDependencies": [
+    "forge",
+    "pill"
+  ],
+  "files": [
+    {
+      "path": "components/forge/health-badge.tsx",
+      "target": "components/forge/health-badge.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Pill } from '@/components/forge/pill';\n\nconst HEALTH_LABELS = { up: 'Up', degraded: 'Degraded', down: 'Down', unknown: 'Unknown' };\n\nconst HealthBadge = ({\n  state = 'unknown',\n  label,\n  pulse = false,\n}: {\n  state?: 'up' | 'degraded' | 'down' | 'unknown';\n  label?: string;\n  pulse?: boolean;\n}) => (\n  <Pill\n    tone={`health-${state}` as any}\n    dot\n    live={pulse && state === 'degraded'}\n    role=\"status\"\n    aria-label={`Health: ${label || HEALTH_LABELS[state]}`}\n  >\n    {label || HEALTH_LABELS[state]}\n  </Pill>\n);\n\nexport { HealthBadge };\n"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "image-view",
+  "type": "registry:ui",
+  "title": "Image View",
+  "description": "Forge Image View component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/image-view.tsx",
+      "target": "components/forge/image-view.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\nconst ImageView = ({\n  src,\n  alt = '',\n  caption,\n  aspect,\n  width,\n  rounded = true,\n  className,\n  style,\n}: {\n  /** Image URL. Omit to render the empty fallback. A broken URL triggers the error fallback on onError. */\n  src?: string;\n  /** Alternative text describing the image content. Pass an empty string only for purely decorative images. */\n  alt?: string;\n  /** Provenance note rendered as figcaption below the frame. Use for source, service, or model attribution. */\n  caption?: React.ReactNode;\n  /** CSS aspect-ratio value (e.g. \"16 / 9\", \"1 / 1\"). Reserves space before load. Omit for natural dimensions. */\n  aspect?: string;\n  /** CSS max-width of the figure. Constrains the image to a column without stretching. */\n  width?: number | string;\n  /** Applies var(--radius-lg) border-radius. Set false for diagrams or charts with content at the edges. */\n  rounded?: boolean;\n  /** Additional className appended to .ai-image. */\n  className?: string;\n  /** Inline style override for the figure wrapper. */\n  style?: React.CSSProperties;\n}) => {\n  const [state, setState] = React.useState(src ? 'loading' : 'empty');\n  return (\n    <figure className={'ai-image' + (rounded ? '' : ' square') + (className ? ' ' + className : '')} style={{ maxWidth: width, ...style }}>\n      <div className=\"ai-image-frame\" style={aspect ? { aspectRatio: aspect } : undefined}>\n        {state === 'loading' && <span className=\"ai-image-shimmer\" aria-hidden=\"true\"/>}\n        {state === 'error' && (\n          <div className=\"ai-image-fallback\"><Icons.image size={20}/><span>Image unavailable</span></div>\n        )}\n        {src && state !== 'error' && (\n          <img\n            src={src} alt={alt}\n            onLoad={() => setState('loaded')}\n            onError={() => setState('error')}\n            style={{ opacity: state === 'loaded' ? 1 : 0 }}\n          />\n        )}\n        {!src && <div className=\"ai-image-fallback\"><Icons.image size={20}/><span>{alt || 'Image'}</span></div>}\n      </div>\n      {caption && <figcaption>{caption}</figcaption>}\n    </figure>\n  );\n};\n\nexport { ImageView };\n"
+    }
+  ]
+}

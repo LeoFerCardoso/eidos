@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "math-view",
+  "type": "registry:ui",
+  "title": "Math View",
+  "description": "Forge Math View component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai"
+  ],
+  "files": [
+    {
+      "path": "components/forge/math-view.tsx",
+      "target": "components/forge/math-view.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst MathView = ({\n  display = false,\n  html,\n  children,\n  className,\n  style,\n  ...rest\n}: {\n  /** Block display mode — renders as div, centered, with displayMode spacing. Match with KaTeX renderToString({ displayMode: true }). */\n  display?: boolean;\n  /** Pre-rendered KaTeX HTML string from renderToString(). When provided, set via dangerouslySetInnerHTML. */\n  html?: string;\n  /** Fallback slot when html is not provided — render plain text math or a Skeleton here. */\n  children?: React.ReactNode;\n  /** Appended to .ai-math (and .block when display=true). */\n  className?: string;\n  /** Inline styles on the wrapper element. */\n  style?: React.CSSProperties;\n  [x: string]: any;\n}) => {\n  const cls = 'ai-math' + (display ? ' block' : '') + (className ? ' ' + className : '');\n  const Tag = display ? 'div' : 'span';\n  if (html != null) {\n    return <Tag className={cls} style={style} role=\"math\" {...rest} dangerouslySetInnerHTML={{ __html: html }}/>;\n  }\n  return <Tag className={cls} style={style} role=\"math\" {...rest}>{children}</Tag>;\n};\n\nexport { MathView };\n"
+    }
+  ]
+}

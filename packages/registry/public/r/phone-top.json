@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "phone-top",
+  "type": "registry:ui",
+  "title": "Phone Top",
+  "description": "Forge Phone Top component.",
+  "registryDependencies": [
+    "forge",
+    "status-bar"
+  ],
+  "files": [
+    {
+      "path": "components/forge/phone-top.tsx",
+      "target": "components/forge/phone-top.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { StatusBar } from '@/components/forge/status-bar';\n\ntype Platform = 'ios' | 'android';\n\nfunction PhoneTop({\n  platform = 'ios', time = '9:41', width = 360, peek = 96, children, frameless = false,\n}: {\n  platform?: Platform; time?: string; width?: number; peek?: number; children?: React.ReactNode; frameless?: boolean;\n}) {\n  const ios = platform === 'ios';\n  return (\n    <div\n      style={{\n        width, borderStartStartRadius: 30, borderStartEndRadius: 30, border: '1px solid var(--border)', borderBlockEnd: 'none',\n        background: 'var(--bg)', overflow: 'hidden', boxShadow: frameless ? 'none' : 'var(--shadow-2)',\n      }}\n    >\n      <div style={{ position: 'relative' }}>\n        {ios ? (\n          <span aria-hidden=\"true\" style={{ position: 'absolute', insetBlockStart: 9, insetInlineStart: '50%', transform: 'translateX(-50%)', width: 104, height: 26, borderRadius: 999, background: '#08090A' }} />\n        ) : (\n          <span aria-hidden=\"true\" style={{ position: 'absolute', insetBlockStart: 9, insetInlineStart: '50%', transform: 'translateX(-50%)', width: 9, height: 9, borderRadius: 999, background: '#08090A' }} />\n        )}\n        <StatusBar platform={platform} time={time} />\n      </div>\n      {children}\n      <div style={{ position: 'relative', height: peek, borderBlockStart: '1px solid var(--border)' }}>\n        <div style={{ padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 12, opacity: 0.5 }} aria-hidden=\"true\">\n          <span style={{ height: 10, width: '70%', borderRadius: 5, background: 'var(--surface-active)' }} />\n          <span style={{ height: 10, width: '52%', borderRadius: 5, background: 'var(--surface-active)' }} />\n          <span style={{ height: 10, width: '60%', borderRadius: 5, background: 'var(--surface-active)' }} />\n        </div>\n        <div style={{ position: 'absolute', insetInline: 0, insetBlockEnd: 0, height: peek * 0.7, background: 'linear-gradient(to bottom, transparent, var(--bg))' }} />\n      </div>\n    </div>\n  );\n}\n\nexport { PhoneTop };\n"
+    }
+  ]
+}

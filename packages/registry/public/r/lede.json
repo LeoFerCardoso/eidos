@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "lede",
+  "type": "registry:ui",
+  "title": "Lede",
+  "description": "Forge Lede component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/lede.tsx",
+      "target": "components/forge/lede.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst Lede = ({ children, up = false, wide = false, narrow = false }: { children?: React.ReactNode; up?: boolean; wide?: boolean; narrow?: boolean }) => (\n  <p className={'ds-caption' + (wide ? ' wide' : '') + (narrow ? ' narrow' : '')} style={{ marginBottom: 18, ...(up ? { marginTop: -6 } : null) }}>\n    {children}\n  </p>\n);\n\nexport { Lede };\n"
+    }
+  ]
+}

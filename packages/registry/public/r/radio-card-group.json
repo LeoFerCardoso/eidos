@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radio-card-group",
+  "type": "registry:ui",
+  "title": "Radio Card Group",
+  "description": "Forge Radio Card Group component.",
+  "registryDependencies": [
+    "forge",
+    "radio-card"
+  ],
+  "files": [
+    {
+      "path": "components/forge/radio-card-group.tsx",
+      "target": "components/forge/radio-card-group.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { RadioCard } from '@/components/forge/radio-card';\n\ntype CardOrientation = 'horizontal' | 'vertical';\n\ninterface RadioCardOption {\n  value: string;\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  icon?: React.ReactNode;\n  disabled?: boolean;\n}\n\ninterface RadioCardGroupProps {\n  /** Options to render as RadioCards. */\n  options: RadioCardOption[];\n  /** Controlled selected value. */\n  value?: string;\n  /** Uncontrolled default selected value. */\n  defaultValue?: string;\n  /** Called when a card is selected. */\n  onValueChange?: (value: string) => void;\n  /** Shared input name (auto-generated if omitted). */\n  name?: string;\n  /** Group layout — `vertical` (default, column of cards) or `horizontal` (row). */\n  orientation?: 'horizontal' | 'vertical';\n  /** Card orientation — how each individual card lays out its control + content. */\n  cardOrientation?: CardOrientation;\n  /** Disable the entire group. */\n  disabled?: boolean;\n  /** Accessible name for the group (role=\"radiogroup\"). */\n  ariaLabel?: string;\n  className?: string;\n}\n\nfunction RadioCardGroup({\n  options,\n  value,\n  defaultValue,\n  onValueChange,\n  name,\n  orientation = 'vertical',\n  cardOrientation = 'horizontal',\n  disabled = false,\n  ariaLabel,\n  className = '',\n}: RadioCardGroupProps) {\n  const reactId = React.useId();\n  const groupName = name || reactId;\n\n  const [internal, setInternal] = React.useState(defaultValue ?? '');\n  const isControlled = value !== undefined;\n  const selected = isControlled ? value : internal;\n\n  const handleChange = (v: string) => {\n    if (!isControlled) setInternal(v);\n    onValueChange?.(v);\n  };\n\n  const groupCls = [\n    'sel-card-group',\n    orientation === 'horizontal' ? 'sel-card-group--horizontal' : '',\n    className,\n  ].filter(Boolean).join(' ');\n\n  return (\n    <div role=\"radiogroup\" aria-label={ariaLabel} className={groupCls}>\n      {options.map((opt) => (\n        <RadioCard\n          key={opt.value}\n          value={opt.value}\n          title={opt.title}\n          description={opt.description}\n          icon={opt.icon}\n          orientation={cardOrientation}\n          checked={selected === opt.value}\n          onChange={handleChange}\n          name={groupName}\n          disabled={disabled || opt.disabled}\n        />\n      ))}\n    </div>\n  );\n}\n\nexport { RadioCardGroup };\n"
+    }
+  ]
+}

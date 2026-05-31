@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "token-swatch",
+  "type": "registry:ui",
+  "title": "Token Swatch",
+  "description": "Forge Token Swatch component.",
+  "registryDependencies": [
+    "forge",
+    "copy-button"
+  ],
+  "files": [
+    {
+      "path": "components/forge/token-swatch.tsx",
+      "target": "components/forge/token-swatch.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { CopyButton } from '@/components/forge/copy-button';\n\nconst TokenSwatch = ({ name, value, lightValue, varName }: {\n  name?: string;\n  value?: string;\n  lightValue?: string;\n  varName?: string;\n}) => (\n  <div className=\"tok\">\n    <div className=\"swatch\" style={{ background: `var(${varName})` }}/>\n    <div className=\"meta\">\n      <span className=\"name\">{name}</span>\n      <span className=\"val\">{varName}</span>\n      <span className=\"val\" style={{color:'var(--fg-faint)'}}>\n        {lightValue ? <>dark · {value}<br/>light · {lightValue}</> : value}\n      </span>\n    </div>\n    <CopyButton text={varName} label=\"var\"/>\n  </div>\n);\n\nexport { TokenSwatch };\n"
+    }
+  ]
+}

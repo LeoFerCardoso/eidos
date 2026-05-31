@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "model-picker",
+  "type": "registry:ui",
+  "title": "Model Picker",
+  "description": "Forge Model Picker component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "model-selector"
+  ],
+  "files": [
+    {
+      "path": "components/forge/model-picker.tsx",
+      "target": "components/forge/model-picker.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { ModelSelector } from '@/components/forge/model-selector';\n\nconst ModelPicker = ModelSelector;\n\nexport { ModelPicker };\n"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "model-badge",
+  "type": "registry:ui",
+  "title": "Model Badge",
+  "description": "Forge Model Badge component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "chip"
+  ],
+  "files": [
+    {
+      "path": "components/forge/model-badge.tsx",
+      "target": "components/forge/model-badge.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Chip } from '@/components/forge/chip';\n\nconst ModelBadge = ({ short = 'S' }: { short?: string }) => (\n  <Chip\n    style={{ fontFamily: 'var(--font-mono)', fontSize: 9.5, fontWeight: 700, padding: '1px 5px' }}\n  >\n    {short}\n  </Chip>\n);\n\nexport { ModelBadge };\n"
+    }
+  ]
+}

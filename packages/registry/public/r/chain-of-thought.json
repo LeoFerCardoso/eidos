@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chain-of-thought",
+  "type": "registry:ui",
+  "title": "Chain Of Thought",
+  "description": "Forge Chain Of Thought component.",
+  "dependencies": [
+    "ai"
+  ],
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/chain-of-thought.tsx",
+      "target": "components/forge/chain-of-thought.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\nconst COT_ICON: Record<string, string> = {\n  think: 'sparkle', search: 'search', observe: 'eye', plan: 'clipboard', done: 'check', read: 'book',\n};\n\nconst ChainOfThought = ({\n  title, steps = [], defaultOpen = true,\n}: {\n  /** Header label. Override for specialised traces (\"Search trace\", \"Retrieval steps\"). */\n  title?: string;\n  /** Ordered list of steps. Rendered as a semantic ol. Append steps as they stream in. */\n  steps?: any[];\n  /** Initial open state before any user toggle. Set false after the trace settles. */\n  defaultOpen?: boolean;\n}) => {\n  const [open, setOpen] = React.useState(defaultOpen);\n  return (\n    <div className=\"ai-cot\" data-open={open ? 'true' : 'false'}>\n      <button className=\"ai-cot-head\" onClick={() => setOpen(v => !v)} aria-expanded={open}>\n        <span className=\"ico\"><Icons.sparkle size={13}/></span>\n        <span className=\"label\">{title || 'Chain of thought'}</span>\n        <span className=\"count\">{steps.length} steps</span>\n        <Icons.chevronDown size={13} className=\"chev\"/>\n      </button>\n      <div className=\"ai-cot-body\" aria-hidden={!open}>\n        <ol className=\"ai-cot-steps\">\n          {steps.map((s, i) => {\n            const Ico = (Icons as Record<string, any>)[COT_ICON[s.kind] || 'sparkle'] || Icons.sparkle;\n            return (\n              <li key={i} className=\"ai-cot-step\" data-status={s.status || 'done'}>\n                <span className=\"ai-cot-mark\"><Ico size={12}/></span>\n                <div className=\"ai-cot-content\">\n                  <div className=\"ai-cot-label\">{s.label}</div>\n                  {s.detail && <div className=\"ai-cot-detail\">{s.detail}</div>}\n                </div>\n              </li>\n            );\n          })}\n        </ol>\n      </div>\n    </div>\n  );\n};\n\nexport { ChainOfThought };\n"
+    }
+  ]
+}

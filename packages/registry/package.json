@@ -1,0 +1,11 @@
+{
+  "name": "@forge/registry",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "extract": "node ../../scripts/extract-registry.mjs",
+    "manifest": "node ../../scripts/build-registry-manifest.mjs",
+    "build": "node ../../scripts/extract-registry.mjs && node ../../scripts/build-registry-manifest.mjs && node scripts/build-registry.mjs"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "suggestion",
+  "type": "registry:ui",
+  "title": "Suggestion",
+  "description": "Forge Suggestion component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai"
+  ],
+  "files": [
+    {
+      "path": "components/forge/suggestion.tsx",
+      "target": "components/forge/suggestion.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst Suggestion = ({\n  icon,\n  children,\n  size = 'md',\n  pressed,\n  onClick,\n}: {\n  /** Optional 11–13px leading icon. */\n  icon?: React.ReactNode;\n  /** Label text. Sentence case, up to 8 words. */\n  children: React.ReactNode;\n  /** Chip size. sm for inline mid-thread; lg for empty state hero rows. */\n  size?: 'sm' | 'md' | 'lg';\n  /** Locks the ember-soft fill — use for already-picked filters. */\n  pressed?: boolean;\n  /** Fires when the chip is activated (click or Enter/Space). */\n  onClick?: () => void;\n}) => (\n  <button\n    className={'sg ' + (size === 'sm' ? 'sm' : size === 'lg' ? 'lg' : '') + (pressed ? ' is-on' : '')}\n    aria-pressed={pressed}\n    onClick={onClick}\n  >\n    {icon && <span className=\"ico\" aria-hidden=\"true\">{icon}</span>}\n    <span>{children}</span>\n  </button>\n);\n\nexport { Suggestion };\n"
+    }
+  ]
+}

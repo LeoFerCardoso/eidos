@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "type": "registry:ui",
+  "title": "Switch",
+  "description": "Forge Switch component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/switch.tsx",
+      "target": "components/forge/switch.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ntype Size = 'sm' | 'md' | 'lg';\n\nconst fcCls = (size: Size, block: boolean, invalid: boolean, extra = '') =>\n  ['fc', size !== 'md' ? size : '', block ? 'block' : '', invalid ? 'invalid' : '', extra]\n    .filter(Boolean).join(' ');\n\ninterface SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {\n  /** Label text rendered next to the track. */\n  label?: React.ReactNode;\n  /**\n   * Optional helper text under the label (alias: `desc`).\n   * Write the consequence of the setting in present tense.\n   */\n  description?: React.ReactNode;\n  /**\n   * Optional helper text under the label (alias: `description`).\n   * Write the consequence of the setting in present tense.\n   */\n  desc?: React.ReactNode;\n  /**\n   * Danger-tinted invalid state — danger ring on track, label in danger tone.\n   * Pair with an error helper element and wire it via aria-describedby.\n   * @default false\n   */\n  invalid?: boolean;\n  /**\n   * Track footprint — 32×18 / 40×22 / 48×26.\n   * @default \"md\"\n   */\n  size?: Size;\n  /**\n   * Uncontrolled initial checked state.\n   * @default false\n   */\n  defaultChecked?: boolean;\n  /**\n   * Fires when the user flips the switch. Receives the new state.\n   * Convenience alternative to the native `onChange` event handler.\n   */\n  onCheckedChange?: (checked: boolean) => void;\n}\n\nfunction Switch({ label, description, invalid = false, disabled, size = 'md', id, className = '', ...rest }: SwitchProps) {\n  const reactId = React.useId();\n  const sid = id || reactId;\n  return (\n    <label className={`${fcCls(size, !!description, invalid)} ${className}`.trim()} htmlFor={sid} aria-disabled={disabled || undefined} aria-invalid={invalid || undefined}>\n      <input\n        type=\"checkbox\"\n        id={sid}\n        role=\"switch\"\n        className=\"fc-input\"\n        disabled={disabled}\n        aria-invalid={invalid || undefined}\n        {...rest}\n      />\n      <span className=\"fc-toggle-track\" aria-hidden=\"true\"><span className=\"fc-toggle-thumb\" /></span>\n      {(label || description) && (\n        <span className=\"fc-text\">\n          {label && <span className=\"fc-label\">{label}</span>}\n          {description && <span className=\"fc-desc\">{description}</span>}\n        </span>\n      )}\n    </label>\n  );\n}\n\nexport { Switch };\n"
+    }
+  ]
+}

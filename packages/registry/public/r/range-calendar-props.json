@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "range-calendar-props",
+  "type": "registry:ui",
+  "title": "Range Calendar Props",
+  "description": "Forge Range Calendar Props component.",
+  "registryDependencies": [
+    "forge",
+    "calendar-props",
+    "date-range"
+  ],
+  "files": [
+    {
+      "path": "components/forge/range-calendar-props.tsx",
+      "target": "components/forge/range-calendar-props.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { CalendarProps } from '@/components/forge/calendar-props';\nimport { DateRange } from '@/components/forge/date-range';\n\ninterface RangeCalendarProps extends Omit<CalendarProps, 'selectionMode' | 'value' | 'defaultValue' | 'onValueChange' | 'onChange'> {\n  /** Controlled range (uncontrolled when omitted; seed with `defaultValue`). */\n  value?: DateRange;\n  /** Uncontrolled initial range. */\n  defaultValue?: DateRange;\n  /**\n   * Called after every click with the updated range object.\n   *\n   * Selection sequence:\n   * 1. First click (or click when range is complete) → sets `start`, clears `end`.\n   * 2. Second click (if after `start`) → sets `end`.\n   * 3. Second click (if before `start`) → swaps so start {'<'} end.\n   */\n  onChange?: (range: DateRange) => void;\n  /** @deprecated Use `onValueChange` instead. */\n  onValueChange?: (range: DateRange) => void;\n}\n\nexport { RangeCalendarProps };\n"
+    }
+  ]
+}

@@ -1,0 +1,3339 @@
+{
+  "$schema": "./forge.contract.schema.json",
+  "version": "1.0.0",
+  "dsVersion": "1.28.1",
+  "generated": true,
+  "surfaces": [
+    "docs",
+    "export",
+    "story",
+    "registry",
+    "cross",
+    "tokens"
+  ],
+  "clauses": [
+    {
+      "id": "C-docs-exists",
+      "title": "Docs page renders",
+      "surface": "docs",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "foundation",
+        "ai",
+        "example"
+      ],
+      "rule": "A migrated page exists at the bound path, default-exports, imports primitives from @/ds/core, and headless-renders with no thrown error / React console.error.",
+      "verifier": "verify-render",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-docs-sections",
+      "title": "Section order",
+      "surface": "docs",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "SubHead meta order matches docs/ds-page-standard.json: Installation -> Usage -> Variants/Sizes/States -> [In context] -> Accessibility -> RTL -> Anatomy -> Do/Don't -> API reference.",
+      "verifier": "check-ds-page-structure",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-a11y-section",
+      "title": "Accessibility section",
+      "surface": "docs",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "Page has a SubHead meta=\"a11y\" section mentioning keyboard + ARIA + contrast + reduced-motion.",
+      "verifier": "check-ds-page-structure",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-rtl-frame",
+      "title": "RTL frame",
+      "surface": "docs",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "Page has a live Frame dir=\"rtl\" with Arabic copy, or a matching waiver (foundations/CSS-only).",
+      "verifier": "check-ds-page-structure",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-anatomy",
+      "title": "Visual anatomy",
+      "surface": "docs",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "Anatomy is rendered: .ana > .stage with numbered .pin + .lead connectors + numbered .ana-list legend (never a prose list).",
+      "verifier": "check-ds-page-structure",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-do-dont",
+      "title": "Do/Don't grid",
+      "surface": "docs",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai",
+        "foundation"
+      ],
+      "rule": "Do/Don't uses .dd-grid.",
+      "verifier": "check-ds-page-structure",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-autopropstable",
+      "title": "Generated API table",
+      "surface": "docs",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "API reference uses <AutoPropsTable component=\"<export>\"/>; no hand-authored table/PropsTable for a real export.",
+      "verifier": "check-ds-page-structure",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-lede",
+      "title": "Header lede budget",
+      "surface": "docs",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "foundation",
+        "ai"
+      ],
+      "rule": "Header lede <=220 chars, plain text (no markup).",
+      "verifier": "check-ds-page-structure",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-no-page-style",
+      "title": "No per-page style",
+      "surface": "docs",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "foundation",
+        "ai",
+        "example"
+      ],
+      "rule": "No <style> block and no inline style={{ color|fontSize|padding|margin|background }} in migrated pages; compose .ds-* + var(--token).",
+      "verifier": "check-no-page-style",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-frame-parses",
+      "title": "Frame snippets parse",
+      "surface": "docs",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai",
+        "example"
+      ],
+      "rule": "Every Frame/CodeBlock/TabbedCode snippet TS-parses; a // @forge-frame:<storyId> Frame must equal its source story (no structural drift).",
+      "verifier": "check-frame-code",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-no-slop",
+      "title": "No AI slop",
+      "surface": "docs",
+      "gate": "advisory",
+      "appliesTo": [
+        "component",
+        "ai",
+        "example"
+      ],
+      "rule": "No emoji feature-icons, no invented metrics, no filler copy, no placeholder CDNs, no hardcoded font-family outside var(--font-*).",
+      "verifier": "check-slop",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-links-resolve",
+      "title": "Links resolve",
+      "surface": "cross",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "foundation",
+        "ai",
+        "example"
+      ],
+      "rule": "Every nav href resolves to a page/example; every page (except overview) is in nav; in-body anchors resolve.",
+      "verifier": "check-nav",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-export",
+      "title": "Barrel export + parity",
+      "surface": "export",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "Component is exported from packages/ui/src/index.ts barrel (resolved via surfaces.exportFile) and all four surfaces resolve.",
+      "verifier": "check-4-surface-parity",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-typecheck",
+      "title": "Typecheck clean",
+      "surface": "export",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "tsc --noEmit clean for @forge/ui.",
+      "verifier": "EXT:ui:typecheck",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-story",
+      "title": "CSF3 story exists",
+      "surface": "story",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "A CSF3 story exists; meta.title prefix is in preview.ts storySort.order AND matches its folder group; tags include 'autodocs'.",
+      "verifier": "check-stories",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-story-matrix",
+      "title": "Variant/state matrix",
+      "surface": "story",
+      "gate": "advisory",
+      "appliesTo": [
+        "component"
+      ],
+      "rule": ">=1 story per documented variant x state (incl. a States story); story renders in {dark,light} x {ltr,rtl} via the existing decorators.",
+      "verifier": "check-stories",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-story-a11y",
+      "title": "Story a11y",
+      "surface": "story",
+      "gate": "advisory",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "@storybook/addon-a11y / test-runner reports no critical/serious violations for the story.",
+      "verifier": "EXT:sb:test",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-registry",
+      "title": "Registry item valid",
+      "surface": "registry",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "A registry item exists; public/r/<name>.json builds; $schema valid; registryDependencies acyclic and present; files[].source resolve.",
+      "verifier": "check-registry",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-registry-sync",
+      "title": "Registry source in sync",
+      "surface": "registry",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "Registry source (surfaces.registrySrc) matches its bound @forge/ui source (surfaces.exportFile) — no drift. Bound via the explicit mapping, not a filename convention.",
+      "verifier": "check-registry",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-cli-install",
+      "title": "CLI install resolves deps",
+      "surface": "registry",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "forge-ui add <name> resolves the FULL transitive registryDependency graph and refuses to write if any dep is missing.",
+      "verifier": "EXT:cli:test",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-visual",
+      "title": "No visual drift",
+      "surface": "cross",
+      "gate": "advisory",
+      "appliesTo": [
+        "component",
+        "foundation",
+        "ai",
+        "example"
+      ],
+      "rule": "No unexplained pixel drift vs tests/visual-baselines.",
+      "verifier": "check-visual",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-contrast-fill",
+      "title": "Contrast on fills",
+      "surface": "cross",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "ai"
+      ],
+      "rule": "Any foreground on an accent/elevated FILL is explicitly contrasting (dark ink on ember; light on dark; >=4.5:1 body / 3:1 UI). Token tertiary tiers (--fg-subtle/--fg-faint) remain advisory by design.",
+      "verifier": "check-contrast-fill",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-a11y-axe",
+      "title": "axe structural",
+      "surface": "cross",
+      "gate": "block",
+      "appliesTo": [
+        "component",
+        "foundation",
+        "ai",
+        "example"
+      ],
+      "rule": "axe-core WCAG A/AA structural rules pass (color-contrast stays advisory per design decision).",
+      "verifier": "check-a11y",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-tokens-dtcg",
+      "title": "DTCG tokens in sync",
+      "surface": "tokens",
+      "gate": "block",
+      "appliesTo": [
+        "all"
+      ],
+      "rule": "tokens/forge.tokens.json is regenerated and in sync with the canonical packages/ui/styles/tokens.css (CSS is source; DTCG is export).",
+      "verifier": "gen-tokens-check",
+      "since": "1.0.0"
+    },
+    {
+      "id": "C-contract-valid",
+      "title": "Contract valid",
+      "surface": "cross",
+      "gate": "block",
+      "appliesTo": [
+        "all"
+      ],
+      "rule": "forge.contract.json validates against forge.contract.schema.json; dsVersion == src/lib/site.ts DS_VERSION; every clause names a known verifier.",
+      "verifier": "check-contract",
+      "since": "1.0.0"
+    }
+  ],
+  "components": [
+    {
+      "name": "accordion",
+      "kind": "component",
+      "ds": "core",
+      "title": "Accordion",
+      "surfaces": {
+        "docs": "src/ds/migrated/accordion.tsx",
+        "export": "Accordion",
+        "exportFile": "packages/ui/src/accordion.tsx",
+        "story": "packages/ui/src/stories/primitives/Accordion.stories.tsx",
+        "registry": "accordion",
+        "registrySrc": "src/forge/accordion.tsx"
+      }
+    },
+    {
+      "name": "agent-avatar",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Agent Avatar",
+      "surfaces": {
+        "docs": "",
+        "export": "AgentAvatar",
+        "exportFile": "packages/ui/src/ai/identity.tsx",
+        "story": "packages/ui/src/stories/ai/AgentAvatar.stories.tsx",
+        "registry": "agent-avatar",
+        "registrySrc": "src/forge/agent-avatar.tsx"
+      }
+    },
+    {
+      "name": "agent-card",
+      "kind": "ai",
+      "ds": "idp",
+      "title": "Agent Card",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/agent-card.tsx",
+        "export": "AgentCard",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/AgentCard.stories.tsx",
+        "registry": "agent-card",
+        "registrySrc": "src/forge/agent-card.tsx"
+      }
+    },
+    {
+      "name": "agent-identity",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Agent Identity",
+      "surfaces": {
+        "docs": "",
+        "export": "AgentIdentity",
+        "exportFile": "packages/ui/src/ai/identity.tsx",
+        "story": "packages/ui/src/stories/ai/AgentIdentity.stories.tsx",
+        "registry": "agent-identity",
+        "registrySrc": "src/forge/agent-identity.tsx"
+      }
+    },
+    {
+      "name": "ai-label",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Ai Label",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/label.tsx",
+        "export": "AILabel",
+        "exportFile": "packages/ui/src/ai/identity.tsx",
+        "story": "packages/ui/src/stories/ai/Identity.stories.tsx",
+        "registry": "ai-label",
+        "registrySrc": "src/forge/ai-label.tsx"
+      }
+    },
+    {
+      "name": "ai-label-with-popover",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Ai Label With Popover",
+      "surfaces": {
+        "docs": "",
+        "export": "AILabelWithPopover",
+        "exportFile": "packages/ui/src/ai/identity.tsx",
+        "story": "packages/ui/src/stories/ai/AILabelWithPopover.stories.tsx",
+        "registry": "ai-label-with-popover",
+        "registrySrc": "src/forge/ai-label-with-popover.tsx"
+      }
+    },
+    {
+      "name": "alert",
+      "kind": "component",
+      "ds": "core",
+      "title": "Alert",
+      "surfaces": {
+        "docs": "src/ds/migrated/alerts.tsx",
+        "export": "Alert",
+        "exportFile": "packages/ui/src/alert.tsx",
+        "story": "packages/ui/src/stories/atoms/Alert.stories.tsx",
+        "registry": "alert",
+        "registrySrc": "src/forge/alert.tsx"
+      }
+    },
+    {
+      "name": "alert-dialog",
+      "kind": "component",
+      "ds": "core",
+      "title": "Alert Dialog",
+      "surfaces": {
+        "docs": "src/ds/migrated/alert-dialog.tsx",
+        "export": "AlertDialog",
+        "exportFile": "packages/ui/src/alert-dialog.tsx",
+        "story": "packages/ui/src/stories/overlays/AlertDialog.stories.tsx",
+        "registry": "alert-dialog",
+        "registrySrc": "src/forge/alert-dialog.tsx"
+      }
+    },
+    {
+      "name": "artifact-panel",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Artifact Panel",
+      "surfaces": {
+        "docs": "",
+        "export": "ArtifactPanel",
+        "exportFile": "packages/ui/src/ai/artifact.tsx",
+        "story": "packages/ui/src/stories/ai/ArtifactPanel.stories.tsx",
+        "registry": "artifact-panel",
+        "registrySrc": "src/forge/artifact-panel.tsx"
+      }
+    },
+    {
+      "name": "artifact-widget",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Artifact Widget",
+      "surfaces": {
+        "docs": "",
+        "export": "ArtifactWidget",
+        "exportFile": "packages/ui/src/ai/artifact.tsx",
+        "story": "packages/ui/src/stories/ai/ArtifactWidget.stories.tsx",
+        "registry": "artifact-widget",
+        "registrySrc": "src/forge/artifact-widget.tsx"
+      }
+    },
+    {
+      "name": "ask-user",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Ask User",
+      "surfaces": {
+        "docs": "",
+        "export": "AskUser",
+        "exportFile": "packages/ui/src/ai/ask.tsx",
+        "story": "packages/ui/src/stories/ai/AskUser.stories.tsx",
+        "registry": "ask-user",
+        "registrySrc": "src/forge/ask-user.tsx"
+      }
+    },
+    {
+      "name": "aspect-ratio",
+      "kind": "component",
+      "ds": "core",
+      "title": "Aspect Ratio",
+      "surfaces": {
+        "docs": "src/ds/migrated/aspect-ratio.tsx",
+        "export": "AspectRatio",
+        "exportFile": "packages/ui/src/aspect-ratio.tsx",
+        "story": "packages/ui/src/stories/primitives/AspectRatio.stories.tsx",
+        "registry": "aspect-ratio",
+        "registrySrc": "src/forge/aspect-ratio.tsx"
+      }
+    },
+    {
+      "name": "attachment",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Attachment",
+      "surfaces": {
+        "docs": "",
+        "export": "Attachment",
+        "exportFile": "packages/ui/src/ai/prompt.tsx",
+        "story": "packages/ui/src/stories/ai/Attachment.stories.tsx",
+        "registry": "attachment",
+        "registrySrc": "src/forge/attachment.tsx"
+      }
+    },
+    {
+      "name": "audio-player",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Audio Player",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/audio-player.tsx",
+        "export": "AudioPlayer",
+        "exportFile": "packages/ui/src/ai/voice.tsx",
+        "story": "packages/ui/src/stories/ai/AudioPlayer.stories.tsx",
+        "registry": "audio-player",
+        "registrySrc": "src/forge/audio-player.tsx"
+      }
+    },
+    {
+      "name": "avatar",
+      "kind": "component",
+      "ds": "core",
+      "title": "Avatar",
+      "surfaces": {
+        "docs": "src/ds/migrated/avatars.tsx",
+        "export": "Avatar",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/Avatar.stories.tsx",
+        "registry": "avatar",
+        "registrySrc": "src/forge/avatar.tsx"
+      }
+    },
+    {
+      "name": "badge",
+      "kind": "component",
+      "ds": "core",
+      "title": "Badge",
+      "surfaces": {
+        "docs": "src/ds/migrated/badges.tsx",
+        "export": "Badge",
+        "exportFile": "packages/ui/src/badge.tsx",
+        "story": "packages/ui/src/stories/atoms/Badge.stories.tsx",
+        "registry": "badge",
+        "registrySrc": "src/forge/badge.tsx"
+      }
+    },
+    {
+      "name": "banner",
+      "kind": "component",
+      "ds": "core",
+      "title": "Banner",
+      "surfaces": {
+        "docs": "src/ds/migrated/banner.tsx",
+        "export": "Banner",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/Banner.stories.tsx",
+        "registry": "banner",
+        "registrySrc": "src/forge/banner.tsx"
+      }
+    },
+    {
+      "name": "breadcrumb",
+      "kind": "component",
+      "ds": "core",
+      "title": "Breadcrumb",
+      "surfaces": {
+        "docs": "src/ds/migrated/breadcrumb.tsx",
+        "export": "Breadcrumb",
+        "exportFile": "packages/ui/src/breadcrumb.tsx",
+        "story": "packages/ui/src/stories/primitives/Breadcrumb.stories.tsx",
+        "registry": "breadcrumb",
+        "registrySrc": "src/forge/breadcrumb.tsx"
+      }
+    },
+    {
+      "name": "button-group",
+      "kind": "component",
+      "ds": "core",
+      "title": "Button Group",
+      "surfaces": {
+        "docs": "src/ds/migrated/button-group.tsx",
+        "export": "ButtonGroup",
+        "exportFile": "packages/ui/src/button-group.tsx",
+        "story": "packages/ui/src/stories/primitives/ButtonGroup.stories.tsx",
+        "registry": "button-group",
+        "registrySrc": "src/forge/button-group.tsx"
+      }
+    },
+    {
+      "name": "calendar",
+      "kind": "component",
+      "ds": "core",
+      "title": "Calendar",
+      "surfaces": {
+        "docs": "src/ds/migrated/calendar.tsx",
+        "export": "Calendar",
+        "exportFile": "packages/ui/src/calendar.tsx",
+        "story": "packages/ui/src/stories/forms/Calendar.stories.tsx",
+        "registry": "calendar",
+        "registrySrc": "src/forge/calendar.tsx"
+      }
+    },
+    {
+      "name": "calendar-props",
+      "kind": "component",
+      "ds": "core",
+      "title": "Calendar Props",
+      "surfaces": {
+        "docs": "",
+        "export": "",
+        "exportFile": "",
+        "story": "",
+        "registry": "calendar-props",
+        "registrySrc": "src/forge/calendar-props.tsx"
+      }
+    },
+    {
+      "name": "card",
+      "kind": "component",
+      "ds": "core",
+      "title": "Card",
+      "surfaces": {
+        "docs": "src/ds/migrated/card.tsx",
+        "export": "Card",
+        "exportFile": "packages/ui/src/card.tsx",
+        "story": "packages/ui/src/stories/blocks/Card.stories.tsx",
+        "registry": "card",
+        "registrySrc": "src/forge/card.tsx"
+      }
+    },
+    {
+      "name": "carousel",
+      "kind": "component",
+      "ds": "core",
+      "title": "Carousel",
+      "surfaces": {
+        "docs": "src/ds/migrated/carousel.tsx",
+        "export": "Carousel",
+        "exportFile": "packages/ui/src/carousel.tsx",
+        "story": "packages/ui/src/stories/blocks/Carousel.stories.tsx",
+        "registry": "carousel",
+        "registrySrc": "src/forge/carousel.tsx"
+      }
+    },
+    {
+      "name": "chain-of-thought",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Chain Of Thought",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/chain-of-thought.tsx",
+        "export": "ChainOfThought",
+        "exportFile": "packages/ui/src/ai/agentic.tsx",
+        "story": "packages/ui/src/stories/ai/ChainOfThought.stories.tsx",
+        "registry": "chain-of-thought",
+        "registrySrc": "src/forge/chain-of-thought.tsx"
+      }
+    },
+    {
+      "name": "chart-legend",
+      "kind": "component",
+      "ds": "core",
+      "title": "Chart Legend",
+      "surfaces": {
+        "docs": "",
+        "export": "ChartLegend",
+        "exportFile": "packages/ui/src/charts.tsx",
+        "story": "packages/ui/src/stories/charts/ChartLegend.stories.tsx",
+        "registry": "chart-legend",
+        "registrySrc": "src/forge/chart-legend.tsx"
+      }
+    },
+    {
+      "name": "checkbox",
+      "kind": "component",
+      "ds": "core",
+      "title": "Checkbox",
+      "surfaces": {
+        "docs": "src/ds/migrated/checkbox.tsx",
+        "export": "Checkbox",
+        "exportFile": "packages/ui/src/forms.tsx",
+        "story": "packages/ui/src/stories/forms/Checkbox.stories.tsx",
+        "registry": "checkbox",
+        "registrySrc": "src/forge/checkbox.tsx"
+      }
+    },
+    {
+      "name": "checkbox-card",
+      "kind": "component",
+      "ds": "core",
+      "title": "Checkbox Card",
+      "surfaces": {
+        "docs": "",
+        "export": "CheckboxCard",
+        "exportFile": "packages/ui/src/selection-card.tsx",
+        "story": "packages/ui/src/stories/forms/CheckboxCard.stories.tsx",
+        "registry": "checkbox-card",
+        "registrySrc": "src/forge/checkbox-card.tsx"
+      }
+    },
+    {
+      "name": "checkpoint",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Checkpoint",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/checkpoint.tsx",
+        "export": "Checkpoint",
+        "exportFile": "packages/ui/src/ai/agentic.tsx",
+        "story": "packages/ui/src/stories/ai/Checkpoint.stories.tsx",
+        "registry": "checkpoint",
+        "registrySrc": "src/forge/checkpoint.tsx"
+      }
+    },
+    {
+      "name": "chip",
+      "kind": "component",
+      "ds": "core",
+      "title": "Chip",
+      "surfaces": {
+        "docs": "src/ds/migrated/chip.tsx",
+        "export": "Chip",
+        "exportFile": "packages/ui/src/badge.tsx",
+        "story": "packages/ui/src/stories/atoms/Chip.stories.tsx",
+        "registry": "chip",
+        "registrySrc": "src/forge/chip.tsx"
+      }
+    },
+    {
+      "name": "citation",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Citation",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/citations.tsx",
+        "export": "Citation",
+        "exportFile": "packages/ui/src/ai/sources.tsx",
+        "story": "packages/ui/src/stories/ai/Citation.stories.tsx",
+        "registry": "citation",
+        "registrySrc": "src/forge/citation.tsx"
+      }
+    },
+    {
+      "name": "code",
+      "kind": "component",
+      "ds": "core",
+      "title": "Code",
+      "surfaces": {
+        "docs": "",
+        "export": "Code",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/primitives/Code.stories.tsx",
+        "registry": "code",
+        "registrySrc": "src/forge/code.tsx"
+      }
+    },
+    {
+      "name": "code-block",
+      "kind": "component",
+      "ds": "ai",
+      "title": "Code Block",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/code-block.tsx",
+        "export": "CodeBlock",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/primitives/CodeBlock.stories.tsx",
+        "registry": "code-block",
+        "registrySrc": "src/forge/code-block.tsx"
+      }
+    },
+    {
+      "name": "code-tree",
+      "kind": "component",
+      "ds": "core",
+      "title": "Code Tree",
+      "surfaces": {
+        "docs": "",
+        "export": "CodeTree",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/primitives/CodeTree.stories.tsx",
+        "registry": "code-tree",
+        "registrySrc": "src/forge/code-tree.tsx"
+      }
+    },
+    {
+      "name": "collapsible",
+      "kind": "component",
+      "ds": "core",
+      "title": "Collapsible",
+      "surfaces": {
+        "docs": "src/ds/migrated/collapsible.tsx",
+        "export": "Collapsible",
+        "exportFile": "packages/ui/src/collapsible.tsx",
+        "story": "packages/ui/src/stories/primitives/Collapsible.stories.tsx",
+        "registry": "collapsible",
+        "registrySrc": "src/forge/collapsible.tsx"
+      }
+    },
+    {
+      "name": "collapsible-code",
+      "kind": "component",
+      "ds": "core",
+      "title": "Collapsible Code",
+      "surfaces": {
+        "docs": "",
+        "export": "CollapsibleCode",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/primitives/CollapsibleCode.stories.tsx",
+        "registry": "collapsible-code",
+        "registrySrc": "src/forge/collapsible-code.tsx"
+      }
+    },
+    {
+      "name": "color-input",
+      "kind": "component",
+      "ds": "core",
+      "title": "Color Input",
+      "surfaces": {
+        "docs": "src/ds/migrated/color-input.tsx",
+        "export": "ColorInput",
+        "exportFile": "packages/ui/src/color-input.tsx",
+        "story": "packages/ui/src/stories/forms/ColorInput.stories.tsx",
+        "registry": "color-input",
+        "registrySrc": "src/forge/color-input.tsx"
+      }
+    },
+    {
+      "name": "color-picker",
+      "kind": "component",
+      "ds": "core",
+      "title": "Color Picker",
+      "surfaces": {
+        "docs": "",
+        "export": "ColorPicker",
+        "exportFile": "packages/ui/src/color-input.tsx",
+        "story": "packages/ui/src/stories/forms/ColorPicker.stories.tsx",
+        "registry": "color-picker",
+        "registrySrc": "src/forge/color-picker.tsx"
+      }
+    },
+    {
+      "name": "combobox",
+      "kind": "component",
+      "ds": "core",
+      "title": "Combobox",
+      "surfaces": {
+        "docs": "src/ds/migrated/combobox.tsx",
+        "export": "Combobox",
+        "exportFile": "packages/ui/src/combobox.tsx",
+        "story": "packages/ui/src/stories/forms/Combobox.stories.tsx",
+        "registry": "combobox",
+        "registrySrc": "src/forge/combobox.tsx"
+      }
+    },
+    {
+      "name": "command",
+      "kind": "component",
+      "ds": "core",
+      "title": "Command",
+      "surfaces": {
+        "docs": "src/ds/migrated/command.tsx",
+        "export": "Command",
+        "exportFile": "packages/ui/src/command.tsx",
+        "story": "packages/ui/src/stories/overlays/Command.stories.tsx",
+        "registry": "command",
+        "registrySrc": "src/forge/command.tsx"
+      }
+    },
+    {
+      "name": "command-dialog",
+      "kind": "component",
+      "ds": "core",
+      "title": "Command Dialog",
+      "surfaces": {
+        "docs": "",
+        "export": "CommandDialog",
+        "exportFile": "packages/ui/src/command.tsx",
+        "story": "packages/ui/src/stories/overlays/CommandDialog.stories.tsx",
+        "registry": "command-dialog",
+        "registrySrc": "src/forge/command-dialog.tsx"
+      }
+    },
+    {
+      "name": "confirmation",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Confirmation",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/confirmation.tsx",
+        "export": "Confirmation",
+        "exportFile": "packages/ui/src/ai/agentic.tsx",
+        "story": "packages/ui/src/stories/ai/Confirmation.stories.tsx",
+        "registry": "confirmation",
+        "registrySrc": "src/forge/confirmation.tsx"
+      }
+    },
+    {
+      "name": "context",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Context",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/contexts.tsx",
+        "export": "Context",
+        "exportFile": "packages/ui/src/ai/context.tsx",
+        "story": "packages/ui/src/stories/ai/Context.stories.tsx",
+        "registry": "context",
+        "registrySrc": "src/forge/context.tsx"
+      }
+    },
+    {
+      "name": "context-bar",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Context Bar",
+      "surfaces": {
+        "docs": "",
+        "export": "ContextBar",
+        "exportFile": "packages/ui/src/ai/context.tsx",
+        "story": "packages/ui/src/stories/ai/ContextBar.stories.tsx",
+        "registry": "context-bar",
+        "registrySrc": "src/forge/context-bar.tsx"
+      }
+    },
+    {
+      "name": "context-gauge",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Context Gauge",
+      "surfaces": {
+        "docs": "",
+        "export": "ContextGauge",
+        "exportFile": "packages/ui/src/ai/context.tsx",
+        "story": "packages/ui/src/stories/ai/ContextGauge.stories.tsx",
+        "registry": "context-gauge",
+        "registrySrc": "src/forge/context-gauge.tsx"
+      }
+    },
+    {
+      "name": "conversation",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Conversation",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/conversation.tsx",
+        "export": "Conversation",
+        "exportFile": "packages/ui/src/ai/message.tsx",
+        "story": "packages/ui/src/stories/ai/Conversation.stories.tsx",
+        "registry": "conversation",
+        "registrySrc": "src/forge/conversation.tsx"
+      }
+    },
+    {
+      "name": "copy-button",
+      "kind": "component",
+      "ds": "core",
+      "title": "Copy Button",
+      "surfaces": {
+        "docs": "",
+        "export": "CopyButton",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/primitives/CopyButton.stories.tsx",
+        "registry": "copy-button",
+        "registrySrc": "src/forge/copy-button.tsx"
+      }
+    },
+    {
+      "name": "copy-chip",
+      "kind": "component",
+      "ds": "core",
+      "title": "Copy Chip",
+      "surfaces": {
+        "docs": "src/ds/migrated/copy-chip.tsx",
+        "export": "CopyChip",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/CopyChip.stories.tsx",
+        "registry": "copy-chip",
+        "registrySrc": "src/forge/copy-chip.tsx"
+      }
+    },
+    {
+      "name": "count-up",
+      "kind": "component",
+      "ds": "core",
+      "title": "Count Up",
+      "surfaces": {
+        "docs": "src/ds/migrated/count-up.tsx",
+        "export": "CountUp",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/CountUp.stories.tsx",
+        "registry": "count-up",
+        "registrySrc": "src/forge/count-up.tsx"
+      }
+    },
+    {
+      "name": "counter",
+      "kind": "component",
+      "ds": "core",
+      "title": "Counter",
+      "surfaces": {
+        "docs": "",
+        "export": "Counter",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/Counter.stories.tsx",
+        "registry": "counter",
+        "registrySrc": "src/forge/counter.tsx"
+      }
+    },
+    {
+      "name": "data-table",
+      "kind": "component",
+      "ds": "idp",
+      "title": "Data Table",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/data-table.tsx",
+        "export": "DataTable",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/DataTable.stories.tsx",
+        "registry": "data-table",
+        "registrySrc": "src/forge/data-table.tsx"
+      }
+    },
+    {
+      "name": "date-input",
+      "kind": "component",
+      "ds": "core",
+      "title": "Date Input",
+      "surfaces": {
+        "docs": "",
+        "export": "DateInput",
+        "exportFile": "packages/ui/src/forms.tsx",
+        "story": "packages/ui/src/stories/forms/DateInput.stories.tsx",
+        "registry": "date-input",
+        "registrySrc": "src/forge/date-input.tsx"
+      }
+    },
+    {
+      "name": "date-picker",
+      "kind": "component",
+      "ds": "core",
+      "title": "Date Picker",
+      "surfaces": {
+        "docs": "src/ds/migrated/date-picker.tsx",
+        "export": "DatePicker",
+        "exportFile": "packages/ui/src/date-picker.tsx",
+        "story": "packages/ui/src/stories/forms/DatePicker.stories.tsx",
+        "registry": "date-picker",
+        "registrySrc": "src/forge/date-picker.tsx"
+      }
+    },
+    {
+      "name": "date-range",
+      "kind": "component",
+      "ds": "core",
+      "title": "Date Range",
+      "surfaces": {
+        "docs": "",
+        "export": "",
+        "exportFile": "",
+        "story": "",
+        "registry": "date-range",
+        "registrySrc": "src/forge/date-range.tsx"
+      }
+    },
+    {
+      "name": "device-frame",
+      "kind": "component",
+      "ds": "core",
+      "title": "Device Frame",
+      "surfaces": {
+        "docs": "",
+        "export": "DeviceFrame",
+        "exportFile": "packages/ui/src/device.tsx",
+        "story": "packages/ui/src/stories/device/DeviceFrame.stories.tsx",
+        "registry": "device-frame",
+        "registrySrc": "src/forge/device-frame.tsx"
+      }
+    },
+    {
+      "name": "diagram",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Diagram",
+      "surfaces": {
+        "docs": "",
+        "export": "Diagram",
+        "exportFile": "packages/ui/src/ai/content.tsx",
+        "story": "packages/ui/src/stories/ai/Diagram.stories.tsx",
+        "registry": "diagram",
+        "registrySrc": "src/forge/diagram.tsx"
+      }
+    },
+    {
+      "name": "diff-viewer",
+      "kind": "component",
+      "ds": "idp",
+      "title": "Diff Viewer",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/diff-viewer.tsx",
+        "export": "DiffViewer",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/DiffViewer.stories.tsx",
+        "registry": "diff-viewer",
+        "registrySrc": "src/forge/diff-viewer.tsx"
+      }
+    },
+    {
+      "name": "drag-drop-overlay",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Drag Drop Overlay",
+      "surfaces": {
+        "docs": "",
+        "export": "DragDropOverlay",
+        "exportFile": "packages/ui/src/ai/prompt.tsx",
+        "story": "packages/ui/src/stories/ai/DragDropOverlay.stories.tsx",
+        "registry": "drag-drop-overlay",
+        "registrySrc": "src/forge/drag-drop-overlay.tsx"
+      }
+    },
+    {
+      "name": "drawer",
+      "kind": "component",
+      "ds": "core",
+      "title": "Drawer",
+      "surfaces": {
+        "docs": "src/ds/migrated/drawer.tsx",
+        "export": "Drawer",
+        "exportFile": "packages/ui/src/drawer.tsx",
+        "story": "packages/ui/src/stories/overlays/Drawer.stories.tsx",
+        "registry": "drawer",
+        "registrySrc": "src/forge/drawer.tsx"
+      }
+    },
+    {
+      "name": "drop-zone",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Drop Zone",
+      "surfaces": {
+        "docs": "",
+        "export": "DropZone",
+        "exportFile": "packages/ui/src/ai/prompt.tsx",
+        "story": "packages/ui/src/stories/ai/DropZone.stories.tsx",
+        "registry": "drop-zone",
+        "registrySrc": "src/forge/drop-zone.tsx"
+      }
+    },
+    {
+      "name": "dropdown-menu",
+      "kind": "component",
+      "ds": "core",
+      "title": "Dropdown Menu",
+      "surfaces": {
+        "docs": "",
+        "export": "DropdownMenu",
+        "exportFile": "packages/ui/src/menu.tsx",
+        "story": "packages/ui/src/stories/overlays/DropdownMenu.stories.tsx",
+        "registry": "dropdown-menu",
+        "registrySrc": "src/forge/dropdown-menu.tsx"
+      }
+    },
+    {
+      "name": "empty",
+      "kind": "component",
+      "ds": "core",
+      "title": "Empty",
+      "surfaces": {
+        "docs": "src/ds/migrated/empty.tsx",
+        "export": "Empty",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/Empty.stories.tsx",
+        "registry": "empty",
+        "registrySrc": "src/forge/empty.tsx"
+      }
+    },
+    {
+      "name": "file-input",
+      "kind": "component",
+      "ds": "core",
+      "title": "File Input",
+      "surfaces": {
+        "docs": "src/ds/migrated/file-input.tsx",
+        "export": "FileInput",
+        "exportFile": "packages/ui/src/forms.tsx",
+        "story": "packages/ui/src/stories/forms/FileInput.stories.tsx",
+        "registry": "file-input",
+        "registrySrc": "src/forge/file-input.tsx"
+      }
+    },
+    {
+      "name": "filter-panel",
+      "kind": "component",
+      "ds": "idp",
+      "title": "Filter Panel",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/filter-panel.tsx",
+        "export": "FilterPanel",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/FilterPanel.stories.tsx",
+        "registry": "filter-panel",
+        "registrySrc": "src/forge/filter-panel.tsx"
+      }
+    },
+    {
+      "name": "forge-chart",
+      "kind": "component",
+      "ds": "core",
+      "title": "Forge Chart",
+      "surfaces": {
+        "docs": "",
+        "export": "ForgeChart",
+        "exportFile": "packages/ui/src/charts.tsx",
+        "story": "packages/ui/src/stories/charts/ForgeChart.stories.tsx",
+        "registry": "forge-chart",
+        "registrySrc": "src/forge/forge-chart.tsx"
+      }
+    },
+    {
+      "name": "forge-mark",
+      "kind": "component",
+      "ds": "core",
+      "title": "Forge Mark",
+      "surfaces": {
+        "docs": "",
+        "export": "ForgeMark",
+        "exportFile": "packages/ui/src/icons.tsx",
+        "story": "packages/ui/src/stories/icons/ForgeMark.stories.tsx",
+        "registry": "forge-mark",
+        "registrySrc": "src/forge/forge-mark.tsx"
+      }
+    },
+    {
+      "name": "forge-tooltip-content",
+      "kind": "component",
+      "ds": "core",
+      "title": "Forge Tooltip Content",
+      "surfaces": {
+        "docs": "",
+        "export": "ForgeTooltipContent",
+        "exportFile": "packages/ui/src/charts.tsx",
+        "story": "",
+        "registry": "forge-tooltip-content",
+        "registrySrc": "src/forge/forge-tooltip-content.tsx"
+      }
+    },
+    {
+      "name": "frame",
+      "kind": "component",
+      "ds": "core",
+      "title": "Frame",
+      "surfaces": {
+        "docs": "",
+        "export": "Frame",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/docs/Frame.stories.tsx",
+        "registry": "frame",
+        "registrySrc": "src/forge/frame.tsx"
+      }
+    },
+    {
+      "name": "health-badge",
+      "kind": "component",
+      "ds": "core",
+      "title": "Health Badge",
+      "surfaces": {
+        "docs": "",
+        "export": "HealthBadge",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/HealthBadge.stories.tsx",
+        "registry": "health-badge",
+        "registrySrc": "src/forge/health-badge.tsx"
+      }
+    },
+    {
+      "name": "history",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "History",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/history.tsx",
+        "export": "History",
+        "exportFile": "packages/ui/src/ai/history.tsx",
+        "story": "packages/ui/src/stories/ai/History.stories.tsx",
+        "registry": "history",
+        "registrySrc": "src/forge/history.tsx"
+      }
+    },
+    {
+      "name": "history-group",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "History Group",
+      "surfaces": {
+        "docs": "",
+        "export": "HistoryGroup",
+        "exportFile": "packages/ui/src/ai/history.tsx",
+        "story": "packages/ui/src/stories/ai/HistoryGroup.stories.tsx",
+        "registry": "history-group",
+        "registrySrc": "src/forge/history-group.tsx"
+      }
+    },
+    {
+      "name": "history-item",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "History Item",
+      "surfaces": {
+        "docs": "",
+        "export": "HistoryItem",
+        "exportFile": "packages/ui/src/ai/history.tsx",
+        "story": "packages/ui/src/stories/ai/HistoryItem.stories.tsx",
+        "registry": "history-item",
+        "registrySrc": "src/forge/history-item.tsx"
+      }
+    },
+    {
+      "name": "history-shell",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "History Shell",
+      "surfaces": {
+        "docs": "",
+        "export": "HistoryShell",
+        "exportFile": "packages/ui/src/ai/history.tsx",
+        "story": "packages/ui/src/stories/ai/HistoryShell.stories.tsx",
+        "registry": "history-shell",
+        "registrySrc": "src/forge/history-shell.tsx"
+      }
+    },
+    {
+      "name": "hover-card",
+      "kind": "component",
+      "ds": "core",
+      "title": "Hover Card",
+      "surfaces": {
+        "docs": "src/ds/migrated/hover-card.tsx",
+        "export": "HoverCard",
+        "exportFile": "packages/ui/src/hover-card.tsx",
+        "story": "packages/ui/src/stories/overlays/HoverCard.stories.tsx",
+        "registry": "hover-card",
+        "registrySrc": "src/forge/hover-card.tsx"
+      }
+    },
+    {
+      "name": "icons",
+      "kind": "component",
+      "ds": "core",
+      "title": "Icons",
+      "surfaces": {
+        "docs": "",
+        "export": "Icons",
+        "exportFile": "packages/ui/src/icons.tsx",
+        "story": "packages/ui/src/stories/icons/Icons.stories.tsx",
+        "registry": "icons",
+        "registrySrc": "src/forge/icons.tsx"
+      }
+    },
+    {
+      "name": "image-view",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Image View",
+      "surfaces": {
+        "docs": "",
+        "export": "ImageView",
+        "exportFile": "packages/ui/src/ai/content.tsx",
+        "story": "packages/ui/src/stories/ai/Content.stories.tsx",
+        "registry": "image-view",
+        "registrySrc": "src/forge/image-view.tsx"
+      }
+    },
+    {
+      "name": "input",
+      "kind": "component",
+      "ds": "core",
+      "title": "Input",
+      "surfaces": {
+        "docs": "src/ds/migrated/input.tsx",
+        "export": "Input",
+        "exportFile": "packages/ui/src/forms.tsx",
+        "story": "packages/ui/src/stories/forms/Input.stories.tsx",
+        "registry": "input",
+        "registrySrc": "src/forge/input.tsx"
+      }
+    },
+    {
+      "name": "input-group",
+      "kind": "component",
+      "ds": "core",
+      "title": "Input Group",
+      "surfaces": {
+        "docs": "src/ds/migrated/input-group.tsx",
+        "export": "InputGroup",
+        "exportFile": "packages/ui/src/input-group.tsx",
+        "story": "packages/ui/src/stories/forms/InputGroup.stories.tsx",
+        "registry": "input-group",
+        "registrySrc": "src/forge/input-group.tsx"
+      }
+    },
+    {
+      "name": "iso-date",
+      "kind": "component",
+      "ds": "core",
+      "title": "Iso Date",
+      "surfaces": {
+        "docs": "",
+        "export": "isoDate",
+        "exportFile": "packages/ui/src/calendar.tsx",
+        "story": "",
+        "registry": "iso-date",
+        "registrySrc": "src/forge/iso-date.tsx"
+      }
+    },
+    {
+      "name": "json-inspector",
+      "kind": "component",
+      "ds": "idp",
+      "title": "Json Inspector",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/json-inspector.tsx",
+        "export": "JSONInspector",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/JSONInspector.stories.tsx",
+        "registry": "json-inspector",
+        "registrySrc": "src/forge/json-inspector.tsx"
+      }
+    },
+    {
+      "name": "kbd",
+      "kind": "component",
+      "ds": "core",
+      "title": "Kbd",
+      "surfaces": {
+        "docs": "src/ds/migrated/kbd.tsx",
+        "export": "Kbd",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/Kbd.stories.tsx",
+        "registry": "kbd",
+        "registrySrc": "src/forge/kbd.tsx"
+      }
+    },
+    {
+      "name": "kbd-row",
+      "kind": "component",
+      "ds": "core",
+      "title": "Kbd Row",
+      "surfaces": {
+        "docs": "",
+        "export": "KbdRow",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/KbdRow.stories.tsx",
+        "registry": "kbd-row",
+        "registrySrc": "src/forge/kbd-row.tsx"
+      }
+    },
+    {
+      "name": "label",
+      "kind": "component",
+      "ds": "core",
+      "title": "Label",
+      "surfaces": {
+        "docs": "src/ds/migrated/label.tsx",
+        "export": "Label",
+        "exportFile": "packages/ui/src/label.tsx",
+        "story": "packages/ui/src/stories/forms/Label.stories.tsx",
+        "registry": "label",
+        "registrySrc": "src/forge/label.tsx"
+      }
+    },
+    {
+      "name": "lang-badge",
+      "kind": "component",
+      "ds": "core",
+      "title": "Lang Badge",
+      "surfaces": {
+        "docs": "",
+        "export": "LangBadge",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/LangBadge.stories.tsx",
+        "registry": "lang-badge",
+        "registrySrc": "src/forge/lang-badge.tsx"
+      }
+    },
+    {
+      "name": "lede",
+      "kind": "component",
+      "ds": "core",
+      "title": "Lede",
+      "surfaces": {
+        "docs": "",
+        "export": "Lede",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/docs/Lede.stories.tsx",
+        "registry": "lede",
+        "registrySrc": "src/forge/lede.tsx"
+      }
+    },
+    {
+      "name": "log-viewer",
+      "kind": "component",
+      "ds": "idp",
+      "title": "Log Viewer",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/log-viewer.tsx",
+        "export": "LogViewer",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/LogViewer.stories.tsx",
+        "registry": "log-viewer",
+        "registrySrc": "src/forge/log-viewer.tsx"
+      }
+    },
+    {
+      "name": "math-view",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Math View",
+      "surfaces": {
+        "docs": "",
+        "export": "MathView",
+        "exportFile": "packages/ui/src/ai/content.tsx",
+        "story": "packages/ui/src/stories/ai/MathView.stories.tsx",
+        "registry": "math-view",
+        "registrySrc": "src/forge/math-view.tsx"
+      }
+    },
+    {
+      "name": "menubar",
+      "kind": "component",
+      "ds": "core",
+      "title": "Menubar",
+      "surfaces": {
+        "docs": "src/ds/migrated/menubar.tsx",
+        "export": "Menubar",
+        "exportFile": "packages/ui/src/menubar.tsx",
+        "story": "packages/ui/src/stories/overlays/Menubar.stories.tsx",
+        "registry": "menubar",
+        "registrySrc": "src/forge/menubar.tsx"
+      }
+    },
+    {
+      "name": "message",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Message",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/message.tsx",
+        "export": "Message",
+        "exportFile": "packages/ui/src/ai/message.tsx",
+        "story": "packages/ui/src/stories/ai/Message.stories.tsx",
+        "registry": "message",
+        "registrySrc": "src/forge/message.tsx"
+      }
+    },
+    {
+      "name": "message-actions",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Message Actions",
+      "surfaces": {
+        "docs": "",
+        "export": "MessageActions",
+        "exportFile": "packages/ui/src/ai/message.tsx",
+        "story": "packages/ui/src/stories/ai/MessageActions.stories.tsx",
+        "registry": "message-actions",
+        "registrySrc": "src/forge/message-actions.tsx"
+      }
+    },
+    {
+      "name": "metric-card",
+      "kind": "component",
+      "ds": "idp",
+      "title": "Metric Card",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/metric-card.tsx",
+        "export": "MetricCard",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/MetricCard.stories.tsx",
+        "registry": "metric-card",
+        "registrySrc": "src/forge/metric-card.tsx"
+      }
+    },
+    {
+      "name": "modal",
+      "kind": "component",
+      "ds": "core",
+      "title": "Modal",
+      "surfaces": {
+        "docs": "src/ds/migrated/modal.tsx",
+        "export": "Modal",
+        "exportFile": "packages/ui/src/modal.tsx",
+        "story": "packages/ui/src/stories/overlays/Modal.stories.tsx",
+        "registry": "modal",
+        "registrySrc": "src/forge/modal.tsx"
+      }
+    },
+    {
+      "name": "model-badge",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Model Badge",
+      "surfaces": {
+        "docs": "",
+        "export": "ModelBadge",
+        "exportFile": "packages/ui/src/ai/prompt.tsx",
+        "story": "packages/ui/src/stories/ai/ModelBadge.stories.tsx",
+        "registry": "model-badge",
+        "registrySrc": "src/forge/model-badge.tsx"
+      }
+    },
+    {
+      "name": "model-picker",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Model Picker",
+      "surfaces": {
+        "docs": "",
+        "export": "ModelPicker",
+        "exportFile": "packages/ui/src/ai/prompt.tsx",
+        "story": "packages/ui/src/stories/ai/ModelPicker.stories.tsx",
+        "registry": "model-picker",
+        "registrySrc": "src/forge/model-picker.tsx"
+      }
+    },
+    {
+      "name": "model-selector",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Model Selector",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/model-selector.tsx",
+        "export": "ModelSelector",
+        "exportFile": "packages/ui/src/ai/prompt.tsx",
+        "story": "packages/ui/src/stories/ai/ModelSelector.stories.tsx",
+        "registry": "model-selector",
+        "registrySrc": "src/forge/model-selector.tsx"
+      }
+    },
+    {
+      "name": "mono",
+      "kind": "component",
+      "ds": "core",
+      "title": "Mono",
+      "surfaces": {
+        "docs": "",
+        "export": "Mono",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/docs/Mono.stories.tsx",
+        "registry": "mono",
+        "registrySrc": "src/forge/mono.tsx"
+      }
+    },
+    {
+      "name": "month-grid",
+      "kind": "component",
+      "ds": "core",
+      "title": "Month Grid",
+      "surfaces": {
+        "docs": "",
+        "export": "monthGrid",
+        "exportFile": "packages/ui/src/calendar.tsx",
+        "story": "",
+        "registry": "month-grid",
+        "registrySrc": "src/forge/month-grid.tsx"
+      }
+    },
+    {
+      "name": "month-label",
+      "kind": "component",
+      "ds": "core",
+      "title": "Month Label",
+      "surfaces": {
+        "docs": "",
+        "export": "monthLabel",
+        "exportFile": "packages/ui/src/calendar.tsx",
+        "story": "",
+        "registry": "month-label",
+        "registrySrc": "src/forge/month-label.tsx"
+      }
+    },
+    {
+      "name": "native-select",
+      "kind": "component",
+      "ds": "core",
+      "title": "Native Select",
+      "surfaces": {
+        "docs": "",
+        "export": "NativeSelect",
+        "exportFile": "packages/ui/src/forms.tsx",
+        "story": "packages/ui/src/stories/forms/NativeSelect.stories.tsx",
+        "registry": "native-select",
+        "registrySrc": "src/forge/native-select.tsx"
+      }
+    },
+    {
+      "name": "navigation-menu",
+      "kind": "component",
+      "ds": "core",
+      "title": "Navigation Menu",
+      "surfaces": {
+        "docs": "",
+        "export": "NavigationMenu",
+        "exportFile": "packages/ui/src/navigation.tsx",
+        "story": "packages/ui/src/stories/blocks/NavigationMenu.stories.tsx",
+        "registry": "navigation-menu",
+        "registrySrc": "src/forge/navigation-menu.tsx"
+      }
+    },
+    {
+      "name": "notification",
+      "kind": "component",
+      "ds": "core",
+      "title": "Notification",
+      "surfaces": {
+        "docs": "src/ds/migrated/notification.tsx",
+        "export": "Notification",
+        "exportFile": "packages/ui/src/notification.tsx",
+        "story": "packages/ui/src/stories/overlays/Notification.stories.tsx",
+        "registry": "notification",
+        "registrySrc": "src/forge/notification.tsx"
+      }
+    },
+    {
+      "name": "number-input",
+      "kind": "component",
+      "ds": "core",
+      "title": "Number Input",
+      "surfaces": {
+        "docs": "src/ds/migrated/number-input.tsx",
+        "export": "NumberInput",
+        "exportFile": "packages/ui/src/forms.tsx",
+        "story": "packages/ui/src/stories/forms/NumberInput.stories.tsx",
+        "registry": "number-input",
+        "registrySrc": "src/forge/number-input.tsx"
+      }
+    },
+    {
+      "name": "otp-input",
+      "kind": "component",
+      "ds": "core",
+      "title": "Otp Input",
+      "surfaces": {
+        "docs": "src/ds/migrated/otp-input.tsx",
+        "export": "OTPInput",
+        "exportFile": "packages/ui/src/forms.tsx",
+        "story": "packages/ui/src/stories/forms/OTPInput.stories.tsx",
+        "registry": "otp-input",
+        "registrySrc": "src/forge/otp-input.tsx"
+      }
+    },
+    {
+      "name": "owner-pill",
+      "kind": "component",
+      "ds": "core",
+      "title": "Owner Pill",
+      "surfaces": {
+        "docs": "",
+        "export": "OwnerPill",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/OwnerPill.stories.tsx",
+        "registry": "owner-pill",
+        "registrySrc": "src/forge/owner-pill.tsx"
+      }
+    },
+    {
+      "name": "pagination",
+      "kind": "component",
+      "ds": "core",
+      "title": "Pagination",
+      "surfaces": {
+        "docs": "src/ds/migrated/pagination.tsx",
+        "export": "Pagination",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/primitives/Pagination.stories.tsx",
+        "registry": "pagination",
+        "registrySrc": "src/forge/pagination.tsx"
+      }
+    },
+    {
+      "name": "password-field",
+      "kind": "component",
+      "ds": "core",
+      "title": "Password Field",
+      "surfaces": {
+        "docs": "",
+        "export": "PasswordField",
+        "exportFile": "packages/ui/src/password.tsx",
+        "story": "packages/ui/src/stories/forms/PasswordField.stories.tsx",
+        "registry": "password-field",
+        "registrySrc": "src/forge/password-field.tsx"
+      }
+    },
+    {
+      "name": "password-input",
+      "kind": "component",
+      "ds": "core",
+      "title": "Password Input",
+      "surfaces": {
+        "docs": "",
+        "export": "PasswordInput",
+        "exportFile": "packages/ui/src/password.tsx",
+        "story": "packages/ui/src/stories/forms/PasswordInput.stories.tsx",
+        "registry": "password-input",
+        "registrySrc": "src/forge/password-input.tsx"
+      }
+    },
+    {
+      "name": "persona",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Persona",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/persona.tsx",
+        "export": "Persona",
+        "exportFile": "packages/ui/src/ai/voice.tsx",
+        "story": "packages/ui/src/stories/ai/Persona.stories.tsx",
+        "registry": "persona",
+        "registrySrc": "src/forge/persona.tsx"
+      }
+    },
+    {
+      "name": "phone-top",
+      "kind": "component",
+      "ds": "core",
+      "title": "Phone Top",
+      "surfaces": {
+        "docs": "",
+        "export": "PhoneTop",
+        "exportFile": "packages/ui/src/device.tsx",
+        "story": "packages/ui/src/stories/device/PhoneTop.stories.tsx",
+        "registry": "phone-top",
+        "registrySrc": "src/forge/phone-top.tsx"
+      }
+    },
+    {
+      "name": "pill",
+      "kind": "component",
+      "ds": "core",
+      "title": "Pill",
+      "surfaces": {
+        "docs": "src/ds/migrated/pills.tsx",
+        "export": "Pill",
+        "exportFile": "packages/ui/src/badge.tsx",
+        "story": "packages/ui/src/stories/atoms/Pill.stories.tsx",
+        "registry": "pill",
+        "registrySrc": "src/forge/pill.tsx"
+      }
+    },
+    {
+      "name": "pipeline",
+      "kind": "component",
+      "ds": "idp",
+      "title": "Pipeline",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/pipeline.tsx",
+        "export": "Pipeline",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/Pipeline.stories.tsx",
+        "registry": "pipeline",
+        "registrySrc": "src/forge/pipeline.tsx"
+      }
+    },
+    {
+      "name": "plan",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Plan",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/plan.tsx",
+        "export": "Plan",
+        "exportFile": "packages/ui/src/ai/agentic.tsx",
+        "story": "packages/ui/src/stories/ai/Plan.stories.tsx",
+        "registry": "plan",
+        "registrySrc": "src/forge/plan.tsx"
+      }
+    },
+    {
+      "name": "popover",
+      "kind": "component",
+      "ds": "core",
+      "title": "Popover",
+      "surfaces": {
+        "docs": "src/ds/migrated/popover.tsx",
+        "export": "Popover",
+        "exportFile": "packages/ui/src/popover.tsx",
+        "story": "packages/ui/src/stories/overlays/Popover.stories.tsx",
+        "registry": "popover",
+        "registrySrc": "src/forge/popover.tsx"
+      }
+    },
+    {
+      "name": "progress",
+      "kind": "component",
+      "ds": "core",
+      "title": "Progress",
+      "surfaces": {
+        "docs": "src/ds/migrated/progress.tsx",
+        "export": "Progress",
+        "exportFile": "packages/ui/src/progress.tsx",
+        "story": "packages/ui/src/stories/atoms/Progress.stories.tsx",
+        "registry": "progress",
+        "registrySrc": "src/forge/progress.tsx"
+      }
+    },
+    {
+      "name": "prompt-banner",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Prompt Banner",
+      "surfaces": {
+        "docs": "",
+        "export": "PromptBanner",
+        "exportFile": "packages/ui/src/ai/prompt.tsx",
+        "story": "packages/ui/src/stories/ai/PromptBanner.stories.tsx",
+        "registry": "prompt-banner",
+        "registrySrc": "src/forge/prompt-banner.tsx"
+      }
+    },
+    {
+      "name": "prompt-input",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Prompt Input",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/prompt-input.tsx",
+        "export": "PromptInput",
+        "exportFile": "packages/ui/src/ai/prompt.tsx",
+        "story": "packages/ui/src/stories/ai/PromptInput.stories.tsx",
+        "registry": "prompt-input",
+        "registrySrc": "src/forge/prompt-input.tsx"
+      }
+    },
+    {
+      "name": "prompt-submit",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Prompt Submit",
+      "surfaces": {
+        "docs": "",
+        "export": "PromptSubmit",
+        "exportFile": "packages/ui/src/ai/prompt.tsx",
+        "story": "packages/ui/src/stories/ai/PromptSubmit.stories.tsx",
+        "registry": "prompt-submit",
+        "registrySrc": "src/forge/prompt-submit.tsx"
+      }
+    },
+    {
+      "name": "props-table",
+      "kind": "component",
+      "ds": "core",
+      "title": "Props Table",
+      "surfaces": {
+        "docs": "",
+        "export": "PropsTable",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/docs/PropsTable.stories.tsx",
+        "registry": "props-table",
+        "registrySrc": "src/forge/props-table.tsx"
+      }
+    },
+    {
+      "name": "prose",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Prose",
+      "surfaces": {
+        "docs": "",
+        "export": "Prose",
+        "exportFile": "packages/ui/src/ai/prose.tsx",
+        "story": "packages/ui/src/stories/ai/Prose.stories.tsx",
+        "registry": "prose",
+        "registrySrc": "src/forge/prose.tsx"
+      }
+    },
+    {
+      "name": "prose-code",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Prose Code",
+      "surfaces": {
+        "docs": "",
+        "export": "ProseCode",
+        "exportFile": "packages/ui/src/ai/prose.tsx",
+        "story": "packages/ui/src/stories/ai/ProseCode.stories.tsx",
+        "registry": "prose-code",
+        "registrySrc": "src/forge/prose-code.tsx"
+      }
+    },
+    {
+      "name": "queue",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Queue",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/queue.tsx",
+        "export": "Queue",
+        "exportFile": "packages/ui/src/ai/agentic.tsx",
+        "story": "packages/ui/src/stories/ai/Queue.stories.tsx",
+        "registry": "queue",
+        "registrySrc": "src/forge/queue.tsx"
+      }
+    },
+    {
+      "name": "radio-card",
+      "kind": "component",
+      "ds": "core",
+      "title": "Radio Card",
+      "surfaces": {
+        "docs": "",
+        "export": "RadioCard",
+        "exportFile": "packages/ui/src/selection-card.tsx",
+        "story": "packages/ui/src/stories/forms/RadioCard.stories.tsx",
+        "registry": "radio-card",
+        "registrySrc": "src/forge/radio-card.tsx"
+      }
+    },
+    {
+      "name": "radio-card-group",
+      "kind": "component",
+      "ds": "core",
+      "title": "Radio Card Group",
+      "surfaces": {
+        "docs": "",
+        "export": "RadioCardGroup",
+        "exportFile": "packages/ui/src/selection-card.tsx",
+        "story": "packages/ui/src/stories/forms/RadioCardGroup.stories.tsx",
+        "registry": "radio-card-group",
+        "registrySrc": "src/forge/radio-card-group.tsx"
+      }
+    },
+    {
+      "name": "radio-group",
+      "kind": "component",
+      "ds": "core",
+      "title": "Radio Group",
+      "surfaces": {
+        "docs": "",
+        "export": "RadioGroup",
+        "exportFile": "packages/ui/src/forms.tsx",
+        "story": "packages/ui/src/stories/forms/RadioGroup.stories.tsx",
+        "registry": "radio-group",
+        "registrySrc": "src/forge/radio-group.tsx"
+      }
+    },
+    {
+      "name": "range-calendar",
+      "kind": "component",
+      "ds": "core",
+      "title": "Range Calendar",
+      "surfaces": {
+        "docs": "",
+        "export": "RangeCalendar",
+        "exportFile": "packages/ui/src/calendar.tsx",
+        "story": "packages/ui/src/stories/forms/RangeCalendar.stories.tsx",
+        "registry": "range-calendar",
+        "registrySrc": "src/forge/range-calendar.tsx"
+      }
+    },
+    {
+      "name": "range-calendar-props",
+      "kind": "component",
+      "ds": "core",
+      "title": "Range Calendar Props",
+      "surfaces": {
+        "docs": "",
+        "export": "",
+        "exportFile": "",
+        "story": "",
+        "registry": "range-calendar-props",
+        "registrySrc": "src/forge/range-calendar-props.tsx"
+      }
+    },
+    {
+      "name": "reasoning",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Reasoning",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/reasoning.tsx",
+        "export": "Reasoning",
+        "exportFile": "packages/ui/src/ai/agentic.tsx",
+        "story": "packages/ui/src/stories/ai/Reasoning.stories.tsx",
+        "registry": "reasoning",
+        "registrySrc": "src/forge/reasoning.tsx"
+      }
+    },
+    {
+      "name": "relative-time",
+      "kind": "component",
+      "ds": "core",
+      "title": "Relative Time",
+      "surfaces": {
+        "docs": "src/ds/migrated/relative-time.tsx",
+        "export": "RelativeTime",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/RelativeTime.stories.tsx",
+        "registry": "relative-time",
+        "registrySrc": "src/forge/relative-time.tsx"
+      }
+    },
+    {
+      "name": "resizable",
+      "kind": "component",
+      "ds": "core",
+      "title": "Resizable",
+      "surfaces": {
+        "docs": "src/ds/migrated/resizable.tsx",
+        "export": "Resizable",
+        "exportFile": "packages/ui/src/resizable.tsx",
+        "story": "packages/ui/src/stories/primitives/Resizable.stories.tsx",
+        "registry": "resizable",
+        "registrySrc": "src/forge/resizable.tsx"
+      }
+    },
+    {
+      "name": "response",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Response",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/response.tsx",
+        "export": "Response",
+        "exportFile": "packages/ui/src/ai/message.tsx",
+        "story": "packages/ui/src/stories/ai/Response.stories.tsx",
+        "registry": "response",
+        "registrySrc": "src/forge/response.tsx"
+      }
+    },
+    {
+      "name": "ring-bar",
+      "kind": "component",
+      "ds": "idp",
+      "title": "Ring Bar",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/ring-bar.tsx",
+        "export": "RingBar",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/RingBar.stories.tsx",
+        "registry": "ring-bar",
+        "registrySrc": "src/forge/ring-bar.tsx"
+      }
+    },
+    {
+      "name": "same-day",
+      "kind": "component",
+      "ds": "core",
+      "title": "Same Day",
+      "surfaces": {
+        "docs": "",
+        "export": "sameDay",
+        "exportFile": "packages/ui/src/calendar.tsx",
+        "story": "",
+        "registry": "same-day",
+        "registrySrc": "src/forge/same-day.tsx"
+      }
+    },
+    {
+      "name": "score-gauge",
+      "kind": "component",
+      "ds": "idp",
+      "title": "Score Gauge",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/score-gauge.tsx",
+        "export": "ScoreGauge",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/ScoreGauge.stories.tsx",
+        "registry": "score-gauge",
+        "registrySrc": "src/forge/score-gauge.tsx"
+      }
+    },
+    {
+      "name": "scroll-area",
+      "kind": "component",
+      "ds": "core",
+      "title": "Scroll Area",
+      "surfaces": {
+        "docs": "src/ds/migrated/scroll-area.tsx",
+        "export": "ScrollArea",
+        "exportFile": "packages/ui/src/scroll-area.tsx",
+        "story": "packages/ui/src/stories/primitives/ScrollArea.stories.tsx",
+        "registry": "scroll-area",
+        "registrySrc": "src/forge/scroll-area.tsx"
+      }
+    },
+    {
+      "name": "select",
+      "kind": "component",
+      "ds": "core",
+      "title": "Select",
+      "surfaces": {
+        "docs": "src/ds/migrated/select.tsx",
+        "export": "Select",
+        "exportFile": "packages/ui/src/select.tsx",
+        "story": "packages/ui/src/stories/forms/Select.stories.tsx",
+        "registry": "select",
+        "registrySrc": "src/forge/select.tsx"
+      }
+    },
+    {
+      "name": "select-native",
+      "kind": "component",
+      "ds": "core",
+      "title": "Select Native",
+      "surfaces": {
+        "docs": "",
+        "export": "SelectNative",
+        "exportFile": "packages/ui/src/forms.tsx",
+        "story": "packages/ui/src/stories/forms/SelectNative.stories.tsx",
+        "registry": "select-native",
+        "registrySrc": "src/forge/select-native.tsx"
+      }
+    },
+    {
+      "name": "separator",
+      "kind": "component",
+      "ds": "core",
+      "title": "Separator",
+      "surfaces": {
+        "docs": "src/ds/migrated/separator.tsx",
+        "export": "Separator",
+        "exportFile": "packages/ui/src/separator.tsx",
+        "story": "packages/ui/src/stories/primitives/Separator.stories.tsx",
+        "registry": "separator",
+        "registrySrc": "src/forge/separator.tsx"
+      }
+    },
+    {
+      "name": "service-card",
+      "kind": "component",
+      "ds": "idp",
+      "title": "Service Card",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/service-card.tsx",
+        "export": "ServiceCard",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/ServiceCard.stories.tsx",
+        "registry": "service-card",
+        "registrySrc": "src/forge/service-card.tsx"
+      }
+    },
+    {
+      "name": "severity-pill",
+      "kind": "component",
+      "ds": "core",
+      "title": "Severity Pill",
+      "surfaces": {
+        "docs": "",
+        "export": "SeverityPill",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/SeverityPill.stories.tsx",
+        "registry": "severity-pill",
+        "registrySrc": "src/forge/severity-pill.tsx"
+      }
+    },
+    {
+      "name": "shimmer",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Shimmer",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/shimmer.tsx",
+        "export": "Shimmer",
+        "exportFile": "packages/ui/src/ai/content.tsx",
+        "story": "packages/ui/src/stories/ai/Shimmer.stories.tsx",
+        "registry": "shimmer",
+        "registrySrc": "src/forge/shimmer.tsx"
+      }
+    },
+    {
+      "name": "sidebar",
+      "kind": "component",
+      "ds": "core",
+      "title": "Sidebar",
+      "surfaces": {
+        "docs": "src/ds/migrated/sidebar.tsx",
+        "export": "Sidebar",
+        "exportFile": "packages/ui/src/sidebar.tsx",
+        "story": "packages/ui/src/stories/blocks/Sidebar.stories.tsx",
+        "registry": "sidebar",
+        "registrySrc": "src/forge/sidebar.tsx"
+      }
+    },
+    {
+      "name": "simple-pagination",
+      "kind": "component",
+      "ds": "core",
+      "title": "Simple Pagination",
+      "surfaces": {
+        "docs": "",
+        "export": "SimplePagination",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/primitives/SimplePagination.stories.tsx",
+        "registry": "simple-pagination",
+        "registrySrc": "src/forge/simple-pagination.tsx"
+      }
+    },
+    {
+      "name": "skeleton",
+      "kind": "component",
+      "ds": "core",
+      "title": "Skeleton",
+      "surfaces": {
+        "docs": "src/ds/migrated/skeleton.tsx",
+        "export": "Skeleton",
+        "exportFile": "packages/ui/src/skeleton.tsx",
+        "story": "packages/ui/src/stories/atoms/Skeleton.stories.tsx",
+        "registry": "skeleton",
+        "registrySrc": "src/forge/skeleton.tsx"
+      }
+    },
+    {
+      "name": "slider",
+      "kind": "component",
+      "ds": "core",
+      "title": "Slider",
+      "surfaces": {
+        "docs": "src/ds/migrated/slider.tsx",
+        "export": "Slider",
+        "exportFile": "packages/ui/src/forms.tsx",
+        "story": "packages/ui/src/stories/forms/Slider.stories.tsx",
+        "registry": "slider",
+        "registrySrc": "src/forge/slider.tsx"
+      }
+    },
+    {
+      "name": "sources",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Sources",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/sources.tsx",
+        "export": "Sources",
+        "exportFile": "packages/ui/src/ai/sources.tsx",
+        "story": "packages/ui/src/stories/ai/Sources.stories.tsx",
+        "registry": "sources",
+        "registrySrc": "src/forge/sources.tsx"
+      }
+    },
+    {
+      "name": "sources-panel",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Sources Panel",
+      "surfaces": {
+        "docs": "",
+        "export": "SourcesPanel",
+        "exportFile": "packages/ui/src/ai/sources.tsx",
+        "story": "packages/ui/src/stories/ai/SourcesPanel.stories.tsx",
+        "registry": "sources-panel",
+        "registrySrc": "src/forge/sources-panel.tsx"
+      }
+    },
+    {
+      "name": "sparkline",
+      "kind": "component",
+      "ds": "core",
+      "title": "Sparkline",
+      "surfaces": {
+        "docs": "",
+        "export": "Sparkline",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/Sparkline.stories.tsx",
+        "registry": "sparkline",
+        "registrySrc": "src/forge/sparkline.tsx"
+      }
+    },
+    {
+      "name": "spec-row",
+      "kind": "component",
+      "ds": "core",
+      "title": "Spec Row",
+      "surfaces": {
+        "docs": "",
+        "export": "SpecRow",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/docs/SpecRow.stories.tsx",
+        "registry": "spec-row",
+        "registrySrc": "src/forge/spec-row.tsx"
+      }
+    },
+    {
+      "name": "speech-input",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Speech Input",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/speech-input.tsx",
+        "export": "SpeechInput",
+        "exportFile": "packages/ui/src/ai/voice.tsx",
+        "story": "packages/ui/src/stories/ai/SpeechInput.stories.tsx",
+        "registry": "speech-input",
+        "registrySrc": "src/forge/speech-input.tsx"
+      }
+    },
+    {
+      "name": "spinner",
+      "kind": "component",
+      "ds": "core",
+      "title": "Spinner",
+      "surfaces": {
+        "docs": "src/ds/migrated/spinner.tsx",
+        "export": "Spinner",
+        "exportFile": "packages/ui/src/spinner.tsx",
+        "story": "packages/ui/src/stories/atoms/Spinner.stories.tsx",
+        "registry": "spinner",
+        "registrySrc": "src/forge/spinner.tsx"
+      }
+    },
+    {
+      "name": "start-of-month",
+      "kind": "component",
+      "ds": "core",
+      "title": "Start Of Month",
+      "surfaces": {
+        "docs": "",
+        "export": "startOfMonth",
+        "exportFile": "packages/ui/src/calendar.tsx",
+        "story": "",
+        "registry": "start-of-month",
+        "registrySrc": "src/forge/start-of-month.tsx"
+      }
+    },
+    {
+      "name": "stat",
+      "kind": "component",
+      "ds": "core",
+      "title": "Stat",
+      "surfaces": {
+        "docs": "",
+        "export": "Stat",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/Stat.stories.tsx",
+        "registry": "stat",
+        "registrySrc": "src/forge/stat.tsx"
+      }
+    },
+    {
+      "name": "status-bar",
+      "kind": "component",
+      "ds": "core",
+      "title": "Status Bar",
+      "surfaces": {
+        "docs": "",
+        "export": "StatusBar",
+        "exportFile": "packages/ui/src/device.tsx",
+        "story": "packages/ui/src/stories/device/StatusBar.stories.tsx",
+        "registry": "status-bar",
+        "registrySrc": "src/forge/status-bar.tsx"
+      }
+    },
+    {
+      "name": "status-dot",
+      "kind": "component",
+      "ds": "core",
+      "title": "Status Dot",
+      "surfaces": {
+        "docs": "src/ds/migrated/status-dot.tsx",
+        "export": "StatusDot",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/StatusDot.stories.tsx",
+        "registry": "status-dot",
+        "registrySrc": "src/forge/status-dot.tsx"
+      }
+    },
+    {
+      "name": "sub-head",
+      "kind": "component",
+      "ds": "core",
+      "title": "Sub Head",
+      "surfaces": {
+        "docs": "",
+        "export": "SubHead",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/docs/SubHead.stories.tsx",
+        "registry": "sub-head",
+        "registrySrc": "src/forge/sub-head.tsx"
+      }
+    },
+    {
+      "name": "suggestion",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Suggestion",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/suggestion.tsx",
+        "export": "Suggestion",
+        "exportFile": "packages/ui/src/ai/prompt.tsx",
+        "story": "packages/ui/src/stories/ai/Suggestion.stories.tsx",
+        "registry": "suggestion",
+        "registrySrc": "src/forge/suggestion.tsx"
+      }
+    },
+    {
+      "name": "suggestion-card",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Suggestion Card",
+      "surfaces": {
+        "docs": "",
+        "export": "SuggestionCard",
+        "exportFile": "packages/ui/src/ai/prompt.tsx",
+        "story": "packages/ui/src/stories/ai/SuggestionCard.stories.tsx",
+        "registry": "suggestion-card",
+        "registrySrc": "src/forge/suggestion-card.tsx"
+      }
+    },
+    {
+      "name": "switch",
+      "kind": "component",
+      "ds": "core",
+      "title": "Switch",
+      "surfaces": {
+        "docs": "src/ds/migrated/switch.tsx",
+        "export": "Switch",
+        "exportFile": "packages/ui/src/forms.tsx",
+        "story": "packages/ui/src/stories/forms/Switch.stories.tsx",
+        "registry": "switch",
+        "registrySrc": "src/forge/switch.tsx"
+      }
+    },
+    {
+      "name": "tabbed-code",
+      "kind": "component",
+      "ds": "core",
+      "title": "Tabbed Code",
+      "surfaces": {
+        "docs": "",
+        "export": "TabbedCode",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/primitives/TabbedCode.stories.tsx",
+        "registry": "tabbed-code",
+        "registrySrc": "src/forge/tabbed-code.tsx"
+      }
+    },
+    {
+      "name": "table",
+      "kind": "component",
+      "ds": "core",
+      "title": "Table",
+      "surfaces": {
+        "docs": "src/ds/migrated/table.tsx",
+        "export": "Table",
+        "exportFile": "packages/ui/src/table.tsx",
+        "story": "packages/ui/src/stories/primitives/Table.stories.tsx",
+        "registry": "table",
+        "registrySrc": "src/forge/table.tsx"
+      }
+    },
+    {
+      "name": "tabs",
+      "kind": "component",
+      "ds": "core",
+      "title": "Tabs",
+      "surfaces": {
+        "docs": "src/ds/migrated/tabs.tsx",
+        "export": "Tabs",
+        "exportFile": "packages/ui/src/tabs.tsx",
+        "story": "packages/ui/src/stories/primitives/Tabs.stories.tsx",
+        "registry": "tabs",
+        "registrySrc": "src/forge/tabs.tsx"
+      }
+    },
+    {
+      "name": "tag-input",
+      "kind": "component",
+      "ds": "core",
+      "title": "Tag Input",
+      "surfaces": {
+        "docs": "src/ds/migrated/tag-input.tsx",
+        "export": "TagInput",
+        "exportFile": "packages/ui/src/tag-input.tsx",
+        "story": "packages/ui/src/stories/forms/TagInput.stories.tsx",
+        "registry": "tag-input",
+        "registrySrc": "src/forge/tag-input.tsx"
+      }
+    },
+    {
+      "name": "task",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Task",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/task.tsx",
+        "export": "Task",
+        "exportFile": "packages/ui/src/ai/agentic.tsx",
+        "story": "packages/ui/src/stories/ai/Task.stories.tsx",
+        "registry": "task",
+        "registrySrc": "src/forge/task.tsx"
+      }
+    },
+    {
+      "name": "terminal",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Terminal",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/terminal.tsx",
+        "export": "Terminal",
+        "exportFile": "packages/ui/src/ai/terminal.tsx",
+        "story": "packages/ui/src/stories/ai/Terminal.stories.tsx",
+        "registry": "terminal",
+        "registrySrc": "src/forge/terminal.tsx"
+      }
+    },
+    {
+      "name": "textarea",
+      "kind": "component",
+      "ds": "core",
+      "title": "Textarea",
+      "surfaces": {
+        "docs": "src/ds/migrated/textarea.tsx",
+        "export": "Textarea",
+        "exportFile": "packages/ui/src/forms.tsx",
+        "story": "packages/ui/src/stories/forms/Textarea.stories.tsx",
+        "registry": "textarea",
+        "registrySrc": "src/forge/textarea.tsx"
+      }
+    },
+    {
+      "name": "tier-badge",
+      "kind": "component",
+      "ds": "core",
+      "title": "Tier Badge",
+      "surfaces": {
+        "docs": "",
+        "export": "TierBadge",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/TierBadge.stories.tsx",
+        "registry": "tier-badge",
+        "registrySrc": "src/forge/tier-badge.tsx"
+      }
+    },
+    {
+      "name": "timeline",
+      "kind": "component",
+      "ds": "idp",
+      "title": "Timeline",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/timeline.tsx",
+        "export": "Timeline",
+        "exportFile": "packages/ui/src/blocks.tsx",
+        "story": "packages/ui/src/stories/blocks/Timeline.stories.tsx",
+        "registry": "timeline",
+        "registrySrc": "src/forge/timeline.tsx"
+      }
+    },
+    {
+      "name": "toaster",
+      "kind": "component",
+      "ds": "core",
+      "title": "Toaster",
+      "surfaces": {
+        "docs": "",
+        "export": "Toaster",
+        "exportFile": "packages/ui/src/notification.tsx",
+        "story": "packages/ui/src/stories/overlays/Toaster.stories.tsx",
+        "registry": "toaster",
+        "registrySrc": "src/forge/toaster.tsx"
+      }
+    },
+    {
+      "name": "toggle",
+      "kind": "component",
+      "ds": "core",
+      "title": "Toggle",
+      "surfaces": {
+        "docs": "src/ds/migrated/toggle.tsx",
+        "export": "Toggle",
+        "exportFile": "packages/ui/src/toggle.tsx",
+        "story": "packages/ui/src/stories/forms/Toggle.stories.tsx",
+        "registry": "toggle",
+        "registrySrc": "src/forge/toggle.tsx"
+      }
+    },
+    {
+      "name": "toggle-group",
+      "kind": "component",
+      "ds": "core",
+      "title": "Toggle Group",
+      "surfaces": {
+        "docs": "src/ds/migrated/toggle-group.tsx",
+        "export": "ToggleGroup",
+        "exportFile": "packages/ui/src/toggle-group.tsx",
+        "story": "packages/ui/src/stories/forms/ToggleGroup.stories.tsx",
+        "registry": "toggle-group",
+        "registrySrc": "src/forge/toggle-group.tsx"
+      }
+    },
+    {
+      "name": "token-swatch",
+      "kind": "component",
+      "ds": "core",
+      "title": "Token Swatch",
+      "surfaces": {
+        "docs": "",
+        "export": "TokenSwatch",
+        "exportFile": "packages/ui/src/primitives.tsx",
+        "story": "packages/ui/src/stories/docs/TokenSwatch.stories.tsx",
+        "registry": "token-swatch",
+        "registrySrc": "src/forge/token-swatch.tsx"
+      }
+    },
+    {
+      "name": "tool",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Tool",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/tool.tsx",
+        "export": "Tool",
+        "exportFile": "packages/ui/src/ai/agentic.tsx",
+        "story": "packages/ui/src/stories/ai/Tool.stories.tsx",
+        "registry": "tool",
+        "registrySrc": "src/forge/tool.tsx"
+      }
+    },
+    {
+      "name": "tool-input",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Tool Input",
+      "surfaces": {
+        "docs": "",
+        "export": "ToolInput",
+        "exportFile": "packages/ui/src/ai/agentic.tsx",
+        "story": "packages/ui/src/stories/ai/ToolInput.stories.tsx",
+        "registry": "tool-input",
+        "registrySrc": "src/forge/tool-input.tsx"
+      }
+    },
+    {
+      "name": "tool-output",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Tool Output",
+      "surfaces": {
+        "docs": "",
+        "export": "ToolOutput",
+        "exportFile": "packages/ui/src/ai/agentic.tsx",
+        "story": "packages/ui/src/stories/ai/ToolOutput.stories.tsx",
+        "registry": "tool-output",
+        "registrySrc": "src/forge/tool-output.tsx"
+      }
+    },
+    {
+      "name": "tool-status",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Tool Status",
+      "surfaces": {
+        "docs": "",
+        "export": "ToolStatus",
+        "exportFile": "packages/ui/src/ai/agentic.tsx",
+        "story": "packages/ui/src/stories/ai/ToolStatus.stories.tsx",
+        "registry": "tool-status",
+        "registrySrc": "src/forge/tool-status.tsx"
+      }
+    },
+    {
+      "name": "toolbar",
+      "kind": "ai",
+      "ds": "core",
+      "title": "Toolbar",
+      "surfaces": {
+        "docs": "src/ds/migrated/toolbar.tsx",
+        "export": "Toolbar",
+        "exportFile": "packages/ui/src/toolbar.tsx",
+        "story": "packages/ui/src/stories/primitives/Toolbar.stories.tsx",
+        "registry": "toolbar",
+        "registrySrc": "src/forge/toolbar.tsx"
+      }
+    },
+    {
+      "name": "tooltip",
+      "kind": "ai",
+      "ds": "mobile",
+      "title": "Tooltip",
+      "surfaces": {
+        "docs": "src/ds/migrated/mobile/tooltip.tsx",
+        "export": "Tooltip",
+        "exportFile": "packages/ui/src/tooltip.tsx",
+        "story": "packages/ui/src/stories/overlays/Tooltip.stories.tsx",
+        "registry": "tooltip",
+        "registrySrc": "src/forge/tooltip.tsx"
+      }
+    },
+    {
+      "name": "transcription",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Transcription",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/transcription.tsx",
+        "export": "Transcription",
+        "exportFile": "packages/ui/src/ai/voice.tsx",
+        "story": "packages/ui/src/stories/ai/Transcription.stories.tsx",
+        "registry": "transcription",
+        "registrySrc": "src/forge/transcription.tsx"
+      }
+    },
+    {
+      "name": "tree-view",
+      "kind": "component",
+      "ds": "idp",
+      "title": "Tree View",
+      "surfaces": {
+        "docs": "src/ds/migrated/idp/tree-view.tsx",
+        "export": "ForgeTree",
+        "exportFile": "src/components/pierre-tree.tsx",
+        "story": "packages/ui/src/stories/blocks/TreeView.stories.tsx",
+        "registry": "tree-view",
+        "registrySrc": "src/forge/tree-view.tsx"
+      }
+    },
+    {
+      "name": "trend",
+      "kind": "component",
+      "ds": "core",
+      "title": "Trend",
+      "surfaces": {
+        "docs": "src/ds/migrated/trend.tsx",
+        "export": "Trend",
+        "exportFile": "packages/ui/src/atoms.tsx",
+        "story": "packages/ui/src/stories/atoms/Trend.stories.tsx",
+        "registry": "trend",
+        "registrySrc": "src/forge/trend.tsx"
+      }
+    }
+  ],
+  "waivers": [
+    {
+      "component": "iso-date",
+      "clause": "C-export",
+      "reason": "Date utility function bundled with Calendar; installable but has no standalone docs/story by design."
+    },
+    {
+      "component": "iso-date",
+      "clause": "C-story",
+      "reason": "Date utility function bundled with Calendar; installable but has no standalone docs/story by design."
+    },
+    {
+      "component": "same-day",
+      "clause": "C-export",
+      "reason": "Date comparison utility bundled with Calendar; no standalone docs/story by design."
+    },
+    {
+      "component": "same-day",
+      "clause": "C-story",
+      "reason": "Date comparison utility bundled with Calendar; no standalone docs/story by design."
+    },
+    {
+      "component": "start-of-month",
+      "clause": "C-export",
+      "reason": "Date utility bundled with Calendar; no standalone docs/story by design."
+    },
+    {
+      "component": "start-of-month",
+      "clause": "C-story",
+      "reason": "Date utility bundled with Calendar; no standalone docs/story by design."
+    },
+    {
+      "component": "month-grid",
+      "clause": "C-export",
+      "reason": "Calendar-internal layout helper; documented within the Calendar page."
+    },
+    {
+      "component": "month-grid",
+      "clause": "C-story",
+      "reason": "Calendar-internal layout helper; documented within the Calendar page."
+    },
+    {
+      "component": "month-label",
+      "clause": "C-export",
+      "reason": "Calendar-internal label helper; documented within the Calendar page."
+    },
+    {
+      "component": "month-label",
+      "clause": "C-story",
+      "reason": "Calendar-internal label helper; documented within the Calendar page."
+    },
+    {
+      "component": "calendar-props",
+      "clause": "C-export",
+      "reason": "Shared prop-type helper for Calendar; not a component."
+    },
+    {
+      "component": "calendar-props",
+      "clause": "C-story",
+      "reason": "Shared prop-type helper for Calendar; not a component."
+    },
+    {
+      "component": "range-calendar-props",
+      "clause": "C-export",
+      "reason": "Shared prop-type helper for RangeCalendar; not a component."
+    },
+    {
+      "component": "range-calendar-props",
+      "clause": "C-story",
+      "reason": "Shared prop-type helper for RangeCalendar; not a component."
+    },
+    {
+      "component": "forge-tooltip-content",
+      "clause": "C-export",
+      "reason": "Recharts tooltip-content render helper; documented with ForgeChart."
+    },
+    {
+      "component": "forge-tooltip-content",
+      "clause": "C-story",
+      "reason": "Recharts tooltip-content render helper; documented with ForgeChart."
+    },
+    {
+      "component": "agent-avatar",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/agents.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "agent-identity",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/agents.tsx, ai/persona.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "ai-label-with-popover",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/label.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "artifact-panel",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/artifact.tsx, ai/changelog.tsx, ai/jsx-preview.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "artifact-widget",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/artifact.tsx, ai/jsx-preview.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "ask-user",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/ask.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "attachment",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/prompt-input.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "chart-legend",
+      "clause": "C-export",
+      "reason": "Documented in context on charts/sankey.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "checkbox-card",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"selection-card\"."
+    },
+    {
+      "component": "code",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "code-tree",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "collapsible-code",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "color-picker",
+      "clause": "C-export",
+      "reason": "Documented in context on color-input.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "command-dialog",
+      "clause": "C-export",
+      "reason": "Documented in context on command.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "context-bar",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/changelog.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "context-gauge",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/changelog.tsx, ai/prompt-input.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "copy-button",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "counter",
+      "clause": "C-export",
+      "reason": "Documented in context on data.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "date-input",
+      "clause": "C-export",
+      "reason": "Documented in context on date-picker.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "device-frame",
+      "clause": "C-export",
+      "reason": "Documented in context on mobile/action-button.tsx, mobile/action-sheet.tsx, mobile/avatar.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "diagram",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/mermaid.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "drag-drop-overlay",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/prompt-input.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "drop-zone",
+      "clause": "C-export",
+      "reason": "Documented in context on file-input.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "dropdown-menu",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"menu\"."
+    },
+    {
+      "component": "forge-chart",
+      "clause": "C-export",
+      "reason": "Documented in context on changelog.tsx, charts/area.tsx, charts/bar.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "forge-mark",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "frame",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "health-badge",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/agents.tsx, copy-chip.tsx, idp/agent-card.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "history-group",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/history.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "history-item",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/history.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "history-shell",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"history\"."
+    },
+    {
+      "component": "icons",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "image-view",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/image.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "kbd-row",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "lang-badge",
+      "clause": "C-export",
+      "reason": "Documented in context on badges.tsx, idp/data-table.tsx, surfaces.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "lede",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "math-view",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/math.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "message-actions",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"message\"."
+    },
+    {
+      "component": "model-badge",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/model-selector.tsx, ai/prompt-input.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "model-picker",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"model-selector\"."
+    },
+    {
+      "component": "mono",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "native-select",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"select\"."
+    },
+    {
+      "component": "navigation-menu",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"navigation\"."
+    },
+    {
+      "component": "owner-pill",
+      "clause": "C-export",
+      "reason": "Documented in context on avatars.tsx, idp/data-table.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "password-field",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"password\"."
+    },
+    {
+      "component": "password-input",
+      "clause": "C-export",
+      "reason": "Documented in context on input.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "phone-top",
+      "clause": "C-export",
+      "reason": "Documented in context on mobile/top-navigation.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "prompt-banner",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/changelog.tsx, ai/prompt-input.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "prompt-submit",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/prompt-input.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "props-table",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "prose",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/artifact.tsx, ai/cjk.tsx, ai/code-block.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "prose-code",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/artifact.tsx, ai/code-block.tsx, ai/markdown.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "radio-card",
+      "clause": "C-export",
+      "reason": "Documented in context on radio.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "radio-card-group",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"radio-card\"."
+    },
+    {
+      "component": "radio-group",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"radio\"."
+    },
+    {
+      "component": "range-calendar",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"calendar\"."
+    },
+    {
+      "component": "select-native",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"select\"."
+    },
+    {
+      "component": "severity-pill",
+      "clause": "C-export",
+      "reason": "Documented in context on idp/data-table.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "simple-pagination",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"pagination\"."
+    },
+    {
+      "component": "sources-panel",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"sources\"."
+    },
+    {
+      "component": "sparkline",
+      "clause": "C-export",
+      "reason": "Documented in context on blocks/stat-band.tsx, charts/overview.tsx, data.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "spec-row",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "stat",
+      "clause": "C-export",
+      "reason": "Documented in context on blocks/hero.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "status-bar",
+      "clause": "C-export",
+      "reason": "Documented in context on mobile/cards.tsx, mobile/layout.tsx, mobile/screens.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "sub-head",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "suggestion-card",
+      "clause": "C-export",
+      "reason": "Documented in context on ai/suggestion.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "tabbed-code",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "tier-badge",
+      "clause": "C-export",
+      "reason": "Documented in context on badges.tsx, blocks/page-headers.tsx, copy-chip.tsx; atom/sub-part, not a standalone-page component."
+    },
+    {
+      "component": "toaster",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"notification\"."
+    },
+    {
+      "component": "token-swatch",
+      "clause": "C-export",
+      "reason": "Doc-authoring primitive (docs layer); no standalone product page by design."
+    },
+    {
+      "component": "tool-input",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"tool\"."
+    },
+    {
+      "component": "tool-output",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"tool\"."
+    },
+    {
+      "component": "tool-status",
+      "clause": "C-export",
+      "reason": "Variant/sub-part documented with its base component \"tool\"."
+    },
+    {
+      "component": "date-range",
+      "clause": "C-export",
+      "reason": "Date-range selection is documented on the Calendar page (RangeCalendar); not a standalone component."
+    },
+    {
+      "component": "date-range",
+      "clause": "C-story",
+      "reason": "Date-range selection is documented on the Calendar page (RangeCalendar); not a standalone component."
+    },
+    {
+      "component": "diff-viewer",
+      "clause": "C-autopropstable",
+      "reason": "External @pierre wrapper (React.FC) — gen-props cannot introspect its props; hand table is authoritative."
+    },
+    {
+      "component": "tree-view",
+      "clause": "C-autopropstable",
+      "reason": "External @pierre wrapper (React.FC) — gen-props cannot introspect its props; hand table is authoritative."
+    },
+    {
+      "component": "tree-view",
+      "clause": "C-export",
+      "reason": "Surface reconciliation in flight: docs + story + export binding now name ONE component (ForgeTree, the @pierre/trees wrapper at src/components/pierre-tree.tsx). ForgeTree is not yet re-exported from the @forge/ui index.ts barrel, so check-4-surface-parity cannot resolve the export until the serialized integrator adds the barrel export and re-runs `npm run gen:contract`. Waived (not green) until then.",
+      "expires": "2026-08-31"
+    },
+    {
+      "component": "tree-view",
+      "clause": "C-registry-sync",
+      "reason": "Surface reconciliation in flight: docs/story/export now describe ForgeTree (paths-based @pierre/trees wrapper) while the registry item tree-view + src/forge/tree-view.tsx still ship the original nodes-based @forge/ui TreeView. They are kept as-is to avoid deleting shipped functionality; the integrator must add the ForgeTree registry source and re-run `npm run gen:contract` so registrySrc matches its bound export. Waived (not green) until then.",
+      "expires": "2026-08-31"
+    }
+  ]
+}

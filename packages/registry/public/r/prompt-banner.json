@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prompt-banner",
+  "type": "registry:ui",
+  "title": "Prompt Banner",
+  "description": "Forge Prompt Banner component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/prompt-banner.tsx",
+      "target": "components/forge/prompt-banner.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\ntype PromptBannerTone = 'promo' | 'info' | 'warn' | 'success' | 'danger';\n\nconst TONE_ICON: Record<PromptBannerTone, string> = {\n  promo:   'sparkle',\n  info:    'info',\n  warn:    'alert',\n  success: 'check',\n  danger:  'alert',\n};\n\nconst PromptBanner = ({\n  tone = 'promo',\n  icon,\n  cta,\n  onCtaClick,\n  onDismiss,\n  children,\n}: {\n  /** Tints the icon + CTA. Default \"promo\" (ember). */\n  tone?: PromptBannerTone;\n  /** Override the tone-default icon. Pass an `Icons.*` name. */\n  icon?: string;\n  /** Trailing CTA label (rendered ember). Omit for a message-only ribbon. */\n  cta?: string;\n  /** CTA click handler. */\n  onCtaClick?: () => void;\n  /** When set, shows a × dismiss button after the CTA. */\n  onDismiss?: () => void;\n  /** Banner message. */\n  children: React.ReactNode;\n}) => {\n  const iconName = icon || TONE_ICON[tone];\n  const IconCmp = (Icons as Record<string, any>)[iconName];\n  const toneCls = ' tone-' + tone;\n  // Render as a Fragment so the icon / text / CTA / × become direct flex\n  // children of the `.pi-banner` slot (no extra wrapper div). Tone is set on\n  // each child independently so the icon + CTA can pick up the right tint.\n  return (\n    <>\n      {IconCmp && (\n        <span className={'pi-banner-icon' + toneCls} aria-hidden=\"true\">\n          <IconCmp size={13}/>\n        </span>\n      )}\n      <span className=\"pi-banner-text\">{children}</span>\n      {cta && (\n        <button\n          type=\"button\"\n          className={'pi-banner-cta' + toneCls}\n          onClick={onCtaClick}\n        >\n          {cta}\n        </button>\n      )}\n      {onDismiss && (\n        <button\n          type=\"button\"\n          className=\"pi-banner-x\"\n          onClick={onDismiss}\n          aria-label=\"Dismiss banner\"\n        >\n          <Icons.x size={11}/>\n        </button>\n      )}\n    </>\n  );\n};\n\nexport { PromptBanner };\n"
+    }
+  ]
+}

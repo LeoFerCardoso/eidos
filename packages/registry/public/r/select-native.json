@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "select-native",
+  "type": "registry:ui",
+  "title": "Select Native",
+  "description": "Forge Select Native component.",
+  "registryDependencies": [
+    "forge",
+    "native-select"
+  ],
+  "files": [
+    {
+      "path": "components/forge/select-native.tsx",
+      "target": "components/forge/select-native.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { NativeSelect } from '@/components/forge/native-select';\n\nconst SelectNative = NativeSelect;\n\nexport { SelectNative };\n"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty",
+  "type": "registry:ui",
+  "title": "Empty",
+  "description": "Forge Empty component.",
+  "registryDependencies": [
+    "forge",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/empty.tsx",
+      "target": "components/forge/empty.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\ninterface EmptyProps {\n  /** Size variant. sm = inline/table, md = page section, lg = hero. */\n  size?: 'sm' | 'md' | 'lg';\n  /** Apply the ember accent tint to the icon tile. */\n  accent?: boolean;\n  /** Apply the dotted background pattern to the frame body. */\n  dotted?: boolean;\n  /** Quiet illustrative cue (an icon, not an emoji). Renders inside a tile. */\n  icon?: React.ReactNode;\n  /** Icon name keyed into the global Icons map. Used when passing a ReactNode is inconvenient. */\n  iconName?: string;\n  /** One-line heading. State what is missing — \"No projects yet\". */\n  title?: React.ReactNode;\n  /** Short sentence explaining the state and pointing the user to the next step. */\n  desc?: React.ReactNode;\n  /** Primary action. Pass a ReactNode (Button) or a string for a default ember button. */\n  action?: React.ReactNode | string;\n  /** Optional secondary action. Pass a ReactNode or a string for a default ghost button. */\n  secondary?: React.ReactNode | string;\n  /** Extra content rendered below the actions row — suggestion chips, etc. */\n  children?: React.ReactNode;\n}\n\nconst Empty = ({\n  size,\n  accent,\n  dotted,\n  icon,\n  iconName,\n  title,\n  desc,\n  action,\n  secondary,\n  children,\n}: EmptyProps) => {\n  const sz = size || 'md';\n  const cls = ['empty', sz];\n  if (accent) cls.push('accent');\n  if (dotted) cls.push('dotted');\n\n  let iconNode = icon;\n  if (!iconNode && iconName && Icons && Icons[iconName]) {\n    const I = Icons[iconName];\n    iconNode = <I size={sz === 'lg' ? 22 : sz === 'sm' ? 16 : 18}/>;\n  }\n\n  return (\n    <div className={cls.join(' ')} role=\"status\">\n      {iconNode && <div className=\"empty-icon\">{iconNode}</div>}\n      <div className=\"empty-text\">\n        {title && <div className=\"empty-title\">{title}</div>}\n        {desc && <div className=\"empty-desc\">{desc}</div>}\n      </div>\n      {(action || secondary) && (\n        <div className=\"empty-actions\">\n          {secondary && (typeof secondary === 'string'\n            ? <button className=\"btn ghost\">{secondary}</button>\n            : secondary)}\n          {action && (typeof action === 'string'\n            ? <button className=\"btn ember\">{action}</button>\n            : action)}\n        </div>\n      )}\n      {children}\n    </div>\n  );\n};\n\nexport { Empty };\n"
+    }
+  ]
+}

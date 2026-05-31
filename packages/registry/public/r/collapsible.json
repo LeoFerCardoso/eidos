@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "type": "registry:ui",
+  "title": "Collapsible",
+  "description": "Forge Collapsible component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/collapsible.tsx",
+      "target": "components/forge/collapsible.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\n\ninterface CollapsibleCtx {\n  open: boolean;\n  toggle: () => void;\n  disabled: boolean;\n  triggerId: string;\n  contentId: string;\n}\n\nconst CollapsibleContext = React.createContext<CollapsibleCtx | null>(null);\n\ninterface CollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Controlled open state. Pair with `onOpenChange`. */\n  open?: boolean;\n  /** Called when the open state changes. */\n  onOpenChange?: (open: boolean) => void;\n  /** Initial open state for uncontrolled usage. */\n  defaultOpen?: boolean;\n  /** Prevents interaction. The trigger renders as disabled. */\n  disabled?: boolean;\n  children: React.ReactNode;\n  className?: string;\n}\n\nconst Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(\n  (\n    {\n      open: openProp,\n      onOpenChange,\n      defaultOpen = false,\n      disabled = false,\n      children,\n      className,\n      ...rest\n    },\n    ref,\n  ) => {\n    const isControlled = openProp !== undefined;\n    const [internalOpen, setInternalOpen] = React.useState(defaultOpen);\n    const open = isControlled ? (openProp as boolean) : internalOpen;\n\n    // Stable IDs shared via context so trigger ↔ content wiring always resolves.\n    const reactId = React.useId();\n    const triggerId = `${reactId}-trigger`;\n    const contentId = `${reactId}-content`;\n\n    const toggle = React.useCallback(() => {\n      if (disabled) return;\n      const next = !open;\n      if (!isControlled) setInternalOpen(next);\n      onOpenChange?.(next);\n    }, [disabled, open, isControlled, onOpenChange]);\n\n    const ctx: CollapsibleCtx = React.useMemo(\n      () => ({ open, toggle, disabled, triggerId, contentId }),\n      [open, toggle, disabled, triggerId, contentId],\n    );\n\n    return (\n      <CollapsibleContext.Provider value={ctx}>\n        <div\n          ref={ref}\n          className={cn('coll-root', className)}\n          data-state={open ? 'open' : 'closed'}\n          {...rest}\n        >\n          {children}\n        </div>\n      </CollapsibleContext.Provider>\n    );\n  },\n);\n\nexport { Collapsible };\n"
+    }
+  ]
+}

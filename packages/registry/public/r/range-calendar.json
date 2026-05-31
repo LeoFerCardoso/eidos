@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "range-calendar",
+  "type": "registry:ui",
+  "title": "Range Calendar",
+  "description": "Forge Range Calendar component.",
+  "registryDependencies": [
+    "forge",
+    "range-calendar-props",
+    "calendar",
+    "calendar-props"
+  ],
+  "files": [
+    {
+      "path": "components/forge/range-calendar.tsx",
+      "target": "components/forge/range-calendar.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Calendar } from '@/components/forge/calendar';\nimport { CalendarProps } from '@/components/forge/calendar-props';\nimport { RangeCalendarProps } from '@/components/forge/range-calendar-props';\n\nfunction RangeCalendar({\n  value,\n  defaultValue,\n  onValueChange,\n  onChange,\n  ...rest\n}: RangeCalendarProps) {\n  const emit = onValueChange ?? onChange;\n  return (\n    <Calendar\n      selectionMode=\"range\"\n      value={value}\n      defaultValue={defaultValue}\n      onValueChange={emit as CalendarProps['onValueChange']}\n      {...rest}\n    />\n  );\n}\n\nexport { RangeCalendar };\n"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "forge-mark",
+  "type": "registry:ui",
+  "title": "Forge Mark",
+  "description": "Forge Forge Mark component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/forge-mark.tsx",
+      "target": "components/forge/forge-mark.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst ForgeMark = ({\n  size = 20,\n  variant = 'solid',\n  color = 'var(--ember)',\n  strokeWidth = 1.4,\n  glow = false,\n}) => {\n  // Lucide Flame — verbatim path from lucide-icons (24×24 native).\n  const FLAME_D = \"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\";\n\n  // 4-pointed sparkle — concave-sided star centred at (0,0), unit radius 6.\n  // Scales linearly via the `r/6` factor in each sparkle's transform.\n  const SPARKLE_D = \"M0 -6 C0.5 -2.2 2.2 -0.5 6 0 C2.2 0.5 0.5 2.2 0 6 C-0.5 2.2 -2.2 0.5 -6 0 C-2.2 -0.5 -0.5 -2.2 0 -6 Z\";\n\n  // Place Lucide's natural centre (12, 13) at (16, 17) in the 32-viewBox.\n  const FLAME_TRANSFORM = 'translate(5.8 7) scale(0.85)';\n\n  // Sparkle layout — 3 sparkles, hugging the flame edges.\n  // Large top-right is the brand accent. The two smalls match radius.\n  const SPARKLES = [\n    { tx: 25,   ty: 10,   r: 3.0 },  // ① top-right — LARGE\n    { tx: 8,    ty: 10,   r: 1.6 },  // ② top-left  — small\n    { tx: 24,   ty: 23.5, r: 1.6 },  // ③ bottom-right — small\n  ];\n\n  const style = glow\n    ? { filter: 'drop-shadow(0 0 10px rgba(255,107,53,0.55))' }\n    : undefined;\n\n  const sparklePath = (s, i, extra = {}) => (\n    <path key={i} d={SPARKLE_D}\n          transform={`translate(${s.tx} ${s.ty}) scale(${(s.r / 6).toFixed(4)})`}\n          {...extra}/>\n  );\n\n  if (variant === 'outline') {\n    return (\n      <svg width={size} height={size} viewBox=\"0 0 32 32\" fill=\"none\"\n           stroke={color} strokeWidth={strokeWidth}\n           strokeLinecap=\"round\" strokeLinejoin=\"round\"\n           style={style} aria-label=\"Forge\">\n        <path d={FLAME_D} transform={FLAME_TRANSFORM}/>\n        {SPARKLES.map((s, i) => sparklePath(s, i))}\n      </svg>\n    );\n  }\n\n  if (variant === 'expressive') {\n    // Hero / splash. Flame in saturated ember, sparkles in ember-light\n    // so the flame still anchors the composition.\n    const flameFill = '#FF6B35';\n    const sparkleFill = '#FFB07F';\n    return (\n      <svg width={size} height={size} viewBox=\"0 0 32 32\" fill=\"none\"\n           style={style} aria-label=\"Forge\">\n        <path d={FLAME_D} transform={FLAME_TRANSFORM} fill={flameFill}/>\n        {SPARKLES.map((s, i) => sparklePath(s, i, { fill: sparkleFill }))}\n      </svg>\n    );\n  }\n\n  // solid (default)\n  return (\n    <svg width={size} height={size} viewBox=\"0 0 32 32\" fill=\"none\"\n         style={style} aria-label=\"Forge\">\n      <path d={FLAME_D} transform={FLAME_TRANSFORM} fill={color}/>\n      {SPARKLES.map((s, i) => sparklePath(s, i, { fill: color }))}\n    </svg>\n  );\n};\n\nexport { ForgeMark };\n"
+    }
+  ]
+}

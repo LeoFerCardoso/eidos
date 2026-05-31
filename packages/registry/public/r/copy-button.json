@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "copy-button",
+  "type": "registry:ui",
+  "title": "Copy Button",
+  "description": "Forge Copy Button component.",
+  "registryDependencies": [
+    "forge",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/copy-button.tsx",
+      "target": "components/forge/copy-button.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\nconst CopyButton = ({ text, label = 'Copy' }: { text?: string; label?: string }) => {\n  const [ok, setOk] = React.useState(false);\n  const onClick = async () => {\n    try { await navigator.clipboard.writeText(text); }\n    catch(e) {\n      const ta = document.createElement('textarea');\n      ta.value = text; document.body.appendChild(ta); ta.select();\n      try { document.execCommand('copy'); } catch(e2){}\n      ta.remove();\n    }\n    setOk(true); setTimeout(()=>setOk(false), 1400);\n  };\n  return (\n    <button className={'copy-btn' + (ok?' ok':'')} onClick={onClick} aria-label=\"Copy code\">\n      {ok ? <Icons.check size={12}/> : <Icons.copy size={12}/>}\n      {ok ? 'Copied' : label}\n    </button>\n  );\n};\n\nexport { CopyButton };\n"
+    }
+  ]
+}

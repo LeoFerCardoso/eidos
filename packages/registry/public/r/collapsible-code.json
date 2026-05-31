@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible-code",
+  "type": "registry:ui",
+  "title": "Collapsible Code",
+  "description": "Forge Collapsible Code component.",
+  "registryDependencies": [
+    "forge",
+    "code",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/collapsible-code.tsx",
+      "target": "components/forge/collapsible-code.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Code } from '@/components/forge/code';\nimport { Icons } from '@/components/forge/icons';\n\nconst COLLAPSE_THRESHOLD = 8;\n\nconst countLines = (src) => String(src).replace(/^\\n+|\\s+$/g, '').split('\\n').length;\n\nconst CollapsibleCode = ({ code, lang = 'jsx' }: { code?: string; lang?: string }) => {\n  const collapsible = countLines(code) > COLLAPSE_THRESHOLD;\n  const [expanded, setExpanded] = React.useState(false);\n  if (!collapsible) return <Code lang={lang}>{code}</Code>;\n  return (\n    <div className=\"ds-code-collapse\" data-expanded={expanded ? 'true' : 'false'}>\n      <div className=\"ds-code-clip\">\n        <Code lang={lang}>{code}</Code>\n        {!expanded && <div className=\"ds-code-fade\" aria-hidden=\"true\"/>}\n      </div>\n      <div className=\"ds-code-toggle-row\">\n        <button\n          type=\"button\"\n          className=\"ds-code-toggle\"\n          onClick={() => setExpanded(v => !v)}\n          aria-expanded={expanded}\n        >\n          {expanded ? 'Hide code' : 'Show code'}\n          <Icons.chevronDown size={10}/>\n        </button>\n      </div>\n    </div>\n  );\n};\n\nexport { CollapsibleCode };\n"
+    }
+  ]
+}

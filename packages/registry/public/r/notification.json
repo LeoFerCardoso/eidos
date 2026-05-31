@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "notification",
+  "type": "registry:ui",
+  "title": "Notification",
+  "description": "Forge Notification component.",
+  "registryDependencies": [
+    "forge",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/notification.tsx",
+      "target": "components/forge/notification.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\nimport { Icons } from '@/components/forge/icons';\n\ninterface ToastAction {\n  label: string;\n  onClick?: () => void;\n}\n\ntype NotificationTone = 'default' | 'info' | 'success' | 'warning' | 'danger';\n\ninterface NotificationProps {\n  /** Semantic tone — icon + accent bar colour. */\n  tone?: NotificationTone;\n  /** Bold heading line. */\n  title?: React.ReactNode;\n  /** Supporting body text. */\n  description?: React.ReactNode;\n  /** Optional inline CTA button. */\n  action?: ToastAction;\n  /** Render a dismiss button. Pass the handler to make it functional. */\n  onDismiss?: () => void;\n  /** aria-label for the dismiss button. */\n  dismissLabel?: string;\n  /** Extra classes on the root element. */\n  className?: string;\n  children?: React.ReactNode;\n}\n\nconst NTF_ICONS: Record<NotificationTone, React.ComponentType<{ size?: number; className?: string }>> = {\n  default: Icons.bell,\n  info:    Icons.info,\n  success: Icons.check,\n  warning: Icons.alert,\n  danger:  Icons.x,\n};\n\nconst Notification = React.forwardRef<HTMLDivElement, NotificationProps>(\n  (\n    {\n      tone = 'default',\n      title,\n      description,\n      action,\n      onDismiss,\n      dismissLabel = 'Dismiss',\n      className,\n      children,\n    },\n    ref,\n  ) => {\n    const Icon = NTF_ICONS[tone];\n    const isAssertive = tone === 'danger' || tone === 'warning';\n\n    return (\n      <div\n        ref={ref}\n        className={cn('ntf', tone !== 'default' && tone, className)}\n        role={isAssertive ? 'alert' : 'status'}\n        aria-live={isAssertive ? 'assertive' : 'polite'}\n        aria-atomic=\"true\"\n      >\n        <Icon size={16} className=\"ntf-icon\" />\n        <div className=\"ntf-body\">\n          {title && <div className=\"ntf-title\">{title}</div>}\n          {description && <div className=\"ntf-desc\">{description}</div>}\n          {children}\n        </div>\n        {action && (\n          <button\n            type=\"button\"\n            className=\"ntf-action\"\n            onClick={action.onClick}\n          >\n            {action.label}\n          </button>\n        )}\n        {onDismiss && (\n          <button\n            type=\"button\"\n            className=\"ntf-close\"\n            aria-label={dismissLabel}\n            onClick={onDismiss}\n          >\n            <Icons.x size={14} />\n          </button>\n        )}\n      </div>\n    );\n  },\n);\n\nexport { Notification };\n"
+    }
+  ]
+}

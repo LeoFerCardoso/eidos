@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mono",
+  "type": "registry:ui",
+  "title": "Mono",
+  "description": "Forge Mono component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/mono.tsx",
+      "target": "components/forge/mono.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst Mono = ({ children }: { children?: React.ReactNode }) => (\n  <code style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', color: 'var(--ember)' }}>{children}</code>\n);\n\nexport { Mono };\n"
+    }
+  ]
+}

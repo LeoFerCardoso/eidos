@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "json-inspector",
+  "type": "registry:ui",
+  "title": "Json Inspector",
+  "description": "Forge Json Inspector component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/json-inspector.tsx",
+      "target": "components/forge/json-inspector.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);\n\nconst renderValue = (v, path, expanded, toggle, depth) => {\n  if (v === null) return <span className=\"json-null\">null</span>;\n  if (typeof v === 'string') return <span className=\"json-str\">\"{v}\"</span>;\n  if (typeof v === 'number') return <span className=\"json-num\">{String(v)}</span>;\n  if (typeof v === 'boolean') return <span className=\"json-bool\">{String(v)}</span>;\n  if (Array.isArray(v)) {\n    const open = expanded[path] !== false;\n    if (v.length === 0) return <span className=\"json-bracket\">[]</span>;\n    return (\n      <>\n        <button type=\"button\" className=\"json-toggle\" onClick={() => toggle(path)} aria-expanded={open}>\n          <span className=\"json-bracket\">{open ? '[' : `[ … ${v.length} ]`}</span>\n        </button>\n        {open && (\n          <ul className=\"json-list\">\n            {v.map((item, i) => (\n              <li key={i}><span className=\"json-key\">{i}:</span> {renderValue(item, path + '.' + i, expanded, toggle, depth + 1)}</li>\n            ))}\n          </ul>\n        )}\n        {open && <span className=\"json-bracket\">]</span>}\n      </>\n    );\n  }\n  if (isObj(v)) {\n    const keys = Object.keys(v);\n    const open = expanded[path] !== false;\n    if (keys.length === 0) return <span className=\"json-bracket\">{'{}'}</span>;\n    return (\n      <>\n        <button type=\"button\" className=\"json-toggle\" onClick={() => toggle(path)} aria-expanded={open}>\n          <span className=\"json-bracket\">{open ? '{' : `{ … ${keys.length} }`}</span>\n        </button>\n        {open && (\n          <ul className=\"json-list\">\n            {keys.map(k => (\n              <li key={k}><span className=\"json-key\">\"{k}\":</span> {renderValue(v[k], path + '.' + k, expanded, toggle, depth + 1)}</li>\n            ))}\n          </ul>\n        )}\n        {open && <span className=\"json-bracket\">{'}'}</span>}\n      </>\n    );\n  }\n  return <span>{String(v)}</span>;\n};\n\nconst JSONInspector = ({ data, defaultCollapsedPaths = [] }: {\n  /** JSON-serializable value to render (object, array, or primitive). */\n  data?: any;\n  /** Paths that start collapsed. Syntax: $.deploy.rings — use to hide verbose branches on load. */\n  defaultCollapsedPaths?: string[];\n}) => {\n  const init = React.useMemo(() => {\n    const o = {}; defaultCollapsedPaths.forEach(p => { o[p] = false; }); return o;\n  }, [defaultCollapsedPaths.join('|')]);\n  const [expanded, setExpanded] = React.useState(init);\n  const toggle = (p) => setExpanded(prev => ({ ...prev, [p]: !(prev[p] !== false) }));\n  return (\n    <div className=\"json-inspector\">\n      {renderValue(data, '$', expanded, toggle, 0)}\n    </div>\n  );\n};\n\nexport { JSONInspector };\n"
+    }
+  ]
+}

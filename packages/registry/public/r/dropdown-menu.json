@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dropdown-menu",
+  "type": "registry:ui",
+  "title": "Dropdown Menu",
+  "description": "Forge Dropdown Menu component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/dropdown-menu.tsx",
+      "target": "components/forge/dropdown-menu.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ninterface DropdownMenuProps {\n  /** Controlled open state. */\n  open?: boolean;\n  /** Called when the menu opens or closes. */\n  onOpenChange?: (open: boolean) => void;\n  /** Uncontrolled initial state. */\n  defaultOpen?: boolean;\n  /** Reading direction; inherits from the nearest [dir] ancestor when omitted. */\n  dir?: 'ltr' | 'rtl';\n  children: React.ReactNode;\n}\n\ninterface MenuCtx {\n  open: boolean;\n  setOpen: (v: boolean) => void;\n  triggerRef: React.RefObject<HTMLButtonElement | null>;\n  dir: 'ltr' | 'rtl';\n  // Roving tabindex — only one item owns tabindex=0 at a time.\n  activeId: string | null;\n  setActiveId: (id: string | null) => void;\n}\n\nconst MenuContext = React.createContext<MenuCtx | null>(null);\n\nconst resolveDir = (el: HTMLElement | null): 'ltr' | 'rtl' => {\n  let node: HTMLElement | null = el;\n  while (node) {\n    const d = node.getAttribute('dir');\n    if (d === 'rtl') return 'rtl';\n    if (d === 'ltr') return 'ltr';\n    node = node.parentElement;\n  }\n  return 'ltr';\n};\n\nconst DropdownMenu: React.FC<DropdownMenuProps> = ({\n  open: openProp,\n  onOpenChange,\n  defaultOpen = false,\n  dir: dirProp,\n  children,\n}) => {\n  const isControlled = openProp !== undefined;\n  const [internalOpen, setInternalOpen] = React.useState(defaultOpen);\n  const open = isControlled ? openProp! : internalOpen;\n\n  const triggerRef = React.useRef<HTMLButtonElement | null>(null);\n  const [activeId, setActiveId] = React.useState<string | null>(null);\n  const [dir, setDir] = React.useState<'ltr' | 'rtl'>(dirProp ?? 'ltr');\n\n  React.useLayoutEffect(() => {\n    if (!dirProp && triggerRef.current) {\n      setDir(resolveDir(triggerRef.current));\n    } else if (dirProp) {\n      setDir(dirProp);\n    }\n  }, [dirProp]);\n\n  const setOpen = React.useCallback(\n    (v: boolean) => {\n      if (!isControlled) setInternalOpen(v);\n      onOpenChange?.(v);\n    },\n    [isControlled, onOpenChange],\n  );\n\n  return (\n    <MenuContext.Provider value={{ open, setOpen, triggerRef, dir, activeId, setActiveId }}>\n      {children}\n    </MenuContext.Provider>\n  );\n};\n\nexport { DropdownMenu };\n"
+    }
+  ]
+}

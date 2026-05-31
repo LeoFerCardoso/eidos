@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "file-input",
+  "type": "registry:ui",
+  "title": "File Input",
+  "description": "Forge File Input component.",
+  "registryDependencies": [
+    "forge",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/file-input.tsx",
+      "target": "components/forge/file-input.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\ninterface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type' | 'title' | 'value'> {\n  /** Field label rendered above the drop zone. */\n  label?: React.ReactNode;\n  /** Headline inside the drop zone. */\n  title?: React.ReactNode;\n  /** Sub-line shown below the title (e.g. accepted types / max size). Alias: `helpText`. */\n  meta?: React.ReactNode;\n  /**\n   * Override the auto-generated sub-line below the title.\n   * Alias for `meta` — preferred in the public API.\n   */\n  helpText?: React.ReactNode;\n  /**\n   * Compact single-row layout — less vertical space, ideal for dense forms.\n   * @default false\n   */\n  compact?: boolean;\n  /** Error message — renders below the drop zone in the danger tone. */\n  error?: React.ReactNode;\n  /**\n   * Fires when files are dropped or picked via the file dialog (FileList).\n   * For the public `File[]` API use `onFilesChange`.\n   */\n  onFiles?: (files: FileList) => void;\n  /**\n   * Fires when files are added. Receives the selected files as a `File[]` array.\n   * Docs-API alias — the implementation wraps `onFiles`.\n   */\n  onFilesChange?: (files: File[]) => void;\n  /**\n   * Maximum byte size per file. Files over the limit should be rejected by the\n   * consumer (the component itself does not validate — wire this in `onFilesChange`).\n   */\n  maxSize?: number;\n  /**\n   * Controlled file list. Pair with `onFilesChange` for a fully controlled component.\n   */\n  value?: File[];\n}\n\nfunction FileInput({ label, title = 'Click to upload or drag & drop', meta, helpText, compact = false, error, onFiles, onFilesChange, maxSize, value: _value, id, className = '', onChange, disabled, ...rest }: FileInputProps) {\n  const reactId = React.useId();\n  const fid = id || reactId;\n  const [dragging, setDragging] = React.useState(false);\n  return (\n    <div className=\"in-field\">\n      {label && <label className=\"in-label\" htmlFor={fid}>{label}</label>}\n      <label\n        className={`in-drop${compact ? ' compact' : ''}${dragging ? ' is-dragging' : ''}${error ? ' is-invalid' : ''} ${className}`.trim()}\n        htmlFor={fid}\n        onDragOver={(e) => { e.preventDefault(); if (!disabled) setDragging(true); }}\n        onDragLeave={() => setDragging(false)}\n        onDrop={(e) => { e.preventDefault(); setDragging(false); if (!disabled && e.dataTransfer.files.length) onFiles?.(e.dataTransfer.files); }}\n      >\n        <span className=\"in-drop-icon\"><Icons.upload size={compact ? 16 : 18} /></span>\n        <div style={{ flex: compact ? 1 : undefined }}>\n          <div className=\"in-drop-title\">{title}</div>\n          {(meta ?? helpText) && <div className=\"in-drop-meta\">{meta ?? helpText}</div>}\n        </div>\n        <input\n          id={fid}\n          type=\"file\"\n          disabled={disabled}\n          aria-invalid={error ? true : undefined}\n          onChange={(e) => {\n            if (e.target.files?.length) {\n              onFiles?.(e.target.files);\n              onFilesChange?.(Array.from(e.target.files));\n            }\n            onChange?.(e);\n          }}\n          {...rest}\n        />\n      </label>\n      {error && <span className=\"in-helprow\"><span className=\"in-error\">{error}</span></span>}\n    </div>\n  );\n}\n\nexport { FileInput };\n"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "transcription",
+  "type": "registry:ui",
+  "title": "Transcription",
+  "description": "Forge Transcription component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai"
+  ],
+  "files": [
+    {
+      "path": "components/forge/transcription.tsx",
+      "target": "components/forge/transcription.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ninterface TranscriptTurn {\n  id: string;\n  speaker: string;\n  text: string;\n  time?: string;            // pre-formatted display string\n  confidence?: number;      // 0..1\n  /** Initials override for the speaker chip. */\n  initials?: string;\n  /** \"user\" tints the chip ember; \"agent\" tints neutral by default. */\n  side?: 'user' | 'agent';\n}\n\nconst Transcription = ({\n  turns = [], showTime = true, showConfidence = false, className,\n}: {\n  /** Ordered array of turns. The component renders each as a list item in an ol role=\"log\". */\n  turns?: TranscriptTurn[];\n  /** When true, renders the turn's time field in Geist Mono if provided. */\n  showTime?: boolean;\n  /** When true, renders a confidence percentage chip (colour-coded by accuracy tier) if available. */\n  showConfidence?: boolean;\n  /** Extra class names on the root ol. */\n  className?: string;\n}) => (\n  <ol className={'ai-transcript' + (className ? ' ' + className : '')} role=\"log\" aria-label=\"Transcript\">\n    {turns.map((t) => (\n      <li key={t.id} className={'ai-transcript-turn' + (t.side === 'user' ? ' is-user' : '')}>\n        <span className=\"ai-transcript-chip\">{t.initials || t.speaker.slice(0, 1)}</span>\n        <div className=\"ai-transcript-text\">\n          <div className=\"ai-transcript-meta\">\n            <span className=\"ai-transcript-speaker\">{t.speaker}</span>\n            {showTime && t.time && <span className=\"ai-transcript-time\">{t.time}</span>}\n            {showConfidence && typeof t.confidence === 'number' && (\n              <span className={'ai-transcript-conf' + (t.confidence < 0.7 ? ' is-low' : t.confidence < 0.9 ? ' is-mid' : ' is-high')}>{Math.round(t.confidence * 100)}%</span>\n            )}\n          </div>\n          <p className=\"ai-transcript-line\">{t.text}</p>\n        </div>\n      </li>\n    ))}\n  </ol>\n);\n\nexport { Transcription };\n"
+    }
+  ]
+}

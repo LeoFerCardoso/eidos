@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "type": "registry:ui",
+  "title": "Label",
+  "description": "Forge Label component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/label.tsx",
+      "target": "components/forge/label.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\n\ninterface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {\n  /**\n   * ID of the associated control. Clicking/tapping the label focuses the\n   * control (native <label> behaviour — no JS needed).\n   */\n  htmlFor?: string;\n  /**\n   * Renders an ember asterisk (aria-hidden) + a visually-hidden \"required\"\n   * span so screen readers announce it. Mutually exclusive with `optional`.\n   */\n  required?: boolean;\n  /**\n   * Appends a muted \"(optional)\" suffix in `--fg-faint`.\n   * Mutually exclusive with `required` — pick one convention per form.\n   */\n  optional?: boolean;\n  /**\n   * Size variant.\n   * - `md` (default) — 13px, standard form label.\n   * - `sm`           — 11px, compact/nested label.\n   */\n  size?: 'sm' | 'md';\n  /**\n   * Dims the label to match a disabled control.\n   * You can also set the `data-disabled` attribute directly.\n   */\n  disabled?: boolean;\n  /** Field name. Use a noun, sentence case. Never a question or imperative. */\n  children: React.ReactNode;\n  /** Extra utility classes merged via cn(). */\n  className?: string;\n}\n\nconst Label = React.forwardRef<HTMLLabelElement, LabelProps>(\n  (\n    {\n      required = false,\n      optional = false,\n      size = 'md',\n      disabled = false,\n      children,\n      className,\n      ...rest\n    },\n    ref,\n  ) => (\n    <label\n      ref={ref}\n      data-disabled={disabled || undefined}\n      className={cn(\n        'in-label',\n        size === 'sm' && 'sm',\n        (disabled) && 'is-disabled',\n        className,\n      )}\n      {...rest}\n    >\n      {children}\n\n      {/* Required: ember asterisk (decorative) + sr-only text */}\n      {required && !optional && (\n        <>\n          <span className=\"required-mark\" aria-hidden=\"true\">*</span>\n          <span className=\"sr-only\">required</span>\n        </>\n      )}\n\n      {/* Optional: muted suffix — do not use alongside required */}\n      {optional && !required && (\n        <span className=\"opt\">(optional)</span>\n      )}\n    </label>\n  ),\n);\n\nexport { Label };\n"
+    }
+  ]
+}

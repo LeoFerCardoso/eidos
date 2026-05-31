@@ -1,0 +1,30 @@
+{
+  "version": "0.2",
+  "language": "en,pt,pt_BR",
+  "caseSensitive": false,
+  "words": [
+    "forge",
+    "ember",
+    "Geist",
+    "Equifax",
+    "tokens",
+    "ds",
+    "jsx",
+    "harness",
+    "skill",
+    "skills",
+    "frontmatter",
+    "Anatomy",
+    "nav",
+    "boot",
+    "Babel",
+    "Recharts",
+    "kbd",
+    "combobox",
+    "popover",
+    "sidesheet",
+    "menubar",
+    "slop"
+  ],
+  "ignoreRegExpList": ["/[\\u00C0-\\u024F]+/"]
+}

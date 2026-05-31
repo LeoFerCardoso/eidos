@@ -1,0 +1,40 @@
+/* Tailwind v4 entry for the NEW idiomatic DS (Phase 0).
+ *
+ * Preflight is intentionally OMITTED (we import only theme + utilities layers) so
+ * Tailwind's base reset does NOT regress the legacy DS pages, which rely on
+ * tokens.css/ds.css resets. New components use Tailwind utilities mapped to the Forge
+ * tokens; legacy pages are untouched.
+ *
+ * `@theme inline` keeps the var() reference in the generated utility, so utilities like
+ * `bg-surface` resolve to the live, theme-aware token value at runtime (dark/light). */
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme inline {
+  /* Forge tokens → Tailwind color utilities (bg-surface, text-fg-muted, border-border, …) */
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-overlay: var(--surface-overlay);
+  --color-surface-active: var(--surface-active);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-fg-faint: var(--fg-faint);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ember: var(--ember);
+  --color-ember-soft: var(--ember-soft);
+  --color-ice: var(--ice);
+  --color-violet: var(--violet);
+
+  /* Fonts (match tokens.css; literal to avoid self-reference) */
+  --font-sans: 'Geist', 'Inter', -apple-system, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Radius scale (shadcn convention) */
+  --radius: 0.625rem;
+}

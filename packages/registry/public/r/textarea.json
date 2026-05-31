@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "type": "registry:ui",
+  "title": "Textarea",
+  "description": "Forge Textarea component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/textarea.tsx",
+      "target": "components/forge/textarea.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ntype Size = 'sm' | 'md' | 'lg';\n\ninterface TextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> {\n  /** Field label rendered above the control. */\n  label?: React.ReactNode;\n  /** Helper text under the control (hidden when `error` is set). */\n  help?: React.ReactNode;\n  /** Error message — sets aria-invalid and renders in the danger tone. */\n  error?: React.ReactNode;\n  /** Show a live character counter (requires maxLength). */\n  showCount?: boolean;\n  /**\n   * Padding / font-size scale — matches the .in-group size modifier.\n   * @default \"md\"\n   */\n  size?: Size;\n  /**\n   * Paints the danger ring around the group. Pair with aria-describedby.\n   * @default false\n   */\n  invalid?: boolean;\n}\n\nfunction Textarea({ label, help, error, showCount, id, className = '', maxLength, value, defaultValue, onChange, ...rest }: TextareaProps) {\n  const reactId = React.useId();\n  const fid = id || reactId;\n  const [len, setLen] = React.useState(String(value ?? defaultValue ?? '').length);\n  const describedBy = error ? `${fid}-err` : help ? `${fid}-help` : undefined;\n  return (\n    <div className=\"in-field\">\n      {label && <label className=\"in-label\" htmlFor={fid}>{label}</label>}\n      <span className={`in-group${error ? ' is-invalid' : ''}`} aria-invalid={error ? true : undefined}>\n        <textarea\n          id={fid}\n          className={`in-control ${className}`.trim()}\n          maxLength={maxLength}\n          value={value}\n          defaultValue={defaultValue}\n          aria-invalid={error ? true : undefined}\n          aria-describedby={describedBy}\n          onChange={(e) => { setLen(e.target.value.length); onChange?.(e); }}\n          {...rest}\n        />\n      </span>\n      {(help || error || showCount) && (\n        <span className=\"in-helprow\">\n          {error\n            ? <span className=\"in-error\" id={`${fid}-err`}>{error}</span>\n            : <span className=\"in-help\" id={`${fid}-help`}>{help}</span>}\n          {showCount && maxLength != null && <span className=\"in-counter\">{len}/{maxLength}</span>}\n        </span>\n      )}\n    </div>\n  );\n}\n\nexport { Textarea };\n"
+    }
+  ]
+}

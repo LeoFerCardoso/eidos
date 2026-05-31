@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "counter",
+  "type": "registry:ui",
+  "title": "Counter",
+  "description": "Forge Counter component.",
+  "registryDependencies": [
+    "forge",
+    "count-up"
+  ],
+  "files": [
+    {
+      "path": "components/forge/counter.tsx",
+      "target": "components/forge/counter.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { CountUp } from '@/components/forge/count-up';\n\nconst Counter = CountUp;\n\nexport { Counter };\n"
+    }
+  ]
+}

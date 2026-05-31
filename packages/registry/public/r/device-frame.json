@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "device-frame",
+  "type": "registry:ui",
+  "title": "Device Frame",
+  "description": "Forge Device Frame component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/device-frame.tsx",
+      "target": "components/forge/device-frame.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ntype Device = {\n  id: string; label: string; w: number; h: number; radius: number;\n  notch?: 'island' | 'punch' | 'none';\n};\n\nconst DEVICES: Device[] = [\n  { id: 'iphone-15-pro',     label: 'iPhone 15 Pro',     w: 393, h: 852, radius: 56, notch: 'island' },\n  { id: 'iphone-16-pro-max', label: 'iPhone 16 Pro Max', w: 440, h: 956, radius: 62, notch: 'island' },\n  { id: 'iphone-se',         label: 'iPhone SE',         w: 375, h: 667, radius: 30, notch: 'none' },\n  { id: 'pixel-8',           label: 'Pixel 8',           w: 412, h: 915, radius: 42, notch: 'punch' },\n  { id: 'galaxy-s24',        label: 'Galaxy S24',        w: 360, h: 780, radius: 44, notch: 'punch' },\n];\n\nfunction DeviceFrame({\n  children,\n  initial = 'iphone-15-pro',\n  maxHeight = 600,\n  bare = false,\n}: {\n  children?: React.ReactNode;\n  initial?: string;\n  maxHeight?: number;\n  /** Hide the device picker toolbar (e.g. when used as a static hero visual). */\n  bare?: boolean;\n}) {\n  const [id, setId] = React.useState(initial);\n  const dev = DEVICES.find((d) => d.id === id) || DEVICES[0];\n  const scale = Math.min(1, maxHeight / dev.h);\n\n  return (\n    <div className=\"device-stage\">\n      {!bare && (\n        <div className=\"device-toolbar\">\n          <div className=\"device-select-wrap\">\n            <select className=\"device-select\" value={id} onChange={(e) => setId(e.target.value)} aria-label=\"Preview device\">\n              {DEVICES.map((d) => (\n                <option key={d.id} value={d.id}>{d.label}</option>\n              ))}\n            </select>\n            <svg className=\"device-select-caret\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" aria-hidden=\"true\">\n              <polyline points=\"6 9 12 15 18 9\" />\n            </svg>\n          </div>\n          <span className=\"device-dims t-mono\">{dev.w} × {dev.h}</span>\n        </div>\n      )}\n\n      <div className=\"device-scaler\" style={{ width: dev.w * scale, height: dev.h * scale }}>\n        <div\n          className=\"device\"\n          style={{ width: dev.w, height: dev.h, borderRadius: dev.radius, transform: `scale(${scale})`, transformOrigin: 'top left' }}\n        >\n          {dev.notch === 'island' && (\n            <span className=\"device-island\" aria-hidden=\"true\"><i className=\"device-cam\" /></span>\n          )}\n          {dev.notch === 'punch' && <span className=\"device-punch\" aria-hidden=\"true\" />}\n          <div className=\"device-screen\" style={{ borderRadius: Math.max(0, dev.radius - 10) }}>\n            {children}\n            <span className=\"device-home\" aria-hidden=\"true\" />\n          </div>\n        </div>\n      </div>\n    </div>\n  );\n}\n\nexport { DeviceFrame };\n"
+    }
+  ]
+}

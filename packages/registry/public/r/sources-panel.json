@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sources-panel",
+  "type": "registry:ui",
+  "title": "Sources Panel",
+  "description": "Forge Sources Panel component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "sources"
+  ],
+  "files": [
+    {
+      "path": "components/forge/sources-panel.tsx",
+      "target": "components/forge/sources-panel.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Sources } from '@/components/forge/sources';\n\nconst SourcesPanel = Sources;\n\nexport { SourcesPanel };\n"
+    }
+  ]
+}

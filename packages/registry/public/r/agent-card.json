@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "agent-card",
+  "type": "registry:ui",
+  "title": "Agent Card",
+  "description": "Forge Agent Card component.",
+  "registryDependencies": [
+    "forge",
+    "icons",
+    "health-badge",
+    "relative-time"
+  ],
+  "files": [
+    {
+      "path": "components/forge/agent-card.tsx",
+      "target": "components/forge/agent-card.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { HealthBadge } from '@/components/forge/health-badge';\nimport { Icons } from '@/components/forge/icons';\nimport { RelativeTime } from '@/components/forge/relative-time';\n\ntype AgentData = {\n  name?: string;\n  model?: string;\n  status?: 'up' | 'degraded' | 'down' | 'unknown' | string;\n  summary?: string;\n  capabilities?: string[];\n  calls?: number;\n  successRate?: number;\n  lastRun?: string | number | Date;\n};\n\nconst AgentCard = ({ agent, onOpen }: {\n  /** Agent record — name, model, status, summary, capabilities, calls, successRate, lastRun. */\n  agent?: AgentData;\n  /** Click handler. Wires the tile as a button (Enter / Space). */\n  onOpen?: () => void;\n}) => {\n  if (!agent) return null;\n  const stats = [];\n  if (agent.calls != null) stats.push(<span key=\"c\"><span className=\"v\">{agent.calls.toLocaleString()}</span> runs</span>);\n  if (agent.successRate != null) stats.push(<span key=\"s\"><span className=\"v\">{agent.successRate}%</span> success</span>);\n  return (\n    <div className=\"agent-card\" role={onOpen ? 'button' : undefined} tabIndex={onOpen ? 0 : undefined}\n         onClick={onOpen} onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && onOpen) onOpen(); }}>\n      <div className=\"ac-head\">\n        <span className=\"ac-avatar\"><Icons.agent size={20}/></span>\n        <div className=\"ac-id\">\n          <span className=\"ac-name\">{agent.name}</span>\n          {agent.model && <span className=\"ac-model\">{agent.model}</span>}\n        </div>\n        {agent.status && <HealthBadge state={agent.status as 'up' | 'degraded' | 'down' | 'unknown'}/>}\n      </div>\n      {agent.summary && <div className=\"ac-summary\">{agent.summary}</div>}\n      {agent.capabilities && agent.capabilities.length > 0 && (\n        <div className=\"ac-caps\">\n          {agent.capabilities.slice(0, 5).map((c) => <span key={c} className=\"chip\">{c}</span>)}\n        </div>\n      )}\n      {(stats.length > 0 || agent.lastRun) && (\n        <div className=\"ac-foot\">\n          <span className=\"ac-stats\">\n            {stats.map((s, i) => (\n              <React.Fragment key={i}>\n                {i > 0 && <span className=\"sep\">·</span>}\n                {s}\n              </React.Fragment>\n            ))}\n          </span>\n          {agent.lastRun && <span className=\"ac-time\"><RelativeTime value={agent.lastRun}/></span>}\n        </div>\n      )}\n    </div>\n  );\n};\n\nexport { AgentCard };\n"
+    }
+  ]
+}

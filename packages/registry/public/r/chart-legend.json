@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chart-legend",
+  "type": "registry:ui",
+  "title": "Chart Legend",
+  "description": "Forge Chart Legend component.",
+  "dependencies": [
+    "recharts"
+  ],
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/chart-legend.tsx",
+      "target": "components/forge/chart-legend.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst ChartLegend = ({ items }: { items: { label: string; color?: string }[] }) => (\n  <ul className=\"forge-legend\">\n    {items.map((it, i) => (\n      <li key={i}>\n        <span className=\"legend-dot\" style={{ background: it.color }}/>\n        <span className=\"legend-label\">{it.label}</span>\n      </li>\n    ))}\n  </ul>\n);\n\nexport { ChartLegend };\n"
+    }
+  ]
+}

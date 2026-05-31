@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:ui",
+  "title": "Badge",
+  "description": "Forge Badge component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/badge.tsx",
+      "target": "components/forge/badge.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\n\ntype BadgeTone = 'neutral' | 'new' | 'ice' | 'success' | 'warning' | 'danger';\n\ninterface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** Tone — maps to .badge.<tone> CSS. Defaults to neutral. */\n  tone?: BadgeTone;\n  /** Size — sm 14px / md 18px / lg 22px. Defaults to md. */\n  size?: 'sm' | 'md' | 'lg';\n  /** Renders the dot variant (presence indicator, no text). */\n  dot?: boolean;\n  /** Hugs the trailing edge of a flex nav row (margin-inline-start: auto). */\n  pushEnd?: boolean;\n  children?: React.ReactNode;\n  className?: string;\n}\n\nconst Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(\n  (\n    { tone = 'neutral', size, dot = false, pushEnd = false, children, className, ...rest },\n    ref,\n  ) => (\n    <span\n      ref={ref}\n      className={cn(\n        'badge',\n        tone !== 'neutral' && tone,\n        size && size !== 'md' && size,\n        dot && 'dot',\n        pushEnd && 'push-end',\n        className,\n      )}\n      {...rest}\n    >\n      {!dot && children}\n    </span>\n  ),\n);\n\nexport { Badge };\n"
+    }
+  ]
+}

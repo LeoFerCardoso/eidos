@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "iso-date",
+  "type": "registry:ui",
+  "title": "Iso Date",
+  "description": "Forge Iso Date component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/iso-date.tsx",
+      "target": "components/forge/iso-date.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nfunction isoDate(d: Date | null | undefined): string {\n  return d ? d.toISOString().slice(0, 10) : '';\n}\n\nexport { isoDate };\n"
+    }
+  ]
+}

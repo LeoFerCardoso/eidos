@@ -1,0 +1,1553 @@
+{
+  "items": [
+    {
+      "name": "icons",
+      "component": "Icons",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "forge-mark",
+      "component": "ForgeMark",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "pill",
+      "component": "Pill",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "chip",
+      "component": "Chip",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "badge",
+      "component": "Badge",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "sparkline",
+      "component": "Sparkline",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "counter",
+      "component": "Counter",
+      "deps": [
+        "count-up"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "count-up",
+      "component": "CountUp",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "avatar",
+      "component": "Avatar",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "tier-badge",
+      "component": "TierBadge",
+      "deps": [
+        "chip"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "lang-badge",
+      "component": "LangBadge",
+      "deps": [
+        "chip"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "empty",
+      "component": "Empty",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "status-dot",
+      "component": "StatusDot",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "trend",
+      "component": "Trend",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "health-badge",
+      "component": "HealthBadge",
+      "deps": [
+        "pill"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "severity-pill",
+      "component": "SeverityPill",
+      "deps": [
+        "pill",
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "kbd",
+      "component": "Kbd",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "kbd-row",
+      "component": "KbdRow",
+      "deps": [
+        "kbd"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "copy-chip",
+      "component": "CopyChip",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "relative-time",
+      "component": "RelativeTime",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "owner-pill",
+      "component": "OwnerPill",
+      "deps": [
+        "avatar"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "copy-button",
+      "component": "CopyButton",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "code",
+      "component": "Code",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "code-block",
+      "component": "CodeBlock",
+      "deps": [
+        "copy-button",
+        "code"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "code-tree",
+      "component": "CodeTree",
+      "deps": [
+        "copy-button",
+        "icons",
+        "code"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "tabbed-code",
+      "component": "TabbedCode",
+      "deps": [
+        "copy-button",
+        "code"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "collapsible-code",
+      "component": "CollapsibleCode",
+      "deps": [
+        "code",
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "frame",
+      "component": "Frame",
+      "deps": [
+        "copy-button",
+        "collapsible-code"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "props-table",
+      "component": "PropsTable",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "sub-head",
+      "component": "SubHead",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "lede",
+      "component": "Lede",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "mono",
+      "component": "Mono",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "token-swatch",
+      "component": "TokenSwatch",
+      "deps": [
+        "copy-button"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "spec-row",
+      "component": "SpecRow",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "pagination",
+      "component": "Pagination",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "simple-pagination",
+      "component": "SimplePagination",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "tabs",
+      "component": "Tabs",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "input",
+      "component": "Input",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "textarea",
+      "component": "Textarea",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "native-select",
+      "component": "NativeSelect",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "select-native",
+      "component": "SelectNative",
+      "deps": [
+        "native-select"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "checkbox",
+      "component": "Checkbox",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "switch",
+      "component": "Switch",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "radio-group",
+      "component": "RadioGroup",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "slider",
+      "component": "Slider",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "number-input",
+      "component": "NumberInput",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "otp-input",
+      "component": "OTPInput",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "file-input",
+      "component": "FileInput",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "date-input",
+      "component": "DateInput",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "date-picker",
+      "component": "DatePicker",
+      "deps": [
+        "icons",
+        "calendar"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "select",
+      "component": "Select",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "calendar",
+      "component": "Calendar",
+      "deps": [
+        "calendar-props",
+        "date-range",
+        "start-of-month",
+        "month-grid",
+        "iso-date",
+        "icons",
+        "month-label",
+        "same-day"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "range-calendar",
+      "component": "RangeCalendar",
+      "deps": [
+        "range-calendar-props",
+        "calendar",
+        "calendar-props"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "date-range",
+      "component": "DateRange",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "calendar-props",
+      "component": "CalendarProps",
+      "deps": [
+        "date-range"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "range-calendar-props",
+      "component": "RangeCalendarProps",
+      "deps": [
+        "calendar-props",
+        "date-range"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "start-of-month",
+      "component": "startOfMonth",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "same-day",
+      "component": "sameDay",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "iso-date",
+      "component": "isoDate",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "month-grid",
+      "component": "monthGrid",
+      "deps": [
+        "start-of-month"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "month-label",
+      "component": "monthLabel",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "combobox",
+      "component": "Combobox",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "color-input",
+      "component": "ColorInput",
+      "deps": [
+        "icons",
+        "color-picker"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "color-picker",
+      "component": "ColorPicker",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "banner",
+      "component": "Banner",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "metric-card",
+      "component": "MetricCard",
+      "deps": [
+        "trend",
+        "sparkline"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "stat",
+      "component": "Stat",
+      "deps": [
+        "trend"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "pipeline",
+      "component": "Pipeline",
+      "deps": [
+        "icons",
+        "status-dot"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "timeline",
+      "component": "Timeline",
+      "deps": [
+        "icons",
+        "avatar",
+        "relative-time"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "ring-bar",
+      "component": "RingBar",
+      "deps": [
+        "status-dot"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "score-gauge",
+      "component": "ScoreGauge",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "log-viewer",
+      "component": "LogViewer",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "diff-viewer",
+      "component": "DiffViewer",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "tree-view",
+      "component": "TreeView",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "json-inspector",
+      "component": "JSONInspector",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "service-card",
+      "component": "ServiceCard",
+      "deps": [
+        "icons",
+        "health-badge",
+        "sparkline",
+        "lang-badge"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "agent-card",
+      "component": "AgentCard",
+      "deps": [
+        "icons",
+        "health-badge",
+        "relative-time"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "filter-panel",
+      "component": "FilterPanel",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "data-table",
+      "component": "DataTable",
+      "deps": [
+        "empty"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "forge-chart",
+      "component": "ForgeChart",
+      "deps": [],
+      "npm": [
+        "recharts"
+      ],
+      "ai": false
+    },
+    {
+      "name": "forge-tooltip-content",
+      "component": "ForgeTooltipContent",
+      "deps": [],
+      "npm": [
+        "recharts"
+      ],
+      "ai": false
+    },
+    {
+      "name": "chart-legend",
+      "component": "ChartLegend",
+      "deps": [],
+      "npm": [
+        "recharts"
+      ],
+      "ai": false
+    },
+    {
+      "name": "device-frame",
+      "component": "DeviceFrame",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "status-bar",
+      "component": "StatusBar",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "phone-top",
+      "component": "PhoneTop",
+      "deps": [
+        "status-bar"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "drawer",
+      "component": "Drawer",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "modal",
+      "component": "Modal",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "alert-dialog",
+      "component": "AlertDialog",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "popover",
+      "component": "Popover",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "tooltip",
+      "component": "Tooltip",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "hover-card",
+      "component": "HoverCard",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "dropdown-menu",
+      "component": "DropdownMenu",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "menubar",
+      "component": "Menubar",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "command",
+      "component": "Command",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "command-dialog",
+      "component": "CommandDialog",
+      "deps": [
+        "command"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "toaster",
+      "component": "Toaster",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "notification",
+      "component": "Notification",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "separator",
+      "component": "Separator",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "aspect-ratio",
+      "component": "AspectRatio",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "scroll-area",
+      "component": "ScrollArea",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "button-group",
+      "component": "ButtonGroup",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "breadcrumb",
+      "component": "Breadcrumb",
+      "deps": [
+        "dropdown-menu",
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "toolbar",
+      "component": "Toolbar",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "navigation-menu",
+      "component": "NavigationMenu",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "sidebar",
+      "component": "Sidebar",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "resizable",
+      "component": "Resizable",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "accordion",
+      "component": "Accordion",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "collapsible",
+      "component": "Collapsible",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "carousel",
+      "component": "Carousel",
+      "deps": [],
+      "npm": [
+        "embla-carousel-react"
+      ],
+      "ai": false
+    },
+    {
+      "name": "table",
+      "component": "Table",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "card",
+      "component": "Card",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "alert",
+      "component": "Alert",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "progress",
+      "component": "Progress",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "spinner",
+      "component": "Spinner",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "skeleton",
+      "component": "Skeleton",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "toggle",
+      "component": "Toggle",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "toggle-group",
+      "component": "ToggleGroup",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "label",
+      "component": "Label",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "input-group",
+      "component": "InputGroup",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "tag-input",
+      "component": "TagInput",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "password-input",
+      "component": "PasswordInput",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "password-field",
+      "component": "PasswordField",
+      "deps": [
+        "password-input"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "checkbox-card",
+      "component": "CheckboxCard",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "radio-card",
+      "component": "RadioCard",
+      "deps": [],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "radio-card-group",
+      "component": "RadioCardGroup",
+      "deps": [
+        "radio-card"
+      ],
+      "npm": [],
+      "ai": false
+    },
+    {
+      "name": "tool-status",
+      "component": "ToolStatus",
+      "deps": [
+        "icons",
+        "pill"
+      ],
+      "npm": [
+        "ai"
+      ],
+      "ai": true
+    },
+    {
+      "name": "tool",
+      "component": "Tool",
+      "deps": [
+        "icons",
+        "tool-status"
+      ],
+      "npm": [
+        "ai"
+      ],
+      "ai": true
+    },
+    {
+      "name": "tool-input",
+      "component": "ToolInput",
+      "deps": [
+        "code"
+      ],
+      "npm": [
+        "ai"
+      ],
+      "ai": true
+    },
+    {
+      "name": "tool-output",
+      "component": "ToolOutput",
+      "deps": [],
+      "npm": [
+        "ai"
+      ],
+      "ai": true
+    },
+    {
+      "name": "reasoning",
+      "component": "Reasoning",
+      "deps": [
+        "icons"
+      ],
+      "npm": [
+        "ai"
+      ],
+      "ai": true
+    },
+    {
+      "name": "chain-of-thought",
+      "component": "ChainOfThought",
+      "deps": [
+        "icons"
+      ],
+      "npm": [
+        "ai"
+      ],
+      "ai": true
+    },
+    {
+      "name": "plan",
+      "component": "Plan",
+      "deps": [
+        "icons",
+        "status-dot"
+      ],
+      "npm": [
+        "ai"
+      ],
+      "ai": true
+    },
+    {
+      "name": "task",
+      "component": "Task",
+      "deps": [
+        "icons",
+        "status-dot"
+      ],
+      "npm": [
+        "ai"
+      ],
+      "ai": true
+    },
+    {
+      "name": "checkpoint",
+      "component": "Checkpoint",
+      "deps": [
+        "icons"
+      ],
+      "npm": [
+        "ai"
+      ],
+      "ai": true
+    },
+    {
+      "name": "confirmation",
+      "component": "Confirmation",
+      "deps": [
+        "icons"
+      ],
+      "npm": [
+        "ai"
+      ],
+      "ai": true
+    },
+    {
+      "name": "queue",
+      "component": "Queue",
+      "deps": [
+        "icons"
+      ],
+      "npm": [
+        "ai"
+      ],
+      "ai": true
+    },
+    {
+      "name": "artifact-widget",
+      "component": "ArtifactWidget",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "artifact-panel",
+      "component": "ArtifactPanel",
+      "deps": [
+        "icons",
+        "drawer"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "ask-user",
+      "component": "AskUser",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "shimmer",
+      "component": "Shimmer",
+      "deps": [],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "image-view",
+      "component": "ImageView",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "diagram",
+      "component": "Diagram",
+      "deps": [],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "math-view",
+      "component": "MathView",
+      "deps": [],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "context",
+      "component": "Context",
+      "deps": [],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "context-gauge",
+      "component": "ContextGauge",
+      "deps": [
+        "context"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "context-bar",
+      "component": "ContextBar",
+      "deps": [
+        "context"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "history-item",
+      "component": "HistoryItem",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "history-group",
+      "component": "HistoryGroup",
+      "deps": [
+        "history-item"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "history",
+      "component": "History",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "history-shell",
+      "component": "HistoryShell",
+      "deps": [
+        "history"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "ai-label",
+      "component": "AILabel",
+      "deps": [],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "ai-label-with-popover",
+      "component": "AILabelWithPopover",
+      "deps": [
+        "ai-label"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "agent-avatar",
+      "component": "AgentAvatar",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "agent-identity",
+      "component": "AgentIdentity",
+      "deps": [
+        "agent-avatar",
+        "ai-label"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "message",
+      "component": "Message",
+      "deps": [
+        "avatar",
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "message-actions",
+      "component": "MessageActions",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "response",
+      "component": "Response",
+      "deps": [
+        "avatar",
+        "prose"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "conversation",
+      "component": "Conversation",
+      "deps": [],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "prompt-submit",
+      "component": "PromptSubmit",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "model-badge",
+      "component": "ModelBadge",
+      "deps": [
+        "chip"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "model-selector",
+      "component": "ModelSelector",
+      "deps": [
+        "model-badge",
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "model-picker",
+      "component": "ModelPicker",
+      "deps": [
+        "model-selector"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "attachment",
+      "component": "Attachment",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "drop-zone",
+      "component": "DropZone",
+      "deps": [
+        "icons",
+        "model-selector",
+        "prompt-submit"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "drag-drop-overlay",
+      "component": "DragDropOverlay",
+      "deps": [
+        "attachment",
+        "icons",
+        "model-selector",
+        "prompt-submit"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "prompt-banner",
+      "component": "PromptBanner",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "prompt-input",
+      "component": "PromptInput",
+      "deps": [
+        "attachment",
+        "icons",
+        "model-selector",
+        "prompt-submit"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "suggestion",
+      "component": "Suggestion",
+      "deps": [],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "suggestion-card",
+      "component": "SuggestionCard",
+      "deps": [],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "prose",
+      "component": "Prose",
+      "deps": [],
+      "npm": [
+        "react-markdown",
+        "remark-gfm"
+      ],
+      "ai": true
+    },
+    {
+      "name": "prose-code",
+      "component": "ProseCode",
+      "deps": [
+        "icons"
+      ],
+      "npm": [
+        "react-markdown",
+        "remark-gfm"
+      ],
+      "ai": true
+    },
+    {
+      "name": "citation",
+      "component": "Citation",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "sources",
+      "component": "Sources",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "sources-panel",
+      "component": "SourcesPanel",
+      "deps": [
+        "sources"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "terminal",
+      "component": "Terminal",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "persona",
+      "component": "Persona",
+      "deps": [],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "speech-input",
+      "component": "SpeechInput",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "transcription",
+      "component": "Transcription",
+      "deps": [],
+      "npm": [],
+      "ai": true
+    },
+    {
+      "name": "audio-player",
+      "component": "AudioPlayer",
+      "deps": [
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    }
+  ]
+}

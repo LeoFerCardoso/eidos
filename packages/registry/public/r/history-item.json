@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "history-item",
+  "type": "registry:ui",
+  "title": "History Item",
+  "description": "Forge History Item component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/history-item.tsx",
+      "target": "components/forge/history-item.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\ninterface HistoryThread {\n  id: string;\n  title: string;\n  preview: string;\n  /** ISO date string used for recency grouping. */\n  updatedAt?: string;\n  starred?: boolean;\n  active?: boolean;\n  /** Associates the thread with a project when groupBy=\"project\". */\n  projectId?: string;\n}\n\ninterface HistoryItemProps {\n  /** The thread data to render. */\n  thread: HistoryThread;\n  /** Called when the row is clicked or activated via keyboard. */\n  onActivate?: () => void;\n  /** Active search query; matching substrings in the title are highlighted in ember. */\n  query?: string;\n}\n\nconst HistoryItem = ({\n  thread,\n  onActivate,\n  query = '',\n}: HistoryItemProps) => {\n  const renderTitle = () => {\n    if (!query) return thread.title;\n    const lower = thread.title.toLowerCase();\n    const q = query.toLowerCase();\n    const i = lower.indexOf(q);\n    if (i < 0) return thread.title;\n    return (\n      <>\n        {thread.title.slice(0, i)}\n        <span className=\"hl\">{thread.title.slice(i, i + q.length)}</span>\n        {thread.title.slice(i + q.length)}\n      </>\n    );\n  };\n  return (\n    <div\n      className={'ai-hist-item' + (thread.active ? ' is-active' : '')}\n      onClick={onActivate}\n      role=\"button\"\n      tabIndex={0}\n      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onActivate?.(); }}\n    >\n      <div className=\"body\">\n        <div className=\"title\">{renderTitle()}</div>\n        <div className=\"preview\">{thread.preview}</div>\n      </div>\n      {thread.starred && <Icons.star className=\"star\" size={12}/>}\n      <span className=\"actions\" onClick={e => e.stopPropagation()}>\n        <button className=\"act\" title=\"Rename\"><Icons.edit size={11}/></button>\n        <button className=\"act danger\" title=\"Delete\"><Icons.trash size={11}/></button>\n      </span>\n    </div>\n  );\n};\n\nexport { HistoryItem };\n"
+    }
+  ]
+}

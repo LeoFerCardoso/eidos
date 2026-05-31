@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ring-bar",
+  "type": "registry:ui",
+  "title": "Ring Bar",
+  "description": "Forge Ring Bar component.",
+  "registryDependencies": [
+    "forge",
+    "status-dot"
+  ],
+  "files": [
+    {
+      "path": "components/forge/ring-bar.tsx",
+      "target": "components/forge/ring-bar.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { StatusDot } from '@/components/forge/status-dot';\n\ntype RingItem = { label?: string; audience?: string; percent?: number; status?: string; count?: number };\n\nconst RingBar = ({ rings = [], currentRing = 0, popoverFor }: {\n  /** Ordered ring definitions — each: { label, audience?, percent, status? }. Status: \"done\" | \"running\" | \"pending\" | \"error\". */\n  rings?: RingItem[];\n  /** Index of the cell that is in flight — highlighted with ember tint and pulse. */\n  currentRing?: number;\n  /** Render prop returning the popover body for a cell. Cells become clickable buttons. */\n  popoverFor?: (ring: RingItem, index: number) => React.ReactNode;\n}) => {\n  const [openIdx, setOpenIdx] = React.useState(null);\n  return (\n    <div className=\"ring-bar\">\n      {rings.map((r, i) => {\n        const tone = i < currentRing ? 'done' : i === currentRing ? (r.status || 'running') : 'pending';\n        const pct = r.percent != null ? r.percent : tone === 'done' ? 100 : 0;\n        const isCurrent = i === currentRing;\n        return (\n          <div key={r.label || i}\n               className={'ring-cell ' + tone + (isCurrent ? ' is-current' : '') + (openIdx === i ? ' has-pop' : '') + (popoverFor ? ' is-interactive' : '')}\n               onClick={() => popoverFor && setOpenIdx(openIdx === i ? null : i)}\n               role={popoverFor ? 'button' : undefined}\n               tabIndex={popoverFor ? 0 : undefined}>\n            <div className=\"ring-head\">\n              <span className=\"ring-label\">\n                <StatusDot tone={tone} pulse={tone === 'running'}/>\n                <span className=\"ring-label-text\">{r.label}</span>\n              </span>\n              <span className=\"ring-pct\">{pct}%</span>\n            </div>\n            {r.audience && <div className=\"ring-aud\">{r.audience}</div>}\n            <div className=\"ring-track\">\n              <span className=\"ring-fill\" style={{ width: pct + '%' }}/>\n            </div>\n            {popoverFor && openIdx === i && (\n              <div className=\"ring-pop\" role=\"dialog\" onClick={(e) => e.stopPropagation()}>\n                {popoverFor(r, i)}\n              </div>\n            )}\n          </div>\n        );\n      })}\n    </div>\n  );\n};\n\nexport { RingBar };\n"
+    }
+  ]
+}

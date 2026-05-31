@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "count-up",
+  "type": "registry:ui",
+  "title": "Count Up",
+  "description": "Forge Count Up component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/count-up.tsx",
+      "target": "components/forge/count-up.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ninterface CountUpProps {\n  /** Target value. Animation eases to this number once visible. */\n  to: number;\n  /** Starting value. Useful for partial-progress reads (e.g. 50→80%). */\n  from?: number;\n  /** Static string appended after the figure (e.g. \"%\", \" / mo\"). */\n  suffix?: string;\n  /** Static string rendered before the animated figure (e.g. \"$\"). */\n  prefix?: string;\n  /** Duration in ms. Collapses to 0 automatically under prefers-reduced-motion. */\n  dur?: number;\n  /** Number of decimal places. Defaults to integer. */\n  decimals?: number;\n  /** Extra class names appended to the host span. */\n  className?: string;\n  /** Inline style override for the host span. */\n  style?: React.CSSProperties;\n}\n\nconst CountUp = ({\n  to,\n  from = 0,\n  suffix = '',\n  prefix = '',\n  dur = 1200,\n  decimals = 0,\n  className = '',\n  style,\n}: CountUpProps) => {\n  const reducedMotion =\n    typeof window !== 'undefined' &&\n    window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;\n  const effectiveDur = reducedMotion ? 0 : dur;\n  const [v, setV] = React.useState(from);\n  const ref = React.useRef<HTMLSpanElement>(null);\n  const [seen, setSeen] = React.useState(false);\n  React.useEffect(() => {\n    if (!ref.current) return;\n    const io = new IntersectionObserver(\n      ([e]) => { if (e.isIntersecting) setSeen(true); },\n      { threshold: 0.4 },\n    );\n    io.observe(ref.current);\n    return () => io.disconnect();\n  }, []);\n  React.useEffect(() => {\n    if (!seen) return;\n    if (effectiveDur === 0) { setV(to); return; }\n    const start = performance.now();\n    const range = to - from;\n    const tick = (now: number) => {\n      const t = Math.min(1, (now - start) / effectiveDur);\n      const ease = 1 - Math.pow(1 - t, 3);\n      setV(from + range * ease);\n      if (t < 1) requestAnimationFrame(tick);\n    };\n    requestAnimationFrame(tick);\n  }, [seen, to, from, effectiveDur]);\n  const cls = ['t-mono', className].filter(Boolean).join(' ');\n  return (\n    <span ref={ref} className={cls} style={style}>\n      {prefix}{v.toFixed(decimals)}{suffix}\n    </span>\n  );\n};\n\nexport { CountUp };\n"
+    }
+  ]
+}

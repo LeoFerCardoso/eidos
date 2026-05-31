@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stat",
+  "type": "registry:ui",
+  "title": "Stat",
+  "description": "Forge Stat component.",
+  "registryDependencies": [
+    "forge",
+    "trend"
+  ],
+  "files": [
+    {
+      "path": "components/forge/stat.tsx",
+      "target": "components/forge/stat.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Trend } from '@/components/forge/trend';\n\nconst Stat = ({ label, value, suffix, hint, delta, deltaUnit = '%', inverted,\n                align = 'start', variant = 'default' }: {\n  label?: React.ReactNode;\n  value?: React.ReactNode;\n  suffix?: React.ReactNode;\n  hint?: React.ReactNode;\n  delta?: number;\n  deltaUnit?: string;\n  inverted?: boolean;\n  align?: 'start' | 'center' | 'end';\n  variant?: 'default' | 'hero' | 'inline';\n}) => (\n  <div className={'stat stat-' + variant + ' align-' + align}>\n    <span className=\"stat-label\">{label}</span>\n    <span className=\"stat-value\">\n      {value}\n      {suffix ? <span className=\"stat-suffix\">{suffix}</span> : null}\n    </span>\n    {(hint || typeof delta === 'number') && (\n      <span className=\"stat-foot\">\n        {typeof delta === 'number' && <Trend delta={delta} unit={deltaUnit} inverted={inverted} variant=\"triangle\"/>}\n        {hint && <span className=\"stat-hint\">{hint}</span>}\n      </span>\n    )}\n  </div>\n);\n\nexport { Stat };\n"
+    }
+  ]
+}

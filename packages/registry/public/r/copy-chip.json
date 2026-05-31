@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "copy-chip",
+  "type": "registry:ui",
+  "title": "Copy Chip",
+  "description": "Forge Copy Chip component.",
+  "registryDependencies": [
+    "forge",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/copy-chip.tsx",
+      "target": "components/forge/copy-chip.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\ninterface CopyChipProps {\n  /** String written to clipboard on click. Always the canonical / full version. */\n  value: string;\n  /** Display label. Truncate or alias the value so it stays scannable (e.g. 7-char SHA). Defaults to value. */\n  label?: React.ReactNode;\n  /** Chip colour variant. Use ember for primary identifiers (service ref), ice for secondaries. */\n  tone?: 'default' | 'ember' | 'ice';\n}\n\nconst CopyChip = ({\n  value,\n  label,\n  tone = 'default',\n}: CopyChipProps) => {\n  const [copied, setCopied] = React.useState(false);\n  const onClick = async () => {\n    try { await navigator.clipboard.writeText(value); }\n    catch (e) {\n      const ta = document.createElement('textarea');\n      ta.value = value; document.body.appendChild(ta); ta.select();\n      try { document.execCommand('copy'); } catch (e2) {}\n      ta.remove();\n    }\n    setCopied(true); setTimeout(() => setCopied(false), 1400);\n  };\n  const cls = ['chip', 'copy-chip'];\n  if (tone !== 'default') cls.push(tone);\n  if (copied) cls.push('is-copied');\n  return (\n    <button type=\"button\" className={cls.join(' ')} onClick={onClick}\n            aria-label={`Copy ${value}`} title={copied ? 'Copied' : `Copy ${value}`}>\n      <span>{label || value}</span>\n      {copied ? <Icons.check size={10}/> : <Icons.copy size={10}/>}\n    </button>\n  );\n};\n\nexport { CopyChip };\n"
+    }
+  ]
+}

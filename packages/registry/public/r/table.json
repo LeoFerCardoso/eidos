@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "table",
+  "type": "registry:ui",
+  "title": "Table",
+  "description": "Forge Table component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/table.tsx",
+      "target": "components/forge/table.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\n\ntype TableDensity = 'comfortable' | 'compact';\n\ninterface TableProps extends React.HTMLAttributes<HTMLTableElement> {\n  /**\n   * Vertical padding preset.\n   * comfortable = 14/16 px padding (was \"cozy\"); compact = 6/10 px (was \"dense\").\n   * Omit for the default (10/12 px).\n   */\n  density?: TableDensity;\n  /**\n   * Alternate row backgrounds. Off by default — hairline dividers read cleaner\n   * and do not compete with hover or selection states.\n   */\n  zebra?: boolean;\n  /**\n   * Make the thead sticky when the table is inside a .tbl-scroll wrapper.\n   */\n  stickyHeader?: boolean;\n  /**\n   * Expand the table to 100% of its container.\n   */\n  fullWidth?: boolean;\n  children?: React.ReactNode;\n  className?: string;\n}\n\nconst Table = React.forwardRef<HTMLTableElement, TableProps>(\n  (\n    {\n      density,\n      zebra = false,\n      stickyHeader = false,\n      fullWidth = false,\n      children,\n      className,\n      ...rest\n    },\n    ref,\n  ) => (\n    <table\n      ref={ref}\n      className={cn(\n        'tbl',\n        density === 'compact' && 'dense',\n        density === 'comfortable' && 'cozy',\n        zebra && 'tbl-zebra',\n        stickyHeader && 'tbl-sticky',\n        fullWidth && 'tbl-full',\n        className,\n      )}\n      {...rest}\n    >\n      {children}\n    </table>\n  ),\n);\n\nexport { Table };\n"
+    }
+  ]
+}

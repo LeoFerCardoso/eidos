@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kbd",
+  "type": "registry:ui",
+  "title": "Kbd",
+  "description": "Forge Kbd component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/kbd.tsx",
+      "target": "components/forge/kbd.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ninterface KbdProps {\n  /** Single key string → one keycap; string array with 2+ items → chord. Providing label triggers row mode. */\n  keys?: string | string[];\n  /** Row mode: left-hand label. Presence switches rendering from inline to .kbd-row block. */\n  label?: React.ReactNode;\n  /** Row mode only: muted hint rendered between the label and the chord. */\n  meta?: React.ReactNode;\n  /** Extra utility classes merged on the outermost element. */\n  className?: string;\n  /** Key glyph or text (single-key mode). Ignored when keys is provided. */\n  children?: React.ReactNode;\n}\n\nconst Kbd = ({\n  keys,\n  label,\n  meta,\n  className = '',\n  children,\n}: KbdProps) => {\n  const keyArr = Array.isArray(keys) ? keys : (keys ? [keys] : []);\n\n  // Row mode — label is present\n  if (label !== undefined) {\n    return (\n      <div className={['kbd-row', className].filter(Boolean).join(' ')}>\n        <span className=\"label\">{label}</span>\n        {meta && <span style={{ fontSize: 11.5, color: 'var(--fg-faint)' }}>{meta}</span>}\n        {keyArr.length > 0 && (\n          <span className=\"kbd-chord\">{keyArr.map((k, i) => <kbd className=\"kbd\" key={i}>{k}</kbd>)}</span>\n        )}\n      </div>\n    );\n  }\n\n  // Chord mode — multiple keys\n  if (keyArr.length > 1) {\n    return (\n      <span className={['kbd-chord', className].filter(Boolean).join(' ')}>\n        {keyArr.map((k, i) => <kbd className=\"kbd\" key={i}>{k}</kbd>)}\n      </span>\n    );\n  }\n\n  // Single-key mode — one key string or children\n  const key = keyArr[0] ?? children;\n  return <kbd className={['kbd', className].filter(Boolean).join(' ')}>{key}</kbd>;\n};\n\nexport { Kbd };\n"
+    }
+  ]
+}

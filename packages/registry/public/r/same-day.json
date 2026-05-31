@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "same-day",
+  "type": "registry:ui",
+  "title": "Same Day",
+  "description": "Forge Same Day component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/same-day.tsx",
+      "target": "components/forge/same-day.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nfunction sameDay(a: Date | null | undefined, b: Date | null | undefined): boolean {\n  return !!a && !!b &&\n    a.getFullYear() === b.getFullYear() &&\n    a.getMonth() === b.getMonth() &&\n    a.getDate() === b.getDate();\n}\n\nexport { sameDay };\n"
+    }
+  ]
+}

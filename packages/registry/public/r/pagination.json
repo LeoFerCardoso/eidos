@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pagination",
+  "type": "registry:ui",
+  "title": "Pagination",
+  "description": "Forge Pagination component.",
+  "registryDependencies": [
+    "forge",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/pagination.tsx",
+      "target": "components/forge/pagination.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\nconst pageRange = (current, total, siblings = 1) => {\n  const out = [];\n  const start = Math.max(2, current - siblings);\n  const end = Math.min(total - 1, current + siblings);\n  out.push(1);\n  if (start > 2) out.push('left-ellipsis');\n  for (let i = start; i <= end; i++) out.push(i);\n  if (end < total - 1) out.push('right-ellipsis');\n  if (total > 1) out.push(total);\n  return out;\n};\n\ninterface PaginationProps {\n  /** Total number of pages. */\n  total?: number;\n  /** Active page (1-based). Clamped to [1, total]. */\n  current?: number;\n  /** Fires when the user clicks a page button or prev/next. */\n  onChange?: (page: number) => void;\n  /** How many page buttons to show on each side of current before collapsing to an ellipsis. */\n  siblings?: number;\n  /** Button footprint. Match the surrounding table density. */\n  size?: 'sm' | 'md' | 'lg';\n  /** Draws a border around every button — better on low-contrast surfaces. */\n  outline?: boolean;\n  /** Hide the prev/next labels — show only the chevron. */\n  compact?: boolean;\n  /** Add double-chevron buttons for jumping to the first and last page. */\n  showFirstLast?: boolean;\n}\n\nconst Pagination = (props: PaginationProps) => {\n  const total = props.total || 1;\n  const current = Math.min(Math.max(props.current || 1, 1), total);\n  const onChange = props.onChange || (() => {});\n  const siblings = props.siblings ?? 1;\n  const showFirstLast = props.showFirstLast || false;\n  const cls = ['pg']\n    .concat(props.size && props.size !== 'md' ? [props.size] : [])\n    .concat(props.outline ? ['outline'] : [])\n    .join(' ');\n  const range = pageRange(current, total, siblings);\n  const go = (n: number) => onChange(Math.min(Math.max(n, 1), total));\n  return (\n    <nav className={cls} role=\"navigation\" aria-label=\"Pagination\">\n      {showFirstLast && (\n        <button className=\"pg-btn\" onClick={() => go(1)} disabled={current === 1} aria-label=\"First page\">\n          <Icons.chevronLeft size={12} className=\"ico-prev\"/><Icons.chevronLeft size={12} className=\"ico-prev\"/>\n        </button>\n      )}\n      <button className=\"pg-btn\" onClick={() => go(current - 1)} disabled={current === 1} aria-label=\"Previous page\">\n        <Icons.chevronLeft size={14} className=\"ico-prev\"/>\n        {props.compact ? null : <span>Previous</span>}\n      </button>\n      {range.map((p, i) =>\n        typeof p === 'string'\n          ? <span key={p + i} className=\"pg-ellipsis\" aria-hidden=\"true\">…</span>\n          : <button key={p} className={'pg-btn' + (p === current ? ' is-active' : '')} onClick={() => go(p)} aria-current={p === current ? 'page' : undefined} aria-label={`Page ${p}`}>{p}</button>\n      )}\n      <button className=\"pg-btn\" onClick={() => go(current + 1)} disabled={current === total} aria-label=\"Next page\">\n        {props.compact ? null : <span>Next</span>}\n        <Icons.chevronRight size={14} className=\"ico-next\"/>\n      </button>\n      {showFirstLast && (\n        <button className=\"pg-btn\" onClick={() => go(total)} disabled={current === total} aria-label=\"Last page\">\n          <Icons.chevronRight size={12} className=\"ico-next\"/><Icons.chevronRight size={12} className=\"ico-next\"/>\n        </button>\n      )}\n    </nav>\n  );\n};\n\nexport { Pagination };\n"
+    }
+  ]
+}

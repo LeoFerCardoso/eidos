@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "shimmer",
+  "type": "registry:ui",
+  "title": "Shimmer",
+  "description": "Forge Shimmer component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai"
+  ],
+  "files": [
+    {
+      "path": "components/forge/shimmer.tsx",
+      "target": "components/forge/shimmer.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst Shimmer = ({\n  children = 'Thinking…',\n  className,\n  style,\n}: {\n  /** The text label behind the gradient sweep. Keep under 4 words, end with \"…\". */\n  children?: React.ReactNode;\n  /** Additional className appended to .ai-shimmer. Use to adjust font-size or color — not the animation. */\n  className?: string;\n  /** Inline style override. Avoid overriding animation-related properties — use the class instead. */\n  style?: React.CSSProperties;\n}) => (\n  <span className={'ai-shimmer' + (className ? ' ' + className : '')} style={style} aria-live=\"polite\">\n    {children}\n  </span>\n);\n\nexport { Shimmer };\n"
+    }
+  ]
+}

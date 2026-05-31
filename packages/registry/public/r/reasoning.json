@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "reasoning",
+  "type": "registry:ui",
+  "title": "Reasoning",
+  "description": "Forge Reasoning component.",
+  "dependencies": [
+    "ai"
+  ],
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/reasoning.tsx",
+      "target": "components/forge/reasoning.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\nconst Reasoning = ({\n  streaming,\n  duration,\n  title,\n  defaultOpen,\n  onOpenChange,\n  children,\n}: {\n  /** Drives auto-open and the shimmer verb. Flip to false when tokens stop arriving. */\n  streaming?: boolean;\n  /** Seconds elapsed. Mono-rendered next to the verb; pair with a useDuration hook. */\n  duration?: number;\n  /** Override the verb label. Default: \"Thinking\" while streaming, \"Thought\" when settled. */\n  title?: string;\n  /** Initial open state before any user toggle. Auto-state takes over until the user clicks. */\n  defaultOpen?: boolean;\n  /** Called when the user manually toggles the collapsible open/closed. */\n  onOpenChange?: (open: boolean) => void;\n  /** Trace content. Use mono-faced paragraphs; <em> for soft annotations, <code> for IDs. */\n  children?: React.ReactNode;\n}) => {\n  const [userToggled, setUserToggled] = React.useState(false);\n  const [open, setOpen] = React.useState(defaultOpen ?? streaming ?? false);\n\n  // Auto-open during streaming / auto-collapse when done — but ONLY if the\n  // consumer didn't pin the state with an explicit `defaultOpen`, and only\n  // until the user manually toggles. Without the `defaultOpen` guard, the\n  // anatomy demo (defaultOpen + streaming=false) would silently auto-close.\n  React.useEffect(() => {\n    if (userToggled) return;\n    if (defaultOpen !== undefined) return;\n    setOpen(!!streaming);\n  }, [streaming, userToggled, defaultOpen]);\n\n  const verb = streaming ? 'Thinking' : 'Thought';\n  return (\n    <div\n      className=\"rsn\"\n      data-streaming={streaming ? 'true' : 'false'}\n      data-open={open ? 'true' : 'false'}\n    >\n      <button\n        className=\"rsn-trigger\"\n        onClick={() => {\n          setUserToggled(true);\n          setOpen(v => {\n            const next = !v;\n            onOpenChange?.(next);\n            return next;\n          });\n        }}\n        aria-expanded={open}\n      >\n        <span className=\"ico\"><Icons.sparkle size={12}/></span>\n        <span className=\"label\">\n          <span className=\"verb\">{title || verb}</span>\n          <span className=\"dot\"/>\n          <span className=\"dur\">{(duration ?? 0).toFixed(1)}s</span>\n        </span>\n        <Icons.chevronDown size={13} className=\"chev\"/>\n      </button>\n      <div className=\"rsn-body\" aria-hidden={!open} aria-live=\"polite\" aria-busy={!!streaming}>\n        <div className=\"rsn-body-inner\" aria-hidden={streaming ? true : undefined}>{children}</div>\n      </div>\n    </div>\n  );\n};\n\nexport { Reasoning };\n"
+    }
+  ]
+}

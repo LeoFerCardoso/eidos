@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pipeline",
+  "type": "registry:ui",
+  "title": "Pipeline",
+  "description": "Forge Pipeline component.",
+  "registryDependencies": [
+    "forge",
+    "icons",
+    "status-dot"
+  ],
+  "files": [
+    {
+      "path": "components/forge/pipeline.tsx",
+      "target": "components/forge/pipeline.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\nimport { StatusDot } from '@/components/forge/status-dot';\n\nconst PIPE_STATUS = { ok: 'done', pass: 'done', running: 'running', pending: 'pending', fail: 'error', skip: 'skipped' };\n\nconst pipeIcon = (tone) => {\n  if (tone === 'done')    return Icons.check;\n  if (tone === 'error')   return Icons.x;\n  if (tone === 'skipped') return Icons.minus;\n  return null;\n};\n\ntype PipeStep = { id?: string; label?: string; status?: string; meta?: string; duration?: string; percent?: number };\n\nconst PipelineStepper = ({ steps, currentIndex, compact }: { steps: PipeStep[]; currentIndex?: number; compact?: boolean }) => (\n  <ol className={'pipeline pipeline-stepper' + (compact ? ' compact' : '')}>\n    {steps.map((s, i) => {\n      const tone = PIPE_STATUS[s.status] || s.status || 'pending';\n      const isCurrent = currentIndex !== undefined ? i === currentIndex : tone === 'running';\n      const Icn = pipeIcon(tone);\n      return (\n        <li key={s.id || s.label || i} className={'pipe-step ' + tone + (isCurrent ? ' is-current' : '')}>\n          <span className=\"pipe-dot\" aria-hidden=\"true\">\n            {isCurrent && <span className=\"pipe-halo\"/>}\n            {Icn ? <Icn size={11}/> : <span className=\"pipe-bullet\"/>}\n          </span>\n          {!compact && (\n            <div className=\"pipe-text\">\n              <span className=\"pipe-label\">{s.label}</span>\n              {s.meta && <span className=\"pipe-meta\">{s.meta}</span>}\n            </div>\n          )}\n        </li>\n      );\n    })}\n  </ol>\n);\n\nconst PipelineChevron = ({ steps, currentIndex }: { steps: PipeStep[]; currentIndex?: number }) => (\n  <ol className=\"pipeline pipeline-chevron\">\n    {steps.map((s, i) => {\n      const tone = PIPE_STATUS[s.status] || s.status || 'pending';\n      const isCurrent = currentIndex !== undefined ? i === currentIndex : tone === 'running';\n      const Icn = pipeIcon(tone);\n      const positionCls = i === 0 ? ' chev-first' : i === steps.length - 1 ? ' chev-last' : '';\n      return (\n        <li key={s.id || i} className={'chev-step ' + tone + (isCurrent ? ' is-current' : '') + positionCls}>\n          <span className=\"chev-inner\">\n            <span className=\"chev-glyph\" aria-hidden=\"true\">\n              {Icn ? <Icn size={11}/> : <StatusDot tone={tone} pulse={tone === 'running'} size=\"sm\"/>}\n            </span>\n            <span className=\"chev-text\">\n              <span className=\"chev-label\">{s.label}</span>\n              {s.meta && <span className=\"chev-meta\">{s.meta}</span>}\n            </span>\n          </span>\n        </li>\n      );\n    })}\n  </ol>\n);\n\nconst Pipeline = ({\n  variant = 'stepper', steps, currentIndex, compact,\n}: {\n  /** Visual layout. Step model is shared between variants. */\n  variant?: 'stepper' | 'chevron';\n  /** Ordered steps — each: { id, label, status, meta?, duration?, percent? }. */\n  steps?: PipeStep[];\n  /** Force which step reads as in-flight. Default: first running step. */\n  currentIndex?: number;\n  /** Stepper-only — collapse labels for table-cell density. */\n  compact?: boolean;\n}) => {\n  if (variant === 'chevron') return <PipelineChevron steps={steps || []} currentIndex={currentIndex}/>;\n  return <PipelineStepper steps={steps || []} currentIndex={currentIndex} compact={compact}/>;\n};\n\nexport { Pipeline };\n"
+    }
+  ]
+}

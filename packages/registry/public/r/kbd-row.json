@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kbd-row",
+  "type": "registry:ui",
+  "title": "Kbd Row",
+  "description": "Forge Kbd Row component.",
+  "registryDependencies": [
+    "forge",
+    "kbd"
+  ],
+  "files": [
+    {
+      "path": "components/forge/kbd-row.tsx",
+      "target": "components/forge/kbd-row.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Kbd } from '@/components/forge/kbd';\n\nconst KbdRow = ({\n  label,\n  keys = [],\n  meta,\n}: {\n  label?: React.ReactNode;\n  keys?: string[];\n  meta?: React.ReactNode;\n}) => <Kbd label={label} keys={keys} meta={meta}/>;\n\nexport { KbdRow };\n"
+    }
+  ]
+}

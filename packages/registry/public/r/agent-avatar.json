@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "agent-avatar",
+  "type": "registry:ui",
+  "title": "Agent Avatar",
+  "description": "Forge Agent Avatar component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/agent-avatar.tsx",
+      "target": "components/forge/agent-avatar.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\nconst AgentAvatar = ({\n  size = 32,\n  status,\n  ember = true,\n  glyph,\n  initials,\n  name,\n  className,\n  style,\n}: {\n  /** Avatar diameter in px. */\n  size?: number;\n  /** Presence dot variant. \"online\" shows green; \"away\" amber; \"offline\" grey; \"busy\" red. */\n  status?: 'online' | 'away' | 'offline' | 'busy';\n  /** When true, applies the ember tint (default true). Set false for user avatars. */\n  ember?: boolean;\n  /** Override the default agent icon with any ReactNode. */\n  glyph?: React.ReactNode;\n  /** Render initials instead of the glyph icon. */\n  initials?: string;\n  /** Accessible name for the avatar (used in title attribute). */\n  name?: string;\n  /** Extra class names applied to the root span. */\n  className?: string;\n  /** Inline styles merged onto the root span. */\n  style?: React.CSSProperties;\n}) => {\n  const cls = ['avatar', 'ai-agent-avatar'];\n  if (ember) cls.push('ember');\n  if (size >= 40) cls.push('lg');\n  if (className) cls.push(className);\n  return (\n    <span className={cls.join(' ')} style={{ width: size, height: size, ...style }} title={name}>\n      {initials\n        ? <span style={{ fontSize: Math.round(size * 0.36) }}>{initials}</span>\n        : (glyph || <Icons.agent size={Math.round(size * 0.5)}/>)}\n      {status && <span className={'status-dot' + (status !== 'online' ? ' ' + status : '')} aria-hidden=\"true\"/>}\n    </span>\n  );\n};\n\nexport { AgentAvatar };\n"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pill",
+  "type": "registry:ui",
+  "title": "Pill",
+  "description": "Forge Pill component.",
+  "registryDependencies": [
+    "forge",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/pill.tsx",
+      "target": "components/forge/pill.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\nimport { Icons } from '@/components/forge/icons';\n\ntype PillTone =\n  | 'ember' | 'success' | 'warning' | 'danger' | 'ice' | 'neutral'\n  // severity family (incident triage)\n  | 'severity-p0' | 'severity-p1' | 'severity-p2' | 'severity-p3'\n  // health family (service uptime)\n  | 'health-up' | 'health-degraded' | 'health-down' | 'health-unknown'\n  // status family (run/pipeline step)\n  | 'status-pending' | 'status-running' | 'status-done' | 'status-error' | 'status-skipped'\n  // risk family (change risk score)\n  | 'risk-low' | 'risk-med' | 'risk-high' | 'risk-crit';\n\ninterface PillProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** Semantic tone — maps directly to .pill.<tone> CSS. */\n  tone?: PillTone;\n  /** Swap the static dot for a pulsing ring. Use only while work is in flight. */\n  live?: boolean;\n  /** Show a static status dot. Suppressed when `icon` is provided. */\n  dot?: boolean;\n  /** Leading icon node (12px). Suppresses the dot automatically. */\n  icon?: React.ReactNode;\n  /** Renders a trailing × remove button with the given aria-label. */\n  onRemove?: () => void;\n  /** Accessible label for the remove button (required when onRemove is set). */\n  removeLabel?: string;\n  children: React.ReactNode;\n  className?: string;\n}\n\nconst Pill = React.forwardRef<HTMLSpanElement, PillProps>(\n  (\n    {\n      tone = 'neutral',\n      live = false,\n      dot = false,\n      icon,\n      onRemove,\n      removeLabel = 'Remove',\n      children,\n      className,\n      onKeyDown,\n      ...rest\n    },\n    ref,\n  ) => {\n    const showDot = !icon && (dot || live);\n\n    const handleKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) => {\n      if (onRemove && (e.key === 'Backspace' || e.key === 'Delete')) {\n        e.preventDefault();\n        onRemove();\n      }\n      onKeyDown?.(e);\n    };\n\n    return (\n      <span\n        ref={ref}\n        className={cn('pill', tone !== 'neutral' && tone, className)}\n        onKeyDown={onRemove ? handleKeyDown : onKeyDown}\n        {...rest}\n      >\n        {icon && <span aria-hidden=\"true\" className=\"pill-icon\">{icon}</span>}\n        {showDot && (\n          <span aria-hidden=\"true\" className={live ? 'ldot' : 'dot'} />\n        )}\n        {children}\n        {onRemove && (\n          <button\n            type=\"button\"\n            className=\"pl-x\"\n            aria-label={removeLabel}\n            onClick={(e) => { e.stopPropagation(); onRemove(); }}\n          >\n            <Icons.x size={10} />\n          </button>\n        )}\n      </span>\n    );\n  },\n);\n\nexport { Pill };\n"
+    }
+  ]
+}

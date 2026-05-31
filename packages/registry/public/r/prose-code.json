@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prose-code",
+  "type": "registry:ui",
+  "title": "Prose Code",
+  "description": "Forge Prose Code component.",
+  "dependencies": [
+    "react-markdown",
+    "remark-gfm"
+  ],
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/prose-code.tsx",
+      "target": "components/forge/prose-code.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\nconst ProseCode = ({\n  lang = 'bash',\n  children,\n}: {\n  lang?: string;\n  children?: React.ReactNode;\n}) => {\n  const [ok, setOk] = React.useState(false);\n  const text = String(children);\n  const onCopy = async () => {\n    try { await navigator.clipboard.writeText(text); }\n    catch (e) {\n      const ta = document.createElement('textarea');\n      ta.value = text; document.body.appendChild(ta); ta.select();\n      try { document.execCommand('copy'); } catch (e2) {}\n      ta.remove();\n    }\n    setOk(true); setTimeout(() => setOk(false), 1200);\n  };\n  return (\n    <div className=\"ai-code\">\n      <div className=\"ai-code-head\">\n        <span className=\"lang\">{lang}</span>\n        <span className=\"spacer\"/>\n        <button className=\"ai-code-copy\" onClick={onCopy} aria-label=\"Copy code\">\n          {ok ? <Icons.check size={11}/> : <Icons.copy size={11}/>}\n          {ok ? 'Copied' : 'Copy'}\n        </button>\n      </div>\n      <pre className=\"ai-code-body\">{children}</pre>\n    </div>\n  );\n};\n\nexport { ProseCode };\n"
+    }
+  ]
+}

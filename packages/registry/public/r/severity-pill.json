@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "severity-pill",
+  "type": "registry:ui",
+  "title": "Severity Pill",
+  "description": "Forge Severity Pill component.",
+  "registryDependencies": [
+    "forge",
+    "pill",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/severity-pill.tsx",
+      "target": "components/forge/severity-pill.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\nimport { Pill } from '@/components/forge/pill';\n\nconst SEVERITY_LABELS = { p0: 'P0 · Critical', p1: 'P1 · Major', p2: 'P2 · Minor', p3: 'P3 · Notice' };\n\nconst SeverityPill = ({\n  level = 'p2',\n  label,\n  icon = true,\n}: {\n  level?: 'p0' | 'p1' | 'p2' | 'p3';\n  label?: string;\n  icon?: boolean;\n}) => (\n  <Pill\n    tone={`severity-${level}` as any}\n    icon={icon ? <Icons.alert size={10} /> : undefined}\n    role=\"status\"\n    aria-label={`Severity: ${label || SEVERITY_LABELS[level]}`}\n  >\n    {label || SEVERITY_LABELS[level]}\n  </Pill>\n);\n\nexport { SeverityPill };\n"
+    }
+  ]
+}

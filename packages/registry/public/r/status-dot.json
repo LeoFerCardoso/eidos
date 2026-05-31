@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "status-dot",
+  "type": "registry:ui",
+  "title": "Status Dot",
+  "description": "Forge Status Dot component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/status-dot.tsx",
+      "target": "components/forge/status-dot.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ninterface StatusDotProps {\n  /** Semantic colour token: \"pending\" | \"running\" | \"done\" | \"error\" | \"skipped\" | \"up\" | \"degraded\" | \"down\" | \"unknown\" | \"p0\" | \"p1\" | \"p2\" | \"p3\". Defaults to neutral. */\n  tone?: string;\n  /** Dot diameter. sm = 6px, md = 8px (default), lg = 10px. Use sm when riding with mono text, lg only in hero cards. */\n  size?: 'sm' | 'md' | 'lg';\n  /** Radiating ring animation. Reserve for in-flight states (running, degraded, p0). */\n  pulse?: boolean;\n  /** Extra classes merged via cn(). */\n  className?: string;\n  /** Accessible title attribute shown on hover. Pair with a visible text label for full a11y. */\n  title?: string;\n  /** Inline style override for the dot span. */\n  style?: React.CSSProperties;\n}\n\nconst StatusDot = ({\n  tone,\n  size = 'md',\n  pulse = false,\n  className = '',\n  title,\n  style,\n}: StatusDotProps) => {\n  const cls = ['s-dot'];\n  if (size !== 'md') cls.push(size);\n  if (tone) cls.push(tone);\n  if (pulse) cls.push('pulse');\n  if (className) cls.push(className);\n  return <span className={cls.join(' ')} aria-hidden=\"true\" title={title} style={style}/>;\n};\n\nexport { StatusDot };\n"
+    }
+  ]
+}

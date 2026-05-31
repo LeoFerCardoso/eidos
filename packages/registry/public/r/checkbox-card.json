@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox-card",
+  "type": "registry:ui",
+  "title": "Checkbox Card",
+  "description": "Forge Checkbox Card component.",
+  "registryDependencies": [
+    "forge",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/checkbox-card.tsx",
+      "target": "components/forge/checkbox-card.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\ntype CardOrientation = 'horizontal' | 'vertical';\n\ninterface CheckboxCardProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type' | 'title'> {\n  /** Primary label text. */\n  title: React.ReactNode;\n  /** Secondary description line. */\n  description?: React.ReactNode;\n  /** Optional leading icon rendered above/before the title. */\n  icon?: React.ReactNode;\n  /** Card layout — `horizontal` (default): control + content in a row;\n   *  `vertical`: control on top, content below. */\n  orientation?: CardOrientation;\n  /** Controlled checked state. */\n  checked?: boolean;\n  /** Uncontrolled default checked state. */\n  defaultChecked?: boolean;\n  /** Called when the checked state changes. */\n  onCheckedChange?: (checked: boolean) => void;\n  disabled?: boolean;\n  className?: string;\n}\n\nfunction CheckboxCard({\n  title,\n  description,\n  icon,\n  orientation = 'horizontal',\n  checked,\n  defaultChecked,\n  onCheckedChange,\n  disabled = false,\n  id,\n  className = '',\n  onChange,\n  ...rest\n}: CheckboxCardProps) {\n  const reactId = React.useId();\n  const cid = id || reactId;\n\n  // Uncontrolled internal state (used only when checked is undefined)\n  const [internal, setInternal] = React.useState(defaultChecked ?? false);\n  const isControlled = checked !== undefined;\n  const isChecked = isControlled ? checked : internal;\n\n  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n    if (!isControlled) setInternal(e.target.checked);\n    onCheckedChange?.(e.target.checked);\n    onChange?.(e);\n  };\n\n  const cardCls = [\n    'sel-card',\n    orientation === 'vertical' ? 'sel-card--vertical' : '',\n    isChecked ? 'sel-card--checked' : '',\n    disabled ? 'sel-card--disabled' : '',\n    className,\n  ].filter(Boolean).join(' ');\n\n  return (\n    <label className={cardCls} htmlFor={cid} aria-disabled={disabled || undefined}>\n      <input\n        type=\"checkbox\"\n        id={cid}\n        className=\"fc-input\"\n        checked={isControlled ? checked : undefined}\n        defaultChecked={!isControlled ? defaultChecked : undefined}\n        disabled={disabled}\n        onChange={handleChange}\n        {...rest}\n      />\n      <span className=\"fc-check-box\" aria-hidden=\"true\">\n        <span className=\"fc-check-icon\">\n          <Icons.check size={10} strokeWidth={3} color=\"currentColor\" />\n        </span>\n      </span>\n      <span className=\"sel-card__body\">\n        {icon && <span className=\"sel-card__icon\" aria-hidden=\"true\">{icon}</span>}\n        <span className=\"sel-card__title\">{title}</span>\n        {description && <span className=\"sel-card__desc\">{description}</span>}\n      </span>\n    </label>\n  );\n}\n\nexport { CheckboxCard };\n"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "code-block",
+  "type": "registry:ui",
+  "title": "Code Block",
+  "description": "Forge Code Block component.",
+  "registryDependencies": [
+    "forge",
+    "copy-button",
+    "code"
+  ],
+  "files": [
+    {
+      "path": "components/forge/code-block.tsx",
+      "target": "components/forge/code-block.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Code } from '@/components/forge/code';\nimport { CopyButton } from '@/components/forge/copy-button';\n\ninterface CodeBlockProps {\n  /** Eyebrow label shown in the block header, left-aligned. Name the snippet (\"deploy command\", \"agent loop\"). */\n  label?: string;\n  /** The raw code string. Rendered through the built-in tokenizer; copied verbatim by the copy button. */\n  code: string;\n  /** Language hint for the built-in tokenizer. Drives syntax colour. Pass an empty string to render plain mono. */\n  lang?: string;\n}\n\nconst CodeBlock = ({ label = 'snippet', code, lang = 'jsx' }: CodeBlockProps) => (\n  <div className=\"ds-frame ds-frame-codeonly\">\n    <div className=\"ds-frame-head\">\n      <span className=\"label\">{label}</span>\n      <div className=\"actions\">\n        <CopyButton text={code}/>\n      </div>\n    </div>\n    <Code lang={lang}>{code}</Code>\n  </div>\n);\n\nexport { CodeBlock };\n"
+    }
+  ]
+}

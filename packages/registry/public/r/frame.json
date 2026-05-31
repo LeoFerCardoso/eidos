@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "frame",
+  "type": "registry:ui",
+  "title": "Frame",
+  "description": "Forge Frame component.",
+  "registryDependencies": [
+    "forge",
+    "copy-button",
+    "collapsible-code"
+  ],
+  "files": [
+    {
+      "path": "components/forge/frame.tsx",
+      "target": "components/forge/frame.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { CollapsibleCode } from '@/components/forge/collapsible-code';\nimport { CopyButton } from '@/components/forge/copy-button';\n\nconst Frame = ({ label, children, code, lang='jsx', center=false, row=false, dotted=false, height }: {\n  label?: React.ReactNode;\n  children?: React.ReactNode;\n  code?: string;\n  lang?: string;\n  center?: boolean;\n  row?: boolean;\n  dotted?: boolean;\n  height?: number | string;\n}) => (\n  <div className=\"ds-frame\">\n    <div className=\"ds-frame-head\">\n      <span className=\"label\">{label}</span>\n      <div className=\"actions\">\n        {code && <CopyButton text={code}/>}\n      </div>\n    </div>\n    <div\n      className={'ds-frame-body' + (center?' center':'') + (row?' row':'') + (dotted?' dotted':'')}\n      style={height ? {minHeight: height} : undefined}\n    >\n      {children}\n    </div>\n    {code && <CollapsibleCode code={code} lang={lang}/>}\n  </div>\n);\n\nexport { Frame };\n"
+    }
+  ]
+}

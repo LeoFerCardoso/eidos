@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "citation",
+  "type": "registry:ui",
+  "title": "Citation",
+  "description": "Forge Citation component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/citation.tsx",
+      "target": "components/forge/citation.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\ninterface CitationSource {\n  id: number;\n  domain: string;\n  title: string;\n  url: string;\n  snippet: string;\n  /** Human-formatted freshness string, e.g. \"14:01 · 18s ago\" */\n  fetched?: string;\n}\n\nconst Citation = ({\n  n,\n  source,\n  href,\n  tone = 'ember',\n}: {\n  /** Numeric rank shown inside the chip. Must match the rank of the corresponding entry in Sources. */\n  n: number;\n  /** Source object used to populate the hover popover. Omit to silence the popover. */\n  source?: CitationSource;\n  /** Override the link target. Defaults to source.url. Opens in a new tab. */\n  href?: string;\n  /** ember matches the model accent; neutral is for ungrounded references. */\n  tone?: 'ember' | 'neutral';\n}) => {\n  const [open, setOpen] = React.useState(false);\n  const closeT = React.useRef<ReturnType<typeof setTimeout> | null>(null);\n  const onEnter = () => { if (closeT.current) clearTimeout(closeT.current); setOpen(true); };\n  const onLeave = () => { closeT.current = setTimeout(() => setOpen(false), 150); };\n  return (\n    <span className=\"ai-cite-wrap\" onMouseEnter={onEnter} onMouseLeave={onLeave}>\n      <button\n        className={'ai-cite-chip' + (tone === 'neutral' ? ' neutral' : '')}\n        aria-haspopup=\"dialog\"\n        aria-expanded={open}\n        aria-label={source ? `Source ${n}, ${source.domain}` : `Source ${n}`}\n        onClick={() => setOpen(v => !v)}\n        onFocus={onEnter}\n        onBlur={onLeave}\n      >{n}</button>\n      {open && source && (\n        <span className=\"ai-cite-pop\" role=\"dialog\" aria-label={source.title}>\n          <span className=\"ai-cite-pop-head\">\n            <span className=\"ai-cite-pop-dom\">{source.domain}</span>\n            <span className=\"ai-cite-pop-rank\">[{n}]</span>\n          </span>\n          <span className=\"ai-cite-pop-title\">{source.title}</span>\n          <span className=\"ai-cite-pop-snip\">{source.snippet}</span>\n          <span className=\"ai-cite-pop-foot\">\n            <Icons.link size={11}/>\n            <span className=\"url\">{(href || source.url).replace(/^https?:\\/\\//, '')}</span>\n          </span>\n        </span>\n      )}\n    </span>\n  );\n};\n\nexport { Citation };\n"
+    }
+  ]
+}

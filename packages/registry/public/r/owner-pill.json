@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "owner-pill",
+  "type": "registry:ui",
+  "title": "Owner Pill",
+  "description": "Forge Owner Pill component.",
+  "registryDependencies": [
+    "forge",
+    "avatar"
+  ],
+  "files": [
+    {
+      "path": "components/forge/owner-pill.tsx",
+      "target": "components/forge/owner-pill.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Avatar } from '@/components/forge/avatar';\n\nfunction initials(name: string): string {\n  const words = name.trim().split(/\\s+/);\n  if (words.length === 1) return (words[0][0] ?? '').toUpperCase();\n  return ((words[0][0] ?? '') + (words[words.length - 1][0] ?? '')).toUpperCase();\n}\n\ninterface OwnerPillProps {\n  /** Person descriptor. `src` (optional) renders a photo avatar with initials fallback. */\n  person?: { name: string; initials: string; role?: string; src?: string };\n  /** Role appended after the name in muted weight (\"· SRE\"). */\n  role?: string;\n  /** Ember-tint the avatar — reserve for the current user / \"you\". */\n  ember?: boolean;\n}\n\nconst OwnerPill = ({ person, role, ember = false }: OwnerPillProps) => {\n  if (!person) return null;\n  return (\n    <span className=\"owner-pill\" title={person.name + (role ? ` — ${role}` : '')}>\n      <Avatar p={person} src={person.src} size={20} ember={ember}/>\n      <span className=\"owner-pill-text\">\n        <span className=\"name\">{person.name}</span>\n        {role && <span className=\"role\">· {role}</span>}\n      </span>\n    </span>\n  );\n};\n\nexport { OwnerPill };\n"
+    }
+  ]
+}

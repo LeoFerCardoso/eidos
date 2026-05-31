@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "queue",
+  "type": "registry:ui",
+  "title": "Queue",
+  "description": "Forge Queue component.",
+  "dependencies": [
+    "ai"
+  ],
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/queue.tsx",
+      "target": "components/forge/queue.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\nconst Queue = ({\n  title = 'Queued', items = [], onRemove,\n}: {\n  /** Header label shown beside the list icon. Update to match product voice (\"Next up\", \"Pending\"). */\n  title?: string;\n  /** Items in order. Accepts plain strings or objects with a text field. */\n  items?: any[];\n  /** Called with the 0-based index of the removed item. When omitted, the remove button is not rendered. */\n  onRemove?: (i: number) => void;\n}) => {\n  // Roving focus after a remove: keep refs to the per-item remove buttons and,\n  // once the parent has re-rendered with the shorter list, move focus to the\n  // remove button now occupying the removed index (the next item), falling back\n  // to the new last item — so keyboard users can keep clearing without lifting\n  // their hands. Documented in queue.tsx (Keyboard a11y card).\n  const btnRefs = React.useRef<(HTMLButtonElement | null)[]>([]);\n  const pendingFocus = React.useRef<number | null>(null);\n\n  const handleRemove = (i: number) => {\n    pendingFocus.current = i;\n    onRemove?.(i);\n  };\n\n  React.useLayoutEffect(() => {\n    const target = pendingFocus.current;\n    pendingFocus.current = null;\n    if (target === null) return;\n    if (items.length === 0) return; // list emptied — nothing to focus\n    const idx = Math.min(target, items.length - 1);\n    btnRefs.current[idx]?.focus();\n  }, [items.length]);\n\n  return (\n    <div className=\"ai-queue\">\n      <div className=\"ai-queue-head\">\n        <Icons.list size={12}/><span>{title}</span>\n        <span className=\"count\" role=\"status\" aria-live=\"polite\">{items.length}</span>\n      </div>\n      <ol className=\"ai-queue-list\">\n        {items.map((it, i) => (\n          <li key={i} className=\"ai-queue-item\">\n            <span className=\"ai-queue-pos\">{i + 1}</span>\n            <span className=\"ai-queue-text\">{typeof it === 'string' ? it : it.text}</span>\n            {onRemove && (\n              <button\n                className=\"ai-queue-remove\"\n                aria-label=\"Remove from queue\"\n                ref={el => { btnRefs.current[i] = el; }}\n                onClick={() => handleRemove(i)}\n              >\n                <Icons.x size={12}/>\n              </button>\n            )}\n          </li>\n        ))}\n      </ol>\n    </div>\n  );\n};\n\nexport { Queue };\n"
+    }
+  ]
+}

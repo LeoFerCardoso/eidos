@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "history-group",
+  "type": "registry:ui",
+  "title": "History Group",
+  "description": "Forge History Group component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "history-item"
+  ],
+  "files": [
+    {
+      "path": "components/forge/history-group.tsx",
+      "target": "components/forge/history-group.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { HistoryItem } from '@/components/forge/history-item';\n\ninterface HistoryThread {\n  id: string;\n  title: string;\n  preview: string;\n  /** ISO date string used for recency grouping. */\n  updatedAt?: string;\n  starred?: boolean;\n  active?: boolean;\n  /** Associates the thread with a project when groupBy=\"project\". */\n  projectId?: string;\n}\n\ninterface HistoryGroupProps {\n  /** Bucket label displayed in the group header, e.g. \"Today\", \"Yesterday\". */\n  label: string;\n  /** The threads belonging to this bucket. */\n  threads: HistoryThread[];\n  /** Active search query forwarded to each HistoryItem for highlight. */\n  query?: string;\n}\n\nconst HistoryGroup = ({\n  label,\n  threads,\n  query = '',\n}: HistoryGroupProps) => (\n  <div className=\"ai-hist-group\">\n    <div className=\"ai-hist-group-head\">\n      <span>{label}</span>\n      <span>{threads.length}</span>\n    </div>\n    {threads.map(t => <HistoryItem key={t.id} thread={t} query={query}/>)}\n  </div>\n);\n\nexport { HistoryGroup };\n"
+    }
+  ]
+}

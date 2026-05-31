@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "title": "Avatar",
+  "description": "Forge Avatar component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/avatar.tsx",
+      "target": "components/forge/avatar.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ntype AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';\n\nconst AVATAR_PRESET: Record<AvatarSize, number> = {\n  xs: 18, sm: 22, md: 28, lg: 36, xl: 48,\n};\n\nfunction initials(name: string): string {\n  const words = name.trim().split(/\\s+/);\n  if (words.length === 1) return (words[0][0] ?? '').toUpperCase();\n  return ((words[0][0] ?? '') + (words[words.length - 1][0] ?? '')).toUpperCase();\n}\n\ninterface AvatarProps {\n  /**\n   * Full name — used for the `title` tooltip and as the source for computed\n   * initials when no `children` or `src` is provided.\n   */\n  name?: string;\n  /** Size preset. xs=18 · sm=22 · md=28 (default) · lg=36 · xl=48. Also accepts a raw pixel number for legacy callers. */\n  size?: AvatarSize | number;\n  /** Image URL. Renders an `<img>` that falls back to initials on load error. */\n  src?: string;\n  /** Presence dot in the trailing-bottom corner. online · away · busy · offline. */\n  status?: 'online' | 'away' | 'busy' | 'offline';\n  /** Tints background with --ember-soft + ember text. Reserve for the current user / \"you\". */\n  ember?: boolean;\n  /** Override the initials — e.g. an icon for bot / system users. */\n  children?: React.ReactNode;\n  /** Extra utility classes merged via cn(). */\n  className?: string;\n  /**\n   * @deprecated Pass `name` + `children` instead.\n   * Legacy person descriptor — { name, initials, role? }.\n   */\n  p?: { name: string; initials: string; role?: string };\n}\n\nfunction AvatarBase({\n  name: nameProp,\n  size = 'md',\n  src,\n  status,\n  ember = false,\n  children,\n  className,\n  p,\n}: AvatarProps) {\n  const [imgError, setImgError] = React.useState(false);\n\n  // Resolution: name from explicit prop or legacy p?.name\n  const resolvedName = nameProp ?? p?.name ?? '';\n  // Diameter: preset string or explicit pixel number (legacy callers)\n  const dia = typeof size === 'number' ? size : AVATAR_PRESET[size ?? 'md'];\n  // Initials: children > legacy p?.initials > computed from name\n  const resolvedInitials = children ?? p?.initials ?? (resolvedName ? initials(resolvedName) : null);\n\n  const cls = ['avatar', ember ? 'ember' : '', className ?? ''].filter(Boolean).join(' ');\n\n  return (\n    <span\n      className={cls}\n      style={{ width: dia, height: dia, fontSize: dia * 0.36 }}\n      title={resolvedName || undefined}\n    >\n      {src && !imgError\n        ? <img src={src} alt={resolvedName || ''} onError={() => setImgError(true)} />\n        : resolvedInitials}\n      {status && (\n        <span\n          className={['status-dot', status !== 'online' ? status : ''].filter(Boolean).join(' ')}\n          aria-hidden=\"true\"\n        />\n      )}\n    </span>\n  );\n}\n\nconst Avatar = AvatarBase;\n\nexport { Avatar };\n"
+    }
+  ]
+}

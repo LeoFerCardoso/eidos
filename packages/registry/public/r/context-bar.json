@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "context-bar",
+  "type": "registry:ui",
+  "title": "Context Bar",
+  "description": "Forge Context Bar component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "context"
+  ],
+  "files": [
+    {
+      "path": "components/forge/context-bar.tsx",
+      "target": "components/forge/context-bar.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Context } from '@/components/forge/context';\n\nconst ContextBar = ({\n  used = 0, total, files, thresholdMid = 0.6, thresholdWarn = 0.85, className, style,\n}: {\n  /** Tokens used so far in this conversation. */\n  used?: number;\n  /** Size of the model's context window (required). */\n  total: number;\n  /** Optional file count shown alongside the token numbers. */\n  files?: number;\n  /** Percentage [0–1] where the tone shifts from ok to mid. */\n  thresholdMid?: number;\n  /** Percentage [0–1] where the tone shifts from mid to warn. */\n  thresholdWarn?: number;\n  /** Extra class names on the root span. */\n  className?: string;\n  /** Inline styles on the root span. */\n  style?: React.CSSProperties;\n}) => (\n  <Context\n    used={used}\n    total={total}\n    files={files}\n    variant=\"bar\"\n    thresholdMid={thresholdMid}\n    thresholdWarn={thresholdWarn}\n    className={className}\n    style={style}\n  />\n);\n\nexport { ContextBar };\n"
+    }
+  ]
+}

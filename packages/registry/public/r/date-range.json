@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "date-range",
+  "type": "registry:ui",
+  "title": "Date Range",
+  "description": "Forge Date Range component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/date-range.tsx",
+      "target": "components/forge/date-range.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ninterface DateRange {\n  start: Date | null;\n  end: Date | null;\n}\n\nexport { DateRange };\n"
+    }
+  ]
+}

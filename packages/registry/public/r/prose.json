@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prose",
+  "type": "registry:ui",
+  "title": "Prose",
+  "description": "Forge Prose component.",
+  "dependencies": [
+    "react-markdown",
+    "remark-gfm"
+  ],
+  "registryDependencies": [
+    "forge",
+    "forge-ai"
+  ],
+  "files": [
+    {
+      "path": "components/forge/prose.tsx",
+      "target": "components/forge/prose.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst AICaret = () => <span className=\"ai-caret\" aria-hidden=\"true\"/>;\n\nconst injectCaret = (node: React.ReactNode): React.ReactNode => {\n  if (typeof node === 'string' || typeof node === 'number') {\n    return <>{node}<AICaret key=\"__caret\"/></>;\n  }\n  if (!React.isValidElement(node)) return node;\n  const inner = React.Children.toArray((node.props as any).children);\n  if (inner.length === 0) {\n    return React.cloneElement(node, { key: node.key }, <AICaret key=\"__caret\"/>);\n  }\n  const lastIdx = inner.length - 1;\n  const next = [...inner.slice(0, lastIdx), injectCaret(inner[lastIdx])];\n  return React.cloneElement(node, { key: node.key }, ...next);\n};\n\nconst withStreamingCaret = (children: React.ReactNode): React.ReactNode[] => {\n  const kids = React.Children.toArray(children);\n  if (kids.length === 0) return [<AICaret key=\"__caret-empty\"/>];\n  const lastIdx = kids.length - 1;\n  return [...kids.slice(0, lastIdx), injectCaret(kids[lastIdx])];\n};\n\nconst Prose = ({\n  streaming = false,\n  as: Tag = 'div',\n  className,\n  children,\n  ...rest\n}: {\n  streaming?: boolean;\n  as?: React.ElementType;\n  className?: string;\n  children?: React.ReactNode;\n  [x: string]: any;\n}) => (\n  <Tag\n    className={'ai-prose' + (className ? ' ' + className : '')}\n    {...(streaming ? { 'aria-live': 'polite', 'aria-busy': true } : {})}\n    {...rest}\n  >\n    {streaming ? withStreamingCaret(children) : children}\n  </Tag>\n);\n\nexport { Prose };\n"
+    }
+  ]
+}

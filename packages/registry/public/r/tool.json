@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tool",
+  "type": "registry:ui",
+  "title": "Tool",
+  "description": "Forge Tool component.",
+  "dependencies": [
+    "ai"
+  ],
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons",
+    "tool-status"
+  ],
+  "files": [
+    {
+      "path": "components/forge/tool.tsx",
+      "target": "components/forge/tool.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\nimport { ToolStatus } from '@/components/forge/tool-status';\n\nconst Tool = ({\n  name,\n  ns = 'forge.ai',\n  state,\n  ms,\n  defaultOpen,\n  children,\n}: {\n  /** Tool function name. Mono-rendered after the namespace prefix. */\n  name: string;\n  /** Namespace prefix shown dimmer than the name — reads like an import path. */\n  ns?: string;\n  /** Drives the status pill, the auto-open behaviour, and which sections render. */\n  state: string;\n  /** Call duration in ms. Shown next to the name in mono when state enters an output state. */\n  ms?: number;\n  /** Manual override for the initial open state. Defaults to open on output-available / output-error. */\n  defaultOpen?: boolean;\n  /** ToolInput + (optional) ToolOutput slots. */\n  children?: React.ReactNode;\n}) => {\n  const autoOpen = state === 'output-available' || state === 'output-error';\n  const [open, setOpen] = React.useState(defaultOpen ?? autoOpen);\n  const [touched, setTouched] = React.useState(false);\n  React.useEffect(() => {\n    if (touched) return;\n    setOpen(autoOpen);\n  }, [autoOpen, touched]);\n  return (\n    <div className=\"tool\" data-open={open ? 'true' : 'false'}>\n      <button\n        className=\"tool-head\"\n        onClick={() => { setTouched(true); setOpen(v => !v); }}\n        aria-expanded={open}\n      >\n        <span className=\"ico\"><Icons.zap size={13}/></span>\n        <span className=\"name\"><span className=\"ns\">{ns}.</span>{name}</span>\n        {typeof ms === 'number' && <span className=\"ms\">{ms} ms</span>}\n        <span role=\"status\" aria-live=\"polite\" className=\"tool-status-live\"><ToolStatus state={state}/></span>\n        <Icons.chevronDown size={13} className=\"chev\"/>\n      </button>\n      <div className=\"tool-body\" aria-hidden={!open}>\n        {children}\n      </div>\n    </div>\n  );\n};\n\nexport { Tool };\n"
+    }
+  ]
+}

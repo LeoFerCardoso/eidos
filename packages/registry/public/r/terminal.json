@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "terminal",
+  "type": "registry:ui",
+  "title": "Terminal",
+  "description": "Forge Terminal component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/terminal.tsx",
+      "target": "components/forge/terminal.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\ninterface TerminalLine {\n  kind: 'in' | 'out' | 'err' | 'note';\n  text: string;\n}\n\ninterface TerminalProps {\n  /** Ordered list of lines to render. Mix in/out/err/note freely. */\n  lines?: TerminalLine[];\n  /** Prompt prefix shown before in lines. Use \">\" for PowerShell / Windows conventions. */\n  prompt?: string;\n  /** Session label shown in the title bar (e.g. \"session · billing-svc\"). */\n  title?: string;\n  /** Status pill in the title bar. \"running\" activates aria-live=\"polite\". */\n  status?: 'idle' | 'running' | 'done' | 'error';\n  /** Optional footer slot rendered below the line list (e.g. a live input). */\n  children?: React.ReactNode;\n  /** Additional class names on the root element. */\n  className?: string;\n}\n\nconst Terminal = ({\n  lines = [], prompt = '$', title, status, children, className,\n}: TerminalProps) => (\n  <div className={'ai-term' + (className ? ' ' + className : '')} role=\"log\" aria-live={status === 'running' ? 'polite' : undefined}>\n    {(title || status) && (\n      <div className=\"ai-term-head\">\n        <span className=\"ai-term-ico\" aria-hidden=\"true\"><Icons.terminal size={14}/></span>\n        {title && <span className=\"ai-term-title\">{title}</span>}\n        {status && <span className={'ai-term-status ' + status}>{status}</span>}\n      </div>\n    )}\n    <div className=\"ai-term-body\" dir=\"ltr\">\n      {lines.map((l, i) => {\n        if (l.kind === 'in') {\n          return (\n            <div key={i} className=\"ai-term-line in\">\n              <span className=\"ai-term-prompt\">{prompt}</span>\n              <span className=\"ai-term-text\">{l.text}</span>\n            </div>\n          );\n        }\n        if (l.kind === 'err') {\n          return (\n            <div key={i} className=\"ai-term-line err\">\n              <span className=\"ai-term-mark\"><Icons.alert size={11}/></span>\n              <span className=\"ai-term-text\">{l.text}</span>\n            </div>\n          );\n        }\n        if (l.kind === 'note') {\n          return <div key={i} className=\"ai-term-line note\">{l.text}</div>;\n        }\n        return <div key={i} className=\"ai-term-line out\"><span className=\"ai-term-text\">{l.text}</span></div>;\n      })}\n      {children}\n    </div>\n  </div>\n);\n\nexport { Terminal };\n"
+    }
+  ]
+}

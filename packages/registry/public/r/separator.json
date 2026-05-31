@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "type": "registry:ui",
+  "title": "Separator",
+  "description": "Forge Separator component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/separator.tsx",
+      "target": "components/forge/separator.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\n\ninterface SeparatorProps extends React.HTMLAttributes<HTMLElement> {\n  /**\n   * Layout direction.\n   * Vertical needs a sized flex-row parent (the element stretches to row height).\n   * @default \"horizontal\"\n   */\n  orientation?: 'horizontal' | 'vertical';\n  /**\n   * Render as a solid hairline (default) or dashed for softer, non-structural breaks.\n   * @default \"solid\"\n   */\n  variant?: 'solid' | 'dashed';\n  /**\n   * When true the separator is purely decorative — hidden from assistive tech\n   * (aria-hidden=\"true\", no role).\n   * When false the separator carries structural meaning: role=\"separator\" and\n   * aria-orientation are set so screen readers announce the boundary.\n   * @default true\n   */\n  decorative?: boolean;\n  /** Extra utility classes merged via cn(). */\n  className?: string;\n}\n\nconst Separator = React.forwardRef<HTMLElement, SeparatorProps>(\n  (\n    {\n      orientation = 'horizontal',\n      variant = 'solid',\n      decorative = true,\n      className,\n      ...rest\n    },\n    ref,\n  ) => {\n    // Horizontal: render as <hr> (semantic default for a horizontal rule).\n    // Vertical: render as <span> (a non-phrasing-content element suits inline row use).\n    const Tag = orientation === 'horizontal' ? 'hr' : 'span';\n\n    const ariaProps: React.AriaAttributes & { role?: string } = decorative\n      ? { 'aria-hidden': 'true' as const }\n      : {\n          role: 'separator',\n          'aria-orientation': orientation,\n        };\n\n    return (\n      <Tag\n        ref={ref as React.Ref<HTMLHRElement & HTMLSpanElement>}\n        className={cn(\n          'separator',\n          orientation,\n          variant === 'dashed' && 'dashed',\n          className,\n        )}\n        {...ariaProps}\n        {...rest}\n      />\n    );\n  },\n);\n\nexport { Separator };\n"
+    }
+  ]
+}

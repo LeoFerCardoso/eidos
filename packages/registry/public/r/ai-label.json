@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ai-label",
+  "type": "registry:ui",
+  "title": "Ai Label",
+  "description": "Forge Ai Label component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai"
+  ],
+  "files": [
+    {
+      "path": "components/forge/ai-label.tsx",
+      "target": "components/forge/ai-label.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst Spark = ({ size = 10 }) => (\n  <svg width={size} height={size} viewBox=\"0 0 24 24\" aria-hidden=\"true\">\n    <path d=\"M 12 1 C 12 6, 18 12, 23 12 C 18 12, 12 18, 12 23 C 12 18, 6 12, 1 12 C 6 12, 12 6, 12 1 Z\" fill=\"currentColor\"/>\n  </svg>\n);\n\nconst AILabel = ({\n  variant = 'mark',\n  size = 'md',\n  revoked = false,\n  interactive = false,\n  onClick,\n  children,\n  style,\n}: {\n  /** Visual flavor. box=22px tile, mark=text+sparkle, pill=tinted background, dot=icon-only. */\n  variant?: 'box' | 'mark' | 'pill' | 'dot';\n  /** Scale. sm=18px, md=22px, lg=28px. */\n  size?: 'sm' | 'md' | 'lg';\n  /** When true, renders strikethrough + muted color to flag rejected AI output. */\n  revoked?: boolean;\n  /** Renders as a button with focus ring + keyboard support. Pair with onClick. */\n  interactive?: boolean;\n  /** Fires on click/Enter/Space when interactive=true. */\n  onClick?: React.MouseEventHandler<HTMLSpanElement>;\n  /** Text label. Defaults to \"AI\"; pass any short token (Beta, ML, GPT) if needed. */\n  children?: React.ReactNode;\n  /** Inline styles merged onto the root span. */\n  style?: React.CSSProperties;\n}) => {\n  const text = children || 'AI';\n\n  const cls = ['ai-label', variant];\n  if (size !== 'md') cls.push(size);\n  if (revoked) cls.push('revoked');\n  if (interactive) cls.push('is-trigger');\n\n  const onKey = interactive\n    ? (e: React.KeyboardEvent<HTMLSpanElement>) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (onClick) onClick(e as unknown as React.MouseEvent<HTMLSpanElement>); } }\n    : undefined;\n\n  return (\n    <span\n      className={cls.join(' ')}\n      role={interactive ? 'button' : undefined}\n      tabIndex={interactive ? 0 : undefined}\n      onClick={onClick}\n      onKeyDown={onKey}\n      aria-label={interactive ? 'AI-generated content — view source' : 'AI-generated content'}\n      style={style}\n    >\n      <span className=\"ai-glyph\"><Spark/></span>\n      <span className=\"ai-text\">{text}</span>\n    </span>\n  );\n};\n\nexport { AILabel };\n"
+    }
+  ]
+}

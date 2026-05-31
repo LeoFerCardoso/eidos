@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "message-actions",
+  "type": "registry:ui",
+  "title": "Message Actions",
+  "description": "Forge Message Actions component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/message-actions.tsx",
+      "target": "components/forge/message-actions.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\nconst MessageActions = ({\n  surface = 'message',\n  onCopy,\n  onRegen,\n  onShare,\n  vote,\n  onVote,\n  extra,\n}: {\n  /** Switch between .msg-action (message) and .ai-resp-action (response) chrome. */\n  surface?: 'message' | 'response';\n  /** Copy handler fired when the copy button is clicked. */\n  onCopy?: () => void;\n  /** Regenerate handler fired when the regenerate button is clicked. */\n  onRegen?: () => void;\n  /** Share handler shown only when surface=\"response\". */\n  onShare?: () => void;\n  /** Controlled vote state — \"up\", \"down\", or null (none). */\n  vote?: 'up' | 'down' | null;\n  /** Called with the toggled vote value when a vote button is clicked. */\n  onVote?: (next: 'up' | 'down' | null) => void;\n  /** Extra ReactNode appended after the canonical buttons. */\n  extra?: React.ReactNode;\n}) => {\n  const base = surface === 'response' ? 'ai-resp-action' : 'msg-action';\n  const sz = surface === 'response' ? 14 : 13;\n  return (\n    <>\n      <button className={base} title=\"Copy\" onClick={onCopy}><Icons.copy size={sz}/></button>\n      <button className={base} title=\"Regenerate\" onClick={onRegen}><Icons.refresh size={sz}/></button>\n      <button\n        className={base + ' thumb-up' + (vote === 'up' ? ' is-on' : '')}\n        title=\"Helpful\" aria-pressed={vote === 'up'}\n        onClick={() => onVote && onVote(vote === 'up' ? null : 'up')}\n      ><Icons.check size={sz}/></button>\n      <button\n        className={base + ' thumb-down' + (vote === 'down' ? ' is-on' : '')}\n        title=\"Not helpful\" aria-pressed={vote === 'down'}\n        onClick={() => onVote && onVote(vote === 'down' ? null : 'down')}\n      ><Icons.x size={sz}/></button>\n      {surface === 'response' && (\n        <button className={base} title=\"Share\" style={{ marginInlineStart: 6 }} onClick={onShare}>\n          <Icons.share size={sz}/>\n        </button>\n      )}\n      {extra}\n    </>\n  );\n};\n\nexport { MessageActions };\n"
+    }
+  ]
+}

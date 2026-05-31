@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input",
+  "type": "registry:ui",
+  "title": "Input",
+  "description": "Forge Input component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/input.tsx",
+      "target": "components/forge/input.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ntype Size = 'sm' | 'md' | 'lg';\n\ninterface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {\n  /** Field label rendered above the control. */\n  label?: React.ReactNode;\n  /** Helper text under the control (hidden when `error` is set). */\n  help?: React.ReactNode;\n  /** Error message — sets aria-invalid and renders in the danger tone. */\n  error?: React.ReactNode;\n  /** Leading addon (text, icon, or element) inside the input group. */\n  prefix?: React.ReactNode;\n  /** Trailing addon inside the input group. */\n  suffix?: React.ReactNode;\n  /**\n   * Field height — 28 / 36 / 44 px.\n   * @default \"md\"\n   */\n  size?: Size;\n  /**\n   * Paints the danger ring on the surrounding group and sets aria-invalid.\n   * @default false\n   */\n  invalid?: boolean;\n}\n\nfunction Input({ label, help, error, prefix, suffix, id, className = '', invalid, size, ...rest }: InputProps) {\n  const reactId = React.useId();\n  const fid = id || reactId;\n  const describedBy = error ? `${fid}-err` : help ? `${fid}-help` : undefined;\n  return (\n    <div className=\"in-field\">\n      {label && <label className=\"in-label\" htmlFor={fid}>{label}</label>}\n      <span className={`in-group${error ? ' is-invalid' : ''}`} aria-invalid={error ? true : undefined}>\n        {prefix != null && <span className=\"in-addon\">{prefix}</span>}\n        <input\n          id={fid}\n          className={`in-control ${className}`.trim()}\n          aria-invalid={error ? true : undefined}\n          aria-describedby={describedBy}\n          {...rest}\n        />\n        {suffix != null && <span className=\"in-addon\">{suffix}</span>}\n      </span>\n      {(help || error) && (\n        <span className=\"in-helprow\">\n          {error\n            ? <span className=\"in-error\" id={`${fid}-err`}>{error}</span>\n            : <span className=\"in-help\" id={`${fid}-help`}>{help}</span>}\n        </span>\n      )}\n    </div>\n  );\n}\n\nexport { Input };\n"
+    }
+  ]
+}

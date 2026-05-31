@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "type": "registry:ui",
+  "title": "Checkbox",
+  "description": "Forge Checkbox component.",
+  "registryDependencies": [
+    "forge",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/checkbox.tsx",
+      "target": "components/forge/checkbox.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\ntype Size = 'sm' | 'md' | 'lg';\n\nconst fcCls = (size: Size, block: boolean, invalid: boolean, extra = '') =>\n  ['fc', size !== 'md' ? size : '', block ? 'block' : '', invalid ? 'invalid' : '', extra]\n    .filter(Boolean).join(' ');\n\ninterface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {\n  /** Label text rendered next to the box. */\n  label?: React.ReactNode;\n  /**\n   * Secondary line under the label — also aliased as `description`.\n   * Switches the wrapper to the two-line \"block\" layout.\n   */\n  description?: React.ReactNode;\n  /**\n   * Optional helper text under the label (alias for `description`).\n   * Switches the wrapper to the two-line \"block\" layout.\n   */\n  desc?: React.ReactNode;\n  /** Render the visual third (indeterminate) state. Does not affect `checked`. */\n  indeterminate?: boolean;\n  /**\n   * Box footprint — 14 / 16 / 18 px.\n   * @default \"md\"\n   */\n  size?: Size;\n  /**\n   * Uncontrolled initial checked state.\n   * @default false\n   */\n  defaultChecked?: boolean;\n  /**\n   * Fires when the user toggles the box. Convenience alias with the new state\n   * value instead of requiring the caller to read `event.target.checked`.\n   */\n  onCheckedChange?: (checked: boolean) => void;\n  /** Form-submission name. Pair with `value` in a native form. */\n  name?: string;\n  /** Danger-tinted invalid state — border turns red. */\n  error?: boolean;\n}\n\nfunction Checkbox({ label, description, indeterminate = false, disabled, size = 'md', id, className = '', ...rest }: CheckboxProps) {\n  const reactId = React.useId();\n  const cid = id || reactId;\n  const ref = React.useRef<HTMLInputElement>(null);\n  React.useEffect(() => { if (ref.current) ref.current.indeterminate = indeterminate; }, [indeterminate]);\n  return (\n    <label className={`${fcCls(size, !!description, false)} ${className}`.trim()} htmlFor={cid} aria-disabled={disabled || undefined}>\n      <input\n        ref={ref}\n        type=\"checkbox\"\n        id={cid}\n        className={`fc-input${indeterminate ? ' indeterminate' : ''}`}\n        disabled={disabled}\n        aria-describedby={description ? `${cid}-desc` : undefined}\n        {...rest}\n      />\n      <span className=\"fc-check-box\" aria-hidden=\"true\">\n        {indeterminate\n          ? <span className=\"fc-check-dash\" />\n          : <span className=\"fc-check-icon\"><Icons.check size={10} strokeWidth={3} color=\"currentColor\" /></span>}\n      </span>\n      {(label || description) && (\n        <span className=\"fc-text\">\n          {label && <span className=\"fc-label\">{label}</span>}\n          {description && <span className=\"fc-desc\" id={`${cid}-desc`}>{description}</span>}\n        </span>\n      )}\n    </label>\n  );\n}\n\nexport { Checkbox };\n"
+    }
+  ]
+}

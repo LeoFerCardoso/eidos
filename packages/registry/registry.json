@@ -1,0 +1,3175 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "forge",
+  "homepage": "https://forge.equifax.dev",
+  "items": [
+    {
+      "name": "forge",
+      "type": "registry:style",
+      "title": "Forge base",
+      "description": "The Forge design-system foundation — semantic design tokens (OKLCH, light + dark), the shared ds.css component layer, and the cn() class helper. Install this once before adding any component.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "source": "styles/tokens.css",
+          "type": "registry:file",
+          "target": "styles/forge/tokens.css"
+        },
+        {
+          "source": "styles/ds.css",
+          "type": "registry:file",
+          "target": "styles/forge/ds.css"
+        },
+        {
+          "source": "src/forge/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "lib/utils.ts"
+        }
+      ]
+    },
+    {
+      "name": "forge-ai",
+      "type": "registry:file",
+      "title": "Forge AI styles",
+      "description": "The ai.css layer that styles the Forge AI components (.ai-* classes). Pulled automatically when you add an AI component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "styles/ai.css",
+          "type": "registry:file",
+          "target": "styles/forge/ai.css"
+        }
+      ]
+    },
+    {
+      "name": "icons",
+      "type": "registry:ui",
+      "title": "Icons",
+      "description": "Forge Icons component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/icons.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/icons.tsx"
+        }
+      ]
+    },
+    {
+      "name": "forge-mark",
+      "type": "registry:ui",
+      "title": "Forge Mark",
+      "description": "Forge Forge Mark component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/forge-mark.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/forge-mark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pill",
+      "type": "registry:ui",
+      "title": "Pill",
+      "description": "Forge Pill component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/pill.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/pill.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chip",
+      "type": "registry:ui",
+      "title": "Chip",
+      "description": "Forge Chip component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/chip.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/chip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Forge Badge component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/badge.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sparkline",
+      "type": "registry:ui",
+      "title": "Sparkline",
+      "description": "Forge Sparkline component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/sparkline.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/sparkline.tsx"
+        }
+      ]
+    },
+    {
+      "name": "counter",
+      "type": "registry:ui",
+      "title": "Counter",
+      "description": "Forge Counter component.",
+      "registryDependencies": [
+        "forge",
+        "count-up"
+      ],
+      "files": [
+        {
+          "source": "src/forge/counter.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/counter.tsx"
+        }
+      ]
+    },
+    {
+      "name": "count-up",
+      "type": "registry:ui",
+      "title": "Count Up",
+      "description": "Forge Count Up component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/count-up.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/count-up.tsx"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Forge Avatar component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/avatar.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/avatar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tier-badge",
+      "type": "registry:ui",
+      "title": "Tier Badge",
+      "description": "Forge Tier Badge component.",
+      "registryDependencies": [
+        "forge",
+        "chip"
+      ],
+      "files": [
+        {
+          "source": "src/forge/tier-badge.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/tier-badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "lang-badge",
+      "type": "registry:ui",
+      "title": "Lang Badge",
+      "description": "Forge Lang Badge component.",
+      "registryDependencies": [
+        "forge",
+        "chip"
+      ],
+      "files": [
+        {
+          "source": "src/forge/lang-badge.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/lang-badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "Forge Empty component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/empty.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/empty.tsx"
+        }
+      ]
+    },
+    {
+      "name": "status-dot",
+      "type": "registry:ui",
+      "title": "Status Dot",
+      "description": "Forge Status Dot component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/status-dot.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/status-dot.tsx"
+        }
+      ]
+    },
+    {
+      "name": "trend",
+      "type": "registry:ui",
+      "title": "Trend",
+      "description": "Forge Trend component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/trend.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/trend.tsx"
+        }
+      ]
+    },
+    {
+      "name": "health-badge",
+      "type": "registry:ui",
+      "title": "Health Badge",
+      "description": "Forge Health Badge component.",
+      "registryDependencies": [
+        "forge",
+        "pill"
+      ],
+      "files": [
+        {
+          "source": "src/forge/health-badge.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/health-badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "severity-pill",
+      "type": "registry:ui",
+      "title": "Severity Pill",
+      "description": "Forge Severity Pill component.",
+      "registryDependencies": [
+        "forge",
+        "pill",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/severity-pill.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/severity-pill.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Forge Kbd component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/kbd.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/kbd.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kbd-row",
+      "type": "registry:ui",
+      "title": "Kbd Row",
+      "description": "Forge Kbd Row component.",
+      "registryDependencies": [
+        "forge",
+        "kbd"
+      ],
+      "files": [
+        {
+          "source": "src/forge/kbd-row.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/kbd-row.tsx"
+        }
+      ]
+    },
+    {
+      "name": "copy-chip",
+      "type": "registry:ui",
+      "title": "Copy Chip",
+      "description": "Forge Copy Chip component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/copy-chip.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/copy-chip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "relative-time",
+      "type": "registry:ui",
+      "title": "Relative Time",
+      "description": "Forge Relative Time component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/relative-time.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/relative-time.tsx"
+        }
+      ]
+    },
+    {
+      "name": "owner-pill",
+      "type": "registry:ui",
+      "title": "Owner Pill",
+      "description": "Forge Owner Pill component.",
+      "registryDependencies": [
+        "forge",
+        "avatar"
+      ],
+      "files": [
+        {
+          "source": "src/forge/owner-pill.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/owner-pill.tsx"
+        }
+      ]
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:ui",
+      "title": "Copy Button",
+      "description": "Forge Copy Button component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/copy-button.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/copy-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "code",
+      "type": "registry:ui",
+      "title": "Code",
+      "description": "Forge Code component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/code.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/code.tsx"
+        }
+      ]
+    },
+    {
+      "name": "code-block",
+      "type": "registry:ui",
+      "title": "Code Block",
+      "description": "Forge Code Block component.",
+      "registryDependencies": [
+        "forge",
+        "copy-button",
+        "code"
+      ],
+      "files": [
+        {
+          "source": "src/forge/code-block.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/code-block.tsx"
+        }
+      ]
+    },
+    {
+      "name": "code-tree",
+      "type": "registry:ui",
+      "title": "Code Tree",
+      "description": "Forge Code Tree component.",
+      "registryDependencies": [
+        "forge",
+        "copy-button",
+        "icons",
+        "code"
+      ],
+      "files": [
+        {
+          "source": "src/forge/code-tree.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/code-tree.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tabbed-code",
+      "type": "registry:ui",
+      "title": "Tabbed Code",
+      "description": "Forge Tabbed Code component.",
+      "registryDependencies": [
+        "forge",
+        "copy-button",
+        "code"
+      ],
+      "files": [
+        {
+          "source": "src/forge/tabbed-code.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/tabbed-code.tsx"
+        }
+      ]
+    },
+    {
+      "name": "collapsible-code",
+      "type": "registry:ui",
+      "title": "Collapsible Code",
+      "description": "Forge Collapsible Code component.",
+      "registryDependencies": [
+        "forge",
+        "code",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/collapsible-code.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/collapsible-code.tsx"
+        }
+      ]
+    },
+    {
+      "name": "frame",
+      "type": "registry:ui",
+      "title": "Frame",
+      "description": "Forge Frame component.",
+      "registryDependencies": [
+        "forge",
+        "copy-button",
+        "collapsible-code"
+      ],
+      "files": [
+        {
+          "source": "src/forge/frame.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/frame.tsx"
+        }
+      ]
+    },
+    {
+      "name": "props-table",
+      "type": "registry:ui",
+      "title": "Props Table",
+      "description": "Forge Props Table component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/props-table.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/props-table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sub-head",
+      "type": "registry:ui",
+      "title": "Sub Head",
+      "description": "Forge Sub Head component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/sub-head.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/sub-head.tsx"
+        }
+      ]
+    },
+    {
+      "name": "lede",
+      "type": "registry:ui",
+      "title": "Lede",
+      "description": "Forge Lede component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/lede.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/lede.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mono",
+      "type": "registry:ui",
+      "title": "Mono",
+      "description": "Forge Mono component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/mono.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/mono.tsx"
+        }
+      ]
+    },
+    {
+      "name": "token-swatch",
+      "type": "registry:ui",
+      "title": "Token Swatch",
+      "description": "Forge Token Swatch component.",
+      "registryDependencies": [
+        "forge",
+        "copy-button"
+      ],
+      "files": [
+        {
+          "source": "src/forge/token-swatch.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/token-swatch.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spec-row",
+      "type": "registry:ui",
+      "title": "Spec Row",
+      "description": "Forge Spec Row component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/spec-row.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/spec-row.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Forge Pagination component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/pagination.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/pagination.tsx"
+        }
+      ]
+    },
+    {
+      "name": "simple-pagination",
+      "type": "registry:ui",
+      "title": "Simple Pagination",
+      "description": "Forge Simple Pagination component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/simple-pagination.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/simple-pagination.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Forge Tabs component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/tabs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Forge Input component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/input.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Forge Textarea component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/textarea.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "native-select",
+      "type": "registry:ui",
+      "title": "Native Select",
+      "description": "Forge Native Select component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/native-select.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/native-select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select-native",
+      "type": "registry:ui",
+      "title": "Select Native",
+      "description": "Forge Select Native component.",
+      "registryDependencies": [
+        "forge",
+        "native-select"
+      ],
+      "files": [
+        {
+          "source": "src/forge/select-native.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/select-native.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Forge Checkbox component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/checkbox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Forge Switch component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/switch.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/switch.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Forge Radio Group component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/radio-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Forge Slider component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/slider.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "number-input",
+      "type": "registry:ui",
+      "title": "Number Input",
+      "description": "Forge Number Input component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/number-input.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/number-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "otp-input",
+      "type": "registry:ui",
+      "title": "Otp Input",
+      "description": "Forge Otp Input component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/otp-input.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/otp-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "file-input",
+      "type": "registry:ui",
+      "title": "File Input",
+      "description": "Forge File Input component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/file-input.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/file-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "date-input",
+      "type": "registry:ui",
+      "title": "Date Input",
+      "description": "Forge Date Input component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/date-input.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/date-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Forge Date Picker component.",
+      "registryDependencies": [
+        "forge",
+        "icons",
+        "calendar"
+      ],
+      "files": [
+        {
+          "source": "src/forge/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/date-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Forge Select component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/select.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Forge Calendar component.",
+      "registryDependencies": [
+        "forge",
+        "calendar-props",
+        "date-range",
+        "start-of-month",
+        "month-grid",
+        "iso-date",
+        "icons",
+        "month-label",
+        "same-day"
+      ],
+      "files": [
+        {
+          "source": "src/forge/calendar.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/calendar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "range-calendar",
+      "type": "registry:ui",
+      "title": "Range Calendar",
+      "description": "Forge Range Calendar component.",
+      "registryDependencies": [
+        "forge",
+        "range-calendar-props",
+        "calendar",
+        "calendar-props"
+      ],
+      "files": [
+        {
+          "source": "src/forge/range-calendar.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/range-calendar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "date-range",
+      "type": "registry:ui",
+      "title": "Date Range",
+      "description": "Forge Date Range component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/date-range.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/date-range.tsx"
+        }
+      ]
+    },
+    {
+      "name": "calendar-props",
+      "type": "registry:ui",
+      "title": "Calendar Props",
+      "description": "Forge Calendar Props component.",
+      "registryDependencies": [
+        "forge",
+        "date-range"
+      ],
+      "files": [
+        {
+          "source": "src/forge/calendar-props.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/calendar-props.tsx"
+        }
+      ]
+    },
+    {
+      "name": "range-calendar-props",
+      "type": "registry:ui",
+      "title": "Range Calendar Props",
+      "description": "Forge Range Calendar Props component.",
+      "registryDependencies": [
+        "forge",
+        "calendar-props",
+        "date-range"
+      ],
+      "files": [
+        {
+          "source": "src/forge/range-calendar-props.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/range-calendar-props.tsx"
+        }
+      ]
+    },
+    {
+      "name": "start-of-month",
+      "type": "registry:ui",
+      "title": "Start Of Month",
+      "description": "Forge Start Of Month component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/start-of-month.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/start-of-month.tsx"
+        }
+      ]
+    },
+    {
+      "name": "same-day",
+      "type": "registry:ui",
+      "title": "Same Day",
+      "description": "Forge Same Day component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/same-day.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/same-day.tsx"
+        }
+      ]
+    },
+    {
+      "name": "iso-date",
+      "type": "registry:ui",
+      "title": "Iso Date",
+      "description": "Forge Iso Date component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/iso-date.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/iso-date.tsx"
+        }
+      ]
+    },
+    {
+      "name": "month-grid",
+      "type": "registry:ui",
+      "title": "Month Grid",
+      "description": "Forge Month Grid component.",
+      "registryDependencies": [
+        "forge",
+        "start-of-month"
+      ],
+      "files": [
+        {
+          "source": "src/forge/month-grid.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/month-grid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "month-label",
+      "type": "registry:ui",
+      "title": "Month Label",
+      "description": "Forge Month Label component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/month-label.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/month-label.tsx"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Forge Combobox component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/combobox.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/combobox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "color-input",
+      "type": "registry:ui",
+      "title": "Color Input",
+      "description": "Forge Color Input component.",
+      "registryDependencies": [
+        "forge",
+        "icons",
+        "color-picker"
+      ],
+      "files": [
+        {
+          "source": "src/forge/color-input.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/color-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color Picker",
+      "description": "Forge Color Picker component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/color-picker.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/color-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "banner",
+      "type": "registry:ui",
+      "title": "Banner",
+      "description": "Forge Banner component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/banner.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/banner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "metric-card",
+      "type": "registry:ui",
+      "title": "Metric Card",
+      "description": "Forge Metric Card component.",
+      "registryDependencies": [
+        "forge",
+        "trend",
+        "sparkline"
+      ],
+      "files": [
+        {
+          "source": "src/forge/metric-card.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/metric-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stat",
+      "type": "registry:ui",
+      "title": "Stat",
+      "description": "Forge Stat component.",
+      "registryDependencies": [
+        "forge",
+        "trend"
+      ],
+      "files": [
+        {
+          "source": "src/forge/stat.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/stat.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pipeline",
+      "type": "registry:ui",
+      "title": "Pipeline",
+      "description": "Forge Pipeline component.",
+      "registryDependencies": [
+        "forge",
+        "icons",
+        "status-dot"
+      ],
+      "files": [
+        {
+          "source": "src/forge/pipeline.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/pipeline.tsx"
+        }
+      ]
+    },
+    {
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Timeline",
+      "description": "Forge Timeline component.",
+      "registryDependencies": [
+        "forge",
+        "icons",
+        "avatar",
+        "relative-time"
+      ],
+      "files": [
+        {
+          "source": "src/forge/timeline.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/timeline.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ring-bar",
+      "type": "registry:ui",
+      "title": "Ring Bar",
+      "description": "Forge Ring Bar component.",
+      "registryDependencies": [
+        "forge",
+        "status-dot"
+      ],
+      "files": [
+        {
+          "source": "src/forge/ring-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/ring-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "score-gauge",
+      "type": "registry:ui",
+      "title": "Score Gauge",
+      "description": "Forge Score Gauge component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/score-gauge.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/score-gauge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "log-viewer",
+      "type": "registry:ui",
+      "title": "Log Viewer",
+      "description": "Forge Log Viewer component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/log-viewer.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/log-viewer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "diff-viewer",
+      "type": "registry:ui",
+      "title": "Diff Viewer",
+      "description": "Forge Diff Viewer component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/diff-viewer.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/diff-viewer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tree-view",
+      "type": "registry:ui",
+      "title": "Tree View",
+      "description": "Forge Tree View component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/tree-view.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/tree-view.tsx"
+        }
+      ]
+    },
+    {
+      "name": "json-inspector",
+      "type": "registry:ui",
+      "title": "Json Inspector",
+      "description": "Forge Json Inspector component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/json-inspector.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/json-inspector.tsx"
+        }
+      ]
+    },
+    {
+      "name": "service-card",
+      "type": "registry:ui",
+      "title": "Service Card",
+      "description": "Forge Service Card component.",
+      "registryDependencies": [
+        "forge",
+        "icons",
+        "health-badge",
+        "sparkline",
+        "lang-badge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/service-card.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/service-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "agent-card",
+      "type": "registry:ui",
+      "title": "Agent Card",
+      "description": "Forge Agent Card component.",
+      "registryDependencies": [
+        "forge",
+        "icons",
+        "health-badge",
+        "relative-time"
+      ],
+      "files": [
+        {
+          "source": "src/forge/agent-card.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/agent-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "filter-panel",
+      "type": "registry:ui",
+      "title": "Filter Panel",
+      "description": "Forge Filter Panel component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/filter-panel.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/filter-panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Forge Data Table component.",
+      "registryDependencies": [
+        "forge",
+        "empty"
+      ],
+      "files": [
+        {
+          "source": "src/forge/data-table.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/data-table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "forge-chart",
+      "type": "registry:ui",
+      "title": "Forge Chart",
+      "description": "Forge Forge Chart component.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/forge-chart.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/forge-chart.tsx"
+        }
+      ]
+    },
+    {
+      "name": "forge-tooltip-content",
+      "type": "registry:ui",
+      "title": "Forge Tooltip Content",
+      "description": "Forge Forge Tooltip Content component.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/forge-tooltip-content.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/forge-tooltip-content.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chart-legend",
+      "type": "registry:ui",
+      "title": "Chart Legend",
+      "description": "Forge Chart Legend component.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/chart-legend.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/chart-legend.tsx"
+        }
+      ]
+    },
+    {
+      "name": "device-frame",
+      "type": "registry:ui",
+      "title": "Device Frame",
+      "description": "Forge Device Frame component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/device-frame.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/device-frame.tsx"
+        }
+      ]
+    },
+    {
+      "name": "status-bar",
+      "type": "registry:ui",
+      "title": "Status Bar",
+      "description": "Forge Status Bar component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/status-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/status-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "phone-top",
+      "type": "registry:ui",
+      "title": "Phone Top",
+      "description": "Forge Phone Top component.",
+      "registryDependencies": [
+        "forge",
+        "status-bar"
+      ],
+      "files": [
+        {
+          "source": "src/forge/phone-top.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/phone-top.tsx"
+        }
+      ]
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "Forge Drawer component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/drawer.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/drawer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "modal",
+      "type": "registry:ui",
+      "title": "Modal",
+      "description": "Forge Modal component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/modal.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/modal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "Forge Alert Dialog component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/alert-dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Forge Popover component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/popover.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/popover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Forge Tooltip component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/tooltip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Forge Hover Card component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/hover-card.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/hover-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Forge Dropdown Menu component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/dropdown-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "Forge Menubar component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/menubar.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/menubar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Forge Command component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/command.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/command.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command-dialog",
+      "type": "registry:ui",
+      "title": "Command Dialog",
+      "description": "Forge Command Dialog component.",
+      "registryDependencies": [
+        "forge",
+        "command"
+      ],
+      "files": [
+        {
+          "source": "src/forge/command-dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/command-dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toaster",
+      "type": "registry:ui",
+      "title": "Toaster",
+      "description": "Forge Toaster component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/toaster.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/toaster.tsx"
+        }
+      ]
+    },
+    {
+      "name": "notification",
+      "type": "registry:ui",
+      "title": "Notification",
+      "description": "Forge Notification component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/notification.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/notification.tsx"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Forge Separator component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/separator.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/separator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "Forge Aspect Ratio component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/aspect-ratio.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/aspect-ratio.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Forge Scroll Area component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/scroll-area.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "Forge Button Group component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/button-group.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/button-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Forge Breadcrumb component.",
+      "registryDependencies": [
+        "forge",
+        "dropdown-menu",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/breadcrumb.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toolbar",
+      "type": "registry:ui",
+      "title": "Toolbar",
+      "description": "Forge Toolbar component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/toolbar.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/toolbar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "Forge Navigation Menu component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/navigation-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/navigation-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "Forge Sidebar component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/sidebar.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/sidebar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "Forge Resizable component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/resizable.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/resizable.tsx"
+        }
+      ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Forge Accordion component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/accordion.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/accordion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Forge Collapsible component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/collapsible.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/collapsible.tsx"
+        }
+      ]
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Forge Carousel component.",
+      "dependencies": [
+        "embla-carousel-react"
+      ],
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/carousel.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Forge Table component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/table.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Forge Card component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/card.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Forge Alert component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/alert.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/alert.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Forge Progress component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/progress.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/progress.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Forge Spinner component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/spinner.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/spinner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Forge Skeleton component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/skeleton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "Forge Toggle component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/toggle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "Forge Toggle Group component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/toggle-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Forge Label component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/label.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/label.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Forge Input Group component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/input-group.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/input-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tag-input",
+      "type": "registry:ui",
+      "title": "Tag Input",
+      "description": "Forge Tag Input component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/tag-input.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/tag-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "password-input",
+      "type": "registry:ui",
+      "title": "Password Input",
+      "description": "Forge Password Input component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/password-input.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/password-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "password-field",
+      "type": "registry:ui",
+      "title": "Password Field",
+      "description": "Forge Password Field component.",
+      "registryDependencies": [
+        "forge",
+        "password-input"
+      ],
+      "files": [
+        {
+          "source": "src/forge/password-field.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/password-field.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkbox-card",
+      "type": "registry:ui",
+      "title": "Checkbox Card",
+      "description": "Forge Checkbox Card component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/checkbox-card.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/checkbox-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio-card",
+      "type": "registry:ui",
+      "title": "Radio Card",
+      "description": "Forge Radio Card component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "files": [
+        {
+          "source": "src/forge/radio-card.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/radio-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio-card-group",
+      "type": "registry:ui",
+      "title": "Radio Card Group",
+      "description": "Forge Radio Card Group component.",
+      "registryDependencies": [
+        "forge",
+        "radio-card"
+      ],
+      "files": [
+        {
+          "source": "src/forge/radio-card-group.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/radio-card-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tool-status",
+      "type": "registry:ui",
+      "title": "Tool Status",
+      "description": "Forge Tool Status component.",
+      "dependencies": [
+        "ai"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons",
+        "pill"
+      ],
+      "files": [
+        {
+          "source": "src/forge/tool-status.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/tool-status.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tool",
+      "type": "registry:ui",
+      "title": "Tool",
+      "description": "Forge Tool component.",
+      "dependencies": [
+        "ai"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons",
+        "tool-status"
+      ],
+      "files": [
+        {
+          "source": "src/forge/tool.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/tool.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tool-input",
+      "type": "registry:ui",
+      "title": "Tool Input",
+      "description": "Forge Tool Input component.",
+      "dependencies": [
+        "ai"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "code"
+      ],
+      "files": [
+        {
+          "source": "src/forge/tool-input.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/tool-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tool-output",
+      "type": "registry:ui",
+      "title": "Tool Output",
+      "description": "Forge Tool Output component.",
+      "dependencies": [
+        "ai"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "files": [
+        {
+          "source": "src/forge/tool-output.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/tool-output.tsx"
+        }
+      ]
+    },
+    {
+      "name": "reasoning",
+      "type": "registry:ui",
+      "title": "Reasoning",
+      "description": "Forge Reasoning component.",
+      "dependencies": [
+        "ai"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/reasoning.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/reasoning.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chain-of-thought",
+      "type": "registry:ui",
+      "title": "Chain Of Thought",
+      "description": "Forge Chain Of Thought component.",
+      "dependencies": [
+        "ai"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/chain-of-thought.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/chain-of-thought.tsx"
+        }
+      ]
+    },
+    {
+      "name": "plan",
+      "type": "registry:ui",
+      "title": "Plan",
+      "description": "Forge Plan component.",
+      "dependencies": [
+        "ai"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons",
+        "status-dot"
+      ],
+      "files": [
+        {
+          "source": "src/forge/plan.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/plan.tsx"
+        }
+      ]
+    },
+    {
+      "name": "task",
+      "type": "registry:ui",
+      "title": "Task",
+      "description": "Forge Task component.",
+      "dependencies": [
+        "ai"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons",
+        "status-dot"
+      ],
+      "files": [
+        {
+          "source": "src/forge/task.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/task.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkpoint",
+      "type": "registry:ui",
+      "title": "Checkpoint",
+      "description": "Forge Checkpoint component.",
+      "dependencies": [
+        "ai"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/checkpoint.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/checkpoint.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirmation",
+      "type": "registry:ui",
+      "title": "Confirmation",
+      "description": "Forge Confirmation component.",
+      "dependencies": [
+        "ai"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/confirmation.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/confirmation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "queue",
+      "type": "registry:ui",
+      "title": "Queue",
+      "description": "Forge Queue component.",
+      "dependencies": [
+        "ai"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/queue.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/queue.tsx"
+        }
+      ]
+    },
+    {
+      "name": "artifact-widget",
+      "type": "registry:ui",
+      "title": "Artifact Widget",
+      "description": "Forge Artifact Widget component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/artifact-widget.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/artifact-widget.tsx"
+        }
+      ]
+    },
+    {
+      "name": "artifact-panel",
+      "type": "registry:ui",
+      "title": "Artifact Panel",
+      "description": "Forge Artifact Panel component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons",
+        "drawer"
+      ],
+      "files": [
+        {
+          "source": "src/forge/artifact-panel.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/artifact-panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ask-user",
+      "type": "registry:ui",
+      "title": "Ask User",
+      "description": "Forge Ask User component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/ask-user.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/ask-user.tsx"
+        }
+      ]
+    },
+    {
+      "name": "shimmer",
+      "type": "registry:ui",
+      "title": "Shimmer",
+      "description": "Forge Shimmer component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "files": [
+        {
+          "source": "src/forge/shimmer.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/shimmer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-view",
+      "type": "registry:ui",
+      "title": "Image View",
+      "description": "Forge Image View component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/image-view.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/image-view.tsx"
+        }
+      ]
+    },
+    {
+      "name": "diagram",
+      "type": "registry:ui",
+      "title": "Diagram",
+      "description": "Forge Diagram component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "files": [
+        {
+          "source": "src/forge/diagram.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/diagram.tsx"
+        }
+      ]
+    },
+    {
+      "name": "math-view",
+      "type": "registry:ui",
+      "title": "Math View",
+      "description": "Forge Math View component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "files": [
+        {
+          "source": "src/forge/math-view.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/math-view.tsx"
+        }
+      ]
+    },
+    {
+      "name": "context",
+      "type": "registry:ui",
+      "title": "Context",
+      "description": "Forge Context component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "files": [
+        {
+          "source": "src/forge/context.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/context.tsx"
+        }
+      ]
+    },
+    {
+      "name": "context-gauge",
+      "type": "registry:ui",
+      "title": "Context Gauge",
+      "description": "Forge Context Gauge component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "context"
+      ],
+      "files": [
+        {
+          "source": "src/forge/context-gauge.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/context-gauge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "context-bar",
+      "type": "registry:ui",
+      "title": "Context Bar",
+      "description": "Forge Context Bar component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "context"
+      ],
+      "files": [
+        {
+          "source": "src/forge/context-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/context-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "history-item",
+      "type": "registry:ui",
+      "title": "History Item",
+      "description": "Forge History Item component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/history-item.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/history-item.tsx"
+        }
+      ]
+    },
+    {
+      "name": "history-group",
+      "type": "registry:ui",
+      "title": "History Group",
+      "description": "Forge History Group component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "history-item"
+      ],
+      "files": [
+        {
+          "source": "src/forge/history-group.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/history-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "history",
+      "type": "registry:ui",
+      "title": "History",
+      "description": "Forge History component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/history.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/history.tsx"
+        }
+      ]
+    },
+    {
+      "name": "history-shell",
+      "type": "registry:ui",
+      "title": "History Shell",
+      "description": "Forge History Shell component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "history"
+      ],
+      "files": [
+        {
+          "source": "src/forge/history-shell.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/history-shell.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-label",
+      "type": "registry:ui",
+      "title": "Ai Label",
+      "description": "Forge Ai Label component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "files": [
+        {
+          "source": "src/forge/ai-label.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/ai-label.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-label-with-popover",
+      "type": "registry:ui",
+      "title": "Ai Label With Popover",
+      "description": "Forge Ai Label With Popover component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "ai-label"
+      ],
+      "files": [
+        {
+          "source": "src/forge/ai-label-with-popover.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/ai-label-with-popover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "agent-avatar",
+      "type": "registry:ui",
+      "title": "Agent Avatar",
+      "description": "Forge Agent Avatar component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/agent-avatar.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/agent-avatar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "agent-identity",
+      "type": "registry:ui",
+      "title": "Agent Identity",
+      "description": "Forge Agent Identity component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "agent-avatar",
+        "ai-label"
+      ],
+      "files": [
+        {
+          "source": "src/forge/agent-identity.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/agent-identity.tsx"
+        }
+      ]
+    },
+    {
+      "name": "message",
+      "type": "registry:ui",
+      "title": "Message",
+      "description": "Forge Message component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "avatar",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/message.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/message.tsx"
+        }
+      ]
+    },
+    {
+      "name": "message-actions",
+      "type": "registry:ui",
+      "title": "Message Actions",
+      "description": "Forge Message Actions component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/message-actions.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/message-actions.tsx"
+        }
+      ]
+    },
+    {
+      "name": "response",
+      "type": "registry:ui",
+      "title": "Response",
+      "description": "Forge Response component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "avatar",
+        "prose"
+      ],
+      "files": [
+        {
+          "source": "src/forge/response.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/response.tsx"
+        }
+      ]
+    },
+    {
+      "name": "conversation",
+      "type": "registry:ui",
+      "title": "Conversation",
+      "description": "Forge Conversation component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "files": [
+        {
+          "source": "src/forge/conversation.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/conversation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "prompt-submit",
+      "type": "registry:ui",
+      "title": "Prompt Submit",
+      "description": "Forge Prompt Submit component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/prompt-submit.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/prompt-submit.tsx"
+        }
+      ]
+    },
+    {
+      "name": "model-badge",
+      "type": "registry:ui",
+      "title": "Model Badge",
+      "description": "Forge Model Badge component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "chip"
+      ],
+      "files": [
+        {
+          "source": "src/forge/model-badge.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/model-badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "model-selector",
+      "type": "registry:ui",
+      "title": "Model Selector",
+      "description": "Forge Model Selector component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "model-badge",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/model-selector.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/model-selector.tsx"
+        }
+      ]
+    },
+    {
+      "name": "model-picker",
+      "type": "registry:ui",
+      "title": "Model Picker",
+      "description": "Forge Model Picker component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "model-selector"
+      ],
+      "files": [
+        {
+          "source": "src/forge/model-picker.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/model-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "attachment",
+      "type": "registry:ui",
+      "title": "Attachment",
+      "description": "Forge Attachment component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/attachment.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/attachment.tsx"
+        }
+      ]
+    },
+    {
+      "name": "drop-zone",
+      "type": "registry:ui",
+      "title": "Drop Zone",
+      "description": "Forge Drop Zone component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons",
+        "model-selector",
+        "prompt-submit"
+      ],
+      "files": [
+        {
+          "source": "src/forge/drop-zone.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/drop-zone.tsx"
+        }
+      ]
+    },
+    {
+      "name": "drag-drop-overlay",
+      "type": "registry:ui",
+      "title": "Drag Drop Overlay",
+      "description": "Forge Drag Drop Overlay component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "attachment",
+        "icons",
+        "model-selector",
+        "prompt-submit"
+      ],
+      "files": [
+        {
+          "source": "src/forge/drag-drop-overlay.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/drag-drop-overlay.tsx"
+        }
+      ]
+    },
+    {
+      "name": "prompt-banner",
+      "type": "registry:ui",
+      "title": "Prompt Banner",
+      "description": "Forge Prompt Banner component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/prompt-banner.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/prompt-banner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "prompt-input",
+      "type": "registry:ui",
+      "title": "Prompt Input",
+      "description": "Forge Prompt Input component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "attachment",
+        "icons",
+        "model-selector",
+        "prompt-submit"
+      ],
+      "files": [
+        {
+          "source": "src/forge/prompt-input.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/prompt-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "suggestion",
+      "type": "registry:ui",
+      "title": "Suggestion",
+      "description": "Forge Suggestion component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "files": [
+        {
+          "source": "src/forge/suggestion.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/suggestion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "suggestion-card",
+      "type": "registry:ui",
+      "title": "Suggestion Card",
+      "description": "Forge Suggestion Card component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "files": [
+        {
+          "source": "src/forge/suggestion-card.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/suggestion-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "prose",
+      "type": "registry:ui",
+      "title": "Prose",
+      "description": "Forge Prose component.",
+      "dependencies": [
+        "react-markdown",
+        "remark-gfm"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "files": [
+        {
+          "source": "src/forge/prose.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/prose.tsx"
+        }
+      ]
+    },
+    {
+      "name": "prose-code",
+      "type": "registry:ui",
+      "title": "Prose Code",
+      "description": "Forge Prose Code component.",
+      "dependencies": [
+        "react-markdown",
+        "remark-gfm"
+      ],
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/prose-code.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/prose-code.tsx"
+        }
+      ]
+    },
+    {
+      "name": "citation",
+      "type": "registry:ui",
+      "title": "Citation",
+      "description": "Forge Citation component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/citation.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/citation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sources",
+      "type": "registry:ui",
+      "title": "Sources",
+      "description": "Forge Sources component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/sources.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/sources.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sources-panel",
+      "type": "registry:ui",
+      "title": "Sources Panel",
+      "description": "Forge Sources Panel component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "sources"
+      ],
+      "files": [
+        {
+          "source": "src/forge/sources-panel.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/sources-panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "terminal",
+      "type": "registry:ui",
+      "title": "Terminal",
+      "description": "Forge Terminal component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/terminal.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/terminal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "persona",
+      "type": "registry:ui",
+      "title": "Persona",
+      "description": "Forge Persona component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "files": [
+        {
+          "source": "src/forge/persona.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/persona.tsx"
+        }
+      ]
+    },
+    {
+      "name": "speech-input",
+      "type": "registry:ui",
+      "title": "Speech Input",
+      "description": "Forge Speech Input component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/speech-input.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/speech-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "transcription",
+      "type": "registry:ui",
+      "title": "Transcription",
+      "description": "Forge Transcription component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "files": [
+        {
+          "source": "src/forge/transcription.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/transcription.tsx"
+        }
+      ]
+    },
+    {
+      "name": "audio-player",
+      "type": "registry:ui",
+      "title": "Audio Player",
+      "description": "Forge Audio Player component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "files": [
+        {
+          "source": "src/forge/audio-player.tsx",
+          "type": "registry:ui",
+          "target": "components/forge/audio-player.tsx"
+        }
+      ]
+    }
+  ]
+}

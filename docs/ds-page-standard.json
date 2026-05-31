@@ -1,0 +1,54 @@
+{
+  "$comment": "Machine-readable derivation of docs/DS-PAGE-STANDARD.md. The rules live here as DATA; scripts/check-ds-page-structure.mjs consumes this, it does NOT re-encode the prose. Update this file when the standard changes, and point the prose at the clause ids it backs.",
+  "version": "1.0.0",
+  "ledeMaxChars": 220,
+  "templates": {
+    "component": {
+      "appliesTo": ["component", "ai"],
+      "$comment": "Canonical Component template (DS-PAGE-STANDARD §2.2). Ordered; never reorder. R=required, r=recommended, o=optional.",
+      "sections": [
+        { "name": "Installation", "meta": ["package managers"], "level": "R", "order": 1 },
+        { "name": "Usage", "meta": ["hello world"], "level": "R", "order": 2, "retiredMeta": ["default", "basic"] },
+        { "name": "Variants", "meta": ["variants", "sizes", "states", "with icon"], "level": "r", "order": 3, "axis": true },
+        { "name": "In context", "meta": ["real surface", "in context"], "level": "r", "order": 4 },
+        { "name": "Accessibility", "meta": ["a11y"], "level": "R", "order": 5, "clause": "C-a11y-section",
+          "requireKeywords": ["keyboard", "aria", "contrast", "motion"], "requireKeywordsMin": 2 },
+        { "name": "RTL", "meta": ["RTL", "العربية"], "level": "R", "order": 6, "clause": "C-rtl-frame",
+          "requireMarker": "rtlFrame" },
+        { "name": "Anatomy", "meta": ["anatomy"], "level": "r", "order": 7, "clause": "C-anatomy",
+          "requireMarker": "anatomy" },
+        { "name": "Do / Don't", "meta": ["rules"], "level": "R", "order": 8, "clause": "C-do-dont",
+          "requireMarker": "ddGrid" },
+        { "name": "API reference", "meta": ["props", "reference"], "metaSuffix": "Props", "level": "R", "order": 9,
+          "clause": "C-autopropstable", "requireMarker": "autoPropsTable", "last": true }
+      ]
+    },
+    "foundation": {
+      "appliesTo": ["foundation"],
+      "$comment": "Foundation template (DS-PAGE-STANDARD §2.3). No Installation/Usage/API.",
+      "sections": [
+        { "name": "Scale / Roles", "meta": ["roles", "scale"], "level": "R", "order": 1 },
+        { "name": "In practice", "meta": ["applied"], "level": "r", "order": 2 },
+        { "name": "Principles", "meta": ["rules"], "level": "R", "order": 3 },
+        { "name": "Accessibility & pairings", "meta": ["a11y"], "level": "R", "order": 4 },
+        { "name": "Do / Don't", "meta": ["rules"], "level": "r", "order": 5, "requireMarker": "ddGrid" },
+        { "name": "Tokens / Reference", "meta": ["reference", "CSS tokens"], "level": "R", "order": 6 }
+      ]
+    }
+  },
+  "markers": {
+    "$comment": "JSX/string signatures the structure checker greps for. Kept here so the patterns are data, not buried in the script.",
+    "rtlFrame": { "any": ["dir=\"rtl\"", "dir='rtl'"] },
+    "anatomy": { "all": ["ana-list"], "any": [".ana", "className=\"ana", "class=\"ana"] },
+    "ddGrid": { "any": ["dd-grid"] },
+    "autoPropsTable": { "any": ["AutoPropsTable"] },
+    "handTable": { "any": ["<PropsTable", "<table"] },
+    "subHead": { "regex": "<SubHead[^>]*meta=\\{?[\"'`]([^\"'`]+)[\"'`]" },
+    "sectionDesc": { "regex": "desc=\\{?[\"'`]([^\"'`]*)[\"'`]" }
+  },
+  "exempt": {
+    "$comment": "kinds/dss where a clause legitimately does not apply (resolved as not-applicable, not failed).",
+    "rtlOptionalDs": ["charts", "patterns"],
+    "autoPropsExemptDs": ["patterns"]
+  }
+}

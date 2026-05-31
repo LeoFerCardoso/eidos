@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs-content",
+  "type": "registry:ui",
+  "title": "Tabs Content",
+  "description": "Forge Tabs Content component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/tabs-content.tsx",
+      "target": "components/forge/tabs-content.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ninterface TabsContextValue {\n  value: string;\n  onValueChange: (value: string) => void;\n  orientation: 'horizontal' | 'vertical';\n  variant: 'line' | 'pills' | 'enclosed';\n  size: 'sm' | 'md';\n  manualActivation: boolean;\n  /** id prefix — all ids are `${uid}-tab-${value}` / `${uid}-panel-${value}` */\n  uid: string;\n  /** ordered list of trigger values (registered in DOM order by TabsTrigger) */\n  registerTrigger: (value: string, disabled: boolean) => void;\n  unregisterTrigger: (value: string) => void;\n  triggerList: React.MutableRefObject<{ value: string; disabled: boolean }[]>;\n}\n\nconst TabsContext = React.createContext<TabsContextValue | null>(null);\n\nfunction useTabsContext(component: string) {\n  const ctx = React.useContext(TabsContext);\n  if (!ctx) throw new Error(`<${component}> must be rendered inside <Tabs>`);\n  return ctx;\n}\n\ninterface TabsContentProps {\n  /** Must match the value prop on the corresponding TabsTrigger. */\n  value: string;\n  className?: string;\n  children?: React.ReactNode;\n}\n\nconst TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(\n  ({ value, className, children, ...rest }, ref) => {\n    const { value: activeValue, uid } = useTabsContext('TabsContent');\n    const isActive = activeValue === value;\n\n    const classes = ['forge-tabpanel', className].filter(Boolean).join(' ');\n\n    return (\n      <div\n        ref={ref}\n        id={`${uid}-panel-${value}`}\n        role=\"tabpanel\"\n        aria-labelledby={`${uid}-tab-${value}`}\n        hidden={!isActive}\n        tabIndex={isActive ? 0 : -1}\n        className={classes}\n        {...rest}\n      >\n        {children}\n      </div>\n    );\n  },\n);\n\nexport { TabsContent };\n"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "context-gauge",
+  "type": "registry:ui",
+  "title": "Context Gauge",
+  "description": "Forge Context Gauge component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "context"
+  ],
+  "files": [
+    {
+      "path": "components/forge/context-gauge.tsx",
+      "target": "components/forge/context-gauge.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Context } from '@/components/forge/context';\n\nconst ContextGauge = ({\n  used = 0,\n  total,\n  files,\n  size = 18,\n  label = true,\n  compact = false,\n  thresholdMid = 0.6,\n  thresholdWarn = 0.85,\n  className,\n  style,\n}: {\n  /** Tokens used so far in this conversation. */\n  used?: number;\n  /** Size of the model's context window (required). */\n  total: number;\n  /** Optional file count shown alongside the token numbers (\"· 3 files\"). */\n  files?: number;\n  /** Radial diameter in px. */\n  size?: number;\n  /** Show \"used / total\" text beside the radial. */\n  label?: boolean;\n  /** Drop everything but the radial + percent for tight rows. */\n  compact?: boolean;\n  /** Percentage [0–1] where the tone shifts from ok to mid. */\n  thresholdMid?: number;\n  /** Percentage [0–1] where the tone shifts from mid to warn. */\n  thresholdWarn?: number;\n  /** Extra class names on the root span. */\n  className?: string;\n  /** Inline styles on the root span. */\n  style?: React.CSSProperties;\n}) => (\n  <Context\n    used={used}\n    total={total}\n    files={files}\n    variant={compact ? 'compact' : 'gauge'}\n    size={size}\n    label={label}\n    thresholdMid={thresholdMid}\n    thresholdWarn={thresholdWarn}\n    className={className}\n    style={style}\n  />\n);\n\nexport { ContextGauge };\n"
+    }
+  ]
+}

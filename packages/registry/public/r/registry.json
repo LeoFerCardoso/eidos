@@ -1,0 +1,2060 @@
+{
+  "name": "forge",
+  "homepage": "https://forge.equifax.dev",
+  "items": [
+    {
+      "name": "forge",
+      "type": "registry:style",
+      "title": "Forge base",
+      "description": "The Forge design-system foundation — semantic design tokens (OKLCH, light + dark), the shared ds.css component layer, and the cn() class helper. Install this once before adding any component.",
+      "registryDependencies": [],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ]
+    },
+    {
+      "name": "forge-ai",
+      "type": "registry:file",
+      "title": "Forge AI styles",
+      "description": "The ai.css layer that styles the Forge AI components (.ai-* classes). Pulled automatically when you add an AI component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "icons",
+      "type": "registry:ui",
+      "title": "Icons",
+      "description": "Forge Icons component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "forge-mark",
+      "type": "registry:ui",
+      "title": "Forge Mark",
+      "description": "Forge Forge Mark component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "pill",
+      "type": "registry:ui",
+      "title": "Pill",
+      "description": "Forge Pill component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "chip",
+      "type": "registry:ui",
+      "title": "Chip",
+      "description": "Forge Chip component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Forge Badge component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "sparkline",
+      "type": "registry:ui",
+      "title": "Sparkline",
+      "description": "Forge Sparkline component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "counter",
+      "type": "registry:ui",
+      "title": "Counter",
+      "description": "Forge Counter component.",
+      "registryDependencies": [
+        "forge",
+        "count-up"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "count-up",
+      "type": "registry:ui",
+      "title": "Count Up",
+      "description": "Forge Count Up component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Forge Avatar component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "tier-badge",
+      "type": "registry:ui",
+      "title": "Tier Badge",
+      "description": "Forge Tier Badge component.",
+      "registryDependencies": [
+        "forge",
+        "chip"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "lang-badge",
+      "type": "registry:ui",
+      "title": "Lang Badge",
+      "description": "Forge Lang Badge component.",
+      "registryDependencies": [
+        "forge",
+        "chip"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "Forge Empty component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "status-dot",
+      "type": "registry:ui",
+      "title": "Status Dot",
+      "description": "Forge Status Dot component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "trend",
+      "type": "registry:ui",
+      "title": "Trend",
+      "description": "Forge Trend component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "health-badge",
+      "type": "registry:ui",
+      "title": "Health Badge",
+      "description": "Forge Health Badge component.",
+      "registryDependencies": [
+        "forge",
+        "pill"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "severity-pill",
+      "type": "registry:ui",
+      "title": "Severity Pill",
+      "description": "Forge Severity Pill component.",
+      "registryDependencies": [
+        "forge",
+        "pill",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Forge Kbd component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "kbd-row",
+      "type": "registry:ui",
+      "title": "Kbd Row",
+      "description": "Forge Kbd Row component.",
+      "registryDependencies": [
+        "forge",
+        "kbd"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "copy-chip",
+      "type": "registry:ui",
+      "title": "Copy Chip",
+      "description": "Forge Copy Chip component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "relative-time",
+      "type": "registry:ui",
+      "title": "Relative Time",
+      "description": "Forge Relative Time component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "owner-pill",
+      "type": "registry:ui",
+      "title": "Owner Pill",
+      "description": "Forge Owner Pill component.",
+      "registryDependencies": [
+        "forge",
+        "avatar"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:ui",
+      "title": "Copy Button",
+      "description": "Forge Copy Button component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "code",
+      "type": "registry:ui",
+      "title": "Code",
+      "description": "Forge Code component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "code-block",
+      "type": "registry:ui",
+      "title": "Code Block",
+      "description": "Forge Code Block component.",
+      "registryDependencies": [
+        "forge",
+        "copy-button",
+        "code"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "code-tree",
+      "type": "registry:ui",
+      "title": "Code Tree",
+      "description": "Forge Code Tree component.",
+      "registryDependencies": [
+        "forge",
+        "copy-button",
+        "icons",
+        "code"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "tabbed-code",
+      "type": "registry:ui",
+      "title": "Tabbed Code",
+      "description": "Forge Tabbed Code component.",
+      "registryDependencies": [
+        "forge",
+        "copy-button",
+        "code"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "collapsible-code",
+      "type": "registry:ui",
+      "title": "Collapsible Code",
+      "description": "Forge Collapsible Code component.",
+      "registryDependencies": [
+        "forge",
+        "code",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "frame",
+      "type": "registry:ui",
+      "title": "Frame",
+      "description": "Forge Frame component.",
+      "registryDependencies": [
+        "forge",
+        "copy-button",
+        "collapsible-code"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "props-table",
+      "type": "registry:ui",
+      "title": "Props Table",
+      "description": "Forge Props Table component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "sub-head",
+      "type": "registry:ui",
+      "title": "Sub Head",
+      "description": "Forge Sub Head component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "lede",
+      "type": "registry:ui",
+      "title": "Lede",
+      "description": "Forge Lede component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "mono",
+      "type": "registry:ui",
+      "title": "Mono",
+      "description": "Forge Mono component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "token-swatch",
+      "type": "registry:ui",
+      "title": "Token Swatch",
+      "description": "Forge Token Swatch component.",
+      "registryDependencies": [
+        "forge",
+        "copy-button"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "spec-row",
+      "type": "registry:ui",
+      "title": "Spec Row",
+      "description": "Forge Spec Row component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Forge Pagination component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "simple-pagination",
+      "type": "registry:ui",
+      "title": "Simple Pagination",
+      "description": "Forge Simple Pagination component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Forge Tabs component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Forge Input component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Forge Textarea component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "native-select",
+      "type": "registry:ui",
+      "title": "Native Select",
+      "description": "Forge Native Select component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "select-native",
+      "type": "registry:ui",
+      "title": "Select Native",
+      "description": "Forge Select Native component.",
+      "registryDependencies": [
+        "forge",
+        "native-select"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Forge Checkbox component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Forge Switch component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Forge Radio Group component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Forge Slider component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "number-input",
+      "type": "registry:ui",
+      "title": "Number Input",
+      "description": "Forge Number Input component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "otp-input",
+      "type": "registry:ui",
+      "title": "Otp Input",
+      "description": "Forge Otp Input component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "file-input",
+      "type": "registry:ui",
+      "title": "File Input",
+      "description": "Forge File Input component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "date-input",
+      "type": "registry:ui",
+      "title": "Date Input",
+      "description": "Forge Date Input component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Forge Date Picker component.",
+      "registryDependencies": [
+        "forge",
+        "icons",
+        "calendar"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Forge Select component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Forge Calendar component.",
+      "registryDependencies": [
+        "forge",
+        "calendar-props",
+        "date-range",
+        "start-of-month",
+        "month-grid",
+        "iso-date",
+        "icons",
+        "month-label",
+        "same-day"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "range-calendar",
+      "type": "registry:ui",
+      "title": "Range Calendar",
+      "description": "Forge Range Calendar component.",
+      "registryDependencies": [
+        "forge",
+        "range-calendar-props",
+        "calendar",
+        "calendar-props"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "date-range",
+      "type": "registry:ui",
+      "title": "Date Range",
+      "description": "Forge Date Range component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "calendar-props",
+      "type": "registry:ui",
+      "title": "Calendar Props",
+      "description": "Forge Calendar Props component.",
+      "registryDependencies": [
+        "forge",
+        "date-range"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "range-calendar-props",
+      "type": "registry:ui",
+      "title": "Range Calendar Props",
+      "description": "Forge Range Calendar Props component.",
+      "registryDependencies": [
+        "forge",
+        "calendar-props",
+        "date-range"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "start-of-month",
+      "type": "registry:ui",
+      "title": "Start Of Month",
+      "description": "Forge Start Of Month component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "same-day",
+      "type": "registry:ui",
+      "title": "Same Day",
+      "description": "Forge Same Day component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "iso-date",
+      "type": "registry:ui",
+      "title": "Iso Date",
+      "description": "Forge Iso Date component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "month-grid",
+      "type": "registry:ui",
+      "title": "Month Grid",
+      "description": "Forge Month Grid component.",
+      "registryDependencies": [
+        "forge",
+        "start-of-month"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "month-label",
+      "type": "registry:ui",
+      "title": "Month Label",
+      "description": "Forge Month Label component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Forge Combobox component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "color-input",
+      "type": "registry:ui",
+      "title": "Color Input",
+      "description": "Forge Color Input component.",
+      "registryDependencies": [
+        "forge",
+        "icons",
+        "color-picker"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color Picker",
+      "description": "Forge Color Picker component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "banner",
+      "type": "registry:ui",
+      "title": "Banner",
+      "description": "Forge Banner component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "metric-card",
+      "type": "registry:ui",
+      "title": "Metric Card",
+      "description": "Forge Metric Card component.",
+      "registryDependencies": [
+        "forge",
+        "trend",
+        "sparkline"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "stat",
+      "type": "registry:ui",
+      "title": "Stat",
+      "description": "Forge Stat component.",
+      "registryDependencies": [
+        "forge",
+        "trend"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "pipeline",
+      "type": "registry:ui",
+      "title": "Pipeline",
+      "description": "Forge Pipeline component.",
+      "registryDependencies": [
+        "forge",
+        "icons",
+        "status-dot"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Timeline",
+      "description": "Forge Timeline component.",
+      "registryDependencies": [
+        "forge",
+        "icons",
+        "avatar",
+        "relative-time"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "ring-bar",
+      "type": "registry:ui",
+      "title": "Ring Bar",
+      "description": "Forge Ring Bar component.",
+      "registryDependencies": [
+        "forge",
+        "status-dot"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "score-gauge",
+      "type": "registry:ui",
+      "title": "Score Gauge",
+      "description": "Forge Score Gauge component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "log-viewer",
+      "type": "registry:ui",
+      "title": "Log Viewer",
+      "description": "Forge Log Viewer component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "diff-viewer",
+      "type": "registry:ui",
+      "title": "Diff Viewer",
+      "description": "Forge Diff Viewer component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "tree-view",
+      "type": "registry:ui",
+      "title": "Tree View",
+      "description": "Forge Tree View component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "json-inspector",
+      "type": "registry:ui",
+      "title": "Json Inspector",
+      "description": "Forge Json Inspector component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "service-card",
+      "type": "registry:ui",
+      "title": "Service Card",
+      "description": "Forge Service Card component.",
+      "registryDependencies": [
+        "forge",
+        "icons",
+        "health-badge",
+        "sparkline",
+        "lang-badge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "agent-card",
+      "type": "registry:ui",
+      "title": "Agent Card",
+      "description": "Forge Agent Card component.",
+      "registryDependencies": [
+        "forge",
+        "icons",
+        "health-badge",
+        "relative-time"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "filter-panel",
+      "type": "registry:ui",
+      "title": "Filter Panel",
+      "description": "Forge Filter Panel component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Forge Data Table component.",
+      "registryDependencies": [
+        "forge",
+        "empty"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "forge-chart",
+      "type": "registry:ui",
+      "title": "Forge Chart",
+      "description": "Forge Forge Chart component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": [
+        "recharts"
+      ]
+    },
+    {
+      "name": "forge-tooltip-content",
+      "type": "registry:ui",
+      "title": "Forge Tooltip Content",
+      "description": "Forge Forge Tooltip Content component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": [
+        "recharts"
+      ]
+    },
+    {
+      "name": "chart-legend",
+      "type": "registry:ui",
+      "title": "Chart Legend",
+      "description": "Forge Chart Legend component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": [
+        "recharts"
+      ]
+    },
+    {
+      "name": "device-frame",
+      "type": "registry:ui",
+      "title": "Device Frame",
+      "description": "Forge Device Frame component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "status-bar",
+      "type": "registry:ui",
+      "title": "Status Bar",
+      "description": "Forge Status Bar component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "phone-top",
+      "type": "registry:ui",
+      "title": "Phone Top",
+      "description": "Forge Phone Top component.",
+      "registryDependencies": [
+        "forge",
+        "status-bar"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "Forge Drawer component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "modal",
+      "type": "registry:ui",
+      "title": "Modal",
+      "description": "Forge Modal component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "Forge Alert Dialog component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Forge Popover component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Forge Tooltip component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Forge Hover Card component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Forge Dropdown Menu component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "Forge Menubar component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Forge Command component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "command-dialog",
+      "type": "registry:ui",
+      "title": "Command Dialog",
+      "description": "Forge Command Dialog component.",
+      "registryDependencies": [
+        "forge",
+        "command"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "toaster",
+      "type": "registry:ui",
+      "title": "Toaster",
+      "description": "Forge Toaster component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "notification",
+      "type": "registry:ui",
+      "title": "Notification",
+      "description": "Forge Notification component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Forge Separator component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "Forge Aspect Ratio component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Forge Scroll Area component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "Forge Button Group component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Forge Breadcrumb component.",
+      "registryDependencies": [
+        "forge",
+        "dropdown-menu",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "toolbar",
+      "type": "registry:ui",
+      "title": "Toolbar",
+      "description": "Forge Toolbar component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "Forge Navigation Menu component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "Forge Sidebar component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "Forge Resizable component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Forge Accordion component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Forge Collapsible component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Forge Carousel component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": [
+        "embla-carousel-react"
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Forge Table component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Forge Card component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Forge Alert component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Forge Progress component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Forge Spinner component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Forge Skeleton component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "Forge Toggle component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "Forge Toggle Group component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Forge Label component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Forge Input Group component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "tag-input",
+      "type": "registry:ui",
+      "title": "Tag Input",
+      "description": "Forge Tag Input component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "password-input",
+      "type": "registry:ui",
+      "title": "Password Input",
+      "description": "Forge Password Input component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "password-field",
+      "type": "registry:ui",
+      "title": "Password Field",
+      "description": "Forge Password Field component.",
+      "registryDependencies": [
+        "forge",
+        "password-input"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "checkbox-card",
+      "type": "registry:ui",
+      "title": "Checkbox Card",
+      "description": "Forge Checkbox Card component.",
+      "registryDependencies": [
+        "forge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "radio-card",
+      "type": "registry:ui",
+      "title": "Radio Card",
+      "description": "Forge Radio Card component.",
+      "registryDependencies": [
+        "forge"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "radio-card-group",
+      "type": "registry:ui",
+      "title": "Radio Card Group",
+      "description": "Forge Radio Card Group component.",
+      "registryDependencies": [
+        "forge",
+        "radio-card"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "tool-status",
+      "type": "registry:ui",
+      "title": "Tool Status",
+      "description": "Forge Tool Status component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons",
+        "pill"
+      ],
+      "dependencies": [
+        "ai"
+      ]
+    },
+    {
+      "name": "tool",
+      "type": "registry:ui",
+      "title": "Tool",
+      "description": "Forge Tool component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons",
+        "tool-status"
+      ],
+      "dependencies": [
+        "ai"
+      ]
+    },
+    {
+      "name": "tool-input",
+      "type": "registry:ui",
+      "title": "Tool Input",
+      "description": "Forge Tool Input component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "code"
+      ],
+      "dependencies": [
+        "ai"
+      ]
+    },
+    {
+      "name": "tool-output",
+      "type": "registry:ui",
+      "title": "Tool Output",
+      "description": "Forge Tool Output component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "dependencies": [
+        "ai"
+      ]
+    },
+    {
+      "name": "reasoning",
+      "type": "registry:ui",
+      "title": "Reasoning",
+      "description": "Forge Reasoning component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": [
+        "ai"
+      ]
+    },
+    {
+      "name": "chain-of-thought",
+      "type": "registry:ui",
+      "title": "Chain Of Thought",
+      "description": "Forge Chain Of Thought component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": [
+        "ai"
+      ]
+    },
+    {
+      "name": "plan",
+      "type": "registry:ui",
+      "title": "Plan",
+      "description": "Forge Plan component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons",
+        "status-dot"
+      ],
+      "dependencies": [
+        "ai"
+      ]
+    },
+    {
+      "name": "task",
+      "type": "registry:ui",
+      "title": "Task",
+      "description": "Forge Task component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons",
+        "status-dot"
+      ],
+      "dependencies": [
+        "ai"
+      ]
+    },
+    {
+      "name": "checkpoint",
+      "type": "registry:ui",
+      "title": "Checkpoint",
+      "description": "Forge Checkpoint component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": [
+        "ai"
+      ]
+    },
+    {
+      "name": "confirmation",
+      "type": "registry:ui",
+      "title": "Confirmation",
+      "description": "Forge Confirmation component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": [
+        "ai"
+      ]
+    },
+    {
+      "name": "queue",
+      "type": "registry:ui",
+      "title": "Queue",
+      "description": "Forge Queue component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": [
+        "ai"
+      ]
+    },
+    {
+      "name": "artifact-widget",
+      "type": "registry:ui",
+      "title": "Artifact Widget",
+      "description": "Forge Artifact Widget component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "artifact-panel",
+      "type": "registry:ui",
+      "title": "Artifact Panel",
+      "description": "Forge Artifact Panel component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons",
+        "drawer"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "ask-user",
+      "type": "registry:ui",
+      "title": "Ask User",
+      "description": "Forge Ask User component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "shimmer",
+      "type": "registry:ui",
+      "title": "Shimmer",
+      "description": "Forge Shimmer component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "image-view",
+      "type": "registry:ui",
+      "title": "Image View",
+      "description": "Forge Image View component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "diagram",
+      "type": "registry:ui",
+      "title": "Diagram",
+      "description": "Forge Diagram component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "math-view",
+      "type": "registry:ui",
+      "title": "Math View",
+      "description": "Forge Math View component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "context",
+      "type": "registry:ui",
+      "title": "Context",
+      "description": "Forge Context component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "context-gauge",
+      "type": "registry:ui",
+      "title": "Context Gauge",
+      "description": "Forge Context Gauge component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "context"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "context-bar",
+      "type": "registry:ui",
+      "title": "Context Bar",
+      "description": "Forge Context Bar component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "context"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "history-item",
+      "type": "registry:ui",
+      "title": "History Item",
+      "description": "Forge History Item component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "history-group",
+      "type": "registry:ui",
+      "title": "History Group",
+      "description": "Forge History Group component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "history-item"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "history",
+      "type": "registry:ui",
+      "title": "History",
+      "description": "Forge History component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "history-shell",
+      "type": "registry:ui",
+      "title": "History Shell",
+      "description": "Forge History Shell component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "history"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "ai-label",
+      "type": "registry:ui",
+      "title": "Ai Label",
+      "description": "Forge Ai Label component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "ai-label-with-popover",
+      "type": "registry:ui",
+      "title": "Ai Label With Popover",
+      "description": "Forge Ai Label With Popover component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "ai-label"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "agent-avatar",
+      "type": "registry:ui",
+      "title": "Agent Avatar",
+      "description": "Forge Agent Avatar component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "agent-identity",
+      "type": "registry:ui",
+      "title": "Agent Identity",
+      "description": "Forge Agent Identity component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "agent-avatar",
+        "ai-label"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "message",
+      "type": "registry:ui",
+      "title": "Message",
+      "description": "Forge Message component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "avatar",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "message-actions",
+      "type": "registry:ui",
+      "title": "Message Actions",
+      "description": "Forge Message Actions component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "response",
+      "type": "registry:ui",
+      "title": "Response",
+      "description": "Forge Response component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "avatar",
+        "prose"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "conversation",
+      "type": "registry:ui",
+      "title": "Conversation",
+      "description": "Forge Conversation component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "prompt-submit",
+      "type": "registry:ui",
+      "title": "Prompt Submit",
+      "description": "Forge Prompt Submit component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "model-badge",
+      "type": "registry:ui",
+      "title": "Model Badge",
+      "description": "Forge Model Badge component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "chip"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "model-selector",
+      "type": "registry:ui",
+      "title": "Model Selector",
+      "description": "Forge Model Selector component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "model-badge",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "model-picker",
+      "type": "registry:ui",
+      "title": "Model Picker",
+      "description": "Forge Model Picker component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "model-selector"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "attachment",
+      "type": "registry:ui",
+      "title": "Attachment",
+      "description": "Forge Attachment component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "drop-zone",
+      "type": "registry:ui",
+      "title": "Drop Zone",
+      "description": "Forge Drop Zone component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons",
+        "model-selector",
+        "prompt-submit"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "drag-drop-overlay",
+      "type": "registry:ui",
+      "title": "Drag Drop Overlay",
+      "description": "Forge Drag Drop Overlay component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "attachment",
+        "icons",
+        "model-selector",
+        "prompt-submit"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "prompt-banner",
+      "type": "registry:ui",
+      "title": "Prompt Banner",
+      "description": "Forge Prompt Banner component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "prompt-input",
+      "type": "registry:ui",
+      "title": "Prompt Input",
+      "description": "Forge Prompt Input component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "attachment",
+        "icons",
+        "model-selector",
+        "prompt-submit"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "suggestion",
+      "type": "registry:ui",
+      "title": "Suggestion",
+      "description": "Forge Suggestion component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "suggestion-card",
+      "type": "registry:ui",
+      "title": "Suggestion Card",
+      "description": "Forge Suggestion Card component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "prose",
+      "type": "registry:ui",
+      "title": "Prose",
+      "description": "Forge Prose component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "dependencies": [
+        "react-markdown",
+        "remark-gfm"
+      ]
+    },
+    {
+      "name": "prose-code",
+      "type": "registry:ui",
+      "title": "Prose Code",
+      "description": "Forge Prose Code component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": [
+        "react-markdown",
+        "remark-gfm"
+      ]
+    },
+    {
+      "name": "citation",
+      "type": "registry:ui",
+      "title": "Citation",
+      "description": "Forge Citation component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "sources",
+      "type": "registry:ui",
+      "title": "Sources",
+      "description": "Forge Sources component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "sources-panel",
+      "type": "registry:ui",
+      "title": "Sources Panel",
+      "description": "Forge Sources Panel component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "sources"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "terminal",
+      "type": "registry:ui",
+      "title": "Terminal",
+      "description": "Forge Terminal component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "persona",
+      "type": "registry:ui",
+      "title": "Persona",
+      "description": "Forge Persona component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "speech-input",
+      "type": "registry:ui",
+      "title": "Speech Input",
+      "description": "Forge Speech Input component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "transcription",
+      "type": "registry:ui",
+      "title": "Transcription",
+      "description": "Forge Transcription component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai"
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "audio-player",
+      "type": "registry:ui",
+      "title": "Audio Player",
+      "description": "Forge Audio Player component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "icons"
+      ],
+      "dependencies": []
+    }
+  ]
+}

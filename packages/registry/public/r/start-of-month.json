@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "start-of-month",
+  "type": "registry:ui",
+  "title": "Start Of Month",
+  "description": "Forge Start Of Month component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/start-of-month.tsx",
+      "target": "components/forge/start-of-month.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nfunction startOfMonth(d: Date): Date {\n  return new Date(d.getFullYear(), d.getMonth(), 1);\n}\n\nexport { startOfMonth };\n"
+    }
+  ]
+}

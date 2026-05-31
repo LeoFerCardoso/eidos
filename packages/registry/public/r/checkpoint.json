@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkpoint",
+  "type": "registry:ui",
+  "title": "Checkpoint",
+  "description": "Forge Checkpoint component.",
+  "dependencies": [
+    "ai"
+  ],
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/checkpoint.tsx",
+      "target": "components/forge/checkpoint.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\nconst Checkpoint = ({\n  label = 'Checkpoint', time, onRestore,\n}: {\n  /** Text label inside the chip. Name it after the captured state: \"Before rollback\", \"Plan agreed\". */\n  label?: string;\n  /** Optional timestamp. Accepts a string (\"14:32\", \"2 min ago\") or a ReactNode. Rendered in Geist Mono. */\n  time?: React.ReactNode;\n  /** When provided, renders a Restore button inside the chip. Called on click; consumer updates UI state. */\n  onRestore?: () => void;\n}) => (\n  <div className=\"ai-checkpoint\" role=\"separator\" aria-label={`${label}${time ? ' · ' + time : ''}`}>\n    <span className=\"ai-checkpoint-rule\"/>\n    <span className=\"ai-checkpoint-label\">\n      <Icons.flag size={11} className=\"flag-mark\" aria-hidden=\"true\"/>\n      <span className=\"lbl\">{label}</span>\n      {time && <><span className=\"sep\">·</span><span className=\"t\">{time}</span></>}\n      {onRestore && <button className=\"ai-checkpoint-restore\" onClick={onRestore}>Restore</button>}\n    </span>\n    <span className=\"ai-checkpoint-rule\"/>\n  </div>\n);\n\nexport { Checkpoint };\n"
+    }
+  ]
+}

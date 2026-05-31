@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sub-head",
+  "type": "registry:ui",
+  "title": "Sub Head",
+  "description": "Forge Sub Head component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/sub-head.tsx",
+      "target": "components/forge/sub-head.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst slugifyHeading = (s) =>\n  String(s).toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');\n\nconst SubHead = ({ children, meta }: { children?: React.ReactNode; meta?: string }) => {\n  const id = typeof children === 'string' ? 'sec-' + slugifyHeading(children) : undefined;\n  return (\n    <h2 className=\"ds-sub\" id={id} data-toc={typeof children === 'string' ? children : undefined}>\n      <span className=\"ds-sub-text\">{children}</span>\n      {meta && <span className=\"meta\">{meta}</span>}\n      {id && <a className=\"ds-sub-anchor\" href={'#' + id} aria-label=\"Link to this section\">#</a>}\n    </h2>\n  );\n};\n\nexport { SubHead };\n"
+    }
+  ]
+}

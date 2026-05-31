@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "artifact-widget",
+  "type": "registry:ui",
+  "title": "Artifact Widget",
+  "description": "Forge Artifact Widget component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/artifact-widget.tsx",
+      "target": "components/forge/artifact-widget.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\ntype ArtifactKind = 'document' | 'html' | 'app' | 'code';\n\ninterface ArtifactRef {\n  id: string;\n  kind: ArtifactKind;\n  title: string;\n  /** Short subtitle / meta (e.g. \"12 KB · markdown\", \"342 lines\"). */\n  meta?: string;\n  /** Language id for code artifacts (\"ts\", \"py\", …). */\n  lang?: string;\n  /** Inline content; consumers can also handle rendering themselves. */\n  content?: string;\n  /** Pre-rendered HTML for kind=\"html\" (consumer is responsible for sanitizing). */\n  html?: string;\n}\n\nconst KIND_META: Record<ArtifactKind, { icon: string; label: string }> = {\n  document: { icon: 'doc',      label: 'Document' },\n  html:     { icon: 'globe',    label: 'HTML page' },\n  app:      { icon: 'rocket',   label: 'App' },\n  code:     { icon: 'terminal', label: 'Code' },\n};\n\nconst ArtifactWidget = ({\n  artifact, onOpen, className,\n}: { artifact: ArtifactRef; onOpen?: () => void; className?: string }) => {\n  const meta = KIND_META[artifact.kind] || KIND_META.document;\n  const Ico = (Icons as Record<string, any>)[meta.icon as string] || Icons.file;\n  return (\n    <button\n      type=\"button\"\n      className={'ai-art-widget' + (className ? ' ' + className : '')}\n      onClick={onOpen}\n      aria-label={`Open ${meta.label.toLowerCase()}: ${artifact.title}`}\n    >\n      <span className=\"ai-art-widget-ico\"><Ico size={16}/></span>\n      <span className=\"ai-art-widget-text\">\n        <span className=\"ai-art-widget-title\">{artifact.title}</span>\n        <span className=\"ai-art-widget-meta\">\n          {meta.label}{artifact.meta ? <> · {artifact.meta}</> : null}\n        </span>\n      </span>\n      <span className=\"ai-art-widget-action\"><Icons.externalLink size={13}/></span>\n    </button>\n  );\n};\n\nexport { ArtifactWidget };\n"
+    }
+  ]
+}

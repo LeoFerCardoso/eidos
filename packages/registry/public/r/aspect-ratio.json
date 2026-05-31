@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aspect-ratio",
+  "type": "registry:ui",
+  "title": "Aspect Ratio",
+  "description": "Forge Aspect Ratio component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/aspect-ratio.tsx",
+      "target": "components/forge/aspect-ratio.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\n\nconst NAMED_RATIOS: Record<string, number> = {\n  '16/9':  16 / 9,\n  '16:9':  16 / 9,\n  '4/3':   4 / 3,\n  '4:3':   4 / 3,\n  '3/2':   3 / 2,\n  '3:2':   3 / 2,\n  '1/1':   1,\n  '1:1':   1,\n  '3/4':   3 / 4,\n  '3:4':   3 / 4,\n  '9/16':  9 / 16,\n  '9:16':  9 / 16,\n  '21/9':  21 / 9,\n  '21:9':  21 / 9,\n};\n\ninterface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {\n  /**\n   * Numeric ratio (width ÷ height), or a named preset string such as\n   * `'16/9'`, `'4/3'`, `'1/1'`, `'9/16'`, `'21/9'`.\n   * Defaults to `1` (square).\n   */\n  ratio?: number | string;\n  /**\n   * Border-radius shorthand applied to the container.\n   * Accepts any CSS value. Defaults to `var(--radius-md)`.\n   */\n  radius?: string;\n  /** Content inside the box (img, video, iframe, or any block element). */\n  children?: React.ReactNode;\n  /** Extra utility classes merged via cn(). */\n  className?: string;\n  /** Inline style overrides for the container. */\n  style?: React.CSSProperties;\n}\n\nconst AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(\n  (\n    {\n      ratio = 1,\n      radius = 'var(--radius-md)',\n      children,\n      className,\n      style,\n      ...rest\n    },\n    ref,\n  ) => {\n    // Resolve ratio to a number\n    const resolvedRatio: number = (() => {\n      if (typeof ratio === 'number') return ratio;\n      if (typeof ratio === 'string') {\n        const preset = NAMED_RATIOS[ratio.trim()];\n        if (preset !== undefined) return preset;\n        // Try parsing \"W/H\" or \"W:H\"\n        const parts = ratio.trim().split(/[/:]/).map(Number);\n        if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) && parts[1] !== 0) {\n          return parts[0] / parts[1];\n        }\n        const num = parseFloat(ratio);\n        return isNaN(num) ? 1 : num;\n      }\n      return 1;\n    })();\n\n    return (\n      <div\n        ref={ref}\n        className={cn('ar', className)}\n        style={{\n          aspectRatio: String(resolvedRatio),\n          borderRadius: radius,\n          ...style,\n        }}\n        {...rest}\n      >\n        {children}\n      </div>\n    );\n  },\n);\n\nexport { AspectRatio };\n"
+    }
+  ]
+}

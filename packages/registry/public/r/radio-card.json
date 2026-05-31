@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radio-card",
+  "type": "registry:ui",
+  "title": "Radio Card",
+  "description": "Forge Radio Card component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/radio-card.tsx",
+      "target": "components/forge/radio-card.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ntype CardOrientation = 'horizontal' | 'vertical';\n\ninterface RadioCardProps {\n  /** The value this card represents within a RadioCardGroup. */\n  value: string;\n  /** Primary label text. */\n  title: React.ReactNode;\n  /** Secondary description line. */\n  description?: React.ReactNode;\n  /** Optional leading icon. */\n  icon?: React.ReactNode;\n  /** Card layout. Inherited from RadioCardGroup when used inside one. */\n  orientation?: CardOrientation;\n  /** Whether this card is currently selected (controlled by RadioCardGroup). */\n  checked?: boolean;\n  /** Called when this card is selected. */\n  onChange?: (value: string) => void;\n  /** Shared input name (provided by RadioCardGroup). */\n  name?: string;\n  disabled?: boolean;\n  id?: string;\n  className?: string;\n}\n\nfunction RadioCard({\n  value,\n  title,\n  description,\n  icon,\n  orientation = 'horizontal',\n  checked = false,\n  onChange,\n  name,\n  disabled = false,\n  id,\n  className = '',\n}: RadioCardProps) {\n  const reactId = React.useId();\n  const rid = id || reactId;\n\n  const cardCls = [\n    'sel-card',\n    orientation === 'vertical' ? 'sel-card--vertical' : '',\n    checked ? 'sel-card--checked' : '',\n    disabled ? 'sel-card--disabled' : '',\n    className,\n  ].filter(Boolean).join(' ');\n\n  return (\n    <label className={cardCls} htmlFor={rid} aria-disabled={disabled || undefined}>\n      <input\n        type=\"radio\"\n        id={rid}\n        className=\"fc-input\"\n        name={name}\n        value={value}\n        checked={checked}\n        disabled={disabled}\n        onChange={() => onChange?.(value)}\n      />\n      <span className=\"fc-radio-box\" aria-hidden=\"true\">\n        <span className=\"fc-radio-dot\" />\n      </span>\n      <span className=\"sel-card__body\">\n        {icon && <span className=\"sel-card__icon\" aria-hidden=\"true\">{icon}</span>}\n        <span className=\"sel-card__title\">{title}</span>\n        {description && <span className=\"sel-card__desc\">{description}</span>}\n      </span>\n    </label>\n  );\n}\n\nexport { RadioCard };\n"
+    }
+  ]
+}

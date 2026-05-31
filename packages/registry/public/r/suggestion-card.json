@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "suggestion-card",
+  "type": "registry:ui",
+  "title": "Suggestion Card",
+  "description": "Forge Suggestion Card component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai"
+  ],
+  "files": [
+    {
+      "path": "components/forge/suggestion-card.tsx",
+      "target": "components/forge/suggestion-card.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst SuggestionCard = ({\n  icon,\n  title,\n  line,\n  onClick,\n}: {\n  /** Small ember-soft tile icon at the top of the card. */\n  icon: React.ReactNode;\n  /** Headline — usually a question. Up to 12 words. */\n  title: string;\n  /** Supporting line under the title. Up to 15 words. */\n  line: string;\n  /** Fires when the tile is activated. */\n  onClick?: () => void;\n}) => (\n  <button className=\"sg-card\" onClick={onClick}>\n    <span className=\"ico\" aria-hidden=\"true\">{icon}</span>\n    <span className=\"title\">{title}</span>\n    <span className=\"line\">{line}</span>\n  </button>\n);\n\nexport { SuggestionCard };\n"
+    }
+  ]
+}

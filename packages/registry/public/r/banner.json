@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "banner",
+  "type": "registry:ui",
+  "title": "Banner",
+  "description": "Forge Banner component.",
+  "registryDependencies": [
+    "forge",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/banner.tsx",
+      "target": "components/forge/banner.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\nconst BANNER_DEFAULT_ICON = { info: 'info', success: 'check', warning: 'alert', danger: 'alert', neutral: 'info' };\n\nconst Banner = ({\n  tone = 'info', icon, title, message,\n  action, onAction, actions, onDismiss,\n  bg, fg, accent, size = 'md', children,\n}: {\n  /** Built-in palettes. \"custom\" disables tinted chrome and uses your bg / fg / accent. */\n  tone?: 'info' | 'success' | 'warning' | 'danger' | 'neutral' | 'custom';\n  /** Override the default tone icon (Icons key). */\n  icon?: string;\n  /** Bold lead text. Omit for message-only banners. */\n  title?: string;\n  /** Muted body text. Keep it short — one sentence. */\n  message?: React.ReactNode;\n  /** Label of the primary CTA (renders as a ghost button). */\n  action?: string;\n  /** Click handler for the action button. */\n  onAction?: () => void;\n  /** Custom action slot. Overrides action/onAction. */\n  actions?: React.ReactNode;\n  /** When provided, renders an × dismiss button. */\n  onDismiss?: () => void;\n  /** Surface color when tone === \"custom\". */\n  bg?: string;\n  /** Text color when tone === \"custom\". */\n  fg?: string;\n  /** Inline-start accent border color when tone === \"custom\". */\n  accent?: string;\n  /** Visual density — affects icon size and padding. */\n  size?: 'sm' | 'md' | 'lg';\n  children?: React.ReactNode;\n}) => {\n  const isCustom = tone === 'custom';\n  const IconName = icon || BANNER_DEFAULT_ICON[tone] || 'info';\n  const IconComp = Icons[IconName] || Icons.info;\n  const style = isCustom ? {\n    background: bg,\n    color: fg,\n    ...(accent ? { borderInlineStart: `3px solid ${accent}` } : {}),\n  } : undefined;\n  const accentStyle = accent ? { '--banner-accent': accent } : undefined;\n  const cls = ['banner', 'tone-' + tone, 'size-' + size].join(' ');\n  return (\n    <div className={cls} role={tone === 'danger' ? 'alert' : 'status'} aria-live={tone === 'danger' ? 'assertive' : 'polite'} style={{ ...style, ...accentStyle }}>\n      <span className=\"banner-icon\" aria-hidden=\"true\">\n        <IconComp size={size === 'lg' ? 18 : 14}/>\n      </span>\n      <div className=\"banner-text\">\n        {title && <span className=\"banner-title\">{title}</span>}\n        {message && <span className=\"banner-message\">{message}</span>}\n        {children}\n      </div>\n      <div className=\"banner-actions\">\n        {actions ? actions : (action && (\n          <button type=\"button\" className=\"btn ghost sm banner-cta\" onClick={onAction}>{action}</button>\n        ))}\n        {onDismiss && (\n          <button type=\"button\" className=\"banner-close\" onClick={onDismiss} aria-label=\"Dismiss\">\n            <Icons.x size={12}/>\n          </button>\n        )}\n      </div>\n    </div>\n  );\n};\n\nexport { Banner };\n"
+    }
+  ]
+}

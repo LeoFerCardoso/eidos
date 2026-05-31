@@ -1,0 +1,578 @@
+/* =============================================================================
+   Forge IDP — Example shell
+   Simulates the actual Forge product chrome for the /examples/* standalone
+   pages. Consumed only by examples — NEVER imported by docs pages.
+
+   Layout: 56px sidenav rail · topbar · content. Uses Forge tokens for color,
+   typography and spacing — adds only structural CSS specific to product chrome.
+   ========================================================================== */
+
+html, body { margin: 0; padding: 0; height: 100%; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Auto-hide scrollbars: invisible until hover/scroll — mirrors the DS shell
+   (.ds-sidenav / .ds-main) so /examples/ pages feel native when scrolling. */
+body, .fp-main, .fp-drawer-body, .cp-results {
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar,
+.fp-main::-webkit-scrollbar,
+.fp-drawer-body::-webkit-scrollbar,
+.cp-results::-webkit-scrollbar {
+  width: 10px; height: 10px;
+}
+body::-webkit-scrollbar-thumb,
+.fp-main::-webkit-scrollbar-thumb,
+.fp-drawer-body::-webkit-scrollbar-thumb,
+.cp-results::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background .12s ease;
+}
+body:hover::-webkit-scrollbar-thumb,
+.fp-main:hover::-webkit-scrollbar-thumb,
+.fp-drawer-body:hover::-webkit-scrollbar-thumb,
+.cp-results:hover::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  background-clip: content-box;
+}
+body:hover, .fp-main:hover, .fp-drawer-body:hover, .cp-results:hover {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+body:active::-webkit-scrollbar-thumb,
+.fp-main:active::-webkit-scrollbar-thumb {
+  background: var(--border-stronger);
+  background-clip: content-box;
+}
+
+* { box-sizing: border-box; }
+
+/* ---- Root layout --------------------------------------------------------- */
+.fp-app {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  grid-template-rows: 48px 1fr;
+  grid-template-areas:
+    "rail topbar"
+    "rail main";
+  min-height: 100vh;
+}
+
+/* ---- Side rail (icons only) --------------------------------------------- */
+.fp-rail {
+  grid-area: rail;
+  background: var(--bg-elevated);
+  border-inline-end: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0;
+  gap: 4px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+.fp-rail-brand {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: color-mix(in oklch, var(--ember) 18%, transparent);
+  color: var(--ember);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+.fp-rail-item {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--fg-muted);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: background .12s ease, color .12s ease;
+  position: relative;
+  border: none;
+  background: transparent;
+  text-decoration: none;
+}
+.fp-rail-item:hover { background: var(--surface); color: var(--fg); }
+.fp-rail-item.is-active { background: color-mix(in oklch, var(--ember) 14%, transparent); color: var(--ember); }
+.fp-rail-item.is-active::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: -8px;
+  top: 50%; transform: translateY(-50%);
+  width: 3px; height: 20px;
+  background: var(--ember);
+  border-radius: 0 2px 2px 0;
+}
+.fp-rail-divider {
+  width: 24px; height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+.fp-rail-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 4px; align-items: center; }
+
+/* ---- Top bar ------------------------------------------------------------- */
+.fp-topbar {
+  grid-area: topbar;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* "Back to the design system" affordance — sits at the topbar's start.
+   Keeps the example feeling like a sub-route of the DS so the user always
+   has a one-click exit. */
+.fp-topbar-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px 5px 8px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background .12s ease, color .12s ease, border-color .12s ease;
+}
+.fp-topbar-back:hover {
+  background: var(--bg);
+  color: var(--fg);
+  border-color: var(--border-strong);
+}
+.fp-topbar-back svg { display: block; }
+.fp-crumbs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+}
+.fp-crumbs .sep { opacity: 0.4; }
+.fp-crumbs .cur { color: var(--fg); }
+.fp-crumbs a.link {
+  color: var(--fg-muted);
+  text-decoration: none;
+  border-radius: var(--radius-xs);
+  padding: 2px 4px;
+  margin: -2px -4px;
+  transition: color .12s ease, background .12s ease;
+}
+.fp-crumbs a.link:hover {
+  color: var(--fg);
+  background: var(--surface);
+}
+
+/* ---- Sub-nav strip (in-section tabs under the topbar) ------------------ */
+.fp-subnav {
+  display: flex;
+  gap: 4px;
+  padding: 6px 0 14px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.fp-subnav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--fg-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .12s ease, color .12s ease, border-color .12s ease;
+}
+.fp-subnav-item:hover {
+  background: var(--surface);
+  color: var(--fg);
+}
+.fp-subnav-item.is-active {
+  background: var(--ember-soft);
+  color: var(--ember);
+  border-color: color-mix(in oklch, var(--ember) 28%, transparent);
+  font-weight: 600;
+}
+.fp-subnav-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--fg-faint);
+  padding: 1px 6px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-full);
+}
+.fp-subnav-item.is-active .fp-subnav-count {
+  background: color-mix(in oklch, var(--ember) 14%, transparent);
+  color: var(--ember);
+}
+.fp-topbar-search {
+  margin-inline-start: auto;
+  width: 280px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: border-color .12s ease;
+}
+.fp-topbar-search:hover { border-color: var(--border-strong); }
+.fp-topbar-search .label { flex: 1; }
+.fp-topbar-search .kbd {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  padding: 2px 5px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--fg-muted);
+}
+.fp-topbar-actions {
+  margin-inline-start: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fp-topbar-icon {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: var(--fg-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.fp-topbar-icon:hover { background: var(--surface); color: var(--fg); }
+.fp-topbar-icon.has-dot {
+  position: relative;
+}
+.fp-topbar-icon.has-dot::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  inset-inline-end: 6px;
+  width: 6px; height: 6px;
+  background: var(--ember);
+  border-radius: 50%;
+}
+.fp-topbar-user {
+  width: 28px; height: 28px;
+  background: var(--ember-soft);
+  color: var(--ember);
+  font-weight: 600;
+  font-size: 11px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Main content -------------------------------------------------------- */
+.fp-main {
+  grid-area: main;
+  padding: 24px 28px 64px;
+  max-width: 1480px;
+  margin: 0 auto;
+  width: 100%;
+}
+.fp-main--full { max-width: none; padding: 0; }
+
+/* ---- Page header — mirrors the DS canonical pattern (.ds-page-header /
+       .t-h1 / .ds-h-eyebrow). Same proportions, same rhythm: 36px h1, 17px
+       lede capped at 60ch, action cluster on the trailing edge, eyebrow
+       slot above the title row. */
+.fp-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.fp-page-header > div:first-child { flex: 1; min-width: 0; }
+.fp-page-header .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 6px;
+  display: block;
+}
+.fp-page-header h1 {
+  font-size: var(--text-3xl);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--fg);
+  margin: 0;
+}
+.fp-page-header-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.fp-page-header .sub {
+  font-size: var(--text-lg);
+  line-height: 1.55;
+  color: var(--fg-muted);
+  margin-top: 10px;
+  max-width: 60ch;
+}
+.fp-page-header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.fp-page-header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+.fp-page-header.is-compact {
+  margin-bottom: 14px;
+  align-items: center;
+}
+.fp-page-header.is-compact h1 {
+  font-size: var(--text-xl);
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+.fp-page-header.is-compact .sub { display: none; }
+.fp-page-header.is-compact .fp-page-header-meta { margin-top: 0; }
+
+/* ---- Generic card --------------------------------------------------------- */
+.fp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 16px;
+}
+.fp-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.fp-card-title {
+  font-weight: 600;
+  font-size: 13.5px;
+}
+.fp-card-sub {
+  color: var(--fg-muted);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* ---- Grid helpers — responsive by default ---------------------------------
+   Each *-N variant tries to keep N columns but allows reflow when the
+   container is too narrow. The min-width per col is set so primary content
+   (KPI cards, stat tiles) never gets squeezed below readable density. */
+.fp-grid { display: grid; gap: 14px; min-width: 0; }
+.fp-grid > * { min-width: 0; }
+.fp-grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.fp-grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.fp-grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.fp-grid-auto { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+/* When agent / service cards are children of an auto-fill grid, stretch them
+   to the full row height so the catalog reads as a regular ledger and not
+   a "Tetris" wall of differently-sized cards. The cards themselves use
+   margin-top:auto on the foot row to pin metrics to the bottom edge. */
+.fp-grid-auto > .agent-card,
+.fp-grid-auto > .service-card { height: 100%; }
+.fp-grid-2x1 { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); }
+.fp-grid-1x2 { grid-template-columns: minmax(280px, 1fr) minmax(0, 2fr); }
+@media (max-width: 960px) {
+  .fp-grid-2x1, .fp-grid-1x2 { grid-template-columns: 1fr; }
+}
+
+/* ---- Tab strip ----------------------------------------------------------- */
+.fp-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+  overflow-x: auto;
+}
+.fp-tab {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--fg-muted);
+  border: none;
+  background: transparent;
+  border-bottom: 1.5px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color .12s ease;
+  white-space: nowrap;
+}
+.fp-tab:hover { color: var(--fg); }
+.fp-tab.is-active {
+  color: var(--fg);
+  font-weight: 600;
+  border-bottom-color: var(--ember);
+}
+
+/* ---- KPI tile ------------------------------------------------------------ */
+.fp-kpi {
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 132px;
+}
+.fp-kpi .label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.fp-kpi .value {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.fp-kpi-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+/* ---- Right-aligned drawer (used by Agent chat example) ------------------- */
+.fp-drawer {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: var(--fp-drawer-width, 460px);
+  background: var(--bg-elevated);
+  border-inline-start: 1px solid var(--border);
+  /* Horizontal-only variant of the floating-layer shadow. */
+  box-shadow: var(--elev-3);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+.fp-drawer-head {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.fp-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+.fp-drawer-foot {
+  border-top: 1px solid var(--border);
+  padding: 12px 16px;
+}
+
+/* Light theme adjustments */
+[data-theme="light"] .fp-rail,
+[data-theme="light"] .fp-topbar { background: var(--surface); }
+[data-theme="light"] .fp-topbar-search { background: var(--bg); }
+
+/* Section header for sub-sections within a page */
+.fp-section { margin-bottom: 24px; }
+.fp-section + .fp-section { margin-top: 24px; }
+.fp-section-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  margin-bottom: 10px;
+}
+
+/* Empty state */
+.fp-empty {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--fg-muted);
+  font-size: 13px;
+}
+
+/* ====================================================================== */
+/* Ember-tinted surfaces — coherent recipe for hero stripes and accent     */
+/* cards that should read as "Forge spoke" without inventing a new colour. */
+/* Works identically in light + dark because all tints are ember-mixed     */
+/* with TRANSPARENT (never with --border, which would produce a muddy      */
+/* lavender in light mode where --border is slate-ink).                    */
+/* ====================================================================== */
+
+/* Small ember-tinted card — e.g. Forge weekly digest, template hero. */
+.fp-card--ember {
+  background: var(--ember-soft);
+  border-color: color-mix(in oklch, var(--ember) 22%, transparent);
+}
+
+/* Big hero stripe — used by ai-insights for "3 things demand attention".
+   Composes a warm mesh (radial ember halos) over a soft ember wash so the
+   inner white cards still read as the surface tier. */
+.fp-hero--ember {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid color-mix(in oklch, var(--ember) 22%, transparent);
+  border-radius: var(--radius-2xl);
+  padding: 22px;
+  margin-bottom: 22px;
+  background-color: var(--ember-softer, color-mix(in oklch, var(--ember) 6%, var(--surface)));
+  background-image:
+    radial-gradient(at 12% 20%, color-mix(in oklch, var(--ember) 18%, transparent) 0px, transparent 55%),
+    radial-gradient(at 88% 90%, color-mix(in oklch, var(--ember) 10%, transparent) 0px, transparent 50%);
+}
+.fp-hero--ember > * { position: relative; z-index: 1; }
+
+/* Larger ember card variant for splashy CTAs (templates Latest release). */
+.fp-card--ember-hero {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--ember-soft);
+  background-image:
+    radial-gradient(at 14% 24%, color-mix(in oklch, var(--ember) 14%, transparent) 0px, transparent 60%);
+  border: 1px solid color-mix(in oklch, var(--ember) 22%, transparent);
+}
+.fp-card--ember-hero > * { position: relative; z-index: 1; }

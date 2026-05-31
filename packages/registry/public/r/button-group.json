@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group",
+  "type": "registry:ui",
+  "title": "Button Group",
+  "description": "Forge Button Group component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/button-group.tsx",
+      "target": "components/forge/button-group.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\n\ntype ButtonGroupSize = 'sm' | 'md' | 'lg';\n\ntype ButtonGroupOrientation = 'horizontal' | 'vertical';\n\ninterface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  /**\n   * Passed down to every direct child button via a CSS modifier class so each\n   * button can size itself consistently without props drilling.\n   * Defaults to \"md\".\n   */\n  size?: ButtonGroupSize;\n  /**\n   * Flow direction of the segments.\n   * - horizontal (default): left-to-right row; inner side borders collapse.\n   * - vertical: top-to-bottom column; inner top/bottom borders collapse.\n   */\n  orientation?: ButtonGroupOrientation;\n  /**\n   * Accessible label for the group. Required when the group's purpose is not\n   * already conveyed by surrounding context (e.g. standalone toolbar groups).\n   */\n  'aria-label'?: string;\n  /** Extra utility classes merged via cn(). */\n  className?: string;\n  /** Button (or asChild-wrapped link) elements. */\n  children: React.ReactNode;\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  (\n    {\n      size = 'md',\n      orientation = 'horizontal',\n      className,\n      children,\n      role = 'group',\n      ...rest\n    },\n    ref,\n  ) => {\n    return (\n      <div\n        ref={ref}\n        role={role}\n        className={cn(\n          'btn-group',\n          orientation === 'vertical' && 'vertical',\n          size !== 'md' && `bg-size-${size}`,\n          className,\n        )}\n        {...rest}\n      >\n        {children}\n      </div>\n    );\n  },\n);\n\nexport { ButtonGroup };\n"
+    }
+  ]
+}

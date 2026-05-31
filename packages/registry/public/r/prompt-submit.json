@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prompt-submit",
+  "type": "registry:ui",
+  "title": "Prompt Submit",
+  "description": "Forge Prompt Submit component.",
+  "registryDependencies": [
+    "forge",
+    "forge-ai",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/prompt-submit.tsx",
+      "target": "components/forge/prompt-submit.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Icons } from '@/components/forge/icons';\n\nconst PromptSubmit = ({\n  status,\n  hasText,\n  onClick,\n}: {\n  status: 'ready' | 'submitted' | 'streaming' | 'error';\n  hasText?: boolean;\n  onClick?: () => void;\n}) => {\n  if (status === 'submitted') return (\n    <button className=\"pi-submit is-submitted\" disabled>\n      <span className=\"pi-submit-spin\"/>\n    </button>\n  );\n  if (status === 'streaming') return (\n    <button className=\"pi-submit is-streaming\" onClick={onClick} aria-label=\"Stop generating\">\n      <span style={{ width: 11, height: 11, background: 'currentColor', borderRadius: 2 }}/>\n    </button>\n  );\n  if (status === 'error') return (\n    <button className=\"pi-submit is-error\" onClick={onClick} aria-label=\"Retry\">\n      <Icons.alert size={14}/>\n    </button>\n  );\n  return (\n    <button className=\"pi-submit\" onClick={onClick} disabled={!hasText} aria-label=\"Send\">\n      <Icons.arrowUp size={14}/>\n    </button>\n  );\n};\n\nexport { PromptSubmit };\n"
+    }
+  ]
+}

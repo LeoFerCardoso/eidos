@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle",
+  "type": "registry:ui",
+  "title": "Toggle",
+  "description": "Forge Toggle component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/toggle.tsx",
+      "target": "components/forge/toggle.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\n\ninterface ToggleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  /**\n   * Controlled pressed state. When provided, the component is controlled.\n   * Maps directly to `aria-pressed`.\n   */\n  pressed?: boolean;\n  /** Uncontrolled initial pressed state. Ignored when `pressed` is provided. */\n  defaultPressed?: boolean;\n  /** Fires when the user clicks, receiving the *next* pressed value. */\n  onPressedChange?: (pressed: boolean) => void;\n  /** Visual chrome variant. Default is \"ghost\". */\n  variant?: 'ghost' | 'outline' | 'solid';\n  /** Height footprint. sm = 26px · md = 32px · lg = 40px. */\n  size?: 'sm' | 'md' | 'lg';\n  /** Standard button disabled. */\n  disabled?: boolean;\n  children?: React.ReactNode;\n  className?: string;\n}\n\nconst Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(\n  (\n    {\n      pressed: pressedProp,\n      defaultPressed = false,\n      onPressedChange,\n      variant = 'ghost',\n      size = 'md',\n      disabled = false,\n      children,\n      className,\n      onClick,\n      ...rest\n    },\n    ref,\n  ) => {\n    const isControlled = pressedProp !== undefined;\n    const [internalPressed, setInternalPressed] = React.useState(defaultPressed);\n    const pressed = isControlled ? pressedProp : internalPressed;\n\n    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {\n      if (disabled) return;\n      const next = !pressed;\n      if (!isControlled) setInternalPressed(next);\n      onPressedChange?.(next);\n      onClick?.(e);\n    };\n\n    return (\n      <button\n        ref={ref}\n        type=\"button\"\n        className={cn(\n          'tgl',\n          variant !== 'ghost' && variant,\n          size !== 'md' && size,\n          pressed && 'is-pressed',\n          className,\n        )}\n        aria-pressed={pressed}\n        disabled={disabled}\n        onClick={handleClick}\n        {...rest}\n      >\n        {children}\n      </button>\n    );\n  },\n);\n\nexport { Toggle };\n"
+    }
+  ]
+}

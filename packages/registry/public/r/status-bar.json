@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "status-bar",
+  "type": "registry:ui",
+  "title": "Status Bar",
+  "description": "Forge Status Bar component.",
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/status-bar.tsx",
+      "target": "components/forge/status-bar.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\ntype Platform = 'ios' | 'android';\n\nfunction SignalGlyph({ filled }: { filled: boolean }) {\n  const bars = [3, 6, 9, 12];\n  return (\n    <svg width=\"18\" height=\"13\" viewBox=\"0 0 18 13\" aria-hidden=\"true\" style={{ display: 'block' }}>\n      {bars.map((h, i) => (\n        <rect key={i} x={i * 4.5} y={13 - h} width=\"3\" height={h} rx={filled ? 1 : 0.6}\n          fill={filled || i < 3 ? 'currentColor' : 'none'} stroke=\"currentColor\" strokeWidth={filled ? 0 : 1}\n          opacity={filled ? 1 : i < 3 ? 1 : 0.45} />\n      ))}\n    </svg>\n  );\n}\n\nfunction WifiGlyph() {\n  return (\n    <svg width=\"17\" height=\"13\" viewBox=\"0 0 17 13\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"1.7\" strokeLinecap=\"round\" aria-hidden=\"true\" style={{ display: 'block' }}>\n      <path d=\"M1.5 4.4a10 10 0 0 1 14 0\" />\n      <path d=\"M4.4 7.6a6 6 0 0 1 8.2 0\" />\n      <circle cx=\"8.5\" cy=\"11\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\" />\n    </svg>\n  );\n}\n\nfunction BatteryGlyph({ ios }: { ios: boolean }) {\n  const level = 0.74;\n  return (\n    <svg width=\"27\" height=\"13\" viewBox=\"0 0 27 13\" aria-hidden=\"true\" style={{ display: 'block' }}>\n      <rect x=\"0.6\" y=\"0.6\" width=\"23\" height=\"11.8\" rx={ios ? 3.4 : 2.2} fill=\"none\" stroke=\"currentColor\" strokeWidth=\"1.1\" opacity={ios ? 0.42 : 0.6} />\n      <rect x={2} y={2} width={(23 - 2.8) * level} height=\"7.8\" rx={ios ? 2 : 1.2} fill=\"currentColor\" />\n      <path d={ios ? 'M25.4 4.4v4.2a1.7 1.7 0 0 0 1.1-1.6v-1a1.7 1.7 0 0 0-1.1-1.6Z' : 'M25 4.6h1.2v3.8H25Z'} fill=\"currentColor\" opacity={ios ? 0.55 : 0.7} />\n    </svg>\n  );\n}\n\nfunction StatusBar({ platform = 'ios', time = '9:41', style }: { platform?: Platform; time?: string; style?: React.CSSProperties }) {\n  const ios = platform === 'ios';\n  return (\n    <div\n      style={{\n        height: ios ? 44 : 36, flex: '0 0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between',\n        paddingInline: ios ? 22 : 16, color: 'var(--fg)', userSelect: 'none', ...style,\n      }}\n    >\n      <span style={{ fontFamily: ios ? 'var(--font-sans)' : 'var(--font-mono)', fontSize: ios ? 15 : 13, fontWeight: ios ? 600 : 500, letterSpacing: ios ? '-0.01em' : 0, fontVariantNumeric: 'tabular-nums' }}>\n        {time}\n      </span>\n      <span style={{ display: 'inline-flex', alignItems: 'center', gap: ios ? 6 : 7 }}>\n        <SignalGlyph filled={ios} />\n        <WifiGlyph />\n        <BatteryGlyph ios={ios} />\n      </span>\n    </div>\n  );\n}\n\nexport { StatusBar };\n"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chip",
+  "type": "registry:ui",
+  "title": "Chip",
+  "description": "Forge Chip component.",
+  "registryDependencies": [
+    "forge",
+    "icons"
+  ],
+  "files": [
+    {
+      "path": "components/forge/chip.tsx",
+      "target": "components/forge/chip.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { cn } from '@/lib/utils';\nimport { Icons } from '@/components/forge/icons';\n\ntype ChipTone =\n  | 'ok' | 'bad' | 'warn' | 'ember' | 'neutral'\n  // tier family (service reliability tier)\n  | 'tier-t1' | 'tier-t2' | 'tier-t3';\n\ninterface ChipProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** Tone — maps to .chip.<tone> CSS. Defaults to neutral. */\n  tone?: ChipTone;\n  /**\n   * Renders a leading 10px trend arrow. Does NOT mirror under dir=\"rtl\" —\n   * up always means up, down always means down.\n   */\n  trend?: 'up' | 'down';\n  /** Leading icon node (e.g., a language colour dot). */\n  icon?: React.ReactNode;\n  /** Renders a trailing × remove button with the given aria-label. */\n  onRemove?: () => void;\n  /** Accessible label for the remove button (required when onRemove is set). */\n  removeLabel?: string;\n  children: React.ReactNode;\n  className?: string;\n}\n\nconst Chip = React.forwardRef<HTMLSpanElement, ChipProps>(\n  (\n    {\n      tone = 'neutral',\n      trend,\n      icon,\n      onRemove,\n      removeLabel = 'Remove',\n      children,\n      className,\n      ...rest\n    },\n    ref,\n  ) => {\n    const toneClass =\n      tone === 'neutral' ? '' : tone.replace('tier-', 'tier-');\n\n    return (\n      <span\n        ref={ref}\n        className={cn(\n          'chip',\n          tone !== 'neutral' && toneClass,\n          onRemove && 'removable',\n          className,\n        )}\n        {...rest}\n      >\n        {trend && (\n          <span aria-hidden=\"true\" className=\"ch-arrow\">\n            {trend === 'up' ? <Icons.arrowUp size={10} /> : <Icons.arrowDown size={10} />}\n          </span>\n        )}\n        {icon && <span aria-hidden=\"true\">{icon}</span>}\n        {children}\n        {onRemove && (\n          <button\n            type=\"button\"\n            className=\"chip-x\"\n            aria-label={removeLabel}\n            onClick={(e) => { e.stopPropagation(); onRemove(); }}\n          >\n            <Icons.x size={9} />\n          </button>\n        )}\n      </span>\n    );\n  },\n);\n\nexport { Chip };\n"
+    }
+  ]
+}
