@@ -50,7 +50,7 @@ function AiHero() {
         How is identity-svc doing?
       </div>
       <div style={{ alignSelf: 'flex-start', display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>
-        <Icons.zap size={11} color="var(--ice)" /> getServiceHealth · done
+        <Icons.zap size={11} color="var(--accent-2)" /> getServiceHealth · done
       </div>
       <div
         aria-live="polite"

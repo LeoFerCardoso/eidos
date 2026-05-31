@@ -24,7 +24,7 @@ const countTokens = () => {
       '--border','--border-strong','--border-stronger',
       '--fg','--fg-muted','--fg-subtle','--fg-faint',
       '--ember','--ember-glow','--ember-deep','--ember-soft','--ember-softer',
-      '--ice','--ice-soft','--success','--success-soft','--warning','--warning-soft','--danger','--danger-soft','--violet',
+      '--accent-2','--accent-2-soft','--success','--success-soft','--warning','--warning-soft','--danger','--danger-soft','--accent-3',
       '--space-0','--space-px','--space-1','--space-2','--space-3','--space-4','--space-5','--space-6','--space-8','--space-10','--space-12','--space-16','--space-24',
       '--radius-xs','--radius-sm','--radius-md','--radius-lg','--radius-xl','--radius-2xl','--radius-full',
       '--text-xs','--text-sm','--text-base','--text-md','--text-body','--text-lg','--text-xl','--text-2xl','--text-3xl','--text-display','--text-display-xl',

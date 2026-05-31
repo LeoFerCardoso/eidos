@@ -21,7 +21,7 @@ const DEMO_AGENT = {
 type Step = { icon: string; tone: string; title: string; body: string; status: string };
 const STEPS: Step[] = [
   { icon: 'sparkle', tone: 'var(--ember)',    title: 'Plan', body: 'Decide whether tools are needed and in what order.', status: 'done' },
-  { icon: 'zap',     tone: 'var(--ice)',      title: 'Call · getServiceHealth', body: '{ "service": "identity-svc" }', status: 'done' },
+  { icon: 'zap',     tone: 'var(--accent-2)',      title: 'Call · getServiceHealth', body: '{ "service": "identity-svc" }', status: 'done' },
   { icon: 'database',tone: 'var(--fg-muted)', title: 'Observe', body: 'p95 482ms · error budget 38% · 2 open incidents', status: 'done' },
   { icon: 'check',   tone: 'var(--success)',  title: 'Answer', body: 'identity-svc is degraded — p95 is above target and the error budget is burning.', status: 'streaming' },
 ];

@@ -25,9 +25,9 @@ const TW_V4 = `/* tailwind.css — Tailwind v4, CSS-first */
   --color-ember-soft: rgb(255 107 53 / 0.12);
   --color-ember-softer: rgb(255 107 53 / 0.06);
 
-  /* Colors — accents */
-  --color-ice: #7DD3FC;
-  --color-violet: #A78BFA;
+  /* Colors — secondary accents (theme-defined hues) */
+  --color-accent-2: #7DD3FC;
+  --color-accent-3: #A78BFA;
 
   /* Colors — status */
   --color-success: #34D399;
@@ -164,8 +164,8 @@ module.exports = {
           soft: 'var(--ember-soft)',
           softer: 'var(--ember-softer)',
         },
-        ice: 'var(--ice)',
-        violet: 'var(--violet)',
+        'accent-2': 'var(--accent-2)',
+        'accent-3': 'var(--accent-3)',
         success: 'var(--success)',
         warning: 'var(--warning)',
         danger: 'var(--danger)',
@@ -236,7 +236,7 @@ const TW_TOKENS_CSS = `/* tokens.css — drop-in CSS variables (works without Ta
   --fg: #EDEDED; --fg-muted: #A1A1A6; --fg-subtle: #6B6B70; --fg-faint: #4A4A4F;
   --ember: #FF6B35; --ember-glow: #FF8C42; --ember-deep: #E04E1A;
   --ember-soft: rgba(255,107,53,0.12); --ember-softer: rgba(255,107,53,0.06);
-  --ice: #7DD3FC; --violet: #A78BFA;
+  --accent-2: #7DD3FC; --accent-3: #A78BFA;
   --success: #34D399; --warning: #FBBF24; --danger: #F87171;
   --border: rgba(255,255,255,0.06); --border-strong: rgba(255,255,255,0.12); --border-stronger: rgba(255,255,255,0.18);
 }

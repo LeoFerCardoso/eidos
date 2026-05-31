@@ -28,7 +28,7 @@ export function Demo() {
     { id: 'success', name: 'Success', tok: '--success', soft: '--success-soft', noun: 'Pass — steady state',                 mean: 'Healthy / approved / merged. Calm, not celebratory.', ex: ['healthy', 'merged', 'gate passed', 'verified'] },
     { id: 'warning', name: 'Warning', tok: '--warning', soft: '--warning-soft', noun: 'Degraded — action recommended',       mean: 'Soft alarm. The thing still works, but attention pays off.', ex: ['degraded', 'stale', 'on-call', 'expiring'] },
     { id: 'danger',  name: 'Danger',  tok: '--danger',  soft: '--danger-soft',  noun: 'Failed — action required',            mean: 'Down / blocked / breaking. Reserved for outright failure.', ex: ['down', 'failed', 'rollback', 'blocked'] },
-    { id: 'ice',     name: 'Ice',     tok: '--ice',     soft: '--ice-soft',     noun: 'Informational — planned',             mean: 'Queued, scheduled, canary. Inert but on the horizon.', ex: ['queued', 'scheduled', 'canary', 'hint'] },
+    { id: 'ice',     name: 'Ice',     tok: '--accent-2',     soft: '--accent-2-soft',     noun: 'Informational — planned',             mean: 'Queued, scheduled, canary. Inert but on the horizon.', ex: ['queued', 'scheduled', 'canary', 'hint'] },
     { id: '',        name: 'Neutral', tok: '--fg-subtle', soft: '--surface',     noun: 'Inert — no signal',                   mean: 'Idle, archived, draft. The default fallback when no tone applies.', ex: ['idle', 'archived', 'draft', 'paused'] },
   ];
 
@@ -279,7 +279,7 @@ export default function Status() {
             </tr>
             <tr>
               <td><span className="pill ice"><span className="dot"/>ice</span></td>
-              <td className="icol"><Icons.info size={14} style={{color:'var(--ice)'}}/> <Mono>info</Mono> · <Icons.calendar size={14} style={{color:'var(--ice)'}}/> <Mono>calendar</Mono></td>
+              <td className="icol"><Icons.info size={14} style={{color:'var(--accent-2)'}}/> <Mono>info</Mono> · <Icons.calendar size={14} style={{color:'var(--accent-2)'}}/> <Mono>calendar</Mono></td>
               <td>Informational / scheduled. The &quot;i&quot; never escalates on its own.</td>
             </tr>
             <tr>
@@ -396,7 +396,7 @@ export default function Status() {
           { prop: 'tone="success"', type: 'string', description: 'Pass / healthy / merged. Calm, not celebratory. Maps to --success / --success-soft.' },
           { prop: 'tone="warning"', type: 'string', description: 'Degraded — action recommended. Maps to --warning / --warning-soft.' },
           { prop: 'tone="danger"',  type: 'string', description: 'Failed / down / blocked. Maps to --danger / --danger-soft.' },
-          { prop: 'tone="ice"',     type: 'string', description: 'Informational / scheduled / queued. Maps to --ice / --ice-soft.' },
+          { prop: 'tone="ice"',     type: 'string', description: 'Informational / scheduled / queued. Maps to --accent-2 / --accent-2-soft.' },
           { prop: 'tone="neutral"', type: 'string', description: 'Inert / idle / archived. The default fallback. Maps to --fg-subtle / --surface.' },
         ]}
       />

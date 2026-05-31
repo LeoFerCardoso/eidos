@@ -274,7 +274,7 @@ export default function AiCodeBlock() {
         <div className="surface" style={{ padding: 18 }}>
           <div className="t-h3" style={{ marginBlockEnd: 6 }}>Contrast</div>
           <div className="t-body" style={{ color: 'var(--fg-muted)' }}>
-            The built-in tokenizer colours keywords with <Mono>.k</Mono> = <Mono>var(--ice)</Mono> and strings with <Mono>.s</Mono> = <Mono>var(--warning)</Mono> — both meet AA on the <Mono>var(--bg)</Mono> code surface in both themes. Comments (<Mono>.c</Mono> = <Mono>var(--fg-faint)</Mono>) are decorative-only and never carry required meaning. Shiki's <Mono>github-dark</Mono> theme meets WCAG AA at normal text size. Verify any custom Shiki theme against the actual background colour.
+            The built-in tokenizer colours keywords with <Mono>.k</Mono> = <Mono>var(--accent-2)</Mono> and strings with <Mono>.s</Mono> = <Mono>var(--warning)</Mono> — both meet AA on the <Mono>var(--bg)</Mono> code surface in both themes. Comments (<Mono>.c</Mono> = <Mono>var(--fg-faint)</Mono>) are decorative-only and never carry required meaning. Shiki's <Mono>github-dark</Mono> theme meets WCAG AA at normal text size. Verify any custom Shiki theme against the actual background colour.
           </div>
         </div>
         <div className="surface" style={{ padding: 18 }}>

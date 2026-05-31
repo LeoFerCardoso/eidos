@@ -88,7 +88,7 @@ export const WithIcon: Story = {
               inlineSize: 8,
               blockSize: 8,
               borderRadius: '50%',
-              background: 'var(--ice)',
+              background: 'var(--accent-2)',
             }}
           />
         }

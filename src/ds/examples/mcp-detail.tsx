@@ -138,7 +138,7 @@ import { FPageHeader, FShell } from './example-shell';
                       <Code lang="jsx">{t.args}</Code>
                     </td>
                     <td style={{verticalAlign: 'top', paddingTop: 12}}>
-                      <span className="mono" style={{color:'var(--ice)', fontSize: 'var(--text-sm)'}}>{t.out}</span>
+                      <span className="mono" style={{color:'var(--accent-2)', fontSize: 'var(--text-sm)'}}>{t.out}</span>
                     </td>
                     <td style={{verticalAlign: 'top', paddingTop: 8}}>
                       <div style={{display:'flex', alignItems:'center', gap: 8}}>

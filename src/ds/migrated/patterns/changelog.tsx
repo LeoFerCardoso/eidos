@@ -12,7 +12,7 @@ const CHANGELOG: ChangelogEntry[] = [
 
   // ─── v1.9.0 — Patterns becomes its own sub-DS (2026-05-21) ──────
   { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'patterns', title: 'Eidos Patterns split into its own sub-DS at /patterns',
-    summary: 'The eight visual textures moved into a dedicated Patterns sub-DS, route-prefixed at /patterns. They stay pure decoration — CSS / SVG over the same --ember / --ice / surface tokens, never a new accent, never a page-level shell.' },
+    summary: 'The eight visual textures moved into a dedicated Patterns sub-DS, route-prefixed at /patterns. They stay pure decoration — CSS / SVG over the same --ember / --accent-2 / surface tokens, never a new accent, never a page-level shell.' },
   { version: 'v1.9.0', date: '2026-05-21', type: 'feat', scope: 'overview', title: 'Overview rebuilt — texture swatches in the hero',
     summary: 'New Introduction-style Overview whose hero is a 2×2 grid of live texture swatches (dot-grid, mesh, conic-orb, spotlight) rendered via the real .pat-* classes instead of stat cards.' },
   { version: 'v1.7.1', date: '2026-05-17', type: 'fix', scope: 'mesh-gradient', title: 'Mesh / dot / linear grid textures render inside .pat-demo',

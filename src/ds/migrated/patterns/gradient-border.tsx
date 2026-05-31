@@ -207,7 +207,7 @@ export default function GradientBorderPage() {
         rows={[
           { prop: 'is-thick', type: 'class', description: 'Bump padding mask from 1.5px to 3px.' },
           { prop: 'is-spin',  type: 'class', description: 'Conic-gradient with @property angle rotation. 6s loop.' },
-          { prop: 'inherits',  type: '<color>', description: 'Surface stays --surface; gradient is from --ember / --ice tokens.' },
+          { prop: 'inherits',  type: '<color>', description: 'Surface stays --surface; gradient is from --ember / --accent-2 tokens.' },
         ]}
       />
     </Section>

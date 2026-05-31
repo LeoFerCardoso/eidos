@@ -164,7 +164,7 @@ function CommentThread({ comments }: { comments: { who: string; when: string; te
         ))}
       </div>
       <div style={{ display: 'flex', gap: 16, marginTop: 12, marginInlineStart: 18, fontSize: 'var(--text-xs)', fontFamily: 'var(--font-mono)' }}>
-        <span style={{ color: 'var(--ice)' }}>↳ Add reply…</span>
+        <span style={{ color: 'var(--accent-2)' }}>↳ Add reply…</span>
         <span style={{ color: 'var(--fg-muted)' }}>Resolve</span>
       </div>
     </div>
@@ -320,7 +320,7 @@ export default function DiffViewerPage() {
           { prop: 'theme', type: 'string', default: '"forge"', description: 'Shiki theme for syntax tokens (Eidos data-viz palette). Diff chrome is themed via Eidos tokens regardless.' },
         ]}
       />
-      <Lede>Built on <Mono>@pierre/diffs</Mono> (the engine behind <a href="https://diffs.com" target="_blank" rel="noreferrer" style={{color:'var(--ice)'}}>diffs.com</a>). Eidos sets only the <Mono>--diffs-*</Mono> colour + font custom properties in <Mono>ds.css</Mono>; the diff logic and layout are the library's.</Lede>
+      <Lede>Built on <Mono>@pierre/diffs</Mono> (the engine behind <a href="https://diffs.com" target="_blank" rel="noreferrer" style={{color:'var(--accent-2)'}}>diffs.com</a>). Eidos sets only the <Mono>--diffs-*</Mono> colour + font custom properties in <Mono>ds.css</Mono>; the diff logic and layout are the library's.</Lede>
     </Section>
   );
 }

@@ -226,7 +226,7 @@ export default function ToolPage() {
           </div>
           <div className="ana-list" style={{ maxWidth: 600, margin: '64px auto 0' }}>
             <span className="num">1</span><span><b style={{ color: 'var(--fg)' }}>Header.</b> Icon tile + namespaced name in mono. The full tool path (<Mono>eidos.ai.listDeploys</Mono>) reads like an import, never a label.</span>
-            <span className="num">2</span><span><b style={{ color: 'var(--fg)' }}>Status + duration.</b> Pill colour maps to the four-state machine; <Mono>--success</Mono>, <Mono>--ice</Mono>, <Mono>--warning</Mono>, <Mono>--danger</Mono>. Duration in mono <Mono>ms</Mono>.</span>
+            <span className="num">2</span><span><b style={{ color: 'var(--fg)' }}>Status + duration.</b> Pill colour maps to the four-state machine; <Mono>--success</Mono>, <Mono>--accent-2</Mono>, <Mono>--warning</Mono>, <Mono>--danger</Mono>. Duration in mono <Mono>ms</Mono>.</span>
             <span className="num">3</span><span><b style={{ color: 'var(--fg)' }}>Input section.</b> Formatted JSON of the params the model called the tool with. While streaming, shimmer placeholders fill the slot.</span>
             <span className="num">4</span><span><b style={{ color: 'var(--fg)' }}>Output section.</b> Rendered any way the tool wants — table, code, paragraph, error card. Reuses existing Eidos primitives, never bespoke.</span>
           </div>
@@ -267,7 +267,7 @@ export default function ToolPage() {
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — invent a special "tool table" style</div>
           <div className="body" style={{ padding: 14, gap: 0 }}>
-            <div style={{ width: '100%', background: 'color-mix(in srgb, var(--violet) 22%, var(--bg))', border: '1px solid var(--violet)', padding: 10, borderRadius: 'var(--radius-xl)', color: 'color-mix(in srgb, var(--violet) 55%, white)', fontSize: 12, fontFamily: 'var(--font-mono)', fontVariantNumeric: 'tabular-nums' }}>
+            <div style={{ width: '100%', background: 'color-mix(in srgb, var(--accent-3) 22%, var(--bg))', border: '1px solid var(--accent-3)', padding: 10, borderRadius: 'var(--radius-xl)', color: 'color-mix(in srgb, var(--accent-3) 55%, white)', fontSize: 12, fontFamily: 'var(--font-mono)', fontVariantNumeric: 'tabular-nums' }}>
               <div style={{ fontWeight: 700, marginBottom: 6, fontFamily: 'var(--font-sans)' }}>Result</div>
               <div>7c4f102 · identity-svc · +12/−3</div>
               <div>9a18bb0 · billing-svc · +4/−0</div>

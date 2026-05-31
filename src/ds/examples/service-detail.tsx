@@ -184,7 +184,7 @@ import { FKpi, FPageHeader, FSection, FShell, IconBubble, useQueryParam } from '
               <FKpi
                 label="MTTR"
                 value="26m"
-                sub={<Sparkline data={mttrSpark} w={160} h={28} color="var(--ice)"/>}
+                sub={<Sparkline data={mttrSpark} w={160} h={28} color="var(--accent-2)"/>}
                 trendNode={<Trend delta={-13} unit="%" inverted/>}/>
             </div>
 

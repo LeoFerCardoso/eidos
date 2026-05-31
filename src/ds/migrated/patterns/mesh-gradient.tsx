@@ -17,7 +17,7 @@ export default function MeshGradientPage() {
           <div className="t-mono-label" style={{position:'relative', background:'var(--surface)', padding:'10px 16px', borderRadius: 'var(--radius-xl)', border:'1px solid var(--border)', color:'var(--fg)'}}>.pat-mesh — default</div>
         </div>
       </Frame>
-      <p className="ds-caption">Three blended radial gradients (ember + ice + ember). Color values come from <Mono>--ember</Mono> and <Mono>--ice</Mono> tokens so theme switching works automatically.</p>
+      <p className="ds-caption">Three blended radial gradients (ember + ice + ember). Color values come from <Mono>--ember</Mono> and <Mono>--accent-2</Mono> tokens so theme switching works automatically.</p>
 
       <SubHead meta="three palettes">Variants</SubHead>
       <Frame label="default · is-cool · is-warm · is-subtle">

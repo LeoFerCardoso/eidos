@@ -82,10 +82,13 @@
      overlay alpha is tuned in one place instead of inline rgba per surface. */
   --scrim: rgba(8,9,10,0.45);
 
-  /* ── COOL ACCENTS — theme-stable, used sparingly ─────────────────────── */
-  --ice:     #7DD3FC;
-  --ice-soft: rgba(125,211,252,0.14);
-  --violet:  #A78BFA;
+  /* ── SECONDARY ACCENTS — used sparingly. Named by ROLE, not hue: --accent-2
+        is the AI / automated-content signal, --accent-3 the premium-tier signal.
+        Each theme defines its own pair (Forge: sky + lavender; Iris: cyan +
+        fuchsia) so a color name never lies. */
+  --accent-2:      #7DD3FC;
+  --accent-2-soft: rgba(125,211,252,0.14);
+  --accent-3:      #A78BFA;
 
   /* ── STATUS — three semantic tokens + soft pill bg ──────────────────── */
   --success:      #34D399;
@@ -107,13 +110,13 @@
   --ember-subtle: var(--ember-softer);
   --ember-border: rgba(255,107,53,0.30);
   --ember-text:   var(--ember-glow);
-  /* info (sky) — promotes --ice */
+  /* info (sky) — promotes --accent-2 */
   --info:         #38BDF8;
   --info-strong:  #0EA5E9;
   --info-soft:    rgba(56,189,248,0.14);
   --info-subtle:  rgba(56,189,248,0.07);
   --info-border:  rgba(56,189,248,0.30);
-  --info-text:    var(--ice);
+  --info-text:    var(--accent-2);
   --info-fg:      #06141C;
   /* success */
   --success-strong: #10B981;
@@ -479,9 +482,9 @@
 
   /* ── COOL ACCENTS — same hues, slightly bumped chroma so they don't
         wash out on white surfaces ─────────────────────────────────────── */
-  --ice:      #0EA5E9;
-  --ice-soft: rgba(14,165,233,0.10);
-  --violet:   #7C3AED;
+  --accent-2:      #0EA5E9;
+  --accent-2-soft: rgba(14,165,233,0.10);
+  --accent-3:   #7C3AED;
 
   /* ── STATUS — slightly deeper than dark so they hit AA on white ─────── */
   --success:      #059669;
@@ -684,11 +687,11 @@
   --viz-seq-mid: #9B8CFF;
 
   /* ── COOL ACCENTS — Iris swaps Forge's sky+lavender for a cyan+fuchsia pair
-        that frames the violet primary (lavender would collide with it). --ice
-        stays the AI/automated signal; --violet is the premium-tier signal. ── */
-  --ice:      #22D3EE;
-  --ice-soft: rgba(34,211,238,0.16);
-  --violet:   #E879F9;
+        that frames the violet primary (lavender would collide with it). --accent-2
+        stays the AI/automated signal; --accent-3 is the premium-tier signal. ── */
+  --accent-2:      #22D3EE;
+  --accent-2-soft: rgba(34,211,238,0.16);
+  --accent-3:   #E879F9;
 
   /* ── INFO role — tracks the cool accent, so it reads cyan under Iris ────── */
   --info:        #22D3EE;
@@ -696,7 +699,7 @@
   --info-soft:   rgba(34,211,238,0.14);
   --info-subtle: rgba(34,211,238,0.07);
   --info-border: rgba(34,211,238,0.30);
-  /* --info-text already resolves through var(--ice); --info-fg (dark ink) is
+  /* --info-text already resolves through var(--accent-2); --info-fg (dark ink) is
      inherited from :root — correct on the bright cyan solid. */
 }
 
@@ -730,9 +733,9 @@
   --viz-seq-mid: #6D28D9;
 
   /* ── COOL ACCENTS — Iris light: deeper cyan + fuchsia so they hit AA on white ── */
-  --ice:      #0891B2;
-  --ice-soft: rgba(8,145,178,0.10);
-  --violet:   #C026D3;
+  --accent-2:      #0891B2;
+  --accent-2-soft: rgba(8,145,178,0.10);
+  --accent-3:   #C026D3;
 
   /* ── INFO role — deeper cyan to hit AA on white (white ink inherited) ───── */
   --info:        #0891B2;
@@ -814,7 +817,7 @@ a { color: inherit; text-decoration: none; }
 }
 .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 .pill.ember { color: var(--ember-text); border-color: color-mix(in srgb, var(--ember) 30%, transparent); background: var(--ember-soft); }
-.pill.ice { color: var(--ice); border-color: rgba(125,211,252,0.3); background: var(--ice-soft); }
+.pill.ice { color: var(--accent-2); border-color: rgba(125,211,252,0.3); background: var(--accent-2-soft); }
 .pill.success { color: var(--success); border-color: rgba(52,211,153,0.3); background: var(--success-soft); }
 .pill.warning { color: var(--warning); border-color: rgba(251,191,36,0.3); background: var(--warning-soft); }
 .pill.danger { color: var(--danger); border-color: rgba(248,113,113,0.3); background: var(--danger-soft); }
@@ -880,7 +883,7 @@ a { color: inherit; text-decoration: none; }
 .badge.sm { min-width: 14px; height: 14px; font-size: 9px; padding: 0 4px; border-radius: 3px; }
 .badge.ember,
 .badge.new      { color: var(--ember);   background: var(--ember-soft); }
-.badge.ice      { color: var(--ice);     background: var(--ice-soft); }
+.badge.ice      { color: var(--accent-2);     background: var(--accent-2-soft); }
 .badge.success  { color: var(--success); background: var(--success-soft); }
 .badge.warning  { color: var(--warning); background: var(--warning-soft); }
 .badge.danger   { color: var(--danger);  background: var(--danger-soft); }
@@ -1187,7 +1190,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: 6px; padding: 14px 16px; overflow-x: auto;
   color: var(--fg-muted); line-height: 1.6;
 }
-.code-block .k { color: var(--ice); }
+.code-block .k { color: var(--accent-2); }
 .code-block .s { color: #FBBF24; }
 .code-block .c { color: var(--fg-faint); font-style: italic; }
 .code-block .n { color: #A78BFA; }
@@ -1220,7 +1223,7 @@ a { color: inherit; text-decoration: none; }
 .chip.warn { color: var(--warning); background: var(--warning-soft); border-color: rgba(251,191,36,0.2); }
 .chip.bad { color: var(--danger); background: var(--danger-soft); border-color: rgba(248,113,113,0.2); }
 .chip.ember { color: var(--ember-text); background: var(--ember-soft); border-color: color-mix(in srgb, var(--ember) 25%, transparent); }
-.chip.ice { color: var(--ice); background: var(--ice-soft); border-color: rgba(125,211,252,0.25); }
+.chip.ice { color: var(--accent-2); background: var(--accent-2-soft); border-color: rgba(125,211,252,0.25); }
 /* Borderless variant — no background/border chrome; the content (leading dot, text)
    is the only affordance. Use for dense contexts where the chip border would add noise.
    Example: LangBadge without border in a compact catalog cell. */
@@ -2998,7 +3001,7 @@ linear-gradient(45deg, rgba(15,23,42,0.10) 25%, transparent 25%, transparent 75%
   width: 36px; height: 36px; border-radius: 8px;
   display: inline-flex; align-items: center; justify-content: center;
 }
-.mdl-icon.info    { background: var(--ice-soft);     color: var(--ice); }
+.mdl-icon.info    { background: var(--accent-2-soft);     color: var(--accent-2); }
 .mdl-icon.success { background: var(--success-soft); color: var(--success); }
 .mdl-icon.warning { background: var(--warning-soft); color: var(--warning); }
 .mdl-icon.danger  { background: var(--danger-soft);  color: var(--danger); }

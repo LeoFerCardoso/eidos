@@ -49,7 +49,7 @@ const IconBubble = ({ icon, size = 36, tone = 'ember', children }: {
   const Icon = (Icons && Icons[icon]) || null;
   const palette = {
     ember:  { bg: 'var(--ember-soft)',   fg: 'var(--ember)' },
-    ice:    { bg: 'var(--ice-soft, color-mix(in oklch, var(--ice) 16%, transparent))', fg: 'var(--ice)' },
+    ice:    { bg: 'var(--accent-2-soft, color-mix(in oklch, var(--accent-2) 16%, transparent))', fg: 'var(--accent-2)' },
     danger: { bg: 'var(--danger-soft)',  fg: 'var(--danger)' },
     warn:   { bg: 'var(--warning-soft)', fg: 'var(--warning)' },
     neutral:{ bg: 'var(--surface-active)', fg: 'var(--fg-muted)' },

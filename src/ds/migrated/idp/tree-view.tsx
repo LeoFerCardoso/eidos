@@ -385,7 +385,7 @@ export default function TreeViewPage() {
           { prop: 'height', type: 'number | string', default: '320', description: 'Fixed panel height; rows virtualize and scroll inside it.' },
         ]}
       />
-      <Lede>Built on <Mono>@pierre/trees</Mono> (the engine behind <a href="https://trees.software" target="_blank" rel="noreferrer" style={{color:'var(--ice)'}}>trees.software</a>). Eidos sets only the <Mono>--trees-*-override</Mono> colour, type + shape custom properties in <Mono>ds.css</Mono>; the model, virtualization and a11y are the library&rsquo;s.</Lede>
+      <Lede>Built on <Mono>@pierre/trees</Mono> (the engine behind <a href="https://trees.software" target="_blank" rel="noreferrer" style={{color:'var(--accent-2)'}}>trees.software</a>). Eidos sets only the <Mono>--trees-*-override</Mono> colour, type + shape custom properties in <Mono>ds.css</Mono>; the model, virtualization and a11y are the library&rsquo;s.</Lede>
     </Section>
   );
 }

@@ -76,7 +76,7 @@ export const Colors: Story = {
         { name: 'success', v: 'var(--success)' },
         { name: 'warning', v: 'var(--warning)' },
         { name: 'danger',  v: 'var(--danger)' },
-        { name: 'ice',     v: 'var(--ice)' },
+        { name: 'ice',     v: 'var(--accent-2)' },
         { name: 'muted',   v: 'var(--fg-muted)' },
       ].map(({ name, v }) => (
         <span key={name} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>

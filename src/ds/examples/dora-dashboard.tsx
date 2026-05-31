@@ -111,7 +111,7 @@ import { FKpi, FPageHeader, FSection, FShell } from './example-shell';
         <FKpi
           label="MTTR"
           value="24m"
-          sub={<Sparkline data={mttrSeries} w={200} h={32} color="var(--ice)"/>}
+          sub={<Sparkline data={mttrSeries} w={200} h={32} color="var(--accent-2)"/>}
           trendNode={<Trend delta={-54} unit="%" inverted/>}/>
       </div>
 

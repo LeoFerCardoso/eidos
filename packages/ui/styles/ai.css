@@ -1056,7 +1056,7 @@ button.ai-cite-panel-head { cursor: pointer; }
 }
 .tool-code .k { color: var(--ember); }
 .tool-code .s { color: var(--success); }
-.tool-code .n { color: var(--ice); }
+.tool-code .n { color: var(--accent-2); }
 
 .tool-output-text {
   font-size: 13px; line-height: 1.55; color: var(--fg);

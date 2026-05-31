@@ -36,7 +36,7 @@ export default function EmberGlowPage() {
           </div>
           <div className="pat-demo is-short" style={{position:'relative', overflow:'hidden'}}>
             <div className="pat-ember-glow is-ice" aria-hidden="true" style={{top:'50%', insetInlineStart:'50%', transform:'translate(-50%, -50%)'}}/>
-            <span style={{position:'relative', fontSize: 'var(--text-xs)', fontFamily:'var(--font-mono)', color:'var(--ice)'}}>is-ice</span>
+            <span style={{position:'relative', fontSize: 'var(--text-xs)', fontFamily:'var(--font-mono)', color:'var(--accent-2)'}}>is-ice</span>
           </div>
           <div className="pat-demo is-short" style={{position:'relative', overflow:'hidden'}}>
             <div className="pat-ember-glow is-pulse" aria-hidden="true" style={{top:'50%', insetInlineStart:'50%', transform:'translate(-50%, -50%)'}}/>
@@ -44,7 +44,7 @@ export default function EmberGlowPage() {
           </div>
           <div className="pat-demo is-short" style={{position:'relative', overflow:'hidden'}}>
             <div className="pat-ember-glow is-ice is-pulse is-lg" aria-hidden="true" style={{top:'50%', insetInlineStart:'50%', transform:'translate(-50%, -50%)'}}/>
-            <span style={{position:'relative', fontSize: 'var(--text-xs)', fontFamily:'var(--font-mono)', color:'var(--ice)'}}>combine</span>
+            <span style={{position:'relative', fontSize: 'var(--text-xs)', fontFamily:'var(--font-mono)', color:'var(--accent-2)'}}>combine</span>
           </div>
         </div>
       </Frame>

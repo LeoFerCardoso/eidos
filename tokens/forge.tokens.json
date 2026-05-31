@@ -210,21 +210,21 @@
         "com.forge.theme.light": "rgba(8,9,10,0.40)"
       }
     },
-    "ice": {
+    "accent-2": {
       "$value": "#7DD3FC",
       "$type": "color",
       "$extensions": {
         "com.forge.theme.light": "#0EA5E9"
       }
     },
-    "ice-soft": {
+    "accent-2-soft": {
       "$value": "rgba(125,211,252,0.14)",
       "$type": "color",
       "$extensions": {
         "com.forge.theme.light": "rgba(14,165,233,0.10)"
       }
     },
-    "violet": {
+    "accent-3": {
       "$value": "#A78BFA",
       "$type": "color",
       "$extensions": {
@@ -331,7 +331,7 @@
       }
     },
     "info-text": {
-      "$value": "{color.ice}",
+      "$value": "{color.accent-2}",
       "$type": "color",
       "$extensions": {
         "com.forge.theme.light": "#0369A1"

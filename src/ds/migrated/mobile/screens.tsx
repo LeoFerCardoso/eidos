@@ -43,7 +43,7 @@ function BoardScreen({ device = 'iphone-15-pro' }: { device?: string }) {
           </div>
           <p style={{ fontSize: 15, lineHeight: 1.5, color: 'var(--fg)', marginTop: 12 }}>p95 latency broke the 200ms SLO; the error budget is burning. On-call paged to investigate the gateway.</p>
           <div style={{ display: 'flex', gap: 8, marginTop: 14 }}>
-            {[['barChart', 'var(--ember-soft)', 'var(--ember-text)'], ['activity', 'var(--ice-soft)', 'var(--ice)'], ['server', 'var(--surface-active)', 'var(--fg-muted)']].map(([ic, bg, fg], i) => {
+            {[['barChart', 'var(--ember-soft)', 'var(--ember-text)'], ['activity', 'var(--accent-2-soft)', 'var(--accent-2)'], ['server', 'var(--surface-active)', 'var(--fg-muted)']].map(([ic, bg, fg], i) => {
               const I = (Icons as Record<string, any>)[ic as string];
               return <span key={i} style={{ width: 54, height: 54, borderRadius: 'var(--radius-lg)', background: bg as string, color: fg as string, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}><I size={22} /></span>;
             })}
@@ -52,7 +52,7 @@ function BoardScreen({ device = 'iphone-15-pro' }: { device?: string }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 16, paddingTop: 14, borderTop: '1px solid var(--border)' }}>
             <span style={{ fontSize: 15, color: 'var(--fg-muted)' }}>Assign to</span>
             <span style={{ display: 'inline-flex', marginInlineStart: 'auto' }}>
-              {[['MT', 'var(--ember)'], ['SS', 'var(--ice)'], ['DC', 'var(--violet)']].map(([in_, tone], i) => (
+              {[['MT', 'var(--ember)'], ['SS', 'var(--accent-2)'], ['DC', 'var(--accent-3)']].map(([in_, tone], i) => (
                 <span key={i} style={{ marginInlineStart: i ? -10 : 0, border: '2px solid var(--surface)', borderRadius: 999 }}>{avatar(in_ as string, tone as string)}</span>
               ))}
             </span>
@@ -101,9 +101,9 @@ function ActivityScreen({ device = 'pixel-8' }: { device?: string }) {
       <div style={{ flex: 1, overflow: 'auto', padding: '0 20px 16px' }}>
         <div style={{ fontSize: 19, fontWeight: 600, padding: '6px 0 2px' }}>Today</div>
         {entry('MT', 'var(--ember)', 'Marcus Thorne', 'Completed', 'success', 'Rolled back deploy #9384 — identity-svc is healthy again and p95 is back under target.', 'Today · 14:20', 'rocket')}
-        {entry('SS', 'var(--ice)', 'Sophia Sterling', 'In Progress', 'warning', 'On the gateway: tuning the connection pool to bring p95 down. Budget freeze in place.', 'Today · 11:45', 'server')}
+        {entry('SS', 'var(--accent-2)', 'Sophia Sterling', 'In Progress', 'warning', 'On the gateway: tuning the connection pool to bring p95 down. Budget freeze in place.', 'Today · 11:45', 'server')}
         <div style={{ fontSize: 19, fontWeight: 600, padding: '14px 0 2px' }}>Yesterday</div>
-        {entry('DC', 'var(--violet)', 'David Chen', 'New', 'ice', 'Opened P2 — intermittent 5xx from the pix-router queue under burst load.', 'Yesterday · 16:30', 'pipeline')}
+        {entry('DC', 'var(--accent-3)', 'David Chen', 'New', 'ice', 'Opened P2 — intermittent 5xx from the pix-router queue under burst load.', 'Yesterday · 16:30', 'pipeline')}
       </div>
     </div>
   );
@@ -153,7 +153,7 @@ export default function MobileScreens() {
                       <span className="pill danger" style={{ fontSize: 11 }}>Urgent</span>
                     </div>
                     <span style={{ display: 'inline-flex', marginTop: 10 }}>
-                      {['var(--ember)', 'var(--ice)', 'var(--violet)'].map((t, i) => (
+                      {['var(--ember)', 'var(--accent-2)', 'var(--accent-3)'].map((t, i) => (
                         <span key={i} style={{ width: 22, height: 22, borderRadius: 999, background: t, marginInlineStart: i ? -7 : 0, border: '2px solid var(--surface)' }} />
                       ))}
                     </span>

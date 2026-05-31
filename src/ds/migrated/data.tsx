@@ -428,24 +428,24 @@ export function Demo() {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const lineSeries = [
     { name: 'Production', color: 'var(--ember)',  data: [42, 48, 55, 51, 60, 68, 72, 78, 82, 88, 94, 98] },
-    { name: 'Staging',    color: 'var(--ice)',    data: [22, 28, 30, 32, 36, 38, 40, 44, 46, 50, 52, 56] },
-    { name: 'Preview',    color: 'var(--violet)', data: [10, 12, 14, 15, 18, 22, 24, 28, 32, 30, 36, 40] },
+    { name: 'Staging',    color: 'var(--accent-2)',    data: [22, 28, 30, 32, 36, 38, 40, 44, 46, 50, 52, 56] },
+    { name: 'Preview',    color: 'var(--accent-3)', data: [10, 12, 14, 15, 18, 22, 24, 28, 32, 30, 36, 40] },
   ];
 
   const stackedData = [
-    { label: 'Mon', segments: [{ name: '2xx', value: 920, color: 'var(--success)' }, { name: '3xx', value: 80, color: 'var(--ice)' }, { name: '4xx', value: 32, color: 'var(--warning)' }, { name: '5xx', value: 6, color: 'var(--danger)' }] },
-    { label: 'Tue', segments: [{ name: '2xx', value: 1080, color: 'var(--success)' }, { name: '3xx', value: 92, color: 'var(--ice)' }, { name: '4xx', value: 28, color: 'var(--warning)' }, { name: '5xx', value: 4, color: 'var(--danger)' }] },
-    { label: 'Wed', segments: [{ name: '2xx', value: 1240, color: 'var(--success)' }, { name: '3xx', value: 110, color: 'var(--ice)' }, { name: '4xx', value: 42, color: 'var(--warning)' }, { name: '5xx', value: 11, color: 'var(--danger)' }] },
-    { label: 'Thu', segments: [{ name: '2xx', value: 1310, color: 'var(--success)' }, { name: '3xx', value: 120, color: 'var(--ice)' }, { name: '4xx', value: 36, color: 'var(--warning)' }, { name: '5xx', value: 7, color: 'var(--danger)' }] },
-    { label: 'Fri', segments: [{ name: '2xx', value: 1420, color: 'var(--success)' }, { name: '3xx', value: 138, color: 'var(--ice)' }, { name: '4xx', value: 30, color: 'var(--warning)' }, { name: '5xx', value: 5, color: 'var(--danger)' }] },
-    { label: 'Sat', segments: [{ name: '2xx', value: 720,  color: 'var(--success)' }, { name: '3xx', value: 60,  color: 'var(--ice)' }, { name: '4xx', value: 12, color: 'var(--warning)' }, { name: '5xx', value: 2, color: 'var(--danger)' }] },
-    { label: 'Sun', segments: [{ name: '2xx', value: 580,  color: 'var(--success)' }, { name: '3xx', value: 48,  color: 'var(--ice)' }, { name: '4xx', value: 14, color: 'var(--warning)' }, { name: '5xx', value: 1, color: 'var(--danger)' }] },
+    { label: 'Mon', segments: [{ name: '2xx', value: 920, color: 'var(--success)' }, { name: '3xx', value: 80, color: 'var(--accent-2)' }, { name: '4xx', value: 32, color: 'var(--warning)' }, { name: '5xx', value: 6, color: 'var(--danger)' }] },
+    { label: 'Tue', segments: [{ name: '2xx', value: 1080, color: 'var(--success)' }, { name: '3xx', value: 92, color: 'var(--accent-2)' }, { name: '4xx', value: 28, color: 'var(--warning)' }, { name: '5xx', value: 4, color: 'var(--danger)' }] },
+    { label: 'Wed', segments: [{ name: '2xx', value: 1240, color: 'var(--success)' }, { name: '3xx', value: 110, color: 'var(--accent-2)' }, { name: '4xx', value: 42, color: 'var(--warning)' }, { name: '5xx', value: 11, color: 'var(--danger)' }] },
+    { label: 'Thu', segments: [{ name: '2xx', value: 1310, color: 'var(--success)' }, { name: '3xx', value: 120, color: 'var(--accent-2)' }, { name: '4xx', value: 36, color: 'var(--warning)' }, { name: '5xx', value: 7, color: 'var(--danger)' }] },
+    { label: 'Fri', segments: [{ name: '2xx', value: 1420, color: 'var(--success)' }, { name: '3xx', value: 138, color: 'var(--accent-2)' }, { name: '4xx', value: 30, color: 'var(--warning)' }, { name: '5xx', value: 5, color: 'var(--danger)' }] },
+    { label: 'Sat', segments: [{ name: '2xx', value: 720,  color: 'var(--success)' }, { name: '3xx', value: 60,  color: 'var(--accent-2)' }, { name: '4xx', value: 12, color: 'var(--warning)' }, { name: '5xx', value: 2, color: 'var(--danger)' }] },
+    { label: 'Sun', segments: [{ name: '2xx', value: 580,  color: 'var(--success)' }, { name: '3xx', value: 48,  color: 'var(--accent-2)' }, { name: '4xx', value: 14, color: 'var(--warning)' }, { name: '5xx', value: 1, color: 'var(--danger)' }] },
   ];
 
   const browsers = [
     { label: 'Chrome',  value: 64, color: 'var(--ember)' },
-    { label: 'Safari',  value: 19, color: 'var(--ice)' },
-    { label: 'Firefox', value: 8,  color: 'var(--violet)' },
+    { label: 'Safari',  value: 19, color: 'var(--accent-2)' },
+    { label: 'Firefox', value: 8,  color: 'var(--accent-3)' },
     { label: 'Edge',    value: 6,  color: 'var(--success)' },
     { label: 'Other',   value: 3,  color: 'var(--warning)' },
   ];
@@ -522,7 +522,7 @@ export default function DataDisplay() {
               <Delta value={-3.6} invert />
             </div>
             <div className="metric-value"><Counter to={142}/><span className="unit">ms</span></div>
-            <div className="metric-spark"><Sparkline data={tLatency} color="var(--ice)" w={260} h={36}/></div>
+            <div className="metric-spark"><Sparkline data={tLatency} color="var(--accent-2)" w={260} h={36}/></div>
             <div className="metric-meta">target ≤ 150ms · 14d</div>
           </div>
           <div className="metric success">
@@ -658,7 +658,7 @@ export default function DataDisplay() {
       <Frame
         label="line · bars · win / loss — pick by data shape, not aesthetics"
         code={`<Sparkline    data={[5,8,11,14,18,22,28,32,40]} color="var(--ember)"/>
-<SparkBars    data={[12,18,22,19,28,36,32,41]} color="var(--ice)"/>
+<SparkBars    data={[12,18,22,19,28,36,32,41]} color="var(--accent-2)"/>
 <SparkWinLoss data={[1,1,-1,1,1,1,-1,1,1,1,1,-1,1,1,1]}/>`}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 18, alignItems: 'end' }}>
           <div>
@@ -668,7 +668,7 @@ export default function DataDisplay() {
           </div>
           <div>
             <div className="t-mono-label" style={{ marginBottom: 8 }}>Bars · discrete counts</div>
-            <SparkBars data={dailyTraffic.slice(0, 14)} color="var(--ice)" w={260} h={42}/>
+            <SparkBars data={dailyTraffic.slice(0, 14)} color="var(--accent-2)" w={260} h={42}/>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', marginTop: 6, fontFamily: 'var(--font-mono)' }}>Sessions / day</div>
           </div>
           <div>
@@ -704,8 +704,8 @@ export default function DataDisplay() {
         label="three series · legend below · hover for exact values"
         code={`<LineChart series={[
   { name: 'Production', color: 'var(--ember)',  data: [...] },
-  { name: 'Staging',    color: 'var(--ice)',    data: [...] },
-  { name: 'Preview',    color: 'var(--violet)', data: [...] },
+  { name: 'Staging',    color: 'var(--accent-2)',    data: [...] },
+  { name: 'Preview',    color: 'var(--accent-3)', data: [...] },
 ]} labels={['Jan','Feb',…,'Dec']}/>`}>
         <LineChart series={lineSeries} labels={months} />
         <div className="legend" style={{ marginTop: 12 }}>
@@ -740,7 +740,7 @@ export default function DataDisplay() {
         code={`<StackedBar data={[
   { label: 'Mon', segments: [
     { name: '2xx', value: 920, color: 'var(--success)' },
-    { name: '3xx', value:  80, color: 'var(--ice)' },
+    { name: '3xx', value:  80, color: 'var(--accent-2)' },
     { name: '4xx', value:  32, color: 'var(--warning)' },
     { name: '5xx', value:   6, color: 'var(--danger)' },
   ]},
@@ -749,7 +749,7 @@ export default function DataDisplay() {
         <StackedBar data={stackedData} />
         <div className="legend" style={{ marginTop: 12 }}>
           <span className="lg-item"><span className="lg-dot" style={{ background: 'var(--success)' }}/>2xx ok</span>
-          <span className="lg-item"><span className="lg-dot" style={{ background: 'var(--ice)' }}/>3xx redirect</span>
+          <span className="lg-item"><span className="lg-dot" style={{ background: 'var(--accent-2)' }}/>3xx redirect</span>
           <span className="lg-item"><span className="lg-dot" style={{ background: 'var(--warning)' }}/>4xx client</span>
           <span className="lg-item"><span className="lg-dot" style={{ background: 'var(--danger)' }}/>5xx server</span>
         </div>
@@ -761,7 +761,7 @@ export default function DataDisplay() {
         label="palette by category · centered total · legend with values"
         code={`<Donut data={[
   { label: 'Chrome',  value: 64, color: 'var(--ember)' },
-  { label: 'Safari',  value: 19, color: 'var(--ice)' },
+  { label: 'Safari',  value: 19, color: 'var(--accent-2)' },
   …
 ]}>
   <span className="t-mono-label">Total</span>
@@ -829,7 +829,7 @@ export default function DataDisplay() {
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', fontVariantNumeric: 'tabular-nums', textAlign: 'end' }}>62% / 80%</div>
 
           <div className="t-mono-label">Deploy cadence</div>
-          <Bullet value={32} target={50} max={50} color="var(--ice)"/>
+          <Bullet value={32} target={50} max={50} color="var(--accent-2)"/>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', fontVariantNumeric: 'tabular-nums', textAlign: 'end' }}>32 / 50/wk</div>
         </div>
       </Frame>
@@ -873,7 +873,7 @@ export default function DataDisplay() {
             <div className="t-mono-label">Disk used</div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-            <Gauge value={48} max={100} color="var(--ice)" label="" />
+            <Gauge value={48} max={100} color="var(--accent-2)" label="" />
             <div className="t-mono-label">NPS · 30d</div>
           </div>
         </div>
@@ -995,7 +995,7 @@ export default function DataDisplay() {
                 <span className="t-mono-label">Requests by status</span>
                 <div className="legend" style={{ fontSize: 'var(--text-xs)' }}>
                   <span className="lg-item"><span className="lg-dot" style={{ background: 'var(--success)' }}/>2xx</span>
-                  <span className="lg-item"><span className="lg-dot" style={{ background: 'var(--ice)' }}/>3xx</span>
+                  <span className="lg-item"><span className="lg-dot" style={{ background: 'var(--accent-2)' }}/>3xx</span>
                   <span className="lg-item"><span className="lg-dot" style={{ background: 'var(--warning)' }}/>4xx</span>
                   <span className="lg-item"><span className="lg-dot" style={{ background: 'var(--danger)' }}/>5xx</span>
                 </div>
@@ -1151,7 +1151,7 @@ export default function DataDisplay() {
                 <Delta value={-3.6} invert/>
               </div>
               <div className="metric-value"><Counter to={142}/><span className="unit">مللي</span></div>
-              <div className="metric-spark"><Sparkline data={tLatency} color="var(--ice)" w={260} h={36}/></div>
+              <div className="metric-spark"><Sparkline data={tLatency} color="var(--accent-2)" w={260} h={36}/></div>
               <div className="metric-meta">الهدف ≤ 150 مللي</div>
             </div>
             <div className="metric success">
@@ -1253,7 +1253,7 @@ export default function DataDisplay() {
               <td>Activity, primary brand metric, the one number that matters</td><td className="mono">Deploys, MRR, requests/min</td>
             </tr>
             <tr>
-              <td className="tok-name"><span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: 2, background: 'var(--ice)', marginInlineEnd: 8, verticalAlign: 'middle' }}/>--ice</td>
+              <td className="tok-name"><span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: 2, background: 'var(--accent-2)', marginInlineEnd: 8, verticalAlign: 'middle' }}/>--accent-2</td>
               <td>Latency, capacity, neutral observational metrics</td><td className="mono">p50/p95, CPU, throughput</td>
             </tr>
             <tr>
@@ -1269,7 +1269,7 @@ export default function DataDisplay() {
               <td>Errors, critical state, negative deltas (uninverted)</td><td className="mono">5xx, churn, incidents</td>
             </tr>
             <tr>
-              <td className="tok-name"><span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: 2, background: 'var(--violet)', marginInlineEnd: 8, verticalAlign: 'middle' }}/>--violet</td>
+              <td className="tok-name"><span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: 2, background: 'var(--accent-3)', marginInlineEnd: 8, verticalAlign: 'middle' }}/>--accent-3</td>
               <td>Adjacent / experimental segment in a multi-series chart</td><td className="mono">Preview env, beta cohort</td>
             </tr>
           </tbody>
@@ -1367,8 +1367,8 @@ export default function DataDisplay() {
           <div className="body" style={{ padding: 16 }}>
             <Donut data={[
               { label: 'A', value: 18, color: 'var(--ember)' },
-              { label: 'B', value: 14, color: 'var(--ice)' },
-              { label: 'C', value: 12, color: 'var(--violet)' },
+              { label: 'B', value: 14, color: 'var(--accent-2)' },
+              { label: 'C', value: 12, color: 'var(--accent-3)' },
               { label: 'D', value: 10, color: 'var(--success)' },
               { label: 'E', value: 9,  color: 'var(--warning)' },
               { label: 'F', value: 8,  color: 'var(--danger)' },
@@ -1377,7 +1377,7 @@ export default function DataDisplay() {
               { label: 'I', value: 5,  color: 'var(--viz-cat-6)' },
               { label: 'J', value: 4,  color: 'var(--success)' },
               { label: 'K', value: 4,  color: 'var(--warning)' },
-              { label: 'L', value: 3,  color: 'var(--violet)' },
+              { label: 'L', value: 3,  color: 'var(--accent-3)' },
             ]} size={120} thickness={12}/>
           </div>
           <div className="note">No one can read a 12-slice pie. Switch to a sorted bar chart and let the longest bar do the work.</div>

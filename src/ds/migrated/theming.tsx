@@ -192,7 +192,7 @@ export default function Theming() {
           <div className="head"><Icons.check size={12}/> Do — keep it to a few tokens</div>
           <div className="body" style={{flexDirection:'column', alignItems:'flex-start', gap: 6, fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-muted)'}}>
             <div>--ember: <span style={{color:'var(--ember)'}}>oklch(72% 0.17 60)</span></div>
-            <div>--bg-elevated: <span style={{color:'var(--ice)'}}>oklch(18% 0.01 240)</span></div>
+            <div>--bg-elevated: <span style={{color:'var(--accent-2)'}}>oklch(18% 0.01 240)</span></div>
           </div>
           <div className="note">Two clear overrides. Keep the rest of the system intact so cross-product muscle memory survives.</div>
         </div>

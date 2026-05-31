@@ -70,7 +70,7 @@ export default function PatternsOverview() {
         eyebrow: 'CSS / SVG · token-driven',
         heading: 'The quietest layer in Eidos.',
         subtitle: 'Pure CSS & SVG over the tokens.',
-        body: 'Reach for a texture to anchor a hero or warm an empty state — one per screen, behind one focal element. Every pattern derives from --ember / --ice / surface tokens, so it re-tints with the theme automatically.',
+        body: 'Reach for a texture to anchor a hero or warm an empty state — one per screen, behind one focal element. Every pattern derives from --ember / --accent-2 / surface tokens, so it re-tints with the theme automatically.',
         actions: (
           <>
             <a className="btn ember" href="/patterns/mesh-gradient">Browse patterns <Icons.arrowRight size={14} /></a>
@@ -82,7 +82,7 @@ export default function PatternsOverview() {
       principlesTitle="Principles"
       principles={[
         { t: 'Restraint', d: 'One textured surface per screen, behind one focal element. If two patterns compete, both lose.' },
-        { t: 'Token-driven', d: 'Colors come from --ember/--ice/surface — never hard-coded — so a pattern flips light/dark with everything else.' },
+        { t: 'Token-driven', d: 'Colors come from --ember/--accent-2/surface — never hard-coded — so a pattern flips light/dark with everything else.' },
         { t: 'Decoration, not structure', d: 'Patterns adorn; they never carry meaning or become a layout. Content sits above them, fully legible.' },
       ]}
       tilesTitle="The patterns"

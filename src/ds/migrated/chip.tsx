@@ -80,7 +80,7 @@ const TREND_CODE = `<Chip tone="ok"  trend="up">+12.4%</Chip>
 const ICON_CODE = `{/* Language-colour dot as leading icon — use var(--*) tokens */}
 <Chip icon={
   <span style={{ display:'inline-block', width:8, height:8,
-    borderRadius:'50%', background:'var(--ice)' }}/>
+    borderRadius:'50%', background:'var(--accent-2)' }}/>
 }>Python</Chip>
 
 <Chip icon={
@@ -348,7 +348,7 @@ export default function ChipPage() {
                 width: 8,
                 height: 8,
                 borderRadius: '50%',
-                background: 'var(--ice)',
+                background: 'var(--accent-2)',
               }}
             />
           }

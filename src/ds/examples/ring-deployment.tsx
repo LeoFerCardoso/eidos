@@ -193,7 +193,7 @@ import { FPageHeader, FSection, FShell, IconBubble } from './example-shell';
                 <span>SLO compliance</span>
                 <span className="mono" style={{color:'var(--success)'}}>99.97%</span>
               </div>
-              <Sparkline data={sloSpark} w={260} h={36} color="var(--ice)"/>
+              <Sparkline data={sloSpark} w={260} h={36} color="var(--accent-2)"/>
             </div>
           </div>
         </div>

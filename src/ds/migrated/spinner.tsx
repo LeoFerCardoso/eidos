@@ -165,7 +165,7 @@ export default function SpinnerPage() {
             { name: 'success', v: 'var(--success)' },
             { name: 'warning', v: 'var(--warning)' },
             { name: 'danger',  v: 'var(--danger)' },
-            { name: 'ice',     v: 'var(--ice)' },
+            { name: 'ice',     v: 'var(--accent-2)' },
             { name: 'muted',   v: 'var(--fg-muted)' },
           ].map(({ name, v }) => (
             <div key={name} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
