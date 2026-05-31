@@ -1,7 +1,7 @@
 ---
 name: refine
 description: |
-  Artifact polish pass. Pick an already-built Forge DS component page or example
+  Artifact polish pass. Pick an already-built Eidos DS component page or example
   screen, propose targeted visual + interaction improvements, apply them, then re-run
   the anti-ai-slop, accessibility, and RTL checks. Use when the request is "polish X",
   "refine this screen", "tighten the spacing/states", "make X feel less generic", or
@@ -14,7 +14,7 @@ allowed-tools: [Read, Edit, Write, Bash, Grep]
 # refine — targeted polish of a built DS artifact
 
 Bridges the harness `tweaks` (parametric exploration) and `critique` (5-dimension
-review) skills into an apply-then-verify loop on an existing Forge artifact.
+review) skills into an apply-then-verify loop on an existing Eidos artifact.
 
 ## 1. Locate the target
 

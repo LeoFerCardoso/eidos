@@ -1,9 +1,9 @@
 export const meta = {
   name: 'restructure-component',
   description:
-    'Restructure ONE Forge DS component end-to-end so its three surfaces are correct and consistent: the docs page (section standard), the Storybook story (CSF3 / atomic-clean taxonomy), and the install/registry item (eidos add). Flow: resolve+audit → 3 parallel rebuilds → build/verify (auto-fix) → adversarial critique.',
+    'Restructure ONE Eidos DS component end-to-end so its three surfaces are correct and consistent: the docs page (section standard), the Storybook story (CSF3 / atomic-clean taxonomy), and the install/registry item (eidos add). Flow: resolve+audit → 3 parallel rebuilds → build/verify (auto-fix) → adversarial critique.',
   whenToUse:
-    'Improving or building an existing Forge DS component. Invoke with args = a component name/slug string, or { component, dryRun, skipDocs, skipStory, skipInstall }. dryRun returns the audit/gap report without editing files.',
+    'Improving or building an existing Eidos DS component. Invoke with args = a component name/slug string, or { component, dryRun, skipDocs, skipStory, skipInstall }. dryRun returns the audit/gap report without editing files.',
   phases: [
     { title: 'Resolve & audit' },
     { title: 'Restructure' },
@@ -56,7 +56,7 @@ const AUDIT_SCHEMA = {
       },
     },
     variants: { type: 'array', items: { type: 'string' }, description: 'Distinct visual variants/sizes/states worth one Frame + one story each.' },
-    intraDeps: { type: 'array', items: { type: 'string' }, description: 'Other Forge components this one imports (→ registryDependencies).' },
+    intraDeps: { type: 'array', items: { type: 'string' }, description: 'Other Eidos components this one imports (→ registryDependencies).' },
     npmDeps: { type: 'array', items: { type: 'string' }, description: 'Real external npm deps (recharts/ai/react-markdown/…), [] if none.' },
     pageLocalCss: { type: 'boolean', description: 'Does it rely on CSS in a page <style> block that must be promoted to tokens.css?' },
     gaps: {
@@ -85,7 +85,7 @@ const VERDICT = {
 // ── Phase 1 — Resolve & audit (read-only) ─────────────────────────────────────
 phase('Resolve & audit')
 const audit = await agent(
-  `Repo: ${REPO}. You are AUDITING a single Forge DS component to plan a 3-surface restructure
+  `Repo: ${REPO}. You are AUDITING a single Eidos DS component to plan a 3-surface restructure
 (docs page, Storybook story, install/registry). Component identifier: "${COMPONENT}".
 
 ${STANDARDS}
@@ -99,7 +99,7 @@ DO (read-only — make NO edits):
 2. Extract the REAL prop list (name/type/required/default/description) from the TS source — this is the
    single source of truth the rebuild steps will share. Cross-check src/ds/core/props.generated.ts.
 3. List the distinct variants/sizes/states that each deserve a Frame + a story.
-4. Identify intra-DS component deps (imports of other Forge components) and real npm deps.
+4. Identify intra-DS component deps (imports of other Eidos components) and real npm deps.
 5. Detect whether the component relies on page-local <style> CSS that must be promoted to tokens.css.
 6. Produce the GAP report per surface: doc (vs DS-PAGE-STANDARD section anatomy), story (vs the CSF3
    template), install (FAMILIES membership, registryDependencies, npm deps, promoted CSS, vaporware).
@@ -120,7 +120,7 @@ phase('Restructure')
 const streams = []
 
 if (!input.skipDocs) streams.push(() => agent(
-  `Repo: ${REPO}. Restructure the DOCS PAGE for ${audit.component} to the Forge page standard.
+  `Repo: ${REPO}. Restructure the DOCS PAGE for ${audit.component} to the Eidos page standard.
 ${STANDARDS}
 
 AUDIT (shared source of truth — use these props/variants/paths, do not re-derive differently):
@@ -211,7 +211,7 @@ phase('Critique')
 const critique = await agent(
   `Repo: ${REPO}. Expert design + DS review of the restructured ${audit.component}: its docs page (${audit.docPage}),
 its Storybook story (${audit.storyFile}), and its install block. Judge against docs/DS-PAGE-STANDARD.md,
-.claude/craft/anti-ai-slop.md (P0 list), and the Forge invariants (single ember accent; DARK INK on ember fills —
+.claude/craft/anti-ai-slop.md (P0 list), and the Eidos invariants (single ember accent; DARK INK on ember fills —
 verify contrast; Geist type; logical props/RTL; composed classes, no per-page <style>). For the story, confirm it
 covers every real variant/state and reads intentional, not boilerplate. Be adversarial: assume something is wrong
 and find it. Return: a short Keep / Fix / Quick-wins review with cited evidence (file:line). Do not edit — this is a

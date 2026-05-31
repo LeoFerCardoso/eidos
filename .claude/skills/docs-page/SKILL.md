@@ -1,7 +1,7 @@
 ---
 name: docs-page
 description: |
-  Build a documentation page in the Forge DS docs site — a prose/guide page
+  Build a documentation page in the Eidos DS docs site — a prose/guide page
   (concepts, getting-started, foundations, API reference, tutorial) rendered in
   the DS shell with inline-start nav and an inline-end "On this page" TOC. Use
   when the request is "docs page", "documentation", "guide", "API reference", or
@@ -12,7 +12,7 @@ allowed-tools: Read, Edit, Write, Bash, Grep, Glob
 
 # Docs Page Skill
 
-Build a documentation page as a real page in the Forge DS site, composing the
+Build a documentation page as a real page in the Eidos DS site, composing the
 DS shell and prose primitives — never per-page `<style>`. The page is a
 `'use client'` module with a **default export**, auto-registered into
 `src/ds/migrated/registry.ts` like every other DS page.

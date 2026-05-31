@@ -44,7 +44,7 @@ process.stdin.on('end', () => {
   // are common in legit rendered demos, so they're not hard-blocked here.
   const m = body.match(/style=\{\{[^}]*(#[0-9a-fA-F]{3,8})/);
   if (m) {
-    process.stderr.write(`Blocked [C-no-page-style]: hardcoded color (${m[1]}) in an inline style. Use var(--token) from the Forge token layer.\n`);
+    process.stderr.write(`Blocked [C-no-page-style]: hardcoded color (${m[1]}) in an inline style. Use var(--token) from the Eidos token layer.\n`);
     process.exit(2);
   }
   process.exit(0);

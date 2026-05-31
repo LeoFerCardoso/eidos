@@ -1,12 +1,12 @@
 ---
 name: component-page
-description: The structure + rules a Forge DS component documentation page must follow — live Frame previews with code, DS-standard typography, Accessibility, a required RTL example, visual Anatomy, Do/Don't, and an API reference, composed only from existing Forge classes/primitives. Use when documenting a component or reviewing a component page for completeness. For the step-by-step "create a new page" mechanics use `new-component`; for full product screens use `idp-screen`.
+description: The structure + rules a Eidos DS component documentation page must follow — live Frame previews with code, DS-standard typography, Accessibility, a required RTL example, visual Anatomy, Do/Don't, and an API reference, composed only from existing Eidos classes/primitives. Use when documenting a component or reviewing a component page for completeness. For the step-by-step "create a new page" mechanics use `new-component`; for full product screens use `idp-screen`.
 allowed-tools: [Read, Edit, Write, Bash, Grep]
 ---
 
 # Component Page Skill
 
-Produces (or reviews) a Forge DS component documentation page by **composing** existing
+Produces (or reviews) a Eidos DS component documentation page by **composing** existing
 classes and primitives — never by writing per-page CSS and never by hand-rolling font
 sizes. `src/styles/tokens.css` + `src/styles/ds.css` are already the design; your job is to
 demonstrate it.
@@ -55,7 +55,7 @@ inside the persisted `(ds)` DocsShell by `DSPageLoader`.
 Each demo is a `<Frame label code center|row>` — preview body on top, the (collapsible) code below.
 
 ## Typography — the 9-step scale, never hand-roll sizes (§3.5)
-Forge type is a **fixed 9-step scale** (72·56·36·28·20·17·15·13·11) — source of truth is
+Eidos type is a **fixed 9-step scale** (72·56·36·28·20·17·15·13·11) — source of truth is
 Foundations/Typography + the `.t-*` utilities. **There is no 12.5, 13.5, 14 or 16.**
 - **Section intros / explainer paragraphs → `<Lede>`** (`<Lede up>` when it directly follows a
   `SubHead`). Muted 64ch paragraph at **t-body 15** (`.ds-caption`); it replaces every inline

@@ -1,7 +1,7 @@
 ---
 name: new-page
 description: |
-  Create a new Forge DS page OR a full IDP example screen (service catalog, DORA
+  Create a new Eidos DS page OR a full IDP example screen (service catalog, DORA
   dashboard, incident room, pipeline console, agent chat, etc.). Use when the request
   is "build the X screen", "prototype the Y page", "add an example", or "new foundations/
   patterns page". Decides page-vs-example, then bridges the harness idp-screen /

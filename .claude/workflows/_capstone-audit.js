@@ -1,6 +1,6 @@
 export const meta = {
   name: 'capstone-audit',
-  description: 'Final adversarial audit over the integrated Forge DS component catalog (all consolidated + promoted components) plus a full deterministic gate. Read-only reviewers return CONFIRMED P0s only (contrast incl. ember-soft nuance, a11y/ARIA-id-resolution/keyboard/focus, RTL logical-props/mirroring, docs-accuracy, leftover <style>, off-scale fonts). One integrity agent runs the whole build gate + cross-component consistency. Produces the final punch list — makes NO edits.',
+  description: 'Final adversarial audit over the integrated Eidos DS component catalog (all consolidated + promoted components) plus a full deterministic gate. Read-only reviewers return CONFIRMED P0s only (contrast incl. ember-soft nuance, a11y/ARIA-id-resolution/keyboard/focus, RTL logical-props/mirroring, docs-accuracy, leftover <style>, off-scale fonts). One integrity agent runs the whole build gate + cross-component consistency. Produces the final punch list — makes NO edits.',
   whenToUse: 'Phase 6 capstone — confirm the whole DS is coherent and catch cross-cutting issues.',
   phases: [{ title: 'Final audit' }, { title: 'Integrity' }],
 }

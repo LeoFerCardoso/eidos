@@ -1,7 +1,7 @@
 ---
 name: ds-a11y-rtl-review
 description: |
-  Review a Forge DS artifact for accessibility (focus visibility, labels, keyboard
+  Review a Eidos DS artifact for accessibility (focus visibility, labels, keyboard
   reachability, contrast, ARIA) AND RTL correctness (logical CSS properties, directional
   icon mirroring, bidi text). Use when the request is "a11y review", "accessibility
   audit", "check RTL", "is this keyboard accessible", or as a gate before shipping a page/
@@ -23,7 +23,7 @@ Confirm its route in `src/ds/core/nav-config.js`.
 
 - `.claude/craft/accessibility-baseline.md` — the a11y contract.
 - `.claude/craft/rtl-and-bidi.md` — logical-property + mirroring rules.
-- `.claude/design-systems/forge/DESIGN.md` — Forge already mandates logical properties
+- `.claude/design-systems/forge/DESIGN.md` — Eidos already mandates logical properties
   and visible focus; treat deviations as regressions.
 
 ## 3. Accessibility checklist

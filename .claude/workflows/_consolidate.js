@@ -1,6 +1,6 @@
 export const meta = {
   name: 'forge-consolidate',
-  description: 'Phase 1 of the Forge DS consolidation: dedup CountUp/Counter, build the Pill/Chip/Badge trio + presets, unify Calendar (selectionMode), and rebuild Select as a custom dropdown + reconcile Combobox + document the Select/Combobox/DropdownMenu boundary. Sequential builds (shared-file safe) → one full verify → per-case critique.',
+  description: 'Phase 1 of the Eidos DS consolidation: dedup CountUp/Counter, build the Pill/Chip/Badge trio + presets, unify Calendar (selectionMode), and rebuild Select as a custom dropdown + reconcile Combobox + document the Select/Combobox/DropdownMenu boundary. Sequential builds (shared-file safe) → one full verify → per-case critique.',
   whenToUse: 'After the consolidation-audit, to execute the 4 consolidation cases.',
   phases: [
     { title: 'Counter dedup' },
@@ -15,7 +15,7 @@ export const meta = {
 const REPO = '/Users/leocardoso/Projects/forge-ds'
 
 const STANDARDS = `
-You are a Forge DS engineer. Repo: ${REPO}. Obey these conventions (read the files, do not guess):
+You are a Eidos DS engineer. Repo: ${REPO}. Obey these conventions (read the files, do not guess):
 - docs/DS-PAGE-STANDARD.md (page anatomy), src/ds/migrated/buttons.tsx (GOLD doc page), src/ds/migrated/pills.tsx (the complete Pills&Chips reference).
 - CSF3 story template: packages/ui/src/stories/blocks/Banner.stories.tsx + atoms/StatusDot.stories.tsx (satisfies Meta<typeof X>, tags:['autodocs'], Default + variants + InContext; stateful demos use a React.useState wrapper in render; rely on the GLOBAL theme/RTL/a11y toolbars — do NOT duplicate per theme/direction).
 - Registry pipeline: scripts/extract-registry.mjs (FAMILIES map — the 'only' array lists exported names per family file) → scripts/build-registry-manifest.mjs → packages/registry/scripts/build-registry.mjs. 'npm run registry:build' runs all three.
@@ -168,7 +168,7 @@ const CASES = [
 ]
 const critiques = await parallel(CASES.map(c => () => agent(
   `${STANDARDS.split('Report exactly')[0]}
-Adversarial design + DS review of the "${c.k}" consolidation. Surfaces: ${c.pages}. Judge against docs/DS-PAGE-STANDARD.md, .claude/craft/anti-ai-slop.md (P0 list), and the Forge invariants (single ember accent; DARK INK on ember — verify contrast; Geist; logical props/RTL; composed classes, NO leftover per-page <style>). ${c.extra} Assume something is wrong and find it. Return a tight Keep / Fix / Quick-wins list with file:line evidence. Do not edit — written gate.`,
+Adversarial design + DS review of the "${c.k}" consolidation. Surfaces: ${c.pages}. Judge against docs/DS-PAGE-STANDARD.md, .claude/craft/anti-ai-slop.md (P0 list), and the Eidos invariants (single ember accent; DARK INK on ember — verify contrast; Geist; logical props/RTL; composed classes, NO leftover per-page <style>). ${c.extra} Assume something is wrong and find it. Return a tight Keep / Fix / Quick-wins list with file:line evidence. Do not edit — written gate.`,
   { label: `critique:${c.k}`, phase: 'Critique', agentType: 'ux-designer' },
 )))
 

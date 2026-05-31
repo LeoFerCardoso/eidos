@@ -1,17 +1,17 @@
 {
-  "name": "forge-harness-marketplace",
+  "name": "eidos-harness-marketplace",
   "owner": {
-    "name": "Forge Platform Team",
-    "email": "forge@equifax.com.br"
+    "name": "Eidos Platform Team",
+    "email": "eidos@equifax.com.br"
   },
   "metadata": {
-    "description": "Marketplace for the Forge engineering harness — design-system, web, and AI agents/skills for the IDP / Developer Experience Platform."
+    "description": "Marketplace for the Eidos engineering harness — design-system, web, and AI agents/skills for the IDP / Developer Experience Platform."
   },
   "plugins": [
     {
-      "name": "forge-harness",
-      "source": "./plugin/forge-harness",
-      "description": "Forge DS + web + AI harness: subagents (design-system, frontend, ux, ai, reviewer, perf), workflow skills (new-component, new-page, refine, portal-scaffold, ds-*, ai-*), commands, and guardrail hooks."
+      "name": "eidos-harness",
+      "source": "./plugin/eidos-harness",
+      "description": "Eidos DS + web + AI harness: subagents (design-system, frontend, ux, ai, reviewer, perf), workflow skills (new-component, new-page, refine, portal-scaffold, ds-*, ai-*), commands, and guardrail hooks."
     }
   ]
 }

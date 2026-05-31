@@ -1,16 +1,16 @@
 ---
 name: ds-component-authoring
 description: |
-  Reference + checklist for authoring Forge DS components: the class systems, the
+  Reference + checklist for authoring Eidos DS components: the class systems, the
   registration mechanics, the known runtime gotchas, and the two-place version bump. Use
-  when you need the rules of the road — "how does the Forge page registry work", "which
+  when you need the rules of the road — "how does the Eidos page registry work", "which
   class do I compose for X", "why is my page a black screen / focus ring doubled /
   dropdown clipped / onChange firing twice", or as a pre-flight before new-component /
   refine. Knowledge skill; pair it with the action skills.
 allowed-tools: [Read, Grep]
 ---
 
-# ds-component-authoring — Forge authoring rules & gotchas
+# ds-component-authoring — Eidos authoring rules & gotchas
 
 The authoritative catalog is `FORGE-DS-REFERENCE.md` + `llms.txt` (root) and
 `docs/FORGE-DS-AUTHORING.md`. This is the quick map; read those for detail.
@@ -40,7 +40,7 @@ preview frames (preview + collapsible code) · `.ds-grid` layout · `.in-*` inpu
 · `.tbl` data tables. Tokens + classes live in `src/styles/tokens.css` + `ds.css` — those
 two files ARE the system. Extend them only for a genuinely new building block.
 
-## Forge invariants
+## Eidos invariants
 
 - Single accent ember `#FF6B35` (`var(--accent)`/`var(--ember)`), at most **2×/screen**; dark ink on every ember fill.
 - Geist Sans (UI/body) + Geist Mono (numerics, captions, eyebrows).

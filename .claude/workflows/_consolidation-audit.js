@@ -1,8 +1,8 @@
 export const meta = {
   name: 'consolidation-audit',
   description:
-    'Read-only audit for the Forge DS consolidation + Storybook-completion program: deep-dives the 4 consolidation cases (Calendar, Badge family, Counter/CountUp, Select vs Combobox vs Dropdown) and builds a full coverage matrix (docs page ↔ @eidos/ui export ↔ story ↔ registry item) classifying every component as complete / story-only / promote-component / consolidate. Produces the plan inputs — makes NO edits.',
-  whenToUse: 'Before planning the Forge DS component-consolidation + Storybook coverage work.',
+    'Read-only audit for the Eidos DS consolidation + Storybook-completion program: deep-dives the 4 consolidation cases (Calendar, Badge family, Counter/CountUp, Select vs Combobox vs Dropdown) and builds a full coverage matrix (docs page ↔ @eidos/ui export ↔ story ↔ registry item) classifying every component as complete / story-only / promote-component / consolidate. Produces the plan inputs — makes NO edits.',
+  whenToUse: 'Before planning the Eidos DS component-consolidation + Storybook coverage work.',
   phases: [
     { title: 'Consolidation deep-dives' },
     { title: 'Coverage matrix' },
@@ -150,7 +150,7 @@ For EACH of these docs slugs, inspect src/ds/migrated/<slug>.tsx (header/lede + 
 SLUGS: ${JSON.stringify(s.slugs)}
 
 For each, decide:
-- isRealComponent: is there a matching @eidos/ui EXPORT (verify via grep of packages/ui/src/index.ts barrel + the source files)? If the docs page only renders raw HTML + CSS classes (no imported Forge component), it is docs-only → isRealComponent:false.
+- isRealComponent: is there a matching @eidos/ui EXPORT (verify via grep of packages/ui/src/index.ts barrel + the source files)? If the docs page only renders raw HTML + CSS classes (no imported Eidos component), it is docs-only → isRealComponent:false.
 - hasStory: is there packages/ui/src/stories/**/<Comp>.stories.tsx? (give the title if so)
 - hasRegistryItem: is <kebab> in packages/registry/registry.generated.json?
 - pageLocalStyle: does the docs page contain a <style> block / rely on page-local CSS that would need promoting to packages/ui/styles/tokens.css before it can install styled?
@@ -172,7 +172,7 @@ const allItems = coverageShards.filter(Boolean).flatMap(r => r.items || [])
 // ── Phase 3 — Completeness critic ───────────────────────────────────────────────
 phase('Critique')
 const critic = await agent(
-  `Repo: ${REPO}. You are a COMPLETENESS + CONSISTENCY critic for a Forge DS consolidation audit. Read-only.
+  `Repo: ${REPO}. You are a COMPLETENESS + CONSISTENCY critic for a Eidos DS consolidation audit. Read-only.
 ${GROUND}
 
 Here is the assembled audit:

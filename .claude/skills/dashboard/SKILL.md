@@ -1,9 +1,9 @@
 ---
 name: dashboard
 description: |
-  Build a Forge IDP dashboard screen — a single product view with KPI/metric
+  Build a Eidos IDP dashboard screen — a single product view with KPI/metric
   cards, one or two charts, and a supporting table or activity list, assembled
-  from existing Forge components. Use when the request is "dashboard", "DORA
+  from existing Eidos components. Use when the request is "dashboard", "DORA
   dashboard", "analytics overview", "ops dashboard", or "control panel". For a
   full multi-region IDP screen (catalog, incident room, pipeline console),
   defer to `idp-screen`. For docs of one component, use `component-page`.
@@ -12,8 +12,8 @@ allowed-tools: Read, Edit, Write, Bash, Grep, Glob
 
 # Dashboard Skill
 
-Build a Forge IDP dashboard as a real screen in the app — composing existing
-Forge components, never writing per-page `<style>`. This is a specialization of
+Build a Eidos IDP dashboard as a real screen in the app — composing existing
+Eidos components, never writing per-page `<style>`. This is a specialization of
 `idp-screen`; read that skill first and follow its compose-never-reinvent rule.
 The system (`src/styles/tokens.css` + `src/styles/ds.css`) is already the
 design; your job is to arrange it.
@@ -32,19 +32,19 @@ design; your job is to arrange it.
 
 1. **Map the screen to existing components** in one sentence before building,
    e.g. *"DORA dashboard = page header + 4 metric cards (`.fc-*` / metric
-   element) + 1 deploy-frequency chart (the Forge chart primitives from
+   element) + 1 deploy-frequency chart (the Eidos chart primitives from
    `@/ds/core`) + a recent-deploys `.tbl` table"*. If you are about to invent a
    component, stop — there is almost certainly an element/block for it.
 2. **Classify** what the dashboard monitors (deploys, DORA, incidents, usage,
    cost) from the request. Generate specific, plausible names and values — no
    "Metric A / Metric B". A number without a source is a labeled placeholder
    (`—` / `Sample`), never an invented stat.
-3. **Lay out** the regions, each a composed Forge block:
+3. **Lay out** the regions, each a composed Eidos block:
    - **Page header** — title + short description, optional date-range control.
    - **Metric row** — 3–4 metric/KPI cards: label + tabular-nums value + a
      muted delta vs. prior period. Compose from the metric element, not bespoke
      divs.
-   - **Primary chart** — full-width or 2/3, via the Forge chart primitives
+   - **Primary chart** — full-width or 2/3, via the Eidos chart primitives
      imported from `@/ds/core` (`src/ds/core/charts.*`). Real-looking series,
      lightly labeled axes.
    - **Secondary** — a `.tbl` table (recent events / top items) or an activity

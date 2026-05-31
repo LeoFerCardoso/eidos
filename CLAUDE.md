@@ -1,12 +1,12 @@
-# forge-ds — session rules (read first)
+# eidos — session rules (read first)
 
-This repo holds **two** things: a runnable **Forge Design System app** (Next.js App
+This repo holds **two** things: a runnable **Eidos Design System app** (Next.js App
 Router) and an LLM **engineering harness** under `.claude/`. Know which one a request
 is about.
 
 ## The component contract is the bar (read this first)
 
-A Forge component is **Done** iff `npm run forge:verify -- --component <slug> --strict`
+A Eidos component is **Done** iff `npm run eidos:verify -- --component <slug> --strict`
 exits 0 — the green gate beats any opinion; reviewers and builders never self-certify. The
 single machine-readable definition of "Done" is **`packages/registry/forge.contract.json`**
 (+ `forge.contract.schema.json`), spanning a component's **four surfaces**: the docs page
@@ -14,7 +14,7 @@ single machine-readable definition of "Done" is **`packages/registry/forge.contr
 (`packages/ui/src/stories`), and the registry item (`packages/registry` → `eidos add`).
 Each clause maps to a deterministic verifier in `scripts/` (the existing `check-*`/`gen-*`
 plus `check-ds-page-structure`, `check-4-surface-parity`, `check-stories`, `check-registry`,
-`check-no-page-style`, `check-slop`); `scripts/forge-verify.mjs` aggregates them and writes
+`check-no-page-style`, `check-slop`); `scripts/eidos-verify.mjs` aggregates them and writes
 `reports/state.json` + the generated **`FORGE-HEALTH.md`** wall. `npm run gen:contract`
 re-syncs the bindings from disk.
 
@@ -22,7 +22,7 @@ The non-negotiables below (contrast, ember-2×, Geist, logical CSS, no per-page 
 the fixed type scale, source-shipped distribution, CSS-authored tokens) are enforced by
 **hooks + verifiers** — obey, don't restate. Use judgment for what no test can decide:
 voice, density, hierarchy, when to consolidate vs promote, when a new component is warranted.
-Commands: `/forge-verify`, `/forge-health`. Reviewer agent: `contract-verifier`. Full upgrade
+Commands: `/eidos-verify`, `/eidos-health`. Reviewer agent: `contract-verifier`. Full upgrade
 spec: `HARNESS-IMPROVED.md`.
 
 ## Running / editing the DS app
@@ -35,7 +35,7 @@ spec: `HARNESS-IMPROVED.md`.
   column swaps). Compiles with **SWC** — there is **no `.babelrc`** and no `window`
   bridge anymore. (Bodies were ported near-verbatim from the original Open Design JS;
   keep JSX text valid for SWC — escape a literal `>` as `{'>'}`.)
-- **Forge is a FAMILY of design systems** sharing one base. Registry:
+- **Eidos is a FAMILY of design systems** sharing one base. Registry:
   `src/ds/core/design-systems.js` (`DESIGN_SYSTEMS`) — **core** (root: `/`, `/color`,
   `/buttons`), **charts** (`/charts/*`), **ai** (`/ai/*`), **idp** (`/idp/*`),
   **patterns** (`/patterns/*`), **mobile** (`/mobile/*`). The sidebar header is a **DS
@@ -70,7 +70,7 @@ spec: `HARNESS-IMPROVED.md`.
 - Styling: `src/styles/tokens.css` + `ds.css` are the design system. **Never** write
   per-page `<style>`; compose existing classes or extend those files.
 
-### Forge invariants (every DS artifact)
+### Eidos invariants (every DS artifact)
 - **Contrast is non-negotiable.** Any foreground (text, icon, brand mark, value)
   placed on a colored/elevated surface MUST get an explicitly contrasting color —
   never let it inherit or keep a color equal/near-equal to its background. On an
@@ -96,7 +96,7 @@ conventions, and why). The live page inventory is `src/ds/core/nav-config.js`.
 
 When the task is "design / build / prototype" UI (not editing the DS app itself):
 
-1. Pick the skill in `.claude/skills/` that matches the artifact (all are Forge-native and
+1. Pick the skill in `.claude/skills/` that matches the artifact (all are Eidos-native and
    on-mission; they auto-trigger).
 2. Read the canonical brand: `.claude/design-systems/forge/DESIGN.md`.
 3. Read only the `.claude/craft/` sections the skill needs.
@@ -116,7 +116,7 @@ The harness lives **entirely in `.claude/`** — Claude Code discovers `agents/`
   `design-system-engineer`, `ux-designer`, `ai-feature-architect`, `ai-sdk-engineer`,
   `code-reviewer`, `performance-optimizer`. They auto-delegate by task; the lead plans
   and routes to specialists.
-- **Skills** (`.claude/skills/`): all Forge-native, all on-mission (DS / DevEx / IDP / AI).
+- **Skills** (`.claude/skills/`): all Eidos-native, all on-mission (DS / DevEx / IDP / AI).
   DS workflow — `new-component`, `new-page`, `refine`, `portal-scaffold`,
   `ds-component-authoring`, `ds-a11y-rtl-review`; DS/IDP artifacts — `component-page`,
   `idp-screen`, `dashboard`, `live-dashboard`, `docs-page`; design process — `critique`,
@@ -126,7 +126,7 @@ The harness lives **entirely in `.claude/`** — Claude Code discovers `agents/`
   (Off-mission Open Design skills — decks, posters, social, video, marketing, mobile,
   business docs — were removed, not archived.)
 - **Commands** (`.claude/commands/`): `/commit`, `/open-pr`, `/release`, `/verify-routes`.
-- **Hooks** (`.claude/settings.json` + `.claude/hooks/`): SessionStart injects the Forge
+- **Hooks** (`.claude/settings.json` + `.claude/hooks/`): SessionStart injects the Eidos
   invariants; PreToolUse blocks hand-edits to the generated manifest and warns on
   `tokens.css`/`ds.css`; PostToolUse formats edited files if a local formatter exists.
 - **Permissions** (`.claude/settings.json`): safe `npm`/`git`/read commands allowed; `git
@@ -135,7 +135,7 @@ The harness lives **entirely in `.claude/`** — Claude Code discovers `agents/`
 - **AI reference**: `app/ai-chat/` + `src/lib/ai/` — a working AI SDK v6 chat-with-agents
   (tool calling + streaming) the `ai-*` skills point to.
 - **Distribution**: `npm run build:plugin` packages `.claude/` into
-  `plugin/forge-harness/` (marketplace at `.claude-plugin/marketplace.json`) so teammates
+  `plugin/eidos-harness/` (marketplace at `.claude-plugin/marketplace.json`) so teammates
   install the harness in one step.
 - **Automation**: scheduled routines + loops in `docs/ROUTINES.md`; CI in
   `.github/workflows/ci.yml`.

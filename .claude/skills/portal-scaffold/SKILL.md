@@ -1,7 +1,7 @@
 ---
 name: portal-scaffold
 description: |
-  Scaffold a new web portal or section in the Next.js App Router, wired to the Forge
+  Scaffold a new web portal or section in the Next.js App Router, wired to the Eidos
   Design System (layout, nav registration, DS shell usage, token import). Use when the
   request is "scaffold a new portal", "add a new section/area to the app", "set up a new
   product surface in the App Router", or "wire a new route into the DS shell". Do NOT use
@@ -9,7 +9,7 @@ description: |
 allowed-tools: [Read, Edit, Write, Bash, Grep]
 ---
 
-# portal-scaffold — new App Router section wired to Forge DS
+# portal-scaffold — new App Router section wired to Eidos DS
 
 This repo renders the DS docs through a catch-all App Router route under the persisted
 `(ds)` layout: `app/(ds)/[...slug]/page.tsx`, fed by the generated nav + migrated
@@ -57,6 +57,6 @@ surfaces, and `<Lede>` / `<Mono>` for prose. Never write per-page `<style>`.
   rebuilds `src/lib/nav.ts`, `src/ds/migrated/registry.ts`, and `src/ds/examples/registry.ts`
   so every new route + sidebar entry resolves. Then RESTART `next dev` — new routes 404
   until restart. Skipping the regen = 404s and missing nav links.
-- Keep Forge invariants: single ember accent (≤2×/screen), Geist Sans + Mono, logical CSS
+- Keep Eidos invariants: single ember accent (≤2×/screen), Geist Sans + Mono, logical CSS
   properties (RTL first-class), anti-ai-slop checklist.
 - Offer `npm run verify` (the `verify-routes` command) to render-check the new routes.

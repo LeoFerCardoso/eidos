@@ -1,0 +1,10 @@
+{
+  "name": "eidos-harness",
+  "description": "Eidos engineering harness — subagents, workflow skills, commands, and guardrail hooks for building the Eidos Design System and AI features on the IDP / Developer Experience Platform.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Eidos Platform Team",
+    "email": "eidos@equifax.com.br"
+  },
+  "keywords": ["design-system", "idp", "developer-experience", "nextjs", "ai-sdk", "forge"]
+}

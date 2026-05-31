@@ -2,7 +2,7 @@
 // Stop hook — the genuinely missing gate. When a task ends, derive the components
 // touched this session (from `git diff --name-only`), map each changed file to the
 // component(s) whose contract surfaces include it, and run the fast static slice of
-// forge:verify for them. If any gate:"block" clause FAILS (not waived), block the
+// eidos:verify for them. If any gate:"block" clause FAILS (not waived), block the
 // stop (exit 2) and surface the failing clauses so the model fixes before finishing.
 // "The verifier's green beats your opinion." Defensive: no git / no contract / no
 // changed components → allow (exit 0).
@@ -39,7 +39,7 @@ function main() {
   const slugs = [...touched].slice(0, 12); // cap the Stop check
   const failing = [];
   for (const slug of slugs) {
-    const out = sh(`node scripts/forge-verify.mjs --component ${slug} --static --strict --json`);
+    const out = sh(`node scripts/eidos-verify.mjs --component ${slug} --static --strict --json`);
     let state;
     try { state = JSON.parse(out); } catch { continue; }
     const comp = state.components?.[slug];
@@ -51,9 +51,9 @@ function main() {
 
   if (failing.length) {
     process.stderr.write(
-      `Stop blocked by forge:verify — ${failing.length} block-clause failure(s) on touched component(s):\n` +
+      `Stop blocked by eidos:verify — ${failing.length} block-clause failure(s) on touched component(s):\n` +
       failing.map((l) => `  • ${l}`).join('\n') +
-      `\nFix these (or add a reviewed waiver in forge.contract.json) and re-verify with \`npm run forge:verify -- --component <slug> --strict\`.\n`,
+      `\nFix these (or add a reviewed waiver in forge.contract.json) and re-verify with \`npm run eidos:verify -- --component <slug> --strict\`.\n`,
     );
     process.exit(2);
   }

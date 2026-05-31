@@ -1,6 +1,6 @@
 ---
 name: idp-screen
-description: A complete Internal Developer Platform product screen assembled exclusively from existing Forge components and elements — service catalog, service detail, DORA dashboard, incident room, pipeline console, score cards, feature flags, agent chat, etc. Use to build/prototype a full IDP screen. Do NOT use to document an isolated component (use component-page) nor for landing/marketing.
+description: A complete Internal Developer Platform product screen assembled exclusively from existing Eidos components and elements — service catalog, service detail, DORA dashboard, incident room, pipeline console, score cards, feature flags, agent chat, etc. Use to build/prototype a full IDP screen. Do NOT use to document an isolated component (use component-page) nor for landing/marketing.
 argument-hint: "[screen-name]"
 allowed-tools: [Read, Edit, Write, Bash, Grep]
 ---

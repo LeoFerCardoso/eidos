@@ -39,7 +39,7 @@ Use `gh pr create` with a structured body via HEREDOC:
 - [ ] `node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs` (+ `gen-examples.mjs`) ran (if routes changed)
 - [ ] `npm run verify` (DS route render) pass — paste result
 - [ ] anti-ai-slop / a11y / RTL checks pass for any new/edited DS artifact
-- [ ] Forge invariants held: single ember ≤2×/screen, Geist Sans + Mono, logical CSS
+- [ ] Eidos invariants held: single ember ≤2×/screen, Geist Sans + Mono, logical CSS
 ```
 
 Title in Conventional-Commit style. After creating, print the PR URL.

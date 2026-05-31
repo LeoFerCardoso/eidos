@@ -1,7 +1,7 @@
 ---
 name: tweaks
 description: |
-  Targeted polish of an existing Forge component, page, or example in the repo —
+  Targeted polish of an existing Eidos component, page, or example in the repo —
   the "dial in the last 20%" pass. Edit the real files (tsx + tokens/ds.css),
   tighten type/spacing/accent/states, then re-run the anti-ai-slop, a11y, and
   RTL checks. Use when the request is "tweak this", "polish X", "tighten the
@@ -11,7 +11,7 @@ allowed-tools: Read, Edit, Bash, Grep, Glob
 argument-hint: "[component/page/example to polish]"
 ---
 
-# Tweaks Skill · Targeted Forge Polish
+# Tweaks Skill · Targeted Eidos Polish
 
 Take something that already exists in the repo and make it noticeably better
 with small, surgical edits. You change the real source files; you do not rebuild

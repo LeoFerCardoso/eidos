@@ -1,7 +1,7 @@
 ---
 name: live-dashboard
 description: |
-  Build a Forge dashboard screen wired to LIVE / streaming data inside the
+  Build a Eidos dashboard screen wired to LIVE / streaming data inside the
   Next.js app — KPIs, a sparkline/trend, an activity feed, and a data table
   that refresh from real sources (App Router route handlers / the app's data
   layer) instead of static mocks. Use when the request is "live dashboard",
@@ -13,7 +13,7 @@ allowed-tools: Read, Edit, Write, Bash, Grep, Glob
 
 # Live Dashboard Skill
 
-A Forge dashboard whose numbers actually move: it fetches from a real data
+A Eidos dashboard whose numbers actually move: it fetches from a real data
 source on mount and on demand, shows honest live/stale state, and degrades to
 seeded data when the source is unavailable so the screen never looks broken.
 
@@ -26,7 +26,7 @@ is no separate CLI or daemon.
 
 1. `dashboard` SKILL — layout, metric/chart/table composition, the 3-file
    ritual, and the accent/state rules. Don't repeat that work here.
-2. `../../FORGE-DS-REFERENCE.md` + `../../llms.txt` — metric, chart (Forge chart
+2. `../../FORGE-DS-REFERENCE.md` + `../../llms.txt` — metric, chart (Eidos chart
    primitives from `@/ds/core`), table, status-dot, badge components.
 3. `../../design-systems/forge/DESIGN.md` and
    `../../craft/{anti-ai-slop,state-coverage,animation-discipline,color,typography}.md`.
@@ -45,7 +45,7 @@ is no separate CLI or daemon.
 3. **KPI grid.** Numbers `font-variant-numeric: tabular-nums`, weight 600. Each
    KPI carries a muted delta line (`↑ 6 vs last week`). No accent on the
    numbers, no decorative progress bars under them — the delta is enough.
-4. **Trend card.** Hand the series to the Forge chart primitives from `@/ds/core`
+4. **Trend card.** Hand the series to the Eidos chart primitives from `@/ds/core`
    (or an inline SVG sparkline) — a 2px stroke with a faint accent fill. No
    external chart libs beyond what the DS already loads.
 5. **Activity feed + table.** New rows prepend; on refresh, briefly highlight

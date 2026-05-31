@@ -1,7 +1,7 @@
 ---
 name: new-component
 description: |
-  Create a new Forge DS component documentation page (a page under
+  Create a new Eidos DS component documentation page (a page under
   src/ds/migrated/, core or sub-DS). Use when the request is "document component X",
   "new component page", "add X to the design system", or "create a doc page for Y".
   Encodes the current route ritual (migrated TSX + gen-migrated + nav-config), the
@@ -11,7 +11,7 @@ argument-hint: "[component-name]"
 allowed-tools: [Read, Edit, Write, Bash, Grep]
 ---
 
-# new-component — author a Forge DS component doc page
+# new-component — author a Eidos DS component doc page
 
 The design system (`src/styles/tokens.css` + `src/styles/ds.css`) IS the product.
 Your job is to **demonstrate existing classes/primitives by composition** — never

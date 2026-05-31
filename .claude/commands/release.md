@@ -1,6 +1,6 @@
 ---
 name: release
-description: Cut a Forge DS version bump. Updates DS_VERSION in src/lib/site.ts (single source of truth for the topbar VersionBadge), adds a changelog entry, sweeps stale nav badges, and commits.
+description: Cut a Eidos DS version bump. Updates DS_VERSION in src/lib/site.ts (single source of truth for the topbar VersionBadge), adds a changelog entry, sweeps stale nav badges, and commits.
 argument-hint: "[major|minor|patch]"
 allowed-tools: [Bash, Read, Edit, Grep]
 ---

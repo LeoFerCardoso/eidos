@@ -1,7 +1,7 @@
 export const meta = {
   name: 'promote-batch',
-  description: 'Promote a batch of docs-only Forge DS patterns into real @eidos/ui components: per-component build in parallel (each writes ONLY its own new component file + story + docs-page rewrite, and RETURNS the shared-file snippets), then ONE serialized integrator applies all barrel/FAMILIES/CSS edits, then one full verify gate (auto-fix), then parallel adversarial critique. Pass args = { batchName, items: [{slug, displayName, suggestedExports, file, npmDeps, intraDeps, notes}] }.',
-  whenToUse: 'Phases 2-5 of the Forge DS Storybook-completion program.',
+  description: 'Promote a batch of docs-only Eidos DS patterns into real @eidos/ui components: per-component build in parallel (each writes ONLY its own new component file + story + docs-page rewrite, and RETURNS the shared-file snippets), then ONE serialized integrator applies all barrel/FAMILIES/CSS edits, then one full verify gate (auto-fix), then parallel adversarial critique. Pass args = { batchName, items: [{slug, displayName, suggestedExports, file, npmDeps, intraDeps, notes}] }.',
+  whenToUse: 'Phases 2-5 of the Eidos DS Storybook-completion program.',
   phases: [
     { title: 'Build components' },
     { title: 'Integrate' },
@@ -17,7 +17,7 @@ const ITEMS = A.items || []
 if (!ITEMS.length) throw new Error('promote-batch: pass args.items = [{slug, displayName, suggestedExports, file, npmDeps, intraDeps, notes}]')
 
 const STANDARDS = `
-You are a senior Forge DS engineer building a PRODUCTION component. Repo: ${REPO}.
+You are a senior Eidos DS engineer building a PRODUCTION component. Repo: ${REPO}.
 Read these before writing (do not guess): docs/DS-PAGE-STANDARD.md; src/ds/migrated/buttons.tsx (gold doc page); packages/ui/src/badge.tsx + select.tsx + combobox.tsx (the canonical NEW-component style — mirror their structure); packages/ui/src/stories/blocks/Banner.stories.tsx + atoms/StatusDot.stories.tsx (CSF3 story template).
 
 COMPONENT-LAYER CONTRACT (how a real @eidos/ui component is written):
@@ -158,7 +158,7 @@ Return the verdict (pass=true only if checks 2-7 are green).`,
 phase('Critique')
 const critiques = await parallel(built.map(b => () => agent(
   `${STANDARDS.split('CRITICAL — you write ONLY')[0]}
-Adversarial design + DS + a11y review of the newly promoted "${b.slug}" component. Surfaces: ${b.newFile}; its story ${b.storyFile}; its docs page ${b.docsPage}. Judge against docs/DS-PAGE-STANDARD.md, .claude/craft/anti-ai-slop.md (P0 list), and the Forge invariants (single ember accent; DARK INK on ember — verify contrast; Geist; on-scale type; logical props/RTL; composed classes, NO leftover per-page <style>). Specifically verify the production bar: full keyboard model, focus trap/restore (overlays) or roving tabindex (menus), correct ARIA roles/states, focus-visible rings, prefers-reduced-motion, RTL mirroring of directional glyphs only. Assume something is wrong and find it. Return a tight Keep / Fix (P0/P1) / Quick-wins list with file:line evidence. Do not edit — written gate.`,
+Adversarial design + DS + a11y review of the newly promoted "${b.slug}" component. Surfaces: ${b.newFile}; its story ${b.storyFile}; its docs page ${b.docsPage}. Judge against docs/DS-PAGE-STANDARD.md, .claude/craft/anti-ai-slop.md (P0 list), and the Eidos invariants (single ember accent; DARK INK on ember — verify contrast; Geist; on-scale type; logical props/RTL; composed classes, NO leftover per-page <style>). Specifically verify the production bar: full keyboard model, focus trap/restore (overlays) or roving tabindex (menus), correct ARIA roles/states, focus-visible rings, prefers-reduced-motion, RTL mirroring of directional glyphs only. Assume something is wrong and find it. Return a tight Keep / Fix (P0/P1) / Quick-wins list with file:line evidence. Do not edit — written gate.`,
   { label: `critique:${b.slug}`, phase: 'Critique', agentType: 'ux-designer' },
 )))
 

@@ -1,4 +1,4 @@
-// Assembles the distributable `plugin/forge-harness/` from the live `.claude/` harness,
+// Assembles the distributable `plugin/eidos-harness/` from the live `.claude/` harness,
 // so the same agents/skills/commands/hooks/content that work in this repo can be installed
 // in other repos via the marketplace. Run: `npm run build:plugin`.
 //
@@ -10,7 +10,7 @@ import { dirname, resolve, join } from 'node:path';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const claude = resolve(root, '.claude');
-const out = resolve(root, 'plugin/forge-harness');
+const out = resolve(root, 'plugin/eidos-harness');
 
 // Scanned component dirs + reference-content dirs the skills read by path.
 const dirs = ['agents', 'skills', 'commands', 'output-styles', 'design-systems', 'craft'];
@@ -52,6 +52,6 @@ writeFileSync(resolve(out, 'hooks/hooks.json'), JSON.stringify({ hooks }, null, 
 
 const count = (d) => (existsSync(resolve(out, d)) ? readdirSync(resolve(out, d)).length : 0);
 console.log(
-  `Built plugin/forge-harness from .claude/ (agents:${count('agents')} skills:${count('skills')} ` +
+  `Built plugin/eidos-harness from .claude/ (agents:${count('agents')} skills:${count('skills')} ` +
     `commands:${count('commands')} design-systems:${count('design-systems')}). Paths -> \${CLAUDE_PLUGIN_ROOT}.`,
 );

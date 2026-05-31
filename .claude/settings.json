@@ -5,8 +5,8 @@
       "Bash(npm run dev)",
       "Bash(npm run build)",
       "Bash(npm run verify)",
-      "Bash(npm run forge:verify:*)",
-      "Bash(npm run forge:health)",
+      "Bash(npm run eidos:verify:*)",
+      "Bash(npm run eidos:health)",
       "Bash(npm run gen:contract)",
       "Bash(npm run check:contract)",
       "Bash(npm run check:*)",
@@ -31,7 +31,7 @@
     "deny": ["Read(./.env)", "Read(./.env.*)", "Read(**/.env*)", "Bash(rm -rf:*)"]
   },
   "env": {
-    "FORGE_HARNESS": "1"
+    "EIDOS_HARNESS": "1"
   },
   "skillListingBudgetFraction": 0.03,
   "hooks": {

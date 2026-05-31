@@ -1,4 +1,4 @@
-# Forge DS — saved workflows
+# Eidos DS — saved workflows
 
 Reusable multi-agent workflows for the design system. Invoke from any session with the
 **Workflow** tool by name, passing `args`.
@@ -20,7 +20,7 @@ Restructure (or build) **one** component across all three surfaces, consistently
 `Resolve & audit` (read-only; emits one shared inventory) → `Restructure` (3 parallel rebuilds fed the
 same audit) → `Build & verify` (gen-props · ui:typecheck · registry:build · cli:test(+full) · sb:build ·
 docs build · render check · screenshot — auto-fixes failures) → `Critique` (adversarial review vs the
-standard + anti-ai-slop + Forge invariants).
+standard + anti-ai-slop + Eidos invariants).
 
 ### Invoke
 ```js

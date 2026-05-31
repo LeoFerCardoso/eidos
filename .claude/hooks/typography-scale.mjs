@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // PreToolUse(Edit|Write|MultiEdit) — typography scale guardrail for DS pages.
 //
-// Forge type is a 9-step scale (Foundations/Typography): 72·56·36·28·20·17·15·13·11.
+// Eidos type is a 9-step scale (Foundations/Typography): 72·56·36·28·20·17·15·13·11.
 // Doc prose must use the .t-* classes or --text-* tokens — never a hand-rolled
 // font-size. This hook inspects edits to src/ds/migrated/**.tsx (+ examples):
 //   • HARD BLOCK the half-pixel doc-prose smells that are never a real component
@@ -50,7 +50,7 @@ process.stdin.on('end', () => {
   if (banned.size) {
     process.stderr.write(
       `Blocked: off-scale font-size ${[...banned].join(', ')}px in ${fp.split('/').slice(-1)[0]}.\n` +
-        `Forge type is a 9-step scale — there is no 12.5/13.5/14.5/16. Use the canonical role instead:\n` +
+        `Eidos type is a 9-step scale — there is no 12.5/13.5/14.5/16. Use the canonical role instead:\n` +
         `  • section intro / lede / body paragraph → <Lede> or className="t-body" (15)\n` +
         `  • card / a11y / helper / caption body     → className="t-small" or var(--text-base) (13)\n` +
         `  • eyebrow / column header                 → className="t-mono-label" (11)\n` +

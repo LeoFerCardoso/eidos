@@ -7,9 +7,9 @@ behave at every size.
 > Adapted from [refero_skill](https://github.com/referodesign/refero_skill)
 > (MIT) — distilled and re-tuned for Open Design's token system.
 
-## Forge type scale — the 9 canonical steps (HARD RULE)
+## Eidos type scale — the 9 canonical steps (HARD RULE)
 
-Forge type is a **fixed 9-step scale**, not a range. The source of truth is
+Eidos type is a **fixed 9-step scale**, not a range. The source of truth is
 **Foundations / Typography** (`src/ds/migrated/typography.tsx`) and the
 `.t-*` utilities in `tokens.css`. **There is no 12.5, no 13.5, no 14, no 16.**
 A size that isn't on this list is a bug.
@@ -46,11 +46,11 @@ may use `var(--text-*)`, never a raw px.
 - A literal `fontSize: 13.5 / 12.5 / 14.5 / 16` anywhere in a DS page → **hard-blocked**. These were the systemic drift; they are never a real size.
 - Any other hand-rolled `fontSize: <px>` for **page chrome / doc prose** → use a `.t-*` class or `--text-*` token. Raw px is allowed *only* inside a component/demo being rendered (a 22px specimen, an 11px badge), never in the surrounding documentation.
 
-## Type scale (other design systems / non-Forge artifacts)
+## Type scale (other design systems / non-Eidos artifacts)
 
-When the active `DESIGN.md` is **not** Forge, use a multiplicative scale (1.2
+When the active `DESIGN.md` is **not** Eidos, use a multiplicative scale (1.2
 or 1.25), capped at 6–8 sizes per artifact (Display 48–72 · H1 32–48 · H2
-24–32 · H3 20–24 · Body 15–18 · Small 13–14 · Caption 11–12). Forge work
+24–32 · H3 20–24 · Body 15–18 · Small 13–14 · Caption 11–12). Eidos work
 **must** use the fixed 9 steps above.
 
 ## Line height (leading)
