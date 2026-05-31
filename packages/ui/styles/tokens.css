@@ -745,6 +745,97 @@
   --info-border: rgba(8,145,178,0.28);
 }
 
+/* ============================================================================
+ * TIDE THEME — calm teal. Primary is a cyan-leaning teal (kept distinct from
+ * the emerald --success); secondary accents are a clear blue (--accent-2, the
+ * AI/info signal) + a coral pop (--accent-3, premium-tier). Same compact-
+ * override pattern as Iris; --ember-fg is inherited so dark-ink-on-bright /
+ * white-on-deep holds automatically.
+ * ========================================================================== */
+[data-ds-theme="tide"] {
+  /* ── SURFACES — dark, cool teal tint (mirrors Forge dark L, hue 195) ───── */
+  --canvas:           oklch(0.13 0.008 195);
+  --bg:               oklch(0.165 0.010 195);
+  --bg-elevated:      oklch(0.2 0.012 195);
+  --surface:          oklch(0.235 0.014 195);
+  --surface-hover:    oklch(0.275 0.016 195);
+  --surface-overlay:  oklch(0.255 0.014 195);
+  --surface-active:   oklch(0.32 0.018 195);
+  --surface-selected: oklch(0.285 0.045 195);
+
+  /* ── ACCENT — bright teal (dark ink rides on top; --ember-fg inherited) ── */
+  --ember:        #2DD4BF;
+  --ember-glow:   #5EEAD4;
+  --ember-deep:   #14B8A6;
+  --ember-soft:   rgba(45,212,191,0.16);
+  --ember-softer: rgba(45,212,191,0.08);
+  --ember-border: rgba(45,212,191,0.32);
+  --ember-text:   #5EEAD4;
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(45,212,191,0.16),
+    0 8px 24px rgba(45,212,191,0.20);
+
+  --ai-accent:          #2DD4BF;
+  --ai-streaming-caret: #2DD4BF;
+  --viz-cat-1:   #2DD4BF;
+  --viz-seq-mid: #2DD4BF;
+
+  /* ── SECONDARY ACCENTS — blue (AI/info) + coral (premium) ──────────────── */
+  --accent-2:      #60A5FA;
+  --accent-2-soft: rgba(96,165,250,0.16);
+  --accent-3:      #FB923C;
+
+  /* ── INFO role — tracks the blue --accent-2 ────────────────────────────── */
+  --info:        #60A5FA;
+  --info-strong: #3B82F6;
+  --info-soft:   rgba(96,165,250,0.14);
+  --info-subtle: rgba(96,165,250,0.07);
+  --info-border: rgba(96,165,250,0.30);
+}
+
+[data-ds-theme="tide"][data-mode="light"] {
+  /* ── SURFACES — light, cool teal tint (mirrors Forge light L, hue 195) ─── */
+  --canvas:           oklch(0.93 0.006 195);
+  --bg:               oklch(0.97 0.005 195);
+  --bg-elevated:      oklch(0.995 0.002 195);
+  --surface:          oklch(1 0 0);
+  --surface-hover:    oklch(0.965 0.006 195);
+  --surface-overlay:  oklch(1 0 0);
+  --surface-active:   oklch(0.935 0.008 195);
+  --surface-selected: oklch(0.95 0.04 195);
+
+  /* ── ACCENT — deep teal (white ink rides on top; --ember-fg inherited) ─── */
+  --ember:        #0D9488;
+  --ember-glow:   #14B8A6;
+  --ember-deep:   #0F766E;
+  --ember-soft:   rgba(13,148,136,0.10);
+  --ember-softer: rgba(13,148,136,0.05);
+  --ember-border: rgba(13,148,136,0.30);
+  --ember-text:   #0F766E;
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(13,148,136,0.14),
+    0 8px 24px rgba(13,148,136,0.18);
+
+  --ai-accent:          #0D9488;
+  --ai-streaming-caret: #0D9488;
+  --viz-cat-1:   #0D9488;
+  --viz-seq-mid: #0D9488;
+
+  /* ── SECONDARY ACCENTS — deeper blue + coral so they hit AA on white ───── */
+  --accent-2:      #2563EB;
+  --accent-2-soft: rgba(37,99,235,0.10);
+  --accent-3:      #EA580C;
+
+  /* ── INFO role — deeper blue (white ink inherited) ─────────────────────── */
+  --info:        #2563EB;
+  --info-strong: #1D4ED8;
+  --info-soft:   rgba(37,99,235,0.10);
+  --info-subtle: rgba(37,99,235,0.05);
+  --info-border: rgba(37,99,235,0.28);
+}
+
 * { box-sizing: border-box; }
 html, body {
   margin: 0; padding: 0;

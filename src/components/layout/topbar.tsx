@@ -2,7 +2,7 @@
 
 import { Breadcrumb } from './breadcrumb';
 import { ThemeToggle } from './theme-toggle';
-import { ThemeSwitcher } from './theme-switcher';
+import { ThemePicker } from './theme-picker';
 import { DSIcon } from './ds-icon';
 import { useActiveDs } from './use-active-ds';
 import { DS_VERSIONS, DS_VERSION } from '@/lib/site';
@@ -32,7 +32,7 @@ export function Topbar({ onOpenPalette }: { onOpenPalette: () => void }) {
 
         <span className="ds-topbar-div" aria-hidden="true" />
 
-        <ThemeSwitcher />
+        <ThemePicker />
         <ThemeToggle />
       </div>
     </div>

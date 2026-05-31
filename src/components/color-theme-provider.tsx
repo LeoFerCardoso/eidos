@@ -7,16 +7,21 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 // The theme is applied as `data-ds-theme` on <html> and persisted under the
 // `eidos-theme` localStorage key. A tiny no-FOUC script in app/layout.tsx sets
 // the attribute before paint; this provider mirrors it into React state so the
-// ThemeSwitcher reflects the current value. The switch is GLOBAL (every sub-DS
+// ThemePicker reflects the current value. The switch is GLOBAL (every sub-DS
 // shares the same theme).
-export type ColorTheme = 'forge' | 'iris';
-export const COLOR_THEMES: { id: ColorTheme; label: string }[] = [
-  { id: 'forge', label: 'Forge' },
-  { id: 'iris', label: 'Iris' },
+export type ColorTheme = 'forge' | 'iris' | 'tide';
+// The registry of selectable color themes. `swatch` is a fixed preview of each
+// theme's accent (theme-independent) so the picker can show the colour before
+// you choose. Add a theme here + its [data-ds-theme] block in tokens.css and it
+// appears in the picker automatically — the list is built to expand.
+export const COLOR_THEMES: { id: ColorTheme; label: string; swatch: string; hint: string }[] = [
+  { id: 'forge', label: 'Forge', swatch: '#FF6B35', hint: 'Warm ember' },
+  { id: 'iris',  label: 'Iris',  swatch: '#9B8CFF', hint: 'Violet' },
+  { id: 'tide',  label: 'Tide',  swatch: '#2DD4BF', hint: 'Calm teal' },
 ];
 const STORAGE_KEY = 'eidos-theme';
 const DEFAULT_THEME: ColorTheme = 'forge';
-const isTheme = (v: unknown): v is ColorTheme => v === 'forge' || v === 'iris';
+const isTheme = (v: unknown): v is ColorTheme => COLOR_THEMES.some((t) => t.id === v);
 
 const ColorThemeContext = createContext<{
   theme: ColorTheme;

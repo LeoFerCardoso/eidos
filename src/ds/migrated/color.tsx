@@ -29,19 +29,20 @@ export default function Color() {
     ['Foreground subtle', '--fg-subtle', '#756F66', '#78736D', 'Metadata, placeholders, disabled.'],
     ['Foreground faint',  '--fg-faint',  '#524C44', '#A8A39B', 'Decorative only — never required reading.'],
   ];
-  // Cool / secondary accents are theme-specific. Forge pairs sky-blue + lavender
-  // against its warm ember; Iris swaps to cyan + fuchsia to frame its violet
-  // primary (a lavender would collide with it). Same token slots (--accent-2 =
-  // AI/automated signal, --accent-3 = premium-tier signal), different hues.
-  const cool = theme === 'iris'
-    ? [
-        ['Accent 2',    '--accent-2',    '#22D3EE', '#0891B2'],
-        ['Accent 3', '--accent-3', '#E879F9', '#C026D3'],
-      ]
-    : [
-        ['Accent 2',    '--accent-2',    '#7DD3FC', '#0EA5E9'],
-        ['Accent 3', '--accent-3', '#A78BFA', '#7C3AED'],
-      ];
+  // Per-theme descriptor — the tokens are function-named (--accent / --accent-2
+  // / --accent-3); these hue words are only for prose. The cool/secondary
+  // accents differ per theme (--accent-2 = AI/automated signal, --accent-3 =
+  // premium-tier signal). Adding a theme = one entry here + its tokens.css block.
+  const THEMES_INFO: Record<string, { accent: string; a2name: string; a3name: string; a2: [string, string]; a3: [string, string] }> = {
+    forge: { accent: 'ember',  a2name: 'sky-blue', a3name: 'lavender', a2: ['#7DD3FC', '#0EA5E9'], a3: ['#A78BFA', '#7C3AED'] },
+    iris:  { accent: 'violet', a2name: 'cyan',     a3name: 'fuchsia',  a2: ['#22D3EE', '#0891B2'], a3: ['#E879F9', '#C026D3'] },
+    tide:  { accent: 'teal',   a2name: 'blue',     a3name: 'coral',    a2: ['#60A5FA', '#2563EB'], a3: ['#FB923C', '#EA580C'] },
+  };
+  const ti = THEMES_INFO[theme] ?? THEMES_INFO.forge;
+  const cool = [
+    ['Accent 2', '--accent-2', ti.a2[0], ti.a2[1]],
+    ['Accent 3', '--accent-3', ti.a3[0], ti.a3[1]],
+  ];
   const status = [
     ['Success', '--success', '#34D399', '#059669'],
     ['Warning', '--warning', '#FBBF24', '#D97706'],
@@ -57,7 +58,7 @@ export default function Color() {
       <div className="ds-grid cols-3" style={{marginBottom: 24}}>
         {[
           ['Semantic, not literal', 'Tokens name a role (--fg-muted), not a hue (--gray-400). Theme switching costs zero per-component work.'],
-          ['One accent', 'The accent — ember in Forge, violet in Iris — is reserved for primary action, focus, active nav, the spark, and T1 highlights. Nothing else.'],
+          ['One accent', 'The accent — ember in Forge, violet in Iris, teal in Tide — is reserved for primary action, focus, active nav, the spark, and T1 highlights. Nothing else.'],
           ['Hairlines only', 'No 2px borders, no shadows on cards. Separation comes from a 6%–18% border on a darker surface.'],
         ].map(([t,d]) => (
           <div key={t} className="surface" style={{padding: 16}}>
@@ -141,7 +142,7 @@ export default function Color() {
       {/* Accent scale — theme-driven */}
       <SubHead meta="theme-driven">The accent (one per theme)</SubHead>
       <p style={{marginTop: -6, marginBottom: 14, fontSize: 'var(--text-body)', color:'var(--fg-muted)', maxWidth:'68ch', lineHeight: 1.6}}>
-        One accent, swapped by the active theme. Components never name a hue — they reach for <Mono>--accent</Mono>, an alias of the theme&rsquo;s <Mono>--ember</Mono>, so every CTA, focus ring, active-nav bar and spark re-colours at once. <b style={{color:'var(--fg)'}}>Forge</b> ships ember; the <b style={{color:'var(--fg)'}}>Iris</b> theme swaps it for violet. Flip the theme in the topbar — the scale below recolours live. The two soft variants are tinted overlays for halos, hover surfaces, and selection backgrounds where the full-strength accent would be too loud.
+        One accent, swapped by the active theme. Components never name a hue — they reach for <Mono>--accent</Mono>, an alias of the theme&rsquo;s <Mono>--ember</Mono>, so every CTA, focus ring, active-nav bar and spark re-colours at once. <b style={{color:'var(--fg)'}}>Forge</b> ships ember, <b style={{color:'var(--fg)'}}>Iris</b> violet, <b style={{color:'var(--fg)'}}>Tide</b> teal. Pick a theme in the topbar — the scale below recolours live. The two soft variants are tinted overlays for halos, hover surfaces, and selection backgrounds where the full-strength accent would be too loud.
       </p>
       <div className="ds-frame">
         <div className="ds-frame-head"><span className="label">Accent scale · active theme</span><CopyButton text={'/* Components use the theme-neutral alias … */\n--accent: var(--ember);\n\n/* … the active theme defines the ramp. Forge ships: */\n--ember: #FF6B35;\n--ember-glow: #FF8C42;\n--ember-deep: #E04E1A;\n--ember-soft: rgba(255,107,53,0.14);\n--ember-softer: rgba(255,107,53,0.07);'}/></div>
@@ -262,9 +263,9 @@ export default function Color() {
       <p className="ds-caption">Component authors: when you paint <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>background: var(--ember)</code>, always pair it with <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>color: var(--ember-fg)</code>. Never hardcode <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>#0A0907</code> or <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>#FFFFFF</code> — the token does the theme work for you.</p>
 
       {/* Cool / secondary accents — theme-specific */}
-      <SubHead meta={(theme === 'iris' ? 'Iris' : 'Forge') + ' · ' + cool.length + ' tokens'}>Cool accents</SubHead>
+      <SubHead meta={theme.charAt(0).toUpperCase() + theme.slice(1) + ' · ' + cool.length + ' tokens'}>Cool accents</SubHead>
       <p style={{marginTop: -6, marginBottom: 14, fontSize: 'var(--text-body)', color:'var(--fg-muted)', maxWidth:'68ch', lineHeight: 1.6}}>
-        Two cool, sparingly-used hues that complement the primary accent — <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--accent-2</code> signals AI / automated content, <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--accent-3</code> signals premium tier. They are <b style={{color:'var(--fg)'}}>theme-specific</b>: <b style={{color:'var(--fg)'}}>Forge</b> pairs sky-blue + lavender against its warm ember; <b style={{color:'var(--fg)'}}>Iris</b> swaps to cyan + fuchsia to frame its violet primary. Switch the theme in the topbar to see the pair below change. Never use either in place of the accent.
+        Two cool, sparingly-used hues that complement the primary accent — <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--accent-2</code> signals AI / automated content, <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--accent-3</code> signals premium tier. They are <b style={{color:'var(--fg)'}}>theme-specific</b>: <b style={{color:'var(--fg)'}}>Forge</b> pairs sky-blue + lavender, <b style={{color:'var(--fg)'}}>Iris</b> cyan + fuchsia, <b style={{color:'var(--fg)'}}>Tide</b> blue + coral. Switch the theme in the topbar to see the pair below change. Never use either in place of the accent.
       </p>
       <div className="ds-grid cols-3">
         {cool.map(([name,v,val,lightVal]) => <TokenSwatch key={v} name={name} varName={v} value={val} lightValue={lightVal}/>)}
@@ -315,9 +316,9 @@ export default function Color() {
       </p>
 
       {/* Info role — the cool accent, now first-class */}
-      <SubHead meta={'role set · ' + (theme === 'iris' ? 'cyan' : 'sky')}>Info (the cool accent role)</SubHead>
+      <SubHead meta={'role set · ' + ti.a2name}>Info (the cool accent role)</SubHead>
       <p style={{marginTop: -6, marginBottom: 14, fontSize: 'var(--text-body)', color:'var(--fg-muted)', maxWidth:'68ch', lineHeight: 1.6}}>
-        Alongside the accent and the status trio, <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>info</code> is a first-class role for informational / AI-assisted surfaces — it rides the theme&rsquo;s cool accent ({theme === 'iris' ? 'cyan in Iris' : 'sky-blue in Forge'}; <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--info-text</code> resolves through <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--accent-2</code>). Like every functional role it implements the same 7-token contract — solid · strong · soft · subtle · border · text · fg — so an alert or badge reads its tint, border, and on-solid ink from one family. <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--accent-3</code> stays the premium-tier signal.
+        Alongside the accent and the status trio, <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>info</code> is a first-class role for informational / AI-assisted surfaces — it rides the theme&rsquo;s cool accent (the {ti.a2name} <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--accent-2</code>; <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--info-text</code> resolves through it). Like every functional role it implements the same 7-token contract — solid · strong · soft · subtle · border · text · fg — so an alert or badge reads its tint, border, and on-solid ink from one family. <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--accent-3</code> stays the premium-tier signal.
       </p>
       <div className="ds-grid cols-3">
         {[
