@@ -58,7 +58,7 @@ const CODE_VALIDATION = `<TagInput
 export default function TagInputPage() {
   // Controlled state for live demos
   const [topics, setTopics] = React.useState(['identity', 'auth', 'sessions']);
-  const [emails, setEmails] = React.useState(['lead@forge.io']);
+  const [emails, setEmails] = React.useState(['lead@eidos.io']);
   const [teams, setTeams] = React.useState(['platform', 'identity']);
   const [envs, setEnvs] = React.useState(['prod-east-1']);
   const [rtlTags, setRtlTags] = React.useState(['الهوية', 'المصادقة', 'الجلسات']);

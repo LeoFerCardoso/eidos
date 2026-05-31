@@ -4,7 +4,7 @@ import { ChangelogView, type ChangelogEntry } from '@/components/docs';
 const CHANGELOG: ChangelogEntry[] = [
   // ─── v1.14.0 — Mobile on the contract harness + atomic Chip (2026-05-30) ──────
   { version: 'v1.14.0', date: '2026-05-30', type: 'feat', scope: 'mobile', title: 'Mobile components on the contract + a dedicated Chip page',
-    summary: 'Every mobile page is verified against the four-surface contract (Accessibility incl. 44px targets, RTL, anatomy) via forge:verify. Chip moved to its own core page; the mobile chips page stays for the mobile-specific filter variant.' },
+    summary: 'Every mobile page is verified against the four-surface contract (Accessibility incl. 44px targets, RTL, anatomy) via eidos:verify. Chip moved to its own core page; the mobile chips page stays for the mobile-specific filter variant.' },
 
   // ─── v1.13.0 — RTL on every component + page-typography standard (2026-05-22) ──────
   { version: 'v1.13.0', date: '2026-05-22', type: 'feat', scope: 'mobile', title: 'RTL section added to all 24 mobile components',

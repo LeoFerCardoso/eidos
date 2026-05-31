@@ -7,12 +7,12 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@e
 const FAQ = [
   {
     value: 'q1',
-    q: 'Is Forge a component library or a design system?',
+    q: 'Is Eidos a component library or a design system?',
     a: 'A design system. The components are the most visible surface, but the tokens, type scale, motion curves, and copy voice are what hold it together.',
   },
   {
     value: 'q2',
-    q: 'Can I use Forge with my own framework?',
+    q: 'Can I use Eidos with my own framework?',
     a: 'Yes. Tokens ship as plain CSS variables; the Tailwind preset is opt-in. The React examples on this site are for demonstration — copy them into your stack of choice.',
   },
   {
@@ -23,7 +23,7 @@ const FAQ = [
   {
     value: 'q4',
     q: 'Where do I report a missing component?',
-    a: 'Open an issue in the Forge platform repo. The catalog grows as the product grows.',
+    a: 'Open an issue in the Eidos platform repo. The catalog grows as the product grows.',
   },
 ];
 

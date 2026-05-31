@@ -92,7 +92,7 @@ export default function Typography() {
       {/* Mono usage */}
       <SubHead meta="numbers, identifiers">Mono usage</SubHead>
       <Lede up>
-        Mono is reserved for things you'd grep for: identifiers (forge-api), versions (v4.18.2), measurements (142ms), hashes (a3f9b2), and inline code. <Mono>tnum</Mono> + <Mono>zero</Mono> are always on, so columns stay aligned through state changes and the digit zero never reads as "O".
+        Mono is reserved for things you'd grep for: identifiers (eidos-api), versions (v4.18.2), measurements (142ms), hashes (a3f9b2), and inline code. <Mono>tnum</Mono> + <Mono>zero</Mono> are always on, so columns stay aligned through state changes and the digit zero never reads as "O".
       </Lede>
       <Frame label="metrics with t-mono + tnum" code={`<span className="t-mono-label">P95 LATENCY</span>
 <span className="t-mono">142ms</span>
@@ -139,9 +139,9 @@ $ npm i @eidos/design-system
             <div className="t-mono-label" style={{padding: 0, marginBottom: 8}}>tnum on (correct)</div>
             <table style={{width:'100%', fontFamily:'var(--font-mono)', fontSize: 'var(--text-base)', fontVariantNumeric:'tabular-nums'}}>
               <tbody>
-                <tr><td style={{color:'var(--fg-muted)', padding:'4px 0'}}>forge-api</td><td style={{textAlign:'right', color:'var(--fg)'}}>142ms</td></tr>
-                <tr><td style={{color:'var(--fg-muted)', padding:'4px 0'}}>forge-shipper</td><td style={{textAlign:'right', color:'var(--fg)'}}>1,420ms</td></tr>
-                <tr><td style={{color:'var(--fg-muted)', padding:'4px 0'}}>forge-ledger</td><td style={{textAlign:'right', color:'var(--fg)'}}>21ms</td></tr>
+                <tr><td style={{color:'var(--fg-muted)', padding:'4px 0'}}>eidos-api</td><td style={{textAlign:'right', color:'var(--fg)'}}>142ms</td></tr>
+                <tr><td style={{color:'var(--fg-muted)', padding:'4px 0'}}>eidos-shipper</td><td style={{textAlign:'right', color:'var(--fg)'}}>1,420ms</td></tr>
+                <tr><td style={{color:'var(--fg-muted)', padding:'4px 0'}}>eidos-ledger</td><td style={{textAlign:'right', color:'var(--fg)'}}>21ms</td></tr>
               </tbody>
             </table>
           </div>
@@ -149,9 +149,9 @@ $ npm i @eidos/design-system
             <div className="t-mono-label" style={{padding: 0, marginBottom: 8}}>tnum off (misaligned)</div>
             <table style={{width:'100%', fontFamily:'var(--font-mono)', fontSize: 'var(--text-base)', fontVariantNumeric:'normal'}}>
               <tbody>
-                <tr><td style={{color:'var(--fg-muted)', padding:'4px 0'}}>forge-api</td><td style={{textAlign:'right', color:'var(--fg)'}}>142ms</td></tr>
-                <tr><td style={{color:'var(--fg-muted)', padding:'4px 0'}}>forge-shipper</td><td style={{textAlign:'right', color:'var(--fg)'}}>1,420ms</td></tr>
-                <tr><td style={{color:'var(--fg-muted)', padding:'4px 0'}}>forge-ledger</td><td style={{textAlign:'right', color:'var(--fg)'}}>21ms</td></tr>
+                <tr><td style={{color:'var(--fg-muted)', padding:'4px 0'}}>eidos-api</td><td style={{textAlign:'right', color:'var(--fg)'}}>142ms</td></tr>
+                <tr><td style={{color:'var(--fg-muted)', padding:'4px 0'}}>eidos-shipper</td><td style={{textAlign:'right', color:'var(--fg)'}}>1,420ms</td></tr>
+                <tr><td style={{color:'var(--fg-muted)', padding:'4px 0'}}>eidos-ledger</td><td style={{textAlign:'right', color:'var(--fg)'}}>21ms</td></tr>
               </tbody>
             </table>
           </div>

@@ -29,7 +29,7 @@ export const Default: Story = {
     variant: 'pill',
     size: 'md',
     label: 'AI summary',
-    model: 'forge-ai/gpt-4o-mini',
+    model: 'eidos-ai/gpt-4o-mini',
     ts: '2 min ago',
     confidence: 0.92,
     children: 'Fraud score elevated due to geolocation mismatch and 3 rapid sequential transactions.',
@@ -47,7 +47,7 @@ export const Variants: Story = {
           variant="pill"
           size="md"
           label="Risk classification"
-          model="forge-ai/risk-classifier-v2"
+          model="eidos-ai/risk-classifier-v2"
           ts="5 min ago"
           confidence={0.88}
         >
@@ -61,7 +61,7 @@ export const Variants: Story = {
           variant="mark"
           size="md"
           label="Incident summary"
-          model="forge-ai/gpt-4o"
+          model="eidos-ai/gpt-4o"
           ts="1 min ago"
           confidence={0.95}
         >
@@ -75,7 +75,7 @@ export const Variants: Story = {
           variant="box"
           size="md"
           label="Deploy recommendation"
-          model="forge-ai/deploy-advisor-v1"
+          model="eidos-ai/deploy-advisor-v1"
           ts="12 min ago"
           confidence={0.79}
         >
@@ -89,7 +89,7 @@ export const Variants: Story = {
           variant="dot"
           size="md"
           label="Anomaly detected"
-          model="forge-ai/anomaly-detector-v3"
+          model="eidos-ai/anomaly-detector-v3"
           ts="just now"
           confidence={0.97}
         >
@@ -108,7 +108,7 @@ export const Sizes: Story = {
         variant="pill"
         size="sm"
         label="Chargeback probability"
-        model="forge-ai/chargeback-pred-v4"
+        model="eidos-ai/chargeback-pred-v4"
         ts="30 sec ago"
         confidence={0.84}
       >
@@ -119,7 +119,7 @@ export const Sizes: Story = {
         variant="pill"
         size="md"
         label="Chargeback probability"
-        model="forge-ai/chargeback-pred-v4"
+        model="eidos-ai/chargeback-pred-v4"
         ts="30 sec ago"
         confidence={0.84}
       >
@@ -130,7 +130,7 @@ export const Sizes: Story = {
         variant="pill"
         size="lg"
         label="Chargeback probability"
-        model="forge-ai/chargeback-pred-v4"
+        model="eidos-ai/chargeback-pred-v4"
         ts="30 sec ago"
         confidence={0.84}
       >
@@ -161,7 +161,7 @@ export const InTableContext: Story = {
               variant="pill"
               size="sm"
               label="Risk classification"
-              model="forge-ai/risk-classifier-v2"
+              model="eidos-ai/risk-classifier-v2"
               ts="4 min ago"
               confidence={0.88}
             >
@@ -178,7 +178,7 @@ export const InTableContext: Story = {
               variant="pill"
               size="sm"
               label="Risk classification"
-              model="forge-ai/risk-classifier-v2"
+              model="eidos-ai/risk-classifier-v2"
               ts="4 min ago"
               confidence={0.96}
             >
@@ -195,7 +195,7 @@ export const InTableContext: Story = {
               variant="pill"
               size="sm"
               label="Risk classification"
-              model="forge-ai/risk-classifier-v2"
+              model="eidos-ai/risk-classifier-v2"
               ts="4 min ago"
               confidence={0.91}
             >

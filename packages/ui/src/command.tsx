@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cn } from './lib/utils';
 import { Icons } from './icons';
-// Forge DS — Command Palette.
+// Eidos DS — Command Palette.
 //
 // A ⌘K (Cmd/Ctrl+K) surface — a single text input that filters across grouped
 // navigation, creation, and recent items. Provides:

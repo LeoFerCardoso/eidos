@@ -118,7 +118,7 @@ export default function Color() {
         {fg.map(([name,v,darkVal,lightVal,usage]) => (
           <div key={v} className="surface" style={{padding: 16}}>
             <div style={{display:'flex', alignItems:'baseline', justifyContent:'space-between', gap: 12, marginBottom: 8}}>
-              <span style={{color: `var(${v})`, fontSize: 'var(--text-md)', fontWeight: 500}}>The forge stays cool.</span>
+              <span style={{color: `var(${v})`, fontSize: 'var(--text-md)', fontWeight: 500}}>The ember stays cool.</span>
               <span style={monoTok}>{v}</span>
             </div>
             <div style={{fontSize: 'var(--text-sm)', color:'var(--fg-muted)', lineHeight: 1.5, marginBottom: 8}}><b style={{color:'var(--fg)'}}>{name}</b> · {usage}</div>
@@ -173,8 +173,8 @@ export default function Color() {
             <button role="tab" aria-selected="false" type="button" style={{textAlign:'start', background:'transparent', border:'none', cursor:'pointer', padding:'10px 14px', fontSize: 'var(--text-base)', color:'var(--fg-muted)'}}>Settings</button>
           </div>
           <div style={{display:'flex', flexDirection:'column', gap: 0, border:'1px solid var(--border)', borderRadius: 'var(--radius-xl)', overflow:'hidden', fontSize: 'var(--text-base)'}}>
-            <div style={{padding:'8px 12px', borderBottom:'1px solid var(--border)', display:'flex', justifyContent:'space-between'}}><span>forge-api</span><span style={{fontFamily:'var(--font-mono)', color:'var(--fg-muted)', fontSize: 'var(--text-xs)', fontVariantNumeric:'tabular-nums'}}>p95 12ms</span></div>
-            <div style={{padding:'8px 12px', background:'var(--ember-softer)', display:'flex', justifyContent:'space-between'}}><span>forge-shipper <span style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--ember)'}}>· T1</span></span><span style={{fontFamily:'var(--font-mono)', color:'var(--fg-muted)', fontSize: 'var(--text-xs)', fontVariantNumeric:'tabular-nums'}}>p95 8ms</span></div>
+            <div style={{padding:'8px 12px', borderBottom:'1px solid var(--border)', display:'flex', justifyContent:'space-between'}}><span>eidos-api</span><span style={{fontFamily:'var(--font-mono)', color:'var(--fg-muted)', fontSize: 'var(--text-xs)', fontVariantNumeric:'tabular-nums'}}>p95 12ms</span></div>
+            <div style={{padding:'8px 12px', background:'var(--ember-softer)', display:'flex', justifyContent:'space-between'}}><span>eidos-shipper <span style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--ember)'}}>· T1</span></span><span style={{fontFamily:'var(--font-mono)', color:'var(--fg-muted)', fontSize: 'var(--text-xs)', fontVariantNumeric:'tabular-nums'}}>p95 8ms</span></div>
           </div>
         </div>
       </Frame>
@@ -279,7 +279,7 @@ export default function Color() {
             <Icons.check size={16} className="alert-icon"/>
             <div className="alert-body">
               <div className="alert-title">Build green</div>
-              <div className="alert-desc">12s · 0 errors — forge-api v2.14.0 ready to deploy.</div>
+              <div className="alert-desc">12s · 0 errors — eidos-api v2.14.0 ready to deploy.</div>
             </div>
           </div>
           <div className="alert warning" style={{width:'100%'}}>
@@ -293,7 +293,7 @@ export default function Color() {
             <Icons.x size={16} className="alert-icon"/>
             <div className="alert-body">
               <div className="alert-title">Outage</div>
-              <div className="alert-desc">5xx rate 18% on forge-api — health checks failing on 3/8 instances.</div>
+              <div className="alert-desc">5xx rate 18% on eidos-api — health checks failing on 3/8 instances.</div>
             </div>
           </div>
         </div>
@@ -343,7 +343,7 @@ export default function Color() {
             ['Info',    '--info',    'AI summarised this thread'],
             ['Success', '--success', 'Deploy #9384 promoted to prod'],
             ['Warning', '--warning', 'p95 is 30ms over target'],
-            ['Danger',  '--danger',  '5xx rate 18% on forge-api'],
+            ['Danger',  '--danger',  '5xx rate 18% on eidos-api'],
           ].map(([name, r, msg]) => (
             <div key={r} style={{display:'flex', alignItems:'center', gap: 14, padding:'12px 14px', borderRadius:'var(--radius-lg)', background:`var(${r}-soft)`, border:`1px solid var(${r}-border)`}}>
               <span className="pill" style={{flex:'0 0 auto', minWidth: 78, justifyContent:'center', background:`var(${r})`, color:`var(${r}-fg)`, borderColor:'transparent', fontWeight: 600}}>{name}</span>
@@ -370,19 +370,19 @@ export default function Color() {
           {/* Default */}
           <label style={{display:'flex', flexDirection:'column', gap: 6}}>
             <span style={{fontSize:'var(--text-xs)', fontFamily:'var(--font-mono)', letterSpacing:'0.06em', color:'var(--fg-subtle)', textTransform:'uppercase'}}>Default · --fg on --surface</span>
-            <input type="text" defaultValue="forge-api" aria-label="Service name, default state"
+            <input type="text" defaultValue="eidos-api" aria-label="Service name, default state"
               style={{height: 36, padding:'0 12px', borderRadius:'var(--radius-lg)', background:'var(--surface)', border:'1px solid var(--border-strong)', color:'var(--fg)', fontSize:'var(--text-base)'}}/>
           </label>
           {/* Disabled */}
           <label style={{display:'flex', flexDirection:'column', gap: 6}}>
             <span style={{fontSize:'var(--text-xs)', fontFamily:'var(--font-mono)', letterSpacing:'0.06em', color:'var(--fg-subtle)', textTransform:'uppercase'}}>Disabled · --fg-subtle, no ring</span>
-            <input type="text" defaultValue="forge-api" disabled aria-label="Service name, disabled state"
+            <input type="text" defaultValue="eidos-api" disabled aria-label="Service name, disabled state"
               style={{height: 36, padding:'0 12px', borderRadius:'var(--radius-lg)', background:'var(--bg-elevated)', border:'1px solid var(--border)', color:'var(--fg-subtle)', fontSize:'var(--text-base)', cursor:'not-allowed'}}/>
           </label>
           {/* Invalid */}
           <label style={{display:'flex', flexDirection:'column', gap: 6}}>
             <span style={{fontSize:'var(--text-xs)', fontFamily:'var(--font-mono)', letterSpacing:'0.06em', color:'var(--fg-subtle)', textTransform:'uppercase'}}>Invalid · --danger border + text</span>
-            <input type="text" defaultValue="forge api" aria-invalid="true" aria-describedby="color-state-err" aria-label="Service name, invalid state"
+            <input type="text" defaultValue="eidos api" aria-invalid="true" aria-describedby="color-state-err" aria-label="Service name, invalid state"
               style={{height: 36, padding:'0 12px', borderRadius:'var(--radius-lg)', background:'var(--surface)', border:'1px solid var(--danger)', color:'var(--fg)', fontSize:'var(--text-base)', boxShadow:'0 0 0 3px var(--danger-soft)'}}/>
             <span id="color-state-err" role="alert" style={{display:'flex', alignItems:'center', gap: 6, fontSize:'var(--text-sm)', color:'var(--danger-text)', lineHeight: 1.5}}>
               <Icons.alert size={13} style={{flexShrink: 0}}/> No spaces allowed in a service name.

@@ -100,7 +100,7 @@ export const WithPopover: Story = {
         variant="pill"
         size="sm"
         label="AI risk score"
-        model="forge-ai/gpt-4o-mini"
+        model="eidos-ai/gpt-4o-mini"
         ts="2 min ago"
         confidence={0.92}
       >
@@ -130,7 +130,7 @@ export const AgentAvatarWithStatus: Story = {
     <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
       {(['online', 'away', 'offline', 'busy'] as const).map((status) => (
         <span key={status} style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-          <AgentAvatar size={32} status={status} name="Forge AI" />
+          <AgentAvatar size={32} status={status} name="Eidos AI" />
           <code style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--fg-muted)' }}>{status}</code>
         </span>
       ))}
@@ -142,7 +142,7 @@ export const AgentAvatarInitials: Story = {
   name: 'AgentAvatar — initials',
   render: () => (
     <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-      <AgentAvatar size={32} initials="FA" name="Forge AI" />
+      <AgentAvatar size={32} initials="FA" name="Eidos AI" />
       <AgentAvatar size={32} initials="RZ" ember={false} name="Risk Agent" />
     </div>
   ),
@@ -154,7 +154,7 @@ export const AgentIdentityDefault: Story = {
   name: 'AgentIdentity — default',
   render: () => (
     <AgentIdentity
-      agent={{ name: 'Forge AI', model: 'forge-ai/gpt-4o', status: 'online' }}
+      agent={{ name: 'Eidos AI', model: 'eidos-ai/gpt-4o', status: 'online' }}
     />
   ),
 };
@@ -163,7 +163,7 @@ export const AgentIdentityWithLabel: Story = {
   name: 'AgentIdentity — with AILabel',
   render: () => (
     <AgentIdentity
-      agent={{ name: 'Risk Analyst', model: 'forge-ai/gpt-4o-mini', status: 'online' }}
+      agent={{ name: 'Risk Analyst', model: 'eidos-ai/gpt-4o-mini', status: 'online' }}
       label
     />
   ),
@@ -180,7 +180,7 @@ export const AgentIdentityInContext: Story = {
       fontFamily: 'var(--font-sans)',
     }}>
       <div style={{ padding: '10px 14px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <AgentIdentity agent={{ name: 'Forge AI', model: 'gpt-4o', status: 'online' }} label />
+        <AgentIdentity agent={{ name: 'Eidos AI', model: 'gpt-4o', status: 'online' }} label />
         <span style={{ fontSize: 11, color: 'var(--fg-muted)', fontFamily: 'var(--font-mono)' }}>14:01</span>
       </div>
       <div style={{ padding: '12px 14px', fontSize: 13, color: 'var(--fg)', lineHeight: 1.6 }}>

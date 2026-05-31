@@ -11,27 +11,27 @@ import type { TerminalLine } from '@/ds/core';
 
 // ── demo line banks ──────────────────────────────────────────────────────────
 const DEPLOY_LINES: TerminalLine[] = [
-  { kind: 'in',   text: 'forge deploy --service identity-svc --ring canary' },
+  { kind: 'in',   text: 'eidos deploy --service identity-svc --ring canary' },
   { kind: 'out',  text: 'Building image…' },
-  { kind: 'out',  text: 'Pushed sha:abc123f → registry.forge.internal/identity-svc:canary' },
+  { kind: 'out',  text: 'Pushed sha:abc123f → registry.eidos.internal/identity-svc:canary' },
   { kind: 'out',  text: 'Promoting canary ring (5% traffic)…' },
   { kind: 'out',  text: '→ Healthy at 02:14:32 UTC  p95=48ms  errors=0' },
   { kind: 'note', text: 'Done. Promote to 25% with --promote or roll back with --rollback.' },
 ];
 
 const ERROR_LINES: TerminalLine[] = [
-  { kind: 'in',  text: 'forge deploy --service billing-svc --ring canary' },
+  { kind: 'in',  text: 'eidos deploy --service billing-svc --ring canary' },
   { kind: 'out', text: 'Building image…' },
-  { kind: 'out', text: 'Pushed sha:def456a → registry.forge.internal/billing-svc:canary' },
+  { kind: 'out', text: 'Pushed sha:def456a → registry.eidos.internal/billing-svc:canary' },
   { kind: 'out', text: 'Promoting canary ring…' },
   { kind: 'err', text: 'Health check failed: GET /healthz → 503 after 10 s' },
   { kind: 'err', text: 'Rollback initiated — restoring previous replica set' },
   { kind: 'out', text: 'Rolled back to billing-svc@sha:prev789 in 4 s' },
-  { kind: 'note', text: 'Canary aborted. Check logs with: forge logs billing-svc --ring canary' },
+  { kind: 'note', text: 'Canary aborted. Check logs with: eidos logs billing-svc --ring canary' },
 ];
 
 const CTX_LINES: TerminalLine[] = [
-  { kind: 'in',  text: 'forge health identity-svc' },
+  { kind: 'in',  text: 'eidos health identity-svc' },
   { kind: 'out', text: 'status: healthy' },
   { kind: 'out', text: 'p95: 48 ms  p99: 61 ms' },
   { kind: 'out', text: 'error budget: 94%' },
@@ -61,9 +61,9 @@ export default function AiTerminalPage() {
 import type { TerminalLine } from "@/ds/core"
 
 const lines: TerminalLine[] = [
-  { kind: 'in',   text: 'forge deploy --service identity-svc --ring canary' },
+  { kind: 'in',   text: 'eidos deploy --service identity-svc --ring canary' },
   { kind: 'out',  text: 'Building image…' },
-  { kind: 'out',  text: 'Pushed sha:abc123f → registry.forge.internal/identity-svc:canary' },
+  { kind: 'out',  text: 'Pushed sha:abc123f → registry.eidos.internal/identity-svc:canary' },
   { kind: 'out',  text: 'Promoting canary ring (5% traffic)…' },
   { kind: 'out',  text: '→ Healthy at 02:14:32 UTC  p95=48ms  errors=0' },
   { kind: 'note', text: 'Done. Promote to 25% with --promote or roll back with --rollback.' },
@@ -98,9 +98,9 @@ const lines: TerminalLine[] = [
         label="Four terminals side by side — idle / running / done / error"
         height={200}
         code={`<Terminal status="idle"    title="session · idle"    lines={[{ kind:'out', text:'Waiting for command…' }]}/>
-<Terminal status="running" title="session · running" lines={[{ kind:'in', text:'forge deploy …' }, { kind:'out', text:'Building…' }]}/>
-<Terminal status="done"    title="session · done"    lines={[{ kind:'in', text:'forge deploy …' }, { kind:'out', text:'Healthy at 02:14 UTC' }]}/>
-<Terminal status="error"   title="session · error"   lines={[{ kind:'in', text:'forge deploy …' }, { kind:'err', text:'Health check failed' }]}/>`}
+<Terminal status="running" title="session · running" lines={[{ kind:'in', text:'eidos deploy …' }, { kind:'out', text:'Building…' }]}/>
+<Terminal status="done"    title="session · done"    lines={[{ kind:'in', text:'eidos deploy …' }, { kind:'out', text:'Healthy at 02:14 UTC' }]}/>
+<Terminal status="error"   title="session · error"   lines={[{ kind:'in', text:'eidos deploy …' }, { kind:'err', text:'Health check failed' }]}/>`}
       >
         <div style={{ display: 'flex', gap: 12, width: '100%', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 220px', minWidth: 180 }}>
@@ -115,7 +115,7 @@ const lines: TerminalLine[] = [
               status="running"
               title="running"
               lines={[
-                { kind: 'in',  text: 'forge deploy --ring canary' },
+                { kind: 'in',  text: 'eidos deploy --ring canary' },
                 { kind: 'out', text: 'Building image…' },
               ]}
             />
@@ -125,7 +125,7 @@ const lines: TerminalLine[] = [
               status="done"
               title="done"
               lines={[
-                { kind: 'in',  text: 'forge deploy --ring canary' },
+                { kind: 'in',  text: 'eidos deploy --ring canary' },
                 { kind: 'out', text: 'Healthy at 02:14 UTC' },
               ]}
             />
@@ -135,7 +135,7 @@ const lines: TerminalLine[] = [
               status="error"
               title="error"
               lines={[
-                { kind: 'in',  text: 'forge deploy --ring canary' },
+                { kind: 'in',  text: 'eidos deploy --ring canary' },
                 { kind: 'err', text: 'Health check failed' },
               ]}
             />
@@ -151,14 +151,14 @@ const lines: TerminalLine[] = [
         label="A deploy that fails on health check — mixes in / out / err / note"
         height={280}
         code={`const lines: TerminalLine[] = [
-  { kind: 'in',   text: 'forge deploy --service billing-svc --ring canary' },
+  { kind: 'in',   text: 'eidos deploy --service billing-svc --ring canary' },
   { kind: 'out',  text: 'Building image…' },
   { kind: 'out',  text: 'Pushed sha:def456a → registry…' },
   { kind: 'out',  text: 'Promoting canary ring…' },
   { kind: 'err',  text: 'Health check failed: GET /healthz → 503 after 10 s' },
   { kind: 'err',  text: 'Rollback initiated — restoring previous replica set' },
   { kind: 'out',  text: 'Rolled back to billing-svc@sha:prev789 in 4 s' },
-  { kind: 'note', text: 'Canary aborted. Check logs with: forge logs billing-svc --ring canary' },
+  { kind: 'note', text: 'Canary aborted. Check logs with: eidos logs billing-svc --ring canary' },
 ]`}
       >
         <div style={{ width: '100%', maxWidth: 600 }}>
@@ -186,7 +186,7 @@ const lines: TerminalLine[] = [
           <Message from="assistant">
             <p style={{ margin: '0 0 12px' }}>Here is what I ran:</p>
             <Terminal
-              title="forge health"
+              title="eidos health"
               status="done"
               lines={CTX_LINES}
             />
@@ -218,7 +218,7 @@ const lines: TerminalLine[] = [
         <div className="surface" style={{ padding: 18 }}>
           <div style={{ fontWeight: 600, marginBottom: 6 }}>Prompt char &amp; contrast</div>
           <div style={{ color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.55 }}>
-            The prompt character (<code style={{ fontFamily: 'var(--font-mono)' }}>$</code> by default) is purely a visual cue — it is included in the DOM as real text so screen readers read "$ forge deploy …" naturally. The danger tone on <code style={{ fontFamily: 'var(--font-mono)' }}>err</code> lines meets AA; the alert icon is supplementary and does not carry meaning alone (the text is the record).
+            The prompt character (<code style={{ fontFamily: 'var(--font-mono)' }}>$</code> by default) is purely a visual cue — it is included in the DOM as real text so screen readers read "$ eidos deploy …" naturally. The danger tone on <code style={{ fontFamily: 'var(--font-mono)' }}>err</code> lines meets AA; the alert icon is supplementary and does not carry meaning alone (the text is the record).
           </div>
         </div>
         <div className="surface" style={{ padding: 18 }}>
@@ -240,7 +240,7 @@ const lines: TerminalLine[] = [
             title="نشر الخدمة"
             status="done"
             lines={[
-              { kind: 'in',  text: 'forge deploy --service identity-svc --ring canary' },
+              { kind: 'in',  text: 'eidos deploy --service identity-svc --ring canary' },
               { kind: 'out', text: '→ Healthy at 02:14:32 UTC  p95=48ms' },
               { kind: 'note', text: 'Done. Promote to 25% with --promote.' },
             ]}
@@ -262,10 +262,10 @@ const lines: TerminalLine[] = [
                 title="session · identity-svc"
                 status="done"
                 lines={[
-                  { kind: 'in',  text: 'forge deploy --service identity-svc' },
+                  { kind: 'in',  text: 'eidos deploy --service identity-svc' },
                   { kind: 'out', text: '→ Healthy at 02:14:32 UTC' },
                   { kind: 'err', text: 'Health check failed (example error line)' },
-                  { kind: 'note', text: 'Done. Review with forge logs.' },
+                  { kind: 'note', text: 'Done. Review with eidos logs.' },
                 ]}
               />
               {/* terminal glyph (pin 1) */}
@@ -313,7 +313,7 @@ const lines: TerminalLine[] = [
               title="deploy"
               status="done"
               lines={[
-                { kind: 'in',  text: 'forge deploy --service identity-svc' },
+                { kind: 'in',  text: 'eidos deploy --service identity-svc' },
                 { kind: 'out', text: '→ Healthy at 02:14 UTC' },
               ]}
             />
@@ -339,7 +339,7 @@ const lines: TerminalLine[] = [
             <Terminal
               status="done"
               lines={[
-                { kind: 'in',   text: 'forge promote --ring canary --pct 25' },
+                { kind: 'in',   text: 'eidos promote --ring canary --pct 25' },
                 { kind: 'out',  text: 'Promoted. Error budget holding at 91%.' },
                 { kind: 'note', text: 'Monitor for 10 min before the 50% step.' },
               ]}

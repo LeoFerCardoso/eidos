@@ -8,7 +8,7 @@ import { Section, SubHead, Frame, CodeBlock, Icons, AutoPropsTable, Context, Pro
 const SOURCES = [
   { icon: 'file', label: 'runbook-identity.md', meta: 'attached' },
   { icon: 'database', label: 'services · 142 rows', meta: 'query' },
-  { icon: 'globe', label: 'status.forge.dev', meta: 'fetched' },
+  { icon: 'globe', label: 'status.eidos.dev', meta: 'fetched' },
   { icon: 'book', label: 'ADR-0042 · step-up auth', meta: 'linked' },
 ];
 

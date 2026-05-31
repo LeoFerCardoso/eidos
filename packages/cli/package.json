@@ -1,7 +1,7 @@
 {
   "name": "eidos",
   "version": "0.1.0",
-  "description": "The Forge Design System CLI — own the code, copied not imported. Install Forge components into any React project.",
+  "description": "The Eidos Design System CLI — own the code, copied not imported. Install Eidos components into any React project.",
   "license": "MIT",
   "type": "module",
   "bin": {

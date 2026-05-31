@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, ForgeChart, ForgeTooltipContent, useChartColors, Recharts, Lede, Mono } from '@/ds/core';
+import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, EidosChart, EidosTooltipContent, useChartColors, Recharts, Lede, Mono } from '@/ds/core';
   const { RadialBarChart, RadialBar, PolarAngleAxis, Tooltip, Legend } = Recharts;
 
 // Tracks prefers-reduced-motion so the arc sweep-in animation can be disabled,
@@ -37,19 +37,19 @@ function usePrefersReducedMotion() {
   ];
 
   const USAGE = `import { RadialBarChart, RadialBar, PolarAngleAxis, Tooltip, Legend } from "recharts"
-import { ForgeChart, ForgeTooltipContent } from "@/charts"
+import { EidosChart, EidosTooltipContent } from "@/charts"
 
 export function Demo({ data }) {
   return (
-    <ForgeChart title="Quarterly goals" height={280}>
+    <EidosChart title="Quarterly goals" height={280}>
       <RadialBarChart data={data} innerRadius="20%" outerRadius="100%"
                       startAngle={90} endAngle={-270} barSize={14}>
         <PolarAngleAxis type="number" domain={[0, 100]} tick={false}/>
         <RadialBar dataKey="value" background cornerRadius={8}/>
-        <Tooltip content={<ForgeTooltipContent/>}/>
+        <Tooltip content={<EidosTooltipContent/>}/>
         <Legend/>
       </RadialBarChart>
-    </ForgeChart>
+    </EidosChart>
   )
 }`;
 
@@ -63,47 +63,47 @@ export default function Page() {
 
         <SubHead meta="hello world">Usage</SubHead>
         <Frame label="quarterly goals · 4 concentric arcs" code={USAGE}>
-          <ForgeChart title="Quarterly goals" subtitle="Q2 progress" meta="forge org" height={300}>
+          <EidosChart title="Quarterly goals" subtitle="Q2 progress" meta="eidos org" height={300}>
             <RadialBarChart data={QUARTERLY} innerRadius="22%" outerRadius="100%" startAngle={90} endAngle={-270} barSize={14}>
               <PolarAngleAxis type="number" domain={[0, 100]} tick={false}/>
               <RadialBar dataKey="value" background={{ fill: 'var(--viz-grid)' }} cornerRadius={8} isAnimationActive={!reduced}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Legend iconSize={8} wrapperStyle={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--font-mono)', color: 'var(--fg-muted)' }}/>
             </RadialBarChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
         <Lede>Set <Mono>background</Mono> with the grid token so an incomplete arc still shows its full track — readers see "X out of 100%", not just "X".</Lede>
 
         <SubHead meta="3 variants">Variants</SubHead>
         <Frame label="single arc · headline progress">
-          <ForgeChart title="Onboarding completion" subtitle="forge-api" meta="72%" height={260}>
+          <EidosChart title="Onboarding completion" subtitle="eidos-api" meta="72%" height={260}>
             <RadialBarChart data={SINGLE} innerRadius="60%" outerRadius="92%" startAngle={90} endAngle={-270} barSize={22}>
               <PolarAngleAxis type="number" domain={[0, 100]} tick={false}/>
               <RadialBar dataKey="value" background={{ fill: 'var(--viz-grid)' }} cornerRadius={12} isAnimationActive={!reduced}/>
               <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" style={{ fill: 'var(--fg)', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-2xl)', fontWeight: 600 }}>72%</text>
               <text x="50%" y="50%" dy={24} textAnchor="middle" style={{ fill: 'var(--fg-faint)', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>complete</text>
             </RadialBarChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <Frame label="3 fleet metrics · with legend">
-          <ForgeChart title="Fleet health" subtitle="this week" meta="%" height={280}>
+          <EidosChart title="Fleet health" subtitle="this week" meta="%" height={280}>
             <RadialBarChart data={FLEET} innerRadius="30%" outerRadius="100%" startAngle={90} endAngle={-270} barSize={16}>
               <PolarAngleAxis type="number" domain={[0, 100]} tick={false}/>
               <RadialBar dataKey="value" background={{ fill: 'var(--viz-grid)' }} cornerRadius={8} isAnimationActive={!reduced} label={{ position: 'insideStart', fill: 'var(--fg)', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)' }}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Legend iconSize={8} wrapperStyle={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--font-mono)', color: 'var(--fg-muted)' }}/>
             </RadialBarChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <Frame label="hemisphere · 180° sweep for top-of-page">
-          <ForgeChart title="Sprint burndown" subtitle="this sprint" meta="64%" height={220}>
+          <EidosChart title="Sprint burndown" subtitle="this sprint" meta="64%" height={220}>
             <RadialBarChart data={[{ name: 'done', value: 64, fill: 'var(--ember)' }]} cx="50%" cy="80%" innerRadius="120%" outerRadius="170%" startAngle={180} endAngle={0} barSize={20}>
               <PolarAngleAxis type="number" domain={[0, 100]} tick={false}/>
               <RadialBar dataKey="value" background={{ fill: 'var(--viz-grid)' }} cornerRadius={10} isAnimationActive={!reduced}/>
             </RadialBarChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <SubHead meta="a11y">Accessibility</SubHead>
@@ -129,14 +129,14 @@ export default function Page() {
         <SubHead meta="RTL · العربية">RTL</SubHead>
         <Frame label='dir="rtl" — title, legend and tooltip align right; concentric arcs are radially symmetric and do not mirror'>
           <div dir="rtl" style={{width: '100%'}}>
-            <ForgeChart title="الأهداف الفصلية" subtitle="التقدم - الربع الثاني" meta="أسطول فورج" height={300}>
+            <EidosChart title="الأهداف الفصلية" subtitle="التقدم - الربع الثاني" meta="أسطول فورج" height={300}>
               <RadialBarChart data={QUARTERLY} innerRadius="22%" outerRadius="100%" startAngle={90} endAngle={-270} barSize={14}>
                 <PolarAngleAxis type="number" domain={[0, 100]} tick={false}/>
                 <RadialBar dataKey="value" background={{ fill: 'var(--viz-grid)' }} cornerRadius={8} isAnimationActive={!reduced}/>
-                <Tooltip content={<ForgeTooltipContent/>}/>
+                <Tooltip content={<EidosTooltipContent/>}/>
                 <Legend iconSize={8} wrapperStyle={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--font-mono)', color: 'var(--fg-muted)' }}/>
               </RadialBarChart>
-            </ForgeChart>
+            </EidosChart>
           </div>
         </Frame>
         <Lede>Under <Mono>dir="rtl"</Mono> the chart title and legend text align to the right. The concentric arcs are radially symmetric — each sweeps 0° to 360° proportional to its value — so the encoding is directionless and the rings do not mirror.</Lede>
@@ -148,12 +148,12 @@ export default function Page() {
             <div className="ana" style={{display:'flex', justifyContent:'center'}}>
               <div className="stage" style={{position:'relative'}} aria-hidden="true">
                 <div style={{width:200, height:180}}>
-                  <ForgeChart height={180} padding={0}>
+                  <EidosChart height={180} padding={0}>
                     <RadialBarChart data={QUARTERLY} innerRadius="24%" outerRadius="100%" startAngle={90} endAngle={-270} barSize={11}>
                       <PolarAngleAxis type="number" domain={[0, 100]} tick={false}/>
                       <RadialBar dataKey="value" background={{ fill: 'var(--viz-grid)' }} cornerRadius={6} isAnimationActive={!reduced}/>
                     </RadialBarChart>
-                  </ForgeChart>
+                  </EidosChart>
                 </div>
                 <span className="lead v" style={{top: -22, left: 60, height: 18}}/>
                 <span className="lead h" style={{top: 50, right: -28, width: 24}}/>
@@ -179,24 +179,24 @@ export default function Page() {
           <div className="dd-card do">
             <div className="head"><Icons.check size={12}/> Do — 3–5 metrics max</div>
             <div className="body">
-              <ForgeChart height={180} padding={4}>
+              <EidosChart height={180} padding={4}>
                 <RadialBarChart data={FLEET} innerRadius="30%" outerRadius="100%" startAngle={90} endAngle={-270} barSize={12}>
                   <PolarAngleAxis type="number" domain={[0, 100]} tick={false}/>
                   <RadialBar dataKey="value" background={{ fill: 'var(--viz-grid)' }} cornerRadius={6} isAnimationActive={!reduced}/>
                 </RadialBarChart>
-              </ForgeChart>
+              </EidosChart>
             </div>
             <div className="note">3–5 rings, each with room to breathe and a corresponding legend entry. The reader matches color → metric via the legend; if you can't fit the legend, you have too many rings.</div>
           </div>
           <div className="dd-card dont">
             <div className="head"><Icons.x size={12}/> Don't — 10 squished rings</div>
             <div className="body">
-              <ForgeChart height={180} padding={4}>
+              <EidosChart height={180} padding={4}>
                 <RadialBarChart data={Array.from({ length: 10 }, (_, i) => ({ name: 'm' + i, value: 30 + i * 6, fill: `var(--viz-cat-${(i % 12) + 1})` }))} innerRadius="6%" outerRadius="100%" startAngle={90} endAngle={-270} barSize={5}>
                   <PolarAngleAxis type="number" domain={[0, 100]} tick={false}/>
                   <RadialBar dataKey="value" background={{ fill: 'var(--viz-grid)' }} isAnimationActive={!reduced}/>
                 </RadialBarChart>
-              </ForgeChart>
+              </EidosChart>
             </div>
             <div className="note">Inner rings shrink to a pixel — past 5 metrics the chart becomes a Rorschach test. Switch to a horizontal Bar chart (sorted by value) where each metric gets its own row.</div>
           </div>

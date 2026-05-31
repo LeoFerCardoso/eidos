@@ -15,21 +15,21 @@ allowed-tools: [Read, Grep]
 The authoritative catalog is `EIDOS-DS-REFERENCE.md` + `llms.txt` (root) and
 `docs/EIDOS-DS-AUTHORING.md`. This is the quick map; read those for detail.
 
-## How a page exists (registry bridge)
+## How a page exists (current — idiomatic TSX, SWC; NO Babel, NO `window` registry)
 
-DS pages are Babel-authored JSX run through a `window` registry (the app compiles with
-`next/babel` via `.babelrc` — do not remove it). A page is real only when **all three**
-are true:
-1. A leaf in `src/ds/core/nav-config.js` (`{ id, label, href }`, alphabetical inside
-   sub-groups). `id` == registry key.
-2. A module `src/ds/pages/<group>/<slug>.jsx` ending in
-   `window.PAGES['<slug>'] = Component;` (examples: `src/ds/examples/<name>.jsx` ending
-   in `window.EXAMPLES['<name>']`, nav leaf marked `external: true`).
-3. `node scripts/gen-manifest.mjs` ran (auto on `npm run dev`/`build`; or
-   `npm run gen:manifest`) → rebuilds `src/ds/runtime/manifest.generated.ts`.
+There is **no `.babelrc`**, no `window.PAGES`, no `gen-manifest`, no `manifest.generated.ts`.
+A page is real when **both** are true:
+1. A leaf in `src/ds/core/nav-config.js` (`{ id, label, href:'pages/<ds>/<slug>.html', badge }`
+   in the correct `ds:`-tagged group). `id` == file slug.
+2. A module `src/ds/migrated/<ds>/<slug>.tsx` (core: `src/ds/migrated/<slug>.tsx`) — `'use client'`,
+   **default export**, imports from `@/ds/core`. Auto-registered into `src/ds/migrated/registry.ts`
+   by `scripts/gen-migrated.mjs` (examples: `src/ds/examples/<name>.tsx` → `examples/registry.ts`
+   via `gen-examples`, nav leaf marked `external: true`).
 
-Core load order is fixed in `src/ds/core/index.ts`:
-install-globals → mocks → nav-config → icons → atoms → primitives → blocks → charts → shell.
+Regen with `node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs` (auto on `dev`/`build`),
+then **restart `next dev`** — new routes 404 until restart. `src/ds/core/index.ts` is a plain
+barrel (`export *`): mocks · icons · atoms · primitives · blocks · charts · device. No load-order
+side effects, no `window`.
 
 ## Class systems (compose, never reinvent)
 
@@ -42,9 +42,11 @@ two files ARE the system. Extend them only for a genuinely new building block.
 
 ## Eidos invariants
 
-- Single accent ember `#FF6B35` (`var(--accent)`/`var(--ember)`), at most **2×/screen**.
+- Single accent ember `#FF6B35` (`var(--accent)`/`var(--ember)`), at most **2×/screen**; dark ink on every ember fill.
 - Geist Sans (UI/body) + Geist Mono (numerics, captions, eyebrows).
-- Logical CSS properties everywhere — RTL is first-class.
+- **Typography: never hand-roll prose font sizes.** Section intros → `<Lede>`, inline code → `<Mono>`,
+  header/headings → `<Section>`/`<SubHead>`; sizes come from `--text-*` tokens (`DS-PAGE-STANDARD.md` §3.5).
+- **RTL section is required on every component page** (§3.6) — logical CSS properties everywhere; RTL is first-class.
 - Anti-AI-slop is a mandatory checklist (`${CLAUDE_PLUGIN_ROOT}/craft/anti-ai-slop.md`).
 
 ## Known gotchas (from docs/EIDOS-DS-AUTHORING.md)
@@ -59,10 +61,10 @@ two files ARE the system. Extend them only for a genuinely new building block.
 - **Multi-fire onChange** → never put `htmlFor={id}` on a `<label>` that ALSO wraps the
   input; wrapping alone is enough, or onChange fires twice.
 
-## Version bump — TWO places, must stay in sync
+## Version bump — ONE source of truth
 
-When cutting a release, update both strings in `src/ds/core/shell.jsx`:
-1. Sidebar sub-text: `<span className="sub">Design System v<X></span>`.
-2. Topbar badge: `<span className="pill ember">…v<X> · Stable</span>`.
-They are currently `v1.7.13`. Also sweep `new`/`updated` badges in `nav-config.js` so they
-reflect only what actually moved. (See the `release` command for the full flow.)
+When cutting a release, update `DS_VERSION` in **`src/lib/site.ts`** (it feeds the
+`VersionBadge` in the DocsShell topbar — `src/components/layout/version-badge.tsx`). Add a
+per-DS changelog entry in `migrated/<ds>/changelog.tsx`, and sweep `new`/`updated` badges in
+`nav-config.js` so they reflect only what actually moved. *(There is no `shell.jsx` and no
+two-string sync anymore.)* See the `release` command for the full flow.

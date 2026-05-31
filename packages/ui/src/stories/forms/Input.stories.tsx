@@ -49,7 +49,7 @@ export const WithIcons: Story = {
   args: {
     label: 'Email',
     type: 'email',
-    placeholder: 'you@forge.io',
+    placeholder: 'you@eidos.io',
     prefix: <Icons.inbox size={14} />,
     suffix: <Icons.check size={14} />,
     help: undefined,
@@ -58,7 +58,7 @@ export const WithIcons: Story = {
 
 /** Static text affix — scheme on the leading edge, domain on the trailing edge. */
 export const Affix: Story = {
-  args: { label: 'Subdomain', prefix: 'https://', suffix: '.forge.io', defaultValue: 'my-app', help: undefined },
+  args: { label: 'Subdomain', prefix: 'https://', suffix: '.eidos.io', defaultValue: 'my-app', help: undefined },
 };
 
 /** Required field — the asterisk pairs with the `required` attribute for screen readers. */
@@ -89,7 +89,7 @@ export const Disabled: Story = {
 
 /** Readonly — value is selectable but locked from editing (tokens, IDs). */
 export const Readonly: Story = {
-  args: { label: 'API key', value: 'forge_3f2a8c1d2e3b', readOnly: true, help: 'Selectable, but locked.' },
+  args: { label: 'API key', value: 'eidos_3f2a8c1d2e3b', readOnly: true, help: 'Selectable, but locked.' },
 };
 
 const Spinner = () => (

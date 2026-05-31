@@ -68,7 +68,7 @@ export const Default: Story = {
             </label>
             <input
               id="mdl-story-rename"
-              defaultValue="forge-api"
+              defaultValue="eidos-api"
               style={{
                 background: 'var(--surface)', color: 'var(--fg)',
                 border: '1px solid var(--border-strong)', borderRadius: 6,
@@ -123,7 +123,7 @@ export const SizeLg: Story = {
           open={open}
           onOpenChange={setOpen}
           size="lg"
-          title="Share forge-api"
+          title="Share eidos-api"
           desc="Anyone with the link can view the service overview and recent deploys."
           footer={
             <>
@@ -158,7 +158,7 @@ export const HeroVariant: Story = {
           onOpenChange={setOpen}
           size="lg"
           hero={<div className="mdl-hero" />}
-          title="Forge 2026.06"
+          title="Eidos 2026.06"
           desc="Cache Components, AI Gateway routing, and a faster Build Command."
           footer={
             <>
@@ -203,7 +203,7 @@ export const ScrollableBody: Story = {
           {Array.from({ length: 8 }).map((_, i) => (
             <p key={i} style={{ margin: '0 0 12px', fontSize: 15, color: 'var(--fg-muted)', lineHeight: 1.55 }}>
               <strong style={{ color: 'var(--fg)' }}>{i + 1}.</strong>{' '}
-              Forge is a substrate for production systems — its features are intended for
+              Eidos is a substrate for production systems — its features are intended for
               engineers operating real infrastructure. You agree not to use the platform to
               attack third parties, distribute malware, store unlawful content, or hammer the
               API beyond the documented per-org rate limits.
@@ -257,7 +257,7 @@ export const RTL: Story = {
           <Modal
             open={open}
             onOpenChange={setOpen}
-            title="مشاركة forge-api"
+            title="مشاركة eidos-api"
             desc="يمكن لأي شخص لديه الرابط عرض الخدمة وعمليات النشر الأخيرة."
             footer={
               <>
@@ -290,7 +290,7 @@ export const InContext: Story = {
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
           <div>
-            <div style={{ fontWeight: 600, fontSize: 15, color: 'var(--fg)' }}>forge-api</div>
+            <div style={{ fontWeight: 600, fontSize: 15, color: 'var(--fg)' }}>eidos-api</div>
             <div style={{ fontSize: 12, color: 'var(--fg-muted)', marginTop: 2 }}>identity-svc · production</div>
           </div>
           <button className="btn sm" onClick={() => setOpen(true)}>Share</button>
@@ -301,7 +301,7 @@ export const InContext: Story = {
         <Modal
           open={open}
           onOpenChange={setOpen}
-          title="Share forge-api"
+          title="Share eidos-api"
           desc="Anyone with the link can view the service overview and recent deploys."
           footer={
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>

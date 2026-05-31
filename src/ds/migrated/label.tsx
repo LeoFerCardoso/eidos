@@ -18,7 +18,7 @@ export function Demo() {
   return (
     <div className="in-field" style={{ minWidth: 320 }}>
       <Label htmlFor="email">Email</Label>
-      <Input id="email" placeholder="you@forge.com" />
+      <Input id="email" placeholder="you@eidos.com" />
     </div>
   )
 }`;
@@ -70,7 +70,7 @@ export default function LabelPage() {
         <div className="in-field" style={{ inlineSize: '36ch' }}>
           <Label htmlFor="lbl-usage">Email</Label>
           <div className="in-group">
-            <input id="lbl-usage" className="in-control" placeholder="you@forge.com" />
+            <input id="lbl-usage" className="in-control" placeholder="you@eidos.com" />
           </div>
         </div>
       </Frame>
@@ -256,7 +256,7 @@ export default function LabelPage() {
           <div className="in-field">
             <Label htmlFor="rtl-email" required>البريد الإلكتروني</Label>
             <div className="in-group">
-              <input id="rtl-email" className="in-control" placeholder="you@forge.com" />
+              <input id="rtl-email" className="in-control" placeholder="you@eidos.com" />
             </div>
             <p className="in-help">يستخدم لتسجيل الدخول.</p>
           </div>

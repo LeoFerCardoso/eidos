@@ -105,7 +105,7 @@ const App = () => {
   const payload = PROJECT_PAYLOAD[project.id] || PROJECT_PAYLOAD['space-pix'];
 
   const [text, setText] = React.useState('');
-  const [model, setModel] = React.useState('forge-sonnet-4-6');
+  const [model, setModel] = React.useState('eidos-sonnet-4-6');
   const [bannerShown, setBannerShown] = React.useState(true);
   const [starred, setStarred] = React.useState(false);
 

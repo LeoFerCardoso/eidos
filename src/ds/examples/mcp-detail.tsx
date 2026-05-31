@@ -166,7 +166,7 @@ import { FPageHeader, FShell } from './example-shell';
               <ul style={{listStyle:'none', padding: 0, margin: 0, display:'flex', flexDirection:'column', gap: 10, fontSize: 'var(--text-sm)'}}>
                 <li style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                   <span style={{color:'var(--fg-muted)'}}>Endpoint</span>
-                  <CopyChip value="mcp://forge.idp/github" label="mcp://forge.idp/github"/>
+                  <CopyChip value="mcp://eidos.idp/github" label="mcp://eidos.idp/github"/>
                 </li>
                 <li style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                   <span style={{color:'var(--fg-muted)'}}>Auth method</span>

@@ -66,7 +66,7 @@ export const Default: Story = {
           open={open}
           onOpenChange={setOpen}
           variant="danger"
-          title="Delete forge-api?"
+          title="Delete eidos-api?"
           description="This permanently removes the service, its deploy history, and 4 linked runbooks. There is no undo."
           cancelLabel="Cancel"
           confirmLabel="Delete service"
@@ -102,7 +102,7 @@ export const Destructive: Story = {
           open={open}
           onOpenChange={setOpen}
           variant="danger"
-          title="Delete forge-api?"
+          title="Delete eidos-api?"
           description="This permanently removes the service, its deploy history, and 4 linked runbooks. There is no undo."
           cancelLabel="Cancel"
           confirmLabel="Delete service"
@@ -129,7 +129,7 @@ export const Danger: Story = {
           open={open}
           onOpenChange={setOpen}
           variant="danger"
-          title="Delete forge-api?"
+          title="Delete eidos-api?"
           description="This permanently removes the service, its deploy history, and 4 linked runbooks. There is no undo."
           cancelLabel="Cancel"
           confirmLabel="Delete service"
@@ -196,7 +196,7 @@ export const Controlled: Story = {
           open={open}
           onOpenChange={setOpen}
           variant="danger"
-          title="Delete forge-api?"
+          title="Delete eidos-api?"
           description="This permanently removes the service, its deploy history, and 4 linked runbooks. There is no undo."
           cancelLabel="Cancel"
           confirmLabel="Delete service"
@@ -226,7 +226,7 @@ export const RTL: Story = {
           open={open}
           onOpenChange={setOpen}
           variant="danger"
-          title="حذف forge-api؟"
+          title="حذف eidos-api؟"
           description="سيؤدي هذا إلى إزالة الخدمة بشكل دائم، وتاريخ النشر، و٤ كتب تشغيل مرتبطة. لا يمكن التراجع."
           cancelLabel="إلغاء"
           confirmLabel="حذف الخدمة"
@@ -250,14 +250,14 @@ export const AllVariants: Story = {
         variant: 'warning',
         label: 'Discard',
         title: 'Discard unsaved changes?',
-        description: 'You have edits to forge-api that will be lost if you leave now.',
+        description: 'You have edits to eidos-api that will be lost if you leave now.',
         cancel: 'Keep editing',
         confirm: 'Discard',
       },
       {
         variant: 'danger',
         label: 'Delete',
-        title: 'Delete forge-api?',
+        title: 'Delete eidos-api?',
         description: 'This permanently removes the service and all linked runbooks. There is no undo.',
         cancel: 'Cancel',
         confirm: 'Delete service',

@@ -29,7 +29,7 @@ const meta = {
         component:
           'The API reference table used at the bottom of every component docs page. ' +
           'Rows declare prop name, type, default, and description; required props get an asterisk. ' +
-          'Prop / type / default cells render as inline code with Forge\'s semantic color system.',
+          'Prop / type / default cells render as inline code with Eidos\'s semantic color system.',
       },
     },
   },

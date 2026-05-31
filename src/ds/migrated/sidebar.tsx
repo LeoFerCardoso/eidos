@@ -50,7 +50,7 @@ const DemoNav = ({ open, children }: { open: boolean; children?: React.ReactNode
         {open && (
           <div style={{ minWidth: 0, flex: 1 }}>
             <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>Ada Lovelace</div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@forge</div>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@eidos</div>
           </div>
         )}
       </div>
@@ -204,7 +204,7 @@ export default function SidebarPage() {
                 {interactive && (
                   <div style={{ minWidth: 0, flex: 1 }}>
                     <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>Ada Lovelace</div>
-                    <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@forge</div>
+                    <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@eidos</div>
                   </div>
                 )}
               </div>
@@ -353,7 +353,7 @@ export default function SidebarPage() {
                 <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg, var(--ember), var(--ember-deep))', color: 'var(--ember-fg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: 'var(--text-xs)' }}>م ل</div>
                 <div style={{ minWidth: 0, flex: 1 }}>
                   <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}>مريم لقاء</div>
-                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>mariam@forge</div>
+                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>mariam@eidos</div>
                 </div>
               </div>
             </SidebarFooter>
@@ -408,7 +408,7 @@ export default function SidebarPage() {
                     <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg, var(--ember), var(--ember-deep))', color: 'var(--ember-fg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: 'var(--text-xs)' }}>AL</div>
                     <div style={{ minWidth: 0, flex: 1 }}>
                       <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}>Ada Lovelace</div>
-                      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@forge</div>
+                      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@eidos</div>
                     </div>
                   </div>
                 </div>

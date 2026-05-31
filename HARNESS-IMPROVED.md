@@ -10,7 +10,7 @@ You are upgrading the **Eidos** design-system harness. The doctrine is one sente
 
 > **Anything that must be true 100% of the time becomes code — a hook, a script, a schema, a generator — fronted by ONE versioned contract. If you're explaining a rule in prose that could be a test, make it a test.**
 
-Today Eidos already has the determinism *parts* (4 hooks, 5 check scripts, 5 generators, blocking `tsc`, a 5-job CI) but **no unifying spine**, and ~35% of the quality bar is still prose-only. Your job is to add the spine — `forge.contract.json` — make every clause map to a deterministic verifier, aggregate them behind `npm run eidos:verify`, gate it with a `Stop` hook, and render a generated `EIDOS-HEALTH.md`.
+Today Eidos already has the determinism *parts* (4 hooks, 5 check scripts, 5 generators, blocking `tsc`, a 5-job CI) but **no unifying spine**, and ~35% of the quality bar is still prose-only. Your job is to add the spine — `eidos.contract.json` — make every clause map to a deterministic verifier, aggregate them behind `npm run eidos:verify`, gate it with a `Stop` hook, and render a generated `EIDOS-HEALTH.md`.
 
 **Respect prior decisions. These are settled; do NOT reopen them:**
 
@@ -20,13 +20,13 @@ Today Eidos already has the determinism *parts* (4 hooks, 5 check scripts, 5 gen
 - **Distribution is source-shipped** — `packages/registry` (`registry.json` → `public/r/<name>.json`) + `packages/cli` (`eidos add`) copy source into consumers. **No changesets, no published-package model.** Versioning is the single `DS_VERSION` in `src/lib/site.ts`, bumped by `/release`. (Add a git tag per release; that is the only release-governance change.)
 - Single accent **ember `#FF6B35`** (`var(--accent)`), ≤2× per screen. **Geist Sans + Geist Mono.** Logical CSS properties (RTL is first-class). The theme axis is **{dark, light} × {ltr, rtl}** — NOT multi-accent.
 - **No Figma linkage** (DTCG export is the only bridge).
-- It's **Eidos**, not "Eidos". Name every new artifact `forge.*` / `eidos:verify` / `EIDOS-HEALTH.md`.
+- It's **Eidos**, not "Eidos". Name every new artifact `eidos.*` / `eidos:verify` / `EIDOS-HEALTH.md`.
 
 **Do NOT re-propose work already done:** `tsc --noEmit` is blocking (`next.config.mjs` `ignoreBuildErrors:false` + CI `ui:typecheck`); API tables are generated (`gen-props.mjs` → `props.generated.ts` → `<AutoPropsTable>`); a11y/visual/nav/frame-code/render checks exist; nav/migrated/examples/props/tokens are generated; `protect-generated`/`typography-scale`/`format-edited`/`session-context` hooks are wired. Reuse all of it.
 
 ---
 
-## 1. THE SPINE — `packages/registry/forge.contract.json` (+ JSON Schema)
+## 1. THE SPINE — `packages/registry/eidos.contract.json` (+ JSON Schema)
 
 Author **two files** as the single machine-readable definition of "a Eidos component is Done." Everything downstream (verify, scaffold, health, Stop hook, the reviewer agent, the workflows) reads these — nothing else encodes the bar.
 
@@ -43,14 +43,14 @@ Every Eidos component must exist coherently across four trees, kept in sync. **S
 
 ⚠️ **Source-mapping reality (do not assume 1:1 filenames):** many `@eidos/ui` exports do **not** live in a per-component file — `Chip`, `CountUp`, `Avatar`, etc. live inside **grouped barrel files** (`atoms.tsx`, `primitives.tsx`, `blocks.tsx`), while the registry keeps a **per-component** `src/forge/<name>.tsx` (split by `scripts/extract-registry.mjs`). Therefore the contract must bind registry↔source via an **explicit per-component mapping field** (`surfaces.exportFile`), never a filename-convention checksum. See `C-registry-sync` (§1.3) and §2.2.5 for the correct end-state.
 
-### 1.2 `forge.contract.schema.json` (JSON Schema, draft 2020-12) — author this
+### 1.2 `eidos.contract.schema.json` (JSON Schema, draft 2020-12) — author this
 
 The contract is a list of **clauses** + a list of **components** with their surface bindings and **waivers**.
 
 ```jsonc
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://forge.dev/forge.contract.schema.json",
+  "$id": "https://eidos.dev/eidos.contract.schema.json",
   "title": "Eidos component contract",
   "type": "object",
   "required": ["version", "clauses", "components"],
@@ -124,7 +124,7 @@ The contract is a list of **clauses** + a list of **components** with their surf
 
 **Waiver semantics (graft from C2 — enforce exactly):** when a clause for a component **fails**, `eidos:verify` checks `waivers[]` for a matching `{component, clause}` whose `expires` (if present) is in the future. If found → the clause status is **`waived`** (a distinct column/value in `reports/state.json` and `EIDOS-HEALTH.md`), with the reason surfaced. A waived clause does **not** count as a `block` fail, but it is **never** rendered as a green pass. No waiver, no skip.
 
-### 1.3 `forge.contract.json` (the authored contract) — clause skeleton
+### 1.3 `eidos.contract.json` (the authored contract) — clause skeleton
 
 Each clause maps to a verifier that **reuses an existing script** or names a **new** one (§2 lists which are new). A `verifier` value of `EXT:<npm-script>` means "shell out to that workspace npm script and parse its exit code/JSON" (graft from C2 — use it to delegate typecheck/CLI-e2e instead of reimplementing them). Author exactly these clauses:
 
@@ -163,7 +163,7 @@ Each clause maps to a verifier that **reuses an existing script** or names a **n
       "rule": "No <style> block and no inline style={{ color|fontSize|padding|margin|background }} in migrated pages; compose .ds-* + var(--token).",
       "verifier": "check-no-page-style" },                                        // NEW
     { "id": "C-frame-parses",    "surface": "docs",  "gate": "block", "appliesTo": ["component","ai","example"],
-      "rule": "Every Frame/CodeBlock/TabbedCode snippet TS-parses; a // @forge-frame:<storyId> Frame must equal its source story (no structural drift).",
+      "rule": "Every Frame/CodeBlock/TabbedCode snippet TS-parses; a // @eidos-frame:<storyId> Frame must equal its source story (no structural drift).",
       "verifier": "check-frame-code" },                                           // EXISTING (extended, §7.6)
     { "id": "C-no-slop",         "surface": "docs",  "gate": "advisory", "appliesTo": ["component","ai","example"],
       "rule": "No emoji feature-icons, no invented metrics ('10× faster', '99.9% uptime'), no filler ('lorem ipsum'), no placeholder CDNs (unsplash/placehold/picsum), no hardcoded font-family outside var(--font-*).",
@@ -216,10 +216,10 @@ Each clause maps to a verifier that **reuses an existing script** or names a **n
       "rule": "tokens/forge.tokens.json is regenerated and in sync with the CANONICAL packages/ui/styles/tokens.css (CSS is source; DTCG is export). gen-tokens source path must be repointed off the legacy src/styles/tokens.css.",
       "verifier": "gen-tokens-check" },                                           // EXISTING (add --check mode + repoint source)
     { "id": "C-contract-valid",  "surface": "cross", "gate": "block", "appliesTo": ["all"],
-      "rule": "forge.contract.json validates against forge.contract.schema.json; dsVersion == src/lib/site.ts DS_VERSION; every clause names a known verifier.",
+      "rule": "eidos.contract.json validates against eidos.contract.schema.json; dsVersion == src/lib/site.ts DS_VERSION; every clause names a known verifier.",
       "verifier": "check-contract" }                                             // NEW
   ],
-  "components": [ /* one entry per component, generated by `forge gen contract --sync` (§4.2) */ ],
+  "components": [ /* one entry per component, generated by `eidos gen contract --sync` (§4.2) */ ],
   "waivers": [
     // explicit, reviewed exceptions — each REQUIRES a reason. Example:
     { "component": "tree-view", "clause": "C-autopropstable", "reason": "external wrapper; gen-props cannot type it; hand table reviewed", "expires": "2026-09-30" }
@@ -259,7 +259,7 @@ Every new script: support `--component <name>`, `--all`, `--strict`, `--json`, a
 5. **`scripts/check-registry.mjs`** — JSON-schema-validate `registry.json` + every `public/r/*.json` against the shadcn registry-item schema; DFS `registryDependencies` for cycles + missing refs; verify every `files[].source` resolves. For `C-registry-sync`, diff `surfaces.registrySrc` against the **bound** `surfaces.exportFile` region (NOT `ui/src/<comp>.tsx == registry/src/forge/<comp>.tsx` by filename — exports live in grouped barrels). **This checksum gate is INTERIM.** The real fix (graft from the winner's stated end-state, §2.2.5) is to make `build-registry.mjs` inline directly from the canonical `packages/ui/src` source so the `src/forge/<name>.tsx` copies disappear entirely. Satisfies `C-registry / C-registry-sync`.
 6. **`scripts/check-contrast-fill.mjs`** — **targeted, not blanket axe.** Headless-screenshot each route; for elements rendered on an accent/elevated fill (`.btn`, `.pill`/`.badge` on tone, `.chip`, status dots, brand tiles, accent buttons), sample fg vs bg pixels and compute WCAG ratio; warn/fail when foreground equals/near-equals its background (the "ember-on-ember" sin) or < threshold. Keep `--fg-subtle/--fg-faint` token tiers advisory. Start advisory; graduate `gate` to `block` once clean. Satisfies `C-contrast-fill`.
 7. **`scripts/check-slop.mjs`** — consolidated anti-AI-slop lint over `src/ds/**` + `packages/ui/src/**/*.tsx`: emoji feature-icons (U+1F300+ inside `<h*>/<button>/<li>/[class*=icon]`), invented-metric regex, filler strings, placeholder-CDN hosts, hardcoded `font-family` outside `var(--font-*)`. `advisory` gate (warns, doesn't block — these are review tells). Satisfies `C-no-slop`.
-8. **`scripts/check-contract.mjs`** — validate `forge.contract.json` against `forge.contract.schema.json`; assert `dsVersion` == `src/lib/site.ts` `DS_VERSION`; assert every clause `verifier` resolves to a known script or `EXT:<npm-script>`. Satisfies `C-contract-valid`. The contract can never silently drift from the verifier set.
+8. **`scripts/check-contract.mjs`** — validate `eidos.contract.json` against `eidos.contract.schema.json`; assert `dsVersion` == `src/lib/site.ts` `DS_VERSION`; assert every clause `verifier` resolves to a known script or `EXT:<npm-script>`. Satisfies `C-contract-valid`. The contract can never silently drift from the verifier set.
 
 ### 2.2.5 Registry-sync end-state (the real fix, not the checksum)
 
@@ -277,7 +277,7 @@ Author **`scripts/eidos-verify.mjs`**, wired as `"eidos:verify": "node scripts/e
 ```
 eidos:verify [--component <slug> | --all] [--surface docs|export|story|registry|cross|tokens] [--clause C-id] [--strict] [--dry] [--json] [--fix]
 ```
-- Runs `check-contract` first, then reads `forge.contract.json`. For each in-scope component × applicable clause (`appliesTo`), it imports the clause verifier's `run({component})` and executes it **once**, memoizing per-route checks so render/a11y/visual/contrast run per page, not per clause. `EXT:<npm-script>` clauses shell out and parse exit code/JSON. `--dry` resolves & prints the plan without executing. `--fix` runs only the safe generators (`gen-*`) then re-verifies — it never edits component logic.
+- Runs `check-contract` first, then reads `eidos.contract.json`. For each in-scope component × applicable clause (`appliesTo`), it imports the clause verifier's `run({component})` and executes it **once**, memoizing per-route checks so render/a11y/visual/contrast run per page, not per clause. `EXT:<npm-script>` clauses shell out and parse exit code/JSON. `--dry` resolves & prints the plan without executing. `--fix` runs only the safe generators (`gen-*`) then re-verifies — it never edits component logic.
 - Applies **waivers**: a failing clause with a matching non-expired waiver becomes status `waived` (never green).
 - Emits **`reports/state.json`** keyed `component → clause → { status: pass|partial|fail|waived, gate, detail }`, plus a top-level surface roll-up.
 - **Exit code: nonzero iff any `gate:"block"` clause is `fail`** (not `waived`) for an in-scope component. `advisory` failures are reported, never block.
@@ -319,17 +319,17 @@ CI: in the existing `docs` job, replace the loose per-step checks with one block
 
 ### 4.1 Upgrade `.claude/skills/new-component`
 
-Today `new-component` emits **only** the docs page. Rewrite it (and/or add `scripts/forge-gen.mjs`) to emit **all four surfaces at once**, with slots defined by the contract:
+Today `new-component` emits **only** the docs page. Rewrite it (and/or add `scripts/eidos-gen.mjs`) to emit **all four surfaces at once**, with slots defined by the contract:
 
 1. `src/ds/migrated/<ds>/<slug>.tsx` — full DS-PAGE-STANDARD skeleton seeded from `buttons.tsx` (gold ref): every required `<SubHead meta>` incl. `a11y`, the RTL `<Frame dir="rtl">`, the `.ana`/`.ana-list` anatomy stub, `.dd-grid`, `<AutoPropsTable component="…"/>`.
 2. `packages/ui/src/<comp>.tsx` (or insert into the correct grouped barrel) — typed stub composing `.ds-*` classes; **add to the `packages/ui/src/index.ts` barrel** (this is a shared file — use the **single-integrator pattern** from `_promote-batch.js`, never parallel barrel edits, never git-worktrees-per-component; the shared barrel/`ds.css` would conflict).
 3. `packages/ui/src/stories/<group>/<Comp>.stories.tsx` — CSF3 `Meta`/`StoryObj`, `tags:['autodocs']`, one story per variant + a States story, theme + RTL decorators.
 4. `packages/registry/registry.json` entry (correct `$schema`, `registryDependencies`, `files[].source→target`) + run `build-registry.mjs` → `public/r/<slug>.json`.
-5. Append the component to `forge.contract.json` `components[]` with its four `surfaces` bound (incl. `exportFile`/`registrySrc`), then run `eidos:verify --component <slug> --dry` to confirm the slots resolve.
+5. Append the component to `eidos.contract.json` `components[]` with its four `surfaces` bound (incl. `exportFile`/`registrySrc`), then run `eidos:verify --component <slug> --dry` to confirm the slots resolve.
 
-### 4.2 `forge gen` CLI (`scripts/forge-gen.mjs`)
+### 4.2 `eidos gen` CLI (`scripts/eidos-gen.mjs`)
 
-`forge gen component <slug> --ds <core|charts|ai|idp|patterns|mobile|blocks>` → emits the 4 stubs above. `forge gen contract --sync` → rebuilds `components[]` from what actually exists on disk (so the contract self-heals as a backstop, but the scaffold is the happy path). Keep skills (not plop/turbo gen) as the mechanism — no new codegen dependency.
+`eidos gen component <slug> --ds <core|charts|ai|idp|patterns|mobile|blocks>` → emits the 4 stubs above. `eidos gen contract --sync` → rebuilds `components[]` from what actually exists on disk (so the contract self-heals as a backstop, but the scaffold is the happy path). Keep skills (not plop/turbo gen) as the mechanism — no new codegen dependency.
 
 ### 4.3 Done = green gate (encode this everywhere)
 
@@ -354,7 +354,7 @@ Generated by `eidos:verify` (and the standalone `"eidos:health": "node scripts/e
 (✅ pass · ❌ block-fail · ⚠ advisory-fail · 〰 waived)
 
 ## Debt (block-fails first, then advisory; auto-ranked: fewest clauses to green first)
-- pill · C-story (block): no CSF3 story → run `forge gen` story stub / `restructure-component pill`
+- pill · C-story (block): no CSF3 story → run `eidos gen` story stub / `restructure-component pill`
 - …
 
 ## Waivers (reviewed exceptions; * = expiring within 30 days)
@@ -398,7 +398,7 @@ Add the **`Stop` hook** (the genuinely missing gate) and one PreToolUse no-page-
 - **`.claude/hooks/no-page-style.mjs`** (PreToolUse) — fast in-edit twin of `check-no-page-style.mjs`; **exit 2 blocks** when the edit introduces `<style>` or inline color/size/spacing in a migrated/ui `.tsx`. Whitelists `tokens.css`/`ds.css`/`ai.css`. Message: "Compose a `.ds-*` class or extend `tokens.css`; no per-page style." Do **not** make it a blanket hex/px ban.
 - **`.claude/hooks/verify-on-stop.mjs`** (Stop) — derive touched components from the session's edited files (`git diff --name-only`), run `eidos:verify --component <each> --strict`; if any `block` clause fails, return the failing clause list so the model must fix before ending. Scope to changed components only (cheap).
 - **Elevate `typography-scale.mjs`**: the lede check moves from warn-only to **block** (now formally owned by clause `C-lede`); keep the off-scale-font warning but route known offenders through the contract's waivers rather than the hardcoded BANNED set.
-- **`session-context.mjs`**: stop restating enforceable invariants; instead inject "the bar is `forge.contract.json`; a component is Done iff `eidos:verify` is green" + the current `reports/state.json` summary line.
+- **`session-context.mjs`**: stop restating enforceable invariants; instead inject "the bar is `eidos.contract.json`; a component is Done iff `eidos:verify` is green" + the current `reports/state.json` summary line.
 
 ---
 
@@ -411,7 +411,7 @@ The end-state: the **story is the single source of the live demo**, so docs-page
 3. **Theme matrix = {dark, light} × {ltr, rtl}** using the existing `preview.ts` theme + RTL decorators — NOT multi-accent (single ember accent stays invariant). `check-stories.mjs` asserts a story renders in all four; `check-visual.mjs` can shoot per-story once coverage is complete.
 4. **Taxonomy lock**: story `title` must match its `stories/<group>/` folder against `preview.ts` `storySort.order`, which `check-stories.mjs` **reads from `preview.ts`** (the real order: `Introduction → Primitives → Forms → Elements → Blocks → Overlays → Device → AI → Icons → Docs`; **no Charts group** — never hardcode the list). Prevents orphaned sidebar entries.
 5. **N-stories-per-variant**: `C-story-matrix` (advisory) counts variant×state stories; close the gaps via `restructure-component` / `promote-batch`.
-6. **Derive-don't-duplicate** (graft from C2 + C3): add `scripts/gen-frame-from-story.mjs` (or extend `gen-migrated`) so a docs `<Frame>` marked `// @forge-frame:<storyId>` **emits its code-string from the story's source**. `check-frame-code.mjs` then upgrades from "parses" toward **"snippet ≡ story source"** (`C-frame-parses`), killing *structural* drift, not just parse drift. Make the CSF3 story the canonical demo; the docs `<Frame>` derives from it.
+6. **Derive-don't-duplicate** (graft from C2 + C3): add `scripts/gen-frame-from-story.mjs` (or extend `gen-migrated`) so a docs `<Frame>` marked `// @eidos-frame:<storyId>` **emits its code-string from the story's source**. `check-frame-code.mjs` then upgrades from "parses" toward **"snippet ≡ story source"** (`C-frame-parses`), killing *structural* drift, not just parse drift. Make the CSF3 story the canonical demo; the docs `<Frame>` derives from it.
 7. **Behavior (roadmap, not v1 contract):** Storybook `play()` interaction tests for the few logic-heavy components (Combobox, Calendar, Select) — add as a future `C-story-play` clause; do **not** introduce a blanket vitest coverage %.
 
 ---
@@ -422,8 +422,8 @@ Thread the contract through the **existing multi-agent workflows** (graft from C
 
 | Phase | Work | Mechanism (existing/new) | **Exit gate** |
 |---|---|---|---|
-| **0 · Spine** | Author `forge.contract.schema.json` + `forge.contract.json` + `docs/ds-page-standard.json` + `check-contract`; bind existing scripts to clauses; repoint `gen-tokens` source | new files | `npm run eidos:verify -- --all --dry` resolves every clause to a runnable verifier; `check-contract` passes (`dsVersion` == `site.ts`) |
-| **1 · Audit** | Build `components[]` + parity matrix | `consolidation-audit` skill → `forge gen contract --sync` | `reports/state.json` exists; `EIDOS-HEALTH.md` renders |
+| **0 · Spine** | Author `eidos.contract.schema.json` + `eidos.contract.json` + `docs/ds-page-standard.json` + `check-contract`; bind existing scripts to clauses; repoint `gen-tokens` source | new files | `npm run eidos:verify -- --all --dry` resolves every clause to a runnable verifier; `check-contract` passes (`dsVersion` == `site.ts`) |
+| **1 · Audit** | Build `components[]` + parity matrix | `consolidation-audit` skill → `eidos gen contract --sync` | `reports/state.json` exists; `EIDOS-HEALTH.md` renders |
 | **2 · New verifiers + aggregate** | Author the 8 new scripts + 2 new hooks; refactor existing `check-*` to export `run()`; extend `check-nav`/`check-frame-code`/`gen-tokens` | §2.2, §6 | `eidos:verify --all` runs all clauses (block + advisory) and emits per-component clause results |
 | **3 · Hooks & CI** | Add `no-page-style.mjs` (Pre) + `verify-on-stop.mjs` (Stop); CI `docs` job runs `eidos:verify --all --strict` + `eidos:health`, uploads artifacts; thin `CLAUDE.md` | §6 | CI green; hooks fire locally on a deliberate violation |
 | **4 · Close block-fails** | Fix the ~38 structural a11y bugs (switch labels, scrollable-region focus, aria-prohibited-attr), missing RTL frames, page-style, sections | `restructure-component`, `ds-a11y-rtl-review` | `eidos:verify --all --strict` exits 0 on `block` clauses |
@@ -438,7 +438,7 @@ Thread the contract through the **existing multi-agent workflows** (graft from C
 
 - **`check-registry.mjs`** (`C-registry`/`C-registry-sync`) — see §2.2.5; ships the interim checksum, drives toward inline-from-source.
 - **CLI dep-completeness guard** (graft from C3) — in `packages/cli/src/index.mjs` `cmdAdd`, **after `resolveGraph`**, assert that all transitive `registryDependencies` are satisfied before writing files (error if `pill` is added but `icons` is absent; keep the existing cycle-detection at resolution time). Add a unit case to `packages/cli/test/`. Wired to `C-cli-install` via `EXT:cli:test`.
-- **`/release`** also `git tag vX.Y.Z` after bumping `DS_VERSION` (consumer pin/diff; already recommended in `docs/DISTRIBUTION.md`) **and** sets `forge.contract.json.dsVersion` to match (asserted by `check-contract`). **No changesets.**
+- **`/release`** also `git tag vX.Y.Z` after bumping `DS_VERSION` (consumer pin/diff; already recommended in `docs/DISTRIBUTION.md`) **and** sets `eidos.contract.json.dsVersion` to match (asserted by `check-contract`). **No changesets.**
 
 ---
 
@@ -446,7 +446,7 @@ Thread the contract through the **existing multi-agent workflows** (graft from C
 
 - **Add reviewer agent `.claude/agents/contract-verifier.md`** — clean isolated context, **runs only `eidos:verify` and reports clause-by-clause from `reports/state.json`**; never edits, never self-certifies. Builder agents (`design-system-engineer`, `frontend-engineer`) do the fixes. Bind the existing `_promote-batch` single-integrator pattern for all shared-file edits (`index.ts` barrel, `ds.css`) — do **not** use git worktrees.
 - **`/verify` command** → `eidos:verify --component <slug> --strict` then prints the `EIDOS-HEALTH` row. **Update `/verify-routes`** to call `eidos:verify --surface docs`. **Add `/eidos-health`** = `eidos:verify --all` then surface the `EIDOS-HEALTH.md` debt table. **Update `/release`** per §9.
-- **Thin `CLAUDE.md` (judgment only).** Remove every enforceable invariant that is now a clause (no-page-`<style>`, lede budget, section order, a11y/RTL/anatomy/Do-Don't/AutoPropsTable presence, 4-surface parity, off-scale fonts) and replace with: *"The bar is `packages/registry/forge.contract.json`. A component is Done iff `npm run eidos:verify -- --component <slug> --strict` exits 0 — the green gate beats your opinion. Non-negotiables (contrast, ember-2×, Geist, logical CSS, source-shipped, CSS-authored tokens) are enforced by hooks + verifiers; obey, don't restate. Use judgment only for what no test can decide: voice, density, hierarchy, when to consolidate vs promote, when to add a component."* Keep the DS-family map, the dev/restart footguns, the routing ritual, and pointers to `forge.contract.json` / `DS-PAGE-STANDARD.md` / `DESIGN.md` / `PROJECT-LOG.md`.
+- **Thin `CLAUDE.md` (judgment only).** Remove every enforceable invariant that is now a clause (no-page-`<style>`, lede budget, section order, a11y/RTL/anatomy/Do-Don't/AutoPropsTable presence, 4-surface parity, off-scale fonts) and replace with: *"The bar is `packages/registry/eidos.contract.json`. A component is Done iff `npm run eidos:verify -- --component <slug> --strict` exits 0 — the green gate beats your opinion. Non-negotiables (contrast, ember-2×, Geist, logical CSS, source-shipped, CSS-authored tokens) are enforced by hooks + verifiers; obey, don't restate. Use judgment only for what no test can decide: voice, density, hierarchy, when to consolidate vs promote, when to add a component."* Keep the DS-family map, the dev/restart footguns, the routing ritual, and pointers to `eidos.contract.json` / `DS-PAGE-STANDARD.md` / `DESIGN.md` / `PROJECT-LOG.md`.
 - **Back-fill `docs/adr/` lightly** for the big settled calls (source-shipped distribution; CSS-authored tokens; no-cva class composition; single ember accent) so contract clauses can cite an ADR — but `PROJECT-LOG.md` already records them, so this is low priority.
 
 ---
@@ -466,10 +466,10 @@ Thread the contract through the **existing multi-agent workflows** (graft from C
 
 ## 12. Acceptance criteria for THIS upgrade
 
-1. `packages/registry/forge.contract.json` + `forge.contract.schema.json` + `docs/ds-page-standard.json` exist; the contract validates against the schema; `dsVersion` == `site.ts`; every clause names a runnable verifier; waivers carry a non-empty reason and optional expiry.
+1. `packages/registry/eidos.contract.json` + `eidos.contract.schema.json` + `docs/ds-page-standard.json` exist; the contract validates against the schema; `dsVersion` == `site.ts`; every clause names a runnable verifier; waivers carry a non-empty reason and optional expiry.
 2. `npm run eidos:verify -- --all --strict` runs all clauses (memoized per route), emits `reports/state.json` with `pass|partial|fail|waived` per clause, regenerates `EIDOS-HEALTH.md`, and exits nonzero only on `block` fails (waived ≠ fail).
 3. The 8 new scripts + 2 new hooks exist and are bound to clauses; existing `check-*` export `run()`; CI's `docs` job calls `eidos:verify --all --strict` + `eidos:health` and uploads `reports/state.json` + `EIDOS-HEALTH.md`; the `Stop` hook blocks finishing on a red gate; the PreToolUse matcher remains `Edit|Write|MultiEdit`.
-4. `new-component` / `forge gen` emit all 4 surfaces so a new component starts parity-complete; the CLI dep-completeness guard + test exist.
+4. `new-component` / `eidos gen` emit all 4 surfaces so a new component starts parity-complete; the CLI dep-completeness guard + test exist.
 5. `gen-tokens` reads the canonical `packages/ui/styles/tokens.css` (or asserts parity with the legacy path); the registry-sync gate binds via `surfaces.exportFile`, with the inline-from-source end-state tracked.
 6. **No** cva-in-components, Style-Dictionary-as-source, changesets, MDX, pnpm, shadcn primitives, multi-accent theming, or Figma linkage was introduced. `tokens.css` remains the token source; distribution remains source-shipped.
 

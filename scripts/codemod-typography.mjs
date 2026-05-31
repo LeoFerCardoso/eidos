@@ -1,5 +1,5 @@
 // One-off codemod: snap doc-prose font sizes in migrated pages onto the
-// 9-step Forge type scale (Foundations/Typography). Context-aware per line:
+// 9-step Eidos type scale (Foundations/Typography). Context-aware per line:
 //   • a section-intro line (carries a 68ch/64ch measure) → t-body (15)
 //   • everything else (card body, captions) → t-small (13)
 //   • inline-code mono const (12) → t-small (13)

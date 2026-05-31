@@ -13,28 +13,33 @@ allowed-tools: Read, Edit, Write, Bash, Grep, Glob
 # Docs Page Skill
 
 Build a documentation page as a real page in the Eidos DS site, composing the
-DS shell and prose primitives — never per-page `<style>`. The page registers
-itself in `window.PAGES['<slug>']` like every other DS page.
+DS shell and prose primitives — never per-page `<style>`. The page is a
+`'use client'` module with a **default export**, auto-registered into
+`src/ds/migrated/registry.ts` like every other DS page.
 
 ## Required pre-reading
 
-1. `component-page` SKILL — the 3-file ritual, JSX page structure, and the
+1. `component-page` SKILL — the route ritual, TSX page structure, and the
    shared hard rules. A docs page is the prose sibling of a component page.
 2. `../../EIDOS-DS-REFERENCE.md` + `../../llms.txt` — confirm the prose, code,
    callout/alert, and table classes you'll use already exist.
 3. `../../design-systems/forge/DESIGN.md` and
    `../../craft/{typography,rtl-and-bidi,accessibility-baseline,color}.md`.
-4. An existing page under `src/ds/pages/get-started/` or
-   `src/ds/pages/foundations/` as a template for prose-heavy layout.
+4. An existing prose-heavy page under `src/ds/migrated/` (and the gold reference
+   `src/ds/migrated/buttons.tsx`) as a template.
 
-## The 3-file ritual (registering the page)
+## The route ritual (registering the page)
 
-1. Append `{ id, label, href }` in `src/ds/core/nav-config.js` — correct group
-   (Get Started / Foundations / Resources for prose), correct order. `id` MUST
-   match the page slug.
-2. Create `src/ds/pages/<group>/<slug>.jsx` that registers
-   `window.PAGES['<slug>'] = Component` (model on an existing page IIFE).
-3. Run `npm run gen:manifest` so the route map regenerates.
+1. Append `{ id, label, href: 'pages/<ds>/<slug>.html', badge }` in
+   `src/ds/core/nav-config.js` — correct `ds:`-tagged group, correct order. `id`
+   MUST match the page slug.
+2. Create `src/ds/migrated/<ds>/<slug>.tsx` (core pages
+   `src/ds/migrated/<slug>.tsx`) — `'use client'`, **default export**, imports
+   primitives from `@/ds/core`. Section intros use `<Lede>`, inline code uses
+   `<Mono>` (both from `@/ds/core`) — no hand-rolled font sizes.
+3. Regenerate with `node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs` —
+   auto-run by `npm run dev`/`build` — then RESTART `next dev` (new routes 404
+   until restart).
 
 ## Page structure
 

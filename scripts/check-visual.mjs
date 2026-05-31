@@ -29,7 +29,7 @@ const slug = (r) => (r === '/' ? 'home' : r.replace(/^\//, '').replace(/\//g, '-
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const getJSON = (p) => new Promise((res, rej) => http.get({ host: '127.0.0.1', port: PORT, path: p }, (r) => { let d = ''; r.on('data', (c) => (d += c)); r.on('end', () => res(JSON.parse(d))); }).on('error', rej));
 mkdirSync(BASE_DIR, { recursive: true });
-const chrome = spawn(CHROME, [`--remote-debugging-port=${PORT}`, '--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=1', '--no-first-run', '--user-data-dir=/tmp/forge-visual', 'about:blank']);
+const chrome = spawn(CHROME, [`--remote-debugging-port=${PORT}`, '--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=1', '--no-first-run', '--user-data-dir=/tmp/eidos-visual', 'about:blank']);
 
 async function main() {
   let targets;

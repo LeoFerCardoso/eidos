@@ -128,7 +128,7 @@ import { FKpi, FPageHeader, FSection, FShell, IconBubble, useQueryParam } from '
           subtitle={`${svc.lang} service. Owned by the ${svc.tribe} tribe.`}
           meta={
             <>
-              <CopyChip value={`git@forge:${svc.tribe.toLowerCase()}/${svc.id}`} label={`forge/${svc.tribe.toLowerCase()}/${svc.id}`}/>
+              <CopyChip value={`git@eidos:${svc.tribe.toLowerCase()}/${svc.id}`} label={`eidos/${svc.tribe.toLowerCase()}/${svc.id}`}/>
               <span className="chip">v{svc.version}</span>
               <span className="chip">{svc.lang}</span>
               <span className="chip ok">p95 {svc.p95}ms</span>

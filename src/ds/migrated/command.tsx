@@ -233,7 +233,7 @@ export default function CommandPage() {
                 padding: '10px 16px', borderBottom: '1px solid var(--border)',
                 background: 'var(--surface)',
               }}>
-                <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--fg)' }}>forge-api</span>
+                <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--fg)' }}>eidos-api</span>
                 <div style={{ flex: 1 }} />
                 <button
                   className="ds-topbar-search"

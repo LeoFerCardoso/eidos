@@ -28,7 +28,7 @@ const meta = {
     status: 'ready',
     disabled: false,
     invalid: false,
-    placeholder: 'Ask Forge AI anything…',
+    placeholder: 'Ask Eidos AI anything…',
     elevated: false,
   },
   argTypes: {
@@ -51,7 +51,7 @@ export const Interactive: Story = {
   render: () => {
     function Demo() {
       const [text, setText] = React.useState('');
-      const [model, setModel] = React.useState('forge-sonnet-4-6');
+      const [model, setModel] = React.useState('eidos-sonnet-4-6');
       const [status, setStatus] = React.useState<'ready' | 'submitted' | 'streaming' | 'error'>('ready');
 
       const handleSubmit = (value: string) => {
@@ -70,7 +70,7 @@ export const Interactive: Story = {
           onStop={() => setStatus('ready')}
           modelValue={model}
           onModelChange={setModel}
-          placeholder="Ask Forge AI anything…"
+          placeholder="Ask Eidos AI anything…"
         />
       );
     }
@@ -85,7 +85,7 @@ export const Typing: Story = {
       const [text, setText] = React.useState(
         "I'm seeing a p99 spike on identity-svc — anything in the last deploy?",
       );
-      const [model, setModel] = React.useState('forge-opus-4-7');
+      const [model, setModel] = React.useState('eidos-opus-4-7');
       return (
         <PromptInput
           status="ready"
@@ -117,7 +117,7 @@ export const Streaming: Story = {
           <PromptInput
             status={streaming ? 'streaming' : 'ready'}
             placeholder={streaming ? 'Generating response…' : 'Ask anything…'}
-            modelValue="forge-sonnet-4-6"
+            modelValue="eidos-sonnet-4-6"
             onModelChange={() => {}}
             onStop={() => setStreaming(false)}
           />
@@ -151,7 +151,7 @@ export const Invalid: Story = {
 export const WithModelSelector: Story = {
   render: () => {
     function Demo() {
-      const [model, setModel] = React.useState('forge-sonnet-4-6');
+      const [model, setModel] = React.useState('eidos-sonnet-4-6');
       return (
         <PromptInput
           modelValue={model}
@@ -178,7 +178,7 @@ export const WithAttachments: Story = {
           value="Two screenshots + the log. Walk me through it."
           attachments={files}
           onRemoveAttachment={id => setFiles(f => f.filter(x => x.id !== id))}
-          modelValue="forge-opus-4-7"
+          modelValue="eidos-opus-4-7"
           onModelChange={() => {}}
           placeholder="What do you see in these files?"
           rows={2}
@@ -258,7 +258,7 @@ export const WithActionsMenu: Story = {
           value={text}
           onChange={setText}
           placeholder="Type a message, or use + to add context…"
-          modelValue="forge-sonnet-4-6"
+          modelValue="eidos-sonnet-4-6"
           onModelChange={() => {}}
           actions={[
             { id: 'upload', label: 'Upload images or files', description: 'PNG, JPG, PDF, logs — up to 20 MB', icon: 'upload' },
@@ -281,7 +281,7 @@ export const Enhanced: Story = {
   render: () => {
     function Demo() {
       const [text, setText] = React.useState('');
-      const [model, setModel] = React.useState('forge-sonnet-4-6');
+      const [model, setModel] = React.useState('eidos-sonnet-4-6');
       const [picked, setPicked] = React.useState<string | null>(null);
       return (
         <PromptInput
@@ -323,14 +323,14 @@ export const InContext: Story = {
   render: () => {
     function Demo() {
       const [text, setText] = React.useState('');
-      const [model, setModel] = React.useState('forge-sonnet-4-6');
+      const [model, setModel] = React.useState('eidos-sonnet-4-6');
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <Conversation title="identity-svc · incident 0421">
             <Message from="user" meta="You · 2:14 PM">
               p99 on identity-svc jumped to 1.8s after the 14:02 deploy. What changed?
             </Message>
-            <Message from="assistant" meta="Forge AI · 2:14 PM">
+            <Message from="assistant" meta="Eidos AI · 2:14 PM">
               The 14:02 deploy added a synchronous token-refresh call on the hot path.
               Drop me the trace and I&rsquo;ll confirm the regression.
             </Message>
@@ -343,7 +343,7 @@ export const InContext: Story = {
             modelValue={model}
             onModelChange={setModel}
             elevated
-            placeholder="Reply to Forge AI…"
+            placeholder="Reply to Eidos AI…"
             footerHint="AI can make mistakes — please double-check important answers."
           />
         </div>

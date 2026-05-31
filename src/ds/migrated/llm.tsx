@@ -314,7 +314,7 @@ export default function LLM() {
             <span style={{fontSize: 'var(--text-base)', fontWeight: 600}}>API integrations</span>
           </div>
           <div style={{color:'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.5}}>
-            Fetch <code style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-subtle)'}}>forge-design-system/llms.txt</code> from the docs build and prepend it to the system prompt of every Eidos-adjacent agent.
+            Fetch <code style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-subtle)'}}>eidos-design-system/llms.txt</code> from the docs build and prepend it to the system prompt of every Eidos-adjacent agent.
           </div>
         </div>
       </div>
@@ -344,9 +344,9 @@ Rules:
       {/* The actual file */}
       <SubHead meta="the file">llms.txt — full contents</SubHead>
       <Lede up>
-        Click <code style={{fontFamily:'var(--font-mono)', color:'var(--fg-subtle)', fontSize: 'var(--text-sm)'}}>Copy</code> on the frame below to grab the whole file. It&apos;s also served at <code style={{fontFamily:'var(--font-mono)', color:'var(--fg-subtle)', fontSize: 'var(--text-sm)'}}>/forge-design-system/llms.txt</code> so you can curl it from a build script.
+        Click <code style={{fontFamily:'var(--font-mono)', color:'var(--fg-subtle)', fontSize: 'var(--text-sm)'}}>Copy</code> on the frame below to grab the whole file. It&apos;s also served at <code style={{fontFamily:'var(--font-mono)', color:'var(--fg-subtle)', fontSize: 'var(--text-sm)'}}>/eidos-design-system/llms.txt</code> so you can curl it from a build script.
       </Lede>
-      <CodeBlock label="forge-design-system/llms.txt" lang="markdown" code={LLMS_TXT}/>
+      <CodeBlock label="eidos-design-system/llms.txt" lang="markdown" code={LLMS_TXT}/>
 
       {/* Rules block */}
       <SubHead meta="ground rules">Conventions the model must follow</SubHead>

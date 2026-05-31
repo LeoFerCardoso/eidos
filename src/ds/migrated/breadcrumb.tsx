@@ -17,7 +17,7 @@ export function Demo() {
     <Breadcrumb
       items={[
         { label: 'Services', href: '/services' },
-        { label: 'forge-api', href: '/services/forge-api' },
+        { label: 'eidos-api', href: '/services/eidos-api' },
         { label: 'v2.14.0' },
       ]}
     />
@@ -28,8 +28,8 @@ const CHEVRON_CODE = `<Breadcrumb
   separator="chevron"
   items={[
     { label: 'Services', href: '/services' },
-    { label: 'forge-api', href: '/services/forge-api' },
-    { label: 'Deploys', href: '/services/forge-api/deploys' },
+    { label: 'eidos-api', href: '/services/eidos-api' },
+    { label: 'Deploys', href: '/services/eidos-api/deploys' },
     { label: 'v2.14.0' },
   ]}
 />`;
@@ -38,7 +38,7 @@ const SLASH_CODE = `<Breadcrumb
   separator="slash"
   items={[
     { label: 'Services', href: '/services' },
-    { label: 'forge-api', href: '/services/forge-api' },
+    { label: 'eidos-api', href: '/services/eidos-api' },
     { label: 'Settings' },
   ]}
 />`;
@@ -47,7 +47,7 @@ const DOT_CODE = `<Breadcrumb
   separator="dot"
   items={[
     { label: 'Services', href: '/services' },
-    { label: 'forge-api', href: '/services/forge-api' },
+    { label: 'eidos-api', href: '/services/eidos-api' },
     { label: 'Settings' },
   ]}
 />`;
@@ -56,7 +56,7 @@ const COMPACT_CODE = `<Breadcrumb
   size="sm"
   items={[
     { label: 'Services', href: '/services' },
-    { label: 'forge-api', href: '/services/forge-api' },
+    { label: 'eidos-api', href: '/services/eidos-api' },
     { label: 'Settings' },
   ]}
 />`;
@@ -65,7 +65,7 @@ const COLLAPSE_CODE = `<Breadcrumb
   maxItems={3}
   items={[
     { label: 'Services', href: '/services' },
-    { label: 'forge-api', href: '/services/forge-api' },
+    { label: 'eidos-api', href: '/services/eidos-api' },
     { label: 'Environments', href: '...' },
     { label: 'Production', href: '...' },
     { label: 'Deploys', href: '...' },
@@ -78,7 +78,7 @@ const ICON_CODE = `import { Home } from "lucide-react"
 <Breadcrumb
   items={[
     { label: 'Services', href: '/services', icon: <Home size={13} /> },
-    { label: 'forge-api', href: '/services/forge-api' },
+    { label: 'eidos-api', href: '/services/eidos-api' },
     { label: 'Deploys' },
   ]}
 />`;
@@ -88,7 +88,7 @@ const RTL_CODE = `<div dir="rtl">
     label="مسار التنقّل"
     items={[
       { label: 'الخدمات', href: '/services', icon: <Home size={13} /> },
-      { label: 'forge-api', href: '/services/forge-api' },
+      { label: 'eidos-api', href: '/services/eidos-api' },
       { label: 'عمليات النشر' },
     ]}
   />
@@ -106,7 +106,7 @@ function PageHeader({ width }: { width: number }) {
         maxItems={collapse ? 2 : undefined}
         items={[
           { label: 'Services',    href: '/services',    icon: <Home size={13} /> },
-          { label: 'forge-api',   href: '/services/forge-api' },
+          { label: 'eidos-api',   href: '/services/eidos-api' },
           { label: 'Environments',href: '/.../environments' },
           { label: 'Production',  href: '/.../production' },
           { label: 'v2.14.0' },
@@ -121,24 +121,24 @@ function PageHeader({ width }: { width: number }) {
 // Deep five-level trail for the responsive page-header demo.
 const HEADER_ITEMS = [
   { label: 'Services', href: '/services' },
-  { label: 'forge-api', href: '/services/forge-api' },
-  { label: 'Environments', href: '/services/forge-api/environments' },
-  { label: 'Production', href: '/services/forge-api/environments/production' },
+  { label: 'eidos-api', href: '/services/eidos-api' },
+  { label: 'Environments', href: '/services/eidos-api/environments' },
+  { label: 'Production', href: '/services/eidos-api/environments/production' },
   { label: 'v2.14.0' },
 ];
 
 const BASE_ITEMS = [
   { label: 'Services', href: '/services' },
-  { label: 'forge-api', href: '/services/forge-api' },
+  { label: 'eidos-api', href: '/services/eidos-api' },
   { label: 'v2.14.0' },
 ];
 
 const LONG_ITEMS = [
   { label: 'Services', href: '/services' },
-  { label: 'forge-api', href: '/services/forge-api' },
-  { label: 'Environments', href: '/services/forge-api/environments' },
-  { label: 'Production', href: '/services/forge-api/environments/production' },
-  { label: 'Deploys', href: '/services/forge-api/environments/production/deploys' },
+  { label: 'eidos-api', href: '/services/eidos-api' },
+  { label: 'Environments', href: '/services/eidos-api/environments' },
+  { label: 'Production', href: '/services/eidos-api/environments/production' },
+  { label: 'Deploys', href: '/services/eidos-api/environments/production/deploys' },
   { label: 'v2.14.0' },
 ];
 
@@ -147,7 +147,7 @@ const INSTALL_TABS = [
   { label: 'npm',    code: 'npx eidos@latest add breadcrumb',       lang: 'bash' },
   { label: 'yarn',   code: 'yarn dlx eidos@latest add breadcrumb',  lang: 'bash' },
   { label: 'bun',    code: 'bunx eidos@latest add breadcrumb',      lang: 'bash' },
-  { label: 'shadcn', code: 'npx shadcn@latest add https://forge.equifax.dev/r/breadcrumb.json', lang: 'bash' },
+  { label: 'shadcn', code: 'npx shadcn@latest add https://eidos.equifax.dev/r/breadcrumb.json', lang: 'bash' },
 ];
 
 // ── Responsive page-header demo (signature "In context" move) ──────────────────
@@ -343,22 +343,22 @@ export default function Page() {
       <Frame label="chevron — default, directional" code={CHEVRON_CODE}>
         <Breadcrumb separator="chevron" items={[
           { label: 'Services', href: '/services' },
-          { label: 'forge-api', href: '/services/forge-api' },
-          { label: 'Deploys', href: '/services/forge-api/deploys' },
+          { label: 'eidos-api', href: '/services/eidos-api' },
+          { label: 'Deploys', href: '/services/eidos-api/deploys' },
           { label: 'v2.14.0' },
         ]} />
       </Frame>
       <Frame label="slash — non-directional" code={SLASH_CODE}>
         <Breadcrumb separator="slash" items={[
           { label: 'Services', href: '/services' },
-          { label: 'forge-api', href: '/services/forge-api' },
+          { label: 'eidos-api', href: '/services/eidos-api' },
           { label: 'Settings' },
         ]} />
       </Frame>
       <Frame label="dot — non-directional" code={DOT_CODE}>
         <Breadcrumb separator="dot" items={[
           { label: 'Services', href: '/services' },
-          { label: 'forge-api', href: '/services/forge-api' },
+          { label: 'eidos-api', href: '/services/eidos-api' },
           { label: 'Settings' },
         ]} />
       </Frame>
@@ -372,7 +372,7 @@ export default function Page() {
       <Frame label="sm — for page-header bars" code={COMPACT_CODE}>
         <Breadcrumb size="sm" items={[
           { label: 'Services', href: '/services' },
-          { label: 'forge-api', href: '/services/forge-api' },
+          { label: 'eidos-api', href: '/services/eidos-api' },
           { label: 'Settings' },
         ]} />
       </Frame>
@@ -393,7 +393,7 @@ export default function Page() {
       <Frame label="leading icon on the root crumb" code={ICON_CODE}>
         <Breadcrumb items={[
           { label: 'Services', href: '/services', icon: <Icons.home size={13} /> },
-          { label: 'forge-api', href: '/services/forge-api' },
+          { label: 'eidos-api', href: '/services/eidos-api' },
           { label: 'Deploys' },
         ]} />
       </Frame>
@@ -444,8 +444,8 @@ export default function Page() {
             separator="chevron"
             items={[
               { label: 'الخدمات', href: '/services', icon: <Icons.home size={13} /> },
-              { label: 'forge-api', href: '/services/forge-api' },
-              { label: 'عمليات النشر', href: '/services/forge-api/deploys' },
+              { label: 'eidos-api', href: '/services/eidos-api' },
+              { label: 'عمليات النشر', href: '/services/eidos-api/deploys' },
               { label: 'v2.14.0' },
             ]}
           />
@@ -468,7 +468,7 @@ export default function Page() {
               <Breadcrumb
                 items={[
                   { label: 'Services', href: '/services', icon: <Icons.home size={13} /> },
-                  { label: 'forge-api', href: '/services/forge-api' },
+                  { label: 'eidos-api', href: '/services/eidos-api' },
                   { label: 'Deploys' },
                 ]}
               />
@@ -496,7 +496,7 @@ export default function Page() {
           <div className="body" style={{padding: 14}}>
             <Breadcrumb items={[
               { label: 'Services', href: '/services' },
-              { label: 'forge-api', href: '/services/forge-api' },
+              { label: 'eidos-api', href: '/services/eidos-api' },
               { label: 'Logs' },
             ]} />
           </div>
@@ -526,8 +526,8 @@ export default function Page() {
           <div className="body" style={{padding: 14}}>
             <Breadcrumb items={[
               { label: 'Services', href: '/services' },
-              { label: 'forge-api', href: '/services/forge-api' },
-              { label: 'Settings', href: '/services/forge-api/settings' },
+              { label: 'eidos-api', href: '/services/eidos-api' },
+              { label: 'Settings', href: '/services/eidos-api/settings' },
             ]} />
           </div>
           <div className="note">The last crumb should always be the current page rendered as plain text. Linking to where you already are confuses screen readers and breaks aria-current semantics.</div>

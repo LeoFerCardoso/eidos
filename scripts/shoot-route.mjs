@@ -11,7 +11,7 @@ const out = process.argv[3] || `/tmp/route${route.replace(/\//g, '-')}.png`;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const getJSON = (p) => new Promise((res, rej) => http.get({ host: '127.0.0.1', port: PORT, path: p }, (r) => { let d = ''; r.on('data', (c) => d += c); r.on('end', () => res(JSON.parse(d))); }).on('error', rej));
 
-const chrome = spawn(CHROME, [`--remote-debugging-port=${PORT}`, '--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=2', '--window-size=1280,1200', '--user-data-dir=/tmp/forge-route', 'about:blank'], { stdio: 'ignore' });
+const chrome = spawn(CHROME, [`--remote-debugging-port=${PORT}`, '--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=2', '--window-size=1280,1200', '--user-data-dir=/tmp/eidos-route', 'about:blank'], { stdio: 'ignore' });
 let targets;
 for (let i = 0; i < 50; i++) { try { targets = await getJSON('/json/list'); break; } catch { await sleep(300); } }
 const ws = new WebSocket(targets.find((t) => t.type === 'page').webSocketDebuggerUrl);

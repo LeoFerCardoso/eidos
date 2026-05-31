@@ -7,7 +7,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'padded',
-    docs: { description: { component: 'Multi-line text entry — a native <textarea> in the Forge field shell (label / helper / invalid), with three sizes, an error tone, and an optional live character counter.' } },
+    docs: { description: { component: 'Multi-line text entry — a native <textarea> in the Eidos field shell (label / helper / invalid), with three sizes, an error tone, and an optional live character counter.' } },
   },
   args: { label: 'Incident summary', placeholder: 'What happened, impact, and current status…', rows: 4 },
   argTypes: {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Icons } from './icons';
-// Forge DS — Combobox.
+// Eidos DS — Combobox.
 //
 // Searchable single/multi-select with a fixed-position popover panel that
 // escapes parent overflow:hidden (e.g. .ds-frame). Keyboard navigation:

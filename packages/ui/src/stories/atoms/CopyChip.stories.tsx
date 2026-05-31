@@ -56,9 +56,9 @@ export const WithLabel: Story = {
 export const Truncated: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-      <CopyChip value="ghcr.io/forge/payments-api:a3f8e4c2d9b817f6e4d8e3b0e2af1a06c8d7b5a9" label="a3f8e4c" />
+      <CopyChip value="ghcr.io/eidos/payments-api:a3f8e4c2d9b817f6e4d8e3b0e2af1a06c8d7b5a9" label="a3f8e4c" />
       <CopyChip value="sk_live_8x4Pr••••••••••••" label="sk_live_8x4···" />
-      <CopyChip value="ns: forge-prod-us-east-2-aurora-cluster-01" label="forge-prod-us-east-2" />
+      <CopyChip value="ns: eidos-prod-us-east-2-aurora-cluster-01" label="eidos-prod-us-east-2" />
     </div>
   ),
 };
@@ -89,7 +89,7 @@ export const Copied: Story = {
           <CopyChip value="try clicking me" />
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }} onClick={() => setLast('catalog://agents/code-reviewer')}>
-          <CopyChip value="forge://catalog/agents/code-reviewer-v2" label="catalog://agents/code-reviewer" />
+          <CopyChip value="eidos://catalog/agents/code-reviewer-v2" label="catalog://agents/code-reviewer" />
         </div>
         <span aria-live="polite" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--fg-muted)' }}>
           {last ? `Copied: ${last}` : 'Click a chip to copy — note the brief success state.'}

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-// Story-parity: the docs page (src/ds/migrated/idp/tree-view.tsx) documents ForgeTree —
+// Story-parity: the docs page (src/ds/migrated/idp/tree-view.tsx) documents EidosTree —
 // the @pierre/trees wrapper at src/components/pierre-tree.tsx — NOT the nodes-based
 // @eidos/ui TreeView. We document the SAME surface here: a path-first file tree with a
 // git-status lane, fuzzy search, drag-and-drop, context menus, flatten-empty-directories,
-// window chrome and RTL. ForgeTree loads via next/dynamic({ ssr:false }) and depends on
+// window chrome and RTL. EidosTree loads via next/dynamic({ ssr:false }) and depends on
 // @pierre/trees, so it renders client-side (Storybook supports this).
-import { ForgeTree } from '@/components/pierre-tree';
+import { EidosTree } from '@/components/pierre-tree';
 
 // ── Mirrors the page's REPO fixture — a realistic monorepo slice with many file
 //    types so the per-language icon colours are tangible. Path-first: directories
@@ -59,7 +59,7 @@ const REPO_GIT = [
 
 // Domain taxonomy — service-and-tier hierarchy, same engine, no file extensions.
 const SERVICES = [
-  'Payments/forge-api',
+  'Payments/eidos-api',
   'Payments/pix-router',
   'Payments/fraud-engine',
   'Identity/identity-svc',
@@ -67,7 +67,7 @@ const SERVICES = [
   'Identity/kyc-orchestrator',
 ];
 const SERVICES_META: Record<string, string> = {
-  'Payments/forge-api': 'T1',
+  'Payments/eidos-api': 'T1',
   'Payments/pix-router': 'T1',
   'Payments/fraud-engine': 'T1',
   'Identity/identity-svc': 'T1',
@@ -79,18 +79,18 @@ const EXPAND_SRC = ['src', 'src/components'];
 
 const meta = {
   title: 'Elements/TreeView',
-  component: ForgeTree,
+  component: EidosTree,
   tags: ['autodocs'],
   parameters: {
     layout: 'padded',
     docs: {
       description: {
         component:
-          'ForgeTree — the @pierre/trees engine re-skinned to Forge (the same surface the ' +
+          'EidosTree — the @pierre/trees engine re-skinned to Eidos (the same surface the ' +
           'docs page documents). Feed it a flat list of canonical `paths`; directories are ' +
           'inferred from the segments. `gitStatus` paints the status lane (colour + letter), ' +
           '`search` + `searchMode` filter by name, `dragAndDrop` + `lockedPaths` move rows, ' +
-          '`contextMenu` + `contextMenuTrigger` mount the Forge menu, `flattenEmptyDirectories` ' +
+          '`contextMenu` + `contextMenuTrigger` mount the Eidos menu, `flattenEmptyDirectories` ' +
           'collapses single-child chains, `chrome` frames it as an IDE panel, and `dir="rtl"` ' +
           'mirrors the layout. Selection accent and focus ring are ember; the model, ' +
           'virtualization and keyboard a11y are the library’s.',
@@ -130,7 +130,7 @@ const meta = {
     initialSearchQuery: { control: 'text', description: 'Pre-populate the search field (e.g. to demo a mode at rest).' },
     dragAndDrop: { control: 'boolean', description: 'Enable drag-to-move between folders and to the root.' },
     lockedPaths: { control: false, description: 'Paths that cannot be dragged (canDrag=false); each also gets a "locked" tag.' },
-    contextMenu: { control: 'boolean', description: 'Mount the Forge context menu (new file/folder, rename, delete).' },
+    contextMenu: { control: 'boolean', description: 'Mount the Eidos context menu (new file/folder, rename, delete).' },
     contextMenuTrigger: {
       control: 'select',
       options: ['both', 'right-click', 'button'],
@@ -144,7 +144,7 @@ const meta = {
     },
     height: { control: false, description: 'Fixed panel height; rows virtualize and scroll inside it.' },
   },
-} satisfies Meta<typeof ForgeTree>;
+} satisfies Meta<typeof EidosTree>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -153,7 +153,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: (args) => (
     <div style={{ maxWidth: 420 }}>
-      <ForgeTree {...args} />
+      <EidosTree {...args} />
     </div>
   ),
 };
@@ -169,7 +169,7 @@ export const GitStatus: Story = {
   },
   render: (args) => (
     <div style={{ maxWidth: 420 }}>
-      <ForgeTree {...args} />
+      <EidosTree {...args} />
     </div>
   ),
 };
@@ -183,19 +183,19 @@ export const Search: Story = {
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--fg-muted)', marginBlockEnd: 8 }}>
           hide-non-matches
         </p>
-        <ForgeTree {...args} searchMode="hide-non-matches" defaultExpanded={EXPAND_SRC} />
+        <EidosTree {...args} searchMode="hide-non-matches" defaultExpanded={EXPAND_SRC} />
       </div>
       <div>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--fg-muted)', marginBlockEnd: 8 }}>
           collapse-non-matches
         </p>
-        <ForgeTree {...args} searchMode="collapse-non-matches" defaultExpanded={EXPAND_SRC} />
+        <EidosTree {...args} searchMode="collapse-non-matches" defaultExpanded={EXPAND_SRC} />
       </div>
       <div>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--fg-muted)', marginBlockEnd: 8 }}>
           expand-matches
         </p>
-        <ForgeTree {...args} searchMode="expand-matches" defaultExpanded={EXPAND_SRC} />
+        <EidosTree {...args} searchMode="expand-matches" defaultExpanded={EXPAND_SRC} />
       </div>
     </div>
   ),
@@ -213,7 +213,7 @@ export const DragAndDrop: Story = {
   },
   render: (args) => (
     <div style={{ maxWidth: 460 }}>
-      <ForgeTree {...args} />
+      <EidosTree {...args} />
     </div>
   ),
 };
@@ -230,7 +230,7 @@ export const ContextMenu: Story = {
   },
   render: (args) => (
     <div style={{ maxWidth: 420 }}>
-      <ForgeTree {...args} />
+      <EidosTree {...args} />
     </div>
   ),
 };
@@ -246,7 +246,7 @@ export const FlattenEmptyDirectories: Story = {
   },
   render: (args) => (
     <div style={{ maxWidth: 420 }}>
-      <ForgeTree {...args} />
+      <EidosTree {...args} />
     </div>
   ),
 };
@@ -264,7 +264,7 @@ export const ServiceCatalog: Story = {
   },
   render: (args) => (
     <div style={{ maxWidth: 420 }}>
-      <ForgeTree {...args} />
+      <EidosTree {...args} />
     </div>
   ),
 };
@@ -285,7 +285,7 @@ export const RTL: Story = {
   },
   render: (args) => (
     <div style={{ maxWidth: 420 }}>
-      <ForgeTree {...args} />
+      <EidosTree {...args} />
     </div>
   ),
 };

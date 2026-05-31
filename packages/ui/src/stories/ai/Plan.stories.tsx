@@ -143,7 +143,7 @@ export const LiveTicking: Story = {
  */
 export const InContext: Story = {
   render: () => (
-    <Message from="assistant" meta="Forge AI · just now" variant="plain">
+    <Message from="assistant" meta="Eidos AI · just now" variant="plain">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 480 }}>
         <Plan
           title="Plan"

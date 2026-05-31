@@ -28,14 +28,14 @@ were removed, not archived.
 ├── commands/            # /commit, /open-pr, /release, /verify-routes
 ├── hooks/               # session-context, protect-generated, format-edited (.mjs)
 ├── output-styles/       # eidos-reviewer
-├── design-systems/      # forge/ — the single canonical brand
+├── design-systems/      # eidos/ — the single canonical brand
 └── craft/               # 8 brand-agnostic craft rulebooks
 ```
 
 ## The three axes (the engineering model)
 
 - **skills/** — *what* to build (artifact shape + workflow).
-- **design-systems/** — the *brand*: `forge/DESIGN.md` is the one canonical brand.
+- **design-systems/** — the *brand*: `eidos/DESIGN.md` is the one canonical brand.
 - **craft/** — *universal* rules a competent designer applies regardless of brand.
 
 A skill reads `design-systems/forge/DESIGN.md` + the craft sections it needs + the catalog

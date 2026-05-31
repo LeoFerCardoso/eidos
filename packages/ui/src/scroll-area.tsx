@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cn } from './lib/utils';
 
-// Forge DS — Scroll Area.
+// Eidos DS — Scroll Area.
 //
 // A bounded scrollable region with thin, auto-hiding, themeable scrollbars.
 // Uses native browser scroll — no custom scrollbar track/thumb DOM nodes.

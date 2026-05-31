@@ -2,7 +2,7 @@ import * as React from 'react';
 import { cn } from './lib/utils';
 
 // ═══════════════════════════════════════════════════════════════════════════
-// InputGroup — Forge DS
+// InputGroup — Eidos DS
 //
 // Composes the existing .in-group / .in-addon / .in-control CSS system that
 // is already used by Input and NativeSelect. No parallel .ig-* classes.
@@ -121,7 +121,7 @@ const InputGroupCtx = React.createContext<InputGroupContextValue>({
  * ```tsx
  * <InputGroup>
  *   <InputAddon kind="text" id="scheme-desc">https://</InputAddon>
- *   <input className="in-control" aria-describedby="scheme-desc" placeholder="forge.example.com" />
+ *   <input className="in-control" aria-describedby="scheme-desc" placeholder="eidos.example.com" />
  *   <InputAddon kind="button" accent>Copy</InputAddon>
  * </InputGroup>
  * ```

@@ -8,7 +8,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'padded',
-    docs: { description: { component: 'A binary setting that takes effect immediately — a native checkbox with `role="switch"` and the Forge toggle visual. Use for instant on/off, not for form submission choices (use Checkbox there).' } },
+    docs: { description: { component: 'A binary setting that takes effect immediately — a native checkbox with `role="switch"` and the Eidos toggle visual. Use for instant on/off, not for form submission choices (use Checkbox there).' } },
   },
   args: { label: 'Auto-deploy on merge', size: 'md' },
   argTypes: {

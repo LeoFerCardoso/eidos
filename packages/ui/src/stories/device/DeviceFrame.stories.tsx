@@ -115,7 +115,7 @@ export const InContext: Story = {
             padding: '12px 18px',
             fontFamily: 'var(--font)', fontSize: 17, fontWeight: 600, color: 'var(--fg)',
           }}>
-            Forge Mobile
+            Eidos Mobile
           </div>
         </PhoneTop>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--fg-muted)', fontSize: 13 }}>

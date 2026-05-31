@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, ForgeChart, ForgeTooltipContent, useChartColors, forgeGridProps, forgeXAxisProps, forgeYAxisProps, Lede, Recharts, Mono, Skeleton } from '@/ds/core';
+import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, EidosChart, EidosTooltipContent, useChartColors, eidosGridProps, eidosXAxisProps, eidosYAxisProps, Lede, Recharts, Mono, Skeleton } from '@/ds/core';
   const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Cell } = Recharts;
 
   // Mirrors the Eidos motion convention (see bar chart / atoms CountUp / tooltip):
@@ -56,8 +56,8 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Fo
   ];
 
   const USAGE = `import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
-import { ForgeChart, ForgeTooltipContent, useChartColors,
-         forgeGridProps, forgeXAxisProps, forgeYAxisProps } from "@/charts"
+import { EidosChart, EidosTooltipContent, useChartColors,
+         eidosGridProps, eidosXAxisProps, eidosYAxisProps } from "@/charts"
 
 // Histogram = bar chart with barCategoryGap={0} and pre-bucketed data.
 export function Demo({ data }) {
@@ -65,16 +65,16 @@ export function Demo({ data }) {
   // Gate the grow-up enter animation on the OS reduced-motion setting.
   const reduced = useReducedMotion()
   return (
-    <ForgeChart title="Latency distribution" meta="ms" height={260}>
+    <EidosChart title="Latency distribution" meta="ms" height={260}>
       <BarChart data={data} barCategoryGap={0}>
-        <CartesianGrid {...forgeGridProps}/>
-        <XAxis dataKey="bucket" {...forgeXAxisProps}/>
-        <YAxis {...forgeYAxisProps}/>
-        <Tooltip content={<ForgeTooltipContent/>}/>
+        <CartesianGrid {...eidosGridProps}/>
+        <XAxis dataKey="bucket" {...eidosXAxisProps}/>
+        <YAxis {...eidosYAxisProps}/>
+        <Tooltip content={<EidosTooltipContent/>}/>
         <Bar dataKey="count" fill={c[0]} stroke="var(--bg)" strokeWidth={1}
              isAnimationActive={!reduced}/>
       </BarChart>
-    </ForgeChart>
+    </EidosChart>
   )
 }`;
 
@@ -90,67 +90,67 @@ export default function Page() {
         <SubHead meta="hello world">Usage</SubHead>
         <Lede>Reach for a categorical bar chart when the X axis is a set of discrete things (services, teams) rather than numeric ranges. Buckets must be contiguous and the count axis must start at zero — a truncated axis makes a peaked distribution look flat, or a fat tail disappear.</Lede>
         <Frame label="latency distribution · request count per ms bucket" code={USAGE}>
-          <ForgeChart title="Latency distribution" subtitle="forge-api" meta="ms · last 1h" height={260}>
+          <EidosChart title="Latency distribution" subtitle="eidos-api" meta="ms · last 1h" height={260}>
             <BarChart data={LATENCY} barCategoryGap={0} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="bucket" {...forgeXAxisProps} interval={0}/>
-              <YAxis {...forgeYAxisProps}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="bucket" {...eidosXAxisProps} interval={0}/>
+              <YAxis {...eidosYAxisProps}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Bar dataKey="count" name="count" fill={c[0]} stroke="var(--bg)" strokeWidth={1} isAnimationActive={!reduced}/>
             </BarChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
         <Lede>The thin background-colour stroke between bars gives the eye a hairline divider while keeping the shape continuous — the trick that distinguishes a histogram from a categorical bar chart.</Lede>
 
         <SubHead meta="3 variants">Variants</SubHead>
         <Frame label="with p95 reference line">
-          <ForgeChart title="Latency · p95 marker" subtitle="forge-api" meta="ms" height={260}>
+          <EidosChart title="Latency · p95 marker" subtitle="eidos-api" meta="ms" height={260}>
             <BarChart data={LATENCY} barCategoryGap={0} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="bucket" {...forgeXAxisProps} interval={0}/>
-              <YAxis {...forgeYAxisProps}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="bucket" {...eidosXAxisProps} interval={0}/>
+              <YAxis {...eidosYAxisProps}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <ReferenceLine x="150–200" stroke="var(--warning)" strokeDasharray="4 4" label={{ value: 'p95', fill: 'var(--warning)', fontSize: 10, position: 'top' }}/>
               <Bar dataKey="count" fill={c[0]} stroke="var(--bg)" strokeWidth={1} isAnimationActive={!reduced}/>
             </BarChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <Frame label="payload sizes · log-style buckets">
-          <ForgeChart title="Payload size distribution" subtitle="forge-api" meta="KB" height={240}>
+          <EidosChart title="Payload size distribution" subtitle="eidos-api" meta="KB" height={240}>
             <BarChart data={SIZES} barCategoryGap={0} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="bucket" {...forgeXAxisProps} interval={0}/>
-              <YAxis {...forgeYAxisProps}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="bucket" {...eidosXAxisProps} interval={0}/>
+              <YAxis {...eidosYAxisProps}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Bar dataKey="count" fill={c[1]} stroke="var(--bg)" strokeWidth={1} isAnimationActive={!reduced}/>
             </BarChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <Frame label="status-tinted · tail flagged as outliers">
-          <ForgeChart title="PR review time" subtitle="forge org" meta="hours" height={240}>
+          <EidosChart title="PR review time" subtitle="eidos org" meta="hours" height={240}>
             <BarChart data={PR} barCategoryGap={0} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="bucket" {...forgeXAxisProps} interval={0}/>
-              <YAxis {...forgeYAxisProps}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="bucket" {...eidosXAxisProps} interval={0}/>
+              <YAxis {...eidosYAxisProps}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Bar dataKey="count" stroke="var(--bg)" strokeWidth={1} isAnimationActive={!reduced}>
                 {PR.map((p, i) => (
                   <Cell key={i} fill={i >= 5 ? 'var(--warning)' : c[0]}/>
                 ))}
               </Bar>
             </BarChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <SubHead meta="2 states">States</SubHead>
         <Lede>A distribution chart has two states besides the populated shape. While the window aggregates, hold the chart frame with a skeleton so the layout never jumps; when a window genuinely has no observations, swap the plot for an empty state rather than drawing flat bars that read as real zeros.</Lede>
         <div className="ds-grid cols-2">
           <Frame label="loading · aggregating the window">
-            <div className="forge-chart">
+            <div className="eidos-chart">
               <div className="fc-head">
-                <div className="fc-head-text"><span className="fc-title">Latency distribution</span><span className="fc-subtitle">forge-api</span></div>
+                <div className="fc-head-text"><span className="fc-title">Latency distribution</span><span className="fc-subtitle">eidos-api</span></div>
                 <span className="fc-meta">ms · last 1h</span>
               </div>
               <div className="fc-body">
@@ -164,9 +164,9 @@ export default function Page() {
             </div>
           </Frame>
           <Frame label="empty · no observations in window">
-            <div className="forge-chart">
+            <div className="eidos-chart">
               <div className="fc-head">
-                <div className="fc-head-text"><span className="fc-title">Latency distribution</span><span className="fc-subtitle">forge-api</span></div>
+                <div className="fc-head-text"><span className="fc-title">Latency distribution</span><span className="fc-subtitle">eidos-api</span></div>
                 <span className="fc-meta">ms · last 1h</span>
               </div>
               <div className="fc-body">
@@ -206,15 +206,15 @@ export default function Page() {
         <SubHead meta="RTL · العربية">RTL</SubHead>
         <Frame label='dir="rtl" — bucket labels and tooltip align right; the distribution shape does not mirror'>
           <div dir="rtl" style={{width: '100%'}}>
-            <ForgeChart title="توزيع زمن الاستجابة" subtitle="forge-api" meta="مللي ثانية · آخر ساعة" height={240}>
+            <EidosChart title="توزيع زمن الاستجابة" subtitle="eidos-api" meta="مللي ثانية · آخر ساعة" height={240}>
               <BarChart data={LATENCY} barCategoryGap={0} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-                <CartesianGrid {...forgeGridProps}/>
-                <XAxis dataKey="bucket" {...forgeXAxisProps} interval={0}/>
-                <YAxis {...forgeYAxisProps}/>
-                <Tooltip content={<ForgeTooltipContent/>}/>
+                <CartesianGrid {...eidosGridProps}/>
+                <XAxis dataKey="bucket" {...eidosXAxisProps} interval={0}/>
+                <YAxis {...eidosYAxisProps}/>
+                <Tooltip content={<EidosTooltipContent/>}/>
                 <Bar dataKey="count" name="عدد" fill={c[0]} stroke="var(--bg)" strokeWidth={1} isAnimationActive={!reduced}/>
               </BarChart>
-            </ForgeChart>
+            </EidosChart>
           </div>
         </Frame>
         <Lede>Under <Mono>dir="rtl"</Mono> the chart title and tooltip labels align to the right. The bucket axis and distribution silhouette do not mirror — the ordered ranges (0–25ms, 25–50ms…) represent a numeric magnitude, not a reading direction.</Lede>
@@ -226,11 +226,11 @@ export default function Page() {
             <div className="ana" style={{display:'flex', justifyContent:'center'}}>
               <div className="stage" style={{position:'relative'}} aria-hidden="true">
                 <div style={{width:340, height:180}}>
-                  <ForgeChart height={180}>
+                  <EidosChart height={180}>
                     <BarChart data={LATENCY} barCategoryGap={0} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-                      <CartesianGrid {...forgeGridProps}/>
-                      <XAxis dataKey="bucket" {...forgeXAxisProps} tick={false}/>
-                      <YAxis {...forgeYAxisProps}/>
+                      <CartesianGrid {...eidosGridProps}/>
+                      <XAxis dataKey="bucket" {...eidosXAxisProps} tick={false}/>
+                      <YAxis {...eidosYAxisProps}/>
                       <ReferenceLine x="150–200" stroke="var(--warning)" strokeDasharray="4 4"/>
                       <Bar dataKey="count" stroke="var(--bg)" strokeWidth={1} isAnimationActive={!reduced}>
                         {LATENCY.map((p, i) => (
@@ -238,7 +238,7 @@ export default function Page() {
                         ))}
                       </Bar>
                     </BarChart>
-                  </ForgeChart>
+                  </EidosChart>
                 </div>
                 <span className="lead h" style={{top: 100, left: -28, width: 24}}/>
                 <span className="lead v" style={{bottom: -22, left: '50%', height: 18, transform:'translateX(-50%)'}}/>
@@ -267,28 +267,28 @@ export default function Page() {
           <div className="dd-card do">
             <div className="head"><Icons.check size={12}/> Do — zero gap, hairline stroke</div>
             <div className="body">
-              <ForgeChart height={140} padding={8}>
+              <EidosChart height={140} padding={8}>
                 <BarChart data={LATENCY} barCategoryGap={0} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
-                  <CartesianGrid {...forgeGridProps}/>
-                  <XAxis dataKey="bucket" {...forgeXAxisProps} interval={0} hide/>
-                  <YAxis {...forgeYAxisProps}/>
+                  <CartesianGrid {...eidosGridProps}/>
+                  <XAxis dataKey="bucket" {...eidosXAxisProps} interval={0} hide/>
+                  <YAxis {...eidosYAxisProps}/>
                   <Bar dataKey="count" fill={c[0]} stroke="var(--bg)" strokeWidth={1} isAnimationActive={!reduced}/>
                 </BarChart>
-              </ForgeChart>
+              </EidosChart>
             </div>
             <div className="note">Continuous silhouette = continuous variable. The reader sees the distribution shape, not 12 individual bars. Use <code style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)'}}>barCategoryGap={'{0}'}</code> + a hairline stroke in <code style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)'}}>--bg</code> color.</div>
           </div>
           <div className="dd-card dont">
             <div className="head"><Icons.x size={12}/> Don't — leave a categorical gap</div>
             <div className="body">
-              <ForgeChart height={140} padding={8}>
+              <EidosChart height={140} padding={8}>
                 <BarChart data={LATENCY} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
-                  <CartesianGrid {...forgeGridProps}/>
-                  <XAxis dataKey="bucket" {...forgeXAxisProps} interval={0} hide/>
-                  <YAxis {...forgeYAxisProps}/>
+                  <CartesianGrid {...eidosGridProps}/>
+                  <XAxis dataKey="bucket" {...eidosXAxisProps} interval={0} hide/>
+                  <YAxis {...eidosYAxisProps}/>
                   <Bar dataKey="count" fill={c[0]} radius={[3, 3, 0, 0]} maxBarSize={20} isAnimationActive={!reduced}/>
                 </BarChart>
-              </ForgeChart>
+              </EidosChart>
             </div>
             <div className="note">Gaps imply categories. If your X axis is a discrete set (services, teams, regions) use the regular Bar chart. Histograms exist specifically because the gap between buckets has no meaning.</div>
           </div>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge AI — the prose surface + streaming caret.
+// Eidos AI — the prose surface + streaming caret.
 //
 // `.ai-prose` is the editorial body that rendered model markdown lands in
 // (headings, lists, inline code, links, tables, blockquotes, figures). The

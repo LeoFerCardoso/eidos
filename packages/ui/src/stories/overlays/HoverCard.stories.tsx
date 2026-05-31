@@ -31,7 +31,7 @@ const ProfileContent = () => (
     <div style={{ flex: 1, minWidth: 0 }}>
       <div style={{ fontWeight: 600, color: 'var(--fg)', fontSize: 15 }}>Ada Lovelace</div>
       <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-muted)', marginTop: 2 }}>
-        @ada · Forge Platform
+        @ada · Eidos Platform
       </div>
       <div style={{ fontSize: 13, color: 'var(--fg-muted)', marginTop: 8, lineHeight: 1.5 }}>
         Working on the deploy pipeline. Reachable on #platform-eng.
@@ -48,7 +48,7 @@ const LinkContent = () => (
   <>
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
       <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--fg-faint)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-        docs.forge.dev
+        docs.eidos.dev
       </span>
     </div>
     <div style={{ fontWeight: 600, color: 'var(--fg)', fontSize: 15, marginBottom: 4 }}>
@@ -192,7 +192,7 @@ export const LinkPreview: Story = {
             onClick={(e) => e.preventDefault()}
             style={{ color: 'var(--ember)', textDecoration: 'underline' }}
           >
-            docs.forge.dev/deploy
+            docs.eidos.dev/deploy
           </a>
         }
       >
@@ -310,7 +310,7 @@ export const RTL: Story = {
             <AvatarCircle initials="AL" />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontWeight: 600, color: 'var(--fg)', fontSize: 15 }}>Ada Lovelace</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-muted)', marginTop: 2 }}>@ada · Forge</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-muted)', marginTop: 2 }}>@ada · Eidos</div>
               <div style={{ fontSize: 13, color: 'var(--fg-muted)', marginTop: 8, lineHeight: 1.5 }}>
                 تعمل على مسار النشر. متاحة على ‎#platform-eng.
               </div>
@@ -360,7 +360,7 @@ export const InContext: Story = {
                 <AvatarCircle initials={initials} size={36} />
                 <div>
                   <div style={{ fontWeight: 600, color: 'var(--fg)', fontSize: 15 }}>{name}</div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-muted)', marginTop: 2 }}>{handle} · Forge Platform</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-muted)', marginTop: 2 }}>{handle} · Eidos Platform</div>
                 </div>
               </div>
             </HoverCard>

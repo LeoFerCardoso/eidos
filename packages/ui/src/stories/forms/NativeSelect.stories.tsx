@@ -16,7 +16,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A native `<select>` in the Forge field shell. Zero JS — keyboard support, ' +
+          'A native `<select>` in the Eidos field shell. Zero JS — keyboard support, ' +
           'form submission, and screen-reader semantics come from the browser. ' +
           'Use when the list is short (≤ 7 items), plain text, and system look-and-feel ' +
           'is acceptable. For icons, descriptions, or groups, use the custom `Select`.',

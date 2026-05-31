@@ -31,8 +31,8 @@ import { FPageHeader, FSection, FShell, IconBubble } from './example-shell';
   };
 
   const LINES = [
-    { id: 1, time: t(240), level: 'info', message: '→ forge-runner v4.18.2 acquired token for identity-svc' },
-    { id: 2, time: t(238), level: 'info', message: 'Cloning git@forge:identity/identity-svc.git @ refs/heads/main' },
+    { id: 1, time: t(240), level: 'info', message: '→ eidos-runner v4.18.2 acquired token for identity-svc' },
+    { id: 2, time: t(238), level: 'info', message: 'Cloning git@eidos:identity/identity-svc.git @ refs/heads/main' },
     { id: 3, time: t(231), level: 'debug', message: 'commit f7a1c2b — Camila Tanaka — feat: biometric step-up for high-risk auth' },
     { id: 4, time: t(225), level: 'info', message: 'Starting build · target=node20 · arch=arm64' },
     { id: 5, time: t(199), level: 'info', message: 'Build complete · artifact identity-svc-4.18.2.tgz (28.4 MiB)' },
@@ -73,7 +73,7 @@ import { FPageHeader, FSection, FShell, IconBubble } from './example-shell';
         subtitle="Promoting identity-svc v4.18.2 from staging to production. Canary observation window opens at Ring 2."
         meta={
           <>
-            <CopyChip value="git@forge:identity/identity-svc@f7a1c2b" label="f7a1c2b"/>
+            <CopyChip value="git@eidos:identity/identity-svc@f7a1c2b" label="f7a1c2b"/>
             <OwnerPill person={author} role="Identity"/>
             <span className="chip">Started <RelativeTime value={new Date(NOW - 4 * 60 * 1000)}/></span>
             <span className="chip ok">→ production</span>

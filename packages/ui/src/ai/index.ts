@@ -1,4 +1,4 @@
-// Forge AI — component layer barrel.
+// Eidos AI — component layer barrel.
 //
 // The AI sub-DS composes the base Core primitives (Avatar, CodeBlock,
 // CopyButton, DataTable, JSONInspector, TreeView, LogViewer, DiffViewer,

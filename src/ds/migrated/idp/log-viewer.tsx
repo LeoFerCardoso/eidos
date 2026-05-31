@@ -7,7 +7,7 @@ import { AutoPropsTable, Icons, Frame, Section, SubHead, TabbedCode, installTabs
 
 // Synthetic IDP-shaped lines.
 const LINES = [
-  { time: '14:32:01.142', level: 'info',  message: 'POST /v1/deploys/forge-api → 202 (req=a3f9)' },
+  { time: '14:32:01.142', level: 'info',  message: 'POST /v1/deploys/eidos-api → 202 (req=a3f9)' },
   { time: '14:32:01.412', level: 'info',  message: 'Provisioning canary cohort · 3/3 pods ready' },
   { time: '14:32:02.092', level: 'debug', message: 'feature-flag canary-blue evaluated true (rule=ring-3)' },
   { time: '14:32:02.870', level: 'warn',  message: 'p95 latency 187ms above 30d baseline 142ms' },
@@ -20,7 +20,7 @@ const LINES = [
   { time: '14:32:06.001', level: 'warn',  message: 'PII scrubber dropped 3 fields from audit event #2241' },
   { time: '14:32:06.402', level: 'fatal', message: 'OOM: memory budget exceeded on canary-blue-2 (kill-and-replace)' },
   { time: '14:32:07.110', level: 'info',  message: 'Replacement pod scheduled: canary-blue-2-new' },
-  { time: '14:32:07.890', level: 'info',  message: 'SLO snapshot · forge-api · err 0.12% / err budget 0.50%' },
+  { time: '14:32:07.890', level: 'info',  message: 'SLO snapshot · eidos-api · err 0.12% / err budget 0.50%' },
 ];
 
 const USAGE = `import { LogViewer } from "@/components/forge/log-viewer"

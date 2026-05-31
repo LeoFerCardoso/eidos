@@ -300,7 +300,7 @@ React.useEffect(() => {
           <div className="ana-list" style={{ maxWidth: 560, margin: '64px auto 0' }}>
             <span className="num">1</span><span><b style={{ color: 'var(--fg)' }}>Outer ring.</b> An SVG <Mono>circle</Mono> (class <Mono>ai-persona-ring</Mono>) that pulses on <Mono>listening</Mono> and rotates a dash pattern on <Mono>thinking</Mono>. No animation under <Mono>prefers-reduced-motion</Mono>.</span>
             <span className="num">2</span><span><b style={{ color: 'var(--fg)' }}>Inner orb.</b> A filled circle (class <Mono>ai-persona-orb</Mono>) with the ember radial gradient — highlight offset to 35%, 35% so it reads as a three-dimensional sphere.</span>
-            <span className="num">3</span><span><b style={{ color: 'var(--fg)' }}>Radial gradient.</b> Three stops: <Mono>#FFB07F</Mono> at 0% (specular), <Mono>#FF6B35</Mono> (ember) at 55%, and <Mono>#7A2F12</Mono> at 100% (shadow). The gradient id is <Mono>forge-persona-grad</Mono> — stable across instances.</span>
+            <span className="num">3</span><span><b style={{ color: 'var(--fg)' }}>Radial gradient.</b> Three stops: <Mono>#FFB07F</Mono> at 0% (specular), <Mono>#FF6B35</Mono> (ember) at 55%, and <Mono>#7A2F12</Mono> at 100% (shadow). The gradient id is <Mono>eidos-persona-grad</Mono> — stable across instances.</span>
           </div>
         </div>
       </div>

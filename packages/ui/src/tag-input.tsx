@@ -2,7 +2,7 @@ import * as React from 'react';
 import { cn } from './lib/utils';
 import { Icons } from './icons';
 
-// Forge DS — TagInput
+// Eidos DS — TagInput
 //
 // Multi-value tag entry field. Type a value, then press Enter or comma to
 // commit it as a chip. Backspace on an empty caret removes the last chip.

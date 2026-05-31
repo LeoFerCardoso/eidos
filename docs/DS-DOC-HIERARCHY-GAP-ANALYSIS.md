@@ -9,7 +9,7 @@
 > with scroll-spy. Build green (175 routes), 0 render errors. **Steps B & D** (rename to
 > `PageHeader`/`Section`/`Subsection`; reconcile ad-hoc headings) remain as follow-up polish.
 > Known minor: sub-DS pages still pass the old global `id` to `Section`, so the in-page eyebrow
-> falls back to "FORGE" (breadcrumb is correct) — fix when adopting the renamed API (Step B).
+> falls back to "EIDOS" (breadcrumb is correct) — fix when adopting the renamed API (Step B).
 
 ## TL;DR
 

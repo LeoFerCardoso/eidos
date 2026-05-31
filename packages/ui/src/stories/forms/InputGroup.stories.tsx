@@ -52,7 +52,7 @@ export const LeadingText: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
       <InputGroup {...args} style={{ maxWidth: 460 }}>
         <InputAddon kind="text" id="sb-scheme-1">https://</InputAddon>
-        <input className="in-control" aria-describedby="sb-scheme-1" defaultValue="forge.example.com/team" />
+        <input className="in-control" aria-describedby="sb-scheme-1" defaultValue="eidos.example.com/team" />
       </InputGroup>
       <InputGroup {...args} style={{ maxWidth: 460 }}>
         <InputAddon kind="text" id="sb-at-1">@</InputAddon>
@@ -98,7 +98,7 @@ export const IconOnlyButton: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
       <InputGroup {...args} style={{ maxWidth: 460 }}>
         <InputAddon kind="icon"><Icons.link size={14} /></InputAddon>
-        <input className="in-control" readOnly defaultValue="https://forge-ds.com/invites/3f4-9k2-x8q" />
+        <input className="in-control" readOnly defaultValue="https://eidos-ds.com/invites/3f4-9k2-x8q" />
         <InputAddon kind="button" aria-label="Copy link"><Icons.copy size={14} /></InputAddon>
       </InputGroup>
       <InputGroup {...args} style={{ maxWidth: 460 }}>
@@ -202,7 +202,7 @@ export const UrlCopy: Story = {
   render: (args) => (
     <InputGroup {...args} style={{ maxWidth: 460 }}>
       <InputAddon kind="icon"><Icons.link size={14} /></InputAddon>
-      <input className="in-control" readOnly defaultValue="https://forge-ds.com/invites/3f4-9k2-x8q" />
+      <input className="in-control" readOnly defaultValue="https://eidos-ds.com/invites/3f4-9k2-x8q" />
       <InputAddon kind="button" aria-label="Copy link"><Icons.copy size={14} /></InputAddon>
     </InputGroup>
   ),
@@ -264,7 +264,7 @@ export const InContext: Story = {
             id="invite-url"
             className="in-control"
             readOnly
-            defaultValue="https://forge-ds.com/invites/3f4-9k2-x8q"
+            defaultValue="https://eidos-ds.com/invites/3f4-9k2-x8q"
           />
           <InputAddon kind="button" aria-label="Copy link">
             <Icons.copy size={14} />

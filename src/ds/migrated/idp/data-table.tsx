@@ -368,7 +368,7 @@ export default function Page() {
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — wrap long mono identifiers</div>
           <div className="body" style={{padding:0, maxWidth: 200}}>
-            <DataTable rows={[{id:'a',name:'urn:forge:svc:identity:auth-handler:v4.18.2:rev-9182'}]} columns={[{id:'name',label:'ID', render:(r)=><span style={{fontFamily:'var(--font-mono)', whiteSpace:'normal', wordBreak:'break-all'}}>{r.name}</span>}]}/>
+            <DataTable rows={[{id:'a',name:'urn:eidos:svc:identity:auth-handler:v4.18.2:rev-9182'}]} columns={[{id:'name',label:'ID', render:(r)=><span style={{fontFamily:'var(--font-mono)', whiteSpace:'normal', wordBreak:'break-all'}}>{r.name}</span>}]}/>
           </div>
           <div className="note">Use a CopyChip with the full value tucked away, or keep the default <Mono>white-space: nowrap</Mono>.</div>
         </div>

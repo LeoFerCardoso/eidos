@@ -32,9 +32,9 @@ design; your job is to arrange it.
 
 1. **Map the screen to existing components** in one sentence before building,
    e.g. *"DORA dashboard = page header + 4 metric cards (`.fc-*` / metric
-   element) + 1 deploy-frequency chart (`window.ForgeChart`) + a recent-deploys
-   `.tbl` table"*. If you are about to invent a component, stop — there is
-   almost certainly an element/block for it.
+   element) + 1 deploy-frequency chart (the Eidos chart primitives from
+   `@/ds/core`) + a recent-deploys `.tbl` table"*. If you are about to invent a
+   component, stop — there is almost certainly an element/block for it.
 2. **Classify** what the dashboard monitors (deploys, DORA, incidents, usage,
    cost) from the request. Generate specific, plausible names and values — no
    "Metric A / Metric B". A number without a source is a labeled placeholder
@@ -44,24 +44,29 @@ design; your job is to arrange it.
    - **Metric row** — 3–4 metric/KPI cards: label + tabular-nums value + a
      muted delta vs. prior period. Compose from the metric element, not bespoke
      divs.
-   - **Primary chart** — full-width or 2/3, via `window.ForgeChart`
-     (`src/ds/core/charts.jsx`). Real-looking series, lightly labeled axes.
+   - **Primary chart** — full-width or 2/3, via the Eidos chart primitives
+     imported from `@/ds/core` (`src/ds/core/charts.*`). Real-looking series,
+     lightly labeled axes.
    - **Secondary** — a `.tbl` table (recent events / top items) or an activity
      list.
 4. **Cover the states** (see `craft/state-coverage.md`): loading (skeleton),
    empty (empty state + CTA), error (alert), populated (realistic data). Don't
    ship only the happy path.
 
-## The 3-file ritual (registering the page)
+## The route ritual (registering the page)
 
-A dashboard usually lives as an Example, not a doc page. To register it:
-1. Add the `{ id, label, href }` entry in `src/ds/core/nav-config.js` (correct
-   group / order).
-2. Create `src/ds/examples/<slug>.jsx` registering
-   `window.EXAMPLES['<slug>'] = App` (model on an existing example such as
-   `cloud-inventory.jsx`). If documenting it as a DS page instead, create
-   `src/ds/pages/<group>/<slug>.jsx` registering `window.PAGES['<slug>']`.
-3. Run `npm run gen:manifest` so the route map regenerates.
+A dashboard usually lives as a full-screen Example, not a doc page. To register it:
+1. Add the `{ id, label, href: 'pages/examples/<slug>.html', external: true }` entry
+   in `src/ds/core/nav-config.js` (correct group / order).
+2. Create `src/ds/examples/<slug>.tsx` — `'use client'`, **default export**, imports
+   from `@/ds/core`, auto-registered into `src/ds/examples/registry.ts` (model on an
+   existing example such as `cloud-inventory.tsx`). If documenting it as a DS page
+   instead, create `src/ds/migrated/<ds>/<slug>.tsx` (core pages
+   `src/ds/migrated/<slug>.tsx`), default export, auto-registered into
+   `src/ds/migrated/registry.ts`.
+3. Regenerate with `node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs` (+
+   `node scripts/gen-examples.mjs` for examples) — auto-run by `npm run dev`/`build` —
+   then RESTART `next dev` (new routes 404 until restart).
 
 ## Hard rules
 

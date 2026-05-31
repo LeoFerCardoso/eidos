@@ -1,5 +1,5 @@
 'use client';
-import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, ForgeChart, ForgeTooltipContent, useChartColors, forgeGridProps, forgeXAxisProps, forgeYAxisProps, Recharts, Lede, Mono } from '@/ds/core';
+import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, EidosChart, EidosTooltipContent, useChartColors, eidosGridProps, eidosXAxisProps, eidosYAxisProps, Recharts, Lede, Mono } from '@/ds/core';
 
 const { ComposedChart, Bar, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend } = Recharts;
 
@@ -25,23 +25,23 @@ const COST = Array.from({ length: 8 }, (_, w) => ({
 }));
 
   const USAGE = `import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
-import { ForgeChart, ForgeTooltipContent, useChartColors,
-         forgeGridProps, forgeXAxisProps, forgeYAxisProps } from "@/charts"
+import { EidosChart, EidosTooltipContent, useChartColors,
+         eidosGridProps, eidosXAxisProps, eidosYAxisProps } from "@/charts"
 
 export function Demo({ data }) {
   const c = useChartColors()
   return (
-    <ForgeChart title="CI runs vs success rate" height={280}>
+    <EidosChart title="CI runs vs success rate" height={280}>
       <ComposedChart data={data}>
-        <CartesianGrid {...forgeGridProps}/>
-        <XAxis dataKey="day" {...forgeXAxisProps}/>
-        <YAxis yAxisId="l" {...forgeYAxisProps}/>
-        <YAxis yAxisId="r" orientation="right" {...forgeYAxisProps} domain={[80, 100]}/>
-        <Tooltip content={<ForgeTooltipContent/>}/>
+        <CartesianGrid {...eidosGridProps}/>
+        <XAxis dataKey="day" {...eidosXAxisProps}/>
+        <YAxis yAxisId="l" {...eidosYAxisProps}/>
+        <YAxis yAxisId="r" orientation="right" {...eidosYAxisProps} domain={[80, 100]}/>
+        <Tooltip content={<EidosTooltipContent/>}/>
         <Bar  yAxisId="l" dataKey="runs" fill={c[1]} radius={[3,3,0,0]}/>
         <Line yAxisId="r" dataKey="pct"  stroke={c[0]} strokeWidth={2} dot={false}/>
       </ComposedChart>
-    </ForgeChart>
+    </EidosChart>
   )
 }`;
 
@@ -55,17 +55,17 @@ export default function Page() {
 
         <SubHead meta="hello world">Usage</SubHead>
         <Frame label="bar (count) + line (rate) · CI runs vs success" code={USAGE}>
-          <ForgeChart title="CI runs vs success rate" subtitle="ci-runner" meta="last 10 days" height={280}>
+          <EidosChart title="CI runs vs success rate" subtitle="ci-runner" meta="last 10 days" height={280}>
             <ComposedChart data={CICD} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="day" {...forgeXAxisProps}/>
-              <YAxis yAxisId="l" {...forgeYAxisProps}/>
-              <YAxis yAxisId="r" orientation="right" {...forgeYAxisProps} domain={[80, 100]}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="day" {...eidosXAxisProps}/>
+              <YAxis yAxisId="l" {...eidosYAxisProps}/>
+              <YAxis yAxisId="r" orientation="right" {...eidosYAxisProps} domain={[80, 100]}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Bar  yAxisId="l" dataKey="runs" name="runs" fill={c[1]} radius={[3, 3, 0, 0]} maxBarSize={22}/>
               <Line yAxisId="r" type="monotone" dataKey="pct" name="success %" stroke={c[0]} strokeWidth={2} dot={false}/>
             </ComposedChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
         <Lede>Bars in the back, lines on top — readers naturally focus on the line as the "rate" story. The right axis hosts the percentage so its scale doesn't collide with raw counts.</Lede>
 
@@ -95,30 +95,30 @@ export default function Page() {
 
         <SubHead meta="3 variants">Variants</SubHead>
         <Frame label="area + line · traffic vs latency">
-          <ForgeChart title="Traffic vs p95 latency" subtitle="forge-api" meta="24h" height={260}>
+          <EidosChart title="Traffic vs p95 latency" subtitle="eidos-api" meta="24h" height={260}>
             <ComposedChart data={PERF} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="hour" {...forgeXAxisProps}/>
-              <YAxis yAxisId="l" {...forgeYAxisProps}/>
-              <YAxis yAxisId="r" orientation="right" {...forgeYAxisProps}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="hour" {...eidosXAxisProps}/>
+              <YAxis yAxisId="l" {...eidosYAxisProps}/>
+              <YAxis yAxisId="r" orientation="right" {...eidosYAxisProps}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Area yAxisId="l" type="monotone" dataKey="rps" name="rps" stroke={c[1]} fill={c[1]} fillOpacity={0.18}/>
               <Line yAxisId="r" type="monotone" dataKey="p95" name="p95 ms" stroke={c[0]} strokeWidth={2} dot={false}/>
             </ComposedChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <Frame label="bar + line · actual vs forecast (same unit, single axis)">
-          <ForgeChart title="Spend vs forecast" subtitle="finops" meta="8 weeks · USD" height={240}>
+          <EidosChart title="Spend vs forecast" subtitle="finops" meta="8 weeks · USD" height={240}>
             <ComposedChart data={COST} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="week" {...forgeXAxisProps}/>
-              <YAxis {...forgeYAxisProps}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="week" {...eidosXAxisProps}/>
+              <YAxis {...eidosYAxisProps}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Bar  dataKey="spend"    name="spend"    fill={c[1]} radius={[3, 3, 0, 0]} maxBarSize={24}/>
               <Line dataKey="forecast" name="forecast" stroke={c[0]} strokeWidth={2} strokeDasharray="4 4" dot={false}/>
             </ComposedChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <SubHead meta="a11y">Accessibility</SubHead>
@@ -154,17 +154,17 @@ export default function Page() {
         <SubHead meta="RTL · العربية">RTL</SubHead>
         <Frame label='dir="rtl" — title, legend and tooltip labels align right; axes and series do not mirror'>
           <div dir="rtl" style={{width: '100%'}}>
-            <ForgeChart title="تشغيل CI مقابل معدل النجاح" subtitle="منفذ CI" meta="آخر ١٠ أيام" height={260}>
+            <EidosChart title="تشغيل CI مقابل معدل النجاح" subtitle="منفذ CI" meta="آخر ١٠ أيام" height={260}>
               <ComposedChart data={CICD} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
-                <CartesianGrid {...forgeGridProps}/>
-                <XAxis dataKey="day" {...forgeXAxisProps}/>
-                <YAxis yAxisId="l" {...forgeYAxisProps}/>
-                <YAxis yAxisId="r" orientation="right" {...forgeYAxisProps} domain={[80, 100]}/>
-                <Tooltip content={<ForgeTooltipContent/>}/>
+                <CartesianGrid {...eidosGridProps}/>
+                <XAxis dataKey="day" {...eidosXAxisProps}/>
+                <YAxis yAxisId="l" {...eidosYAxisProps}/>
+                <YAxis yAxisId="r" orientation="right" {...eidosYAxisProps} domain={[80, 100]}/>
+                <Tooltip content={<EidosTooltipContent/>}/>
                 <Bar  yAxisId="l" dataKey="runs" name="تشغيل" fill={c[1]} radius={[3, 3, 0, 0]} maxBarSize={22}/>
                 <Line yAxisId="r" type="monotone" dataKey="pct" name="نجاح ٪" stroke={c[0]} strokeWidth={2} dot={false}/>
               </ComposedChart>
-            </ForgeChart>
+            </EidosChart>
           </div>
         </Frame>
         <Lede>Under <Mono>dir="rtl"</Mono> the chart chrome (title, tooltip rows, legend entries) aligns to the right. The dual Y axes remain in their left/right positions — they are structural, not directional — and the plotted bars and line do not mirror.</Lede>
@@ -176,16 +176,16 @@ export default function Page() {
             <div className="ana" style={{display:'flex', justifyContent:'center'}}>
               <div className="stage" style={{position:'relative'}} aria-hidden="true">
                 <div style={{width:340, height:180}}>
-                  <ForgeChart height={180}>
+                  <EidosChart height={180}>
                     <ComposedChart data={CICD} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
-                      <CartesianGrid {...forgeGridProps}/>
-                      <XAxis dataKey="day" {...forgeXAxisProps}/>
-                      <YAxis yAxisId="l" {...forgeYAxisProps}/>
-                      <YAxis yAxisId="r" orientation="right" {...forgeYAxisProps} domain={[80, 100]}/>
+                      <CartesianGrid {...eidosGridProps}/>
+                      <XAxis dataKey="day" {...eidosXAxisProps}/>
+                      <YAxis yAxisId="l" {...eidosYAxisProps}/>
+                      <YAxis yAxisId="r" orientation="right" {...eidosYAxisProps} domain={[80, 100]}/>
                       <Bar  yAxisId="l" dataKey="runs" fill={c[1]} radius={[3, 3, 0, 0]} maxBarSize={18}/>
                       <Line yAxisId="r" type="monotone" dataKey="pct" stroke={c[0]} strokeWidth={2} dot={false}/>
                     </ComposedChart>
-                  </ForgeChart>
+                  </EidosChart>
                 </div>
                 <span className="lead h" style={{top: 90, left: -28, width: 24}}/>
                 <span className="lead h" style={{top: 90, right: -28, width: 24}}/>
@@ -211,31 +211,31 @@ export default function Page() {
           <div className="dd-card do">
             <div className="head"><Icons.check size={12}/> Do — bar in back, line on top</div>
             <div className="body">
-              <ForgeChart height={140} padding={8}>
+              <EidosChart height={140} padding={8}>
                 <ComposedChart data={CICD} margin={{ top: 4, right: 4, left: -16, bottom: 0 }}>
-                  <CartesianGrid {...forgeGridProps}/>
-                  <XAxis dataKey="day" {...forgeXAxisProps} hide/>
-                  <YAxis yAxisId="l" {...forgeYAxisProps}/>
-                  <YAxis yAxisId="r" orientation="right" {...forgeYAxisProps} domain={[80, 100]}/>
+                  <CartesianGrid {...eidosGridProps}/>
+                  <XAxis dataKey="day" {...eidosXAxisProps} hide/>
+                  <YAxis yAxisId="l" {...eidosYAxisProps}/>
+                  <YAxis yAxisId="r" orientation="right" {...eidosYAxisProps} domain={[80, 100]}/>
                   <Bar  yAxisId="l" dataKey="runs" fill={c[1]} radius={[3, 3, 0, 0]} maxBarSize={16}/>
                   <Line yAxisId="r" dataKey="pct" stroke={c[0]} strokeWidth={2} dot={false}/>
                 </ComposedChart>
-              </ForgeChart>
+              </EidosChart>
             </div>
             <div className="note">The bar is the "volume" (left axis, raw count), the line is the "rate" (right axis, percent). Putting them on separate <Mono>yAxisId</Mono>s lets both scales breathe; the line rides above the bars instead of being crushed.</div>
           </div>
           <div className="dd-card dont">
             <div className="head"><Icons.x size={12}/> Don't — two units, one axis</div>
             <div className="body">
-              <ForgeChart height={140} padding={8}>
+              <EidosChart height={140} padding={8}>
                 <ComposedChart data={CICD} margin={{ top: 4, right: 4, left: -16, bottom: 0 }}>
-                  <CartesianGrid {...forgeGridProps}/>
-                  <XAxis dataKey="day" {...forgeXAxisProps} hide/>
-                  <YAxis {...forgeYAxisProps}/>
+                  <CartesianGrid {...eidosGridProps}/>
+                  <XAxis dataKey="day" {...eidosXAxisProps} hide/>
+                  <YAxis {...eidosYAxisProps}/>
                   <Bar  dataKey="runs" fill={c[1]} radius={[3, 3, 0, 0]} maxBarSize={16}/>
                   <Line dataKey="pct" stroke={c[0]} strokeWidth={2} dot={false}/>
                 </ComposedChart>
-              </ForgeChart>
+              </EidosChart>
             </div>
             <div className="note">A 98% line flattens against a 30-count bar when forced onto one axis — both stories disappear. Always pair a Bar + Line composed chart with dual <Mono>YAxis</Mono> elements.</div>
           </div>

@@ -27,7 +27,7 @@ const PLATFORM_GROUPS: CommandGroup[] = [
   {
     heading: 'Recent',
     items: [
-      { id: 'r-forge-api',    label: 'Open: forge-api (main)',       keywords: ['service', 'api'] },
+      { id: 'r-eidos-api',    label: 'Open: eidos-api (main)',       keywords: ['service', 'api'] },
       { id: 'r-deploy-511',   label: 'Open: deploy #511',            keywords: ['deploy', 'release'] },
       { id: 'r-runbook-auth', label: 'Open: Runbook — auth outage',  keywords: ['runbook', 'incident'] },
     ],
@@ -39,7 +39,7 @@ const AGENT_GROUPS: CommandGroup[] = [
     heading: 'AI Agents',
     items: [
       { id: 'agent-triage',     label: 'Run triage agent on latest incident', kbd: ['⌘', '1'] },
-      { id: 'agent-review',     label: 'Request PR review from forge-bot',    kbd: ['⌘', '2'] },
+      { id: 'agent-review',     label: 'Request PR review from eidos-bot',    kbd: ['⌘', '2'] },
       { id: 'agent-summarise',  label: 'Summarise deploy diff',               kbd: [] },
       { id: 'agent-runbook',    label: 'Generate runbook from alert payload', kbd: [] },
     ],
@@ -58,7 +58,7 @@ const IDP_GROUPS_WITH_DISABLED: CommandGroup[] = [
   {
     heading: 'Service actions',
     items: [
-      { id: 'redeploy',        label: 'Redeploy — forge-api (main)',   kbd: ['⌘', 'R'] },
+      { id: 'redeploy',        label: 'Redeploy — eidos-api (main)',   kbd: ['⌘', 'R'] },
       { id: 'rollback',        label: 'Rollback to deploy #508',       kbd: [] },
       { id: 'scale-up',        label: 'Scale: increase replica count', kbd: [] },
       {
@@ -274,7 +274,7 @@ export const WithDisabledItems: Story = {
  * Controlled mode — the parent owns the query string. The palette opens with
  * "deploy" pre-typed so only matching items are visible. Use this when you want
  * to pre-seed the search from a context (e.g. the user right-clicked a service
- * named "forge-deploy").
+ * named "eidos-deploy").
  */
 export const ControlledQuery: Story = {
   render: () => {
@@ -424,7 +424,7 @@ export const InContext: Story = {
             background: 'var(--surface)',
           }}
         >
-          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--fg)' }}>forge-api</span>
+          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--fg)' }}>eidos-api</span>
           <span
             className="pill"
             style={{ fontSize: 11, padding: '1px 6px' }}
@@ -467,7 +467,7 @@ export const InContext: Story = {
               marginBottom: 12,
             }}
           >
-            deploy #511 &mdash; forge-api &mdash; <span style={{ color: 'var(--fg-faint)' }}>2 min ago</span>
+            deploy #511 &mdash; eidos-api &mdash; <span style={{ color: 'var(--fg-faint)' }}>2 min ago</span>
           </div>
           {lastRun && (
             <div

@@ -2,7 +2,7 @@
 name: tweaks
 description: |
   Targeted polish of an existing Eidos component, page, or example in the repo —
-  the "dial in the last 20%" pass. Edit the real files (jsx + tokens/ds.css),
+  the "dial in the last 20%" pass. Edit the real files (tsx + tokens/ds.css),
   tighten type/spacing/accent/states, then re-run the anti-ai-slop, a11y, and
   RTL checks. Use when the request is "tweak this", "polish X", "tighten the
   spacing", "fix the accent usage", "clean this up", or "make this feel less
@@ -20,8 +20,8 @@ then re-verify the craft checks.
 
 ## Required pre-reading
 
-1. The target file(s): `src/ds/pages/<group>/<slug>.jsx`,
-   `src/ds/examples/<slug>.jsx`, and the classes it uses in
+1. The target file(s): `src/ds/migrated/<ds>/<slug>.tsx` (core pages:
+   `src/ds/migrated/<slug>.tsx`), `src/ds/examples/<name>.tsx`, and the classes it uses in
    `src/styles/ds.css` / `src/styles/tokens.css`.
 2. `../../design-systems/forge/DESIGN.md` — the standard you're polishing toward.
 3. `../../craft/anti-ai-slop.md` (P0 list), plus whichever of
@@ -69,8 +69,10 @@ then re-verify the craft checks.
    `ds.css`/`tokens.css`, never inline per-page `<style>`.
 4. Re-verify: walk the anti-ai-slop P0 list, the a11y baseline, and the RTL
    check against your changes.
-5. If the page is registered, no manifest change is needed unless you renamed
-   the slug; if you did, update `nav-config.js` and run `npm run gen:manifest`.
+5. If the page is registered, no regen is needed unless you renamed the slug; if
+   you did, update `src/ds/core/nav-config.js` and run `node scripts/gen-nav.mjs &&
+   node scripts/gen-migrated.mjs` (+ `gen-examples.mjs` for examples), then restart
+   `next dev`.
 
 ## Hard rules
 

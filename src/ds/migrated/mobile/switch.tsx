@@ -251,7 +251,7 @@ export default function MobileSwitch() {
             <Row label="Deploy alerts" on={true} />
             <Row label="Weekly digest" on={false} />
           </div>
-          <div className="note">Each row stands alone and applies on flip. No Save button to forget.</div>
+          <div className="note">Each row stands alone and applies on flip. No Save button to eidost.</div>
         </div>
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12} /> Don't — use it to pick one of many</div>

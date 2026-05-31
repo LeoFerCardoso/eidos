@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge AI — conversation turn primitives.
+// Eidos AI — conversation turn primitives.
 // Moved out of core/atoms.tsx into the AI component layer (core/ai) so the
 // chat-bubble surface lives beside the other AI components. Markup is
 // unchanged; visual styles live in src/styles/ai.css under the `.msg-*`
@@ -24,7 +24,7 @@ import { Prose } from './prose';
 //   actions     ReactNode — toolbar slot under the bubble
 //   avatar      boolean — default true; set false to hide
 //   userAvatar  Person  — defaults to { initials: 'L', name: 'You' }
-//   botAvatar   Person  — defaults to { initials: 'F', name: 'Forge AI' }
+//   botAvatar   Person  — defaults to { initials: 'F', name: 'Eidos AI' }
 const Message = ({
   from,
   variant,
@@ -70,7 +70,7 @@ const Message = ({
   const showAvatar = avatar !== false && resolvedVariant === 'bubble' && role !== 'system';
   const rawAvatar = role === 'user'
     ? (userAvatar || { initials: 'L', name: 'You' })
-    : (botAvatar  || { initials: 'F', name: 'Forge AI' });
+    : (botAvatar  || { initials: 'F', name: 'Eidos AI' });
   const avatarObj = { name: rawAvatar.name ?? 'User', initials: rawAvatar.initials ?? rawAvatar.name?.[0] ?? '?' };
 
   return (
@@ -184,7 +184,7 @@ const Response = ({
   from = 'assistant',
   meta,
   avatar = false,
-  botAvatar = { initials: 'F', name: 'Forge AI' },
+  botAvatar = { initials: 'F', name: 'Eidos AI' },
   actions,
   streaming = false,
   children,
@@ -204,7 +204,7 @@ const Response = ({
   /** Pre-rendered prose nodes — headings, paragraphs, lists, tables, code blocks, figures. */
   children?: React.ReactNode;
 }) => {
-  const resolvedBot = { name: botAvatar.name ?? 'Forge AI', initials: botAvatar.initials ?? 'F' };
+  const resolvedBot = { name: botAvatar.name ?? 'Eidos AI', initials: botAvatar.initials ?? 'F' };
   return (
   <div className={'ai-resp ' + from} role="article" aria-roledescription={`${from} response`}>
     {from === 'assistant' && avatar && <Avatar p={resolvedBot} size={32} ember/>}

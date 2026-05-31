@@ -43,7 +43,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, AutoPropsTable,
 
     const params = { since: '24h', tier: 'T1', limit: 10 };
     return (
-      <Tool name="listDeploys" ns="forge.ai" state={state} ms={state.startsWith('output') ? 412 : undefined}>
+      <Tool name="listDeploys" ns="eidos.ai" state={state} ms={state.startsWith('output') ? 412 : undefined}>
         <ToolInput
           params={params}
           streaming={state === 'input-streaming'}
@@ -59,7 +59,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, AutoPropsTable,
             <div className="tool-err">
               <Icons.alert size={14}/>
               <div className="body">
-                Upstream timeout calling <code>github.api/orgs/forge/repos</code>. Retry after
+                Upstream timeout calling <code>github.api/orgs/eidos/repos</code>. Retry after
                 10s or fall back to the cached snapshot.
               </div>
             </div>
@@ -74,7 +74,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, AutoPropsTable,
       <div className="t-mono-label">
         Eidos AI <span style={{ marginInline: 6, color: 'var(--fg-faint)' }}>·</span> just now
       </div>
-      <Tool name="listDeploys" ns="forge.ai" state="output-available" ms={412} defaultOpen>
+      <Tool name="listDeploys" ns="eidos.ai" state="output-available" ms={412} defaultOpen>
         <ToolInput params={{ since: '24h', tier: 'T1', limit: 10 }}/>
         <ToolOutput label="Output" meta="4 rows"><DeployTable/></ToolOutput>
       </Tool>
@@ -91,7 +91,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, AutoPropsTable,
   );
 
   const SimpleVariant = ({ state }) => (
-    <Tool name="listDeploys" ns="forge.ai" state={state} ms={state.startsWith('output') ? 412 : undefined} defaultOpen={state.startsWith('output')}>
+    <Tool name="listDeploys" ns="eidos.ai" state={state} ms={state.startsWith('output') ? 412 : undefined} defaultOpen={state.startsWith('output')}>
       <ToolInput
         params={{ since: '24h', tier: 'T1' }}
         streaming={state === 'input-streaming'}
@@ -112,7 +112,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, AutoPropsTable,
 
   // ─── code snippets ──────────────────────────────────────────────────────
   const USAGE_CODE = `<Tool>
-  <ToolHeader name="listDeploys" type="forge.ai.listDeploys" state="output-available"/>
+  <ToolHeader name="listDeploys" type="eidos.ai.listDeploys" state="output-available"/>
   <ToolContent>
     <ToolInput input={{ since: "24h", tier: "T1", limit: 10 }}/>
     <ToolOutput output={<DeployTable rows={rows}/>} errorText={undefined}/>
@@ -194,7 +194,7 @@ export default function ToolPage() {
       <SubHead meta="RTL · العربية">RTL</SubHead>
       <Frame label="dir=&quot;rtl&quot; — icon flips to start, chevron + status mirror" height={300}>
         <div dir="rtl" style={{ width: '100%' }}>
-          <Tool name="listDeploys" ns="forge.ai" state="output-available" ms={412} defaultOpen>
+          <Tool name="listDeploys" ns="eidos.ai" state="output-available" ms={412} defaultOpen>
             <ToolInput params={{ since: '24h', tier: 'T1' }}/>
             <ToolOutput label="النتائج" meta="4 سطور">
               <DeployTable/>
@@ -210,7 +210,7 @@ export default function ToolPage() {
         <div className="ds-frame-body" style={{ padding: '72px 36px 60px' }}>
           <div className="ana" style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="stage" style={{ position: 'relative', width: 520 }} aria-hidden="true">
-              <Tool name="listDeploys" ns="forge.ai" state="output-available" ms={412} defaultOpen>
+              <Tool name="listDeploys" ns="eidos.ai" state="output-available" ms={412} defaultOpen>
                 <ToolInput params={{ since: '24h' }}/>
                 <ToolOutput label="Output" meta="4 rows"><DeployTable/></ToolOutput>
               </Tool>
@@ -225,7 +225,7 @@ export default function ToolPage() {
             </div>
           </div>
           <div className="ana-list" style={{ maxWidth: 600, margin: '64px auto 0' }}>
-            <span className="num">1</span><span><b style={{ color: 'var(--fg)' }}>Header.</b> Icon tile + namespaced name in mono. The full tool path (<Mono>forge.ai.listDeploys</Mono>) reads like an import, never a label.</span>
+            <span className="num">1</span><span><b style={{ color: 'var(--fg)' }}>Header.</b> Icon tile + namespaced name in mono. The full tool path (<Mono>eidos.ai.listDeploys</Mono>) reads like an import, never a label.</span>
             <span className="num">2</span><span><b style={{ color: 'var(--fg)' }}>Status + duration.</b> Pill colour maps to the four-state machine; <Mono>--success</Mono>, <Mono>--ice</Mono>, <Mono>--warning</Mono>, <Mono>--danger</Mono>. Duration in mono <Mono>ms</Mono>.</span>
             <span className="num">3</span><span><b style={{ color: 'var(--fg)' }}>Input section.</b> Formatted JSON of the params the model called the tool with. While streaming, shimmer placeholders fill the slot.</span>
             <span className="num">4</span><span><b style={{ color: 'var(--fg)' }}>Output section.</b> Rendered any way the tool wants — table, code, paragraph, error card. Reuses existing Eidos primitives, never bespoke.</span>
@@ -248,7 +248,7 @@ export default function ToolPage() {
             <div className="tool">
               <div className="tool-head">
                 <span className="ico"><Icons.zap size={13}/></span>
-                <span className="name"><span className="ns">forge.ai.</span>listDeploys</span>
+                <span className="name"><span className="ns">eidos.ai.</span>listDeploys</span>
                 <span className="tool-status error"><Icons.alert size={10}/>Error</span>
                 <Icons.chevronDown size={13} className="chev"/>
               </div>

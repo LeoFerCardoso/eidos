@@ -1,4 +1,4 @@
-/* Forge Design System — page-only styles */
+/* Eidos Design System — page-only styles */
 /* Each pane scrolls independently; the page itself does not.
    Scoped via :has() so the no-scroll rule only applies to the DS docs shell
    (#ds-root). Example pages (.fp-app) keep native body scroll. */
@@ -635,7 +635,7 @@ a:focus-visible,
 
 /* Showcase frame — three surfaces stack inside one container so the eye can
    tell the chrome (head), the example (body), and the code (footer) apart at
-   a glance. Canonical assignment (Forge v1.2, theme-agnostic):
+   a glance. Canonical assignment (Eidos v1.2, theme-agnostic):
 
      • header  → --surface       (the lifted strip with the label)
      • body    → --bg-elevated   (the workspace where the example renders)
@@ -832,39 +832,39 @@ a:focus-visible,
   box-shadow: var(--elev-1);
 }
 
-/* ── Compound Tabs component (forge-tabs / forge-tablist / forge-tab / forge-tabpanel)
+/* ── Compound Tabs component (eidos-tabs / eidos-tablist / eidos-tab / eidos-tabpanel)
    Compound API: <Tabs> <TabsList> <TabsTrigger> <TabsContent>
    Variants: line (default), pills, enclosed. Sizes: md (default), sm.
    RTL: logical properties throughout — flex row, inset-inline — mirror automatically.
    prefers-reduced-motion: transitions skipped. */
 
-.forge-tabs {
+.eidos-tabs {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-.forge-tabs--vertical {
+.eidos-tabs--vertical {
   flex-direction: row;
   align-items: flex-start;
   gap: 0;
 }
 
 /* TabsList */
-.forge-tablist {
+.eidos-tablist {
   display: flex;
   align-items: stretch;
   gap: 0;
 }
 
 /* line variant (default) */
-.forge-tablist--line {
+.eidos-tablist--line {
   border-bottom: 1px solid var(--border);
   gap: 2px;
 }
 
 /* pills variant */
-.forge-tablist--pills {
+.eidos-tablist--pills {
   gap: 4px;
   padding: 3px;
   background: var(--surface);
@@ -874,7 +874,7 @@ a:focus-visible,
 }
 
 /* enclosed variant */
-.forge-tablist--enclosed {
+.eidos-tablist--enclosed {
   gap: 0;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -883,7 +883,7 @@ a:focus-visible,
 }
 
 /* vertical line variant */
-.forge-tabs--vertical .forge-tablist--line {
+.eidos-tabs--vertical .eidos-tablist--line {
   flex-direction: column;
   border-bottom: none;
   border-inline-end: 1px solid var(--border);
@@ -893,18 +893,18 @@ a:focus-visible,
 }
 
 /* vertical pills */
-.forge-tabs--vertical .forge-tablist--pills {
+.eidos-tabs--vertical .eidos-tablist--pills {
   flex-direction: column;
 }
 
 /* vertical enclosed */
-.forge-tabs--vertical .forge-tablist--enclosed {
+.eidos-tabs--vertical .eidos-tablist--enclosed {
   flex-direction: column;
   border-radius: 8px;
 }
 
 /* TabsTrigger */
-.forge-tab {
+.eidos-tab {
   position: relative;
   padding: 10px 14px;
   font-size: var(--text-sm, 13px);
@@ -920,11 +920,11 @@ a:focus-visible,
   user-select: none;
 }
 
-.forge-tab:hover:not(.forge-tab--disabled) { color: var(--fg); }
-.forge-tab--active { color: var(--fg); }
+.eidos-tab:hover:not(.eidos-tab--disabled) { color: var(--fg); }
+.eidos-tab--active { color: var(--fg); }
 
 /* line: ember underline indicator */
-.forge-tablist--line .forge-tab--active::after {
+.eidos-tablist--line .eidos-tab--active::after {
   content: '';
   position: absolute;
   inset-inline: 0;
@@ -935,7 +935,7 @@ a:focus-visible,
 }
 
 /* vertical line: right-side indicator */
-.forge-tabs--vertical .forge-tablist--line .forge-tab--active::after {
+.eidos-tabs--vertical .eidos-tablist--line .eidos-tab--active::after {
   inset-block: 0;
   inset-inline-end: -1px;
   inset-inline-start: unset;
@@ -944,44 +944,44 @@ a:focus-visible,
 }
 
 /* pills: filled background on active */
-.forge-tablist--pills .forge-tab {
+.eidos-tablist--pills .eidos-tab {
   padding: 6px 12px;
   border-radius: 5px;
 }
-.forge-tablist--pills .forge-tab--active {
+.eidos-tablist--pills .eidos-tab--active {
   background: var(--surface-hover);
   color: var(--fg);
 }
-.forge-tablist--pills .forge-tab--active::after { display: none; }
+.eidos-tablist--pills .eidos-tab--active::after { display: none; }
 
 /* enclosed: bordered segments */
-.forge-tablist--enclosed .forge-tab {
+.eidos-tablist--enclosed .eidos-tab {
   border-inline-end: 1px solid var(--border);
   border-radius: 0;
   padding: 7px 14px;
 }
-.forge-tablist--enclosed .forge-tab:last-child { border-inline-end: none; }
-.forge-tablist--enclosed .forge-tab--active {
+.eidos-tablist--enclosed .eidos-tab:last-child { border-inline-end: none; }
+.eidos-tablist--enclosed .eidos-tab--active {
   background: var(--surface-hover);
   color: var(--fg);
 }
-.forge-tablist--enclosed .forge-tab--active::after { display: none; }
+.eidos-tablist--enclosed .eidos-tab--active::after { display: none; }
 
 /* sm size modifier */
-.forge-tab--sm {
+.eidos-tab--sm {
   padding: 6px 10px;
   font-size: var(--text-xs, 11px);
 }
-.forge-tablist--pills .forge-tab--sm { padding: 4px 8px; }
+.eidos-tablist--pills .eidos-tab--sm { padding: 4px 8px; }
 
 /* disabled */
-.forge-tab--disabled {
+.eidos-tab--disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
 /* count badge inside a trigger */
-.forge-tab .count {
+.eidos-tab .count {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -993,13 +993,13 @@ a:focus-visible,
   color: var(--fg-faint);
   border-radius: 10px;
 }
-.forge-tab--active .count {
+.eidos-tab--active .count {
   background: var(--ember-soft, rgba(255,107,53,0.12));
   color: var(--ember, #FF6B35);
 }
 
 /* TabsContent */
-.forge-tabpanel {
+.eidos-tabpanel {
   padding: 18px;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -1010,29 +1010,29 @@ a:focus-visible,
   min-height: 80px;
   outline: none;
 }
-.forge-tabpanel[hidden] { display: none; }
+.eidos-tabpanel[hidden] { display: none; }
 
 /* vertical layout: panel fills remaining width */
-.forge-tabs--vertical .forge-tabpanel {
+.eidos-tabs--vertical .eidos-tabpanel {
   flex: 1;
   min-height: unset;
   border-radius: 0 8px 8px 0;
 }
-.forge-tabs--vertical .forge-tablist--line ~ .forge-tabpanel {
+.eidos-tabs--vertical .eidos-tablist--line ~ .eidos-tabpanel {
   border-inline-start: none;
   margin-inline-start: 0;
 }
 
 /* Light theme overrides */
-[data-theme="light"] .forge-tablist--pills { background: var(--bg-elevated); }
-[data-theme="light"] .forge-tablist--enclosed { background: var(--bg-elevated); }
-[data-theme="light"] .forge-tablist--pills .forge-tab--active { background: var(--surface); }
-[data-theme="light"] .forge-tablist--enclosed .forge-tab--active { background: var(--surface); }
-[data-theme="light"] .forge-tabpanel { background: var(--surface); }
+[data-theme="light"] .eidos-tablist--pills { background: var(--bg-elevated); }
+[data-theme="light"] .eidos-tablist--enclosed { background: var(--bg-elevated); }
+[data-theme="light"] .eidos-tablist--pills .eidos-tab--active { background: var(--surface); }
+[data-theme="light"] .eidos-tablist--enclosed .eidos-tab--active { background: var(--surface); }
+[data-theme="light"] .eidos-tabpanel { background: var(--surface); }
 
 /* prefers-reduced-motion: kill transitions */
 @media (prefers-reduced-motion: reduce) {
-  .forge-tab { transition: none; }
+  .eidos-tab { transition: none; }
 }
 
 /* Collapsible code — long Frame snippets clip to ~6 lines until expanded.
@@ -1231,7 +1231,7 @@ a:focus-visible,
 /* When the demo is a chart, the centred-flex collapses the container to 0
    width and ResponsiveContainer can't size itself — force the chart to
    span the body. Same trick for any block-level child that needs space. */
-.dd-card .body > .forge-chart,
+.dd-card .body > .eidos-chart,
 .dd-card .body > .pipeline,
 .dd-card .body > .timeline,
 .dd-card .body > .ring-bar,
@@ -2101,7 +2101,7 @@ a:focus-visible,
 /* =================================================================
  * Density — [data-density="…"] (Phase 1, Gap Analysis DEF-02)
  *
- * Canonical contract for the three density tiers used in Forge:
+ * Canonical contract for the three density tiers used in Eidos:
  *
  *   compact     — dense data surfaces (DataTable in a dashboard,
  *                 inline Card grids, Toolbar inside a sidesheet).
@@ -3159,7 +3159,7 @@ a:focus-visible,
   --diffs-bg-hover-override: var(--surface-hover);
   /* file-status icon (modified) → ice; add/del icons come from success/danger below */
   --diffs-modified-color-override: var(--viz-cat-2);
-  /* additions → Forge success. Translucent tints (over --diffs-bg) keep the hue
+  /* additions → Eidos success. Translucent tints (over --diffs-bg) keep the hue
      pure and clearly visible in BOTH modes; the emphasis (word-level) is stronger. */
   --diffs-addition-base: var(--success);
   --diffs-addition-color-override: var(--success);
@@ -3168,7 +3168,7 @@ a:focus-visible,
      mode), so the box lands DARK-on-light-text in dark and LIGHT-on-dark-text in
      light — the inherited token text keeps strong contrast in BOTH themes. */
   --diffs-bg-addition-emphasis-override: color-mix(in oklab, var(--success) 42%, var(--bg));
-  /* deletions → Forge danger */
+  /* deletions → Eidos danger */
   --diffs-deletion-base: var(--danger);
   --diffs-deletion-color-override: var(--danger);
   --diffs-bg-deletion-override: color-mix(in oklab, var(--danger) 52%, var(--diffs-bg));
@@ -3188,9 +3188,9 @@ a:focus-visible,
    The FileTree is a custom element with a Shadow DOM; its only public styling
    surface is the `--trees-*-override` custom properties, which pierce the
    shadow boundary by inheritance. We map ONLY colour, typography and shape to
-   Forge tokens — the tree logic, virtualization, layout and a11y are the
+   Eidos tokens — the tree logic, virtualization, layout and a11y are the
    library's, untouched. (Mirror of the `.pierre-diff` --diffs-* strategy.) */
-.forge-tree {
+.eidos-tree {
   display: block; width: 100%;
   border: 1px solid var(--border); border-radius: var(--radius-xl); overflow: hidden;
   /* The library's scroll + search containers carry inline padding only, so the
@@ -3217,16 +3217,16 @@ a:focus-visible,
   --trees-selected-bg-override: var(--surface-selected);
   --trees-selected-fg-override: var(--fg);
   --trees-selected-focused-border-color-override: var(--ember);
-  /* focus ring → Forge ember, 2px, offset like our other controls */
+  /* focus ring → Eidos ember, 2px, offset like our other controls */
   --trees-focus-ring-color-override: var(--ember);
   --trees-focus-ring-width-override: 2px;
   --trees-focus-ring-offset-override: -2px;
   /* File icons keep the library's per-language colour palette (React cyan, TS
      blue, CSS indigo, Markdown green, …) so file type is legible at a glance —
-     the one place Forge intentionally lets the tree carry more than the ember
+     the one place Eidos intentionally lets the tree carry more than the ember
      accent. Files with no extension match fall back to --trees-icon-gray.
      (Set --trees-file-icon-color to collapse them all to one neutral instead.) */
-  /* git status lane → Forge semantic tokens (status rides colour AND letter) */
+  /* git status lane → Eidos semantic tokens (status rides colour AND letter) */
   --trees-git-added-color-override: var(--success);
   --trees-git-modified-color-override: var(--viz-cat-2);
   --trees-git-deleted-color-override: var(--danger);
@@ -3245,39 +3245,39 @@ a:focus-visible,
 }
 /* When the IDE-style window chrome header is present, drop the host top pad —
    the chrome supplies its own breathing room. */
-.forge-tree.has-chrome { padding-block: 0 10px; }
-.forge-tree-loading {
+.eidos-tree.has-chrome { padding-block: 0 10px; }
+.eidos-tree-loading {
   padding: 18px; font-family: var(--font-mono); font-size: var(--text-xs);
   color: var(--fg-faint); background: var(--bg-elevated);
   border: 1px solid var(--border); border-radius: var(--radius-xl);
 }
-[data-theme="light"] .forge-tree { color-scheme: light; }
+[data-theme="light"] .eidos-tree { color-scheme: light; }
 
 /* IDE-style window chrome header, slotted above the tree (macOS traffic lights,
-   repo title, trailing action buttons). Composed from Forge tokens only. */
-.forge-tree-chrome {
+   repo title, trailing action buttons). Composed from Eidos tokens only. */
+.eidos-tree-chrome {
   display: flex; align-items: center; gap: 10px;
   padding: 11px 14px; border-bottom: 1px solid var(--border);
   background: var(--surface); font-family: var(--font-mono);
 }
-.forge-tree-chrome .ftc-lights { display: inline-flex; gap: 6px; margin-inline-end: 4px; }
-.forge-tree-chrome .ftc-lights i { width: 11px; height: 11px; border-radius: 999px; display: block; }
-.forge-tree-chrome .ftc-lights i:nth-child(1) { background: #FF5F57; }
-.forge-tree-chrome .ftc-lights i:nth-child(2) { background: #FEBC2E; }
-.forge-tree-chrome .ftc-lights i:nth-child(3) { background: #28C840; }
-.forge-tree-chrome .ftc-title { font-size: var(--text-xs); color: var(--fg); font-weight: 600; letter-spacing: .01em; }
-.forge-tree-chrome .ftc-actions { margin-inline-start: auto; display: inline-flex; gap: 2px; }
-.forge-tree-chrome .ftc-actions button {
+.eidos-tree-chrome .ftc-lights { display: inline-flex; gap: 6px; margin-inline-end: 4px; }
+.eidos-tree-chrome .ftc-lights i { width: 11px; height: 11px; border-radius: 999px; display: block; }
+.eidos-tree-chrome .ftc-lights i:nth-child(1) { background: #FF5F57; }
+.eidos-tree-chrome .ftc-lights i:nth-child(2) { background: #FEBC2E; }
+.eidos-tree-chrome .ftc-lights i:nth-child(3) { background: #28C840; }
+.eidos-tree-chrome .ftc-title { font-size: var(--text-xs); color: var(--fg); font-weight: 600; letter-spacing: .01em; }
+.eidos-tree-chrome .ftc-actions { margin-inline-start: auto; display: inline-flex; gap: 2px; }
+.eidos-tree-chrome .ftc-actions button {
   display: inline-grid; place-items: center; inline-size: 26px; block-size: 26px;
   border: 1px solid transparent; border-radius: var(--radius-sm); background: transparent;
   color: var(--fg-subtle); cursor: pointer; transition: color .12s ease, background .12s ease;
 }
-.forge-tree-chrome .ftc-actions button:hover { color: var(--fg); background: var(--surface-active); }
-.forge-tree-chrome .ftc-actions button:focus-visible { outline: 2px solid var(--ember); outline-offset: -1px; color: var(--fg); }
+.eidos-tree-chrome .ftc-actions button:hover { color: var(--fg); background: var(--surface-active); }
+.eidos-tree-chrome .ftc-actions button:focus-visible { outline: 2px solid var(--ember); outline-offset: -1px; color: var(--fg); }
 
-/* Context menu rendered by ForgeTree's renderContextMenu — slotted into the
+/* Context menu rendered by EidosTree's renderContextMenu — slotted into the
    tree's shadow at the anchor; the library positions it, we style it. */
-.forge-tree-menu {
+.eidos-tree-menu {
   /* portaled to <body>, so it matches the app's `body > div { min-height:100dvh }`
      — reset that or the menu stretches to full viewport height. */
   min-block-size: 0;
@@ -3285,25 +3285,25 @@ a:focus-visible,
   border: 1px solid var(--border-strong); border-radius: var(--radius-md);
   box-shadow: var(--shadow-2); font-family: var(--font-sans);
 }
-.forge-tree-menu .ftm-item {
+.eidos-tree-menu .ftm-item {
   display: flex; align-items: center; gap: 9px; inline-size: 100%;
   padding: 7px 9px; border: 0; border-radius: var(--radius-sm); background: transparent;
   font-size: var(--text-base); color: var(--fg); text-align: start; cursor: pointer;
   transition: background .1s ease, color .1s ease;
 }
-.forge-tree-menu .ftm-item svg { color: var(--fg-subtle); flex: none; }
-.forge-tree-menu .ftm-item:hover,
-.forge-tree-menu .ftm-item:focus-visible { background: var(--surface-active); outline: none; }
-.forge-tree-menu .ftm-item:hover svg { color: var(--fg-muted); }
-.forge-tree-menu .ftm-item.danger { color: var(--danger); }
-.forge-tree-menu .ftm-item.danger svg { color: var(--danger); }
-.forge-tree-menu .ftm-item.danger:hover { background: color-mix(in oklab, var(--danger) 16%, transparent); }
-.forge-tree-menu .ftm-sep { height: 1px; margin: 5px 4px; background: var(--border); }
+.eidos-tree-menu .ftm-item svg { color: var(--fg-subtle); flex: none; }
+.eidos-tree-menu .ftm-item:hover,
+.eidos-tree-menu .ftm-item:focus-visible { background: var(--surface-active); outline: none; }
+.eidos-tree-menu .ftm-item:hover svg { color: var(--fg-muted); }
+.eidos-tree-menu .ftm-item.danger { color: var(--danger); }
+.eidos-tree-menu .ftm-item.danger svg { color: var(--danger); }
+.eidos-tree-menu .ftm-item.danger:hover { background: color-mix(in oklab, var(--danger) 16%, transparent); }
+.eidos-tree-menu .ftm-sep { height: 1px; margin: 5px 4px; background: var(--border); }
 
 /* Side-by-side / multi-up tree demo grid (flatten, search modes). */
-.forge-tree-duo { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); align-items: start; }
-.forge-tree-duo .ftd-col > .ftd-cap { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); }
-.forge-tree-duo .ftd-col > .ftd-cap b { color: var(--fg); font-weight: 600; }
+.eidos-tree-duo { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); align-items: start; }
+.eidos-tree-duo .ftd-col > .ftd-cap { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); }
+.eidos-tree-duo .ftd-col > .ftd-cap b { color: var(--fg); font-weight: 600; }
 
 /* Control bar — diffs.com-style: recessed segmented tracks with an elevated
    active pill, plus toggle pills with a mini switch. Lives ABOVE the card. */
@@ -3535,28 +3535,28 @@ a:focus-visible,
 /* ============================================================================
    PHASE 3.C — CHARTS (Recharts theming)
    ============================================================================ */
-.forge-chart {
+.eidos-chart {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
   overflow: hidden;
 }
-.forge-chart .fc-head {
+.eidos-chart .fc-head {
   display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
   padding: 14px 18px 8px;
   border-bottom: 1px solid var(--border);
 }
-.forge-chart .fc-head-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.forge-chart .fc-title { font-size: 15px; font-weight: 600; color: var(--fg); letter-spacing: -0.005em; line-height: 1.25; }
-.forge-chart .fc-subtitle { font-size: 13px; font-weight: 500; color: var(--fg-muted); line-height: 1.3; }
-.forge-chart .fc-meta { font-size: 11px; font-family: var(--font-mono); font-weight: 500; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.08em; }
-.forge-chart .fc-body { padding: 18px; }
-/* ForgeChart ships state/fallback as first-class props; this styles the
+.eidos-chart .fc-head-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.eidos-chart .fc-title { font-size: 15px; font-weight: 600; color: var(--fg); letter-spacing: -0.005em; line-height: 1.25; }
+.eidos-chart .fc-subtitle { font-size: 13px; font-weight: 500; color: var(--fg-muted); line-height: 1.3; }
+.eidos-chart .fc-meta { font-size: 11px; font-family: var(--font-mono); font-weight: 500; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.eidos-chart .fc-body { padding: 18px; }
+/* EidosChart ships state/fallback as first-class props; this styles the
    built-in container it renders for state="loading" | "empty" (or a custom
    fallback node). Without it the component's OWN default state text rendered
    bare top-left. Centers contents over the inline minBlockSize:height it sets,
    so plain state="empty"/state="loading" looks right on every chart page. */
-.forge-chart .fc-state {
+.eidos-chart .fc-state {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3569,10 +3569,10 @@ a:focus-visible,
 }
 /* Axis text — bumped to --fg-muted at 11.5px so it clears WCAG AA in both
    themes. Previously --fg-faint was unreadable on light bg charts. */
-.forge-chart .recharts-cartesian-axis-tick-value {
+.eidos-chart .recharts-cartesian-axis-tick-value {
   fill: var(--fg-muted); font-family: var(--font-mono); font-size: var(--text-xs);
 }
-.forge-chart .recharts-cartesian-grid line {
+.eidos-chart .recharts-cartesian-grid line {
   stroke: var(--viz-grid); stroke-opacity: 0.8;
 }
 /* Polar grid — softer than the cartesian grid so the data shape pops.
@@ -3580,23 +3580,23 @@ a:focus-visible,
    opacity, width) inside each chart so the page renders deterministically
    regardless of CSS specificity. CSS here is intentionally empty for
    polygon/line so prop-level values win cleanly. */
-.forge-chart .recharts-polar-grid-concentric circle,
-.forge-chart .recharts-polar-grid-concentric polygon { fill: none; }
+.eidos-chart .recharts-polar-grid-concentric circle,
+.eidos-chart .recharts-polar-grid-concentric polygon { fill: none; }
 /* Radar polygon — thinner stroke so the shape reads as a contour rather
    than a heavy frame; smaller vertex dots at every axis intersection. */
-.forge-chart .recharts-radar .recharts-polygon {
+.eidos-chart .recharts-radar .recharts-polygon {
   stroke-width: 1.5 !important;
 }
-.forge-chart .recharts-radar .recharts-dot {
+.eidos-chart .recharts-radar .recharts-dot {
   r: 3 !important;
   stroke-width: 1.5 !important;
 }
-.forge-chart .recharts-polar-angle-axis-tick-value,
-.forge-chart .recharts-polar-radius-axis-tick-value {
+.eidos-chart .recharts-polar-angle-axis-tick-value,
+.eidos-chart .recharts-polar-radius-axis-tick-value {
   fill: var(--fg-muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500;
 }
 
-.forge-tooltip {
+.eidos-tooltip {
   background: var(--bg-elevated);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg, 8px);
@@ -3608,7 +3608,7 @@ a:focus-visible,
   color: var(--fg);
   pointer-events: none;
 }
-.forge-tooltip .ft-label {
+.eidos-tooltip .ft-label {
   color: var(--fg-muted);
   font-family: var(--font-mono);
   font-size: 11px;
@@ -3619,35 +3619,35 @@ a:focus-visible,
   padding-bottom: 6px;
   border-bottom: 1px solid var(--border);
 }
-.forge-tooltip .ft-rows { display: flex; flex-direction: column; gap: 5px; }
-.forge-tooltip .ft-row { display: grid; grid-template-columns: 8px 1fr auto; align-items: center; gap: 8px; }
-.forge-tooltip .ft-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-.forge-tooltip .ft-name { color: var(--fg-muted); font-size: 12px; }
-.forge-tooltip .ft-value { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; font-size: 12px; font-family: var(--font-mono); }
-[data-theme="light"] .forge-tooltip { background: var(--bg-elevated); border-color: var(--border-strong); }
+.eidos-tooltip .ft-rows { display: flex; flex-direction: column; gap: 5px; }
+.eidos-tooltip .ft-row { display: grid; grid-template-columns: 8px 1fr auto; align-items: center; gap: 8px; }
+.eidos-tooltip .ft-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.eidos-tooltip .ft-name { color: var(--fg-muted); font-size: 12px; }
+.eidos-tooltip .ft-value { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; font-size: 12px; font-family: var(--font-mono); }
+[data-theme="light"] .eidos-tooltip { background: var(--bg-elevated); border-color: var(--border-strong); }
 
 /* ChartLegend — manual legend (not Recharts'). Bigger labels + roomier
    gap so the legend can carry the visual weight when axis text alone
    doesn't tell you which series is which. */
-.forge-legend {
+.eidos-legend {
   list-style: none; padding: 0; margin: 10px 0 0;
   display: flex; flex-wrap: wrap; gap: 16px;
   font-size: 13px; line-height: 1.4;
 }
-.forge-legend li {
+.eidos-legend li {
   display: inline-flex; align-items: center; gap: 8px;
   color: var(--fg); font-weight: 500;
 }
-.forge-legend .legend-dot {
+.eidos-legend .legend-dot {
   width: 10px; height: 10px; border-radius: 3px; flex: 0 0 10px;
 }
-.forge-legend .legend-label { color: var(--fg); }
-.forge-legend .legend-value { color: var(--fg-muted); font-family: var(--font-mono); font-size: 12px; }
+.eidos-legend .legend-label { color: var(--fg); }
+.eidos-legend .legend-value { color: var(--fg-muted); font-family: var(--font-mono); font-size: 12px; }
 
-.forge-chart-fallback { padding: 20px; color: var(--danger); border: 1px dashed var(--danger); border-radius: 6px; font-family: var(--font-mono); }
+.eidos-chart-fallback { padding: 20px; color: var(--danger); border: 1px dashed var(--danger); border-radius: 6px; font-family: var(--font-mono); }
 
 /* Heatmap hover popover — lifted from AI Label popover so the chrome
-   reads as a Forge moment, not a generic browser tooltip. */
+   reads as a Eidos moment, not a generic browser tooltip. */
 .heat-pop {
   width: 220px; padding: 12px 14px;
   background: var(--bg-elevated);
@@ -3686,8 +3686,8 @@ a:focus-visible,
 /* ---- Recharts hover / active state overrides ----
    By default Recharts paints the hover cursor as opaque rgb(204,204,204) and
    the active dot/bar as white — both clash with dark mode AND light mode.
-   Bind them to Forge tokens so the highlight reads consistently in both. */
-.forge-chart .recharts-tooltip-cursor {
+   Bind them to Eidos tokens so the highlight reads consistently in both. */
+.eidos-chart .recharts-tooltip-cursor {
   fill: var(--fg) !important;
   fill-opacity: 0.06 !important;
   stroke: var(--viz-axis) !important;
@@ -3695,84 +3695,84 @@ a:focus-visible,
   stroke-dasharray: 3 3 !important;
   stroke-width: 1 !important;
 }
-[data-theme="light"] .forge-chart .recharts-tooltip-cursor {
+[data-theme="light"] .eidos-chart .recharts-tooltip-cursor {
   fill: var(--fg) !important;
   fill-opacity: 0.04 !important;
 }
 /* Active dot — line + area + composed charts */
-.forge-chart .recharts-active-dot circle,
-.forge-chart .recharts-active-dot path {
+.eidos-chart .recharts-active-dot circle,
+.eidos-chart .recharts-active-dot path {
   stroke: var(--surface) !important;
   stroke-width: 2 !important;
   filter: drop-shadow(0 0 4px color-mix(in oklch, currentColor 50%, transparent));
 }
 /* Active bar — bar + histogram + composed charts */
-.forge-chart .recharts-bar-rectangle:hover rect,
-.forge-chart .recharts-active-bar rect {
+.eidos-chart .recharts-bar-rectangle:hover rect,
+.eidos-chart .recharts-active-bar rect {
   filter: brightness(1.18) !important;
 }
-[data-theme="light"] .forge-chart .recharts-bar-rectangle:hover rect,
-[data-theme="light"] .forge-chart .recharts-active-bar rect {
+[data-theme="light"] .eidos-chart .recharts-bar-rectangle:hover rect,
+[data-theme="light"] .eidos-chart .recharts-active-bar rect {
   filter: brightness(0.92) saturate(1.1) !important;
 }
 /* Pie / radial sector hover */
-.forge-chart .recharts-pie-sector:hover path,
-.forge-chart .recharts-radial-bar-sector:hover path {
+.eidos-chart .recharts-pie-sector:hover path,
+.eidos-chart .recharts-radial-bar-sector:hover path {
   filter: brightness(1.15) !important;
 }
-[data-theme="light"] .forge-chart .recharts-pie-sector:hover path,
-[data-theme="light"] .forge-chart .recharts-radial-bar-sector:hover path {
+[data-theme="light"] .eidos-chart .recharts-pie-sector:hover path,
+[data-theme="light"] .eidos-chart .recharts-radial-bar-sector:hover path {
   filter: brightness(0.94) !important;
 }
 /* Sankey link hover — the link path is a stroke, not a fill, so set
    stroke-opacity instead of fill-opacity. */
-.forge-chart .forge-sankey-link {
+.eidos-chart .eidos-sankey-link {
   transition: stroke-opacity var(--dur-fast) var(--ease);
   cursor: pointer;
 }
-.forge-chart .forge-sankey-link:hover {
+.eidos-chart .eidos-sankey-link:hover {
   stroke-opacity: 0.6 !important;
 }
 /* Brush — slider control at the bottom of some line/area charts */
-.forge-chart .recharts-brush rect.recharts-brush-slide {
+.eidos-chart .recharts-brush rect.recharts-brush-slide {
   fill: var(--ember) !important;
   fill-opacity: 0.14 !important;
   stroke: none !important;
 }
-.forge-chart .recharts-brush rect:not(.recharts-brush-slide) {
+.eidos-chart .recharts-brush rect:not(.recharts-brush-slide) {
   fill: var(--surface) !important;
   stroke: var(--border) !important;
 }
-.forge-chart .recharts-brush .recharts-brush-traveller rect {
+.eidos-chart .recharts-brush .recharts-brush-traveller rect {
   fill: var(--ember) !important;
   stroke: var(--ember) !important;
 }
-.forge-chart .recharts-brush .recharts-brush-traveller line {
+.eidos-chart .recharts-brush .recharts-brush-traveller line {
   stroke: var(--surface) !important;
 }
-.forge-chart .recharts-brush text {
+.eidos-chart .recharts-brush text {
   fill: var(--fg-muted) !important;
   font-family: var(--font-mono);
   font-size: 10px;
 }
 /* Reference line label — pages set the stroke; ensure text inherits */
-.forge-chart .recharts-reference-line-label,
-.forge-chart .recharts-cartesian-axis-line { stroke: var(--viz-axis); }
+.eidos-chart .recharts-reference-line-label,
+.eidos-chart .recharts-cartesian-axis-line { stroke: var(--viz-axis); }
 /* Built-in Recharts legend (when used over our ChartLegend). Bigger and
    higher-contrast so it's legible. */
-.forge-chart .recharts-default-legend { padding: 0 !important; }
-.forge-chart .recharts-default-legend .recharts-legend-item {
+.eidos-chart .recharts-default-legend { padding: 0 !important; }
+.eidos-chart .recharts-default-legend .recharts-legend-item {
   margin-inline-end: 18px !important;
 }
-.forge-chart .recharts-legend-item-text {
+.eidos-chart .recharts-legend-item-text {
   color: var(--fg) !important; font-size: 13px !important;
   font-weight: 500 !important; letter-spacing: -0.002em !important;
   margin-inline-start: 6px !important;
 }
-.forge-chart .recharts-legend-icon { display: inline-block !important; vertical-align: middle !important; }
+.eidos-chart .recharts-legend-icon { display: inline-block !important; vertical-align: middle !important; }
 /* Cursor for radar / pie / radial — usually a polar overlay we don't need */
-.forge-chart .recharts-pie .recharts-tooltip-cursor,
-.forge-chart .recharts-radial-bar .recharts-tooltip-cursor { display: none !important; }
+.eidos-chart .recharts-pie .recharts-tooltip-cursor,
+.eidos-chart .recharts-radial-bar .recharts-tooltip-cursor { display: none !important; }
 
 /* ===========================================================================
    PATTERNS — visual effects & decorative surfaces
@@ -4095,7 +4095,7 @@ a:focus-visible,
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Mobile component primitives — touch-sized surfaces used by the Forge Mobile
+   Mobile component primitives — touch-sized surfaces used by the Eidos Mobile
    sub-DS pages (migrated/mobile/*). Tokens + ember accent come from core.
    ───────────────────────────────────────────────────────────────────────── */
 
@@ -6273,7 +6273,7 @@ table.tbl:has(+ .tbl-bottom) { border-radius: 8px 8px 0 0; }
 
 /* ════════════════════════════════════════════════════════════════════════
    Components / Status & semantics — classes promoted out of a former
-   page-local <style> block in status.tsx (Forge invariant: never <style>
+   page-local <style> block in status.tsx (Eidos invariant: never <style>
    per page; compose ds.css). Composes tokens.css colour vars only.
    ════════════════════════════════════════════════════════════════════════ */
 .st-row { display: grid; grid-template-columns: 100px 1.1fr 1.4fr 1.4fr; gap: 18px; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--border); }

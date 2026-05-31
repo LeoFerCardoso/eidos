@@ -4,7 +4,7 @@ import { ChangelogView, type ChangelogEntry } from '@/components/docs';
 const CHANGELOG: ChangelogEntry[] = [
   // ─── v1.11.0 — Charts on Storybook + the contract harness (2026-05-30) ──────
   { version: 'v1.11.0', date: '2026-05-30', type: 'feat', scope: 'charts', title: 'Charts join the Storybook + registry surfaces',
-    summary: 'ForgeChart and ChartLegend ship Storybook stories and registry items, and a Charts group joined the Storybook sort order. Chart pages are verified against the forge:verify contract (a11y, anatomy, four-surface parity).' },
+    summary: 'EidosChart and ChartLegend ship Storybook stories and registry items, and a Charts group joined the Storybook sort order. Chart pages are verified against the eidos:verify contract (a11y, anatomy, four-surface parity).' },
 
   // ─── v1.10.0 — Page standard (2026-05-22) ──────
   { version: 'v1.10.0', date: '2026-05-22', type: 'feat', scope: 'colors', title: 'Colors — the data-viz palette moved here from core',
@@ -24,13 +24,13 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.6.0', date: '2026-05-16', type: 'fix', scope: 'charts', title: 'Chart titles, legend + heatmap popover legibility',
     summary: 'fc-title 14→15px, fc-subtitle 12→13px / weight 500, legend text 13→13.5px, cartesian ticks 11.5→12px / 500, polar ticks 12.5px / --fg. Heatmap popover title 13→14px with tightened tracking.' },
   { version: 'v1.6.0', date: '2026-05-16', type: 'fix', scope: 'charts', title: 'Do / Don\'t live demos rendered empty',
-    summary: '.dd-card .body is a flex-center wrapper, so block-level chart children collapsed to 0 width and ResponsiveContainer emitted nothing. Added explicit width:100% on .forge-chart inside Do/Don\'t bodies so all live demos render at full width.' },
+    summary: '.dd-card .body is a flex-center wrapper, so block-level chart children collapsed to 0 width and ResponsiveContainer emitted nothing. Added explicit width:100% on .eidos-chart inside Do/Don\'t bodies so all live demos render at full width.' },
   { version: 'v1.5.0', date: '2026-05-16', type: 'feat', scope: 'gauge', title: 'Gauge rewritten from scratch (plain SVG)',
     summary: 'The PieChart-based gauge mis-centered inside ResponsiveContainer. Replaced with a 30-line SVG primitive: semi / three-quarter / full variants, explicit polar math, centered tabular-nums readout, and a Change-Risk-Score recipe tinted green/amber/red.' },
   { version: 'v1.5.0', date: '2026-05-16', type: 'fix', scope: 'sankey', title: 'Sankey rendered empty — fixed the link renderer',
-    summary: 'ForgeLink read props.d, but Recharts Sankey passes sourceX/targetX/… and expects the renderer to build the path. Rewrote it to construct the cubic bezier; ribbons now appear with palette-indexed colours and stroke-opacity 0.28→0.6 on hover.' },
+    summary: 'EidosLink read props.d, but Recharts Sankey passes sourceX/targetX/… and expects the renderer to build the path. Rewrote it to construct the cubic bezier; ribbons now appear with palette-indexed colours and stroke-opacity 0.28→0.6 on hover.' },
   { version: 'v1.3.0', date: '2026-05-16', type: 'feat', scope: 'charts', title: '11 chart types — Recharts themed with Eidos tokens',
-    summary: 'Bar, line, area, histogram, pie, gauge, composed, radar, radial, sankey, heatmap. Each page documents 2–4 variants on a real IDP-shaped dataset. New <ForgeChart>, <ForgeTooltipContent>, useChartColors helpers.' },
+    summary: 'Bar, line, area, histogram, pie, gauge, composed, radar, radial, sankey, heatmap. Each page documents 2–4 variants on a real IDP-shaped dataset. New <EidosChart>, <EidosTooltipContent>, useChartColors helpers.' },
 ];
 
 export default function ChartsChangelog() {

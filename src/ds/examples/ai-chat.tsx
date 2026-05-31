@@ -23,7 +23,7 @@ const STARTERS: { icon: string; label: string }[] = [
 
 const App = () => {
   const [text, setText] = React.useState('');
-  const [model, setModel] = React.useState('forge-sonnet-4-6');
+  const [model, setModel] = React.useState('eidos-sonnet-4-6');
   const [bannerShown, setBannerShown] = React.useState(true);
   // Which starter is currently selected. A chip is "selected" when its label
   // is the prefix of the current composer text — so editing the prompt past

@@ -2,7 +2,7 @@
  *
  * Preflight is intentionally OMITTED (we import only theme + utilities layers) so
  * Tailwind's base reset does NOT regress the legacy DS pages, which rely on
- * tokens.css/ds.css resets. New components use Tailwind utilities mapped to the Forge
+ * tokens.css/ds.css resets. New components use Tailwind utilities mapped to the Eidos
  * tokens; legacy pages are untouched.
  *
  * `@theme inline` keeps the var() reference in the generated utility, so utilities like
@@ -12,7 +12,7 @@
 @import 'tailwindcss/utilities.css' layer(utilities);
 
 @theme inline {
-  /* Forge tokens → Tailwind color utilities (bg-surface, text-fg-muted, border-border, …) */
+  /* Eidos tokens → Tailwind color utilities (bg-surface, text-fg-muted, border-border, …) */
   --color-bg: var(--bg);
   --color-bg-elevated: var(--bg-elevated);
   --color-canvas: var(--canvas);

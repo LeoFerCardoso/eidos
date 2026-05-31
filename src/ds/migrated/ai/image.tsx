@@ -186,7 +186,7 @@ export default function AiImage() {
                 <ImageView
                   src={SVG_WIDE}
                   alt="Ring rollout diagram showing canary, 25%, and 100% stages with health gates at each transition"
-                  caption="Generated from forge.yaml ring definitions · identity-svc · 2026-05-27"
+                  caption="Generated from eidos.yaml ring definitions · identity-svc · 2026-05-27"
                   aspect="16 / 9"
                 />
               </div>
@@ -226,7 +226,7 @@ export default function AiImage() {
         <div className="surface" style={{ padding: 18 }}>
           <div style={{ fontWeight: 600, marginBottom: 6 }}>Caption as figcaption</div>
           <div style={{ color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.55 }}>
-            The <code style={{ fontFamily: 'var(--font-mono)' }}>caption</code> prop renders as a semantic <code style={{ fontFamily: 'var(--font-mono)' }}>{'<figcaption>'}</code> inside the <code style={{ fontFamily: 'var(--font-mono)' }}>{'<figure>'}</code> element. Screen readers associate it with the image automatically. Use it for provenance ("Generated from forge.yaml · identity-svc · timestamp") — not a repeat of the alt text.
+            The <code style={{ fontFamily: 'var(--font-mono)' }}>caption</code> prop renders as a semantic <code style={{ fontFamily: 'var(--font-mono)' }}>{'<figcaption>'}</code> inside the <code style={{ fontFamily: 'var(--font-mono)' }}>{'<figure>'}</code> element. Screen readers associate it with the image automatically. Use it for provenance ("Generated from eidos.yaml · identity-svc · timestamp") — not a repeat of the alt text.
           </div>
         </div>
         <div className="surface" style={{ padding: 18 }}>
@@ -251,7 +251,7 @@ export default function AiImage() {
   <ImageView
     src={img}
     alt="مخطط النشر التدريجي"
-    caption="تم إنشاؤه من تعريفات forge.yaml · identity-svc"
+    caption="تم إنشاؤه من تعريفات eidos.yaml · identity-svc"
     aspect="16 / 9"
   />
 </div>`}
@@ -260,7 +260,7 @@ export default function AiImage() {
           <ImageView
             src={SVG_WIDE}
             alt="مخطط النشر التدريجي لخدمة identity-svc"
-            caption="تم إنشاؤه من تعريفات forge.yaml · identity-svc · 2026-05-27"
+            caption="تم إنشاؤه من تعريفات eidos.yaml · identity-svc · 2026-05-27"
             aspect="16 / 9"
           />
         </div>
@@ -279,7 +279,7 @@ export default function AiImage() {
               <ImageView
                 src={SVG_WIDE}
                 alt="Anatomy demo image"
-                caption="Generated from forge.yaml · identity-svc · 2026-05-27"
+                caption="Generated from eidos.yaml · identity-svc · 2026-05-27"
                 aspect="16 / 9"
               />
               {/* pin 1 — frame */}
@@ -315,12 +315,12 @@ export default function AiImage() {
               <ImageView
                 src={SVG_WIDE}
                 alt="Ring rollout — canary to 25% to 100% with health gates"
-                caption="Generated from forge.yaml · identity-svc"
+                caption="Generated from eidos.yaml · identity-svc"
                 aspect="16 / 9"
               />
             </div>
           </div>
-          <div className="note">Alt text describes the content ("Ring rollout — canary to 25% to 100%"); the caption names the source ("Generated from forge.yaml · identity-svc"). Both are mandatory in AI-generated images so users know what they're looking at and where it came from.</div>
+          <div className="note">Alt text describes the content ("Ring rollout — canary to 25% to 100%"); the caption names the source ("Generated from eidos.yaml · identity-svc"). Both are mandatory in AI-generated images so users know what they're looking at and where it came from.</div>
         </div>
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — ship an image with no alt</div>

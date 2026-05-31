@@ -1,50 +1,50 @@
 ---
 name: release
-description: Cut a Eidos DS version bump. Updates BOTH version strings in src/ds/core/shell.jsx (sidebar sub-text and topbar badge — they must stay in sync), adds a changelog entry, sweeps stale nav badges, and commits.
+description: Cut a Eidos DS version bump. Updates DS_VERSION in src/lib/site.ts (single source of truth for the topbar VersionBadge), adds a changelog entry, sweeps stale nav badges, and commits.
 argument-hint: "[major|minor|patch]"
 allowed-tools: [Bash, Read, Edit, Grep]
 ---
 
-# /release — version bump (two-place, in sync)
+# /release — per-DS version bump
 
-The DS version is shown in **two** places in `src/ds/core/shell.jsx` and they MUST match.
-Currently `v1.7.13`.
+Versioning is **per Design System**. Each DS's version lives in the `DS_VERSIONS` map in
+`src/lib/site.ts` and must match the latest entry in that DS's own Changelog. The topbar
+`VersionBadge` is DS-aware (`src/components/layout/version-badge.tsx`).
+
+`$ARGUMENTS` = `<ds> [major|minor|patch]` (e.g. `core minor`, `ai patch`). `<ds>` is one of
+`core · charts · ai · idp · patterns · mobile · blocks` (default `core`; default bump `patch`).
+If `<ds>` is omitted, infer it from the changed files' DS.
 
 ## 1. Determine the new version
 
-Read the current version from `src/ds/core/shell.jsx`. Apply the bump from `$ARGUMENTS`
-(`major`/`minor`/`patch`, default `patch`) to get `vX.Y.Z`.
+Read `DS_VERSIONS['<ds>']` from `src/lib/site.ts`. Apply the bump to get the new `X.Y.Z`. It MUST
+be contiguous within that DS (no gaps vs the DS's latest changelog entry — versions are independent
+across DSs, so the same number may exist in another DS).
 
-## 2. Update BOTH strings in shell.jsx (must stay in sync)
+## 2. Update DS_VERSIONS
 
-1. Sidebar sub-text:
-   `<span className="sub">Design System vX.Y.Z</span>`
-2. Topbar badge pill:
-   `<span className="pill ember"><span className="dot"/>vX.Y.Z · Stable</span>`
-
-Grep `shell.jsx` for the old version after editing to confirm zero stale occurrences.
+Edit `src/lib/site.ts`: set `'<ds>': 'X.Y.Z'` in the `DS_VERSIONS` map. (Do not touch
+`package.json` — its version is owned by another process. `DS_VERSION` stays = `DS_VERSIONS.core`.)
 
 ## 3. Sweep stale nav badges
 
 In `src/ds/core/nav-config.js`, per the badge policy, drop `new`/`updated` badges on items
-that did NOT actually move this cycle. "Everything is new" == "nothing is new". Leave
-badges only on genuinely changed entries.
+that did NOT actually move this cycle. "Everything is new" == "nothing is new". Leave badges
+only on genuinely changed entries (scaffold placeholders keep `soon`).
 
 ## 4. Changelog
 
-Add a dated entry for `vX.Y.Z` summarizing notable changes. If a `CHANGELOG.md` exists,
-prepend the new section (keep reverse-chronological order); if not, create one with a
-`# Changelog` header and the first entry. Keep it under `${CLAUDE_PLUGIN_ROOT}/`-untouched paths — only
-write the changelog and the two source files this flow owns.
+Add a dated entry for `X.Y.Z`. For a sub-DS change, prepend the entry to that DS's changelog
+(`src/ds/migrated/<ds>/changelog.tsx`, the `ChangelogEntry[]`); for a core/global change use
+the core changelog. Keep reverse-chronological order.
 
 ## 5. Commit
 
-Stage `src/ds/core/shell.jsx`, `src/ds/core/nav-config.js` (if swept), and the changelog.
+Stage `src/lib/site.ts`, `src/ds/core/nav-config.js` (if swept), and the changelog file(s).
 Commit as `chore(release): vX.Y.Z`, body ending with:
 
 ```
 Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 ```
 
-Do not push. Report the new version and the commit hash. Note: do not edit
-`package.json` — its version is owned by another process.
+Do not push. Report the new version and the commit hash.

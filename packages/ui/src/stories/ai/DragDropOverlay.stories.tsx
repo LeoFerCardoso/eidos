@@ -16,7 +16,7 @@ const meta = {
     },
   },
   args: {
-    modelValue: 'forge-sonnet-4-6',
+    modelValue: 'eidos-sonnet-4-6',
     placeholder: 'Drag a file anywhere on this composer…',
   },
   argTypes: {
@@ -32,7 +32,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => {
     function Demo() {
-      const [model, setModel] = React.useState('forge-sonnet-4-6');
+      const [model, setModel] = React.useState('eidos-sonnet-4-6');
       return (
         <DragDropOverlay
           modelValue={model}
@@ -50,7 +50,7 @@ export const Default: Story = {
 export const WithPreloadedFiles: Story = {
   render: () => {
     function Demo() {
-      const [model, setModel] = React.useState('forge-sonnet-4-6');
+      const [model, setModel] = React.useState('eidos-sonnet-4-6');
       return (
         <DragDropOverlay
           modelValue={model}

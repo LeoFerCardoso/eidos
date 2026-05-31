@@ -1,5 +1,5 @@
 export const meta = {
-  name: 'forge-consolidate',
+  name: 'eidos-consolidate',
   description: 'Phase 1 of the Eidos DS consolidation: dedup CountUp/Counter, build the Pill/Chip/Badge trio + presets, unify Calendar (selectionMode), and rebuild Select as a custom dropdown + reconcile Combobox + document the Select/Combobox/DropdownMenu boundary. Sequential builds (shared-file safe) → one full verify → per-case critique.',
   whenToUse: 'After the consolidation-audit, to execute the 4 consolidation cases.',
   phases: [

@@ -12,7 +12,7 @@ const meta = {
         component:
           'A compact status pill that represents the four run-states of an agent tool call: ' +
           'Pending (input streaming), Running (input available, executing), Done (output arrived), ' +
-          'and Error (output error). Composes the Forge Pill primitive so semantic tones and ' +
+          'and Error (output error). Composes the Eidos Pill primitive so semantic tones and ' +
           'live-region announcements are handled by the design system — never colour alone.',
       },
     },
@@ -66,10 +66,10 @@ export const InContext: Story = {
     >
       {(
         [
-          { tool: 'forge.ai.lookup_user',        state: 'input-streaming'  },
-          { tool: 'forge.ai.search_incidents',   state: 'input-available'  },
-          { tool: 'forge.infra.get_deploy_info', state: 'output-available' },
-          { tool: 'forge.ai.assess_risk_score',  state: 'output-error'     },
+          { tool: 'eidos.ai.lookup_user',        state: 'input-streaming'  },
+          { tool: 'eidos.ai.search_incidents',   state: 'input-available'  },
+          { tool: 'eidos.infra.get_deploy_info', state: 'output-available' },
+          { tool: 'eidos.ai.assess_risk_score',  state: 'output-error'     },
         ] as { tool: string; state: string }[]
       ).map(({ tool, state }) => (
         <div

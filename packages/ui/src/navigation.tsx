@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { cn } from './lib/utils';
 import { Icons } from './icons';
 
-// Forge DS — Navigation Menu
+// Eidos DS — Navigation Menu
 //
 // Horizontal site navigation bar with optional dropdown content panels per
 // top-level item. Top items form a roving tab-stop list; ArrowLeft / Right

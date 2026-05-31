@@ -96,19 +96,19 @@ export const InContext: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
       <Banner
         tone="info"
-        title="Welcome to Forge"
+        title="Welcome to Eidos"
         message="Take the 5-minute tour to wire your first service to the IDP."
         action="Start tour"
         onAction={() => {}}
       />
       <div style={{ padding: 14, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-xl)' }}>
-        <div style={{ fontWeight: 500, marginBottom: 10 }}>Service health · forge-api</div>
+        <div style={{ fontWeight: 500, marginBottom: 10 }}>Service health · eidos-api</div>
         <Banner tone="warning" message="3 of 5 SLO budgets at risk this window." />
       </div>
       <Banner
         tone="success"
         title="Service onboarded"
-        message="forge-api is now indexed in the Service Catalog."
+        message="eidos-api is now indexed in the Service Catalog."
         onDismiss={() => {}}
       />
     </div>

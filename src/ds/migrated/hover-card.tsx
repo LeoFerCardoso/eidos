@@ -82,10 +82,10 @@ export function Demo() {
 
 const LINK_PREVIEW_CODE = `<HoverCard
   minWidth={280}
-  trigger={<a href="https://docs.forge.dev/deploy">docs.forge.dev/deploy</a>}
+  trigger={<a href="https://docs.eidos.dev/deploy">docs.eidos.dev/deploy</a>}
 >
   <div>
-    <p className="t-mono-label">docs.forge.dev</p>
+    <p className="t-mono-label">docs.eidos.dev</p>
     <strong>Deploying a service</strong>
     <p>Six steps from local change to production traffic.</p>
   </div>
@@ -164,13 +164,13 @@ export default function HoverCardPage() {
                 onClick={(e) => e.preventDefault()}
                 style={{ color: 'var(--ember)', textDecoration: 'underline' }}
               >
-                docs.forge.dev/deploy
+                docs.eidos.dev/deploy
               </a>
             }
           >
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>
-                docs.forge.dev
+                docs.eidos.dev
               </div>
               <div style={{ fontWeight: 600, color: 'var(--fg)', fontSize: 'var(--text-body)', marginBottom: 4 }}>Deploying a service</div>
               <div style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', lineHeight: 1.5 }}>

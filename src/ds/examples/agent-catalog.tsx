@@ -24,7 +24,7 @@ import { FPageHeader, FShell } from './example-shell';
       provider: 'anthropic', model: 'claude-4.6-sonnet', status: 'up',
       capabilities: ['sql-review','schema-diff','migration-risk'], pass: 90, cost: 0.14, calls: 318, lastRun: Date.now() - 4 * 3600 * 1000 },
     { id: 'fraud-co-pilot',  name: 'fraud-co-pilot',  summary: 'Investigates flagged transactions · suggests rule tweaks',
-      provider: 'local',     model: 'forge-llama-3.3', status: 'degraded',
+      provider: 'local',     model: 'eidos-llama-3.3', status: 'degraded',
       capabilities: ['fraud-triage','rule-tuning'], pass: 79, cost: 0.05, calls: 4218, lastRun: Date.now() - 9 * 60 * 1000 },
     { id: 'test-writer',     name: 'test-writer',     summary: 'Drafts Vitest / Jest cases from a function signature + sample input',
       provider: 'openai',    model: 'gpt-5.1-mini',    status: 'up',
@@ -33,7 +33,7 @@ import { FPageHeader, FShell } from './example-shell';
       provider: 'anthropic', model: 'claude-4.7-haiku', status: 'up',
       capabilities: ['cost-anomaly','rightsize','budget-alerts'], pass: 96, cost: 0.03, calls: 7841, lastRun: Date.now() - 90 * 1000 },
     { id: 'kyc-helper',      name: 'kyc-helper',      summary: 'Explains a flagged onboarding case · cites docs · drafts response',
-      provider: 'local',     model: 'forge-llama-3.3', status: 'up',
+      provider: 'local',     model: 'eidos-llama-3.3', status: 'up',
       capabilities: ['kyc-explain','doc-cite'], pass: 87, cost: 0.04, calls: 612, lastRun: Date.now() - 12 * 3600 * 1000 },
     { id: 'runbook-runner',  name: 'runbook-runner',  summary: 'Executes parameterized runbooks · returns transcript + diffs',
       provider: 'anthropic', model: 'claude-4.7-sonnet', status: 'up',
@@ -45,7 +45,7 @@ import { FPageHeader, FShell } from './example-shell';
       provider: 'anthropic', model: 'claude-4.7-opus', status: 'up',
       capabilities: ['compliance','evidence','audit-trail'], pass: 93, cost: 0.31, calls: 41, lastRun: Date.now() - 3 * 3600 * 1000 },
     { id: 'sandbox-runner',  name: 'sandbox-runner',  summary: 'Spawns a sandboxed sibling deploy for safe experiments',
-      provider: 'local',     model: 'forge-runner',    status: 'down',
+      provider: 'local',     model: 'eidos-runner',    status: 'down',
       capabilities: ['sandbox','sibling-deploy'], pass: 0, cost: 0.00, calls: 0, lastRun: Date.now() - 4 * 86400 * 1000 },
   ];
 

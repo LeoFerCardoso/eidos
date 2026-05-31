@@ -80,7 +80,7 @@ export const CustomLabels: Story = {
 export const InContext: Story = {
   render: () => {
     const services = [
-      { name: 'forge-api', region: 'us-east-1', state: 'up' as const, latency: '42 ms' },
+      { name: 'eidos-api', region: 'us-east-1', state: 'up' as const, latency: '42 ms' },
       { name: 'auth-gateway', region: 'eu-west-1', state: 'degraded' as const, latency: '380 ms', pulse: true },
       { name: 'ingest-worker', region: 'us-west-2', state: 'down' as const, latency: '—' },
       { name: 'metrics-collector', region: 'ap-southeast-1', state: 'unknown' as const, latency: '—' },
@@ -128,7 +128,7 @@ export const RTL: Story = {
         <HealthBadge state="unknown" />
       </div>
       <div className="surface" style={{ padding: '10px 14px', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: 360 }}>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)' }}>forge-api</span>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)' }}>eidos-api</span>
         <HealthBadge state="up" label="يعمل" />
       </div>
     </div>

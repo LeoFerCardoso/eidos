@@ -168,7 +168,7 @@ export default function Page() {
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — use for non-JSON</div>
           <div className="body" style={{padding:0, color:'var(--fg-faint)', fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)'}}>
-            <pre style={{margin:0}}>HTTP/1.1 200 OK{'\n'}content-type: application/json{'\n'}server: forge-edge</pre>
+            <pre style={{margin:0}}>HTTP/1.1 200 OK{'\n'}content-type: application/json{'\n'}server: eidos-edge</pre>
           </div>
           <div className="note">Use a plain code block for headers, logs, or unstructured strings.</div>
         </div>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge — shared icons (Lucide-style, 16/20px stroke 1.5) and the brand mark
+// Eidos — shared icons (Lucide-style, 16/20px stroke 1.5) and the brand mark
 type IconProps = { size?: number; color?: string; strokeWidth?: number } & React.SVGProps<SVGSVGElement>;
 const I = (path: React.ReactNode, vb = '0 0 24 24') => ({ size = 16, color = 'currentColor', strokeWidth = 1.5, ...rest }: IconProps = {}) => (
   <svg width={size} height={size} viewBox={vb} fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" {...rest}>
@@ -234,7 +234,7 @@ const Icons = {
   activity:    I(<polyline points="3 12 7 12 10 4 14 20 17 12 21 12"/>),
 
   // ─── IDP / DX / Agent platform glyphs ───────────────────────────
-  // Added for the Examples gallery — Forge ships a single, consistent
+  // Added for the Examples gallery — Eidos ships a single, consistent
   // visual vocabulary for "infrastructure + agent" surfaces.
   bot:         I(<><rect x="4" y="8" width="16" height="12" rx="2"/><circle cx="9" cy="14" r="1" fill="currentColor"/><circle cx="15" cy="14" r="1" fill="currentColor"/><line x1="12" y1="4" x2="12" y2="8"/><circle cx="12" cy="4" r="1" fill="currentColor"/></>),
   cloud:       I(<path d="M7 19 H17 a4 4 0 1 0 -1 -7.9 A5 5 0 0 0 7 11 a4 4 0 0 0 0 8 z"/>),

@@ -5,17 +5,17 @@ import type { ModelOption } from '@eidos/ui';
 
 // ── Shared model catalogs ────────────────────────────────────────────────────
 
-const FORGE_MODELS: ModelOption[] = [
-  { id: 'forge-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: '$3 / 1M' },
-  { id: 'forge-opus-4-7',   short: 'O', name: 'Opus 4.7',   cost: '$15 / 1M' },
-  { id: 'forge-haiku-4-5',  short: 'H', name: 'Haiku 4.5',  cost: '$1 / 1M' },
+const EIDOS_MODELS: ModelOption[] = [
+  { id: 'eidos-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: '$3 / 1M' },
+  { id: 'eidos-opus-4-7',   short: 'O', name: 'Opus 4.7',   cost: '$15 / 1M' },
+  { id: 'eidos-haiku-4-5',  short: 'H', name: 'Haiku 4.5',  cost: '$1 / 1M' },
 ];
 
 const EXTENDED_MODELS: ModelOption[] = [
-  { id: 'forge-sonnet-4-6',   short: 'S',  name: 'Sonnet 4.6',       cost: '$3 / 1M' },
-  { id: 'forge-opus-4-7',     short: 'O',  name: 'Opus 4.7',         cost: '$15 / 1M' },
-  { id: 'forge-haiku-4-5',    short: 'H',  name: 'Haiku 4.5',        cost: '$1 / 1M' },
-  { id: 'forge-embed-3',      short: 'E',  name: 'Embed 3',          cost: '$0.10 / 1M' },
+  { id: 'eidos-sonnet-4-6',   short: 'S',  name: 'Sonnet 4.6',       cost: '$3 / 1M' },
+  { id: 'eidos-opus-4-7',     short: 'O',  name: 'Opus 4.7',         cost: '$15 / 1M' },
+  { id: 'eidos-haiku-4-5',    short: 'H',  name: 'Haiku 4.5',        cost: '$1 / 1M' },
+  { id: 'eidos-embed-3',      short: 'E',  name: 'Embed 3',          cost: '$0.10 / 1M' },
 ];
 
 // ── Meta ─────────────────────────────────────────────────────────────────────
@@ -40,13 +40,13 @@ const meta = {
     },
   },
   args: {
-    value: 'forge-sonnet-4-6',
-    models: FORGE_MODELS,
+    value: 'eidos-sonnet-4-6',
+    models: EIDOS_MODELS,
   },
   argTypes: {
     value: {
       control: 'select',
-      options: FORGE_MODELS.map(m => m.id),
+      options: EIDOS_MODELS.map(m => m.id),
     },
   },
 } satisfies Meta<typeof ModelPicker>;
@@ -57,19 +57,19 @@ type Story = StoryObj<typeof meta>;
 // ── Stories ──────────────────────────────────────────────────────────────────
 
 /**
- * Default — controlled picker with the three standard Forge-hosted models.
+ * Default — controlled picker with the three standard Eidos-hosted models.
  * Click the trigger to open the drop-up and select a model; the label updates
  * to reflect the choice.
  */
 export const Default: Story = {
   render: (args) => {
     function Demo() {
-      const [value, setValue] = React.useState(args.value ?? 'forge-sonnet-4-6');
+      const [value, setValue] = React.useState(args.value ?? 'eidos-sonnet-4-6');
       return (
         <ModelPicker
           value={value}
           onChange={setValue}
-          models={args.models ?? FORGE_MODELS}
+          models={args.models ?? EIDOS_MODELS}
         />
       );
     }
@@ -85,7 +85,7 @@ export const Default: Story = {
 export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'flex-start' }}>
-      {FORGE_MODELS.map((m) => {
+      {EIDOS_MODELS.map((m) => {
         function ModelRow() {
           const [value, setValue] = React.useState(m.id);
           return (
@@ -93,7 +93,7 @@ export const Variants: Story = {
               <span style={{ width: 120, fontSize: 12, color: 'var(--fg-muted)', fontFamily: 'var(--font-mono)' }}>
                 {m.id}
               </span>
-              <ModelPicker value={value} onChange={setValue} models={FORGE_MODELS} />
+              <ModelPicker value={value} onChange={setValue} models={EIDOS_MODELS} />
             </div>
           );
         }
@@ -110,7 +110,7 @@ export const Variants: Story = {
 export const ExtendedCatalog: Story = {
   render: () => {
     function Demo() {
-      const [value, setValue] = React.useState('forge-sonnet-4-6');
+      const [value, setValue] = React.useState('eidos-sonnet-4-6');
       return (
         <ModelPicker
           value={value}
@@ -130,7 +130,7 @@ export const ExtendedCatalog: Story = {
 export const InContext: Story = {
   render: () => {
     function Demo() {
-      const [model, setModel] = React.useState('forge-sonnet-4-6');
+      const [model, setModel] = React.useState('eidos-sonnet-4-6');
       return (
         <div
           style={{
@@ -150,7 +150,7 @@ export const InContext: Story = {
             </svg>
           </button>
           <span style={{ flex: 1 }}/>
-          <ModelPicker value={model} onChange={setModel} models={FORGE_MODELS} />
+          <ModelPicker value={model} onChange={setModel} models={EIDOS_MODELS} />
           <button
             className="pi-submit"
             aria-label="Send"

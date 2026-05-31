@@ -29,7 +29,7 @@ src/lib/nav.ts
 reports/
 
 # Backups / archives (not source — kept locally, out of version control)
-Forge-DS.zip
+Eidos-DS.zip
 .backup-premonorepo/
 1180
 

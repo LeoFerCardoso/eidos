@@ -5,7 +5,7 @@ import { ButtonGroup } from '@eidos/ui';
 // NOTE: The stories render raw .btn / .btn-group CSS classes directly — in a
 // real app you would use the full <Button> component. The ButtonGroup component
 // itself manages orientation, size modifier, and role="group"; child buttons
-// are plain HTML buttons styled with the Forge .btn classes here for clarity.
+// are plain HTML buttons styled with the Eidos .btn classes here for clarity.
 
 const meta = {
   title: 'Primitives/ButtonGroup',

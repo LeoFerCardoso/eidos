@@ -19,7 +19,7 @@ const meta = {
     },
   },
   args: {
-    agent: { name: 'Forge AI', model: 'forge-ai/gpt-4o-mini', status: 'online' },
+    agent: { name: 'Eidos AI', model: 'eidos-ai/gpt-4o-mini', status: 'online' },
     size: 32,
     label: false,
   },
@@ -42,7 +42,7 @@ export const Default: Story = {};
 /** With AI label — appends an AILabel pill after the agent name to flag AI-generated content. */
 export const WithAILabel: Story = {
   args: {
-    agent: { name: 'Deploy Agent', model: 'forge-ai/codex-v2', status: 'online' },
+    agent: { name: 'Deploy Agent', model: 'eidos-ai/codex-v2', status: 'online' },
     label: true,
   },
 };
@@ -63,16 +63,16 @@ export const Variants: Story = {
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center' }}>
           <AgentIdentity
-            agent={{ name: 'Forge AI', model: 'forge-ai/gpt-4o-mini', status: 'online' }}
+            agent={{ name: 'Eidos AI', model: 'eidos-ai/gpt-4o-mini', status: 'online' }}
           />
           <AgentIdentity
-            agent={{ name: 'Incident Responder', model: 'forge-ai/claude-3-haiku', status: 'away' }}
+            agent={{ name: 'Incident Responder', model: 'eidos-ai/claude-3-haiku', status: 'away' }}
           />
           <AgentIdentity
-            agent={{ name: 'Fraud Engine', model: 'forge-ai/risk-v3', status: 'busy' }}
+            agent={{ name: 'Fraud Engine', model: 'eidos-ai/risk-v3', status: 'busy' }}
           />
           <AgentIdentity
-            agent={{ name: 'Audit Bot', model: 'forge-ai/compliance-v1', status: 'offline' }}
+            agent={{ name: 'Audit Bot', model: 'eidos-ai/compliance-v1', status: 'offline' }}
           />
         </div>
       </section>
@@ -84,19 +84,19 @@ export const Variants: Story = {
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center' }}>
           <AgentIdentity
-            agent={{ name: 'Deploy Agent', model: 'forge-ai/codex-v2', status: 'online' }}
+            agent={{ name: 'Deploy Agent', model: 'eidos-ai/codex-v2', status: 'online' }}
             size={24}
           />
           <AgentIdentity
-            agent={{ name: 'Deploy Agent', model: 'forge-ai/codex-v2', status: 'online' }}
+            agent={{ name: 'Deploy Agent', model: 'eidos-ai/codex-v2', status: 'online' }}
             size={32}
           />
           <AgentIdentity
-            agent={{ name: 'Deploy Agent', model: 'forge-ai/codex-v2', status: 'online' }}
+            agent={{ name: 'Deploy Agent', model: 'eidos-ai/codex-v2', status: 'online' }}
             size={40}
           />
           <AgentIdentity
-            agent={{ name: 'Deploy Agent', model: 'forge-ai/codex-v2', status: 'online' }}
+            agent={{ name: 'Deploy Agent', model: 'eidos-ai/codex-v2', status: 'online' }}
             size={48}
           />
         </div>
@@ -109,11 +109,11 @@ export const Variants: Story = {
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center' }}>
           <AgentIdentity
-            agent={{ name: 'Forge AI', model: 'forge-ai/gpt-4o-mini', status: 'online' }}
+            agent={{ name: 'Eidos AI', model: 'eidos-ai/gpt-4o-mini', status: 'online' }}
             label
           />
           <AgentIdentity
-            agent={{ name: 'Summarisation Agent', model: 'forge-ai/claude-3-5-sonnet', status: 'away' }}
+            agent={{ name: 'Summarisation Agent', model: 'eidos-ai/claude-3-5-sonnet', status: 'away' }}
             label
             size={40}
           />
@@ -160,7 +160,7 @@ export const InContext: Story = {
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <AgentIdentity
-          agent={{ name: 'Deploy Agent', model: 'forge-ai/codex-v2', status: 'online' }}
+          agent={{ name: 'Deploy Agent', model: 'eidos-ai/codex-v2', status: 'online' }}
           label
         />
         <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--fg-muted)' }}>

@@ -42,9 +42,9 @@ import { FShell } from './example-shell';
   //    canonical CSS in ds.css gives both surfaces the same chrome. Kept
   //    local because each <script type="text/babel"> has its own scope.
   const MODELS = [
-    { id: 'forge-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: '$3 / 1M' },
-    { id: 'forge-opus-4-7',   short: 'O', name: 'Opus 4.7',   cost: '$15 / 1M' },
-    { id: 'forge-haiku-4-5',  short: 'H', name: 'Haiku 4.5',  cost: '$1 / 1M' },
+    { id: 'eidos-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: '$3 / 1M' },
+    { id: 'eidos-opus-4-7',   short: 'O', name: 'Opus 4.7',   cost: '$15 / 1M' },
+    { id: 'eidos-haiku-4-5',  short: 'H', name: 'Haiku 4.5',  cost: '$1 / 1M' },
   ];
 
   const ModelBadge = ({ short }) => (
@@ -145,7 +145,7 @@ import { FShell } from './example-shell';
 
   const App = () => {
     const [draft, setDraft]   = React.useState('');
-    const [model, setModel]   = React.useState('forge-sonnet-4-6');
+    const [model, setModel]   = React.useState('eidos-sonnet-4-6');
     const [banner, setBanner] = React.useState(true);
     const taRef = React.useRef(null);
 

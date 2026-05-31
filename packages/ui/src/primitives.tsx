@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-// Forge DS — section-building primitives shared by every page:
+// Eidos DS — section-building primitives shared by every page:
 // CopyButton · Code · CodeBlock · Frame · Section · SubHead · TokenSwatch · SpecRow
 //
 // Tokenizer note (do NOT regress):
@@ -574,13 +574,13 @@ const SpecRow = ({ token, value, usage }: {
 // Usage on a page:
 //   <TabbedCode tabs={installTabs('alert')} ariaLabel="package manager"/>
 //
-// `peers` overrides the default npm dependency list shown in the Manual tab. Forge
+// `peers` overrides the default npm dependency list shown in the Manual tab. Eidos
 // components are SEMANTIC-CLASS React (no Radix, no CVA) — the only baseline dep is
 // the cn() helper (clsx + tailwind-merge). Components that need a real library
 // (recharts for charts, ai/react-markdown for AI) pass their own list.
 const DEFAULT_PEERS = 'clsx tailwind-merge';
 const installTabs = (name, peers = DEFAULT_PEERS) => {
-  const manual = `# 1. Install the Forge base layer once (design tokens + ds.css + cn).
+  const manual = `# 1. Install the Eidos base layer once (design tokens + ds.css + cn).
 npx eidos@latest init
 
 # 2. Add this component — the CLI copies its source into components/forge/
@@ -589,16 +589,16 @@ npx eidos@latest add ${name}
 ${peers !== DEFAULT_PEERS ? `\n#    (pulls npm deps: ${peers})` : ''}
 
 # Manual alternative: copy components/forge/${name}.tsx + lib/utils.ts from the
-# Forge source, run \`npm install ${peers}\`, and import the Forge stylesheet layer
+# Eidos source, run \`npm install ${peers}\`, and import the Eidos stylesheet layer
 # (@eidos/ui/styles/tokens.css → ds.css) so the semantic classes resolve.`;
   return [
     { label: 'pnpm',   code: `pnpm dlx eidos@latest add ${name}`, lang: 'bash' },
     { label: 'npm',    code: `npx eidos@latest add ${name}`,      lang: 'bash' },
     { label: 'yarn',   code: `yarn dlx eidos@latest add ${name}`, lang: 'bash' },
     { label: 'bun',    code: `bunx eidos@latest add ${name}`,     lang: 'bash' },
-    // The Forge registry is shadcn registry-item.json compatible, so the stock
+    // The Eidos registry is shadcn registry-item.json compatible, so the stock
     // shadcn CLI installs the same component (resolving its deps) too.
-    { label: 'shadcn', code: `npx shadcn@latest add https://forge.equifax.dev/r/${name}.json`, lang: 'bash' },
+    { label: 'shadcn', code: `npx shadcn@latest add https://eidos.equifax.dev/r/${name}.json`, lang: 'bash' },
     { label: 'Manual', code: manual, lang: 'bash' },
   ];
 };

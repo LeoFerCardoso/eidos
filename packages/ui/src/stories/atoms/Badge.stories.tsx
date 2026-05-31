@@ -157,7 +157,7 @@ export const VersionTag: Story = {
       }}
     >
       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-        forge-api <Badge>v2.1.7</Badge>
+        eidos-api <Badge>v2.1.7</Badge>
       </span>
       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
         pix-router <Badge tone="warning">v1.0.0-rc.4</Badge>

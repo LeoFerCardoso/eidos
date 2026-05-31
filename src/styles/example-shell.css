@@ -1,9 +1,9 @@
 /* =============================================================================
-   Forge IDP — Example shell
-   Simulates the actual Forge product chrome for the /examples/* standalone
+   Eidos IDP — Example shell
+   Simulates the actual Eidos product chrome for the /examples/* standalone
    pages. Consumed only by examples — NEVER imported by docs pages.
 
-   Layout: 56px sidenav rail · topbar · content. Uses Forge tokens for color,
+   Layout: 56px sidenav rail · topbar · content. Uses Eidos tokens for color,
    typography and spacing — adds only structural CSS specific to product chrome.
    ========================================================================== */
 
@@ -537,13 +537,13 @@ body:active::-webkit-scrollbar-thumb,
 
 /* ====================================================================== */
 /* Ember-tinted surfaces — coherent recipe for hero stripes and accent     */
-/* cards that should read as "Forge spoke" without inventing a new colour. */
+/* cards that should read as "Eidos spoke" without inventing a new colour. */
 /* Works identically in light + dark because all tints are ember-mixed     */
 /* with TRANSPARENT (never with --border, which would produce a muddy      */
 /* lavender in light mode where --border is slate-ink).                    */
 /* ====================================================================== */
 
-/* Small ember-tinted card — e.g. Forge weekly digest, template hero. */
+/* Small ember-tinted card — e.g. Eidos weekly digest, template hero. */
 .fp-card--ember {
   background: var(--ember-soft);
   border-color: color-mix(in oklch, var(--ember) 22%, transparent);

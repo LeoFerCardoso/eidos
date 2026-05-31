@@ -1,12 +1,12 @@
 'use client';
-import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, ForgeChart, ForgeTooltipContent, ChartLegend, Lede, Recharts, Mono } from '@/ds/core';
+import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, EidosChart, EidosTooltipContent, ChartLegend, Lede, Recharts, Mono } from '@/ds/core';
   const { Sankey, Tooltip, Layer, Rectangle } = Recharts;
 
 
-  // Traffic flow: forge-api -> downstream services -> outcomes.
+  // Traffic flow: eidos-api -> downstream services -> outcomes.
   const TRAFFIC = {
     nodes: [
-      { name: 'forge-api' },
+      { name: 'eidos-api' },
       { name: 'fraud-engine' },
       { name: 'kyc-orchestrator' },
       { name: 'auth-gateway' },
@@ -55,7 +55,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Fo
 
   // Eidos node renderer — gives every block a Eidos-toned rectangle + label.
   const PALETTE = ['var(--viz-cat-1)','var(--viz-cat-2)','var(--viz-cat-3)','var(--viz-cat-4)','var(--success)','var(--warning)','var(--danger)'];
-  const ForgeNode = (props) => {
+  const EidosNode = (props) => {
     const x = props.x, y = props.y, width = props.width, height = props.height;
     const payload = props.payload || {};
     const idx = props.index || 0;
@@ -74,7 +74,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Fo
   // Correct link renderer — receives sourceX/targetX/sourceY/targetY +
   // sourceControlX/targetControlX from Recharts Sankey. We build the path
   // ourselves so the ribbon stretches between source and target nodes.
-  const ForgeLink = (props) => {
+  const EidosLink = (props) => {
     const {
       sourceX, targetX, sourceY, targetY,
       sourceControlX, targetControlX, linkWidth, index,
@@ -91,16 +91,16 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Fo
             strokeOpacity={0.28}
             strokeWidth={Math.max(1, linkWidth)}
             fill="none"
-            className="forge-sankey-link"/>
+            className="eidos-sankey-link"/>
     );
   };
 
   const USAGE = `import { Sankey, Tooltip } from "recharts"
-import { ForgeChart, ForgeTooltipContent } from "@/charts"
+import { EidosChart, EidosTooltipContent } from "@/charts"
 
 // The link path is rendered by a function that receives sourceX/targetX/
 // sourceY/targetY/sourceControlX/targetControlX + linkWidth.
-function ForgeLink({ sourceX, targetX, sourceY, targetY,
+function EidosLink({ sourceX, targetX, sourceY, targetY,
                     sourceControlX, targetControlX, linkWidth, index }) {
   const d = \`M\${sourceX},\${sourceY} C\${sourceControlX},\${sourceY}\` +
             \` \${targetControlX},\${targetY} \${targetX},\${targetY}\`
@@ -111,13 +111,13 @@ function ForgeLink({ sourceX, targetX, sourceY, targetY,
 
 export function Demo({ data }) {
   return (
-    <ForgeChart title="Traffic flow" height={320}>
+    <EidosChart title="Traffic flow" height={320}>
       <Sankey data={data}
               nodePadding={24} nodeWidth={10}
-              node={<ForgeNode/>} link={<ForgeLink/>}>
-        <Tooltip content={<ForgeTooltipContent/>}/>
+              node={<EidosNode/>} link={<EidosLink/>}>
+        <Tooltip content={<EidosTooltipContent/>}/>
       </Sankey>
-    </ForgeChart>
+    </EidosChart>
   )
 }`;
 
@@ -130,14 +130,14 @@ export default function Page() {
 
       <SubHead meta="hello world">Usage</SubHead>
       <Lede up>Read it left → right: each column is a stage, ribbon width is the volume flowing between them, and a ribbon keeps its source node's hue across the whole diagram. Hover any ribbon for the exact value its thickness only approximates.</Lede>
-      <Frame label="traffic flow · forge-api fan-out" code={USAGE}>
-        <ForgeChart title="Request flow" subtitle="forge-api fan-out" meta="last 1h · rps" height={360}>
+      <Frame label="traffic flow · eidos-api fan-out" code={USAGE}>
+        <EidosChart title="Request flow" subtitle="eidos-api fan-out" meta="last 1h · rps" height={360}>
           <Sankey data={TRAFFIC} nodePadding={28} nodeWidth={10}
-                  node={<ForgeNode/>} link={<ForgeLink/>}
+                  node={<EidosNode/>} link={<EidosLink/>}
                   margin={{ top: 10, right: 130, bottom: 10, left: 10 }}>
-            <Tooltip content={<ForgeTooltipContent/>}/>
+            <Tooltip content={<EidosTooltipContent/>}/>
           </Sankey>
-        </ForgeChart>
+        </EidosChart>
       </Frame>
       <p className="ds-caption dim" style={{ marginTop: 12, marginBottom: 18 }}>
         <span className="t-mono-label" style={{ marginInlineEnd: 8 }}>when not to</span>
@@ -146,22 +146,22 @@ export default function Page() {
 
       <SubHead meta="2 variants">Variants</SubHead>
       <Frame label="CI/CD pipeline · funnel from commit to merge">
-        <ForgeChart title="CI pipeline" subtitle="this week" meta="commits → merged" height={340}>
+        <EidosChart title="CI pipeline" subtitle="this week" meta="commits → merged" height={340}>
           <Sankey data={CI} nodePadding={32} nodeWidth={10}
-                  node={<ForgeNode/>} link={<ForgeLink/>}
+                  node={<EidosNode/>} link={<EidosLink/>}
                   margin={{ top: 10, right: 120, bottom: 10, left: 10 }}>
-            <Tooltip content={<ForgeTooltipContent/>}/>
+            <Tooltip content={<EidosTooltipContent/>}/>
           </Sankey>
-        </ForgeChart>
+        </EidosChart>
       </Frame>
 
       <Frame label="dense flow · pair with legend for outcomes">
-        <ForgeChart title="Traffic outcomes" subtitle="success / retried / dropped" meta="last 1h" height={340}>
+        <EidosChart title="Traffic outcomes" subtitle="success / retried / dropped" meta="last 1h" height={340}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 180px', gap: 16, alignItems: 'stretch', width: '100%', height: '100%' }}>
             <Sankey data={TRAFFIC} nodePadding={20} nodeWidth={8}
-                    node={<ForgeNode/>} link={<ForgeLink/>}
+                    node={<EidosNode/>} link={<EidosLink/>}
                     margin={{ top: 10, right: 130, bottom: 10, left: 10 }}>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
             </Sankey>
             <div style={{ alignSelf: 'center' }}>
               <ChartLegend items={[
@@ -171,7 +171,7 @@ export default function Page() {
               ]}/>
             </div>
           </div>
-        </ForgeChart>
+        </EidosChart>
       </Frame>
 
       <SubHead meta="a11y">Accessibility</SubHead>
@@ -197,13 +197,13 @@ export default function Page() {
       <SubHead meta="RTL · العربية">RTL</SubHead>
       <Frame label='dir="rtl" — node labels and tooltip align right; flow still reads left to right (directed graph convention)'>
         <div dir="rtl" style={{width: '100%'}}>
-          <ForgeChart title="تدفق طلبات API" subtitle="forge-api fan-out" meta="آخر ساعة · rps" height={360}>
+          <EidosChart title="تدفق طلبات API" subtitle="eidos-api fan-out" meta="آخر ساعة · rps" height={360}>
             <Sankey data={TRAFFIC} nodePadding={28} nodeWidth={10}
-                    node={<ForgeNode/>} link={<ForgeLink/>}
+                    node={<EidosNode/>} link={<EidosLink/>}
                     margin={{ top: 10, right: 130, bottom: 10, left: 10 }}>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
             </Sankey>
-          </ForgeChart>
+          </EidosChart>
         </div>
       </Frame>
       <Lede>Under <Mono>dir="rtl"</Mono> the chart title, tooltip, and any legend text align to the right. The Sankey diagram itself reads left to right — that directionality is part of the graph's meaning (source → target), not a locale preference — so the flow is not mirrored.</Lede>
@@ -215,12 +215,12 @@ export default function Page() {
           <div className="ana" style={{display:'flex', justifyContent:'center'}}>
             <div className="stage" style={{position:'relative'}} aria-hidden="true">
               <div style={{width:300, height:180}}>
-                <ForgeChart height={180} padding={0}>
+                <EidosChart height={180} padding={0}>
                   <Sankey data={CI} nodePadding={20} nodeWidth={9}
-                          node={<ForgeNode/>} link={<ForgeLink/>}
+                          node={<EidosNode/>} link={<EidosLink/>}
                           margin={{ top: 8, right: 80, bottom: 8, left: 8 }}>
                   </Sankey>
-                </ForgeChart>
+                </EidosChart>
               </div>
               <span className="lead v" style={{top: -22, left: 20, height: 18}}/>
               <span className="lead v" style={{top: -22, left: '50%', height: 18, transform:'translateX(-50%)'}}/>
@@ -246,18 +246,18 @@ export default function Page() {
         <div className="dd-card do">
           <div className="head"><Icons.check size={12}/> Do — 2–4 layers, ≤ 10 nodes per layer</div>
           <div className="body" style={{ padding: 12 }}>
-            <ForgeChart height={220} padding={6}>
+            <EidosChart height={220} padding={6}>
               <Sankey data={CI} nodePadding={18} nodeWidth={8}
-                      node={<ForgeNode/>} link={<ForgeLink/>}
+                      node={<EidosNode/>} link={<EidosLink/>}
                       margin={{ top: 8, right: 100, bottom: 8, left: 8 }}/>
-            </ForgeChart>
+            </EidosChart>
           </div>
           <div className="note">Clean layer separation. Each ribbon's thickness tells the volume story without a tooltip.</div>
         </div>
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — wire every service to every service</div>
           <div className="body" style={{ padding: 14 }}>
-            <ForgeChart height={220} padding={6}>
+            <EidosChart height={220} padding={6}>
               <Sankey data={{
                 nodes: [
                   { name: 'api-a' }, { name: 'api-b' }, { name: 'api-c' }, { name: 'api-d' },
@@ -270,9 +270,9 @@ export default function Page() {
                   { source: 3, target: 4, value: 50 },  { source: 3, target: 5, value: 30 }, { source: 3, target: 6, value: 45 }, { source: 3, target: 7, value: 70 },
                 ],
               }} nodePadding={10} nodeWidth={6}
-                 node={<ForgeNode/>} link={<ForgeLink/>}
+                 node={<EidosNode/>} link={<EidosLink/>}
                  margin={{ top: 8, right: 70, bottom: 8, left: 8 }}/>
-            </ForgeChart>
+            </EidosChart>
           </div>
           <div className="note">Fully-connected graphs aren't Sankeys. Use a force-directed graph or a heatmap of service ↔ service traffic instead.</div>
         </div>

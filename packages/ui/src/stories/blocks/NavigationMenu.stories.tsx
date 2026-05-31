@@ -213,7 +213,7 @@ export const InContext: Story = {
               marginInlineEnd: 12,
             }}
           >
-            Forge
+            Eidos
           </span>
           <NavigationMenu>
             {[

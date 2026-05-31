@@ -70,7 +70,7 @@ const FEATURES: SlideData[] = [
 ];
 
 const HEROES: SlideData[] = [
-  { tag: 'RELEASE', title: 'Forge 1.1', desc: '7 new components, full alphabetical sort.' },
+  { tag: 'RELEASE', title: 'Eidos 1.1', desc: '7 new components, full alphabetical sort.' },
   { tag: 'GUIDE',   title: 'Tailwind v4 setup', desc: 'A 90-second walkthrough of the preset.' },
   { tag: 'ROADMAP', title: 'Coming next', desc: 'Combobox, command palette, and a chart kit.' },
 ];
@@ -269,7 +269,7 @@ export const InContext: Story = {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--fg-faint)' }}>What&apos;s new</div>
-            <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--fg)', marginTop: 4 }}>Forge 1.1 — release highlights</div>
+            <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--fg)', marginTop: 4 }}>Eidos 1.1 — release highlights</div>
           </div>
           <button
             type="button"
@@ -294,7 +294,7 @@ export const InContext: Story = {
           <CarouselControls />
           <CarouselDots />
         </Carousel>
-        <div style={{ fontSize: 12, color: 'var(--fg-faint)' }}>Forge Design System · v1.1.0 · 2026-05-30</div>
+        <div style={{ fontSize: 12, color: 'var(--fg-faint)' }}>Eidos Design System · v1.1.0 · 2026-05-30</div>
       </div>
     );
   },

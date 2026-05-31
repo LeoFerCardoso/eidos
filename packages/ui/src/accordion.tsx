@@ -2,7 +2,7 @@ import * as React from 'react';
 import { cn } from './lib/utils';
 import { Icons } from './icons';
 
-// Forge DS — Accordion
+// Eidos DS — Accordion
 //
 // Compound API: <Accordion> wraps <AccordionItem value>, which wraps
 // <AccordionTrigger> and <AccordionContent>.

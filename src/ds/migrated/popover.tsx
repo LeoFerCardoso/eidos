@@ -63,7 +63,7 @@ const LinkPreviewContent = () => (
   <>
     <div style={{ height: 100, background: 'linear-gradient(135deg, oklch(40% 0.10 30), oklch(20% 0.04 30))', borderRadius: '10px 10px 0 0' }} />
     <div style={{ padding: 12 }}>
-      <div style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.04em', marginBottom: 4 }}>FORGE.DEV/BLOG</div>
+      <div style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.04em', marginBottom: 4 }}>EIDOS.DEV/BLOG</div>
       <div style={{ fontSize: 'var(--text-md)', fontWeight: 600, marginBottom: 6 }}>Building a design system that ships every Friday</div>
       <div style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', lineHeight: 1.55 }}>How the platform team made the DS the cheapest path for product engineers.</div>
     </div>
@@ -155,7 +155,7 @@ export default function Page() {
             <Popover trigger={<button className="btn"><span className="avatar sm ember">AS</span>Ana Silva<Icons.chevronDown size={12} /></button>} side="bottom" align="end">
               {({ close }) => <ProfileContent close={close} />}
             </Popover>
-            <Popover trigger={<a className="btn link">forge.dev/blog<Icons.link size={12} /></a>} side="top" align="center">
+            <Popover trigger={<a className="btn link">eidos.dev/blog<Icons.link size={12} /></a>} side="top" align="center">
               <LinkPreviewContent />
             </Popover>
           </div>
@@ -204,7 +204,7 @@ export default function Page() {
       <Frame
         label="link preview · profile card · filter form"
         code={`{/* Link preview */}
-<Popover trigger={<a>forge.dev/blog</a>} side="top" align="center">
+<Popover trigger={<a>eidos.dev/blog</a>} side="top" align="center">
   <LinkPreview />
 </Popover>
 
@@ -220,7 +220,7 @@ export default function Page() {
       >
         <div className="pop-stage" style={{ minHeight: 220 }}>
           <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Popover trigger={<a className="btn link">forge.dev/blog<Icons.link size={12} /></a>} side="top" align="center">
+            <Popover trigger={<a className="btn link">eidos.dev/blog<Icons.link size={12} /></a>} side="top" align="center">
               <LinkPreviewContent />
             </Popover>
             <Popover trigger={<span className="avatar lg ember" style={{ cursor: 'pointer' }} title="Ana Silva">AS</span>} side="end" align="start">

@@ -19,7 +19,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, Message, Me
 
   const VARIANTS_CODE = `<Message from="user">…</Message>
 <Message from="assistant">…</Message>
-<Message from="system">Session opened · forge-ai/sonnet-4-6</Message>`;
+<Message from="system">Session opened · eidos-ai/sonnet-4-6</Message>`;
 
   const MARKDOWN_CODE = `<Message from="assistant" meta={<>
   <span className="name">Eidos AI</span>
@@ -31,7 +31,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, Message, Me
   - <code>traces.id=$incident</code> in Datadog
   - the deploy diff for the last commit
 
-  If those look clean, run <code>forge incident replay --id 0421</code>.
+  If those look clean, run <code>eidos incident replay --id 0421</code>.
 </Message>`;
 
   const ATTACHMENTS_CODE = `<Message
@@ -92,7 +92,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, Message, Me
           <li>the deploy diff for the last commit</li>
         </ul>
         <p style={{ marginTop: 8 }}>
-          If those look clean, run <code>forge incident replay --id 0421</code>.
+          If those look clean, run <code>eidos incident replay --id 0421</code>.
         </p>
       </Message>
     );
@@ -150,7 +150,7 @@ export default function MessagePage() {
           <Message from="assistant" meta={<><span className="name">Eidos AI</span></>}>
             In <code>docs/runbooks/tier-1/</code>.
           </Message>
-          <Message from="system">Session opened · forge-ai/sonnet-4-6</Message>
+          <Message from="system">Session opened · eidos-ai/sonnet-4-6</Message>
         </Sample>
       </Frame>
       <Lede>
@@ -205,7 +205,7 @@ export default function MessagePage() {
               <li>the deploy diff for the last commit</li>
             </ul>
             <p style={{ marginTop: 8 }}>
-              If those look clean, run <code>forge incident replay --id 0421</code>.
+              If those look clean, run <code>eidos incident replay --id 0421</code>.
             </p>
           </Message>
         </Sample>

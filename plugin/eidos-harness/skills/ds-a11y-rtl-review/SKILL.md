@@ -15,9 +15,9 @@ allowed-tools: [Read, Grep, Edit, Bash]
 
 ## 1. Locate the target
 
-Resolve `$ARGUMENTS` to a file: pages `src/ds/pages/<group>/<slug>.jsx`, examples
-`src/ds/examples/<name>.jsx`. Read it fully. Confirm its route in
-`src/ds/core/nav-config.js`.
+Resolve `$ARGUMENTS` to a file: pages `src/ds/migrated/<ds>/<slug>.tsx` (core pages
+`src/ds/migrated/<slug>.tsx`), examples `src/ds/examples/<name>.tsx`. Read it fully.
+Confirm its route in `src/ds/core/nav-config.js`.
 
 ## 2. Pre-read the rulebooks
 
@@ -57,5 +57,5 @@ Resolve `$ARGUMENTS` to a file: pages `src/ds/pages/<group>/<slug>.jsx`, example
 
 Output a prioritized findings list (P0 must-fix → P2 nice) with the exact file + the
 offending pattern. Apply fixes only if the user asked; otherwise leave edits to `refine`.
-If you edited and touched nav, run `node scripts/gen-manifest.mjs`, then offer
-`npm run verify`.
+If you edited and touched nav, run `node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs`
+(+ `gen-examples.mjs`) and restart `next dev`, then offer `npm run verify`.

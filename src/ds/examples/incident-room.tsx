@@ -262,7 +262,7 @@ import { FKpi, FPageHeader, FSection, FShell, IconBubble } from './example-shell
               <div style={{display:'flex', alignItems:'center', gap: 8, flexWrap:'wrap', fontSize: 'var(--text-sm)', color:'var(--fg-muted)'}}>
                 Started <RelativeTime value={at(14)}/> by <OwnerPill person={deployAuthor} role="Pix"/>
               </div>
-              <CopyChip value="git@forge:pix/pix-router@a91f2dc" label="a91f2dc"/>
+              <CopyChip value="git@eidos:pix/pix-router@a91f2dc" label="a91f2dc"/>
               <a href="/example/pipeline-view" className="btn ghost sm" style={{alignSelf:'flex-start', marginTop: 4}}>
                 <Icons.pipeline size={11}/> Open in pipeline
               </a>

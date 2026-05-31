@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, ForgeChart, ForgeTooltipContent, ChartLegend, useChartColors, forgeGridProps, forgeXAxisProps, forgeYAxisProps, Recharts, Lede, Mono } from '@/ds/core';
+import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, EidosChart, EidosTooltipContent, ChartLegend, useChartColors, eidosGridProps, eidosXAxisProps, eidosYAxisProps, Recharts, Lede, Mono } from '@/ds/core';
   const { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } = Recharts;
 
 // Tracks prefers-reduced-motion so the area draw animation can be disabled,
@@ -39,21 +39,21 @@ function usePrefersReducedMotion() {
   }));
 
   const USAGE = `import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
-import { ForgeChart, ForgeTooltipContent, useChartColors,
-         forgeGridProps, forgeXAxisProps, forgeYAxisProps } from "@/charts"
+import { EidosChart, EidosTooltipContent, useChartColors,
+         eidosGridProps, eidosXAxisProps, eidosYAxisProps } from "@/charts"
 
 export function Demo({ data }) {
   const c = useChartColors()
   return (
-    <ForgeChart title="Open incidents" meta="12 weeks" height={260}>
+    <EidosChart title="Open incidents" meta="12 weeks" height={260}>
       <AreaChart data={data}>
-        <CartesianGrid {...forgeGridProps}/>
-        <XAxis dataKey="week" {...forgeXAxisProps}/>
-        <YAxis {...forgeYAxisProps}/>
-        <Tooltip content={<ForgeTooltipContent/>}/>
+        <CartesianGrid {...eidosGridProps}/>
+        <XAxis dataKey="week" {...eidosXAxisProps}/>
+        <YAxis {...eidosYAxisProps}/>
+        <Tooltip content={<EidosTooltipContent/>}/>
         <Area type="monotone" dataKey="open" stroke={c[0]} fill={c[0]} fillOpacity={0.18}/>
       </AreaChart>
-    </ForgeChart>
+    </EidosChart>
   )
 }`;
 
@@ -75,62 +75,62 @@ export default function Page() {
 
         <SubHead meta="hello world">Usage</SubHead>
         <Frame label="single series · open incidents" code={USAGE}>
-          <ForgeChart title="Open incidents" subtitle="all severities" meta="12 weeks" height={260}>
+          <EidosChart title="Open incidents" subtitle="all severities" meta="12 weeks" height={260}>
             <AreaChart data={INC} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="week" {...forgeXAxisProps}/>
-              <YAxis {...forgeYAxisProps}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="week" {...eidosXAxisProps}/>
+              <YAxis {...eidosYAxisProps}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Area type="monotone" dataKey="open" name="open" stroke={c[0]} fill={c[0]} fillOpacity={0.18} isAnimationActive={!reduced}/>
             </AreaChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <SubHead meta="3 variants">Variants</SubHead>
         <Frame label="stacked · request mix by service">
-          <ForgeChart title="Requests by service" subtitle="forge fleet" meta="last 7 days" height={260}>
+          <EidosChart title="Requests by service" subtitle="eidos fleet" meta="last 7 days" height={260}>
             <AreaChart data={MIX} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="day" {...forgeXAxisProps}/>
-              <YAxis {...forgeYAxisProps}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="day" {...eidosXAxisProps}/>
+              <YAxis {...eidosYAxisProps}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               {MIX_SERIES.map((s) => (
                 <Area key={s.key} type="monotone" dataKey={s.key} name={s.label} stackId="1" stroke={s.color} fill={s.color} fillOpacity={0.45} isAnimationActive={!reduced}/>
               ))}
             </AreaChart>
-          </ForgeChart>
+          </EidosChart>
           <ChartLegend items={MIX_SERIES.map((s) => ({ color: s.color, label: s.label }))}/>
         </Frame>
         <Lede>Stacked area is best when the <em>composition</em> is the story and the total is also useful. If you need to compare exact values per series, use a line chart instead.</Lede>
 
         <Frame label="gradient fill · single series with depth">
-          <ForgeChart title="Active workflows" subtitle="forge-runner" meta="24h" height={260}>
+          <EidosChart title="Active workflows" subtitle="eidos-runner" meta="24h" height={260}>
             <AreaChart data={WF} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
               <defs>
-                <linearGradient id="forgeAreaG" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="eidosAreaG" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%"  stopColor={c[0]} stopOpacity={0.5}/>
                   <stop offset="95%" stopColor={c[0]} stopOpacity={0.02}/>
                 </linearGradient>
               </defs>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="hour" {...forgeXAxisProps} interval={3}/>
-              <YAxis {...forgeYAxisProps}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
-              <Area type="monotone" dataKey="wf" stroke={c[0]} strokeWidth={2} fill="url(#forgeAreaG)" isAnimationActive={!reduced}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="hour" {...eidosXAxisProps} interval={3}/>
+              <YAxis {...eidosYAxisProps}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
+              <Area type="monotone" dataKey="wf" stroke={c[0]} strokeWidth={2} fill="url(#eidosAreaG)" isAnimationActive={!reduced}/>
             </AreaChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <Frame label="step · discrete state changes (replicas, scale)">
-          <ForgeChart title="Replicas in service" subtitle="forge-api" meta="autoscaler" height={220}>
+          <EidosChart title="Replicas in service" subtitle="eidos-api" meta="autoscaler" height={220}>
             <AreaChart data={WF.map((d, i) => ({ hour: d.hour, n: 3 + Math.floor(i / 6) + (i % 7 === 0 ? 1 : 0) }))} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="hour" {...forgeXAxisProps} interval={3}/>
-              <YAxis {...forgeYAxisProps} allowDecimals={false}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="hour" {...eidosXAxisProps} interval={3}/>
+              <YAxis {...eidosYAxisProps} allowDecimals={false}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Area type="step" dataKey="n" stroke={c[1]} fill={c[1]} fillOpacity={0.18} isAnimationActive={!reduced}/>
             </AreaChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <SubHead meta="a11y">Accessibility</SubHead>
@@ -156,15 +156,15 @@ export default function Page() {
         <SubHead meta="RTL · العربية">RTL</SubHead>
         <Frame label='dir="rtl" — axis labels and legend flow right-to-left; the plotted series does not mirror'>
           <div dir="rtl" style={{width: '100%'}}>
-            <ForgeChart title="حوادث مفتوحة" subtitle="جميع الخطورات" meta="١٢ أسبوعًا" height={240}>
+            <EidosChart title="حوادث مفتوحة" subtitle="جميع الخطورات" meta="١٢ أسبوعًا" height={240}>
               <AreaChart data={INC} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-                <CartesianGrid {...forgeGridProps}/>
-                <XAxis dataKey="week" {...forgeXAxisProps}/>
-                <YAxis {...forgeYAxisProps}/>
-                <Tooltip content={<ForgeTooltipContent/>}/>
+                <CartesianGrid {...eidosGridProps}/>
+                <XAxis dataKey="week" {...eidosXAxisProps}/>
+                <YAxis {...eidosYAxisProps}/>
+                <Tooltip content={<EidosTooltipContent/>}/>
                 <Area type="monotone" dataKey="open" name="مفتوح" stroke={c[0]} fill={c[0]} fillOpacity={0.18} isAnimationActive={!reduced}/>
               </AreaChart>
-            </ForgeChart>
+            </EidosChart>
             <ChartLegend items={[{ color: c[0], label: 'مفتوح' }]}/>
           </div>
         </Frame>
@@ -177,14 +177,14 @@ export default function Page() {
             <div className="ana" style={{display:'flex', justifyContent:'center'}}>
               <div className="stage" style={{position:'relative'}} aria-hidden="true">
                 <div style={{width:340, height:180}}>
-                  <ForgeChart height={180}>
+                  <EidosChart height={180}>
                     <AreaChart data={INC} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-                      <CartesianGrid {...forgeGridProps}/>
-                      <XAxis dataKey="week" {...forgeXAxisProps}/>
-                      <YAxis {...forgeYAxisProps}/>
+                      <CartesianGrid {...eidosGridProps}/>
+                      <XAxis dataKey="week" {...eidosXAxisProps}/>
+                      <YAxis {...eidosYAxisProps}/>
                       <Area type="monotone" dataKey="open" stroke={c[0]} strokeWidth={2} fill={c[0]} fillOpacity={0.18}/>
                     </AreaChart>
-                  </ForgeChart>
+                  </EidosChart>
                 </div>
                 <span className="lead v" style={{top: -22, left: 90, height: 18}}/>
                 <span className="lead h" style={{top: 60, right: -28, width: 24}}/>
@@ -210,28 +210,28 @@ export default function Page() {
           <div className="dd-card do">
             <div className="head"><Icons.check size={12}/> Do — keep the fill subtle</div>
             <div className="body">
-              <ForgeChart height={140} padding={8}>
+              <EidosChart height={140} padding={8}>
                 <AreaChart data={INC} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
-                  <CartesianGrid {...forgeGridProps}/>
-                  <XAxis dataKey="week" {...forgeXAxisProps}/>
-                  <YAxis {...forgeYAxisProps}/>
+                  <CartesianGrid {...eidosGridProps}/>
+                  <XAxis dataKey="week" {...eidosXAxisProps}/>
+                  <YAxis {...eidosYAxisProps}/>
                   <Area type="monotone" dataKey="open" stroke={c[0]} fill={c[0]} fillOpacity={0.18}/>
                 </AreaChart>
-              </ForgeChart>
+              </EidosChart>
             </div>
             <div className="note">Fill opacity 0.15–0.22 lets the line lead while the area suggests volume. The fill is a hint, not a flood — keep it lighter than the stroke.</div>
           </div>
           <div className="dd-card dont">
             <div className="head"><Icons.x size={12}/> Don't — flood the chart with solid fill</div>
             <div className="body">
-              <ForgeChart height={140} padding={8}>
+              <EidosChart height={140} padding={8}>
                 <AreaChart data={INC} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
-                  <CartesianGrid {...forgeGridProps}/>
-                  <XAxis dataKey="week" {...forgeXAxisProps}/>
-                  <YAxis {...forgeYAxisProps}/>
+                  <CartesianGrid {...eidosGridProps}/>
+                  <XAxis dataKey="week" {...eidosXAxisProps}/>
+                  <YAxis {...eidosYAxisProps}/>
                   <Area type="monotone" dataKey="open" stroke={c[0]} fill={c[0]} fillOpacity={0.9}/>
                 </AreaChart>
-              </ForgeChart>
+              </EidosChart>
             </div>
             <div className="note">Solid fills hide the gridlines, overpower neighboring KPIs, and make stacked series indistinguishable. If you need to emphasise volume, use a bar chart instead.</div>
           </div>

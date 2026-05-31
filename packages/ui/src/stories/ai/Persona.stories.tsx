@@ -21,7 +21,7 @@ const meta = {
       },
     },
   },
-  args: { state: 'listening', size: 96, label: 'Forge Voice Agent' },
+  args: { state: 'listening', size: 96, label: 'Eidos Voice Agent' },
   argTypes: {
     state: { control: 'inline-radio', options: ['idle', 'listening', 'thinking', 'speaking'] },
     size: { control: 'number' },
@@ -53,7 +53,7 @@ export const States: Story = {
     <div style={{ display: 'flex', gap: 32, alignItems: 'center', flexWrap: 'wrap' }}>
       {(['idle', 'listening', 'thinking', 'speaking'] as const).map((s) => (
         <div key={s} style={stack}>
-          <Persona state={s} size={96} label="Forge Voice Agent" />
+          <Persona state={s} size={96} label="Eidos Voice Agent" />
           <span style={monoLabel}>{s.toUpperCase()}</span>
         </div>
       ))}
@@ -67,7 +67,7 @@ export const Sizes: Story = {
     <div style={{ display: 'flex', gap: 24, alignItems: 'flex-end', flexWrap: 'wrap' }}>
       {[64, 96, 144, 200].map((sz) => (
         <div key={sz} style={stack}>
-          <Persona state="idle" size={sz} label="Forge Voice Agent" />
+          <Persona state="idle" size={sz} label="Eidos Voice Agent" />
           <span style={monoLabel}>{sz}</span>
         </div>
       ))}
@@ -91,7 +91,7 @@ export const VoiceSurface: Story = {
         padding: 32,
       }}
     >
-      <Persona state="listening" size={200} label="Forge Voice Agent" />
+      <Persona state="listening" size={200} label="Eidos Voice Agent" />
       <SpeechInput
         state="listening"
         levels={[0.4, 0.7, 0.9, 0.6, 0.8, 0.5, 0.7, 0.9, 0.4, 0.6, 0.8, 0.5, 0.7, 0.6]}
@@ -107,12 +107,12 @@ export const WithAgentIdentity: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 48, alignItems: 'flex-start', flexWrap: 'wrap' }}>
       <div style={stack}>
-        <Persona state="speaking" size={96} label="Forge Voice Agent" />
+        <Persona state="speaking" size={96} label="Eidos Voice Agent" />
         <span style={{ fontSize: 'var(--text-base)', color: 'var(--fg-muted)' }}>audio surface</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8, paddingBlockStart: 12 }}>
         <AgentIdentity
-          agent={{ name: 'Forge Voice Agent', model: 'anthropic/claude-sonnet-4.5', status: 'online' }}
+          agent={{ name: 'Eidos Voice Agent', model: 'anthropic/claude-sonnet-4.5', status: 'online' }}
         />
         <span style={{ fontSize: 'var(--text-base)', color: 'var(--fg-muted)' }}>
           chat header / settings list

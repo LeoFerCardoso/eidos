@@ -103,7 +103,7 @@ export default function RelativeTimePage() {
       <Frame label="audit log · activity feed · deploy table">
         <div style={{ display:'flex', flexDirection:'column', gap: 10, fontSize: 'var(--text-base)' }}>
           {[
-            { who: { initials: 'AS', name: 'Ana Souza' }, what: 'promoted forge-api v2.1.7 to canary', at: new Date(Date.now() - 4 * M) },
+            { who: { initials: 'AS', name: 'Ana Souza' }, what: 'promoted eidos-api v2.1.7 to canary', at: new Date(Date.now() - 4 * M) },
             { who: { initials: 'MP', name: 'Marc P.' },   what: 'commented on INC-4137',              at: new Date(Date.now() - 27 * M) },
             { who: { initials: 'JL', name: 'João L.' },   what: 'merged #4218',                       at: new Date(Date.now() - 3 * 60 * M) },
           ].map((it, i) => (

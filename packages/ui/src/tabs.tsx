@@ -1,6 +1,6 @@
 'use client';
 /**
- * Forge DS — Compound Tabs
+ * Eidos DS — Compound Tabs
  *
  * Exports: Tabs · TabsList · TabsTrigger · TabsContent
  *
@@ -83,7 +83,7 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
     },
     ref,
   ) => {
-    const [uid] = React.useState(() => `forge-tabs-${++uidCounter}`);
+    const [uid] = React.useState(() => `eidos-tabs-${++uidCounter}`);
     const [internalValue, setInternalValue] = React.useState(defaultValue ?? '');
     const isControlled = controlledValue !== undefined;
     const activeValue = isControlled ? controlledValue : internalValue;
@@ -130,8 +130,8 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
     );
 
     const classes = [
-      'forge-tabs',
-      orientation === 'vertical' ? 'forge-tabs--vertical' : '',
+      'eidos-tabs',
+      orientation === 'vertical' ? 'eidos-tabs--vertical' : '',
       className,
     ]
       .filter(Boolean)
@@ -160,8 +160,8 @@ export const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
     const { orientation, variant } = useTabsContext('TabsList');
 
     const classes = [
-      'forge-tablist',
-      `forge-tablist--${variant}`,
+      'eidos-tablist',
+      `eidos-tablist--${variant}`,
       className,
     ]
       .filter(Boolean)
@@ -267,10 +267,10 @@ export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>
     );
 
     const classes = [
-      'forge-tab',
-      size === 'sm' ? 'forge-tab--sm' : '',
-      isSelected ? 'forge-tab--active' : '',
-      disabled ? 'forge-tab--disabled' : '',
+      'eidos-tab',
+      size === 'sm' ? 'eidos-tab--sm' : '',
+      isSelected ? 'eidos-tab--active' : '',
+      disabled ? 'eidos-tab--disabled' : '',
       className,
     ]
       .filter(Boolean)
@@ -311,7 +311,7 @@ export const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
     const { value: activeValue, uid } = useTabsContext('TabsContent');
     const isActive = activeValue === value;
 
-    const classes = ['forge-tabpanel', className].filter(Boolean).join(' ');
+    const classes = ['eidos-tabpanel', className].filter(Boolean).join(' ');
 
     return (
       <div

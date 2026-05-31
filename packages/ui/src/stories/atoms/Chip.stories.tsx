@@ -122,7 +122,7 @@ export const Removable: Story = {
     const initial = [
       { id: 'env-prod', label: 'env:prod', tone: 'ember' as const },
       { id: 'region-use1', label: 'region:us-east-1', tone: 'neutral' as const },
-      { id: 'service-api', label: 'service:forge-api', tone: 'neutral' as const },
+      { id: 'service-api', label: 'service:eidos-api', tone: 'neutral' as const },
       { id: 'severity-p1', label: 'severity:P1', tone: 'bad' as const },
     ];
     const [chips, setChips] = React.useState(initial);
@@ -157,9 +157,9 @@ export const ReliabilityTiers: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
       {[
-        { tier: 'tier-t1' as const, label: 'tier-1', service: 'forge-api', slo: '99.99%' },
-        { tier: 'tier-t2' as const, label: 'tier-2', service: 'forge-webhooks', slo: '99.9%' },
-        { tier: 'tier-t3' as const, label: 'tier-3', service: 'forge-preview', slo: '99.5%' },
+        { tier: 'tier-t1' as const, label: 'tier-1', service: 'eidos-api', slo: '99.99%' },
+        { tier: 'tier-t2' as const, label: 'tier-2', service: 'eidos-webhooks', slo: '99.9%' },
+        { tier: 'tier-t3' as const, label: 'tier-3', service: 'eidos-preview', slo: '99.5%' },
       ].map(({ tier, label, service, slo }) => (
         <div key={tier} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Chip tone={tier}>{label}</Chip>
@@ -196,7 +196,7 @@ export const InContext: Story = {
     <div className="surface" style={{ padding: 20, borderRadius: 10, maxWidth: 480, display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <span style={{ fontWeight: 600, fontSize: 'var(--text-base)', color: 'var(--fg)' }}>
-          forge-api
+          eidos-api
         </span>
         <Chip tone="tier-t1">tier-1</Chip>
       </div>

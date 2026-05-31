@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as Re from 'recharts';
-// Forge DS — Charts (Recharts wrapper).
+// Eidos DS — Charts (Recharts wrapper).
 //
-// We don't replace Recharts; we wrap it with Forge tokens. Each chart page
+// We don't replace Recharts; we wrap it with Eidos tokens. Each chart page
 // imports its Recharts primitives directly from window.Recharts and embeds
-// them inside <ForgeChart> (size + padding + tooltip) so the page chrome
+// them inside <EidosChart> (size + padding + tooltip) so the page chrome
 // stays consistent.
 //
 // AUTHORING RULES:
@@ -13,7 +13,7 @@ import * as Re from 'recharts';
 //      tooltip surfaces. Never hardcode hex.
 //   3. Default axis font is the mono token; data values get tabular-nums.
 // ── Theme helpers ──────────────────────────────────────────────────────────
-// Returns the Forge categorical palette (12 hues) for series colors.
+// Returns the Eidos categorical palette (12 hues) for series colors.
 const useChartColors = () => {
   return React.useMemo(() => {
     // CSS vars resolve at runtime; we pass them through to Recharts as-is.
@@ -61,9 +61,9 @@ const fmtNumber = (n, unit) => {
   return unit ? `${t} ${unit}` : t;
 };
 
-// ── ForgeTooltip ───────────────────────────────────────────────────────────
+// ── EidosTooltip ───────────────────────────────────────────────────────────
 // Drop-in replacement for the default Recharts <Tooltip content>. Renders a
-// Forge-styled bubble.
+// Eidos-styled bubble.
 type TooltipPayloadItem = {
   name?: string;
   dataKey?: string;
@@ -73,17 +73,17 @@ type TooltipPayloadItem = {
   fill?: string;
   stroke?: string;
 };
-type ForgeTooltipContentProps = {
+type EidosTooltipContentProps = {
   active?: boolean;
   payload?: TooltipPayloadItem[];
   label?: React.ReactNode;
   [key: string]: any;
 };
-const ForgeTooltipContent = (props: ForgeTooltipContentProps) => {
+const EidosTooltipContent = (props: EidosTooltipContentProps) => {
   if (!props.active || !props.payload || props.payload.length === 0) return null;
   const items = props.payload;
   return (
-    <div className="forge-tooltip">
+    <div className="eidos-tooltip">
       {props.label != null && <div className="ft-label">{props.label}</div>}
       <div className="ft-rows">
         {items.map((it, i) => (
@@ -98,7 +98,7 @@ const ForgeTooltipContent = (props: ForgeTooltipContentProps) => {
   );
 };
 
-// Default axis tick — sets Forge typography on every X/Y label.
+// Default axis tick — sets Eidos typography on every X/Y label.
 // v1.6.0 bumped fontSize to 12 and fill to --fg-muted-strong (still
 // secondary but clears WCAG AA on both themes against surface/bg).
 const tickStyle = {
@@ -117,7 +117,7 @@ const polarTickStyle = {
   fill: 'var(--fg)',
 };
 
-// ── ForgeChart container ──────────────────────────────────────────────────
+// ── EidosChart container ──────────────────────────────────────────────────
 // Wraps any Recharts node in a Card-style surface with header (title + meta).
 //
 // Two DS-wide guarantees the per-page chrome no longer has to hand-roll:
@@ -128,7 +128,7 @@ const polarTickStyle = {
 //     node) renders INSIDE .fc-body, bypassing ResponsiveContainer (which only
 //     accepts a single chart child), so distribution states reuse the same
 //     surface without bespoke markup.
-const ForgeChart = ({ title, subtitle, meta, height = 280, padding = 18, accent, state, fallback, children }: {
+const EidosChart = ({ title, subtitle, meta, height = 280, padding = 18, accent, state, fallback, children }: {
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   meta?: React.ReactNode;
@@ -159,7 +159,7 @@ const ForgeChart = ({ title, subtitle, meta, height = 280, padding = 18, accent,
 
   const showFallback = fallback != null || (state && state !== 'ready');
   return (
-    <div className="forge-chart" style={accent ? ({ '--chart-accent': accent } as React.CSSProperties) : undefined}>
+    <div className="eidos-chart" style={accent ? ({ '--chart-accent': accent } as React.CSSProperties) : undefined}>
       {(title || meta) && (
         <div className="fc-head">
           <div className="fc-head-text">
@@ -192,9 +192,9 @@ const ForgeChart = ({ title, subtitle, meta, height = 280, padding = 18, accent,
 };
 
 // ── ChartLegend ───────────────────────────────────────────────────────────
-// Horizontal swatches, Forge-styled, for any chart that needs a manual legend.
+// Horizontal swatches, Eidos-styled, for any chart that needs a manual legend.
 const ChartLegend = ({ items }: { items: { label: string; color?: string }[] }) => (
-  <ul className="forge-legend">
+  <ul className="eidos-legend">
     {items.map((it, i) => (
       <li key={i}>
         <span className="legend-dot" style={{ background: it.color }}/>
@@ -211,8 +211,8 @@ const xAxisProps = { stroke: 'var(--viz-axis)', tick: tickStyle, tickLine: false
 const yAxisProps = { stroke: 'var(--viz-axis)', tick: tickStyle, tickLine: false, axisLine: { stroke: 'var(--viz-axis)' }, tickFormatter: fmtCompact };
 
 export {
-  ForgeChart,
-  ForgeTooltipContent,
+  EidosChart,
+  EidosTooltipContent,
   ChartLegend,
   useChartColors,
   usePrefersReducedMotion,
@@ -224,9 +224,9 @@ export {
 // so migrated chart pages can import them from '@/ds/core'.
 export {
   Re as Recharts,
-  tickStyle as forgeChartTick,
-  polarTickStyle as forgePolarTick,
-  gridProps as forgeGridProps,
-  xAxisProps as forgeXAxisProps,
-  yAxisProps as forgeYAxisProps,
+  tickStyle as eidosChartTick,
+  polarTickStyle as eidosPolarTick,
+  gridProps as eidosGridProps,
+  xAxisProps as eidosXAxisProps,
+  yAxisProps as eidosYAxisProps,
 };

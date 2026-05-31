@@ -270,7 +270,7 @@ function InContextDemo() {
           <Icons.sparkle size={16} style={{ color: 'var(--ember)' }}/>
         </span>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', flex: 1, minWidth: 0 }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--fg-subtle)' }}>FORGE STATS AGENT</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--fg-subtle)' }}>EIDOS STATS AGENT</span>
           <Prose style={{ maxWidth: 560 }}>
             <p>
               Sample variance measures how far each value sits from the mean {inline.status === 'ready'

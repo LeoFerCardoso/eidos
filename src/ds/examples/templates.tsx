@@ -21,7 +21,7 @@ import { FPageHeader, FShell } from './example-shell';
     { id: 'data-pipeline',     name: 'data-pipeline',     desc: 'Dagster pipeline · ClickHouse sink · per-asset cost guardrails · partition-aware retries.',  lang: 'Python',      framework: ['Dagster','ClickHouse'],   maturity: 'Stable',       maintainer: personByPrefix('Larissa'), usage: 38,  version: '1.6.0' },
     { id: 'ml-model-svc',      name: 'ml-model-svc',      desc: 'FastAPI · model registry · drift alarms · ABACUS sampling · ONNX export by default.',  lang: 'Python',      framework: ['FastAPI','MLflow'],       maturity: 'Stable',       maintainer: personByPrefix('Beatriz'), usage: 27,  version: '0.9.3' },
     { id: 'rust-edge-svc',     name: 'rust-edge-svc',     desc: 'Rust edge service · axum + tonic · zero-copy serialization · cgroup-aware autoscale.',  lang: 'Rust',        framework: ['axum','tonic'],           maturity: 'Beta',         maintainer: personByPrefix('Diego'),   usage: 14,  version: '0.4.1' },
-    { id: 'forge-agent',       name: 'forge-agent',       desc: 'Eidos AI agent · MCP server scaffold · streaming responses · tool-calling boilerplate · OpenTelemetry traces.',  lang: 'TypeScript',  framework: ['MCP','AI SDK'],           maturity: 'Beta',         maintainer: personByPrefix('Camila'),  usage: 22,  version: '0.7.0' },
+    { id: 'eidos-agent',       name: 'eidos-agent',       desc: 'Eidos AI agent · MCP server scaffold · streaming responses · tool-calling boilerplate · OpenTelemetry traces.',  lang: 'TypeScript',  framework: ['MCP','AI SDK'],           maturity: 'Beta',         maintainer: personByPrefix('Camila'),  usage: 22,  version: '0.7.0' },
     { id: 'java-spring-svc',   name: 'java-spring-svc',   desc: 'Spring Boot 3 · Java 21 · OTLP · Resilience4j circuit breakers · containerized with jlink slim image.',  lang: 'Java',        framework: ['Spring Boot 3'],          maturity: 'Stable',       maintainer: personByPrefix('Thiago'),  usage: 58,  version: '5.1.0' },
     { id: 'event-handler',     name: 'event-handler',     desc: 'Event-driven consumer · Kafka or SQS · idempotency keys · DLQ replay tooling pre-baked.',  lang: 'Go',          framework: ['Kafka','SQS'],            maturity: 'Stable',       maintainer: personByPrefix('Larissa'), usage: 44,  version: '2.3.4' },
     { id: 'cron-job',          name: 'cron-job',          desc: 'Scheduled batch job · cost-aware concurrency · SLO-aware retries · Slack notifications on long runs.',  lang: 'Python',      framework: ['k8s CronJob'],            maturity: 'Stable',       maintainer: personByPrefix('Mariana'), usage: 31,  version: '1.4.2' },
@@ -29,12 +29,12 @@ import { FPageHeader, FShell } from './example-shell';
     { id: 'cli-tool',          name: 'cli-tool',          desc: 'Eidos CLI plugin scaffold · oclif · auto-publish to internal registry · drift-tested binaries.',  lang: 'TypeScript',  framework: ['oclif'],                  maturity: 'Beta',         maintainer: personByPrefix('Leonardo'),usage: 18,  version: '0.6.1' },
   ];
 
-  const FEATURED = TEMPLATES.filter(t => t.featured || ['nextjs-app','forge-agent'].includes(t.id)).slice(0, 3);
+  const FEATURED = TEMPLATES.filter(t => t.featured || ['nextjs-app','eidos-agent'].includes(t.id)).slice(0, 3);
 
   const RECENT = [
     { id: 'go-grpc-svc',         when: '4h ago' },
     { id: 'nestjs-microservice', when: 'yesterday' },
-    { id: 'forge-agent',         when: '3d ago' },
+    { id: 'eidos-agent',         when: '3d ago' },
     { id: 'data-pipeline',       when: '1w ago' },
     { id: 'java-spring-svc',     when: '2w ago' },
   ];
@@ -271,7 +271,7 @@ import { FPageHeader, FShell } from './example-shell';
               </div>
               <p style={{fontSize: 'var(--text-sm)', color:'var(--fg-muted)', lineHeight: 1.55, margin: 0}}>
                 Every template is owned by a maintainer team. To propose a new template, open a PR against the
-                {' '}<span className="mono" style={{color:'var(--ember)'}}>forge/templates</span> repo using the meta-template.
+                {' '}<span className="mono" style={{color:'var(--ember)'}}>eidos/templates</span> repo using the meta-template.
               </p>
               <a href="#" className="btn ghost sm" style={{marginTop: 10, alignSelf:'flex-start'}}>
                 <Icons.book size={11}/> Authoring guide

@@ -168,7 +168,7 @@ if (cmd === 'contract') {
   const missing = components.filter((c) => !c.surfaces.docs || !c.surfaces.export || !c.surfaces.story).length;
   console.log(`  ${missing} component(s) missing ≥1 of docs/export/story (parity gaps the contract now tracks).`);
 } else if (cmd === 'component') {
-  console.error('forge gen component <slug> — scaffold lands in Phase 3 (§4). Use the `new-component` skill meanwhile.');
+  console.error('eidos gen component <slug> — scaffold lands in Phase 3 (§4). Use the `new-component` skill meanwhile.');
   process.exit(2);
 } else {
   console.error('usage: eidos-gen.mjs contract --sync|--check  |  component <slug> --ds <ds>');

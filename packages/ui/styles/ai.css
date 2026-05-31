@@ -1,4 +1,4 @@
-/* Forge Design System — AI sub-DS component styles
+/* Eidos Design System — AI sub-DS component styles
  *
  * All .ai-* and .msg-* rules live here, NOT in ds.css. Moved out of ds.css
  * (~293 lines) plus page-local <style> blocks from the AI doc pages. Extends
@@ -277,7 +277,7 @@
 /* Token classes for hand-tokenized code samples inside .ai-code-body.
    The DS doesn't bundle Shiki/Prism — these are just colour roles that
    render any consumer-supplied <span class="tok-…">…</span> tokens with
-   the Forge palette. Use them sparingly in docs/demos; in production a
+   the Eidos palette. Use them sparingly in docs/demos; in production a
    build-time highlighter (Shiki, react-syntax-highlighter) is recommended. */
 .ai-code-body .tok-key { color: var(--ember); }
 .ai-code-body .tok-str { color: var(--success, #34D399); }

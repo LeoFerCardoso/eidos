@@ -7,9 +7,9 @@ import type { CitationSource } from '@eidos/ui';
 
 const SRC_RINGS: CitationSource = {
   id: 1,
-  domain: 'docs.forgeplatform.io',
+  domain: 'docs.eidosplatform.io',
   title: 'Pix Router — Ring deployment model',
-  url: 'https://docs.forgeplatform.io/pix-router/rings',
+  url: 'https://docs.eidosplatform.io/pix-router/rings',
   snippet:
     'The ring deployment model gates each release through a sequence of traffic slices (Ring 0–4) with automatic rollback on SLO breach.',
   fetched: '14:01 · 18s ago',
@@ -46,9 +46,9 @@ const SRC_LATENCY: CitationSource = {
 
 const SRC_NO_FETCH: CitationSource = {
   id: 5,
-  domain: 'runbooks.forgeplatform.io',
+  domain: 'runbooks.eidosplatform.io',
   title: 'Bureau Gateway · Provider failover',
-  url: 'https://runbooks.forgeplatform.io/bureau-failover',
+  url: 'https://runbooks.eidosplatform.io/bureau-failover',
   snippet:
     'Execute the failover by toggling the `BUREAU_PROVIDER` feature flag to the secondary endpoint.',
 };
@@ -234,7 +234,7 @@ export const HrefOverride: Story = {
   args: {
     n: 1,
     source: SRC_RINGS,
-    href: 'https://docs.forgeplatform.io/pix-router/changelog',
+    href: 'https://docs.eidosplatform.io/pix-router/changelog',
     tone: 'ember',
   },
   render: (args) => (

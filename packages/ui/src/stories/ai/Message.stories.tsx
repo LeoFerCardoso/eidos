@@ -123,7 +123,7 @@ export const WithActions: Story = {
 export const WithMeta: Story = {
   args: {
     from: 'assistant',
-    meta: <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>Forge AI · just now</span>,
+    meta: <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>Eidos AI · just now</span>,
     children: 'I found 3 ADR violations in the current sprint. Want me to open draft issues?',
   },
 };
@@ -146,7 +146,7 @@ export const InContext: Story = {
               from="assistant"
               meta={
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>
-                  Forge AI · now
+                  Eidos AI · now
                 </span>
               }
               actions={

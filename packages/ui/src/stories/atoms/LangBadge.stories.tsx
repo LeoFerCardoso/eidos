@@ -68,7 +68,7 @@ export const InContext: Story = {
   render: () => (
     <div className="surface" style={{ borderRadius: 10, overflow: 'hidden' }}>
       {[
-        { name: 'forge-api',           lang: 'Go',         repo: 'platform/forge-api',      deploys: 142 },
+        { name: 'eidos-api',           lang: 'Go',         repo: 'platform/eidos-api',      deploys: 142 },
         { name: 'auth-service',        lang: 'TypeScript', repo: 'platform/auth-service',   deploys: 89  },
         { name: 'billing-worker',      lang: 'Java',       repo: 'platform/billing-worker', deploys: 31  },
         { name: 'ml-inference-router', lang: 'Python',     repo: 'ml/inference-router',     deploys: 17  },

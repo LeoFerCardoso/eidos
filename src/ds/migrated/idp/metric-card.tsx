@@ -90,7 +90,7 @@ export default function MetricCardPage() {
       <SubHead meta="single hero tile">Hero metric</SubHead>
       <Frame label="size='lg' · the single most important metric on the page" code={`<MetricCard
   size="lg"
-  label="p95 latency · forge-api"
+  label="p95 latency · eidos-api"
   value={142}
   unit="ms"
   delta={-4.2}
@@ -100,7 +100,7 @@ export default function MetricCardPage() {
   foot="last 24h · SLO 200ms · budget 78%"
 />`}>
         <div style={{maxWidth: 520}}>
-          <MetricCard size="lg" label="p95 latency · forge-api" value={142} unit="ms"
+          <MetricCard size="lg" label="p95 latency · eidos-api" value={142} unit="ms"
                       delta={-4.2} deltaUnit="ms" inverted series={sLatHero}
                       foot="last 24h · SLO 200ms · budget 78%"
                       sparkColor="var(--success)"/>
@@ -247,7 +247,7 @@ ${SKELETON_CODE}`}>
           <div className="note">If the sparkline shows 7 days, the trend must read "vs. last 7d". A 30-day delta on a 7-point spark misleads at first glance.</div>
         </div>
         <div className="dd-card dont">
-          <div className="head"><Icons.x size={12}/> Don't — forget <Mono>inverted</Mono> on latency metrics</div>
+          <div className="head"><Icons.x size={12}/> Don't — eidost <Mono>inverted</Mono> on latency metrics</div>
           <div className="body">
             <div style={{maxWidth: 260}}>
               <MetricCard label="p95 latency" value={142} unit="ms" delta={-4} deltaUnit="ms" series={sLead}/>

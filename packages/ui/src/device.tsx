@@ -1,5 +1,5 @@
 'use client';
-// Forge — DeviceFrame. A realistic handset bezel for previewing mobile surfaces at
+// Eidos — DeviceFrame. A realistic handset bezel for previewing mobile surfaces at
 // true device dimensions, with a header combobox to switch between presets. Composes
 // nothing but tokens + the .device-* chrome in ds.css.
 import * as React from 'react';

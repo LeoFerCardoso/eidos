@@ -10,7 +10,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs
 
 export function Demo() {
   return (
-    <CopyChip value="ghcr.io/forge/payments-api:a3f8e4c" label="a3f8e4c" />
+    <CopyChip value="ghcr.io/eidos/payments-api:a3f8e4c" label="a3f8e4c" />
   )
 }`;
 
@@ -23,16 +23,16 @@ export default function CopyChipPage() {
 
       <SubHead meta="hello world">Usage</SubHead>
       <Frame label="basic" row code={USAGE_CODE}>
-        <CopyChip value="ghcr.io/forge/payments-api:a3f8e4c" label="a3f8e4c"/>
-        <CopyChip value="forge/payments-api"/>
+        <CopyChip value="ghcr.io/eidos/payments-api:a3f8e4c" label="a3f8e4c"/>
+        <CopyChip value="eidos/payments-api"/>
         <CopyChip value="ns: production · cluster: us-east-2" label="prod · us-east-2"/>
       </Frame>
 
       <SubHead meta="default · ember · ice">Tones</SubHead>
-      <Frame label="tint the chip to rank an identifier" row code={`<CopyChip value="forge/identity-svc" />              {/* default */}
+      <Frame label="tint the chip to rank an identifier" row code={`<CopyChip value="eidos/identity-svc" />              {/* default */}
 <CopyChip value="identity-svc@4.18.2" tone="ember" /> {/* primary */}
 <CopyChip value="prod-us-east-1"      tone="ice" />  {/* secondary */}`}>
-        <CopyChip value="forge/identity-svc"/>
+        <CopyChip value="eidos/identity-svc"/>
         <CopyChip value="identity-svc@4.18.2" tone="ember"/>
         <CopyChip value="prod-us-east-1" tone="ice"/>
       </Frame>
@@ -45,12 +45,12 @@ export default function CopyChipPage() {
 
       <SubHead meta="value vs. label">Truncate the display, copy the full value</SubHead>
       <Frame label="show a short SHA · copy the full image ref" row code={`<CopyChip
-  value="ghcr.io/forge/payments-api:a3f8e4c2d9b817f6"
+  value="ghcr.io/eidos/payments-api:a3f8e4c2d9b817f6"
   label="a3f8e4c"
 />`}>
-        <CopyChip value="ghcr.io/forge/payments-api:a3f8e4c2d9b817f6e4d8e3b0e2af1a06c8d7b5a9" label="a3f8e4c"/>
+        <CopyChip value="ghcr.io/eidos/payments-api:a3f8e4c2d9b817f6e4d8e3b0e2af1a06c8d7b5a9" label="a3f8e4c"/>
         <CopyChip value="sk_live_8x4Pr••••••••••••" label="sk_live_8x4···"/>
-        <CopyChip value="ns: forge-prod-us-east-2-aurora-cluster-01" label="forge-prod-us-east-2"/>
+        <CopyChip value="ns: eidos-prod-us-east-2-aurora-cluster-01" label="eidos-prod-us-east-2"/>
       </Frame>
       <Lede>Show what's scannable (a 7-char SHA, a friendly ref), but copy the full canonical string. Readers paste the long version; they only ever read the short one.</Lede>
 
@@ -63,10 +63,10 @@ export default function CopyChipPage() {
             <HealthBadge state="up"/>
           </div>
           <div style={{display:'grid', gridTemplateColumns:'auto 1fr', gap: '10px 16px', alignItems:'center', fontSize: 'var(--text-base)'}}>
-            <span style={{color:'var(--fg-faint)', fontFamily:'var(--font-mono)'}}>ref</span>           <CopyChip value="forge/payments-api"/>
-            <span style={{color:'var(--fg-faint)', fontFamily:'var(--font-mono)'}}>image</span>         <CopyChip value="ghcr.io/forge/payments-api:a3f8e4c" label="ghcr.io/forge/payments-api:a3f8e4c"/>
+            <span style={{color:'var(--fg-faint)', fontFamily:'var(--font-mono)'}}>ref</span>           <CopyChip value="eidos/payments-api"/>
+            <span style={{color:'var(--fg-faint)', fontFamily:'var(--font-mono)'}}>image</span>         <CopyChip value="ghcr.io/eidos/payments-api:a3f8e4c" label="ghcr.io/eidos/payments-api:a3f8e4c"/>
             <span style={{color:'var(--fg-faint)', fontFamily:'var(--font-mono)'}}>commit</span>        <CopyChip value="a3f8e4c2d9b817f6e4d8e3b0e2af1a06c8d7b5a9" label="a3f8e4c"/>
-            <span style={{color:'var(--fg-faint)', fontFamily:'var(--font-mono)'}}>namespace</span>     <CopyChip value="forge-payments-prod" label="forge-payments-prod"/>
+            <span style={{color:'var(--fg-faint)', fontFamily:'var(--font-mono)'}}>namespace</span>     <CopyChip value="eidos-payments-prod" label="eidos-payments-prod"/>
             <span style={{color:'var(--fg-faint)', fontFamily:'var(--font-mono)'}}>cluster</span>       <CopyChip value="prod-us-east-2"/>
           </div>
         </div>
@@ -75,7 +75,7 @@ export default function CopyChipPage() {
       <SubHead meta="state">Copied state</SubHead>
       <Frame label="click any chip — confirmation is seen and spoken, never colour alone" row code={`<CopyChip value="copy me" />`}>
         <CopyChip value="try clicking me"/>
-        <CopyChip value="forge://catalog/agents/code-reviewer-v2" label="catalog://agents/code-reviewer"/>
+        <CopyChip value="eidos://catalog/agents/code-reviewer-v2" label="catalog://agents/code-reviewer"/>
       </Frame>
       <div style={{display:'flex', flexWrap:'wrap', alignItems:'center', gap: 10, marginBlockStart: 14, fontFamily:'var(--font-mono)', fontSize:'var(--text-xs)', letterSpacing:'0.04em', color:'var(--fg-faint)'}}>
         <span style={{color:'var(--fg-subtle)'}}>on click</span>
@@ -117,8 +117,8 @@ export default function CopyChipPage() {
       <SubHead meta="RTL · العربية">RTL</SubHead>
       <Frame label={'dir="rtl" — copy icon moves to the leading (left) edge'} center code={`<div dir="rtl"><CopyChip value="…" label="…"/></div>`} lang="tsx">
         <div dir="rtl" style={{display:'flex', flexWrap:'wrap', gap: 12, alignItems:'center'}}>
-          <CopyChip value="ghcr.io/forge/payments-api:a3f8e4c" label="a3f8e4c"/>
-          <CopyChip value="forge/payments-api"/>
+          <CopyChip value="ghcr.io/eidos/payments-api:a3f8e4c" label="a3f8e4c"/>
+          <CopyChip value="eidos/payments-api"/>
           <CopyChip value="ns: production · cluster: us-east-2" label="prod · us-east-2"/>
         </div>
       </Frame>
@@ -133,7 +133,7 @@ export default function CopyChipPage() {
         <div className="ds-frame-body" style={{ padding: '72px 48px 64px' }}>
           <div className="ana" style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="stage" style={{ position: 'relative' }} aria-hidden="true">
-              <CopyChip value="ghcr.io/forge/payments-api:a3f8e4c" label="a3f8e4c" />
+              <CopyChip value="ghcr.io/eidos/payments-api:a3f8e4c" label="a3f8e4c" />
               {/* pin 1 — code text */}
               <span className="lead v" style={{ top: -28, left: '30%', height: 22 }} />
               <div className="pin" style={{ top: -50, left: '30%', transform: 'translateX(-50%)' }}>1</div>

@@ -1,4 +1,4 @@
-// @eidos/ui — the Forge Design System component library.
+// @eidos/ui — the Eidos Design System component library.
 //
 // Framework-agnostic React + a shared semantic CSS layer (import the stylesheets
 // from "@eidos/ui/styles/*"). Each module imports its dependencies directly

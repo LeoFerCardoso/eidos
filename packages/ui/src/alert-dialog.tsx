@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { cn } from './lib/utils';
 import { Icons } from './icons';
 
-// Forge DS — Alert Dialog
+// Eidos DS — Alert Dialog
 //
 // A blocking modal that demands an explicit answer. Unlike Modal:
 //   - The backdrop is inert — clicking outside does NOT close the dialog.
@@ -30,7 +30,7 @@ export interface AlertDialogProps {
   onOpenChange?: (open: boolean) => void;
   /** Semantic variant — drives the icon tile colour and default confirm style. */
   variant?: AlertDialogVariant;
-  /** The question to ask the user. Keep it specific ("Delete forge-api?"). */
+  /** The question to ask the user. Keep it specific ("Delete eidos-api?"). */
   title: React.ReactNode;
   /**
    * The consequence — what happens and whether it's reversible.

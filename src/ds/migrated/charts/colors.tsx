@@ -1,7 +1,7 @@
 'use client';
 // Eidos Charts — Foundations / Colors. The data-visualization palette, relocated here from
 // the core Color page: categorical, sequential, diverging, plus the chart chrome tokens.
-import { Section, SubHead, Frame, Icons, ForgeChart, ForgeTooltipContent, useChartColors, forgeGridProps, forgeXAxisProps, forgeYAxisProps, Recharts, Mono, Lede } from '@/ds/core';
+import { Section, SubHead, Frame, Icons, EidosChart, EidosTooltipContent, useChartColors, eidosGridProps, eidosXAxisProps, eidosYAxisProps, Recharts, Mono, Lede } from '@/ds/core';
 
 const { BarChart, Bar, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } = Recharts;
 
@@ -60,30 +60,30 @@ export default function ChartsColors() {
         The same tokens in real charts. Series read the categorical ramp via <Mono>useChartColors()</Mono> (so colours stay consistent and theme-flip for free); a diverging metric maps sign to <Mono>--viz-div-pos</Mono> / <Mono>--viz-div-neg</Mono>.
       </Lede>
       <Frame label="categorical — multi-series via --viz-cat-1..3">
-        <ForgeChart title="Requests by service" subtitle="api · auth · kyc" meta="this week" height={240}>
+        <EidosChart title="Requests by service" subtitle="api · auth · kyc" meta="this week" height={240}>
           <LineChart data={CAT} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-            <CartesianGrid {...forgeGridProps} />
-            <XAxis dataKey="d" {...forgeXAxisProps} />
-            <YAxis {...forgeYAxisProps} />
-            <Tooltip content={<ForgeTooltipContent />} />
+            <CartesianGrid {...eidosGridProps} />
+            <XAxis dataKey="d" {...eidosXAxisProps} />
+            <YAxis {...eidosYAxisProps} />
+            <Tooltip content={<EidosTooltipContent />} />
             <Line type="monotone" dataKey="api" name="api" stroke={c[0]} strokeWidth={2} dot={false} />
             <Line type="monotone" dataKey="auth" name="auth" stroke={c[1]} strokeWidth={2} dot={false} />
             <Line type="monotone" dataKey="kyc" name="kyc" stroke={c[2]} strokeWidth={2} dot={false} />
           </LineChart>
-        </ForgeChart>
+        </EidosChart>
       </Frame>
       <Frame label="diverging — sign maps to --viz-div-pos / --viz-div-neg">
-        <ForgeChart title="Cost variance" subtitle="vs. forecast · centred on zero" meta="$/day" height={220}>
+        <EidosChart title="Cost variance" subtitle="vs. forecast · centred on zero" meta="$/day" height={220}>
           <BarChart data={DIV} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-            <CartesianGrid {...forgeGridProps} />
-            <XAxis dataKey="n" {...forgeXAxisProps} />
-            <YAxis {...forgeYAxisProps} />
-            <Tooltip content={<ForgeTooltipContent />} />
+            <CartesianGrid {...eidosGridProps} />
+            <XAxis dataKey="n" {...eidosXAxisProps} />
+            <YAxis {...eidosYAxisProps} />
+            <Tooltip content={<EidosTooltipContent />} />
             <Bar dataKey="v" name="variance" radius={[3, 3, 0, 0]}>
               {DIV.map((e, i) => <Cell key={i} fill={e.v >= 0 ? 'var(--viz-div-pos)' : 'var(--viz-div-neg)'} />)}
             </Bar>
           </BarChart>
-        </ForgeChart>
+        </EidosChart>
       </Frame>
       <p className="ds-caption">Cap the categorical series at the first few hues; past ~6 they stop being distinguishable. For ordered magnitude reach for the sequential ramp instead of more categories.</p>
 

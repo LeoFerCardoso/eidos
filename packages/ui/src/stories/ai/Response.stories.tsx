@@ -23,7 +23,7 @@ const meta = {
     streaming: false,
     meta: (
       <>
-        <span className="name">Forge AI</span>
+        <span className="name">Eidos AI</span>
         <span className="dot" />
         <span>14:02 · gpt-5</span>
       </>
@@ -72,7 +72,7 @@ export const RichBody: Story = {
         <Response
           meta={
             <>
-              <span className="name">Forge AI</span>
+              <span className="name">Eidos AI</span>
               <span className="dot" />
               <span>14:08 · gpt-5</span>
             </>
@@ -93,9 +93,9 @@ export const RichBody: Story = {
             Run the dry-run first, then promote in two canary steps. Each step is reversible; the full
             roll is the only one-way door.
           </p>
-          <ProseCode lang="bash">{`forge migrate --dry-run --target=billing-svc
-forge migrate --promote --canary=10%
-forge migrate --promote --canary=100%`}</ProseCode>
+          <ProseCode lang="bash">{`eidos migrate --dry-run --target=billing-svc
+eidos migrate --promote --canary=10%
+eidos migrate --promote --canary=100%`}</ProseCode>
           <h3>Owners + ETAs</h3>
           <table>
             <thead>
@@ -118,7 +118,7 @@ forge migrate --promote --canary=100%`}</ProseCode>
                 <td>billing</td>
                 <td className="num">12 min</td>
                 <td>
-                  <code>forge canary --revert</code>
+                  <code>eidos canary --revert</code>
                 </td>
               </tr>
               <tr>
@@ -146,7 +146,7 @@ export const Diagram: Story = {
     <Response
       meta={
         <>
-          <span className="name">Forge AI</span>
+          <span className="name">Eidos AI</span>
         </>
       }
     >
@@ -260,7 +260,7 @@ export const Streaming: Story = {
           streaming={!done}
           meta={
             <>
-              <span className="name">Forge AI</span>
+              <span className="name">Eidos AI</span>
               <span className="dot" />
               <span>{done ? 'just now' : 'streaming…'}</span>
             </>
@@ -298,7 +298,7 @@ export const DocumentFlow: Story = {
       <Response
         meta={
           <>
-            <span className="name">Forge AI</span>
+            <span className="name">Eidos AI</span>
             <span className="dot" />
             <span>14:02 · gpt-5</span>
           </>

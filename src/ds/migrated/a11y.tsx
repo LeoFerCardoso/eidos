@@ -586,7 +586,7 @@ export default function A11y() {
         </div>
       </div>
       <p className="ds-caption">
-        Found something that should be on this list? Open an issue at <Mono>github.com/forge/design-system/issues</Mono> with the <Mono>a11y</Mono> label. We triage weekly.
+        Found something that should be on this list? Open an issue at <Mono>github.com/eidos/design-system/issues</Mono> with the <Mono>a11y</Mono> label. We triage weekly.
       </p>
     </Section>
   );

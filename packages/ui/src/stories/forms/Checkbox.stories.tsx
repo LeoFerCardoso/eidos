@@ -8,7 +8,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'padded',
-    docs: { description: { component: 'A native checkbox with the Forge `.fc` visual box. Supports a label, a stacked description, sizes (sm/md/lg), a visual indeterminate state, disabled, and a danger-tinted error state.' } },
+    docs: { description: { component: 'A native checkbox with the Eidos `.fc` visual box. Supports a label, a stacked description, sizes (sm/md/lg), a visual indeterminate state, disabled, and a danger-tinted error state.' } },
   },
   args: { label: 'Enable auto-deploy on merge', size: 'md' },
   argTypes: {

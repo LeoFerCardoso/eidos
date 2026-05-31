@@ -304,7 +304,7 @@ npm install mermaid`}
               <Icons.sparkle size={16} style={{ color: 'var(--ember)' }}/>
             </span>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--fg-subtle)', display: 'block', marginBottom: 8 }}>FORGE PLATFORM AGENT</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--fg-subtle)', display: 'block', marginBottom: 8 }}>EIDOS PLATFORM AGENT</span>
               <p style={{ fontSize: 'var(--text-md)', lineHeight: 1.6, color: 'var(--fg)', marginBottom: 12 }}>
                 The agent run loop has four steps — plan, call tools, observe results, and draft the answer. Here is the flowchart:
               </p>

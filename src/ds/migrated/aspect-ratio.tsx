@@ -93,7 +93,7 @@ const IN_CONTEXT_CODE = `{/* Card with locked-ratio thumbnail */}
     <img src="/cover.jpg" alt="Ring rollout diagram — canary to 100% with health gates" />
   </AspectRatio>
   <div style={{ padding: 16 }}>
-    <h3>The forge that ships</h3>
+    <h3>The platform that ships</h3>
     <p>Architecture notes from the platform team.</p>
   </div>
 </div>
@@ -307,7 +307,7 @@ export default function AspectRatioPage() {
               <img src={IMG_HERO} alt="Ring rollout diagram — canary to 100% with health gates" />
             </AspectRatio>
             <div style={{ padding: 14 }}>
-              <div style={{ fontSize: 'var(--text-md)', fontWeight: 600, letterSpacing: '-0.005em', marginBottom: 4 }}>The forge that ships</div>
+              <div style={{ fontSize: 'var(--text-md)', fontWeight: 600, letterSpacing: '-0.005em', marginBottom: 4 }}>The platform that ships</div>
               <div style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', lineHeight: 1.55 }}>Architecture notes from the platform team.</div>
             </div>
           </div>

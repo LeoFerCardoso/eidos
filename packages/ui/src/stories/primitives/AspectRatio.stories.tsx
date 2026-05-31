@@ -119,7 +119,7 @@ export const InContext: Story = {
         <div className="ar-label">cover.jpg</div>
       </AspectRatio>
       <div style={{ padding: 16 }}>
-        <div style={{ fontWeight: 600, marginBottom: 4 }}>The forge that ships</div>
+        <div style={{ fontWeight: 600, marginBottom: 4 }}>The platform that ships</div>
         <div style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', lineHeight: 1.55 }}>
           Architecture notes from the platform team.
         </div>

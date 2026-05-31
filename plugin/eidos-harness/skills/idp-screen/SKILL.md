@@ -27,10 +27,14 @@ building. If you are about to invent a component, stop — there is probably
 an element/block that solves it.
 
 ### Step 2 — Build it in the app
-A screen is either an Example (standalone, registers `window.EXAMPLES['<name>']` in
-`src/ds/examples/<name>.jsx`) or a DS page (registers `window.PAGES['<slug>']` in
-`src/ds/pages/<group>/<slug>.jsx`). Add the nav entry in `src/ds/core/nav-config.js`, then
-run `npm run gen:manifest`. Compose only existing classes/components — no per-page `<style>`.
+A screen is either a full-screen Example (`src/ds/examples/<name>.tsx`, `'use client'`,
+**default export**, auto-registered into `src/ds/examples/registry.ts`, nav leaf marked
+`external: true`) or a DS page (`src/ds/migrated/<ds>/<slug>.tsx` — core pages
+`src/ds/migrated/<slug>.tsx` —`'use client'`, **default export**, imports from `@/ds/core`,
+auto-registered into `src/ds/migrated/registry.ts`). Add the nav entry in
+`src/ds/core/nav-config.js`, then run `node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs`
+(+ `node scripts/gen-examples.mjs` for examples) and restart `next dev`. Compose only
+existing classes/components — no per-page `<style>`.
 
 ### Step 3 — Cover the states (not just the "happy path")
 Every data screen has states. Cover (see `${CLAUDE_PLUGIN_ROOT}/craft/state-coverage.md`):
@@ -55,5 +59,6 @@ Run `npm run verify` (route mounts) + the manual checklist in `${CLAUDE_PLUGIN_R
 - **Logical properties + RTL example/test.**
 - **Controlled density:** one tight section, one breathing (intentional tension),
   not perfect symmetry without rhythm.
-- **Build in the repo** — register the screen and run `gen:manifest`; never emit a
-  standalone HTML document. Hand off to `code-reviewer` / `ux-designer` when done.
+- **Build in the repo** — add the `.tsx` module + nav entry, run `gen-nav`/`gen-migrated`
+  (+ `gen-examples`), and restart `next dev`; never emit a standalone HTML document. Hand
+  off to `code-reviewer` / `ux-designer` when done.

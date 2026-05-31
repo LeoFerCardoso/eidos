@@ -90,7 +90,7 @@ const RunbookBody = () => (
 const App = () => {
   const [panelOpen, setPanelOpen] = React.useState(true);
   const [text, setText] = React.useState('');
-  const [model, setModel] = React.useState('forge-opus-4-7');
+  const [model, setModel] = React.useState('eidos-opus-4-7');
 
   return (
     <ChatShell

@@ -11,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A native `<input type="number">` in the Forge field shell. The browser spinner is hidden; ' +
+          'A native `<input type="number">` in the Eidos field shell. The browser spinner is hidden; ' +
           'an explicit stepper is the affordance. Supports a `stacked` (default) or `split` layout. ' +
           'A `meter` prop renders a thin progress bar below the field within [min, max].',
       },

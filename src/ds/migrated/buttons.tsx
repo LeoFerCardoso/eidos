@@ -25,7 +25,7 @@ const INSTALL_NPM  = `npx eidos@latest add button`;
 const INSTALL_YARN = `yarn dlx eidos@latest add button`;
 const INSTALL_BUN  = `bunx eidos@latest add button`;
 // The Eidos registry is shadcn registry-item.json compatible — the stock CLI works too.
-const INSTALL_SHADCN = `npx shadcn@latest add https://forge.equifax.dev/r/button.json`;
+const INSTALL_SHADCN = `npx shadcn@latest add https://eidos.equifax.dev/r/button.json`;
 
 // Manual install — Eidos components are semantic-class React (no Radix, no CVA);
 // the only baseline dep is the cn() helper. Shown when the user picks "Manual".
@@ -33,7 +33,7 @@ const INSTALL_MANUAL = `# 1. Install the Eidos base layer once (design tokens + 
 npx eidos@latest init
 
 # 2. Copy components/forge/button.tsx from the Eidos source
-#    into your repo (https://github.com/forge/design-system) — or just run
+#    into your repo (https://github.com/eidos/design-system) — or just run
 #    \`eidos add button\` to do steps 1–2 for you.
 
 # 3. Import the Eidos stylesheet layer at your app root so the .btn classes

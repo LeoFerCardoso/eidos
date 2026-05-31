@@ -9,7 +9,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, AutoPropsTable,
 // ── Usage demo — 5-step trace ────────────────────────────────────────────────
 const USAGE_STEPS = [
   { kind: 'think',   label: 'What caused the p99 spike on identity-svc?', detail: 'Looking at deploys in the last 24 h overlapping with the spike window.' },
-  { kind: 'search',  label: 'Search deploy log', detail: 'forge.deploys · since=24h · tier=T1' },
+  { kind: 'search',  label: 'Search deploy log', detail: 'eidos.deploys · since=24h · tier=T1' },
   { kind: 'observe', label: '4 Tier-1 deploys found — identity-svc @ 0421 is the newest', detail: 'pool-size: 8 → 32 and retry-budget: 3 → 8 in the same commit.' },
   { kind: 'plan',    label: 'Check only the pool-size change — it sits on the spike\'s code path' },
   { kind: 'done',    label: 'Recommend reverting pool-size; keep the retry-budget bump for now' },
@@ -22,7 +22,7 @@ const USAGE_CODE = `import { ChainOfThought } from "@/ds/core"
   defaultOpen={true}
   steps={[
     { kind: "think",   label: "What caused the p99 spike?", detail: "Checking deploys…" },
-    { kind: "search",  label: "Search deploy log",          detail: "forge.deploys · since=24h" },
+    { kind: "search",  label: "Search deploy log",          detail: "eidos.deploys · since=24h" },
     { kind: "observe", label: "4 Tier-1 deploys found",    detail: "identity-svc @ 0421 is newest" },
     { kind: "plan",    label: "Check only pool-size change" },
     { kind: "done",    label: "Recommend reverting pool-size" },
@@ -42,7 +42,7 @@ const KIND_STEPS = [
 // ── Streaming demo ────────────────────────────────────────────────────────────
 const ALL_STEPS = [
   { kind: 'think',   label: 'What\'s driving the p99 spike?',           detail: 'Spike began 14:07 UTC — correlate with deploy window.' },
-  { kind: 'search',  label: 'Search deploy log · since=24h · tier=T1',  detail: 'forge.deploys' },
+  { kind: 'search',  label: 'Search deploy log · since=24h · tier=T1',  detail: 'eidos.deploys' },
   { kind: 'observe', label: '4 T1 deploys — identity-svc is newest',    detail: 'Committed 14:02 · +15 files changed' },
   { kind: 'plan',    label: 'Diff identity-svc @ 0421',                  detail: 'pool-size 8→32 and retry-budget 3→8 in same commit' },
   { kind: 'done',    label: 'Revert pool-size; keep retry-budget',       detail: 'pool-size is the only change on the spike\'s code path' },
@@ -269,7 +269,7 @@ export default function ChainOfThoughtPage() {
             defaultOpen={true}
             steps={[
               { kind: 'think',   label: 'ما سبب ارتفاع p99 على identity-svc؟', detail: 'مقارنة النشر بنافذة الارتفاع' },
-              { kind: 'search',  label: 'البحث في سجل النشر', detail: 'forge.deploys · since=24h' },
+              { kind: 'search',  label: 'البحث في سجل النشر', detail: 'eidos.deploys · since=24h' },
               { kind: 'observe', label: 'تم العثور على 4 عمليات نشر — identity-svc هو الأحدث' },
               { kind: 'plan',    label: 'فحص تغيير pool-size فقط' },
               { kind: 'done',    label: 'التوصية بالتراجع عن pool-size' },

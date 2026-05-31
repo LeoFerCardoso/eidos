@@ -11,7 +11,7 @@ const meta = {
         component:
           'Canonical empty-state surface for tables, drawers, and hero sections. ' +
           'Three sizes (sm / md / lg) share the same chrome; pass `iconName` (keyed into Icons) ' +
-          'or a ReactNode `icon`. `action` and `secondary` strings auto-render as Forge buttons.',
+          'or a ReactNode `icon`. `action` and `secondary` strings auto-render as Eidos buttons.',
       },
     },
   },

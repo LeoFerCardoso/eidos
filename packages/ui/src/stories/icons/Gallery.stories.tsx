@@ -10,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The complete Forge icon set — Lucide-style 24×24 stroke glyphs, ' +
+          'The complete Eidos icon set — Lucide-style 24×24 stroke glyphs, ' +
           'rendered at 20px here. Each entry in the `Icons` map is a standalone ' +
           'React component accepting `size`, `color`, and `strokeWidth` props.',
       },

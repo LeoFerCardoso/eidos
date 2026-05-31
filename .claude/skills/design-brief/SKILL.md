@@ -42,7 +42,7 @@ each, cite the Eidos token/component rather than an abstract value.
 2. **Layout model** — regions and the inline-axis structure (nav / rail /
    content grid / table / footer), expressed so it flips under `dir="rtl"`.
 3. **Component map** — name each region as an existing Eidos component/element
-   from the catalog (e.g. metric card, `.tbl` table, `window.ForgeChart`, status
+   from the catalog (e.g. metric card, `.tbl` table, `window.EidosChart`, status
    dot, `.badge`). If a region has no existing component, flag it as new work
    for `new-component` — don't hand-wave it.
 4. **Type roles** — which content is Geist Sans (UI/body) vs Geist Mono

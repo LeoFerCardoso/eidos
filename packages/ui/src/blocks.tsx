@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge DS — building blocks & IDP recipes (Phase 3 + Phase 3-rework).
+// Eidos DS — building blocks & IDP recipes (Phase 3 + Phase 3-rework).
 //
 // Mid-level React helpers that COMPOSE existing atoms (Pill, StatusDot,
 // Trend, Avatar, Sparkline, Card, Icons). Page chrome lives in ds.css under

@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { cn } from './lib/utils';
 import { Icons } from './icons';
 
-// Forge DS — Dropdown Menu
+// Eidos DS — Dropdown Menu
 //
 // Command list (ACTIONS, not value selection). Compound: trigger + portalled
 // panel. role=menu; items role=menuitem|menuitemcheckbox|menuitemradio.

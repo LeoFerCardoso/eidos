@@ -36,7 +36,7 @@ Use `gh pr create` with a structured body via HEREDOC:
 - <bullet per notable change; reference files/skills/components touched>
 
 ## Verification
-- [ ] `node scripts/gen-manifest.mjs` ran (if routes changed)
+- [ ] `node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs` (+ `gen-examples.mjs`) ran (if routes changed)
 - [ ] `npm run verify` (DS route render) pass — paste result
 - [ ] anti-ai-slop / a11y / RTL checks pass for any new/edited DS artifact
 - [ ] Eidos invariants held: single ember ≤2×/screen, Geist Sans + Mono, logical CSS

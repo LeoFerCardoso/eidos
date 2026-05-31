@@ -227,7 +227,7 @@ export const InContext: Story = {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontWeight: 600, fontSize: 'var(--text-base)' }}>Forge Studio</span>
+          <span style={{ fontWeight: 600, fontSize: 'var(--text-base)' }}>Eidos Studio</span>
           <Menubar {...args}>
             <FileMenu />
             <EditMenu />

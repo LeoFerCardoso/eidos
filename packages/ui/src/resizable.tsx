@@ -2,7 +2,7 @@ import * as React from 'react';
 import { cn } from './lib/utils';
 import { Icons } from './icons';
 
-// Forge DS — Resizable panels.
+// Eidos DS — Resizable panels.
 //
 // Split any two panes with a drag-and-keyboard handle. Supports:
 //   orientation horizontal | vertical
@@ -498,7 +498,7 @@ ResizablePanel.displayName = 'ResizablePanel';
 /**
  * The drag handle between two panels. Must be a direct child of `<Resizable>`.
  * Renders a 10px hit zone with a 1px visible line. With `withHandle`, adds a
- * centred grip pill (the standard Forge affordance).
+ * centred grip pill (the standard Eidos affordance).
  *
  * Keyboard: ArrowLeft/Right (horizontal) or ArrowUp/Down (vertical) nudges by
  * `step`; Shift+Arrow nudges by `largeStep`; Home/End jump to min/max; Enter

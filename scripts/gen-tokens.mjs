@@ -77,7 +77,7 @@ function toRef(value) {
 
 // ---- build DTCG tree ------------------------------------------------------
 const TYPE_FOR_CAT = { color: 'color', fontSize: 'dimension', spacing: 'dimension', radius: 'dimension', breakpoint: 'dimension', dimension: 'dimension', duration: 'duration', easing: 'cubicBezier', shadow: 'shadow', fontFamily: 'fontFamily', number: 'number', zIndex: 'number', opacity: 'number', other: undefined };
-const tree = { $description: `Forge Design System tokens — generated from ${SOURCE}. Do not edit by hand; edit the CSS and re-run scripts/gen-tokens.mjs.` };
+const tree = { $description: `Eidos Design System tokens — generated from ${SOURCE}. Do not edit by hand; edit the CSS and re-run scripts/gen-tokens.mjs.` };
 let count = 0;
 for (const [name, { value, desc }] of root) {
   const t = typeOf(name, value);

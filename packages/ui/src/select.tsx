@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Icons } from './icons';
-// Forge DS — Custom Select.
+// Eidos DS — Custom Select.
 //
 // Single-value picker from a closed set with custom rendering (icons,
 // descriptions, groups). For typeahead + multi-select + chips, use Combobox.

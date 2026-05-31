@@ -15,7 +15,7 @@ const ROOT = resolve(HERE, '..', '..', '..');
 const results = [];
 const check = (label, cond) => results.push({ label, pass: !!cond });
 
-const proj = mkdtempSync(join(tmpdir(), 'forge-full-'));
+const proj = mkdtempSync(join(tmpdir(), 'eidos-full-'));
 writeFileSync(join(proj, 'package.json'), JSON.stringify({ name: 'consumer', private: true }, null, 2));
 
 const cli = (args) =>
@@ -28,7 +28,7 @@ const SAMPLE = [
   ['metric-card', ['components/forge/metric-card.tsx', 'components/forge/trend.tsx', 'components/forge/sparkline.tsx']],
   ['health-badge', ['components/forge/health-badge.tsx', 'components/forge/pill.tsx']],
   ['data-table', ['components/forge/data-table.tsx']],
-  ['forge-chart', ['components/forge/forge-chart.tsx']],
+  ['eidos-chart', ['components/forge/eidos-chart.tsx']],
   ['tool', ['components/forge/tool.tsx', 'components/forge/icons.tsx', 'styles/forge/ai.css']],
   ['message', ['components/forge/message.tsx']],
   ['drawer', ['components/forge/drawer.tsx']],
@@ -94,7 +94,7 @@ const summary =
   `\n\n${failed.length === 0 ? 'ALL_PASS' : 'SOME_FAIL (' + failed.length + ')'}  [${results.length} checks]\n` +
   (tscErrs.length ? `\n--- tsc errors ---\n${tscErrs.slice(0, 20).join('\n')}\n` : '') +
   `project: ${proj}\n`;
-writeFileSync(join(tmpdir(), 'forge-cli-e2e-full.txt'), summary);
+writeFileSync(join(tmpdir(), 'eidos-cli-e2e-full.txt'), summary);
 console.log(summary);
 if (failed.length === 0) { try { rmSync(proj, { recursive: true, force: true }); } catch {} }
 process.exit(failed.length === 0 ? 0 : 1);

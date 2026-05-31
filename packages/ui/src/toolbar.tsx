@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cn } from './lib/utils';
 
-// Forge DS — Toolbar
+// Eidos DS — Toolbar
 //
 // A single-tab-stop row of controls (buttons, toggle buttons, groups, separators)
 // with roving tabindex and full ARIA toolbar keyboard model.

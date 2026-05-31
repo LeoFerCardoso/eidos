@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { cn } from './lib/utils';
 
-// Forge DS — Tooltip
+// Eidos DS — Tooltip
 //
 // Hover + keyboard-focus triggered tooltip with:
 //   - Configurable open delay (~500ms) and close delay

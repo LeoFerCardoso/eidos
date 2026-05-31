@@ -29,7 +29,7 @@ export function Demo() {
   return (
     <div className="grid gap-2">
       <Label htmlFor="email">Email</Label>
-      <Input id="email" type="email" placeholder="you@forge.io"/>
+      <Input id="email" type="email" placeholder="you@eidos.io"/>
     </div>
   )
 }`;
@@ -367,7 +367,7 @@ export function Demo() {
   // ─── Code samples (one source — used in code panels below) ───────────────
   const CODE_BASIC = [
     `<Field label="Email" htmlFor="email" required help="We never share your email.">`,
-    `  <Input id="email" type="email" placeholder="you@forge.io"/>`,
+    `  <Input id="email" type="email" placeholder="you@eidos.io"/>`,
     `</Field>`,
   ].join('\n');
 
@@ -375,7 +375,7 @@ export function Demo() {
     `<InputGroup>`,
     `  <InputGroup.Addon>https://</InputGroup.Addon>`,
     `  <Input placeholder="my-app"/>`,
-    `  <InputGroup.Addon>.forge.io</InputGroup.Addon>`,
+    `  <InputGroup.Addon>.eidos.io</InputGroup.Addon>`,
     `</InputGroup>`,
   ].join('\n');
 
@@ -433,7 +433,7 @@ export function Demo() {
         <Frame label="basic" code={USAGE_CODE}>
           <div style={{width:'100%', maxWidth: 360}}>
             <Field htmlFor="usage" label="Email">
-              <Group><input id="usage" type="email" className="in-control" placeholder="you@forge.io"/></Group>
+              <Group><input id="usage" type="email" className="in-control" placeholder="you@eidos.io"/></Group>
             </Field>
           </div>
         </Frame>
@@ -459,7 +459,7 @@ export function Demo() {
         <Frame label="The simplest possible field — label, control, helper" code={CODE_BASIC}>
           <div style={{width:'100%', maxWidth: 360}}>
             <Field htmlFor="b1" label="Email" required help="We never share your email.">
-              <Group><input id="b1" type="email" className="in-control" placeholder="you@forge.io"/></Group>
+              <Group><input id="b1" type="email" className="in-control" placeholder="you@eidos.io"/></Group>
             </Field>
           </div>
         </Frame>
@@ -522,7 +522,7 @@ export function Demo() {
               <Group disabled><input id="st4" className="in-control" defaultValue="locked" disabled/></Group>
             </Field>
             <Field label="Readonly" htmlFor="st5" help="Tap to copy">
-              <Group readOnly><input id="st5" className="in-control" defaultValue="forge_3f2a…" readOnly/></Group>
+              <Group readOnly><input id="st5" className="in-control" defaultValue="eidos_3f2a…" readOnly/></Group>
             </Field>
             <Field label="Loading" htmlFor="st6" help="Validating availability…">
               <Group>
@@ -567,7 +567,7 @@ export function Demo() {
             <Field label="Email" htmlFor="ic1">
               <Group>
                 <span className="in-addon icon"><Icons.bell size={14}/></span>
-                <input id="ic1" type="email" className="in-control" placeholder="you@forge.io"/>
+                <input id="ic1" type="email" className="in-control" placeholder="you@eidos.io"/>
               </Group>
             </Field>
             <Field label="When" htmlFor="ic2">
@@ -580,7 +580,7 @@ export function Demo() {
             <Field label="Repository" htmlFor="ic3">
               <Group>
                 <span className="in-addon icon"><Icons.branch size={14}/></span>
-                <input id="ic3" className="in-control" placeholder="forge/identity"/>
+                <input id="ic3" className="in-control" placeholder="eidos/identity"/>
               </Group>
             </Field>
             <Field label="Avatar URL" htmlFor="ic4">
@@ -670,7 +670,7 @@ export function Demo() {
               <Group>
                 <span className="in-addon text">https://</span>
                 <input id="af1" className="in-control" defaultValue="my-app"/>
-                <span className="in-addon text">.forge.io</span>
+                <span className="in-addon text">.eidos.io</span>
               </Group>
             </Field>
             <Field label="Filename" htmlFor="af2">
@@ -724,7 +724,7 @@ export function Demo() {
             <Field label="Subscribe to release notes" htmlFor="cta1" help="One email per release. Unsubscribe any time.">
               <Group size="lg" style={{paddingInlineEnd: 4}}>
                 <span className="in-addon icon"><Icons.bell size={15}/></span>
-                <input id="cta1" type="email" className="in-control" placeholder="you@forge.io"/>
+                <input id="cta1" type="email" className="in-control" placeholder="you@eidos.io"/>
                 <button type="button" className="btn ember" style={{alignSelf:'center'}}>
                   Subscribe <Icons.arrowRight size={13}/>
                 </button>
@@ -734,7 +734,7 @@ export function Demo() {
             <Field label="Invite by email" htmlFor="cta2">
               <Group style={{paddingInlineEnd: 4}}>
                 <span className="in-addon icon"><Icons.user size={14}/></span>
-                <input id="cta2" type="email" className="in-control" placeholder="teammate@forge.io"/>
+                <input id="cta2" type="email" className="in-control" placeholder="teammate@eidos.io"/>
                 <button type="button" className="btn outline sm" style={{alignSelf:'center'}}>
                   <Icons.plus size={12}/> Invite
                 </button>
@@ -831,7 +831,7 @@ export function Demo() {
           <div className="ds-grid cols-2" style={{width:'100%'}}>
             <Field label="Hostname + port" htmlFor="rc1" help="Bind two related values into one field.">
               <Group>
-                <input id="rc1" className="in-control" defaultValue="api.forge.io" style={{flex: '1 1 auto'}}/>
+                <input id="rc1" className="in-control" defaultValue="api.eidos.io" style={{flex: '1 1 auto'}}/>
                 <span className="in-addon" style={{padding: 0, alignSelf:'stretch', width: 1, background:'var(--border)'}} aria-hidden="true"/>
                 <input className="in-control" type="number" defaultValue="443" style={{flex: '0 0 80px', textAlign:'center'}}/>
               </Group>
@@ -854,7 +854,7 @@ export function Demo() {
                 <select className="in-addon select" defaultValue="POST" aria-label="HTTP method" style={{fontWeight: 600, fontFamily:'var(--font-mono)', fontSize: 'var(--text-sm)'}}>
                   <option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option>
                 </select>
-                <input id="rc3" className="in-control t-mono" defaultValue="https://api.forge.io/v1/services" style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-sm)'}}/>
+                <input id="rc3" className="in-control t-mono" defaultValue="https://api.eidos.io/v1/services" style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-sm)'}}/>
               </Group>
             </Field>
 
@@ -904,14 +904,14 @@ export function Demo() {
             <Field label="البريد الإلكتروني" htmlFor="rtl1" required help="لن نشارك بريدك الإلكتروني.">
               <Group>
                 <span className="in-addon icon"><Icons.bell size={14}/></span>
-                <input id="rtl1" type="email" className="in-control" placeholder="you@forge.io"/>
+                <input id="rtl1" type="email" className="in-control" placeholder="you@eidos.io"/>
               </Group>
             </Field>
             <Field label="اسم النطاق" htmlFor="rtl2" help="سيظهر هذا الاسم على رابط النشر.">
               <Group>
                 <span className="in-addon text">https://</span>
                 <input id="rtl2" className="in-control" defaultValue="my-app"/>
-                <span className="in-addon text">.forge.io</span>
+                <span className="in-addon text">.eidos.io</span>
               </Group>
             </Field>
             <Field label="كلمة المرور" htmlFor="rtl3" help="على الأقل ١٢ حرفًا.">

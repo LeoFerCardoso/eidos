@@ -175,7 +175,7 @@ import { FPageHeader, FSection, FShell, useQueryParam } from './example-shell';
                   <div>
                     <label className="t-mono-label" style={{display:'block', marginBottom: 6}}>Repo name</label>
                     <div className="in-group">
-                      <span className="in-addon text" style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-sm)'}}>forge-platform/</span>
+                      <span className="in-addon text" style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-sm)'}}>eidos-platform/</span>
                       <input className="in-control" value={repoName} onChange={(e) => setRepoName(e.target.value)}/>
                     </div>
                     <div style={{fontSize: 'var(--text-xs)', color:'var(--fg-muted)', marginTop: 6}}>Lowercase, hyphenated. Pattern <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>{'{domain}-{noun}'}</code>.</div>
@@ -375,7 +375,7 @@ import { FPageHeader, FSection, FShell, useQueryParam } from './example-shell';
                   <div className="fp-card-title" style={{marginBottom: 14}}>Summary</div>
                   <div style={{display:'flex', flexDirection:'column', gap: 14}}>
                     <Row label="Template"   value={<><span className="pill ember">{TEMPLATES.find(t => t.id === template).tier}</span> <span style={{fontWeight: 600}}>{TEMPLATES.find(t => t.id === template).title}</span></>}/>
-                    <Row label="Repository" value={<span style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-sm)', color:'var(--ember)'}}>forge-platform/{repoName}</span>}/>
+                    <Row label="Repository" value={<span style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-sm)', color:'var(--ember)'}}>eidos-platform/{repoName}</span>}/>
                     <Row label="Visibility" value={<span className="pill ">{visibility}</span>}/>
                     <Row label="Tribe"      value={<span className="pill ice">{tribe}</span>}/>
                     <Row label="Pipeline"   value={<><span className={'pill ' + (pipeline === 'standard' ? 'success' : 'warning')}>{pipeline}</span> {rings && <span className="pill ember">rings on</span>}</>}/>
@@ -393,10 +393,10 @@ import { FPageHeader, FSection, FShell, useQueryParam } from './example-shell';
                       '+ src/db/migrate.ts',
                       '+ test/health.test.ts',
                       '+ Dockerfile',
-                      '+ .forge/pipeline.yaml',
-                      '+ .forge/slo.yaml',
-                      '+ .forge/oncall.yaml',
-                      '+ .forge/dashboards/api.json',
+                      '+ .eidos/pipeline.yaml',
+                      '+ .eidos/slo.yaml',
+                      '+ .eidos/oncall.yaml',
+                      '+ .eidos/dashboards/api.json',
                       '+ README.md',
                       '+ … 13 more',
                     ].map((line, i) => (
@@ -419,7 +419,7 @@ import { FPageHeader, FSection, FShell, useQueryParam } from './example-shell';
                 <div className="fp-card-title" style={{marginBottom: 14}}>What happens next</div>
                 <div style={{display:'flex', gap: 24, flexWrap:'wrap'}}>
                   {[
-                    ['1', 'PR opened', 'On forge-platform/' + repoName + ' for the initial scaffold commit.'],
+                    ['1', 'PR opened', 'On eidos-platform/' + repoName + ' for the initial scaffold commit.'],
                     ['2', 'CI green', 'First build runs against the template smoke tests. Expected 90s.'],
                     ['3', 'On-call set', 'Rotation created in PagerDuty with the 4 owners on rotation weekly.'],
                     ['4', 'Ready', 'Service appears in the catalog. You can deploy to canary immediately.'],

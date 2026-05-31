@@ -55,7 +55,7 @@ const POPOVER_CODE = [
   '<AILabelWithPopover',
   '  variant="pill"',
   '  label="AI summary"',
-  '  model="forge-ai/gpt-4o-mini"',
+  '  model="eidos-ai/gpt-4o-mini"',
   '  ts="2 min ago"',
   '  confidence={0.92}>',
   '  Generated from the last 30 days of incident reports.',
@@ -234,7 +234,7 @@ export default function AILabelPage() {
           <AILabelWithPopover variant="pill" label="AI summary">
             Generated from the last 30 days of incident reports.
           </AILabelWithPopover>
-          <AILabelWithPopover variant="box" label="AI value" model="forge-ai/sonnet-4-6" ts="just now" confidence={0.88}>
+          <AILabelWithPopover variant="box" label="AI value" model="eidos-ai/sonnet-4-6" ts="just now" confidence={0.88}>
             Suggested service name based on existing repo patterns.
           </AILabelWithPopover>
           <AILabelWithPopover variant="mark" label="AI tag" ts="14:02" confidence={0.74}>

@@ -25,7 +25,7 @@
   // scripts/bump-version.sh in lockstep with all `?v=...` query strings
   // on page shells. Pages can read this at runtime if they need it
   // (e.g. for a "Build {VERSION}" footer).
-  window.FORGE_VERSION = '20260517n';
+  window.EIDOS_VERSION = '20260517n';
 
   window.SECTIONS = {
     // No standalone "Home" — the Introduction (slug `overview`) is the project

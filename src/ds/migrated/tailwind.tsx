@@ -85,16 +85,16 @@ const TW_V4 = `/* tailwind.css — Tailwind v4, CSS-first */
   --shadow-ember: 0 0 0 3px rgb(255 107 53 / 0.18);
 
   /* Motion */
-  --ease-forge: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-eidos: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-fast: 120ms;
   --duration-normal: 220ms;
   --duration-slow: 360ms;
 
   /* Animations */
-  --animate-ember-pulse: ember-pulse 2s var(--ease-forge) infinite;
-  --animate-page-enter: fade-in 360ms var(--ease-forge) both;
-  --animate-sheet-in: sheet-in 360ms var(--ease-forge) both;
-  --animate-progress: progress 2.6s var(--ease-forge) infinite;
+  --animate-ember-pulse: ember-pulse 2s var(--ease-eidos) infinite;
+  --animate-page-enter: fade-in 360ms var(--ease-eidos) both;
+  --animate-sheet-in: sheet-in 360ms var(--ease-eidos) both;
+  --animate-progress: progress 2.6s var(--ease-eidos) infinite;
 }
 
 /* Light theme — opt in with [data-theme="light"] on <html> */
@@ -200,7 +200,7 @@ module.exports = {
         ember: '0 0 0 3px rgba(255,107,53,0.18)',
       },
       transitionTimingFunction: {
-        forge: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        eidos: 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
       transitionDuration: {
         fast: '120ms', DEFAULT: '220ms', slow: '360ms',
@@ -255,7 +255,7 @@ export default function Tailwind() {
       id="tailwind"
       num="05"
       title="Tailwind"
-      desc="Eidos is built CSS-first. Drop the @theme block into your tailwind.css and every Eidos token becomes a Tailwind utility — bg-ember, text-fg-muted, rounded-lg, animate-ember-pulse, ease-forge."
+      desc="Eidos is built CSS-first. Drop the @theme block into your tailwind.css and every Eidos token becomes a Tailwind utility — bg-ember, text-fg-muted, rounded-lg, animate-ember-pulse, ease-eidos."
     >
       {/* Path picker */}
       <SubHead meta="pick one">Which preset do you need?</SubHead>
@@ -290,7 +290,7 @@ export default function Tailwind() {
           <span className="inline-tag">colors → bg-ember, text-fg, border-border-strong</span>
           <span className="inline-tag">type → text-h1, text-mono-label, font-mono</span>
           <span className="inline-tag">radius → rounded-lg, rounded-2xl</span>
-          <span className="inline-tag">motion → animate-ember-pulse, ease-forge, duration-normal</span>
+          <span className="inline-tag">motion → animate-ember-pulse, ease-eidos, duration-normal</span>
         </div>
       </Frame>
       <Lede>
@@ -326,7 +326,7 @@ export default function Tailwind() {
         <tbody>
           <tr><td>Use semantic tokens (<code style={{fontFamily:'var(--font-mono)'}}>bg-surface</code>, not <code style={{fontFamily:'var(--font-mono)'}}>bg-zinc-900</code>)</td><td>Keeps the light theme honest. Raw zinc/slate breaks on theme switch.</td></tr>
           <tr><td>One <code style={{fontFamily:'var(--font-mono)'}}>bg-ember</code> per surface</td><td>Ember signals attention. More than one cancels itself out.</td></tr>
-          <tr><td><code style={{fontFamily:'var(--font-mono)'}}>ease-forge</code> + <code style={{fontFamily:'var(--font-mono)'}}>duration-normal</code> on every transition</td><td>Single ease, three durations. No bespoke timings in components.</td></tr>
+          <tr><td><code style={{fontFamily:'var(--font-mono)'}}>ease-eidos</code> + <code style={{fontFamily:'var(--font-mono)'}}>duration-normal</code> on every transition</td><td>Single ease, three durations. No bespoke timings in components.</td></tr>
           <tr><td>Numbers in <code style={{fontFamily:'var(--font-mono)'}}>font-mono</code> + <code style={{fontFamily:'var(--font-mono)', fontVariantNumeric:'tabular-nums'}}>tnum</code></td><td>p95, versions, counts must be tabular so digits don't dance on update.</td></tr>
           <tr><td>Borders are hairlines (<code style={{fontFamily:'var(--font-mono)'}}>border-border</code>)</td><td>Eidos doesn't use 2px borders or thick dividers anywhere.</td></tr>
         </tbody>

@@ -104,7 +104,7 @@ export const Expanded: Story = {
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 10px 18px' }}>
             <ForgeMark size={20} />
-            {open && <span style={{ fontWeight: 700, fontSize: 'var(--text-md)', letterSpacing: '-0.01em' }}>Forge Studio</span>}
+            {open && <span style={{ fontWeight: 700, fontSize: 'var(--text-md)', letterSpacing: '-0.01em' }}>Eidos Studio</span>}
           </div>
 
           <SidebarSection label="Workspace">
@@ -153,7 +153,7 @@ export const Expanded: Story = {
                     Ada Lovelace
                   </div>
                   <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>
-                    ada@forge
+                    ada@eidos
                   </div>
                 </div>
               )}
@@ -251,7 +251,7 @@ export const NonCollapsible: Story = {
       <Sidebar collapsible="none" style={{ height: '100%' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 10px 18px' }}>
           <ForgeMark size={20} />
-          <span style={{ fontWeight: 700, fontSize: 'var(--text-md)', letterSpacing: '-0.01em' }}>Forge Studio</span>
+          <span style={{ fontWeight: 700, fontSize: 'var(--text-md)', letterSpacing: '-0.01em' }}>Eidos Studio</span>
         </div>
 
         <SidebarSection label="Workspace">
@@ -271,7 +271,7 @@ export const NonCollapsible: Story = {
             <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg, var(--ember), var(--ember-deep))', color: 'var(--ember-fg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 11, flexShrink: 0 }}>AL</div>
             <div style={{ minWidth: 0, flex: 1 }}>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>Ada Lovelace</div>
-              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@forge</div>
+              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@eidos</div>
             </div>
           </div>
         </SidebarFooter>
@@ -308,7 +308,7 @@ export const CollapsibleGroups: Story = {
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 10px 18px' }}>
             <ForgeMark size={20} />
-            {open && <span style={{ fontWeight: 700, fontSize: 'var(--text-md)' }}>Forge Studio</span>}
+            {open && <span style={{ fontWeight: 700, fontSize: 'var(--text-md)' }}>Eidos Studio</span>}
           </div>
 
           <SidebarSection label="Platform">
@@ -335,7 +335,7 @@ export const CollapsibleGroups: Story = {
           <SidebarFooter>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '4px 8px' }}>
               <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg, var(--ember), var(--ember-deep))', color: 'var(--ember-fg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 11, flexShrink: 0 }}>AL</div>
-              {open && <div style={{ minWidth: 0, flex: 1 }}><div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>Ada Lovelace</div><div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@forge</div></div>}
+              {open && <div style={{ minWidth: 0, flex: 1 }}><div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>Ada Lovelace</div><div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@eidos</div></div>}
             </div>
           </SidebarFooter>
         </Sidebar>
@@ -372,7 +372,7 @@ export const WithFooter: Story = {
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 10px 18px' }}>
             <ForgeMark size={20} />
-            {open && <span style={{ fontWeight: 700, fontSize: 'var(--text-md)' }}>Forge Studio</span>}
+            {open && <span style={{ fontWeight: 700, fontSize: 'var(--text-md)' }}>Eidos Studio</span>}
           </div>
 
           <SidebarSection label="Workspace">
@@ -486,7 +486,7 @@ export const OffCanvas: Story = {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 10px 18px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <ForgeMark size={20} />
-                <span style={{ fontWeight: 700, fontSize: 'var(--text-md)' }}>Forge Studio</span>
+                <span style={{ fontWeight: 700, fontSize: 'var(--text-md)' }}>Eidos Studio</span>
               </div>
             </div>
 
@@ -507,7 +507,7 @@ export const OffCanvas: Story = {
                 <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg, var(--ember), var(--ember-deep))', color: 'var(--ember-fg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 11 }}>AL</div>
                 <div style={{ minWidth: 0, flex: 1 }}>
                   <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>Ada Lovelace</div>
-                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@forge</div>
+                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@eidos</div>
                 </div>
               </div>
             </SidebarFooter>
@@ -538,7 +538,7 @@ export const RTL: Story = {
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 10px 18px' }}>
             <ForgeMark size={20} />
-            {open && <span style={{ fontWeight: 700, fontSize: 'var(--text-md)' }}>Forge Studio</span>}
+            {open && <span style={{ fontWeight: 700, fontSize: 'var(--text-md)' }}>Eidos Studio</span>}
           </div>
 
           <SidebarSection label="مساحة العمل">
@@ -559,7 +559,7 @@ export const RTL: Story = {
               {open && (
                 <div style={{ minWidth: 0, flex: 1 }}>
                   <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>نور محمد</div>
-                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>nour@forge</div>
+                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>nour@eidos</div>
                 </div>
               )}
             </div>
@@ -610,7 +610,7 @@ export const InContext: Story = {
             <Icons.panelLeft size={14} />
           </button>
           <ForgeMark size={18} />
-          <span style={{ fontWeight: 600, fontSize: 'var(--text-md)' }}>Forge Studio</span>
+          <span style={{ fontWeight: 600, fontSize: 'var(--text-md)' }}>Eidos Studio</span>
           <div style={{ marginInlineStart: 'auto', display: 'flex', gap: 8 }}>
             <button className="btn icon ghost sm" aria-label="Search"><Icons.search size={14} /></button>
             <button className="btn icon ghost sm" aria-label="Notifications"><Icons.bell size={14} /></button>
@@ -649,7 +649,7 @@ export const InContext: Story = {
                 {open && (
                   <div style={{ minWidth: 0, flex: 1 }}>
                     <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>Ada Lovelace</div>
-                    <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@forge</div>
+                    <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontFamily: 'var(--font-mono)' }}>ada@eidos</div>
                   </div>
                 )}
               </div>

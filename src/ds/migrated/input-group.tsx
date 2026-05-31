@@ -32,7 +32,7 @@ export function Demo() {
 
 const URL_COPY_CODE = `<InputGroup style={{ maxWidth: 460 }}>
   <InputAddon kind="icon"><Link size={14} /></InputAddon>
-  <input className="in-control" readOnly defaultValue="https://forge-ds.com/invites/3f4-9k2-x8q" />
+  <input className="in-control" readOnly defaultValue="https://eidos-ds.com/invites/3f4-9k2-x8q" />
   <InputAddon kind="button" aria-label="Copy link">
     <Copy size={14} />
   </InputAddon>
@@ -41,7 +41,7 @@ const URL_COPY_CODE = `<InputGroup style={{ maxWidth: 460 }}>
 const AFFIX_CODE = `{/* URL scheme prefix — affix linked via aria-describedby */}
 <InputGroup>
   <InputAddon kind="text" id="url-scheme">https://</InputAddon>
-  <input className="in-control" aria-describedby="url-scheme" defaultValue="forge.example.com/team" />
+  <input className="in-control" aria-describedby="url-scheme" defaultValue="eidos.example.com/team" />
 </InputGroup>
 
 {/* Trailing unit suffix */}
@@ -136,7 +136,7 @@ function formatAmount(raw: string, currency: string): string {
 
 export default function Page() {
   const [q, setQ] = React.useState('');
-  const [url, setUrl] = React.useState('forge.example.com/team');
+  const [url, setUrl] = React.useState('eidos.example.com/team');
   // Live currency builder — the three segments compose into one structured value.
   const [ccy, setCcy] = React.useState('USD');
   const [amount, setAmount] = React.useState('1299.5');
@@ -191,7 +191,7 @@ export default function Page() {
         <div style={{ padding: 24, display: 'flex', justifyContent: 'center', width: '100%' }}>
           <InputGroup style={{ maxWidth: 460, width: '100%' }}>
             <InputAddon kind="icon"><Icons.link size={14} /></InputAddon>
-            <input className="in-control" readOnly defaultValue="https://forge-ds.com/invites/3f4-9k2-x8q" />
+            <input className="in-control" readOnly defaultValue="https://eidos-ds.com/invites/3f4-9k2-x8q" />
             <InputAddon kind="button" aria-label="Copy link">
               <Icons.copy size={14} />
             </InputAddon>
@@ -399,7 +399,7 @@ export default function Page() {
                   id="ic-invite"
                   className="in-control"
                   readOnly
-                  defaultValue="https://forge-ds.com/invites/3f4-9k2-x8q"
+                  defaultValue="https://eidos-ds.com/invites/3f4-9k2-x8q"
                 />
                 <InputAddon kind="button" aria-label="Copy link">
                   <Icons.copy size={14} />
@@ -487,7 +487,7 @@ export default function Page() {
             <div className="stage" style={{ position: 'relative', width: 380 }} aria-hidden="true">
               <InputGroup style={{ width: '100%' }}>
                 <InputAddon kind="text">https://</InputAddon>
-                <input className="in-control" readOnly tabIndex={-1} defaultValue="forge.example.com/team" />
+                <input className="in-control" readOnly tabIndex={-1} defaultValue="eidos.example.com/team" />
                 <InputAddon kind="button" tabIndex={-1} style={{ cursor: 'default' }}>
                   <Icons.copy size={13} />
                   <span style={{ marginInlineStart: 4 }}>Copy</span>

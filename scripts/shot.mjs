@@ -30,7 +30,7 @@ const chrome = spawn(CHROME, [
   `--remote-debugging-port=${PORT}`, '--headless=new', '--disable-gpu',
   '--no-first-run', '--no-default-browser-check',
   '--force-device-scale-factor=1', '--window-size=1400,2400',
-  '--user-data-dir=/tmp/forge-chrome-shot', 'about:blank',
+  '--user-data-dir=/tmp/eidos-chrome-shot', 'about:blank',
 ]);
 
 class CDP {

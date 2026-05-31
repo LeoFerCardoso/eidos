@@ -15,20 +15,20 @@ import { Icons, Frame, Section, SubHead, PropsTable, installTabs, TabbedCode, Le
 // Japanese
 const JA_PROSE = {
   heading: 'サービスのデプロイ手順',
-  para1: '「forge deploy」コマンドを使用して、カナリアリングから段階的にサービスをデプロイします。各リングでエラーバジェットを確認してから次に進んでください。',
+  para1: '「eidos deploy」コマンドを使用して、カナリアリングから段階的にサービスをデプロイします。各リングでエラーバジェットを確認してから次に進んでください。',
   list: [
     'カナリアリング（5%）で15分間トラフィックを監視する',
     '異常なし: 25%リングに昇格する',
     '異常あり: 自動ロールバックが実行される',
   ],
   blockquote: 'ヒント: --hold フラグを使用すると、自動昇格を一時停止できます。',
-  code: 'forge deploy --service identity-svc --ring canary --hold',
+  code: 'eidos deploy --service identity-svc --ring canary --hold',
 };
 
 // Chinese (Simplified)
 const ZH_PROSE = {
   heading: '服务部署流程',
-  para1: '使用 `forge deploy` 命令将服务逐步部署到各个环，从金丝雀环开始，依次升级至 25% 和 100%。每个阶段都需要验证错误预算。',
+  para1: '使用 `eidos deploy` 命令将服务逐步部署到各个环，从金丝雀环开始，依次升级至 25% 和 100%。每个阶段都需要验证错误预算。',
   list: [
     '金丝雀环（5%）运行 15 分钟，观察指标',
     '指标正常：升级至 25% 环',
@@ -40,7 +40,7 @@ const ZH_PROSE = {
 // Korean
 const KO_PROSE = {
   heading: '서비스 배포 절차',
-  para1: '`forge deploy` 명령어를 사용하여 카나리 링부터 점진적으로 서비스를 배포합니다. 각 링에서 에러 버짓을 확인한 후 다음 단계로 진행하세요.',
+  para1: '`eidos deploy` 명령어를 사용하여 카나리 링부터 점진적으로 서비스를 배포합니다. 각 링에서 에러 버짓을 확인한 후 다음 단계로 진행하세요.',
   list: [
     '카나리 링(5%)에서 15분간 트래픽 모니터링',
     '정상: 25% 링으로 승격',
@@ -50,9 +50,9 @@ const KO_PROSE = {
 
 // Mixed CJK + Latin + code (no mid-word breaking of Latin/code runs)
 const MIXED_CONTENT = {
-  ja: 'identity-svc のデプロイで `forge deploy --service identity-svc --ring canary` コマンドを使用し、p95 レイテンシが 400ms 以下であることを確認してください。',
-  zh: '运行 `forge deploy` 后，检查 `error_budget_remaining` 的值，确保大于 5% 再继续升级 identity-svc。',
-  ko: '`identity-svc` 배포 시 p95 지연 시간이 400ms 미만인지 확인하세요. `forge deploy --service identity-svc` 명령어를 실행하십시오.',
+  ja: 'identity-svc のデプロイで `eidos deploy --service identity-svc --ring canary` コマンドを使用し、p95 レイテンシが 400ms 以下であることを確認してください。',
+  zh: '运行 `eidos deploy` 后，检查 `error_budget_remaining` 的值，确保大于 5% 再继续升级 identity-svc。',
+  ko: '`identity-svc` 배포 시 p95 지연 시간이 400ms 미만인지 확인하세요. `eidos deploy --service identity-svc` 명령어를 실행하십시오.',
 };
 
 // CJK + Arabic bidi
@@ -66,14 +66,14 @@ const USAGE_CODE = `// Set lang on the Prose wrapper — the :lang() rules in ai
 <Prose lang="ja">
   <h2>サービスのデプロイ手順</h2>
   <p>
-    「forge deploy」コマンドを使用して、
+    「eidos deploy」コマンドを使用して、
     カナリアリングから段階的にデプロイします。
   </p>
 </Prose>
 
 // Same for Message bubbles:
 <Message from="assistant" lang="zh">
-  服务部署流程：使用 forge deploy 逐步升级。
+  服务部署流程：使用 eidos deploy 逐步升级。
 </Message>`;
 
 export default function AiCJK() {
@@ -112,7 +112,7 @@ export default function AiCJK() {
       </Lede>
       <Frame label="lang usage pattern — set on the Prose or a wrapper div" code={USAGE_CODE}>
         <Prose lang="ja" style={{ maxWidth: 480 }}>
-          <p>「forge deploy」コマンドを使用して、カナリアリングから段階的にデプロイします。</p>
+          <p>「eidos deploy」コマンドを使用して、カナリアリングから段階的にデプロイします。</p>
         </Prose>
       </Frame>
 
@@ -267,7 +267,7 @@ export default function AiCJK() {
           <div dir="rtl" lang="ar">
             <Prose>
               <h3>نشر الخدمات</h3>
-              <p>استخدم أمر <code>forge deploy</code> لنشر الخدمات تدريجيًا من القناة التجريبية إلى 25% ثم 100%.</p>
+              <p>استخدم أمر <code>eidos deploy</code> لنشر الخدمات تدريجيًا من القناة التجريبية إلى 25% ثم 100%.</p>
             </Prose>
           </div>
           <div lang="ja">
@@ -292,7 +292,7 @@ export default function AiCJK() {
               <div lang="ja">
                 <Prose style={{ maxWidth: 520 }}>
                   <h2>サービスのデプロイ手順</h2>
-                  <p>「forge deploy」コマンドを使用して、p95 レイテンシが <code>400ms</code> 以下であることを確認してください。</p>
+                  <p>「eidos deploy」コマンドを使用して、p95 レイテンシが <code>400ms</code> 以下であることを確認してください。</p>
                   <ul>
                     <li>カナリアリングで15分間監視する</li>
                     <li>異常なし: 25%リングに昇格する</li>

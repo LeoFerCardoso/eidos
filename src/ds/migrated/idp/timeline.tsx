@@ -7,7 +7,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, installTabs
 
 const M = 60_000;
 const ITEMS = [
-  { id: 't1', tone: 'deploy',   icon: 'rocket', title: 'Promoted forge-api v2.1.7 → canary', at: new Date(Date.now() - 4 * M), meta: '64% of traffic · err 0.12%', current: true },
+  { id: 't1', tone: 'deploy',   icon: 'rocket', title: 'Promoted eidos-api v2.1.7 → canary', at: new Date(Date.now() - 4 * M), meta: '64% of traffic · err 0.12%', current: true },
   { id: 't2', person: { initials: 'AS', name: 'Ana Souza' }, title: 'Ana approved the change',                 at: new Date(Date.now() - 12 * M), meta: 'Reviewer · SRE',                              done: true },
   { id: 't3', tone: 'commit',   icon: 'branch', title: '#4218 — Trim cold-start in handlers',                  at: new Date(Date.now() - 24 * M), meta: '8 files · +142 / −24',                       done: true },
   { id: 't4', tone: 'incident', icon: 'alert',  title: 'INC-4137 closed',                                      at: new Date(Date.now() - 3 * 60 * M), meta: 'Duration 38m · 1 affected service',         done: true },
@@ -66,7 +66,7 @@ export default function TimelinePage() {
       <Frame label='dir="rtl" — the rail and pins anchor to the inline-start (right); titles and timestamps align right'>
         <div dir="rtl">
           <Timeline items={[
-            { id: 'r1', tone: 'deploy', icon: 'rocket', title: 'ترقية forge-api v2.1.7 → canary', at: new Date(Date.now() - 4 * 60_000), meta: '64% من حركة المرور · خطأ 0.12%', current: true },
+            { id: 'r1', tone: 'deploy', icon: 'rocket', title: 'ترقية eidos-api v2.1.7 → canary', at: new Date(Date.now() - 4 * 60_000), meta: '64% من حركة المرور · خطأ 0.12%', current: true },
             { id: 'r2', person: { initials: 'ع.س', name: 'علي سعد' }, title: 'علي وافق على التغيير', at: new Date(Date.now() - 12 * 60_000), meta: 'مراجع · SRE', done: true },
             { id: 'r3', tone: 'incident', icon: 'alert', title: 'تم إغلاق INC-4137', at: new Date(Date.now() - 3 * 60 * 60_000), meta: 'المدة 38 دقيقة · خدمة واحدة متأثرة', done: true },
           ]}/>
@@ -86,7 +86,7 @@ export default function TimelinePage() {
           <div className="ana" style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="stage" style={{ position: 'relative' }} aria-hidden="true">
               <Timeline items={[
-                { id: 'a1', tone: 'deploy', icon: 'rocket', title: 'Promoted forge-api v2.1.7 → canary', at: new Date(Date.now() - 4 * 60_000), meta: '64% of traffic · err 0.12%', current: true },
+                { id: 'a1', tone: 'deploy', icon: 'rocket', title: 'Promoted eidos-api v2.1.7 → canary', at: new Date(Date.now() - 4 * 60_000), meta: '64% of traffic · err 0.12%', current: true },
                 { id: 'a2', person: { initials: 'AS', name: 'Ana Souza' }, title: 'Ana approved the change', at: new Date(Date.now() - 12 * 60_000), meta: 'Reviewer · SRE', done: true },
               ]}/>
               {/* pin 1 — tl-pin (icon for system event), top-left of first item */}

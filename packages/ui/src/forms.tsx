@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Icons } from './icons';
-// Forge DS — form controls.
+// Eidos DS — form controls.
 //
 // Typed React wrappers over the semantic form classes in tokens.css. Each control
 // is a native, focusable element (real <input>/<select>/<textarea>, except Slider,
@@ -132,7 +132,7 @@ export function Textarea({ label, help, error, showCount, id, className = '', ma
 }
 
 // ── NativeSelect ──────────────────────────────────────────────────────────────
-// Native <select> wrapper in the Forge field shell. Prefer this on mobile-first
+// Native <select> wrapper in the Eidos field shell. Prefer this on mobile-first
 // surfaces or when system look-and-feel is acceptable (short lists, no icons).
 // For rich custom rendering (icons, descriptions, groups) use the custom Select.
 export interface NativeSelectOption { label: string; value: string; disabled?: boolean }
@@ -930,7 +930,7 @@ export function OTPInput({ layout, length = 6, groupEvery = 0, value, defaultVal
 // ── FileInput ─────────────────────────────────────────────────────────────────
 // A drop zone wrapping a native <input type="file"> (overlaid, opacity 0) so
 // click, keyboard, and drag-and-drop all work. Requires the .in-drop layer
-// (shipped in the Forge base CSS).
+// (shipped in the Eidos base CSS).
 export interface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type' | 'title' | 'value'> {
   /** Field label rendered above the drop zone. */
   label?: React.ReactNode;
@@ -1011,7 +1011,7 @@ export function FileInput({ label, title = 'Click to upload or drag & drop', met
 }
 
 // ── DateInput ────────────────────────────────────────────────────────────────
-// The native date control in the Forge field shell — full keyboard + locale
+// The native date control in the Eidos field shell — full keyboard + locale
 // support, zero JS. Renders ONE calendar affordance: the native browser
 // indicator is hidden via ::-webkit-calendar-picker-indicator (opacity:0) and
 // replaced by a single themed DS icon in an in-addon, avoiding the dark-mode

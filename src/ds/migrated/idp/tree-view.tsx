@@ -3,11 +3,11 @@
 // We render Pierre's @pierre/trees FileTree (path-first model, virtualized rows,
 // git-status lane, search, drag-and-drop, context menus, keyboard a11y) and
 // re-skin ONLY colours, typography and shapes to Eidos via the `--trees-*-override`
-// custom props. See `.forge-tree` in ds.css and the wrapper in
+// custom props. See `.eidos-tree` in ds.css and the wrapper in
 // src/components/pierre-tree.tsx.
 import * as React from 'react';
 import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Lede, Mono } from '@/ds/core';
-import { ForgeTree } from '@/components/pierre-tree';
+import { EidosTree } from '@/components/pierre-tree';
 
 const lede  = { fontSize: 'var(--text-body)', color: 'var(--fg-muted)', marginTop: 14, marginBottom: 18, lineHeight: 1.6, maxWidth: 'none' };
 const intro = { fontSize: 'var(--text-body)', color: 'var(--fg-muted)', marginTop: 0, marginBottom: 30, lineHeight: 1.65, maxWidth: 'none' };
@@ -73,7 +73,7 @@ const GIT_LEGEND: { letter: string; color: string; state: string; desc: string }
 
 // Domain taxonomy — service-and-tier hierarchy, same engine, no file extensions.
 const SERVICES = [
-  'Payments/forge-api',
+  'Payments/eidos-api',
   'Payments/pix-router',
   'Payments/fraud-engine',
   'Identity/identity-svc',
@@ -81,15 +81,15 @@ const SERVICES = [
   'Identity/kyc-orchestrator',
 ];
 const SERVICES_META: Record<string, string> = {
-  'Payments/forge-api': 'T1', 'Payments/pix-router': 'T1', 'Payments/fraud-engine': 'T1',
+  'Payments/eidos-api': 'T1', 'Payments/pix-router': 'T1', 'Payments/fraud-engine': 'T1',
   'Identity/identity-svc': 'T1', 'Identity/bureau-gateway': 'T2', 'Identity/kyc-orchestrator': 'T1',
 };
 
 const EXPAND_SRC = ['src', 'src/components'];
 
-const USAGE = `import { ForgeTree } from "@/components/forge/tree-view"
+const USAGE = `import { EidosTree } from "@/components/forge/tree-view"
 
-<ForgeTree
+<EidosTree
   paths={files}
   chrome="acme-components"
   defaultExpanded={["src", "src/components"]}
@@ -123,7 +123,7 @@ function ContextMenuDemo() {
         </div>
       </div>
       <div style={{ maxWidth: 420 }}>
-        <ForgeTree
+        <EidosTree
           key={trigger}
           paths={REPO}
           chrome="acme-components"
@@ -151,7 +151,7 @@ export default function TreeViewPage() {
       <SubHead meta="hello world">Usage</SubHead>
       <Frame label="path-first file tree · per-language icons · window chrome" code={USAGE}>
         <div style={{ maxWidth: 420 }}>
-          <ForgeTree
+          <EidosTree
             paths={REPO}
             chrome="acme-components"
             defaultExpanded={EXPAND_SRC}
@@ -164,9 +164,9 @@ export default function TreeViewPage() {
 
       {/* ── FILE TYPES ───────────────────────────────────────────────── */}
       <SubHead meta="per-language colour">File types &amp; icons</SubHead>
-      <Frame label="every level expanded — the icon palette in one view" code={`<ForgeTree paths={files} initialExpansion="open" />`}>
+      <Frame label="every level expanded — the icon palette in one view" code={`<EidosTree paths={files} initialExpansion="open" />`}>
         <div style={{ maxWidth: 420 }}>
-          <ForgeTree paths={REPO} initialExpansion="open" height={560} />
+          <EidosTree paths={REPO} initialExpansion="open" height={560} />
         </div>
       </Frame>
       <Lede>The engine resolves an icon + colour from each filename — extensions (<Mono>.tsx</Mono>, <Mono>.css</Mono>, <Mono>.sql</Mono>) and whole-name configs (<Mono>package.json</Mono>, <Mono>bunfig.toml</Mono>, <Mono>.oxlintrc.json</Mono>) alike. Files with no match fall back to one quiet neutral.</Lede>
@@ -174,14 +174,14 @@ export default function TreeViewPage() {
       {/* ── FLATTEN EMPTY DIRECTORIES ────────────────────────────────── */}
       <SubHead meta="flattenEmptyDirectories">Flatten empty directories</SubHead>
       <Frame label="collapse single-child folder chains into one row">
-        <div className="forge-tree-duo">
+        <div className="eidos-tree-duo">
           <div className="ftd-col">
             <div className="ftd-cap"><Icons.folder size={13}/> <b>Default expanded</b></div>
-            <ForgeTree paths={REPO} defaultExpanded={['.github', 'build', 'build/assets', 'build/assets/images', 'build/assets/images/social', 'config']} height={384}/>
+            <EidosTree paths={REPO} defaultExpanded={['.github', 'build', 'build/assets', 'build/assets/images', 'build/assets/images/social', 'config']} height={384}/>
           </div>
           <div className="ftd-col">
             <div className="ftd-cap"><Icons.layers size={13}/> <b>flattenEmptyDirectories</b></div>
-            <ForgeTree paths={REPO} flattenEmptyDirectories defaultExpanded={['.github', 'build', 'build/assets/images/social', 'config']} height={384}/>
+            <EidosTree paths={REPO} flattenEmptyDirectories defaultExpanded={['.github', 'build', 'build/assets/images/social', 'config']} height={384}/>
           </div>
         </div>
       </Frame>
@@ -189,7 +189,7 @@ export default function TreeViewPage() {
 
       {/* ── GIT STATUS ───────────────────────────────────────────────── */}
       <SubHead meta="gitStatus">Git status on files</SubHead>
-      <Frame label="status lane — colour + letter, descendant dots on folders" code={`<ForgeTree
+      <Frame label="status lane — colour + letter, descendant dots on folders" code={`<EidosTree
   paths={files}
   gitStatus={[
     { path: "src/components/Button.tsx", status: "added" },
@@ -200,7 +200,7 @@ export default function TreeViewPage() {
   ]}
 />`}>
         <div style={{ display: 'grid', gap: 24, gridTemplateColumns: 'minmax(280px, 1fr) minmax(240px, 320px)', alignItems: 'start' }}>
-          <ForgeTree paths={REPO} gitStatus={REPO_GIT} initialExpansion="open" height={560}/>
+          <EidosTree paths={REPO} gitStatus={REPO_GIT} initialExpansion="open" height={560}/>
           <div className="surface" style={{ padding: 4, alignSelf: 'start' }}>
             {GIT_LEGEND.map((g, i) => (
               <div key={g.state} style={{ display: 'grid', gridTemplateColumns: '28px 92px 1fr', alignItems: 'center', gap: 10, padding: '11px 12px', borderTop: i === 0 ? 'none' : '1px solid var(--border)' }}>
@@ -217,18 +217,18 @@ export default function TreeViewPage() {
       {/* ── SEARCH ───────────────────────────────────────────────────── */}
       <SubHead meta="fileTreeSearchMode">Search &amp; filter</SubHead>
       <Frame label='filter by name — three modes for non-matching rows ("tsx" prefilled)'>
-        <div className="forge-tree-duo">
+        <div className="eidos-tree-duo">
           <div className="ftd-col">
             <div className="ftd-cap"><Icons.eyeOff size={13}/> <b>hide-non-matches</b></div>
-            <ForgeTree paths={REPO} search searchMode="hide-non-matches" initialSearchQuery="tsx" defaultExpanded={EXPAND_SRC} height={360}/>
+            <EidosTree paths={REPO} search searchMode="hide-non-matches" initialSearchQuery="tsx" defaultExpanded={EXPAND_SRC} height={360}/>
           </div>
           <div className="ftd-col">
             <div className="ftd-cap"><Icons.minimize size={13}/> <b>collapse-non-matches</b></div>
-            <ForgeTree paths={REPO} search searchMode="collapse-non-matches" initialSearchQuery="tsx" defaultExpanded={EXPAND_SRC} height={360}/>
+            <EidosTree paths={REPO} search searchMode="collapse-non-matches" initialSearchQuery="tsx" defaultExpanded={EXPAND_SRC} height={360}/>
           </div>
           <div className="ftd-col">
             <div className="ftd-cap"><Icons.maximize size={13}/> <b>expand-matches</b></div>
-            <ForgeTree paths={REPO} search searchMode="expand-matches" initialSearchQuery="tsx" defaultExpanded={EXPAND_SRC} height={360}/>
+            <EidosTree paths={REPO} search searchMode="expand-matches" initialSearchQuery="tsx" defaultExpanded={EXPAND_SRC} height={360}/>
           </div>
         </div>
       </Frame>
@@ -244,22 +244,22 @@ export default function TreeViewPage() {
 
       {/* ── DRAG AND DROP ────────────────────────────────────────────── */}
       <SubHead meta="dragAndDrop">Drag and drop</SubHead>
-      <Frame label="drag rows onto folders or the root — package.json is locked" code={`<ForgeTree
+      <Frame label="drag rows onto folders or the root — package.json is locked" code={`<EidosTree
   paths={files}
   dragAndDrop
   lockedPaths={["package.json"]}
 />`}>
         <div style={{ maxWidth: 460 }}>
-          <ForgeTree paths={REPO} dragAndDrop lockedPaths={['package.json']} defaultExpanded={['src', 'src/components', 'src/utils']} height={480}/>
+          <EidosTree paths={REPO} dragAndDrop lockedPaths={['package.json']} defaultExpanded={['src', 'src/components', 'src/utils']} height={480}/>
         </div>
       </Frame>
       <Lede>Drop targets open automatically on hover, and dragging is disabled while search is active. A <Mono>canDrag</Mono> callback pins specific paths — here <Mono>package.json</Mono> carries a <Mono>locked</Mono> tag and refuses to move.</Lede>
 
       {/* ── IN CONTEXT ───────────────────────────────────────────────── */}
       <SubHead meta="domain taxonomy">In context — service catalog</SubHead>
-      <Frame label="same engine · meta tag per node · tier in the action lane" code={`<ForgeTree paths={services} meta={{ "Payments/forge-api": "T1" }} density="relaxed" />`}>
+      <Frame label="same engine · meta tag per node · tier in the action lane" code={`<EidosTree paths={services} meta={{ "Payments/eidos-api": "T1" }} density="relaxed" />`}>
         <div style={{ maxWidth: 420 }}>
-          <ForgeTree paths={SERVICES} defaultExpanded={['Payments', 'Identity']} meta={SERVICES_META} density="relaxed" height={300}/>
+          <EidosTree paths={SERVICES} defaultExpanded={['Payments', 'Identity']} meta={SERVICES_META} density="relaxed" height={300}/>
         </div>
       </Frame>
       <Lede>The path-first model is not just for files — feed it any <Mono>parent/child</Mono> taxonomy. Here service tiers ride a text meta tag in the action lane.</Lede>
@@ -287,9 +287,9 @@ export default function TreeViewPage() {
 
       {/* ── RTL ──────────────────────────────────────────────────────── */}
       <SubHead meta="RTL · العربية">RTL</SubHead>
-      <Frame label='dir="rtl" — indentation, chevrons and the git lane mirror to the start edge' code={`<ForgeTree dir="rtl" paths={files} gitStatus={status} />`}>
+      <Frame label='dir="rtl" — indentation, chevrons and the git lane mirror to the start edge' code={`<EidosTree dir="rtl" paths={files} gitStatus={status} />`}>
         <div style={{ maxWidth: 420 }}>
-          <ForgeTree dir="rtl" paths={REPO} gitStatus={REPO_GIT} defaultExpanded={EXPAND_SRC} height={360}/>
+          <EidosTree dir="rtl" paths={REPO} gitStatus={REPO_GIT} defaultExpanded={EXPAND_SRC} height={360}/>
         </div>
       </Frame>
       <Lede>Set <Mono>dir="rtl"</Mono> on the tree itself (not just a wrapper) so the engine&rsquo;s RTL mode engages: the disclosure chevrons, indent guides and the status lane all flip to the inline-start edge, and filenames stay bidi-isolated LTR — they are code, so they read left-to-right inside the mirrored layout.</Lede>
@@ -344,11 +344,11 @@ export default function TreeViewPage() {
         <div className="dd-card do">
           <div className="head"><Icons.check size={12}/> Do — surface git status + a meta tag per row</div>
           <div className="body">
-            <ForgeTree
-              paths={['forge-api/deploy.ts', 'forge-api/risk.ts']}
-              defaultExpanded={['forge-api']}
-              gitStatus={[{ path: 'forge-api/deploy.ts', status: 'modified' }]}
-              meta={{ 'forge-api': 'T1' }}
+            <EidosTree
+              paths={['eidos-api/deploy.ts', 'eidos-api/risk.ts']}
+              defaultExpanded={['eidos-api']}
+              gitStatus={[{ path: 'eidos-api/deploy.ts', status: 'modified' }]}
+              meta={{ 'eidos-api': 'T1' }}
               height={132}
             />
           </div>
@@ -356,15 +356,15 @@ export default function TreeViewPage() {
         </div>
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don&rsquo;t — nest 6+ levels deep</div>
-          <div className="body" style={{ fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-faint)' }}>{">"} apps {">"} forge {">"} src {">"} util {">"} string {">"} pad.ts</div>
+          <div className="body" style={{ fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-faint)' }}>{">"} apps {">"} eidos {">"} src {">"} util {">"} string {">"} pad.ts</div>
           <div className="note">Past four levels, the indent guides take over and the labels collapse to nothing. Split into multiple trees, scope the root deeper, or turn on <Mono>flattenEmptyDirectories</Mono>.</div>
         </div>
       </div>
 
       {/* ── API ──────────────────────────────────────────────────────── */}
-      <SubHead meta="ForgeTreeProps">API reference</SubHead>
+      <SubHead meta="EidosTreeProps">API reference</SubHead>
       <PropsTable
-        label="<ForgeTree />"
+        label="<EidosTree />"
         rows={[
           { prop: 'paths', type: 'string[]', required: true, description: 'Canonical leaf paths (e.g. "src/index.ts"). Directories are inferred from the segments.' },
           { prop: 'defaultExpanded', type: 'string[]', description: 'Directory paths that start expanded.' },

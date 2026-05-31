@@ -23,15 +23,15 @@ const SOURCES = [
     id: 2,
     domain: 'github.com',
     title: 'config/grpc.toml — retry budget bumped to 8',
-    url: 'https://github.com/forge/repo/commit/ab12cd',
+    url: 'https://github.com/eidos/repo/commit/ab12cd',
     snippet: 'Increase retry_budget from 3 to 8 to absorb migration burst on identity-svc. Reviewed by @ops.',
     fetched: '14:01 · 20s ago',
   },
   {
     id: 3,
-    domain: 'docs.forge.dev',
+    domain: 'docs.eidos.dev',
     title: 'Runbook · Tier-1 incident · billing-svc',
-    url: 'https://docs.forge.dev/runbooks/tier-1/billing.md',
+    url: 'https://docs.eidos.dev/runbooks/tier-1/billing.md',
     snippet: 'Step 1: revert the most recent canary; Step 2: drop retry_budget to baseline; Step 3: rebind alert names.',
     fetched: '14:01 · 22s ago',
   },
@@ -39,7 +39,7 @@ const SOURCES = [
     id: 4,
     domain: 'notion.so',
     title: 'Postmortem · 0421 — alert binding regression',
-    url: 'https://notion.so/forge/postmortem-0421',
+    url: 'https://notion.so/eidos/postmortem-0421',
     snippet: 'Renaming svc.latency.p99 → svc.lat.p99 silently un-bound the existing PagerDuty alert. Caught at 4% error rate.',
     fetched: '14:01 · 25s ago',
   },
@@ -47,7 +47,7 @@ const SOURCES = [
     id: 5,
     domain: 'pagerduty.com',
     title: 'Incident #1894 — billing-svc p99 spike',
-    url: 'https://forge.pagerduty.com/incidents/1894',
+    url: 'https://eidos.pagerduty.com/incidents/1894',
     snippet: 'Triggered at 02:14 UTC. On-call: @maya. Error budget at 38% remaining. Escalated to P1 at 02:22 UTC.',
     fetched: '14:02 · 10s ago',
   },
@@ -119,7 +119,7 @@ const MANY_SOURCES = [
   { id: 8,  domain: 'github.com',    title: 'PR #2841 — alert binding rename', url: '#', snippet: 'Renames svc.latency.p99 → svc.lat.p99 in the Datadog config. Merged before the incident.', fetched: '14:01 · 40s ago' },
   { id: 9,  domain: 'jira.acme.io',  title: 'INC-0421 — Tier-1 incident ticket', url: '#', snippet: 'Status: closed. Time to resolve: 38 minutes. Postmortem due 2026-05-30.', fetched: '14:02 · 1m ago' },
   { id: 10, domain: 'slack.com',     title: '#oncall — paged 02:14 UTC', url: '#', snippet: 'Acknowledged by @maya at 02:15. Bridge opened. SRE + Billing on the call.', fetched: '14:02 · 1m ago' },
-  { id: 11, domain: 'docs.forge.dev',title: 'Architecture · billing-svc dependencies', url: '#', snippet: 'billing-svc depends on identity-svc for token validation and on orders-svc for state.', fetched: '14:02 · 1m ago' },
+  { id: 11, domain: 'docs.eidos.dev',title: 'Architecture · billing-svc dependencies', url: '#', snippet: 'billing-svc depends on identity-svc for token validation and on orders-svc for state.', fetched: '14:02 · 1m ago' },
   { id: 12, domain: 'datadog.com',   title: 'Dashboard · billing-svc SLO', url: '#', snippet: 'Error budget for May: 38% remaining. Current burn rate: 1.8x.', fetched: '14:02 · 2m ago' },
 ];
 const PaginatedSourcesDemo = () => (
@@ -323,7 +323,7 @@ export default function AiSources() {
             sources={[
               { ...SOURCES[0], title: 'تتبع أحداث الحادثة 0421 — billing-svc', snippet: 'ارتفع زمن الاستجابة p99 إلى 412ms بين 02:14 و02:38 UTC.', domain: 'datadog.com', fetched: '14:01 · منذ 18ث' },
               { ...SOURCES[1], title: 'config/grpc.toml — رفع ميزانية المحاولة إلى 8', snippet: 'رفع retry_budget من 3 إلى 8 لاستيعاب موجة الهجرة على identity-svc.', domain: 'github.com', fetched: '14:01 · منذ 20ث' },
-              { ...SOURCES[2], title: 'دليل تشغيل · حادثة الفئة الأولى · billing-svc', snippet: 'الخطوة 1: عكس أحدث canary؛ الخطوة 2: خفض retry_budget؛ الخطوة 3: ربط أسماء التنبيهات.', domain: 'docs.forge.dev', fetched: '14:01 · منذ 22ث' },
+              { ...SOURCES[2], title: 'دليل تشغيل · حادثة الفئة الأولى · billing-svc', snippet: 'الخطوة 1: عكس أحدث canary؛ الخطوة 2: خفض retry_budget؛ الخطوة 3: ربط أسماء التنبيهات.', domain: 'docs.eidos.dev', fetched: '14:01 · منذ 22ث' },
             ]}
             title="المصادر"
           />

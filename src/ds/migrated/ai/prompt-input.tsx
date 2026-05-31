@@ -56,7 +56,7 @@ const IdleComposer = () => {
       value={text}
       onChange={setText}
       onSubmit={() => setText('')}
-      modelValue="forge-sonnet-4-6"
+      modelValue="eidos-sonnet-4-6"
       onModelChange={() => {}}
     />
   );
@@ -71,7 +71,7 @@ const TypingComposer = () => {
       value={text}
       onChange={setText}
       onSubmit={() => {}}
-      modelValue="forge-opus-4-7"
+      modelValue="eidos-opus-4-7"
       onModelChange={() => {}}
       rows={2}
     />
@@ -86,7 +86,7 @@ const StreamingComposer = () => {
       <PromptInput
         status={streaming ? 'streaming' : 'ready'}
         placeholder={streaming ? 'Generating response…' : 'Ask anything…'}
-        modelValue="forge-sonnet-4-6"
+        modelValue="eidos-sonnet-4-6"
         onModelChange={() => {}}
         onStop={() => setStreaming(false)}
         rows={1}
@@ -106,7 +106,7 @@ const StreamingComposer = () => {
 // Full toolbar composer
 const FullToolbarComposer = () => {
   const [text, setText] = React.useState("Two screenshots + the log + the trace JSON. Walk me through it.");
-  const [model, setModel] = React.useState('forge-opus-4-7');
+  const [model, setModel] = React.useState('eidos-opus-4-7');
   const [pinned, setPinned] = React.useState(true);
   const [files, setFiles] = React.useState([
     { id: 'a', name: 'flamegraph-p99.png',   size: '186 KB', kind: 'image' as const, hue: 18 },
@@ -162,7 +162,7 @@ const MultiAttachDemo = () => {
     <PromptInput
       status="ready"
       value="Two screenshots + the log + the trace JSON. Walk me through it."
-      modelValue="forge-opus-4-7"
+      modelValue="eidos-opus-4-7"
       onModelChange={() => {}}
       attachments={files}
       onRemoveAttachment={id => setFiles(arr => arr.filter(x => x.id !== id))}
@@ -189,7 +189,7 @@ const UploadingDemo = () => {
       </div>
       <div className="pi-foot">
         <button className="pi-tool" disabled><Icons.paperclip size={15}/></button>
-        <ModelSelector value="forge-sonnet-4-6" onChange={() => {}}/>
+        <ModelSelector value="eidos-sonnet-4-6" onChange={() => {}}/>
         <span className="spacer"/>
         <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>
           uploading {pct}%
@@ -224,7 +224,7 @@ const DropZoneDemo = () => {
       ) : (
         <div className="pi-foot">
           <button className="pi-tool"><Icons.paperclip size={15}/></button>
-          <ModelSelector value="forge-sonnet-4-6" onChange={() => {}}/>
+          <ModelSelector value="eidos-sonnet-4-6" onChange={() => {}}/>
           <span className="spacer"/>
           <PromptSubmit status="ready" hasText={false} onClick={() => {}}/>
         </div>
@@ -239,7 +239,7 @@ const DropZoneDemo = () => {
 // and a supporting caption below.
 const EnhancedComposer = () => {
   const [text, setText] = React.useState('');
-  const [model, setModel] = React.useState('forge-sonnet-4-6');
+  const [model, setModel] = React.useState('eidos-sonnet-4-6');
   const [picked, setPicked] = React.useState<string | null>(null);
   return (
     <PromptInput
@@ -363,7 +363,7 @@ const ActionsComposer = () => {
       status="ready"
       placeholder="Type a message, or pick an action…"
       rows={1}
-      modelValue="forge-sonnet-4-6"
+      modelValue="eidos-sonnet-4-6"
       onModelChange={() => {}}
       actions={[
         { id: 'upload', icon: 'upload',  label: 'Upload images or files', description: 'PNG, JPG, PDF — up to 20 MB' },
@@ -390,7 +390,7 @@ export function Chat() {
       onChange={setText}
       onSubmit={(msg) => { send(msg); setStatus('streaming'); }}
       onStop={() => setStatus('ready')}
-      modelValue="forge-sonnet-4-6"
+      modelValue="eidos-sonnet-4-6"
       onModelChange={setModel}
     />
   );
@@ -623,7 +623,7 @@ export default function PromptInputPage() {
           </div>
           <div className="pi-foot">
             <button className="pi-tool"><Icons.paperclip size={15}/></button>
-            <ModelSelector value="forge-opus-4-7" onChange={() => {}}/>
+            <ModelSelector value="eidos-opus-4-7" onChange={() => {}}/>
             <span className="spacer"/>
             <PromptSubmit status="ready" hasText={true} onClick={() => {}}/>
           </div>
@@ -714,7 +714,7 @@ export default function PromptInputPage() {
           <PromptInput
             status="ready"
             placeholder="اسأل أي شيء…"
-            modelValue="forge-sonnet-4-6"
+            modelValue="eidos-sonnet-4-6"
             onModelChange={() => {}}
             rows={2}
           />

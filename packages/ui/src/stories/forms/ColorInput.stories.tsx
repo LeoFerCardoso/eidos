@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { ColorInput, ColorPicker } from '@eidos/ui';
 
-// ─── Forge / IDP brand swatches ────────────────────────────────────────────
+// ─── Eidos / IDP brand swatches ────────────────────────────────────────────
 const BRAND_SWATCHES = [
   '#FF6B35', '#F87171', '#FACC15', '#4ADE80',
   '#60A5FA', '#A78BFA', '#F472B6', '#08090A',
@@ -70,7 +70,7 @@ export const WithAlpha: Story = {
 
 // ── WithSwatches ─────────────────────────────────────────────────────────────
 /**
- * Curated Forge brand palette pinned below the inputs.
+ * Curated Eidos brand palette pinned below the inputs.
  * Click any swatch to snap to that value exactly.
  * Uses local state so the trigger swatch updates on every pick.
  */

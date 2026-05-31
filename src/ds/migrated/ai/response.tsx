@@ -23,9 +23,9 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, PropsTable,
   <h2>Migration plan</h2>
   <p>Run the dry-run first, then promote in two steps:</p>
   <ProseCode lang="bash">{
-\`forge migrate --dry-run --target=billing-svc
-forge migrate --promote --canary=10%
-forge migrate --promote --canary=100%\`
+\`eidos migrate --dry-run --target=billing-svc
+eidos migrate --promote --canary=10%
+eidos migrate --promote --canary=100%\`
   }</ProseCode>
 
   <table>
@@ -147,9 +147,9 @@ forge migrate --promote --canary=100%\`
         <h2>Migration plan</h2>
         <p>Run the dry-run first, then promote in two canary steps. Each step is reversible; the full roll is the only one-way door.</p>
 
-        <ProseCode lang="bash">{`forge migrate --dry-run --target=billing-svc
-forge migrate --promote --canary=10%
-forge migrate --promote --canary=100%`}</ProseCode>
+        <ProseCode lang="bash">{`eidos migrate --dry-run --target=billing-svc
+eidos migrate --promote --canary=10%
+eidos migrate --promote --canary=100%`}</ProseCode>
 
         <h3>Owners + ETAs</h3>
         <table>
@@ -163,7 +163,7 @@ forge migrate --promote --canary=100%`}</ProseCode>
           </thead>
           <tbody>
             <tr><td>Dry-run</td><td>infra</td><td className="num">5 min</td><td>n/a</td></tr>
-            <tr><td>Canary 10%</td><td>billing</td><td className="num">12 min</td><td><code>forge canary --revert</code></td></tr>
+            <tr><td>Canary 10%</td><td>billing</td><td className="num">12 min</td><td><code>eidos canary --revert</code></td></tr>
             <tr><td>Full roll</td><td>billing</td><td className="num">3 min</td><td>previous-release pin</td></tr>
             <tr><td>Verify p99</td><td>oncall</td><td className="num">10 min</td><td>—</td></tr>
           </tbody>
@@ -418,7 +418,7 @@ export default function ResponsePage() {
               >
                 <h2>Heading at prose scale</h2>
                 <p>Body at 15px / 1.65, capped at 68ch so the line length stays readable. Wide blocks — tables, code, diagrams — escape the cap.</p>
-                <ProseCode lang="bash">{`forge incident replay --id 0421`}</ProseCode>
+                <ProseCode lang="bash">{`eidos incident replay --id 0421`}</ProseCode>
               </Response>
               <span className="lead h" style={{ top: 8,   left: -32, width: 28 }}/>
               <span className="lead h" style={{ top: 42,  left: -32, width: 28 }}/>

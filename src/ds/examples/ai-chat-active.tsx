@@ -90,7 +90,7 @@ const App = () => {
   const chatTitle = findChat(chatId);
 
   const [text, setText] = React.useState('');
-  const [model, setModel] = React.useState('forge-opus-4-7');
+  const [model, setModel] = React.useState('eidos-opus-4-7');
 
   return (
     <ChatShell
@@ -209,7 +209,7 @@ aws rds restore-db-cluster-from-snapshot \\
   --engine aurora-postgresql
 
 # 3. Cut over (update the secret, rolling restart)
-forge cli release identity-svc --db aurora`}</ProseCode>
+eidos cli release identity-svc --db aurora`}</ProseCode>
 
               <p>
                 Estimated saving for <code>identity-svc</code> alone is around
@@ -385,7 +385,7 @@ LIMIT  20;`}
 
               <h3>Final cutover command</h3>
               <ProseCode lang="bash">{`# Run as identity-platform during the Sun 02:00 UTC window
-forge cli release identity-svc \\
+eidos cli release identity-svc \\
   --db aurora \\
   --secret-rotate aurora-prod \\
   --canary 5% --soak 10m`}</ProseCode>

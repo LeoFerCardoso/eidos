@@ -27,7 +27,7 @@ return open ? (
   <Banner
     tone="success"
     title="Service onboarded"
-    message="forge-api is now indexed in the Service Catalog."
+    message="eidos-api is now indexed in the Service Catalog."
     onDismiss={() => setOpen(false)}
   />
 ) : (
@@ -62,7 +62,7 @@ export default function BannerPage() {
       <Frame label="info · success · warning · danger · neutral">
         <div style={{display:'flex', flexDirection:'column', gap: 12}}>
           <Banner tone="info"    title="Heads up"      message="Eidos CLI 4.2 is available — see what's new."/>
-          <Banner tone="success" title="Promoted"      message="forge-api v2.1.7 promoted to production. Rollback available for 24h."/>
+          <Banner tone="success" title="Promoted"      message="eidos-api v2.1.7 promoted to production. Rollback available for 24h."/>
           <Banner tone="warning" title="Freeze"        message="Non-critical merges paused until Fri 18:00 UTC."/>
           <Banner tone="danger"  title="Active incident" message="INC-4137 — fraud-engine latency p99 spiking. Status: investigating." action="Open incident"/>
           <Banner tone="neutral" title="Heads up"      message="Internal change — onboarding flow moved under /onboarding."/>
@@ -85,7 +85,7 @@ export default function BannerPage() {
             <div className="t-mono-label" style={{ marginBlockEnd: 8 }}>Dismissible — try it</div>
             <div style={{ minBlockSize: 44 }}>
               {open ? (
-                <Banner tone="success" title="Service onboarded" message="forge-api is now indexed in the Service Catalog." onDismiss={() => setOpen(false)}/>
+                <Banner tone="success" title="Service onboarded" message="eidos-api is now indexed in the Service Catalog." onDismiss={() => setOpen(false)}/>
               ) : (
                 <Empty size="sm" iconName="check" title="Banner dismissed" desc="Nothing left to announce on this surface." secondary={
                   <button type="button" className="btn ghost xs" onClick={() => setOpen(true)}>Restore banner</button>
@@ -152,7 +152,7 @@ export default function BannerPage() {
           <div>
             <div className="t-mono-label" style={{ marginBlockEnd: 8 }}>Inside a card</div>
             <div style={{ padding: 16, background:'var(--surface)', border:'1px solid var(--border)', borderRadius: 'var(--radius-xl)' }}>
-              <div className="t-body" style={{ fontWeight: 600, color: 'var(--fg)', marginBlockEnd: 12 }}>Service health · forge-api</div>
+              <div className="t-body" style={{ fontWeight: 600, color: 'var(--fg)', marginBlockEnd: 12 }}>Service health · eidos-api</div>
               <Banner tone="warning" message="3 of 5 SLO budgets at risk this window."/>
             </div>
           </div>

@@ -135,7 +135,7 @@ export const InContext: Story = {
     return (
       <div style={{ width: 580, display: 'flex', gap: 20, alignItems: 'flex-start' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <Message from="assistant" streaming meta="Forge AI · now">
+          <Message from="assistant" streaming meta="Eidos AI · now">
             Checking the incident queue for tier-1 services over the last 24 hours…
           </Message>
         </div>

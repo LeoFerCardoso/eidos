@@ -20,7 +20,7 @@ const meta = {
   args: {
     label: 'deploy command',
     lang: 'bash',
-    code: `forge deploy --service identity-svc --ring canary`,
+    code: `eidos deploy --service identity-svc --ring canary`,
   },
   argTypes: {
     label: { control: 'text', description: 'Eyebrow label shown in the block header — name the snippet.' },
@@ -44,7 +44,7 @@ export const BashShell: Story = {
   args: {
     label: 'shell',
     lang: 'bash',
-    code: `forge deploy --service identity-svc --ring canary`,
+    code: `eidos deploy --service identity-svc --ring canary`,
   },
 };
 
@@ -176,14 +176,14 @@ export const InContext: Story = {
         </span>
         <div style={{ flex: 1, minWidth: 0 }}>
           <span className="t-mono-label" style={{ display: 'block', marginBottom: 8 }}>
-            FORGE PLATFORM AGENT
+            EIDOS PLATFORM AGENT
           </span>
           <Prose>
             <p>
               Based on the trace, p95 on <code>identity-svc</code> is 482 ms — above the 400 ms target.
               Run this to tail live traffic:
             </p>
-            <ProseCode lang="bash">{`forge trace --service identity-svc --tail`}</ProseCode>
+            <ProseCode lang="bash">{`eidos trace --service identity-svc --tail`}</ProseCode>
             <p>
               You can narrow the window with <code>--last 5m</code> if you want only recent spans.
             </p>

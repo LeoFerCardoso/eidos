@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge AI — Voice surfaces.
+// Eidos AI — Voice surfaces.
 //
 // Persona       — the orb avatar for audio conversations (idle / listening /
 //                 thinking / speaking). SVG-based, animation lives in CSS so
@@ -43,13 +43,13 @@ export const Persona = ({
       <circle cx="50" cy="50" r="46" className="ai-persona-ring" />
       {/* Inner orb — ember gradient */}
       <defs>
-        <radialGradient id="forge-persona-grad" cx="35%" cy="35%" r="65%">
+        <radialGradient id="eidos-persona-grad" cx="35%" cy="35%" r="65%">
           <stop offset="0%"  stopColor="#FFB07F"/>
           <stop offset="55%" stopColor="#FF6B35"/>
           <stop offset="100%" stopColor="#7A2F12"/>
         </radialGradient>
       </defs>
-      <circle cx="50" cy="50" r="32" fill="url(#forge-persona-grad)" className="ai-persona-orb"/>
+      <circle cx="50" cy="50" r="32" fill="url(#eidos-persona-grad)" className="ai-persona-orb"/>
     </svg>
   </span>
 );
@@ -87,7 +87,7 @@ export const SpeechInput = ({
 
   // A click while processing is a no-op — but the button stays focusable (no
   // `disabled`) so Tab-reachability and the documented focus-never-lost
-  // behaviour hold even if the parent forgets to gate the transition.
+  // behaviour hold even if the parent eidosts to gate the transition.
   const handleToggle = () => { if (state !== 'processing') onToggle?.(); };
 
   // Compact: just the icon button — reuses .pi-tool chrome so it lines up

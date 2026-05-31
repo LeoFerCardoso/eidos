@@ -1,18 +1,18 @@
-# forge-ds — Project Log (compiled)
+# eidos-ds — Project Log (compiled)
 
 Last updated: 2026-05-26 (Next.js 14 → 16 + React 18 → 19 upgrade; Turbopack now default).
 
 ## What this project is
 
 Two things in one repo:
-1. **The Forge Design System app** — the multi-page DS documentation site (Introduction,
+1. **The Eidos Design System app** — the multi-page DS documentation site (Introduction,
    foundations, ~80 components, charts, elements, AI surfaces, patterns, IDP example
    screens), running as a **Next.js (App Router)** app.
 2. **The engineering harness** in **`.claude/`** — subagents, skills, commands, hooks,
    settings, plus the design-systems/craft knowledge — so professional, structured UI work
    can be done from Claude Code in the terminal (originally done in the Open Design app).
 
-Forge = the DS that powers Equifax/Boa Vista's Internal Developer Platform. Single accent
+Eidos = the DS that powers Equifax/Boa Vista's Internal Developer Platform. Single accent
 **ember `#FF6B35`** (≤2×/screen), **Geist Sans/Mono**, warm-OKLCH palette, RTL first-class.
 
 Run: `npm install && npm run dev` → <http://localhost:3000> (Introduction).
@@ -23,7 +23,7 @@ Run: `npm install && npm run dev` → <http://localhost:3000> (Introduction).
 
 ### 1. Harness extraction (from the Open Design app)
 - Source: `/Applications/Open Design.app/.../open-design/` (skills, design-systems, craft,
-  frames, prompt-templates) + the project data for the original `forge-design-system`.
+  frames, prompt-templates) + the project data for the original `eidos-design-system`.
 - Built `.claude/` as the executable harness; everything translated to English.
 
 ### 2. DS site → Next.js (pragmatic port)
@@ -35,7 +35,7 @@ Run: `npm install && npm run dev` → <http://localhost:3000> (Introduction).
 - Compiles with **`next/babel`** (`.babelrc`) because the legacy JSX is looser than SWC.
 - Renders client-side (SSR shows a brief splash).
 
-### 3. Full merge of `Forge-DS.zip` (the modern DS — color system v1.2)
+### 3. Full merge of `Eidos-DS.zip` (the modern DS — color system v1.2)
 - The zip used the SAME architecture, modern version (warm **OKLCH** palette, elevation
   scale `--elev-*`, 7 surface tiers; ember unchanged). Adopted wholesale:
   replaced `src/styles/{tokens,ds,example-shell}.css` + the 8 core modules + pages/examples.
@@ -49,7 +49,7 @@ Run: `npm install && npm run dev` → <http://localhost:3000> (Introduction).
   landings, blogs, consumer mobile, business docs; the 139 inspiration brands (kept only
   `forge`); prompt-templates; device frames.
 - The 7 kept OD skills (dashboard, docs-page, critique, tweaks, etc.) were rewritten to be
-  Forge-native (no `$imagegen`/`<artifact>`/OD CLI).
+  Eidos-native (no `$imagegen`/`<artifact>`/OD CLI).
 
 ### 5. Harness consolidated into `.claude/`
 - Everything moved from a separate `harness/` folder into `.claude/` (skills, design-systems,
@@ -73,7 +73,7 @@ was rejected and reverted.)
     active state; `next-themes` (attribute `data-theme`, key `forge-theme`).
   - **SPA navigation**: clicking the sidebar only swaps `<main>`; sidebar keeps scroll +
     selection (verified). Examples → standalone `/example/<name>` (full-screen, no shell).
-  - **shadcn removed** (Forge IS the component library; redundant). **Tailwind v4 kept** for
+  - **shadcn removed** (Eidos IS the component library; redundant). **Tailwind v4 kept** for
     net-new code (`app/tailwind.css`, no preflight, tokens mapped via `@theme inline`).
 - **Phase 1 ✅** — Doc primitives + incremental migration mechanism:
   - `src/components/docs/*` exposes the authoring primitives (`Section`, `Frame`,
@@ -123,7 +123,7 @@ was rejected and reverted.)
 ---
 
 ### 7. Multi-DS family (core + sub-DSs) — Phase 1 ✅ (2026-05-21)
-Forge is becoming a **family of Design Systems** sharing one base. Decisions locked:
+Eidos is becoming a **family of Design Systems** sharing one base. Decisions locked:
 core stays at root (`/color`, `/buttons` — zero breakage); sub-DSs (charts, ai, idp,
 patterns; mobile later) target routed prefixes `/<ds>/<slug>`; the sidebar header is a
 **DS switcher**; some core pages migrate into sub-DSs.
@@ -148,9 +148,9 @@ patterns; mobile later) target routed prefixes `/<ds>/<slug>`; the sidebar heade
   - **In-body links fixed project-wide**: a one-shot rewrote every legacy `pages/<group>/<slug>.html`
     across all migrated pages to its final route (core primitives→`/<slug>`, IDP blocks→`/idp/`,
     `pages/elements/`→`/idp/`, charts/ai/patterns→`/<ds>/`). `components-catalog` scoped to core.
-  - Verified: build green (**163 routes**), DS-scoped nav + breadcrumbs correct (Forge Charts/AI/IDP/Patterns/Mobile), old flat routes 404 (moved), render sweep 0 errors. Docs: CLAUDE.md + session hook updated; `docs/MULTI-DS-ARCHITECTURE.md`.
+  - Verified: build green (**163 routes**), DS-scoped nav + breadcrumbs correct (Eidos Charts/AI/IDP/Patterns/Mobile), old flat routes 404 (moved), render sweep 0 errors. Docs: CLAUDE.md + session hook updated; `docs/MULTI-DS-ARCHITECTURE.md`.
   - **Gotcha:** after editing nav-config/design-systems, **restart `next dev`** — `generateStaticParams` is read once at start and `dynamicParams=false`, so new routes 404 until restart (do NOT `next build` while `next dev` runs — it corrupts the shared `.next`).
-- **7th DS + DeviceFrame (2026-05-21).** Added **Forge Blocks** (`/blocks/*`, icon `layers`):
+- **7th DS + DeviceFrame (2026-05-21).** Added **Eidos Blocks** (`/blocks/*`, icon `layers`):
   generic page-level sections — `hero` + `page-headers` **moved from IDP**, plus new
   `feature-grid`, `cta-banner`, `stat-band`, `split-feature`, and `overview`. (IDP keeps its
   platform-specific Blocks + the card Elements.) Added a reusable **`DeviceFrame`**
@@ -162,7 +162,7 @@ patterns; mobile later) target routed prefixes `/<ds>/<slug>`; the sidebar heade
 - **DeviceFrame polish + Mobile expansion (2026-05-21).** Bezel is now **theme-adaptive**
   (`var(--bg-elevated)` + `--border-strong` — light frame in light mode, dark in dark, like
   the old PhoneFrame) while the hardware bits stay realistic: black **Dynamic Island + camera
-  lens**, black **punch-hole**, translucent **home indicator**. Expanded **Forge Mobile** to
+  lens**, black **punch-hole**, translucent **home indicator**. Expanded **Eidos Mobile** to
   overview · **app-bar** (large collapsing title) · tab-bar · **list** (grouped inset rows +
   switches) · **segmented** control · sheet, plus an **Example screens** page (`screens`) with
   two full handset screens (service detail + agent chat) in DeviceFrames on different devices.
@@ -188,7 +188,7 @@ src/
   styles/{tokens,ds,ai-shell,example-shell}.css
 .claude/                     # the harness (agents, skills, commands, hooks, settings, design-systems/forge, craft) + Memory/
 scripts/                     # gen-nav, gen-migrated, gen-examples, build-plugin, verify-render
-docs/                        # HARNESS-GAP-ANALYSIS, REACT-NEXTJS-GAP-ANALYSIS, ROUTINES, FORGE-DS-AUTHORING
+docs/                        # HARNESS-GAP-ANALYSIS, REACT-NEXTJS-GAP-ANALYSIS, ROUTINES, EIDOS-DS-AUTHORING
 ```
 
 Generated (gitignored), rebuilt by predev/prebuild: `src/lib/nav.ts`,
@@ -229,7 +229,7 @@ section "heading". Shipped **Step A + C** (non-breaking, zero page edits):
   to one column < 1240px). Build green (175 routes); render sweep 0 errors; verified by screenshot.
 - **Follow-up:** Step B (rename to `PageHeader`/`Section`(H2)/`Subsection`(H3); keep `SubHead`
   alias) + Step D (reconcile ~50 ad-hoc `<h2>/<h3>`, NOT `.ai-prose`). Minor: sub-DS pages pass
-  the old global `id` to `Section` so the in-page eyebrow shows "FORGE" (breadcrumb is correct).
+  the old global `id` to `Section` so the in-page eyebrow shows "EIDOS" (breadcrumb is correct).
 
 ### 9. Doc polish + more mobile (2026-05-21)
 - **Centered content**: `.ds-main-inner` is single-column centered (max 1100) by default; the
@@ -240,7 +240,7 @@ section "heading". Shipped **Step A + C** (non-breaking, zero page edits):
   left spacer read as dead space while the rail filled the right — replaced with column-centering.)
 - **Eyebrow fix**: `Section` now resolves its nav item by the **current route** (`usePathname`),
   not the stale `id` slug — sub-DS pages show the correct group ("CHARTS"/"AI"/…) instead of
-  "FORGE". (`primitives.tsx` got `'use client'`.) Gap-analysis Steps B (rename API) and D
+  "EIDOS". (`primitives.tsx` got `'use client'`.) Gap-analysis Steps B (rename API) and D
   (reconcile ~50 ad-hoc `<h2>/<h3>`) deferred as larger/low-visibility refactors.
 - **More mobile**: added `search` (field + recents/results), `chips` (horizontal-scroll
   filters), `toast` (snackbar w/ Undo) — Mobile DS now 10 pages. Build green (178 routes); 0
@@ -333,26 +333,26 @@ section "heading". Shipped **Step A + C** (non-breaking, zero page edits):
   `NoFallbackError` lines appear in `next start` logs (404 path with no static fallback) and are
   unrelated to the app; likewise the `/api/mynas/*` 404s come from an external local listener.
 
-### 11. Contract harness — deterministic `forge:verify` gate (2026-05-30)
+### 11. Contract harness — deterministic `eidos:verify` gate (2026-05-30)
 Built the **contract-first determinism layer** specified in `HARNESS-IMPROVED.md` (itself the
 upgraded meta-prompt distilled from the `HARNESS.md` "Eidos" draft — kept the doctrine, dropped
 the stack-mismatched parts: no cva/Style-Dictionary/changesets/MDX/pnpm). The harness now has a
 single machine-readable spine instead of scattered checks.
-- **The spine:** `packages/registry/forge.contract.json` (+ `forge.contract.schema.json`) defines
+- **The spine:** `packages/registry/eidos.contract.json` (+ `eidos.contract.schema.json`) defines
   "a component is Done" as **25 clauses** across the **4 surfaces** (docs page · `@eidos/ui` export
   · Storybook story · registry item). Each clause names a verifier; `scripts/check-contract.mjs`
   validates the contract (dependency-free schema validator + dsVersion==`site.ts` + verifier
   resolution). `docs/ds-page-standard.json` is the machine-readable derivation of
   DS-PAGE-STANDARD.md that the structure checker consumes (rules as data, not re-encoded).
-- **Data layer:** `scripts/forge-gen.mjs contract --sync` joins every installable unit across its
+- **Data layer:** `scripts/eidos-gen.mjs contract --sync` joins every installable unit across its
   4 surfaces by a normalised slug → `components[]` (**179 components** = registry:ui items). `--check`
   keeps the committed contract in sync (CI gate).
-- **Aggregator:** `scripts/forge-verify.mjs` (`npm run forge:verify`) reads the contract, runs each
+- **Aggregator:** `scripts/eidos-verify.mjs` (`npm run eidos:verify`) reads the contract, runs each
   clause's verifier once (in-process `run({component})` for new checks; shells existing scripts),
   applies **waivers** (a fail with a non-expired waiver → `waived`, never silently green), writes
-  `reports/state.json` + regenerates **`FORGE-HEALTH.md`** (the health wall). Flags: `--component`/
+  `reports/state.json` + regenerates **`EIDOS-HEALTH.md`** (the health wall). Flags: `--component`/
   `--all`/`--surface`/`--clause`/`--strict`/`--dry`/`--heavy`/`--static`/`--fix`. Exit nonzero under
-  `--strict` iff a `block` clause `fail`s. `scripts/forge-health.mjs` renders the wall.
+  `--strict` iff a `block` clause `fail`s. `scripts/eidos-health.mjs` renders the wall.
 - **New verifiers (6 ready):** `check-4-surface-parity` (C-export keystone), `check-stories`
   (reads storySort.order from preview.ts — no hardcoded list; no "Charts" group), `check-registry`
   (C-registry/-sync, shadcn schema + acyclic deps + build-not-stale), `check-ds-page-structure`
@@ -363,22 +363,22 @@ single machine-readable spine instead of scattered checks.
 - **Hooks:** `.claude/hooks/no-page-style.mjs` (PreToolUse, hard-block `<style>`/hardcoded color in
   page chrome — whitelists the token CSS, strips Frame demo snippets) + `verify-on-stop.mjs` (Stop —
   runs the fast `--static` gate for git-touched components, blocks finishing on a red block-clause).
-  `protect-generated.mjs` now also guards FORGE-HEALTH.md / reports/state.json / forge.tokens.json.
+  `protect-generated.mjs` now also guards EIDOS-HEALTH.md / reports/state.json / forge.tokens.json.
   `settings.json` wires both (PreToolUse matcher stays `Edit|Write|MultiEdit`) + permissions.
 - **Fixed a real bug:** `gen-tokens.mjs` read the dead `src/styles/tokens.css` path (removed in the
   monorepo extraction) → `npm run gen:tokens` was throwing ENOENT. Repointed to the canonical
   `packages/ui/styles/tokens.css` + added `--check` (201 tokens, in sync).
-- **Wiring:** npm scripts `forge:verify`/`forge:health`/`gen:contract`/`check:contract`; CI
-  `contract` job (gen:contract --check + gen:tokens --check blocking; forge:verify advisory until
-  the backlog burns down + uploads the health wall); `contract-verifier` agent; `/forge-verify` +
-  `/forge-health` commands; CLAUDE.md "the contract is the bar" pointer; `/reports` gitignored.
+- **Wiring:** npm scripts `eidos:verify`/`eidos:health`/`gen:contract`/`check:contract`; CI
+  `contract` job (gen:contract --check + gen:tokens --check blocking; eidos:verify advisory until
+  the backlog burns down + uploads the health wall); `contract-verifier` agent; `/eidos-verify` +
+  `/eidos-health` commands; CLAUDE.md "the contract is the bar" pointer; `/reports` gitignored.
 - **Baseline (the honest backlog the wall now quantifies):** 36/179 done · 142 block-fails · 29
   advisory · surfaces docs 47% · export 74% · story 46% · registry 100% · tokens 100%. The gold
   refs (button-group/card/metric-card/service-card) are green. The 142 block-fails are real
   drift (missing stories/docs for sub-utilities, hand tables vs `<AutoPropsTable>`, section order)
   to burn down via `promote-batch`/`restructure-component`/`doc-section-audit` — that catalog
   remediation (HARNESS-IMPROVED.md Phases 4–8) is the work the harness now drives, after which CI
-  flips to `forge:verify --all --strict --heavy` (blocking).
+  flips to `eidos:verify --all --strict --heavy` (blocking).
 
 **Phase 5 — full backlog cleared: 0 block-fails (2026-05-30, same day).** Drove the entire remaining
 contract backlog (142 → 0 `block`-fails) via triage + verified batches, with `npm run build` (blocking
@@ -400,10 +400,10 @@ blind-edited:
   shared `metaTitle()` (CSF meta title, not a demo `title:`), export-list comment stripping (StatusDot was
   dropped by a `// Phase 2 atoms` comment inside `export {…}`), `autodocs` detection scans any tags array,
   `Charts` added to `preview.ts` storySort.order; docs-binding now domain/singular-plural aware.
-- **End state:** `forge:verify --all --strict` exits 0; **167/179 done · 0 block-fails · 95 waived · 12
+- **End state:** `eidos:verify --all --strict` exits 0; **167/179 done · 0 block-fails · 95 waived · 12
   advisory** (9 story-matrix want ≥2 stories/variant, 3 anti-slop tells — non-blocking); surfaces export
   100% · registry 100% · tokens 100% · story 61% · docs 53%. `build` + `sb:build` + `check-contract` +
-  `gen-tokens --check` + `forge-gen contract --check` all green. CI's contract job can now flip to
+  `gen-tokens --check` + `eidos-gen contract --check` all green. CI's contract job can now flip to
   `--strict` (blocking) for `block` clauses. Remaining advisory + the 2 docs↔impl reconciliations are the
   next polish pass.
 
@@ -430,7 +430,7 @@ Acted on the 2 docs↔impl mismatches instead of leaving them waived, plus an at
   (sub)group, pinning `overview` first and leaving "Get Started" in its pedagogical order; Storybook
   `preview.ts` storySort gained `method: 'alphabetical'` (group order fixed, stories A→Z within).
 - **Verified:** `npm run build` green (**248 pages**, +1 = /chip; SSG prerenders all = render gate),
-  `npm run sb:build` green, `forge:verify --all --strict` exit 0, contract valid. **167/179 done · 0
+  `npm run sb:build` green, `eidos:verify --all --strict` exit 0, contract valid. **167/179 done · 0
   block-fails · 93 waived · 12 advisory.** Also surfaced a latent class of risk: the contract checks
   parity/render but not that docs *demos* match the impl API — a `check-demo-api` verifier is the next
   harness addition.
@@ -448,7 +448,7 @@ new pages (chip 9/8/7/9/7, avatars 8/8/6/8/7) and acted on the Fix lists, plus t
   **Photo group**, and **Owners list (with photos)** sections (all 7 images, realistic name/role), plus an
   `<AutoPropsTable component="OwnerPill">`. Avatar Storybook story gained `WithPhoto`/`PhotoGroup`/`PhotoStatus`
   stories; `apps/storybook/.storybook/main.ts` got `staticDirs:['../../../public']` so `/avatars/*` resolves.
-  Verified: build green (248 pages), sb:build green, `forge:verify --all --strict` exit 0, screenshots show
+  Verified: build green (248 pages), sb:build green, `eidos:verify --all --strict` exit 0, screenshots show
   photos + non-stretched OwnerPills rendering correctly.
 
 **Phase 8 — per-DS versioning + DS-aware badge + changelogs (2026-05-30, same day).** The single global
@@ -468,7 +468,7 @@ to **per-DS versioning**:
   1.12.0, charts/blocks/patterns 1.11.0, mobile 1.14.0). Versions are independent across DSs (the same
   number can recur in different DSs).
 - **Docs:** `docs/DISTRIBUTION.md` + `.claude/commands/release.md` rewritten for per-DS versioning
-  (`/release <ds> [bump]`, git tag `<ds>-vX.Y.Z`). Build green (248 pages); `forge:verify --all --strict`
+  (`/release <ds> [bump]`, git tag `<ds>-vX.Y.Z`). Build green (248 pages); `eidos:verify --all --strict`
   exit 0.
 
 **Phase 4 — verifier hardening + binding accuracy (2026-05-30, same day).** The first real run of any
@@ -478,14 +478,14 @@ linter surfaces both real debt AND linter bugs; hardened the signal before remed
   `<style>…</style>` element (13→0 fails). `check-ds-page-structure` parsed Frame `code` demo strings
   (a `<SubHead>` in a demo polluted the section order) and mis-indexed the "out of order near X" label
   (filtered vs unfiltered array) → strips demos + carries meta/order pairs (9→4 fails, labels correct).
-- **Docs-binding collisions fixed in `forge-gen`:** basename-slug binding mis-mapped across DSs —
+- **Docs-binding collisions fixed in `eidos-gen`:** basename-slug binding mis-mapped across DSs —
   `label`→`ai/label.tsx` (should be core `label.tsx`), and core components (`tabs`/`switch`/`slider`/
   `progress`/`skeleton`) bound to their `mobile/*` demo page. Added domain-aware `resolveDocs`
   (ai-prefix strip + DS rank: core canonical, mobile = demo) + **singular/plural** matching
   (`pill`→`pills.tsx`, `badge`→`badges.tsx`). Docs coverage 47%→51%; 8 components correctly re-bound;
   5 false section-order fails cleared.
 - **Waivers:** 16 for 8 export-only utilities (`iso-date`/`same-day`/`start-of-month`/`month-grid`/
-  `month-label`/`calendar-props`/`range-calendar-props`/`forge-tooltip-content` — installable units with
+  `month-label`/`calendar-props`/`range-calendar-props`/`eidos-tooltip-content` — installable units with
   no standalone docs/story by design) → they resolve `waived`, not block-fail.
 - **Corrected baseline:** 36→**45/179 done**, 142→**125 block-fails**, 16 waived. The remaining 125 are
   genuine: C-export parity ~90 / C-story 49 / C-autopropstable 44 / C-docs-sections 4 (Accessibility after
@@ -496,12 +496,12 @@ linter surfaces both real debt AND linter bugs; hardened the signal before remed
 **Phase 5 — batch 1: 35 missing Storybook stories (2026-05-30, same day).** Drove the story bucket via a
 35-agent workflow (one `design-system-engineer` per component, each writing ONLY its own
 `packages/ui/src/stories/<group>/<Export>.stories.tsx` against the real component API + a sibling
-template, enforcing the Forge invariants). **Verified by the real gate `npm run sb:build` (Storybook
+template, enforcing the Eidos invariants). **Verified by the real gate `npm run sb:build` (Storybook
 built successfully)** — not agent self-report. Along the way fixed 3 more binding/verifier bugs:
 `toSlug` is now acronym-aware (`JSONInspector`→`json-inspector`, `OTPInput`→`otp-input`,
 `AILabel`→`ai-label`); a shared `metaTitle()` extracts the CSF meta title from the `const meta` block
 (demo-data `title:` like an AskUser option "Backend / Platform" no longer hijacks the binding —
-fixed forge-gen + check-stories); `autodocs` detection scans any tags array (a story's own tags no
+fixed eidos-gen + check-stories); `autodocs` detection scans any tags array (a story's own tags no
 longer masks the meta's `['autodocs']`); and **`Charts` was added to `preview.ts` storySort.order**
 (chart stories existed but were never registered). **Result: C-story block-fails 49→1** (the lone
 `date-range` has no resolved export — a naming edge), **story-surface coverage 47%→61%**, contract

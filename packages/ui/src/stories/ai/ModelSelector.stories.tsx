@@ -3,9 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ModelSelector, ModelPicker, PromptInput, Icons } from '@eidos/ui';
 
 const MODELS = [
-  { id: 'forge-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: '$3 / 1M' },
-  { id: 'forge-opus-4-7',   short: 'O', name: 'Opus 4.7',   cost: '$15 / 1M' },
-  { id: 'forge-haiku-4-5',  short: 'H', name: 'Haiku 4.5',  cost: '$1 / 1M' },
+  { id: 'eidos-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: '$3 / 1M' },
+  { id: 'eidos-opus-4-7',   short: 'O', name: 'Opus 4.7',   cost: '$15 / 1M' },
+  { id: 'eidos-haiku-4-5',  short: 'H', name: 'Haiku 4.5',  cost: '$1 / 1M' },
 ];
 
 const meta = {
@@ -25,7 +25,7 @@ const meta = {
     },
   },
   args: {
-    value: 'forge-sonnet-4-6',
+    value: 'eidos-sonnet-4-6',
     models: MODELS,
   },
   argTypes: {
@@ -54,7 +54,7 @@ export const CustomModels: Story = {
       const custom = [
         { id: 'anthropic/claude-sonnet-4-5', short: 'S', name: 'Claude Sonnet 4.5', cost: 'Fast · $3 / 1M' },
         { id: 'openai/gpt-5',                short: 'G', name: 'GPT-5',             cost: 'OpenAI · $15 / 1M' },
-        { id: 'forge-ai/sonnet-4-6',         short: 'F', name: 'Forge Sonnet 4.6',  cost: 'Hosted · $3 / 1M' },
+        { id: 'eidos-ai/sonnet-4-6',         short: 'F', name: 'Eidos Sonnet 4.6',  cost: 'Hosted · $3 / 1M' },
         { id: 'openai/gpt-4o-mini',          short: 'M', name: 'GPT-4o mini',      cost: 'Budget · $0.15 / 1M' },
       ];
       const [value, setValue] = React.useState('anthropic/claude-sonnet-4-5');
@@ -70,7 +70,7 @@ export const InContext: Story = {
   parameters: { layout: 'padded' },
   render: () => {
     function Demo() {
-      const [model, setModel] = React.useState('forge-sonnet-4-6');
+      const [model, setModel] = React.useState('eidos-sonnet-4-6');
       const [text, setText] = React.useState('');
       return (
         <div style={{ width: '100%', maxWidth: 520 }}>
@@ -96,7 +96,7 @@ export const HeaderContext: Story = {
   parameters: { layout: 'padded' },
   render: () => {
     function Demo() {
-      const [model, setModel] = React.useState('forge-opus-4-7');
+      const [model, setModel] = React.useState('eidos-opus-4-7');
       return (
         <div
           className="surface"
@@ -138,8 +138,8 @@ export const RTL: Story = {
   parameters: { layout: 'padded' },
   render: () => {
     function Demo() {
-      const [selector, setSelector] = React.useState('forge-sonnet-4-6');
-      const [model, setModel] = React.useState('forge-sonnet-4-6');
+      const [selector, setSelector] = React.useState('eidos-sonnet-4-6');
+      const [model, setModel] = React.useState('eidos-sonnet-4-6');
       const [text, setText] = React.useState('');
       return (
         <div
@@ -176,7 +176,7 @@ export const RTL: Story = {
 export const ModelPickerAlias: Story = {
   render: () => {
     function Demo() {
-      const [value, setValue] = React.useState('forge-haiku-4-5');
+      const [value, setValue] = React.useState('eidos-haiku-4-5');
       return <ModelPicker value={value} onChange={setValue} models={MODELS} />;
     }
     return <Demo />;

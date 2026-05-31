@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A `<pre>` block with Forge\'s single-pass syntax highlighter. ' +
+          'A `<pre>` block with Eidos\'s single-pass syntax highlighter. ' +
           'Supports `jsx`/`ts`/`tsx`/`js`, `css`, `html`, `bash`/`shell` — ' +
           'auto-detects HTML when the first non-space character is `<` with no obvious JS at the top level.',
       },
@@ -47,7 +47,7 @@ export const CssSnippet: Story = {
 export const BashSnippet: Story = {
   args: {
     lang: 'bash',
-    children: `# Install the Forge UI library\npnpm dlx eidos@latest add button\n\n# Start the dev server\nnpm run dev`,
+    children: `# Install the Eidos UI library\npnpm dlx eidos@latest add button\n\n# Start the dev server\nnpm run dev`,
   },
 };
 
@@ -55,6 +55,6 @@ export const BashSnippet: Story = {
 export const HtmlSnippet: Story = {
   args: {
     lang: 'html',
-    children: `<!DOCTYPE html>\n<html lang="en" dir="ltr">\n  <head>\n    <meta charset="UTF-8">\n    <title>Forge DS</title>\n  </head>\n  <body>\n    <button class="btn btn-primary" type="button">Ship it</button>\n  </body>\n</html>`,
+    children: `<!DOCTYPE html>\n<html lang="en" dir="ltr">\n  <head>\n    <meta charset="UTF-8">\n    <title>Eidos DS</title>\n  </head>\n  <body>\n    <button class="btn btn-primary" type="button">Ship it</button>\n  </body>\n</html>`,
   },
 };

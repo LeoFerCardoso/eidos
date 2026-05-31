@@ -137,8 +137,8 @@ import { FKpi, FPageHeader, FSection, FShell, useQueryParam } from './example-sh
     },
     {
       kind: 'tool',
-      name: 'forge.openPR',
-      args: { service: 'pix-router', base: 'main', target: 'Ring 1', author: 'forge-agent' },
+      name: 'eidos.openPR',
+      args: { service: 'pix-router', base: 'main', target: 'Ring 1', author: 'eidos-agent' },
       result: 'PR #7424 drafted — 4 files changed, +186 / -22',
     },
     {

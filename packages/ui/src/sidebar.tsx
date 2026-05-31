@@ -3,7 +3,7 @@ import { cn } from './lib/utils';
 import { Icons } from './icons';
 
 // ═══════════════════════════════════════════════════════════════════════════
-// Sidebar — Forge DS  (packages/ui/src/sidebar.tsx)
+// Sidebar — Eidos DS  (packages/ui/src/sidebar.tsx)
 //
 // Collapsible vertical nav rail for app shells.
 // Modes:
@@ -12,7 +12,7 @@ import { Icons } from './icons';
 // Off-canvas — full overlay with scrim + focus trap (collapsible="offcanvas")
 //
 // CSS classes live in the .sb-* namespace (packages/ui/styles/tokens.css).
-// Zero Tailwind, zero Radix, zero next/* — pure React + Forge semantic classes.
+// Zero Tailwind, zero Radix, zero next/* — pure React + Eidos semantic classes.
 // ═══════════════════════════════════════════════════════════════════════════
 
 // ── Types ────────────────────────────────────────────────────────────────────

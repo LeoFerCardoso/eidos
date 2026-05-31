@@ -21,7 +21,7 @@ const getJSON = (path) => new Promise((resolve, reject) => {
 const chrome = spawn(CHROME, [
   `--remote-debugging-port=${PORT}`, '--headless=new', '--disable-gpu',
   '--no-first-run', '--no-default-browser-check', '--force-device-scale-factor=1',
-  '--window-size=900,1100', '--user-data-dir=/tmp/forge-chrome-test-ask', 'about:blank',
+  '--window-size=900,1100', '--user-data-dir=/tmp/eidos-chrome-test-ask', 'about:blank',
 ]);
 
 class CDP {

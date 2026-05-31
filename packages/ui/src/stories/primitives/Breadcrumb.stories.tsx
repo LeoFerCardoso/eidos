@@ -6,14 +6,14 @@ import { Breadcrumb, Icons } from '@eidos/ui';
 
 const BASE_ITEMS = [
   { label: 'Services', href: '#' },
-  { label: 'forge-api', href: '#' },
+  { label: 'eidos-api', href: '#' },
   { label: 'Deploys', href: '#' },
   { label: 'v2.14.0' },
 ];
 
 const LONG_ITEMS = [
   { label: 'Services', href: '#' },
-  { label: 'forge-api', href: '#' },
+  { label: 'eidos-api', href: '#' },
   { label: 'Environments', href: '#' },
   { label: 'Production', href: '#' },
   { label: 'Deploys', href: '#' },
@@ -83,7 +83,7 @@ export const Separators: Story = {
           <Breadcrumb
             items={[
               { label: 'Services', href: '#' },
-              { label: 'forge-api', href: '#' },
+              { label: 'eidos-api', href: '#' },
               { label: 'Settings' },
             ]}
             separator={sep}
@@ -102,7 +102,7 @@ export const Compact: Story = {
     size: 'sm',
     items: [
       { label: 'Services', href: '#' },
-      { label: 'forge-api', href: '#' },
+      { label: 'eidos-api', href: '#' },
       { label: 'Settings' },
     ],
   },
@@ -128,7 +128,7 @@ export const WithIcon: Story = {
       <Breadcrumb
         items={[
           { label: 'Services', href: '#', icon: <Icons.home size={13} /> },
-          { label: 'forge-api', href: '#' },
+          { label: 'eidos-api', href: '#' },
           { label: 'Deploys' },
         ]}
       />
@@ -147,7 +147,7 @@ export const WithOnClick: Story = {
         <Breadcrumb
           items={[
             { label: 'Services', onClick: () => setLast('Services') },
-            { label: 'forge-api', onClick: () => setLast('forge-api') },
+            { label: 'eidos-api', onClick: () => setLast('eidos-api') },
             { label: 'Deploys' },
           ]}
         />
@@ -195,7 +195,7 @@ export const RTL: Story = {
           <Breadcrumb
             items={[
               { label: 'الخدمات', href: '#' },
-              { label: 'forge-api', href: '#' },
+              { label: 'eidos-api', href: '#' },
               { label: 'عمليات النشر' },
             ]}
             separator={sep}
@@ -225,7 +225,7 @@ export const InContext: Story = {
         size="sm"
         items={[
           { label: 'Services', href: '#' },
-          { label: 'forge-api', href: '#' },
+          { label: 'eidos-api', href: '#' },
           { label: 'Settings' },
         ]}
         style={{ marginBottom: 14 } as React.CSSProperties}
@@ -242,7 +242,7 @@ export const InContext: Story = {
         Settings
       </h2>
       <p style={{ fontSize: 'var(--text-md)', color: 'var(--fg-muted)', margin: 0 }}>
-        Manage alert routes, on-call rotation, and the dependency map for forge-api.
+        Manage alert routes, on-call rotation, and the dependency map for eidos-api.
       </p>
     </div>
   ),

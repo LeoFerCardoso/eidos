@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Icons } from './icons';
 import { Calendar } from './calendar';
 
-// Forge DS — DatePicker.
+// Eidos DS — DatePicker.
 //
 // A field-like trigger button that shows the selected date (or placeholder)
 // with a leading calendar icon and a trailing chevron. Clicking opens a

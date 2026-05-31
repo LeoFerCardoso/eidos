@@ -118,7 +118,7 @@ const CODE_ARTIFACT = {
 import (
   "log"
   "net/http"
-  "github.com/forge/identity-svc/internal/auth"
+  "github.com/eidos/identity-svc/internal/auth"
 )
 
 func main() {
@@ -368,7 +368,7 @@ function ErrorState() {
       <ArtifactPanel artifact={{ ...DOC_ARTIFACT, meta: 'generation failed' } as any} open width={360}>
         <Alert tone="danger" assertive>
           <AlertTitle>Couldn&rsquo;t finish the artifact</AlertTitle>
-          <AlertDescription>The model stopped after the heading — the upstream request to <Mono>forge-ai/sonnet-4-6</Mono> was cut off. Your prompt is preserved.</AlertDescription>
+          <AlertDescription>The model stopped after the heading — the upstream request to <Mono>eidos-ai/sonnet-4-6</Mono> was cut off. Your prompt is preserved.</AlertDescription>
           <AlertActions>
             <button type="button" className="btn sm" onClick={() => setRetried(true)}>
               <Icons.refresh size={13}/> {retried ? 'Retrying…' : 'Retry'}

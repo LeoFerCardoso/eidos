@@ -32,7 +32,7 @@ const meta = {
       description: {
         component:
           '`SelectNative` is a deprecated alias for `NativeSelect` — a native `<select>` ' +
-          'in the Forge field shell. Zero JavaScript: keyboard, form submission, and ' +
+          'in the Eidos field shell. Zero JavaScript: keyboard, form submission, and ' +
           'screen-reader semantics all come from the browser. Use it when the list is ' +
           'short (≤ 7 items), plain text, and system look-and-feel is acceptable. ' +
           'For icons, descriptions, or option groups use the custom `Select`. ' +

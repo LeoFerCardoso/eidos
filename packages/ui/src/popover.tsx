@@ -2,7 +2,7 @@ import * as React from 'react';
 import { cn } from './lib/utils';
 import { Icons } from './icons';
 
-// Forge DS — Popover.
+// Eidos DS — Popover.
 //
 // Trigger element + anchored floating panel. Placement: top|bottom|start|end
 // (logical) with viewport flip. Uses position:fixed + getBoundingClientRect

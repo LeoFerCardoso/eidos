@@ -1,6 +1,6 @@
 # .claude/Memory
 
-Project-local memory for LLM sessions (Claude Code) working on **forge-ds**. Committed with
+Project-local memory for LLM sessions (Claude Code) working on **eidos-ds**. Committed with
 the repo so any teammate's agent gets the same context. Read this folder at the start of a
 session to understand what the project is, what's been done, the conventions, and what's next.
 

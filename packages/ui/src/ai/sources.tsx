@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge AI — inline citation chip + sources panel.
+// Eidos AI — inline citation chip + sources panel.
 //
 // Citation: an inline superscript chip that opens a hover/focus popover with
 // the source domain, title, snippet, and URL. Markup uses `.ai-cite-*` CSS.

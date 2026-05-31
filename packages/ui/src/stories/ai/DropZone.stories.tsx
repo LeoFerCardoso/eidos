@@ -16,7 +16,7 @@ const meta = {
     },
   },
   args: {
-    modelValue: 'forge-sonnet-4-6',
+    modelValue: 'eidos-sonnet-4-6',
   },
   argTypes: {
     modelValue: { control: 'text' },
@@ -30,7 +30,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => {
     function Demo() {
-      const [model, setModel] = React.useState('forge-sonnet-4-6');
+      const [model, setModel] = React.useState('eidos-sonnet-4-6');
       return (
         <DropZone
           modelValue={model}

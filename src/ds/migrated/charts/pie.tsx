@@ -1,11 +1,11 @@
 'use client';
-import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, ForgeChart, ForgeTooltipContent, useChartColors, Lede, Recharts, Mono } from '@/ds/core';
+import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, EidosChart, EidosTooltipContent, useChartColors, Lede, Recharts, Mono } from '@/ds/core';
   const { PieChart, Pie, Cell, Tooltip, Legend } = Recharts;
 
 
   // Request distribution by service — 5 slices.
   const MIX = [
-    { name: 'forge-api',        value: 4280 },
+    { name: 'eidos-api',        value: 4280 },
     { name: 'auth-gateway',     value: 2140 },
     { name: 'fraud-engine',     value: 1620 },
     { name: 'kyc-orchestrator', value:  980 },
@@ -27,19 +27,19 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Fo
   ];
 
   const USAGE = `import { PieChart, Pie, Cell, Tooltip } from "recharts"
-import { ForgeChart, ForgeTooltipContent, useChartColors } from "@/charts"
+import { EidosChart, EidosTooltipContent, useChartColors } from "@/charts"
 
 export function Demo({ data }) {
   const c = useChartColors()
   return (
-    <ForgeChart title="Requests by service" height={260}>
+    <EidosChart title="Requests by service" height={260}>
       <PieChart>
         <Pie data={data} dataKey="value" nameKey="name" outerRadius={90}>
           {data.map((_, i) => <Cell key={i} fill={c[i % c.length]}/>)}
         </Pie>
-        <Tooltip content={<ForgeTooltipContent/>}/>
+        <Tooltip content={<EidosTooltipContent/>}/>
       </PieChart>
-    </ForgeChart>
+    </EidosChart>
   )
 }`;
 
@@ -56,25 +56,25 @@ export default function Page() {
         <SubHead meta="hello world">Usage</SubHead>
         <Lede>Only use a pie when segments are mutually exclusive parts of one total — never plot unrelated quantities or values that do not add up. The eye reads arc angle far less precisely than bar length, so reserve the pie for the "at a glance, is one slice big?" question.</Lede>
         <Frame label="pie · request distribution by service" code={USAGE}>
-          <ForgeChart title="Requests by service" subtitle="forge fleet" meta="last 1h" height={260}>
+          <EidosChart title="Requests by service" subtitle="eidos fleet" meta="last 1h" height={260}>
             <PieChart>
               <Pie data={MIX} dataKey="value" nameKey="name" outerRadius={90} stroke="var(--bg)" strokeWidth={2}>
                 {MIX.map((_, i) => <Cell key={i} fill={c[i % c.length]}/>)}
               </Pie>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
             </PieChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
         <Lede>A 2-px stroke matching the background creates a hairline gap between slices — keeps the categories from blurring into each other.</Lede>
 
         <SubHead meta="3 variants">Variants</SubHead>
         <Frame label="donut · with center total">
-          <ForgeChart title="Storage by tier" subtitle="object store" meta="TB" height={260}>
+          <EidosChart title="Storage by tier" subtitle="object store" meta="TB" height={260}>
             <PieChart>
               <Pie data={STORAGE} dataKey="value" nameKey="name" innerRadius={62} outerRadius={92} stroke="var(--bg)" strokeWidth={2}>
                 {STORAGE.map((_, i) => <Cell key={i} fill={c[i % c.length]}/>)}
               </Pie>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" style={{ fill: 'var(--fg)', fontFamily: 'var(--font-mono)', fontSize: 18, fontVariantNumeric: 'tabular-nums' }}>
                 {total} TB
               </text>
@@ -82,33 +82,33 @@ export default function Page() {
                 total
               </text>
             </PieChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <Frame label="half donut · build outcome">
-          <ForgeChart title="Build outcomes" subtitle="last 24h" meta="208 runs" height={220}>
+          <EidosChart title="Build outcomes" subtitle="last 24h" meta="208 runs" height={220}>
             <PieChart>
               <Pie data={BUILDS} dataKey="value" nameKey="name" startAngle={180} endAngle={0} innerRadius={56} outerRadius={86} cy="70%" stroke="var(--bg)" strokeWidth={2}>
                 <Cell fill="var(--success)"/>
                 <Cell fill="var(--danger)"/>
                 <Cell fill="var(--fg-faint)"/>
               </Pie>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
             </PieChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
         <Lede>Half donuts read like a gauge — perfect for "X of Y" stories at the top of a dashboard.</Lede>
 
         <Frame label="data-table fallback · the exact numbers a colour-blind or screen-reader user reads instead of the arc">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr minmax(280px, 360px)', gap: 24, alignItems: 'center' }}>
-            <ForgeChart height={240} padding={8}>
+            <EidosChart height={240} padding={8}>
               <PieChart>
                 <Pie data={MIX} dataKey="value" nameKey="name" innerRadius={52} outerRadius={82} stroke="var(--bg)" strokeWidth={2}>
                   {MIX.map((_, i) => <Cell key={i} fill={c[i % c.length]}/>)}
                 </Pie>
-                <Tooltip content={<ForgeTooltipContent/>}/>
+                <Tooltip content={<EidosTooltipContent/>}/>
               </PieChart>
-            </ForgeChart>
+            </EidosChart>
             <table className="tbl tbl-data" aria-label="Requests by service — name, value and share">
               <caption className="t-mono-label" style={{ textAlign: 'start', color: 'var(--fg-faint)', paddingBottom: 8 }}>requests by service</caption>
               <thead>
@@ -143,10 +143,10 @@ export default function Page() {
         <Lede>Every donut should ship with — or link to — this table. It is the encoding the chart only approximates: a screen reader reads the exact <Mono>name → value → share</Mono>, and a colour-blind reader gets the share as a number, not a hue. Mono numerals are <Mono>tabular-nums</Mono> so the columns align to the same baseline.</Lede>
 
         <SubHead meta="loading · empty · error">States</SubHead>
-        <Lede>A distribution is never instantaneous and is rarely guaranteed to return data — a pie that only knows how to draw slices is a pie that flashes empty or throws on the unhappy path. <Mono>{'<ForgeChart>'}</Mono> ships these three as first-class props (<Mono>state="loading"</Mono>, <Mono>state="empty"</Mono>, or a <Mono>fallback</Mono> node) so the surface, header and live-region announcement stay identical to the ready chart below.</Lede>
+        <Lede>A distribution is never instantaneous and is rarely guaranteed to return data — a pie that only knows how to draw slices is a pie that flashes empty or throws on the unhappy path. <Mono>{'<EidosChart>'}</Mono> ships these three as first-class props (<Mono>state="loading"</Mono>, <Mono>state="empty"</Mono>, or a <Mono>fallback</Mono> node) so the surface, header and live-region announcement stay identical to the ready chart below.</Lede>
         <div className="ds-grid cols-3" style={{marginTop: 12}}>
           <Frame label="loading · skeleton">
-            <ForgeChart title="Requests by service" subtitle="forge fleet" meta="last 1h" height={220} state="loading" fallback={
+            <EidosChart title="Requests by service" subtitle="eidos fleet" meta="last 1h" height={220} state="loading" fallback={
               <div role="status" aria-busy="true" aria-label="Loading request distribution" style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap: 14, minBlockSize: 220}}>
                 <span className="sk-line" aria-hidden="true" style={{inlineSize: 132, blockSize: 132, borderRadius: '50%'}}/>
                 <span className="sk-line" aria-hidden="true" style={{inlineSize: 96, blockSize: 10}}/>
@@ -155,7 +155,7 @@ export default function Page() {
             }/>
           </Frame>
           <Frame label="empty · no events in range">
-            <ForgeChart title="Requests by service" subtitle="forge fleet" meta="last 1h" height={220} fallback={
+            <EidosChart title="Requests by service" subtitle="eidos fleet" meta="last 1h" height={220} fallback={
               <div className="empty sm">
                 <span className="empty-icon"><Icons.pieChart size={18}/></span>
                 <div className="empty-text">
@@ -166,7 +166,7 @@ export default function Page() {
             }/>
           </Frame>
           <Frame label='error · role="alert"'>
-            <ForgeChart title="Requests by service" subtitle="forge fleet" meta="last 1h" height={220} fallback={
+            <EidosChart title="Requests by service" subtitle="eidos fleet" meta="last 1h" height={220} fallback={
               <div style={{display:'flex', alignItems:'center', minBlockSize: 220}}>
                 <div className="alert danger" role="alert" aria-live="assertive" style={{inlineSize: '100%'}}>
                   <Icons.alert size={16} aria-hidden="true" className="alert-icon"/>
@@ -210,14 +210,14 @@ export default function Page() {
         <SubHead meta="RTL · العربية">RTL</SubHead>
         <Frame label='dir="rtl" — title and tooltip labels align right; the donut is radially symmetric and does not mirror'>
           <div dir="rtl" style={{width: '100%'}}>
-            <ForgeChart title="الطلبات حسب الخدمة" subtitle="أسطول فورج" meta="آخر ساعة" height={260}>
+            <EidosChart title="الطلبات حسب الخدمة" subtitle="أسطول فورج" meta="آخر ساعة" height={260}>
               <PieChart>
                 <Pie data={MIX} dataKey="value" nameKey="name" innerRadius={52} outerRadius={82} stroke="var(--bg)" strokeWidth={2}>
                   {MIX.map((_, i) => <Cell key={i} fill={c[i % c.length]}/>)}
                 </Pie>
-                <Tooltip content={<ForgeTooltipContent/>}/>
+                <Tooltip content={<EidosTooltipContent/>}/>
               </PieChart>
-            </ForgeChart>
+            </EidosChart>
           </div>
         </Frame>
         <Lede>Under <Mono>dir="rtl"</Mono> the chart title and tooltip rows align to the right and the legend reads right-to-left. The pie itself is radially symmetric — angle encodes proportion, not direction — so the slices do not mirror.</Lede>
@@ -229,7 +229,7 @@ export default function Page() {
             <div className="ana" style={{display:'flex', justifyContent:'center'}}>
               <div className="stage" style={{position:'relative'}} aria-hidden="true">
                 <div style={{width:200, height:180}}>
-                  <ForgeChart height={180} padding={0}>
+                  <EidosChart height={180} padding={0}>
                     <PieChart>
                       <Pie data={STORAGE} dataKey="value" nameKey="name" innerRadius={48} outerRadius={76} stroke="var(--bg)" strokeWidth={2}>
                         {STORAGE.map((_, i) => <Cell key={i} fill={c[i % c.length]}/>)}
@@ -238,7 +238,7 @@ export default function Page() {
                         {total} TB
                       </text>
                     </PieChart>
-                  </ForgeChart>
+                  </EidosChart>
                 </div>
                 <span className="lead h" style={{top: 40, right: -28, width: 24}}/>
                 <span className="lead v" style={{top: -22, left: 60, height: 18}}/>
@@ -264,20 +264,20 @@ export default function Page() {
           <div className="dd-card do">
             <div className="head"><Icons.check size={12}/> Do — stop at 6 slices</div>
             <div className="body">
-              <ForgeChart height={160} padding={8}>
+              <EidosChart height={160} padding={8}>
                 <PieChart>
                   <Pie data={MIX} dataKey="value" nameKey="name" innerRadius={36} outerRadius={66} stroke="var(--bg)" strokeWidth={2}>
                     {MIX.map((_, i) => <Cell key={i} fill={c[i % c.length]}/>)}
                   </Pie>
                 </PieChart>
-              </ForgeChart>
+              </EidosChart>
             </div>
             <div className="note">Five slices are the practical max — arc angles smaller than ~30° become indistinguishable. If you have an "Other" bucket, lump rare categories into it instead of slivering them out.</div>
           </div>
           <div className="dd-card dont">
             <div className="head"><Icons.x size={12}/> Don't — 12 micro-slices</div>
             <div className="body">
-              <ForgeChart height={160} padding={8}>
+              <EidosChart height={160} padding={8}>
                 <PieChart>
                   <Pie
                     data={Array.from({ length: 12 }, (_, i) => ({ name: 's' + (i + 1), value: 1 + (i % 4) }))}
@@ -285,7 +285,7 @@ export default function Page() {
                     {Array.from({ length: 12 }).map((_, i) => <Cell key={i} fill={c[i % c.length]}/>)}
                   </Pie>
                 </PieChart>
-              </ForgeChart>
+              </EidosChart>
             </div>
             <div className="note">12 slivers = 12 questions, none of which a pie can answer. A horizontal bar chart (sorted descending) reads in a glance — the eye compares lengths far better than angles.</div>
           </div>
@@ -304,7 +304,7 @@ export default function Page() {
           ]}
         />
         <PropsTable
-          label="<ForgeChart /> — distribution states"
+          label="<EidosChart /> — distribution states"
           rows={[
             { prop: 'state',    type: '"loading" | "empty" | "ready"', default: '"ready"', description: 'Renders the built-in loading / empty fallback inside the chart body — same surface, header and aria-live region as the ready chart.' },
             { prop: 'fallback', type: 'ReactNode', description: 'Custom non-chart body (skeleton donut, empty CTA, or a role="alert" error). Takes precedence over state.' },

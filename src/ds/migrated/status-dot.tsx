@@ -171,7 +171,7 @@ export default function StatusDotPage() {
           </div>
           {/* Log lines */}
           <div style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-muted)', display:'flex', flexDirection:'column', gap: 4}}>
-            <span style={row}><StatusDot tone="done" size="sm"/><span>12:42:03  202  POST /v1/deploys/forge-api</span></span>
+            <span style={row}><StatusDot tone="done" size="sm"/><span>12:42:03  202  POST /v1/deploys/eidos-api</span></span>
             <span style={row}><StatusDot tone="error" size="sm"/><span>12:42:04  500  POST /v1/agents/run</span></span>
             <span style={row}><StatusDot tone="skipped" size="sm"/><span>12:42:05  --   skipped: gate failed</span></span>
           </div>

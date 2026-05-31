@@ -568,7 +568,7 @@ export default function NumberPage() {
             <div>
               <label className="in-label" htmlFor="rc1">Server target</label>
               <div className="in-group">
-                <input id="rc1" className="in-control" defaultValue="api.forge.io" style={{flex:'1 1 auto'}}/>
+                <input id="rc1" className="in-control" defaultValue="api.eidos.io" style={{flex:'1 1 auto'}}/>
                 <span className="in-addon" style={{padding: 0, alignSelf:'stretch', width: 1, background:'var(--border)'}} aria-hidden="true"/>
                 <input className="in-control" type="number" defaultValue="443" min="1" max="65535" style={{flex:'0 0 80px', textAlign:'center', fontVariantNumeric:'tabular-nums'}}/>
               </div>

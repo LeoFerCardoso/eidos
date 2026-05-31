@@ -1,11 +1,11 @@
-# Eidos Design System
+# Forge Design System
 
 > Category: Developer Platform
 > Design system that powers Equifax/Boa Vista's Internal Developer Platform (IDP). CSS-first (Tailwind v4 + tokens in CSS variables), framework-agnostic at the class layer, with reference React components to copy and paste. There is no npm package — you own your copy of each component.
 
 ## 1. Visual Theme & Atmosphere
 
-Eidos is an operations tool, not a landing page. The atmosphere is that of a
+Forge is an operations tool, not a landing page. The atmosphere is that of a
 well-lit engineering terminal: neutral, information-dense surfaces, a calm
 typographic hierarchy, and a single warm accent — ember — used sparingly
 to signal action and state, never to decorate. The system assumes screens for
@@ -16,7 +16,7 @@ spectacle.
 The signature is restraint: lots of neutral gray with subtle layers (`bg` → `surface` →
 `border`), Geist typography in a disciplined scale, and ember appearing at most
 twice per screen. Where most AI dashboards overdo gradients and
-neon, Eidos looks like software that a platform team trusts at 3am
+neon, Forge looks like software that a platform team trusts at 3am
 during an incident.
 
 **Key Characteristics:**
@@ -43,13 +43,29 @@ during an incident.
   reflected in the status `.pill`. Severity is semantic — see the *Severity &
   state* page; never pick a raw red, use the token.
 
-### Surface & Background
-- Layers via token: `--bg` (canvas) → `--surface` (elevated cards/containers) →
-  `--border` (alpha borders). Dark/light via `[data-theme="..."]` in `tokens.css`.
-- Foregrounds: `--fg`, `--fg-muted` for secondary text/captions.
+### Surface & Background (modern foundation — color system v1.2)
+- **Warm OKLCH palette.** Colors are authored in OKLCH with a warm undertone (hue ~60°,
+  very low chroma) — perceptually-uniform lightness steps, never cold grey. `--bg` is
+  `oklch(0.165 0.006 60)` (warm near-black, **not** pure black); `--fg` is `#F2EEE8`
+  (warm white). Light theme mirrors the same logic toward paper-white.
+- **7 surface tiers, monotonic light progression** (deeper → lighter):
+  `--canvas` (behind modal/sidesheet backdrops) → `--bg` (page) → `--bg-elevated`
+  (topbar/sidebar/code well) → `--surface` (default card/frame) → `--surface-hover` →
+  `--surface-overlay` (popover/dropdown/modal/sidesheet) → `--surface-active`
+  (selected/pressed). Plus `--surface-selected` (ember-tinged). Borders:
+  `--border-subtle` < `--border` < `--border-strong` < `--border-stronger`.
+- Foregrounds (warm-leaning): `--fg` → `--fg-muted` → `--fg-subtle` → `--fg-faint`
+  (faint is decorative only, never load-bearing).
 
-> Never hardcode hex outside of `:root`. The six (or more) tokens in `tokens.css` are the
-> truth — map the brand onto them.
+> Never hardcode hex outside the token layer. The foundation lives in
+> `src/styles/tokens.css` (the v1.2 OKLCH token system, adopted wholesale from the latest
+> Forge DS); map the brand onto those tokens.
+
+## 2b. Elevation
+- A real **elevation scale** drives depth: `--elev-0` (none) → `--elev-1` → `--elev-2` →
+  `--elev-3` → `--elev-4`, plus `--elev-ember` (ember-glow for hero CTAs). Legacy
+  `--shadow-0..5` are aliased onto `--elev-*`. Prefer raising the **surface tier** +
+  `--elev-*` over ad-hoc box-shadows; depth stays consistent and theme-aware.
 
 ## 3. Typography
 
@@ -115,5 +131,5 @@ Compose from what already exists. Core class systems (in `ds.css`/`tokens.css`):
   no lorem ipsum, no "trust" purple→blue gradient.
 - ~80% proven patterns + ~20% distinctive choice (one typographic decision, one
   memorable microinteraction, one detail that only someone who has used the IDP would add).
-- If a reviewer recognizes the screen as Eidos/IDP from the photo, it has soul. If it looks
+- If a reviewer recognizes the screen as Forge/IDP from the photo, it has soul. If it looks
   like a generic dashboard template, redo it. See `craft/anti-ai-slop.md`.

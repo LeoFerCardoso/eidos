@@ -50,7 +50,7 @@ const useTheme = () => {
   const toggle = React.useCallback(() => {
     const next = get() === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
-    try { localStorage.setItem('forge-ai-theme', next); } catch {}
+    try { localStorage.setItem('eidos-ai-theme', next); } catch {}
     setTheme(next);
   }, []);
   return [theme, toggle] as [string, () => void];

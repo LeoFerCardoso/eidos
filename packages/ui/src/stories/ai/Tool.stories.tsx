@@ -29,7 +29,7 @@ const meta = {
   },
   args: {
     name: 'search_incidents',
-    ns: 'forge.ai',
+    ns: 'eidos.ai',
     state: 'output-available',
     ms: 312,
   },
@@ -101,7 +101,7 @@ export const OutputError: Story = {
 export const MultipleTools: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 620 }}>
-      <Tool name="lookup_user" ns="forge.ai" state="output-available" ms={142}>
+      <Tool name="lookup_user" ns="eidos.ai" state="output-available" ms={142}>
         <ToolInput params={LOOKUP_PARAMS} paramsHint="2 args" />
         <ToolOutput meta="1 result">
           <p style={{ margin: '8px 12px', fontSize: 13, color: 'var(--fg-muted)' }}>
@@ -109,7 +109,7 @@ export const MultipleTools: Story = {
           </p>
         </ToolOutput>
       </Tool>
-      <Tool name="search_incidents" ns="forge.ai" state="output-available" ms={312}>
+      <Tool name="search_incidents" ns="eidos.ai" state="output-available" ms={312}>
         <ToolInput params={SEARCH_PARAMS} paramsHint="3 args" />
         <ToolOutput meta="2 results">
           <p style={{ margin: '8px 12px', fontSize: 13, color: 'var(--fg-muted)' }}>
@@ -117,7 +117,7 @@ export const MultipleTools: Story = {
           </p>
         </ToolOutput>
       </Tool>
-      <Tool name="get_service_health" ns="forge.infra" state="input-available" ms={undefined}>
+      <Tool name="get_service_health" ns="eidos.infra" state="input-available" ms={undefined}>
         <ToolInput params={{ service: 'fraud-engine', region: 'sa-east-1' }} paramsHint="2 args" />
       </Tool>
     </div>

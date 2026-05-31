@@ -4,7 +4,7 @@ import { cn } from './lib/utils';
 import { Icons } from './icons';
 
 // ═══════════════════════════════════════════════════════════════════════════
-// Notification / Toaster — Forge DS
+// Notification / Toaster — Eidos DS
 //
 //   Toaster       = portal region that renders stacked toasts (fixed corner)
 //   useToast      = hook + context providing toast({tone,title,description,…})

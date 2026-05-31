@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge AI — agentic disclosure shells.
+// Eidos AI — agentic disclosure shells.
 //
 // Tool: a four-state (pending → running → done → error) collapsible block
 // for one model tool call. Exports the main <Tool/> plus composable sub-parts
@@ -51,7 +51,7 @@ export const ToolStatus = ({
 // Tool — one collapsible tool-call block.
 export const Tool = ({
   name,
-  ns = 'forge.ai',
+  ns = 'eidos.ai',
   state,
   ms,
   defaultOpen,
@@ -135,7 +135,7 @@ export const ToolOutput = ({
 }: {
   /** Section label. Switch to "Error" when state = output-error. */
   label?: string;
-  /** Rendered result. Use Forge primitives — Table, Code, plain prose, error card. */
+  /** Rendered result. Use Eidos primitives — Table, Code, plain prose, error card. */
   children?: React.ReactNode;
   /** Right-aligned meta — row count, HTTP status, etc. */
   meta?: string;

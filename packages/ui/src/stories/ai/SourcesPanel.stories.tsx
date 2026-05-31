@@ -8,9 +8,9 @@ import type { CitationSource } from '@eidos/ui';
 const FRAUD_SOURCES: CitationSource[] = [
   {
     id: 1,
-    domain: 'docs.forge.internal',
+    domain: 'docs.eidos.internal',
     title: 'Fraud Engine — Feature Store Runbook',
-    url: 'https://docs.forge.internal/fraud-engine/feature-store-runbook',
+    url: 'https://docs.eidos.internal/fraud-engine/feature-store-runbook',
     snippet:
       'The feature store serves pre-computed signals at p99 < 4 ms under normal load. ' +
       'When cache TTL expires during a high-throughput window, the fallback path adds ~120 ms.',
@@ -18,9 +18,9 @@ const FRAUD_SOURCES: CitationSource[] = [
   },
   {
     id: 2,
-    domain: 'alerts.forge.internal',
+    domain: 'alerts.eidos.internal',
     title: 'INC-9812 — High p95 Latency · Fraud Engine',
-    url: 'https://alerts.forge.internal/incidents/INC-9812',
+    url: 'https://alerts.eidos.internal/incidents/INC-9812',
     snippet:
       'Detected 14:02 BRT. Scoring chain retried 3× before circuit breaker opened. ' +
       'Affected 0.4 % of Pix transactions over 11 minutes.',
@@ -28,9 +28,9 @@ const FRAUD_SOURCES: CitationSource[] = [
   },
   {
     id: 3,
-    domain: 'registry.forge.internal',
+    domain: 'registry.eidos.internal',
     title: 'fraud-engine v3.4.7 — Release Notes',
-    url: 'https://registry.forge.internal/fraud-engine/releases/v3.4.7',
+    url: 'https://registry.eidos.internal/fraud-engine/releases/v3.4.7',
     snippet:
       'Adds graceful degradation when the feature store is unavailable. ' +
       'Falls back to the last known good snapshot instead of retrying.',
@@ -38,9 +38,9 @@ const FRAUD_SOURCES: CitationSource[] = [
   },
   {
     id: 4,
-    domain: 'dash.forge.internal',
+    domain: 'dash.eidos.internal',
     title: 'SLO Dashboard — Fraud Engine · Pix Router',
-    url: 'https://dash.forge.internal/services/fraud-engine/slo',
+    url: 'https://dash.eidos.internal/services/fraud-engine/slo',
     snippet:
       'Error budget burn rate reached 3.1× for 9 consecutive minutes. ' +
       'Auto-rollback threshold is 4× — manual rollback was initiated.',
@@ -48,9 +48,9 @@ const FRAUD_SOURCES: CitationSource[] = [
   },
   {
     id: 5,
-    domain: 'wiki.forge.internal',
+    domain: 'wiki.eidos.internal',
     title: 'Circuit Breaker Configuration Reference',
-    url: 'https://wiki.forge.internal/reliability/circuit-breaker',
+    url: 'https://wiki.eidos.internal/reliability/circuit-breaker',
     snippet:
       'Half-open probes are sent every 30 s. Recovery is confirmed after 3 consecutive ' +
       'healthy probes. Tune RETRY_BUDGET for burst-sensitive services.',
@@ -60,9 +60,9 @@ const FRAUD_SOURCES: CitationSource[] = [
 const DEPLOY_SOURCES: CitationSource[] = [
   {
     id: 1,
-    domain: 'deploy.forge.internal',
+    domain: 'deploy.eidos.internal',
     title: 'Canary Deploy — pix-router v4.2.1 · ring-0',
-    url: 'https://deploy.forge.internal/pipelines/pix-router/4.2.1',
+    url: 'https://deploy.eidos.internal/pipelines/pix-router/4.2.1',
     snippet:
       'Ring-0 shift-left at 09:15. Error rate stable at 0.02 %; no latency regression. ' +
       'Promoted to ring-1 at 09:45.',
@@ -70,9 +70,9 @@ const DEPLOY_SOURCES: CitationSource[] = [
   },
   {
     id: 2,
-    domain: 'metrics.forge.internal',
+    domain: 'metrics.eidos.internal',
     title: 'pix-router — Canary vs Stable Comparison',
-    url: 'https://metrics.forge.internal/canary/pix-router/4.2.1',
+    url: 'https://metrics.eidos.internal/canary/pix-router/4.2.1',
     snippet:
       'p50 / p95 / p99 latency unchanged across both cohorts. Throughput delta < 0.1 %. ' +
       'Memory footprint reduced by 18 MB (GC pressure fix).',
@@ -80,9 +80,9 @@ const DEPLOY_SOURCES: CitationSource[] = [
   },
   {
     id: 3,
-    domain: 'changelog.forge.internal',
+    domain: 'changelog.eidos.internal',
     title: 'pix-router v4.2.1 — Changelog',
-    url: 'https://changelog.forge.internal/pix-router/4.2.1',
+    url: 'https://changelog.eidos.internal/pix-router/4.2.1',
     snippet:
       'Removes legacy PSP adapter. Adds idempotency key validation for duplicate-payment ' +
       'protection. Patches CVE-2025-11042 in the HTTP client.',
@@ -92,9 +92,9 @@ const DEPLOY_SOURCES: CitationSource[] = [
 const MINIMAL_SOURCES: CitationSource[] = [
   {
     id: 1,
-    domain: 'docs.forge.internal',
+    domain: 'docs.eidos.internal',
     title: 'Agent Memory — Design Reference',
-    url: 'https://docs.forge.internal/ai/agent-memory',
+    url: 'https://docs.eidos.internal/ai/agent-memory',
     snippet:
       'Episodic memory is scoped per conversation turn. ' +
       'Semantic memory is stored in the vector index and retrieved via ANN.',

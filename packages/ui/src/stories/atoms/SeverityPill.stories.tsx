@@ -14,7 +14,7 @@ const meta = {
       description: {
         component:
           'Compact pill that communicates incident / alert / change-risk severity. ' +
-          'Follows the Forge P0–P3 convention: P0 = Critical (highest), P3 = Notice (lowest). ' +
+          'Follows the Eidos P0–P3 convention: P0 = Critical (highest), P3 = Notice (lowest). ' +
           'Use in incident tables, alert feeds, change-management queues, and SLO dashboards ' +
           'wherever a glanceable severity level is required.',
       },

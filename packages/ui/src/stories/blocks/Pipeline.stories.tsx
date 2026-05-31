@@ -54,7 +54,7 @@ const meta = {
           'deploy page, the status cell in a deploy table, the hero on a release dashboard. ' +
           'Two variants share one step model: `stepper` (cards on a dotted rail, Linear/Vercel ' +
           'feel) and `chevron` (nested right-pointing arrows, GitHub Actions style). Each step ' +
-          'carries a `status` (`done | running | pending | error | skipped`) mapped to a Forge ' +
+          'carries a `status` (`done | running | pending | error | skipped`) mapped to a Eidos ' +
           '`--status-*` token. For vertical, time-ordered sequences use `Timeline` instead.',
       },
     },

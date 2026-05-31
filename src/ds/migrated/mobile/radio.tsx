@@ -230,9 +230,9 @@ const REGIONS = [
 const CHEAPEST_USD = Math.min(...REGIONS.map((r) => r.usdMo));
 
 const ENVS = [
-  { id: 'production', label: 'Production',   sub: 'api.forge.dev' },
-  { id: 'staging',    label: 'Staging',      sub: 'staging.forge.dev' },
-  { id: 'preview',    label: 'Preview',      sub: 'pr-*.forge.dev' },
+  { id: 'production', label: 'Production',   sub: 'api.eidos.dev' },
+  { id: 'staging',    label: 'Staging',      sub: 'staging.eidos.dev' },
+  { id: 'preview',    label: 'Preview',      sub: 'pr-*.eidos.dev' },
 ];
 
 function RadioScreen() {
@@ -613,8 +613,8 @@ export default function MobileRadio() {
 function TrailingCheckVariantGroup() {
   const [sel, setSel] = React.useState('production');
   const opts = [
-    { id: 'production', label: 'Production',   sub: 'api.forge.dev' },
-    { id: 'staging',    label: 'Staging',       sub: 'staging.forge.dev' },
+    { id: 'production', label: 'Production',   sub: 'api.eidos.dev' },
+    { id: 'staging',    label: 'Staging',       sub: 'staging.eidos.dev' },
     { id: 'preview',    label: 'Preview — disabled', sub: '', disabled: true },
   ];
   const roving = useRovingRadio(

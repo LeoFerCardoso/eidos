@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DateInput } from '@eidos/ui';
 
 /**
- * `DateInput` is the native `<input type="date">` wrapper in the Forge field
+ * `DateInput` is the native `<input type="date">` wrapper in the Eidos field
  * shell. It renders ONE calendar affordance — the native browser indicator is
  * hidden via `::-webkit-calendar-picker-indicator { opacity:0 }` and replaced
  * by a single themed DS icon in the leading `.in-addon`, solving the dark-mode
@@ -20,7 +20,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Styled native `<input type="date">` in the Forge field shell. One DS calendar icon replaces the browser\'s native dark indicator. ' +
+          'Styled native `<input type="date">` in the Eidos field shell. One DS calendar icon replaces the browser\'s native dark indicator. ' +
           'For a custom popover calendar grid use **DatePicker** instead.',
       },
     },

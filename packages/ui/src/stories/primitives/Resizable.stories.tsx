@@ -146,7 +146,7 @@ export const Vertical: Story = {
           <PanelContent
             key="top"
             title="Editor"
-            items={['function deploy() {', "  return forge.push('us-east-1');", '}']}
+            items={['function deploy() {', "  return eidos.push('us-east-1');", '}']}
           />,
           <PanelContent
             key="bottom"
@@ -345,7 +345,7 @@ export const InContext: Story = {
                   title="Editor"
                   items={[
                     'export default function Page() {',
-                    '  return <h1>Hello Forge</h1>',
+                    '  return <h1>Hello Eidos</h1>',
                     '}',
                   ]}
                 />,

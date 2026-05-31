@@ -19,7 +19,7 @@ import type { FileContents } from '@pierre/diffs/react';
 // Shadow DOM). No hard-coded hex: keyword=violet, fn=ice, string=warning-yellow,
 // number/const=teal, comment=faint. Green/red are reserved for add/del, so no
 // syntax token uses them (they'd clash with the row tint).
-const FORGE_SYNTAX_DEFAULTS: Record<string, string> = {
+const EIDOS_SYNTAX_DEFAULTS: Record<string, string> = {
   foreground: 'var(--fg)',
   background: 'transparent',
   'token-comment': 'var(--fg-faint)',
@@ -32,7 +32,7 @@ const FORGE_SYNTAX_DEFAULTS: Record<string, string> = {
   'token-punctuation': 'var(--fg-muted)',
   'token-link': 'var(--viz-cat-2)',
 };
-let forgeThemeRegistered = false;
+let eidosThemeRegistered = false;
 
 // Load Pierre's React entry AND register the Eidos CSS-variables theme before
 // the component highlights — both inside the dynamic chunk so Shiki never lands
@@ -43,9 +43,9 @@ const MultiFileDiff = dynamic(
       import('@pierre/diffs/react'),
       import('@pierre/diffs'),
     ]);
-    if (!forgeThemeRegistered) {
-      coreMod.registerCustomCSSVariableTheme('forge', FORGE_SYNTAX_DEFAULTS);
-      forgeThemeRegistered = true;
+    if (!eidosThemeRegistered) {
+      coreMod.registerCustomCSSVariableTheme('forge', EIDOS_SYNTAX_DEFAULTS);
+      eidosThemeRegistered = true;
     }
     return reactMod.MultiFileDiff;
   },

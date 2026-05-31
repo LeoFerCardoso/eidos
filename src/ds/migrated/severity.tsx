@@ -74,7 +74,7 @@ export default function Severity() {
       <Frame label="incident.io / PagerDuty conventions, mapped to Eidos tokens">
         <div style={{display:'flex', flexDirection:'column', gap: 12, width:'100%'}}>
           {[
-            ['P0', 'severity-p0', '--severity-p0', '#FB5252', '#B91C1C', 'CRITICAL', 'Outage, data loss, security incident. Pages on-call regardless of business hours. Examples: forge-api 5xx > 50%, customer-data leaked, prod database unreachable.'],
+            ['P0', 'severity-p0', '--severity-p0', '#FB5252', '#B91C1C', 'CRITICAL', 'Outage, data loss, security incident. Pages on-call regardless of business hours. Examples: eidos-api 5xx > 50%, customer-data leaked, prod database unreachable.'],
             ['P1', 'severity-p1', '--severity-p1', '#FB923C', '#EA580C', 'HIGH',     'SLO burning, degraded service. Working-hours response. Examples: p99 latency 3× target, a region degraded, a payment provider failing for one card type.'],
             ['P2', 'severity-p2', '--severity-p2', '#FBBF24', '#EAB308', 'MEDIUM',   'Partial impact with a workaround. Ticket queue. Examples: stale cache for 1 customer cohort, intermittent UI bug, slow background job.'],
             ['P3', 'severity-p3', '--severity-p3', '#7DD3FC', '#0EA5E9', 'LOW',      'Informational, cosmetic, scheduled. No SLA. Examples: scheduled maintenance, deprecation reminder, copy typo.'],
@@ -157,11 +157,11 @@ export default function Severity() {
       <Lede up>
         A real Eidos view: a service row that uses all four families at once. Read left-to-right — the catalog tells you what the service <em>is</em> (health), the row's badge tells you about the active <em>event</em> (severity), the deploy strip shows where the latest <em>change</em> is (status), and the right column scores the next <em>change</em>'s risk.
       </Lede>
-      <Frame label="forge-api in the catalog — four token families in one row">
+      <Frame label="eidos-api in the catalog — four token families in one row">
         <div style={{display:'flex', flexDirection:'column', gap: 10, width:'100%'}}>
           <div style={{display:'grid', gridTemplateColumns:'200px 1fr 1fr 1fr', gap: 12, padding:'12px 14px', background:'var(--surface)', border:'1px solid var(--border)', borderRadius: 'var(--radius-xl)', alignItems:'center'}}>
             <div>
-              <div style={{fontSize: 'var(--text-md)', fontWeight: 600, color:'var(--fg)', marginBottom: 4}}>forge-api</div>
+              <div style={{fontSize: 'var(--text-md)', fontWeight: 600, color:'var(--fg)', marginBottom: 4}}>eidos-api</div>
               <span className="pill health-up"><Icons.check size={10}/> Up</span>
             </div>
             <div style={{fontSize: 'var(--text-base)', color:'var(--fg-subtle)'}}>

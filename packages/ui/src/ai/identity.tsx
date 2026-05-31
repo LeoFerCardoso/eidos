@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge AI — agent identity.
+// Eidos AI — agent identity.
 //
 // How an agent shows up in the UI: its mark (AgentAvatar), its inline name +
 // model line (AgentIdentity), the "this is AI" badge (AILabel), and — for a
@@ -7,7 +7,7 @@ import * as React from 'react';
 // layer reuses rather than replicates. Styles live in src/styles/ai.css.
 import { Icons } from '../icons';
 
-// ── Spark — the 4-point Forge sparkle, the AI glyph ───────────────────────
+// ── Spark — the 4-point Eidos sparkle, the AI glyph ───────────────────────
 const Spark = ({ size = 10 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
     <path d="M 12 1 C 12 6, 18 12, 23 12 C 18 12, 12 18, 12 23 C 12 18, 6 12, 1 12 C 6 12, 12 6, 12 1 Z" fill="currentColor"/>
@@ -73,7 +73,7 @@ const AILabelWithPopover = ({
   variant = 'pill',
   size = 'md',
   label = 'AI summary',
-  model = 'forge-ai/gpt-4o-mini',
+  model = 'eidos-ai/gpt-4o-mini',
   ts = '2 min ago',
   confidence = 0.92,
   children,
@@ -215,7 +215,7 @@ const AgentIdentity = ({
     <AgentAvatar size={size} status={agent.status} name={agent.name}/>
     <span className="ai-agent-id-text">
       <span className="ai-agent-id-name">
-        {agent.name || 'Forge AI'}
+        {agent.name || 'Eidos AI'}
         {label && <AILabel variant="pill" size="sm">AI</AILabel>}
       </span>
       {agent.model && <span className="ai-agent-id-model">{agent.model}</span>}

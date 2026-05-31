@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge AI — conversation history rail.
+// Eidos AI — conversation history rail.
 //
 // History (HistoryShell alias): the 280px sidebar rail with New Chat pinned
 // at top, a search field, and threads bucketed by recency. Inline rename

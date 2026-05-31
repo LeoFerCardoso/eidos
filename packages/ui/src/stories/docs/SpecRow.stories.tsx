@@ -11,7 +11,7 @@ const meta = {
         component:
           'A single `<tr>` for a token/spec table — renders three cells: token name, value, and usage. ' +
           'Always wrap it in `<table><tbody>` in the consuming page; see the stories below for the ' +
-          'correct table chrome that Forge docs pages use.',
+          'correct table chrome that Eidos docs pages use.',
       },
     },
   },

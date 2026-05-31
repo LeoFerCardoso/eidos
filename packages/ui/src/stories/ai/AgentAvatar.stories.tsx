@@ -12,7 +12,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The visual mark for an AI agent in the Forge platform. Renders a circular ' +
+          'The visual mark for an AI agent in the Eidos platform. Renders a circular ' +
           'avatar with the canonical ember tint, an optional presence dot, and either the ' +
           'default agent glyph, a custom icon, or two-letter initials. Use it anywhere an ' +
           'agent needs to be identified — chat headers, run logs, agentic pipeline cards, ' +
@@ -23,7 +23,7 @@ const meta = {
   args: {
     size: 32,
     ember: true,
-    name: 'Forge AI',
+    name: 'Eidos AI',
   },
   argTypes: {
     size: { control: { type: 'number', min: 16, max: 80, step: 4 } },

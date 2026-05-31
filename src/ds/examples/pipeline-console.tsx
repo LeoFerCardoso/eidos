@@ -100,9 +100,9 @@ import { FPageHeader, FShell } from './example-shell';
   };
 
   // --- Log stream ----------------------------------------------------------
-  // Realistic forge-engine log for the selected run (run_8h2k9p · canary deploy).
+  // Realistic eidos-engine log for the selected run (run_8h2k9p · canary deploy).
   const RUN_LOG = [
-    { time: '14:32:08.142', level: 'info', message: '$ forge deploy --service identity-svc --version v4.18.2 --stage canary' },
+    { time: '14:32:08.142', level: 'info', message: '$ eidos deploy --service identity-svc --version v4.18.2 --stage canary' },
     { time: '14:32:08.234', level: 'info', message: 'Resolved deploy plan: 1 cluster, 1 region (us-east-1), strategy ring' },
     { time: '14:32:08.501', level: 'info', message: '[stage 1/6] build · pulling base image node:22-alpine ...' },
     { time: '14:32:11.873', level: 'info', message: '[stage 1/6] build · running pnpm install (lockfile a91c4f0)' },
@@ -378,7 +378,7 @@ import { FPageHeader, FShell } from './example-shell';
                     DATADOG_API_KEY=•••••••••••<br/>
                     POSTGRES_HOST=prod-db.internal<br/>
                     REDIS_HOST=prod-redis.internal<br/>
-                    FEATURE_FLAGS_ENDPOINT=https://flags.forge.local<br/>
+                    FEATURE_FLAGS_ENDPOINT=https://flags.eidos.local<br/>
                   </div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, ForgeChart, ForgeTooltipContent, useChartColors, forgeGridProps, forgeXAxisProps, forgeYAxisProps, Lede, Recharts, Mono } from '@/ds/core';
+import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, EidosChart, EidosTooltipContent, useChartColors, eidosGridProps, eidosXAxisProps, eidosYAxisProps, Lede, Recharts, Mono } from '@/ds/core';
   const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } = Recharts;
 
   // Mirrors the Eidos motion convention (see atoms CountUp / tooltip): the
@@ -26,7 +26,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Fo
 
   // Deploys per service this week — single series.
   const DEPLOYS = [
-    { svc: 'forge-api',       n: 14 },
+    { svc: 'eidos-api',       n: 14 },
     { svc: 'fraud-engine',    n:  9 },
     { svc: 'kyc-orchestrator',n:  7 },
     { svc: 'auth-gateway',    n:  6 },
@@ -46,7 +46,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Fo
 
   // Grouped — passing vs failing tests by service.
   const TESTS = [
-    { svc: 'forge-api',  pass: 412, fail:  6 },
+    { svc: 'eidos-api',  pass: 412, fail:  6 },
     { svc: 'fraud',      pass: 268, fail: 12 },
     { svc: 'kyc',        pass: 184, fail:  4 },
     { svc: 'auth',       pass: 122, fail:  2 },
@@ -54,8 +54,8 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Fo
   ];
 
   const USAGE = `import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
-import { ForgeChart, ForgeTooltipContent, useChartColors,
-         forgeGridProps, forgeXAxisProps, forgeYAxisProps } from "@/charts"
+import { EidosChart, EidosTooltipContent, useChartColors,
+         eidosGridProps, eidosXAxisProps, eidosYAxisProps } from "@/charts"
 
 export function Demo({ data }) {
   const c = useChartColors()
@@ -63,15 +63,15 @@ export function Demo({ data }) {
   // motion-sensitive see final heights immediately (no sweep).
   const reduced = useReducedMotion()
   return (
-    <ForgeChart title="Deploys this week" height={260}>
+    <EidosChart title="Deploys this week" height={260}>
       <BarChart data={data}>
-        <CartesianGrid {...forgeGridProps}/>
-        <XAxis dataKey="svc" {...forgeXAxisProps}/>
-        <YAxis {...forgeYAxisProps}/>
-        <Tooltip content={<ForgeTooltipContent/>}/>
+        <CartesianGrid {...eidosGridProps}/>
+        <XAxis dataKey="svc" {...eidosXAxisProps}/>
+        <YAxis {...eidosYAxisProps}/>
+        <Tooltip content={<EidosTooltipContent/>}/>
         <Bar dataKey="n" fill={c[0]} radius={[3, 3, 0, 0]} isAnimationActive={!reduced}/>
       </BarChart>
-    </ForgeChart>
+    </EidosChart>
   )
 }`;
 
@@ -87,15 +87,15 @@ export default function Page() {
         <SubHead meta="hello world">Usage</SubHead>
         <Lede>Prefer a line chart when the X axis is continuous time and trend matters more than any individual value. The value axis must start at zero — bars encode proportion by length, and a truncated baseline makes a small difference look large.</Lede>
         <Frame label="vertical · deploys per service" code={USAGE}>
-          <ForgeChart title="Deploys this week" subtitle="forge fleet" meta="count" height={260}>
+          <EidosChart title="Deploys this week" subtitle="eidos fleet" meta="count" height={260}>
             <BarChart data={DEPLOYS} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="svc" {...forgeXAxisProps} interval={0} angle={-20} textAnchor="end" height={50}/>
-              <YAxis {...forgeYAxisProps} allowDecimals={false}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="svc" {...eidosXAxisProps} interval={0} angle={-20} textAnchor="end" height={50}/>
+              <YAxis {...eidosYAxisProps} allowDecimals={false}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Bar dataKey="n" name="deploys" fill={c[0]} radius={[3, 3, 0, 0]} maxBarSize={32} isAnimationActive={!reduced}/>
             </BarChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
         <Lede>Bar length is an <em>approximate</em> read, so the same data ships beside the chart as a visually-hidden <Mono>.sr-only</Mono> <Mono>&lt;table&gt;</Mono>: sighted users hover for the exact value, screen-reader users get every count from the table — same numbers, two channels.</Lede>
         <table className="sr-only">
@@ -110,48 +110,48 @@ export default function Page() {
 
         <SubHead meta="3 variants">Variants</SubHead>
         <Frame label="horizontal · long category labels">
-          <ForgeChart title="Errors by category" subtitle="last 1h" meta="count" height={240}>
+          <EidosChart title="Errors by category" subtitle="last 1h" meta="count" height={240}>
             <BarChart data={ERRORS} layout="vertical" margin={{ top: 8, right: 12, left: 16, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps} horizontal={false} vertical={true}/>
-              <XAxis type="number" {...forgeXAxisProps}/>
-              <YAxis type="category" dataKey="cat" {...forgeYAxisProps} width={130} tickFormatter={undefined}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps} horizontal={false} vertical={true}/>
+              <XAxis type="number" {...eidosXAxisProps}/>
+              <YAxis type="category" dataKey="cat" {...eidosYAxisProps} width={130} tickFormatter={undefined}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Bar dataKey="n" name="errors" radius={[0, 3, 3, 0]} maxBarSize={20} isAnimationActive={!reduced}>
                 {ERRORS.map((e, i) => (
                   <Cell key={i} fill={i === 0 ? 'var(--danger)' : c[1]}/>
                 ))}
               </Bar>
             </BarChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
         <Lede>Use a horizontal layout when labels are long. Highlight the dominant bar with a status colour to draw attention without a separate annotation.</Lede>
 
         <Frame label="grouped · two series side-by-side">
-          <ForgeChart title="Test results" subtitle="ci-runner" meta="pass / fail" height={260}>
+          <EidosChart title="Test results" subtitle="ci-runner" meta="pass / fail" height={260}>
             <BarChart data={TESTS} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="svc" {...forgeXAxisProps}/>
-              <YAxis {...forgeYAxisProps}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="svc" {...eidosXAxisProps}/>
+              <YAxis {...eidosYAxisProps}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Legend iconSize={8} wrapperStyle={legendStyle}/>
               <Bar dataKey="pass" name="pass" fill="var(--success)" radius={[3, 3, 0, 0]} maxBarSize={20} isAnimationActive={!reduced}/>
               <Bar dataKey="fail" name="fail" fill="var(--danger)"  radius={[3, 3, 0, 0]} maxBarSize={20} isAnimationActive={!reduced}/>
             </BarChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <Frame label="stacked · composition per service">
-          <ForgeChart title="Test results · stacked" subtitle="ci-runner" meta="pass / fail" height={240}>
+          <EidosChart title="Test results · stacked" subtitle="ci-runner" meta="pass / fail" height={240}>
             <BarChart data={TESTS} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-              <CartesianGrid {...forgeGridProps}/>
-              <XAxis dataKey="svc" {...forgeXAxisProps}/>
-              <YAxis {...forgeYAxisProps}/>
-              <Tooltip content={<ForgeTooltipContent/>}/>
+              <CartesianGrid {...eidosGridProps}/>
+              <XAxis dataKey="svc" {...eidosXAxisProps}/>
+              <YAxis {...eidosYAxisProps}/>
+              <Tooltip content={<EidosTooltipContent/>}/>
               <Legend iconSize={8} wrapperStyle={legendStyle}/>
               <Bar dataKey="pass" name="pass" stackId="1" fill="var(--success)" maxBarSize={32} isAnimationActive={!reduced}/>
               <Bar dataKey="fail" name="fail" stackId="1" fill="var(--danger)"  maxBarSize={32} radius={[3, 3, 0, 0]} isAnimationActive={!reduced}/>
             </BarChart>
-          </ForgeChart>
+          </EidosChart>
         </Frame>
 
         <SubHead meta="a11y">Accessibility</SubHead>
@@ -177,15 +177,15 @@ export default function Page() {
         <SubHead meta="RTL · العربية">RTL</SubHead>
         <Frame label='dir="rtl" — axis labels and legend flow right-to-left; bar lengths read correctly in either direction'>
           <div dir="rtl" style={{width: '100%'}}>
-            <ForgeChart title="عمليات النشر هذا الأسبوع" subtitle="أسطول فورج" meta="عدد" height={240}>
+            <EidosChart title="عمليات النشر هذا الأسبوع" subtitle="أسطول فورج" meta="عدد" height={240}>
               <BarChart data={DEPLOYS} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-                <CartesianGrid {...forgeGridProps}/>
-                <XAxis dataKey="svc" {...forgeXAxisProps} interval={0} angle={-20} textAnchor="end" height={50}/>
-                <YAxis {...forgeYAxisProps} allowDecimals={false}/>
-                <Tooltip content={<ForgeTooltipContent/>}/>
+                <CartesianGrid {...eidosGridProps}/>
+                <XAxis dataKey="svc" {...eidosXAxisProps} interval={0} angle={-20} textAnchor="end" height={50}/>
+                <YAxis {...eidosYAxisProps} allowDecimals={false}/>
+                <Tooltip content={<EidosTooltipContent/>}/>
                 <Bar dataKey="n" name="نشر" fill={c[0]} radius={[3, 3, 0, 0]} maxBarSize={32} isAnimationActive={!reduced}/>
               </BarChart>
-            </ForgeChart>
+            </EidosChart>
           </div>
         </Frame>
         <Lede>Under <Mono>dir="rtl"</Mono> the chart title and tooltip text align to the right. The category axis and bar lengths are not mirrored — bar charts encode value as length, a magnitude that does not change with reading direction.</Lede>
@@ -197,14 +197,14 @@ export default function Page() {
             <div className="ana" style={{display:'flex', justifyContent:'center'}}>
               <div className="stage" style={{position:'relative'}} aria-hidden="true">
                 <div style={{width:340, height:180}}>
-                  <ForgeChart height={180}>
+                  <EidosChart height={180}>
                     <BarChart data={DEPLOYS} margin={{ top: 8, right: 12, left: -8, bottom: 0 }}>
-                      <CartesianGrid {...forgeGridProps}/>
-                      <XAxis dataKey="svc" {...forgeXAxisProps} tick={false}/>
-                      <YAxis {...forgeYAxisProps} allowDecimals={false}/>
+                      <CartesianGrid {...eidosGridProps}/>
+                      <XAxis dataKey="svc" {...eidosXAxisProps} tick={false}/>
+                      <YAxis {...eidosYAxisProps} allowDecimals={false}/>
                       <Bar dataKey="n" fill={c[0]} radius={[3, 3, 0, 0]} maxBarSize={26} isAnimationActive={!reduced}/>
                     </BarChart>
-                  </ForgeChart>
+                  </EidosChart>
                 </div>
                 <span className="lead v" style={{top: -22, left: 80, height: 18}}/>
                 <span className="lead h" style={{top: 110, left: -28, width: 24}}/>
@@ -230,28 +230,28 @@ export default function Page() {
           <div className="dd-card do">
             <div className="head"><Icons.check size={12}/> Do — start the Y axis at zero</div>
             <div className="body">
-              <ForgeChart height={140} padding={8}>
+              <EidosChart height={140} padding={8}>
                 <BarChart data={DEPLOYS.slice(0, 5)} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
-                  <CartesianGrid {...forgeGridProps}/>
-                  <XAxis dataKey="svc" {...forgeXAxisProps} interval={0} hide/>
-                  <YAxis {...forgeYAxisProps}/>
+                  <CartesianGrid {...eidosGridProps}/>
+                  <XAxis dataKey="svc" {...eidosXAxisProps} interval={0} hide/>
+                  <YAxis {...eidosYAxisProps}/>
                   <Bar dataKey="n" fill={c[0]} radius={[3, 3, 0, 0]} maxBarSize={20} isAnimationActive={!reduced}/>
                 </BarChart>
-              </ForgeChart>
+              </EidosChart>
             </div>
             <div className="note">Bar length only reads as proportion when the axis starts at zero. If you need to highlight small differences around a baseline, switch to a line chart with a <Mono>ReferenceLine</Mono>.</div>
           </div>
           <div className="dd-card dont">
             <div className="head"><Icons.x size={12}/> Don't — clip the axis to exaggerate</div>
             <div className="body">
-              <ForgeChart height={140} padding={8}>
+              <EidosChart height={140} padding={8}>
                 <BarChart data={DEPLOYS.slice(0, 5)} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
-                  <CartesianGrid {...forgeGridProps}/>
-                  <XAxis dataKey="svc" {...forgeXAxisProps} interval={0} hide/>
-                  <YAxis {...forgeYAxisProps} domain={[5, 'dataMax']}/>
+                  <CartesianGrid {...eidosGridProps}/>
+                  <XAxis dataKey="svc" {...eidosXAxisProps} interval={0} hide/>
+                  <YAxis {...eidosYAxisProps} domain={[5, 'dataMax']}/>
                   <Bar dataKey="n" fill={c[0]} radius={[3, 3, 0, 0]} maxBarSize={20} isAnimationActive={!reduced}/>
                 </BarChart>
-              </ForgeChart>
+              </EidosChart>
             </div>
             <div className="note">A 3-deploy service looks like a rounding error next to one with 14 — but only because the baseline lies. Clipped axes turn small differences into dramatic ones, which is misleading at best, dishonest at worst.</div>
           </div>

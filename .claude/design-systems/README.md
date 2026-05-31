@@ -5,14 +5,14 @@ is injected into the system prompt of every skill that declares `design_system.r
 
 ## Layout
 
-- **`forge/`** — **the single canonical brand.** Forge Design System: IDP Equifax/Boa
+- **`eidos/`** — **the single canonical brand.** Eidos Design System: IDP Equifax/Boa
   Vista, ember accent `#FF6B35`, Geist Sans/Mono, cool neutrals, platform density. Every
-  skill and agent reads `forge/DESIGN.md`. It is the source of truth for the *visual
+  skill and agent reads `eidos/DESIGN.md`. It is the source of truth for the *visual
   language* — the complete technical catalog (tokens, classes, components) lives in
   `../../CLAUDE.md` and `../../llms.txt`.
 
 The 139 inspiration brands imported from Open Design were removed — this project builds one
-design system (Forge), so other brands' aesthetics are off-mission. If you ever need to
+design system (Eidos), so other brands' aesthetics are off-mission. If you ever need to
 prototype against a different aesthetic, author a new `<brand>/DESIGN.md` here for that
 task.
 
@@ -22,7 +22,7 @@ The first H1 is the title shown in the selector. The line right after the H1 is 
 metadata:
 
 ```markdown
-# Forge Design System
+# Eidos Design System
 
 > Category: Developer Platform
 > One-line summary.

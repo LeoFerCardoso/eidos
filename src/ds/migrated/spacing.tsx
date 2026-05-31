@@ -100,7 +100,7 @@ export default function Spacing() {
           </div>
           {/* Input with padding shown */}
           <div style={{display:'flex', alignItems:'center', gap: 18}}>
-            <input style={{height: 36, padding:'0 12px', borderRadius: 'var(--radius-lg)', background:'var(--surface)', border:'1px solid var(--border-strong)', color:'var(--fg)', fontSize: 'var(--text-base)', width: 200}} defaultValue="forge-api"/>
+            <input style={{height: 36, padding:'0 12px', borderRadius: 'var(--radius-lg)', background:'var(--surface)', border:'1px solid var(--border-strong)', color:'var(--fg)', fontSize: 'var(--text-base)', width: 200}} defaultValue="eidos-api"/>
             <span className="t-mono" style={{fontSize: 'var(--text-base)', color:'var(--fg-muted)'}}>padding 0 12px · 36px tall</span>
           </div>
         </div>
@@ -266,7 +266,7 @@ export default function Spacing() {
               <table className="tbl" style={{width:'100%'}}>
                 <thead><tr><th>Service</th><th>Tier</th><th>p95</th><th>Health</th></tr></thead>
                 <tbody>
-                  <tr><td>forge-api</td><td><span className="t-mono" style={{fontSize: 'var(--text-xs)', color:'var(--fg)'}}>T1</span></td><td className="t-mono" style={{fontVariantNumeric:'tabular-nums'}}>14ms</td><td><span className="pill health-up">Up</span></td></tr>
+                  <tr><td>eidos-api</td><td><span className="t-mono" style={{fontSize: 'var(--text-xs)', color:'var(--fg)'}}>T1</span></td><td className="t-mono" style={{fontVariantNumeric:'tabular-nums'}}>14ms</td><td><span className="pill health-up">Up</span></td></tr>
                   <tr><td>identity-svc</td><td><span className="t-mono" style={{fontSize: 'var(--text-xs)', color:'var(--fg)'}}>T1</span></td><td className="t-mono" style={{fontVariantNumeric:'tabular-nums'}}>22ms</td><td><span className="pill health-degraded">Degraded</span></td></tr>
                 </tbody>
               </table>

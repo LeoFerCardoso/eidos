@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, ForgeChart, Lede, Mono, Spinner, Alert, AlertTitle, AlertDescription, Kbd } from '@/ds/core';
+import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, EidosChart, Lede, Mono, Spinner, Alert, AlertTitle, AlertDescription, Kbd } from '@/ds/core';
 
   // Respect the user's motion preference. Returns true when the OS requests
   // reduced motion, so the gauge can render its final fill instantly instead
@@ -186,10 +186,10 @@ function Gauge({ value, max, variant = "semi", color = "var(--ember)", label }) 
   )
 }
 
-<ForgeChart title="SLO budget left" height={240}>
+<EidosChart title="SLO budget left" height={240}>
   <Gauge value={72} max={100} variant="semi"
          color="var(--success)" label="of 100% budget"/>
-</ForgeChart>`;
+</EidosChart>`;
 
 export default function Page() {
   return (
@@ -201,51 +201,51 @@ export default function Page() {
       <SubHead meta="hello world">Usage</SubHead>
       <Lede>Never line up a row of gauges — that is a radial bar chart in disguise and does the same job in half the pixels. Always render a background track so readers see the value against its ceiling, not just a lonely sweep.</Lede>
       <Frame label="single gauge · SLO budget left" code={USAGE}>
-        <ForgeChart title="SLO budget left" subtitle="forge-api" meta="this quarter" height={260}>
+        <EidosChart title="SLO budget left" subtitle="eidos-api" meta="this quarter" height={260}>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
             <Gauge value={72} max={100} variant="semi" color="var(--success)" label="of 100% budget" size={220} thickness={16}/>
           </div>
-        </ForgeChart>
+        </EidosChart>
       </Frame>
       <Lede>The center label is the load-bearing element — the arc is decoration. Always pair the value with a unit and a contextual subtitle.</Lede>
 
       <SubHead meta="3 variants">Variants</SubHead>
       <Frame label="semi · three-q · full">
-        <ForgeChart title="The three sweeps" subtitle={<span style={{ fontVariantNumeric: 'tabular-nums' }}>180° · 270° · 360°</span>} height={260}>
+        <EidosChart title="The three sweeps" subtitle={<span style={{ fontVariantNumeric: 'tabular-nums' }}>180° · 270° · 360°</span>} height={260}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, alignItems: 'center', justifyItems: 'center', width: '100%' }}>
             <Gauge value={72} variant="semi"    color="var(--ember)"   label="semi"    size={170} thickness={14}/>
             <Gauge value={72} variant="three-q" color="var(--ember)"   label="three-q" size={170} thickness={14}/>
             <Gauge value={72} variant="full"    color="var(--ember)"   label="full"    size={170} thickness={14}/>
           </div>
-        </ForgeChart>
+        </EidosChart>
       </Frame>
 
       <Frame label="status-tinted · color tracks the value (Change Risk Score recipe)">
-        <ForgeChart title="Change Risk Score" subtitle={<span style={{ fontVariantNumeric: 'tabular-nums' }}>3 services · 0–100 scale</span>} meta="lower = safer" height={250}>
+        <EidosChart title="Change Risk Score" subtitle={<span style={{ fontVariantNumeric: 'tabular-nums' }}>3 services · 0–100 scale</span>} meta="lower = safer" height={250}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, alignItems: 'center', justifyItems: 'center', width: '100%' }}>
-            <Gauge value={72} variant="semi" color={toneFor(72)} label="healthy"  sublabel="forge-api"     size={170} thickness={14}/>
+            <Gauge value={72} variant="semi" color={toneFor(72)} label="healthy"  sublabel="eidos-api"     size={170} thickness={14}/>
             <Gauge value={48} variant="semi" color={toneFor(48)} label="at risk"  sublabel="fraud-engine"  size={170} thickness={14}/>
             <Gauge value={18} variant="semi" color={toneFor(18)} label="breached" sublabel="kyc"           size={170} thickness={14}/>
           </div>
-        </ForgeChart>
+        </EidosChart>
       </Frame>
 
       <Frame label="dense · hero KPI at the top of a dashboard">
-        <ForgeChart title="Deploy success" subtitle="last 30 days" meta={<span style={{ fontVariantNumeric: 'tabular-nums' }}>92.4%</span>} height={280}>
+        <EidosChart title="Deploy success" subtitle="last 30 days" meta={<span style={{ fontVariantNumeric: 'tabular-nums' }}>92.4%</span>} height={280}>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
             <Gauge value={92} max={100} variant="three-q" color="var(--ember)" label="of 211 runs" size={240} thickness={18}/>
           </div>
-        </ForgeChart>
+        </EidosChart>
       </Frame>
 
       <Frame label="full ring · stat-card recipe (small)">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, width: '100%' }}>
           {[{v:84,l:'coverage',c:'var(--ember)'},{v:99,l:'uptime',c:'var(--success)'},{v:62,l:'docs',c:'var(--warning)'},{v:28,l:'a11y',c:'var(--danger)'}].map((g, i) => (
-            <ForgeChart key={i} title={g.l} height={150} padding={6}>
+            <EidosChart key={i} title={g.l} height={150} padding={6}>
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                 <Gauge value={g.v} variant="full" color={g.c} size={108} thickness={10} ariaLabel={g.l}/>
               </div>
-            </ForgeChart>
+            </EidosChart>
           ))}
         </div>
       </Frame>
@@ -254,7 +254,7 @@ export default function Page() {
       <Lede>A gauge is the headline number on a dashboard — so it must say something honest while the metric is still resolving, when the window has no events, and when the query fails. The arc never fakes a value it does not have.</Lede>
       <Frame label="loading · empty · error — the gauge before (and instead of) a value">
         <div className="ds-grid cols-3" style={{ gap: 14 }}>
-          <ForgeChart title="SLO budget left" subtitle="forge-api" height={200} state="loading"
+          <EidosChart title="SLO budget left" subtitle="eidos-api" height={200} state="loading"
             fallback={
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
                 <Spinner size="lg" aria-label="Loading SLO budget"/>
@@ -262,7 +262,7 @@ export default function Page() {
               </div>
             }
           />
-          <ForgeChart title="SLO budget left" subtitle="forge-api" height={200} state="empty"
+          <EidosChart title="SLO budget left" subtitle="eidos-api" height={200} state="empty"
             fallback={
               <div className="empty sm">
                 <span className="empty-icon"><Icons.gauge size={18}/></span>
@@ -273,11 +273,11 @@ export default function Page() {
               </div>
             }
           />
-          <div className="forge-chart">
+          <div className="eidos-chart">
             <div className="fc-head">
               <div className="fc-head-text">
                 <span className="fc-title">SLO budget left</span>
-                <span className="fc-subtitle">forge-api</span>
+                <span className="fc-subtitle">eidos-api</span>
               </div>
             </div>
             <div className="fc-body" style={{ minBlockSize: 200, display: 'flex', alignItems: 'center' }}>
@@ -291,11 +291,11 @@ export default function Page() {
       </Frame>
       <Lede>Loading and empty share the <Mono>role="status"</Mono> live region the chart container provides (with <Mono>aria-busy</Mono> while loading); the error state is a real <Mono>role="alert"</Mono> danger <Mono>Alert</Mono> so assistive tech is interrupted. A disabled or at-minimum gauge still renders its honest value — it reads <Mono>0%</Mono> over the track, never a blank frame.</Lede>
       <Frame label="zero & disabled — a real value of 0 still draws (track only), never an empty frame">
-        <ForgeChart title="Error budget burned" subtitle="payments-api" meta={<span style={{ fontVariantNumeric: 'tabular-nums' }}>nominal</span>} height={220}>
+        <EidosChart title="Error budget burned" subtitle="payments-api" meta={<span style={{ fontVariantNumeric: 'tabular-nums' }}>nominal</span>} height={220}>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', opacity: 0.55 }} aria-disabled="true">
             <Gauge value={0} max={100} variant="semi" color="var(--fg-faint)" label="of 100% budget" size={200} thickness={14} ariaLabel="Error budget burned, disabled"/>
           </div>
-        </ForgeChart>
+        </EidosChart>
       </Frame>
 
       <SubHead meta="a11y">Accessibility</SubHead>
@@ -331,11 +331,11 @@ export default function Page() {
       <SubHead meta="RTL · العربية">RTL</SubHead>
       <Frame label='dir="rtl" — title and labels align right; the arc direction and centre readout are unchanged'>
         <div dir="rtl" style={{width: '100%'}}>
-          <ForgeChart title="ميزانية SLO المتبقية" subtitle="forge-api" meta="هذا الربع" height={260}>
+          <EidosChart title="ميزانية SLO المتبقية" subtitle="eidos-api" meta="هذا الربع" height={260}>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
               <Gauge value={72} max={100} variant="semi" color="var(--success)" label="من ميزانية ١٠٠٪" size={220} thickness={16}/>
             </div>
-          </ForgeChart>
+          </EidosChart>
         </div>
       </Frame>
       <Lede>Under <Mono>dir="rtl"</Mono> the chart title, subtitle, and label text align to the right. The arc itself is radially symmetric — it has no inherent direction — and the centre readout value is not mirrored.</Lede>
@@ -373,11 +373,11 @@ export default function Page() {
         <div className="dd-card do">
           <div className="head"><Icons.check size={12}/> Do — one gauge, big, with a number you can read</div>
           <div className="body" style={{ padding: 14 }}>
-            <ForgeChart height={200} padding={8}>
+            <EidosChart height={200} padding={8}>
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                 <Gauge value={64} variant="semi" color="var(--success)" label="of 100% budget" size={170} thickness={14}/>
               </div>
-            </ForgeChart>
+            </EidosChart>
           </div>
           <div className="note">A single gauge anchors a dashboard. The number is the headline; the arc tells you "more or less than half" at a glance.</div>
         </div>

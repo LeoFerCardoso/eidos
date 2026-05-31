@@ -1,5 +1,5 @@
 // One-shot: reconcile the per-page installTabs('name','peers') calls with reality.
-// Forge components are semantic-CSS React — NOT Radix, NOT class-variance-authority.
+// Eidos components are semantic-CSS React — NOT Radix, NOT class-variance-authority.
 // Strip those categorically-wrong tokens from the peer string. If what's left is
 // only the cn() baseline (clsx tailwind-merge), drop the 2nd arg so the page falls
 // back to installTabs' DEFAULT_PEERS. Genuine third-party libs (recharts, embla,

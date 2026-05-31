@@ -1,4 +1,4 @@
-// Forge mock data — Brazilian fintech context
+// Eidos mock data — Brazilian fintech context
 const SERVICES = [
   { id: 'identity-svc', name: 'identity-svc', tier: 'T1', lang: 'TypeScript', owner: 'Identity', tribe: 'Identity', deploys: '2m ago', alert: false, coverage: 87.4, p95: 142, sast: 0, version: '4.18.2', deps: ['bureau-gateway','consent-vault','session-store'] },
   { id: 'pix-router', name: 'pix-router', tier: 'T1', lang: 'Go', owner: 'Pix', tribe: 'Pix', deploys: '14m ago', alert: true, coverage: 78.2, p95: 89, sast: 0, version: '2.7.0', deps: ['ledger-svc','bureau-gateway'] },
@@ -93,7 +93,7 @@ const ADRS = [
   { id: 'ADR-004', title: 'gRPC for internal RPC, REST at the edge', status: 'Superseded', date: '2024-08-19', author: 'Camila Tanaka' },
   { id: 'ADR-005', title: 'Quality gates enforced at PR-time, not deploy-time', status: 'Accepted', date: '2025-01-08', author: 'Leonardo Mariga' },
   { id: 'ADR-006', title: 'Async-first inter-tribe communication', status: 'Accepted', date: '2025-04-30', author: 'Diego Vasquez' },
-  { id: 'ADR-007', title: 'Forge as the single system of record for delivery', status: 'Proposed', date: '2026-04-21', author: 'Leonardo Mariga' },
+  { id: 'ADR-007', title: 'Eidos as the single system of record for delivery', status: 'Proposed', date: '2026-04-21', author: 'Leonardo Mariga' },
 ];
 
 const RUNBOOKS = [
@@ -108,7 +108,7 @@ const RUNBOOKS = [
 
 const TEMPLATES = [
   { id: 'nestjs-microservice', name: 'nestjs-microservice', desc: 'NestJS · gRPC + REST · OTLP · pre-wired quality gates', lang: 'TypeScript', usage: 142 },
-  { id: 'nextjs-app', name: 'nextjs-app', desc: 'Next.js 15 · App Router · Tailwind · Forge auth shim', lang: 'TypeScript', usage: 84 },
+  { id: 'nextjs-app', name: 'nextjs-app', desc: 'Next.js 15 · App Router · Tailwind · Eidos auth shim', lang: 'TypeScript', usage: 84 },
   { id: 'go-grpc-svc', name: 'go-grpc-svc', desc: 'Go · gRPC · sqlc + pgx · canary-ready Helm chart', lang: 'Go', usage: 96 },
   { id: 'data-pipeline', name: 'data-pipeline', desc: 'Python · Dagster · ClickHouse sink · cost guardrails', lang: 'Python', usage: 38 },
   { id: 'ml-model-svc', name: 'ml-model-svc', desc: 'Python · FastAPI · model registry · drift alarms', lang: 'Python', usage: 27 },

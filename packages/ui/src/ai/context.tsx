@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge AI — Context window indicator.
+// Eidos AI — Context window indicator.
 //
 // "Context" in an AI surface means TWO things, and the user should be able
 // to read both at a glance:

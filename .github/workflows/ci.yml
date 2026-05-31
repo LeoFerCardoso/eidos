@@ -1,8 +1,8 @@
-name: forge-ds CI
+name: eidos-ds CI
 
 # Eidos DS monorepo — continuous integration. Keeps the design system honest on
 # every push: the @eidos/ui library typechecks + builds, the registry builds and
-# validates, the forge-ui CLI E2E passes, Storybook builds, and the docs app builds
+# validates, the eidos CLI E2E passes, Storybook builds, and the docs app builds
 # + renders headless.
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
       - run: npm run ui:build
 
   registry-cli:
-    name: "registry build + forge-ui CLI E2E"
+    name: "registry build + eidos CLI E2E"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -91,7 +91,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: forge-health
+          name: eidos-health
           path: |
             reports/state.json
             EIDOS-HEALTH.md

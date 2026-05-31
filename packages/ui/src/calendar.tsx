@@ -253,7 +253,7 @@ function isCellDisabled(d: Date, disabled?: (d: Date) => boolean, minDate?: Date
 // ─── Calendar — unified month-grid picker ────────────────────────────────────
 
 /**
- * Forge Calendar — unified single/range month-grid picker.
+ * Eidos Calendar — unified single/range month-grid picker.
  *
  * - `selectionMode="single"` (default): picks one date.
  * - `selectionMode="range"`: two-click range with hover-preview band.

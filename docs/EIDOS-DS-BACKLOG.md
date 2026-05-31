@@ -62,4 +62,4 @@ Per user direction, do AFTER Lotes A–D land:
 1. **`...rest` destructuring at param level in `<script type="text/babel">` files.** Babel emits `const _excluded = [...]` at script-top scope, which becomes global. A second script doing the same collides with `SyntaxError: Identifier '_excluded' has already been declared`. Pass explicit props instead.
 2. **Mock data shape consistency.** All mock arrays live at `window.MOCKS.*` — never read from bare `window.SERVICES`/`window.PEOPLE`.
 3. **CountUp vs static number.** `CountUp` expects `to=`, not `value=`. For grids of 4+ KPIs prefer plain `toLocaleString()` to avoid load-time animation noise.
-4. **Browser cache.** Every JSX/JS change requires bumping `FORGE_VERSION` and `?v=` query in all HTMLs. The asset-cache step is non-negotiable.
+4. **Browser cache.** Every JSX/JS change requires bumping `EIDOS_VERSION` and `?v=` query in all HTMLs. The asset-cache step is non-negotiable.

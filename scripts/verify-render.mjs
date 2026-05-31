@@ -42,7 +42,7 @@ const chrome = spawn(CHROME, [
   '--disable-gpu',
   '--no-first-run',
   '--no-default-browser-check',
-  '--user-data-dir=/tmp/forge-chrome-verify',
+  '--user-data-dir=/tmp/eidos-chrome-verify',
   'about:blank',
 ]);
 
@@ -108,10 +108,10 @@ async function main() {
     const shell = document.querySelector('.ds-sidenav, .ds-app');
     const links = document.querySelectorAll('.ds-sidenav a, .ds-link').length;
     // Example screens render full-screen OUTSIDE the docs shell, composing the
-    // Forge example shells (.fp-* IDP rail/grid/card, or the AI .ai-shell).
+    // Eidos example shells (.fp-* IDP rail/grid/card, or the AI .ai-shell).
     const example = document.querySelector('.fp-rail, [class*="fp-"], .ai-shell, [class*="fshell"], #example-root, .f-shell');
     const txt = (document.body.innerText || '');
-    const splash = txt.includes('Loading Forge');
+    const splash = txt.includes('Loading Eidos');
     // Intentional placeholder pages (mobile components queued for a dedicated build).
     const scaffold = /to be designed|to be built|Scaffolded —/i.test(txt);
     const crumbs = (document.querySelector('.crumbs')||{}).innerText || null;

@@ -58,7 +58,7 @@ export default function Surfaces() {
               color:'var(--fg-muted)', lineHeight: 1.6,
             }}>
               <div className="t-mono-label" style={{padding:0, marginBottom: 6}}>--bg-elevated (inset · 4px)</div>
-              forge deploy --canary=10
+              eidos deploy --canary=10
             </pre>
             <div style={{marginTop: 10, padding:'8px 12px', background:'var(--surface-hover)', borderRadius: 'var(--radius-sm)', fontSize: 'var(--text-base)', color:'var(--fg-muted)', lineHeight: 1.5}}>
               <span className="t-mono-label" style={{padding:0, marginInlineEnd: 8}}>--surface-hover</span>
@@ -148,10 +148,10 @@ export default function Surfaces() {
       </Frame>
 
       <SubHead meta="syntax">Code block</SubHead>
-      <Frame label=".code-block" code={`forge deploy identity-svc --canary=10`}>
+      <Frame label=".code-block" code={`eidos deploy identity-svc --canary=10`}>
         <pre className="code-block" style={{width:'100%', margin: 0}}>
           <span className="c"># deploy identity-svc with a 10% canary</span>{'\n'}
-          <span className="k">forge</span> <span className="f">deploy</span> identity-svc <span className="n">--canary</span>=<span className="s">10</span>{'\n'}
+          <span className="k">eidos</span> <span className="f">deploy</span> identity-svc <span className="n">--canary</span>=<span className="s">10</span>{'\n'}
           <span className="c">→ canary: 10% traffic for 5min, then promote</span>
         </pre>
       </Frame>

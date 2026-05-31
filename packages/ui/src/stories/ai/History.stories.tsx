@@ -232,7 +232,7 @@ export const MobileDrawer: Story = {
           <button className="ai-hist-icon-btn" title="Open history" onClick={() => setOpen(true)}>
             <Icons.menu size={14} />
           </button>
-          <span style={{ fontWeight: 600, fontSize: 'var(--text-base)', color: 'var(--fg)' }}>Forge AI</span>
+          <span style={{ fontWeight: 600, fontSize: 'var(--text-base)', color: 'var(--fg)' }}>Eidos AI</span>
           <span style={{ flex: 1 }} />
           <button className="ai-hist-icon-btn" title="More">
             <Icons.more size={14} />

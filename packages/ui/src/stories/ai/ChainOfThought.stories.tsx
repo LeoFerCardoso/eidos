@@ -28,7 +28,7 @@ const KIND_STEPS = [
 // Streaming source — steps append one-by-one in the interactive story.
 const STREAM_STEPS = [
   { kind: 'think',   label: "What's driving the p99 spike?",          detail: 'Spike began 14:07 UTC — correlate with deploy window.' },
-  { kind: 'search',  label: 'Search deploy log · since=24h · tier=T1', detail: 'forge.deploys' },
+  { kind: 'search',  label: 'Search deploy log · since=24h · tier=T1', detail: 'eidos.deploys' },
   { kind: 'observe', label: '4 T1 deploys — identity-svc is newest',   detail: 'Committed 14:02 · +15 files changed' },
   { kind: 'plan',    label: 'Diff identity-svc @ 0421',                detail: 'pool-size 8→32 and retry-budget 3→8 in same commit' },
   { kind: 'done',    label: 'Revert pool-size; keep retry-budget',      detail: "pool-size is the only change on the spike's code path" },
@@ -137,7 +137,7 @@ export const InContext: Story = {
   render: () => (
     <div style={{ maxWidth: 580, display: 'flex', flexDirection: 'column', gap: 10 }}>
       <ChainOfThought title="Chain of thought" defaultOpen={false} steps={IN_CTX_STEPS} />
-      <Response meta="Forge AI · just now">
+      <Response meta="Eidos AI · just now">
         <p>
           The <code>identity-svc</code> deploy at 14:02 is the only one in the spike window. The
           pool-size change (8 → 32) is the sole diff on the p99 code path — recommend reverting it.
@@ -157,7 +157,7 @@ export const RTL: Story = {
         defaultOpen
         steps={[
           { kind: 'think',   label: 'ما سبب ارتفاع p99 على identity-svc؟', detail: 'مقارنة النشر بنافذة الارتفاع' },
-          { kind: 'search',  label: 'البحث في سجل النشر', detail: 'forge.deploys · since=24h' },
+          { kind: 'search',  label: 'البحث في سجل النشر', detail: 'eidos.deploys · since=24h' },
           { kind: 'observe', label: 'تم العثور على 4 عمليات نشر — identity-svc هو الأحدث' },
           { kind: 'plan',    label: 'فحص تغيير pool-size فقط' },
           { kind: 'done',    label: 'التوصية بالتراجع عن pool-size' },

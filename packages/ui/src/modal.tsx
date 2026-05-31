@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { cn } from './lib/utils';
 import { Icons } from './icons';
-// Forge DS — Modal.
+// Eidos DS — Modal.
 //
 // A centered overlay panel for self-contained flows the user can back out of:
 // quick edits, share dialogs, attachments, media previews, announcements.

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-// Forge DS — Drawer.
+// Eidos DS — Drawer.
 //
 // Two layouts, one component:
 //

@@ -14,8 +14,8 @@ const meta = {
     docs: {
       description: {
         component:
-          'Forge icon primitives — Lucide-style 24×24 stroke glyphs shared across ' +
-          'every Forge DS surface (core, charts, AI, IDP, DevOps). Each key in the ' +
+          'Eidos icon primitives — Lucide-style 24×24 stroke glyphs shared across ' +
+          'every Eidos DS surface (core, charts, AI, IDP, DevOps). Each key in the ' +
           '`Icons` map is a React component accepting `size` (default 16), `color` ' +
           '(default `currentColor`), and `strokeWidth` (default 1.5). Use the ' +
           'semantic groupings — Navigation, Editing, DevOps, Agent / AI — to pick ' +
@@ -120,7 +120,7 @@ function IconGrid({
 
 /**
  * Default — the core navigation and UI glyphs at 20px with default stroke.
- * These appear in sidebars, breadcrumbs, and tab bars across all Forge surfaces.
+ * These appear in sidebars, breadcrumbs, and tab bars across all Eidos surfaces.
  */
 export const Default: Story = {
   render: () => <IconGrid keys={NAV_ICONS} />,
@@ -168,7 +168,7 @@ export const Sizes: Story = {
 };
 
 /**
- * Variants — stroke weight and color modes that cover the three Forge
+ * Variants — stroke weight and color modes that cover the three Eidos
  * contexts: default UI (1.5), editorial/thin (1.0), and accent-highlighted
  * (ember). All icons share the same prop surface.
  */

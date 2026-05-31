@@ -6,12 +6,12 @@ import type { CitationSource } from '@eidos/ui';
 // ── Fixtures ──────────────────────────────────────────────────────────────────
 
 const SOURCES: CitationSource[] = [
-  { id: 1, domain: 'docs.forgeplatform.io', title: 'Pix Router — Ring deployment model', url: 'https://docs.forgeplatform.io/pix-router/rings', snippet: 'The ring deployment model gates each release through a sequence of traffic slices (Ring 0–4) with automatic rollback on SLO breach.', fetched: '14:01 · 18s ago' },
+  { id: 1, domain: 'docs.eidosplatform.io', title: 'Pix Router — Ring deployment model', url: 'https://docs.eidosplatform.io/pix-router/rings', snippet: 'The ring deployment model gates each release through a sequence of traffic slices (Ring 0–4) with automatic rollback on SLO breach.', fetched: '14:01 · 18s ago' },
   { id: 2, domain: 'github.com', title: 'PR #7421 · idempotency keys for retries', url: 'https://github.com/org/pix-router/pull/7421', snippet: 'Adds idempotency keys to all outbound Pix calls to prevent duplicate transactions on retry. Risk score: 34 / low.', fetched: '14:01 · 20s ago' },
   { id: 3, domain: 'confluence.internal', title: 'ADR-006 — async-first inter-tribe communication', url: 'https://confluence.internal/adr/006', snippet: 'All inter-tribe calls MUST be async (event-bus) unless the use case is user-facing and latency-sensitive.', fetched: '14:02 · 1m ago' },
   { id: 4, domain: 'grafana.internal', title: 'bureau-gateway p95 latency dashboard', url: 'https://grafana.internal/d/bureau-gw', snippet: 'p95 latency: 218 ms. SLO threshold: 250 ms. Current health: green.', fetched: '14:02 · 1m ago' },
-  { id: 5, domain: 'runbooks.forgeplatform.io', title: 'Bureau Gateway · Provider failover', url: 'https://runbooks.forgeplatform.io/bureau-failover', snippet: 'Execute the failover by toggling the `BUREAU_PROVIDER` feature flag to the secondary endpoint.', fetched: '14:03 · 2m ago' },
-  { id: 6, domain: 'docs.forgeplatform.io', title: 'Fraud Engine — null user_agent handling', url: 'https://docs.forgeplatform.io/fraud-engine/known-issues', snippet: 'When user_agent is null the scoring pipeline raises a NullPointerException. Fixed in v3.4.7.', fetched: '14:03 · 2m ago' },
+  { id: 5, domain: 'runbooks.eidosplatform.io', title: 'Bureau Gateway · Provider failover', url: 'https://runbooks.eidosplatform.io/bureau-failover', snippet: 'Execute the failover by toggling the `BUREAU_PROVIDER` feature flag to the secondary endpoint.', fetched: '14:03 · 2m ago' },
+  { id: 6, domain: 'docs.eidosplatform.io', title: 'Fraud Engine — null user_agent handling', url: 'https://docs.eidosplatform.io/fraud-engine/known-issues', snippet: 'When user_agent is null the scoring pipeline raises a NullPointerException. Fixed in v3.4.7.', fetched: '14:03 · 2m ago' },
 ];
 
 // ── Meta ─────────────────────────────────────────────────────────────────────
@@ -222,7 +222,7 @@ export const ResponseWithCitations: Story = {
           <div className="ai-resp assistant" role="article" aria-roledescription="assistant response">
             <div className="ai-resp-stack">
               <div className="ai-resp-meta" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--fg-muted)' }}>
-                Forge AI · Sonnet 4.6 · just now
+                Eidos AI · Sonnet 4.6 · just now
               </div>
               <div className="ai-prose">
                 <h3>What caused the pix-router p95 spike?</h3>

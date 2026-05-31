@@ -4,10 +4,10 @@
 >
 > Arquivos canônicos relacionados:
 > - `CLAUDE.md` — regras de autoria curtas (versão TL;DR deste documento)
-> - `forge-design-system/assets/js/core/nav-config.js` — single source of truth da navegação
-> - `forge-design-system/assets/css/tokens.css` — todos os tokens CSS
-> - `forge-design-system/assets/css/ds.css` — sistema de classes (componentes)
-> - `forge-design-system/assets/js/core/{atoms,primitives,blocks,icons,charts,shell}.jsx` — React core
+> - `eidos-design-system/assets/js/core/nav-config.js` — single source of truth da navegação
+> - `eidos-design-system/assets/css/tokens.css` — todos os tokens CSS
+> - `eidos-design-system/assets/css/ds.css` — sistema de classes (componentes)
+> - `eidos-design-system/assets/js/core/{atoms,primitives,blocks,icons,charts,shell}.jsx` — React core
 > - `BACKLOG.md` — itens em aberto
 
 ---
@@ -15,8 +15,8 @@
 ## 1. Como a estrutura do projeto funciona
 
 ### 1.1 Entry point
-- `forge-design-system/design-system.html` — página "Introduction" (raiz)
-- Todas as outras páginas vivem em `forge-design-system/pages/<group>/<slug>.html`
+- `eidos-design-system/design-system.html` — página "Introduction" (raiz)
+- Todas as outras páginas vivem em `eidos-design-system/pages/<group>/<slug>.html`
 
 ### 1.2 Padrão de cada página HTML
 Toda página é uma casca fina que:
@@ -75,7 +75,7 @@ Cada `<script type="text/babel">` tem seu próprio escopo. Compartilhar componen
 
 ### 1.6 Versionamento
 - Versão atual: **v1.7.12** (visível na sidebar como sub-text e no badge ember do topbar)
-- `window.FORGE_VERSION` em `nav-config.js` controla o cache busting (`?v=...` nas páginas)
+- `window.EIDOS_VERSION` em `nav-config.js` controla o cache busting (`?v=...` nas páginas)
 - **Sempre bump em dois lugares ao mesmo tempo:** sidebar sub-text + topbar badge
 
 ---
@@ -470,9 +470,9 @@ Specialized blocks (consulte cada componente)
   .pi (Prompt Input) .pi-head .pi-foot .pi-submit
   .conv .conv-head .conv-body .conv-jump (Conversation)
   .hero-grid .ember-glow-bg (Hero patterns)
-  .forge-chart .fc-head .fc-head-text .fc-title .fc-subtitle .fc-meta .fc-body
-  .forge-tooltip .ft-label .ft-rows .ft-row .ft-dot .ft-name .ft-value
-  .forge-legend .legend-dot .legend-label
+  .eidos-chart .fc-head .fc-head-text .fc-title .fc-subtitle .fc-meta .fc-body
+  .eidos-tooltip .ft-label .ft-rows .ft-row .ft-dot .ft-name .ft-value
+  .eidos-legend .legend-dot .legend-label
 ```
 
 > Padrão geral: cada componente "mid-level" tem seu próprio bloco em `ds.css` com prefixo curto.
@@ -544,17 +544,17 @@ Todos exportados em `window` para uso em `<script type="text/babel">` separados.
 | `FilterPanel({ groups, onClear, query, onQueryChange, placeholder })` | Sidebar de facets agrupados. |
 | `DataTable({ columns, rows, onRowClick, rowKey, empty, sort, onSort, sticky, dense, footer })` | Tabela dense pronta. |
 
-### 4.4 `charts.jsx` — wrapper Recharts (Forge tokens)
+### 4.4 `charts.jsx` — wrapper Recharts (Eidos tokens)
 | Export | Notas |
 |---|---|
-| `ForgeChart({ title, subtitle, meta, height, padding, accent, children })` | Card surface + ResponsiveContainer. Children = nó Recharts. |
-| `ForgeTooltipContent` | Replace de `<Tooltip content>` com chrome Eidos. |
+| `EidosChart({ title, subtitle, meta, height, padding, accent, children })` | Card surface + ResponsiveContainer. Children = nó Recharts. |
+| `EidosTooltipContent` | Replace de `<Tooltip content>` com chrome Eidos. |
 | `ChartLegend({ items })` | Legenda horizontal manual. |
 | `useChartColors()` | Retorna `var(--viz-cat-1..12)` (memo). |
 | `fmtCompact(n)` | Formato curto (k/M/B). |
 | `fmtNumber(n, unit)` | Locale + unit. |
-| `forgeChartTick` / `forgePolarTick` | Default tick styles (mono 12px, --fg-muted). |
-| `forgeGridProps` / `forgeXAxisProps` / `forgeYAxisProps` | Spread props para CartesianGrid/XAxis/YAxis. |
+| `eidosChartTick` / `eidosPolarTick` | Default tick styles (mono 12px, --fg-muted). |
+| `eidosGridProps` / `eidosXAxisProps` / `eidosYAxisProps` | Spread props para CartesianGrid/XAxis/YAxis. |
 
 ### 4.5 `shell.jsx`
 | Export | Notas |
@@ -711,7 +711,7 @@ Todos exportados em `window` para uso em `<script type="text/babel">` separados.
 
 ### 5.10 Charts (12)
 
-> Todos wrapped em `<ForgeChart>` com `useChartColors()` retornando `var(--viz-cat-N)`.
+> Todos wrapped em `<EidosChart>` com `useChartColors()` retornando `var(--viz-cat-N)`.
 
 - **chart-overview** — Decision matrix entre chart types. SVG previews.
 - **chart-line** — `LineChart` / `Line` / `ReferenceLine`. Single + multi (p50/p95/p99) + dashed forecast.
@@ -724,7 +724,7 @@ Todos exportados em `window` para uso em `<script type="text/babel">` separados.
 - **chart-gauge** — SVG puro (`arcPath()`). Semi (180°), three-q (270°), full ring stat-card.
 - **chart-heatmap** — SVG grid + CSS Grid + popover. GitHub-style calendar (53w×7d), service×month matrix, compact sparkline-sized.
 - **chart-histogram** — `BarChart` com `barCategoryGap={0}` + ReferenceLine + Cell. Latency/payload/PR-review distributions.
-- **chart-sankey** — `Sankey` com custom `ForgeNode` + `ForgeLink`. Traffic flow, CI/CD commit→merge, dense flow + legenda.
+- **chart-sankey** — `Sankey` com custom `EidosNode` + `EidosLink`. Traffic flow, CI/CD commit→merge, dense flow + legenda.
 
 ### 5.11 Elements (7)
 
@@ -842,7 +842,7 @@ Antes de criar uma nova classe ou componente:
 
 ## 8. Mocks disponíveis (`mocks.js`)
 
-`window.MOCKS` expõe dados de exemplo reutilizáveis (LANGS, services, agents, persons, time series, etc.) — consulte `forge-design-system/assets/js/core/mocks.js` antes de inventar dados de mock. Usar uma struct de mock real é o que separa screenshots de catalog tiles vazios.
+`window.MOCKS` expõe dados de exemplo reutilizáveis (LANGS, services, agents, persons, time series, etc.) — consulte `eidos-design-system/assets/js/core/mocks.js` antes de inventar dados de mock. Usar uma struct de mock real é o que separa screenshots de catalog tiles vazios.
 
 ---
 
@@ -854,7 +854,7 @@ Antes de criar uma nova classe ou componente:
 4. **Criar JSX** `assets/js/pages/<group>/<slug>.jsx` com IIFE e `window.PAGES['<slug>'] = MyPage`. Começar com `<Section id="..." title="..." desc="...">`.
 5. **Conteúdo mínimo**: cada variante numa SubHead + Frame; Anatomy; Decision matrix; Do/Don't grid; RTL exemplo.
 6. **Verificar parse**: rodar Babel standalone 7.29.0 no arquivo (mesmo do browser).
-7. **Bump cache version** se necessário (`scripts/bump-version.sh` ou edição manual de `FORGE_VERSION` no `nav-config.js` E `<aside class="brand">` sub-text).
+7. **Bump cache version** se necessário (`scripts/bump-version.sh` ou edição manual de `EIDOS_VERSION` no `nav-config.js` E `<aside class="brand">` sub-text).
 
 ---
 
@@ -879,7 +879,7 @@ Recharts (charts pages apenas): `recharts@2.x` via UMD.
 ## 11. Onde estão as coisas — mapa rápido
 
 ```
-forge-design-system/
+eidos-design-system/
 ├── design-system.html                ← Overview (entry)
 ├── assets/
 │   ├── css/
@@ -892,12 +892,12 @@ forge-design-system/
 │   └── js/
 │       ├── core/
 │       │   ├── mocks.js              ← Dados de mock
-│       │   ├── nav-config.js         ← Single source of truth (navegação + FORGE_VERSION)
+│       │   ├── nav-config.js         ← Single source of truth (navegação + EIDOS_VERSION)
 │       │   ├── icons.jsx             ← Icons + ForgeMark
 │       │   ├── atoms.jsx             ← Sparkline, Counter, Avatar, Message, Empty, StatusDot, Trend, HealthBadge, SeverityPill, CopyChip, RelativeTime, OwnerPill, KbdRow
 │       │   ├── primitives.jsx        ← Section, SubHead, Frame, Code, CodeBlock, CodeTree, Tabs, TabbedCode, PropsTable, TokenSwatch, Pagination, ComponentInstall, installTabs
 │       │   ├── blocks.jsx            ← Banner, Pipeline, Timeline, RingBar, ScoreGauge, MetricCard, Stat, ServiceCard, AgentCard, LogViewer, DiffViewer, TreeView, JSONInspector, FilterPanel, DataTable
-│       │   ├── charts.jsx            ← ForgeChart, ForgeTooltipContent, ChartLegend
+│       │   ├── charts.jsx            ← EidosChart, EidosTooltipContent, ChartLegend
 │       │   ├── shell.jsx             ← DSShell, SideNav, Topbar, ThemeToggle, CommandPalette
 │       │   └── boot.jsx              ← Mounting (sempre por último na página)
 │       ├── pages/
@@ -912,7 +912,7 @@ forge-design-system/
 │       └── examples/                 ← 21 standalone product screens
 ├── pages/                            ← HTML shells correspondentes (espelha a árvore de assets/js/pages/)
 └── scripts/
-    └── bump-version.sh               ← Bump FORGE_VERSION em todos os ?v= e na sidebar
+    └── bump-version.sh               ← Bump EIDOS_VERSION em todos os ?v= e na sidebar
 ```
 
 ---

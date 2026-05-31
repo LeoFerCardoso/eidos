@@ -37,7 +37,7 @@ for a high-standard harness; **P2** = polish / scale.
 | Root `CLAUDE.md` | ✅ | Good: covers app + harness + invariants. |
 | `EIDOS-DS-REFERENCE.md`, `llms.txt` | ✅ | DS catalog for authoring. |
 | `harness/skills/` (76) | ⚠️ content-only | Open Design `od:` schema; not Claude Code skills; wrong location. |
-| `harness/design-systems/` (140) | ⚠️ | Brand library; only `forge/` is canonical for us. |
+| `harness/design-systems/` (140) | ⚠️ | Brand library; only `eidos/` is canonical for us. |
 | `harness/craft/` (8) | ✅ content | Brand-agnostic rulebooks; valuable, not wired. |
 | `harness/agents/*.yaml` (2) | ⚠️ wrong format | OD "interface" YAML, not Claude Code subagents. |
 | `harness/{frames,prompt-templates}` | ✅ content | Asset libraries. |
@@ -162,7 +162,7 @@ None of these exist yet (the 76 OD skills are decks/posters/landing/social, not 
 
 ## 3. Signal-vs-noise in current content
 
-- **140 design systems**: only `forge/` is canonical for an IDP. Keep the library
+- **140 design systems**: only `eidos/` is canonical for an IDP. Keep the library
   (useful for the `design-system` axis when prototyping), but mark `forge` as default and
   don't let the picker imply 140 equal choices.
 - **76 skills**: ~50 are decks/posters/social/video/avatars/PPT — irrelevant to a

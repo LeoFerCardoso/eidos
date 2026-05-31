@@ -45,7 +45,7 @@ export const DualMode: Story = {
   },
 };
 
-/** A full palette of Forge semantic tokens. */
+/** A full palette of Eidos semantic tokens. */
 export const AllCoreTokens: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>

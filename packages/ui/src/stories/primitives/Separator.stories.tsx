@@ -61,7 +61,7 @@ export const Vertical: Story = {
     <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: 14, border: '1px solid var(--border)', borderRadius: 'var(--radius-xl)', background: 'var(--surface)', width: 'fit-content' }}>
       <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--fg-faint)' }}>Workspace</div>
-        <div style={{ fontSize: 'var(--text-md)', fontWeight: 600, marginTop: 2 }}>Forge Cloud</div>
+        <div style={{ fontSize: 'var(--text-md)', fontWeight: 600, marginTop: 2 }}>Eidos Cloud</div>
       </div>
       <Separator {...args} />
       <div>
@@ -112,7 +112,7 @@ export const AllVariants: Story = {
       <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--fg-faint)', marginBottom: 12 }}>Vertical · solid</div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '8px 0' }}>
-          <span style={{ color: 'var(--fg-muted)', fontSize: 'var(--text-base)' }}>Forge Cloud</span>
+          <span style={{ color: 'var(--fg-muted)', fontSize: 'var(--text-base)' }}>Eidos Cloud</span>
           <Separator orientation="vertical" decorative />
           <span style={{ color: 'var(--fg-muted)', fontSize: 'var(--text-base)' }}>us-east-1</span>
         </div>
@@ -143,7 +143,7 @@ export const InContext: Story = {
   render: () => (
     <div style={{ width: 360, border: '1px solid var(--border)', borderRadius: 'var(--radius-xl)', overflow: 'hidden', background: 'var(--bg)' }}>
       <div style={{ padding: '16px 20px' }}>
-        <div style={{ fontWeight: 600, fontSize: 'var(--text-md)', marginBottom: 4 }}>Forge Cloud</div>
+        <div style={{ fontWeight: 600, fontSize: 'var(--text-md)', marginBottom: 4 }}>Eidos Cloud</div>
         <div style={{ fontSize: 'var(--text-base)', color: 'var(--fg-muted)' }}>Manage your workspace settings</div>
       </div>
       <Separator orientation="horizontal" />

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ForgeChart, ForgeTooltipContent, Recharts } from '@eidos/ui';
+import { EidosChart, EidosTooltipContent, Recharts } from '@eidos/ui';
 
-// Local series fixture — ForgeChart is a container; the chart type is
-// determined by the Recharts child you pass in, not a prop on ForgeChart.
+// Local series fixture — EidosChart is a container; the chart type is
+// determined by the Recharts child you pass in, not a prop on EidosChart.
 const MONTHLY = [
   { month: 'Jan', requests: 38200, errors: 420 },
   { month: 'Feb', requests: 41500, errors: 310 },
@@ -21,8 +21,8 @@ const TICK_STYLE = {
 };
 
 const meta = {
-  title: 'Charts/ForgeChart',
-  component: ForgeChart,
+  title: 'Charts/EidosChart',
+  component: EidosChart,
   tags: ['autodocs'],
   parameters: {
     layout: 'padded',
@@ -30,7 +30,7 @@ const meta = {
       description: {
         component:
           'A card-style container that wraps any Recharts composition in a ' +
-          'Forge-themed surface with an optional title, subtitle, and meta slot. ' +
+          'Eidos-themed surface with an optional title, subtitle, and meta slot. ' +
           'It sets up <ResponsiveContainer> internally; pass a single Recharts chart ' +
           'element as `children`.',
       },
@@ -50,7 +50,7 @@ const meta = {
     subtitle: { control: 'text' },
     meta: { control: 'text' },
   },
-} satisfies Meta<typeof ForgeChart>;
+} satisfies Meta<typeof EidosChart>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -58,15 +58,15 @@ type Story = StoryObj<typeof meta>;
 /** Default — a simple line chart of monthly API requests. */
 export const Default: Story = {
   render: (args) => (
-    <ForgeChart {...args}>
+    <EidosChart {...args}>
       <Recharts.LineChart data={MONTHLY}>
         <Recharts.CartesianGrid stroke="var(--viz-grid)" vertical={false} />
         <Recharts.XAxis dataKey="month" tick={TICK_STYLE} tickLine={false} axisLine={{ stroke: 'var(--viz-axis)' }} />
         <Recharts.YAxis tick={TICK_STYLE} tickLine={false} axisLine={false} />
-        <Recharts.Tooltip content={<ForgeTooltipContent/>}/>
+        <Recharts.Tooltip content={<EidosTooltipContent/>}/>
         <Recharts.Line type="monotone" dataKey="requests" stroke="var(--viz-cat-1)" strokeWidth={2} dot={false} />
       </Recharts.LineChart>
-    </ForgeChart>
+    </EidosChart>
   ),
 };
 
@@ -74,7 +74,7 @@ export const Default: Story = {
 export const AreaChart: Story = {
   args: { title: 'Request volume', subtitle: 'Area fill', meta: 'last 6 months' },
   render: (args) => (
-    <ForgeChart {...args}>
+    <EidosChart {...args}>
       <Recharts.AreaChart data={MONTHLY}>
         <defs>
           <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
@@ -85,10 +85,10 @@ export const AreaChart: Story = {
         <Recharts.CartesianGrid stroke="var(--viz-grid)" vertical={false} />
         <Recharts.XAxis dataKey="month" tick={TICK_STYLE} tickLine={false} axisLine={{ stroke: 'var(--viz-axis)' }} />
         <Recharts.YAxis tick={TICK_STYLE} tickLine={false} axisLine={false} />
-        <Recharts.Tooltip content={<ForgeTooltipContent/>}/>
+        <Recharts.Tooltip content={<EidosTooltipContent/>}/>
         <Recharts.Area type="monotone" dataKey="requests" stroke="var(--viz-cat-1)" strokeWidth={2} fill="url(#areaFill)" dot={false} />
       </Recharts.AreaChart>
-    </ForgeChart>
+    </EidosChart>
   ),
 };
 
@@ -96,16 +96,16 @@ export const AreaChart: Story = {
 export const BarChart: Story = {
   args: { title: 'Requests vs Errors', subtitle: 'Grouped bars', meta: 'last 6 months' },
   render: (args) => (
-    <ForgeChart {...args}>
+    <EidosChart {...args}>
       <Recharts.BarChart data={MONTHLY} barSize={14} barGap={4}>
         <Recharts.CartesianGrid stroke="var(--viz-grid)" vertical={false} />
         <Recharts.XAxis dataKey="month" tick={TICK_STYLE} tickLine={false} axisLine={{ stroke: 'var(--viz-axis)' }} />
         <Recharts.YAxis tick={TICK_STYLE} tickLine={false} axisLine={false} />
-        <Recharts.Tooltip content={<ForgeTooltipContent/>}/>
+        <Recharts.Tooltip content={<EidosTooltipContent/>}/>
         <Recharts.Bar dataKey="requests" fill="var(--viz-cat-1)" radius={[3, 3, 0, 0]} />
         <Recharts.Bar dataKey="errors" fill="var(--viz-cat-5)" radius={[3, 3, 0, 0]} />
       </Recharts.BarChart>
-    </ForgeChart>
+    </EidosChart>
   ),
 };
 
@@ -113,15 +113,15 @@ export const BarChart: Story = {
 export const WithAccent: Story = {
   args: { title: 'Deploy frequency', accent: 'var(--accent)', meta: '↑ 12%' },
   render: (args) => (
-    <ForgeChart {...args}>
+    <EidosChart {...args}>
       <Recharts.LineChart data={MONTHLY}>
         <Recharts.CartesianGrid stroke="var(--viz-grid)" vertical={false} />
         <Recharts.XAxis dataKey="month" tick={TICK_STYLE} tickLine={false} axisLine={{ stroke: 'var(--viz-axis)' }} />
         <Recharts.YAxis tick={TICK_STYLE} tickLine={false} axisLine={false} />
-        <Recharts.Tooltip content={<ForgeTooltipContent/>}/>
+        <Recharts.Tooltip content={<EidosTooltipContent/>}/>
         <Recharts.Line type="monotone" dataKey="requests" stroke="var(--chart-accent, var(--viz-cat-1))" strokeWidth={2} dot={false} />
       </Recharts.LineChart>
-    </ForgeChart>
+    </EidosChart>
   ),
 };
 
@@ -129,14 +129,14 @@ export const WithAccent: Story = {
 export const NoHeader: Story = {
   args: { title: undefined, subtitle: undefined, meta: undefined, height: 200 },
   render: (args) => (
-    <ForgeChart {...args}>
+    <EidosChart {...args}>
       <Recharts.LineChart data={MONTHLY}>
         <Recharts.CartesianGrid stroke="var(--viz-grid)" vertical={false} />
         <Recharts.XAxis dataKey="month" tick={TICK_STYLE} tickLine={false} axisLine={{ stroke: 'var(--viz-axis)' }} />
         <Recharts.YAxis tick={TICK_STYLE} tickLine={false} axisLine={false} />
         <Recharts.Line type="monotone" dataKey="requests" stroke="var(--viz-cat-1)" strokeWidth={2} dot={false} />
       </Recharts.LineChart>
-    </ForgeChart>
+    </EidosChart>
   ),
 };
 
@@ -145,25 +145,25 @@ export const InContext: Story = {
   parameters: { layout: 'padded' },
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-      <ForgeChart title="API Requests" subtitle="Line" meta="6 mo" height={220}>
+      <EidosChart title="API Requests" subtitle="Line" meta="6 mo" height={220}>
         <Recharts.LineChart data={MONTHLY}>
           <Recharts.CartesianGrid stroke="var(--viz-grid)" vertical={false} />
           <Recharts.XAxis dataKey="month" tick={TICK_STYLE} tickLine={false} axisLine={{ stroke: 'var(--viz-axis)' }} />
           <Recharts.YAxis tick={TICK_STYLE} tickLine={false} axisLine={false} />
-          <Recharts.Tooltip content={<ForgeTooltipContent/>}/>
+          <Recharts.Tooltip content={<EidosTooltipContent/>}/>
           <Recharts.Line type="monotone" dataKey="requests" stroke="var(--viz-cat-1)" strokeWidth={2} dot={false} />
         </Recharts.LineChart>
-      </ForgeChart>
+      </EidosChart>
 
-      <ForgeChart title="Error count" subtitle="Bar" meta="6 mo" height={220}>
+      <EidosChart title="Error count" subtitle="Bar" meta="6 mo" height={220}>
         <Recharts.BarChart data={MONTHLY} barSize={18}>
           <Recharts.CartesianGrid stroke="var(--viz-grid)" vertical={false} />
           <Recharts.XAxis dataKey="month" tick={TICK_STYLE} tickLine={false} axisLine={{ stroke: 'var(--viz-axis)' }} />
           <Recharts.YAxis tick={TICK_STYLE} tickLine={false} axisLine={false} />
-          <Recharts.Tooltip content={<ForgeTooltipContent/>}/>
+          <Recharts.Tooltip content={<EidosTooltipContent/>}/>
           <Recharts.Bar dataKey="errors" fill="var(--viz-cat-5)" radius={[3, 3, 0, 0]} />
         </Recharts.BarChart>
-      </ForgeChart>
+      </EidosChart>
     </div>
   ),
 };

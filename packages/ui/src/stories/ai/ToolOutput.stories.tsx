@@ -10,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The result section of a tool-call block. Accepts any Forge primitives as children — ' +
+          'The result section of a tool-call block. Accepts any Eidos primitives as children — ' +
           'prose, Code, Table, or an error card. Switch label to "Error" when state is output-error.',
       },
     },

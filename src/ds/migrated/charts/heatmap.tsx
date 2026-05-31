@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, ForgeChart, Lede, Mono } from '@/ds/core';
+import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, EidosChart, Lede, Mono } from '@/ds/core';
 
 
   // 5 discrete intensity steps — matches the GitHub contribution model.
@@ -30,7 +30,7 @@ import { Icons, Frame, Section, SubHead, TabbedCode, PropsTable, installTabs, Fo
   );
 
   // Service × month matrix — 5 services × 12 months of errors.
-  const SERVICES = ['forge-api', 'fraud-engine', 'kyc', 'auth', 'ledger'];
+  const SERVICES = ['eidos-api', 'fraud-engine', 'kyc', 'auth', 'ledger'];
   const MONTHS   = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const MATRIX   = SERVICES.map((_, r) => MONTHS.map((_, c) => Math.abs(Math.sin(r * 1.3 + c * 0.7))));
   const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -233,7 +233,7 @@ export default function Page() {
 
       <SubHead meta="hello world">Usage</SubHead>
       <Frame label="GitHub-style activity calendar · 53 weeks × 7 days · hover any cell" code={USAGE}>
-        <ForgeChart title="Contribution calendar" subtitle="forge org" meta="1y" height={210} padding={12}>
+        <EidosChart title="Contribution calendar" subtitle="eidos org" meta="1y" height={210} padding={12}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'flex-start', width: '100%' }}>
             <div style={{ overflowX: 'auto', width: '100%' }}>
               <CalendarHeatmap data={CAL}/>
@@ -243,24 +243,24 @@ export default function Page() {
               <Legend/>
             </div>
           </div>
-        </ForgeChart>
+        </EidosChart>
       </Frame>
       <Lede>Hover <em>or</em> <Mono>Tab</Mono> to a cell to surface the day of week, week index, intensity bucket, and exact value — like the AI Label popover, but for data instead of provenance. <Mono>Esc</Mono> dismisses it.</Lede>
 
       <SubHead meta="2 variants">Variants</SubHead>
       <Frame label="matrix · service × month error rate · hover for full context">
-        <ForgeChart title="Errors by service · monthly" subtitle="fleet" meta="last year" height={280} padding={14}>
+        <EidosChart title="Errors by service · monthly" subtitle="fleet" meta="last year" height={280} padding={14}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
             <MatrixHeatmap rows={SERVICES} cols={MONTHS} data={MATRIX} caption="Monthly error rate by service"/>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}><Legend/></div>
           </div>
-        </ForgeChart>
+        </EidosChart>
       </Frame>
       <Lede>For matrices, prefer CSS Grid over SVG — labels align to the row/column without manual placement, and the cells flex to fill the container.</Lede>
 
       <Frame label="compact · sparkline-sized for inline use (hover or tab to a cell)">
         <div className="t-mono" style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 'var(--text-base)' }}>
-          <span style={{ color: 'var(--fg)', fontWeight: 500 }}>forge-api</span>
+          <span style={{ color: 'var(--fg)', fontWeight: 500 }}>eidos-api</span>
           <CalendarHeatmap data={CAL.slice(0, 12)} cellSize={10} gap={2}/>
           <span style={{ color: 'var(--fg-muted)', fontVariantNumeric: 'tabular-nums' }}>1,284</span>
         </div>
@@ -294,12 +294,12 @@ export default function Page() {
       <SubHead meta="RTL · العربية">RTL</SubHead>
       <Frame label='dir="rtl" — row and column labels flow right-to-left; cell intensity and the less→more legend do not mirror'>
         <div dir="rtl" style={{width: '100%'}}>
-          <ForgeChart title="أخطاء حسب الخدمة" subtitle="الأسطول" meta="السنة الماضية" height={240} padding={14}>
+          <EidosChart title="أخطاء حسب الخدمة" subtitle="الأسطول" meta="السنة الماضية" height={240} padding={14}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
               <MatrixHeatmap rows={SERVICES.slice(0, 3)} cols={MONTHS.slice(0, 6)} data={MATRIX.slice(0, 3).map(r => r.slice(0, 6))} cellH={24} caption="معدل الأخطاء حسب الخدمة"/>
               <div style={{ display: 'flex', justifyContent: 'flex-start' }}><Legend/></div>
             </div>
-          </ForgeChart>
+          </EidosChart>
         </div>
       </Frame>
       <Lede>Under <Mono>dir="rtl"</Mono> the row labels and column headings align to the right and read right-to-left. The intensity scale (less → more) and each cell's fill value are not affected — the sequential ramp has no inherent reading direction.</Lede>

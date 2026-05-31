@@ -1,7 +1,7 @@
 {
   "name": "@eidos/ui",
   "version": "0.1.0",
-  "description": "Forge Design System — framework-agnostic React components over a shared semantic CSS layer.",
+  "description": "Eidos Design System — framework-agnostic React components over a shared semantic CSS layer.",
   "license": "MIT",
   "type": "module",
   "sideEffects": [

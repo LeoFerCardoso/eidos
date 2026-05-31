@@ -57,7 +57,7 @@ export const AllTones: Story = {
               {tone === 'promo'   ? 'Upgrade for unlimited context and longer history.' :
                tone === 'info'   ? '18 services loaded · context window at 42 %.' :
                tone === 'warn'   ? 'Token budget at 80 % — response may be truncated.' :
-               tone === 'success'? 'Connected to Forge workspace · 3 integrations active.' :
+               tone === 'success'? 'Connected to Eidos workspace · 3 integrations active.' :
                                    'Rate limit reached — wait 60 s before sending.'}
             </PromptBanner>
           }

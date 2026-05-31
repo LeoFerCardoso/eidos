@@ -1,6 +1,6 @@
-// eidos — the Forge Design System CLI.
+// eidos — the Eidos Design System CLI.
 //
-// "Own the code, copied not imported": `init` installs the Forge base layer
+// "Own the code, copied not imported": `init` installs the Eidos base layer
 // (design tokens + ds.css + cn) once, then `add <component>` copies a component's
 // source into your repo, resolving its registry dependencies topologically.
 //
@@ -27,8 +27,8 @@ const note = (s) => console.log(`  ${C.dim(s)}`);
 
 const CONFIG_FILE = 'components.json';
 const DEFAULT_CONFIG = {
-  $schema: 'https://forge.equifax.dev/schema/components.json',
-  registry: 'https://forge.equifax.dev/r',
+  $schema: 'https://eidos.equifax.dev/schema/components.json',
+  registry: 'https://eidos.equifax.dev/r',
   aliases: { components: 'components', ui: 'components/forge', lib: 'lib', styles: 'styles' },
   rsc: false,
   tsx: true,
@@ -101,7 +101,7 @@ async function resolveGraph(registry, names) {
 function remapTarget(target, aliases) {
   // Targets are emitted as e.g. "components/forge/status-dot.tsx", "lib/utils.ts",
   // "styles/forge/tokens.css". Remap the leading segment via the alias map so a
-  // project can relocate where Forge files land.
+  // project can relocate where Eidos files land.
   const seg = target.split('/')[0];
   const rest = target.split('/').slice(1).join('/');
   if (seg === 'components' && aliases.components && aliases.components !== 'components') {
@@ -162,10 +162,10 @@ async function cmdInit(cwd, flags) {
   }
   installDeps(cwd, [...deps], { noInstall: !!flags['no-install'] });
   console.log();
-  ok(C.bold('Forge base installed.'));
+  ok(C.bold('Eidos base installed.'));
   note('Import the layer in your global stylesheet (order matters):');
-  note(`  @import "./${cfg.aliases.styles}/forge/tokens.css";`);
-  note(`  @import "./${cfg.aliases.styles}/forge/ds.css";`);
+  note(`  @import "./${cfg.aliases.styles}/eidos/tokens.css";`);
+  note(`  @import "./${cfg.aliases.styles}/eidos/ds.css";`);
   note(`Then: ${C.ember('eidos add <component>')}`);
 }
 
@@ -190,7 +190,7 @@ async function cmdAdd(cwd, names, flags) {
 async function cmdList(cwd, flags) {
   const cfg = loadConfig(cwd, flags);
   const items = await fetchIndex(cfg.registry);
-  console.log(C.bold('\nForge registry') + C.dim(`  (${cfg.registry})\n`));
+  console.log(C.bold('\nEidos registry') + C.dim(`  (${cfg.registry})\n`));
   for (const i of items) {
     const dep = (i.registryDependencies || []).filter((d) => d !== 'forge');
     console.log(`  ${C.ember(i.name.padEnd(20))} ${C.dim(i.type.replace('registry:', ''))}`);
@@ -220,13 +220,13 @@ async function cmdDiff(cwd, names, flags) {
 
 function help() {
   console.log(`
-${C.ember(C.bold('eidos'))} — the Forge Design System CLI
+${C.ember(C.bold('eidos'))} — the Eidos Design System CLI
 
 ${C.bold('Usage')}
   eidos <command> [components...] [options]
 
 ${C.bold('Commands')}
-  init                 Set up the project and install the Forge base layer
+  init                 Set up the project and install the Eidos base layer
   add <component...>   Copy component(s) into your repo (with their deps)
   list                 List components available in the registry
   diff <component...>  Compare installed files against the registry

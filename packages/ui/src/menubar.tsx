@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { cn } from './lib/utils';
 
-// Forge DS — Menubar
+// Eidos DS — Menubar
 //
 // Horizontal application menu bar (File / Edit / View / Help…).
 // ARIA: role=menubar + role=menuitem triggers; role=menu panels with role=menuitem rows.

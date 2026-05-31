@@ -27,7 +27,7 @@ Authoritative conventions to obey (read them — do not guess):
 - packages/ui/src/stories/blocks/Banner.stories.tsx + atoms/StatusDot.stories.tsx — the CSF3 story template (satisfies Meta, tags:['autodocs'], Default + variants/sizes/states + InContext).
 - scripts/extract-registry.mjs (FAMILIES map) → scripts/build-registry-manifest.mjs → packages/registry/scripts/build-registry.mjs — the 3-step install/registry pipeline.
 
-FORGE INVARIANTS (never violate): single ember accent #FF6B35 (≤2×/screen); dark-ink foreground on ember fills (contrast is non-negotiable); Geist Sans + Geist Mono; compose existing classes (NEVER per-page <style> — extend tokens.css/ds.css); logical CSS props (RTL first-class); the component layer is framework-agnostic React over a SEMANTIC CSS layer (no Tailwind utilities, no Radix in components).
+EIDOS INVARIANTS (never violate): single ember accent #FF6B35 (≤2×/screen); dark-ink foreground on ember fills (contrast is non-negotiable); Geist Sans + Geist Mono; compose existing classes (NEVER per-page <style> — extend tokens.css/ds.css); logical CSS props (RTL first-class); the component layer is framework-agnostic React over a SEMANTIC CSS layer (no Tailwind utilities, no Radix in components).
 
 Storybook taxonomy (atomic-clean): Primitives · Forms · Atoms · Blocks · Charts · Overlays · Device · AI · Icons · Docs. Story title must use the correct group.
 

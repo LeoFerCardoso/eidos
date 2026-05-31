@@ -41,7 +41,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Default bar — forge-sonnet-4-6 session, 32k of 128k tokens consumed (ok tone). */
+/** Default bar — eidos-sonnet-4-6 session, 32k of 128k tokens consumed (ok tone). */
 export const Default: Story = {};
 
 /** With attached files — token count plus a file badge in the label row. */
@@ -90,7 +90,7 @@ export const InPromptInput: Story = {
         value=""
         onChange={() => {}}
         onSubmit={() => {}}
-        modelValue="forge-sonnet-4-6"
+        modelValue="eidos-sonnet-4-6"
         onModelChange={() => {}}
         contextSlot={<ContextBar used={82000} total={200000} files={3} />}
         placeholder="Describe the incident or paste a log trace…"

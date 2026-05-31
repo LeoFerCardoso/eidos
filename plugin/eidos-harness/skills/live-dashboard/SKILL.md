@@ -26,8 +26,8 @@ is no separate CLI or daemon.
 
 1. `dashboard` SKILL — layout, metric/chart/table composition, the 3-file
    ritual, and the accent/state rules. Don't repeat that work here.
-2. `../../EIDOS-DS-REFERENCE.md` + `../../llms.txt` — metric, chart
-   (`window.ForgeChart`), table, status-dot, badge components.
+2. `../../EIDOS-DS-REFERENCE.md` + `../../llms.txt` — metric, chart (Eidos chart
+   primitives from `@/ds/core`), table, status-dot, badge components.
 3. `../../design-systems/forge/DESIGN.md` and
    `../../craft/{anti-ai-slop,state-coverage,animation-discipline,color,typography}.md`.
 4. `src/lib/` — the app's data layer; route handlers / server actions are where
@@ -45,9 +45,9 @@ is no separate CLI or daemon.
 3. **KPI grid.** Numbers `font-variant-numeric: tabular-nums`, weight 600. Each
    KPI carries a muted delta line (`↑ 6 vs last week`). No accent on the
    numbers, no decorative progress bars under them — the delta is enough.
-4. **Trend card.** Hand the series to `window.ForgeChart` (or an inline SVG
-   sparkline) — a 2px stroke with a faint accent fill. No external chart libs
-   beyond what the DS already loads.
+4. **Trend card.** Hand the series to the Eidos chart primitives from `@/ds/core`
+   (or an inline SVG sparkline) — a 2px stroke with a faint accent fill. No
+   external chart libs beyond what the DS already loads.
 5. **Activity feed + table.** New rows prepend; on refresh, briefly highlight
    changed rows (respect `prefers-reduced-motion` — see
    `craft/animation-discipline.md`). Status pills use the DS status set.
@@ -79,10 +79,12 @@ is no separate CLI or daemon.
 
 ## Register the page
 
-Same 3-file ritual as `dashboard`: edit `src/ds/core/nav-config.js` → add the
-`src/ds/examples/<slug>.jsx` (registering `window.EXAMPLES['<slug>']`) or
-`src/ds/pages/<group>/<slug>.jsx` (registering `window.PAGES['<slug>']`) → run
-`npm run gen:manifest`.
+Same route ritual as `dashboard`: edit `src/ds/core/nav-config.js` → add the
+`src/ds/examples/<slug>.tsx` (`'use client'`, default export, nav leaf marked
+`external: true`) or `src/ds/migrated/<ds>/<slug>.tsx` (core pages
+`src/ds/migrated/<slug>.tsx`, default export, imports from `@/ds/core`) → run
+`node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs` (+
+`node scripts/gen-examples.mjs` for examples) → RESTART `next dev`.
 
 ## Hard rules
 

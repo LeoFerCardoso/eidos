@@ -1,4 +1,4 @@
-/* Make the Storybook canvas match the Forge app shell: tokenised background +
+/* Make the Storybook canvas match the Eidos app shell: tokenised background +
    the Geist type stack. tokens.css/ds.css own the real system; this only paints
    the preview iframe body (Storybook's own chrome is unaffected). */
 html,

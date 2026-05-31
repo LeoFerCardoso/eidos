@@ -104,7 +104,7 @@ export const Sizes: Story = {
 /** Commit-time validator — rejects malformed entries and caps the total. */
 export const WithValidation: Story = {
   render: () => {
-    const [emails, setEmails] = React.useState<string[]>(['lead@forge.io']);
+    const [emails, setEmails] = React.useState<string[]>(['lead@eidos.io']);
     return (
       <div style={{ maxWidth: 480 }}>
         <label
@@ -139,7 +139,7 @@ export const WithValidation: Story = {
  *  at rest (mirrors the doc page's commit-time validation rejection). */
 export const InvalidEntry: Story = {
   render: () => {
-    const [emails, setEmails] = React.useState<string[]>(['lead@forge.io']);
+    const [emails, setEmails] = React.useState<string[]>(['lead@eidos.io']);
     const wrapRef = React.useRef<HTMLDivElement>(null);
     // Drive a real commit of an invalid value so the component's internal error
     // state turns on — no props can seed `error` directly.

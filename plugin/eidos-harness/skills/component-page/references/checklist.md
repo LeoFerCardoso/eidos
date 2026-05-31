@@ -2,23 +2,28 @@
 
 ## P0 — blocks delivery
 - [ ] The 2 coordinated changes exist: entry in `src/ds/core/nav-config.js` + the
-      `src/ds/pages/<group>/<slug>.jsx` module; `npm run gen:manifest` was run.
-- [ ] The `.jsx` registers `window.PAGES['<slug>']` (without it the page does not mount).
-- [ ] `manifest.generated.ts` was NOT hand-edited (it's generated from nav-config).
+      `src/ds/migrated/<ds>/<slug>.tsx` module (default export, imports from `@/ds/core`);
+      `gen-nav` + `gen-migrated` ran (auto on `dev`/`build`) and `next dev` was restarted.
+- [ ] The module is auto-registered in `src/ds/migrated/registry.ts` (no `window.PAGES`, no `.jsx`).
 - [ ] Zero per-page `<style>`. Only existing classes or an extension of `tokens.css`/`ds.css`.
-- [ ] Page includes: Frame with live demo, Anatomy, Decision matrix, Do/Don't (with live UI), RTL example.
-- [ ] Ember accent appears at most 2× in the rendered screen.
+- [ ] **Typography**: section intros use `<Lede>`, inline code uses `<Mono>`, header/headings via
+      `<Section>`/`<SubHead>` — **no hand-rolled `font-size` for prose** (DS-PAGE-STANDARD §3.5).
+- [ ] Page includes, in order: Installation → Usage → Variants/Sizes/States → Accessibility →
+      **RTL** → visual Anatomy → Do/Don't (live UI) → API reference (`PropsTable`).
+- [ ] **RTL section present** — a live `dir="rtl"` Frame with Arabic copy + a `<Lede>` (§3.6). *Required.*
+- [ ] Each example is a `<Frame label code>` (preview + code).
+- [ ] Ember accent appears at most 2× in the rendered screen; dark ink on every ember fill.
 - [ ] No non-existent `Icons.x` (causes a black screen).
-- [ ] Anti-AI-slop P0 (see `${CLAUDE_PLUGIN_ROOT}/craft/anti-ai-slop.md`): no Tailwind indigo, no trust gradient, no emoji-icon, no invented metric, no lorem ipsum.
+- [ ] Anti-AI-slop P0 (`${CLAUDE_PLUGIN_ROOT}/craft/anti-ai-slop.md`): no Tailwind indigo, no trust gradient, no emoji-icon, no invented metric, no lorem ipsum.
 
 ## P1 — must pass
-- [ ] Logical properties everywhere; directional icons mirror in `[dir="rtl"]`.
-- [ ] Spacing rhythm: caption after Frame `marginTop:14`; lede after SubHead `marginTop:-6`; consecutive Frames `18px`.
+- [ ] Logical properties everywhere; directional icons mirror in RTL via `transform: scaleX(-1)`.
+- [ ] Spacing rhythm comes from `<Lede>` (`up` after a SubHead) — don't reintroduce inline margins.
 - [ ] No duplicated focus ring (inner inputs with `box-shadow:none !important`).
 - [ ] Dropdowns/popovers not clipped by the `.ds-frame`'s `overflow:hidden`.
-- [ ] `npm run build` compiles and `npm run verify -- /<slug>` mounts the route.
+- [ ] `npm run verify` mounts the route with no page errors; bumped `DS_VERSION` in `src/lib/site.ts` + changelog.
 
 ## P2 — polish
-- [ ] Decision matrix actually helps you choose (it's not a generic table).
+- [ ] Variant guidance actually helps you choose (it's not a generic table).
 - [ ] Do/Don't show the real mistake someone would make, not a strawman.
-- [ ] Caption explains the *why* of the variant, not just the *what*.
+- [ ] The `<Lede>` explains the *why* of the variant, not just the *what*.

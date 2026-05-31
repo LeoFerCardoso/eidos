@@ -218,7 +218,7 @@ export default function CardPage() {
     {/* <img> or <canvas> */}
   </CardMedia>
   <CardHeader>
-    <CardTitle>forge-api</CardTitle>
+    <CardTitle>eidos-api</CardTitle>
     <CardDescription>Edge-deployed REST gateway.</CardDescription>
   </CardHeader>
   <CardFooter>
@@ -246,7 +246,7 @@ export default function CardPage() {
             SERVICE
           </CardMedia>
           <CardHeader>
-            <CardTitle>forge-api</CardTitle>
+            <CardTitle>eidos-api</CardTitle>
             <CardDescription>Edge-deployed REST gateway. 4 regions. p50 latency 12ms.</CardDescription>
           </CardHeader>
           <CardFooter>
@@ -276,10 +276,10 @@ export default function CardPage() {
       </Lede>
       <Frame
         label="whole card is a link — one Tab stop"
-        code={`<a href="/services/forge-api" style={{ textDecoration: 'none' }}>
+        code={`<a href="/services/eidos-api" style={{ textDecoration: 'none' }}>
   <Card interactive>
     <CardHeader>
-      <CardTitle>forge-api</CardTitle>
+      <CardTitle>eidos-api</CardTitle>
       <CardDescription>REST gateway · 99.94% uptime</CardDescription>
     </CardHeader>
   </Card>
@@ -294,9 +294,9 @@ export default function CardPage() {
           }}
         >
           {[
-            { name: 'forge-api', desc: 'REST gateway · 99.94% uptime' },
-            { name: 'forge-jobs', desc: 'Background workers · 12 active' },
-            { name: 'forge-ledger', desc: 'Event store · 3.2M events/day' },
+            { name: 'eidos-api', desc: 'REST gateway · 99.94% uptime' },
+            { name: 'eidos-jobs', desc: 'Background workers · 12 active' },
+            { name: 'eidos-ledger', desc: 'Event store · 3.2M events/day' },
           ].map((s) => (
             <a
               key={s.name}
@@ -323,7 +323,7 @@ export default function CardPage() {
   <CardHeader row>
     <div>
       <CardTitle>Recent deploys</CardTitle>
-      <CardDescription>Last 30 days · forge-api</CardDescription>
+      <CardDescription>Last 30 days · eidos-api</CardDescription>
     </div>
     <Button size="xs">View all</Button>
   </CardHeader>
@@ -334,7 +334,7 @@ export default function CardPage() {
           <CardHeader row>
             <div>
               <CardTitle>Recent deploys</CardTitle>
-              <CardDescription>Last 30 days · forge-api</CardDescription>
+              <CardDescription>Last 30 days · eidos-api</CardDescription>
             </div>
             <button className="btn xs">View all</button>
           </CardHeader>
@@ -420,7 +420,7 @@ export default function CardPage() {
             <CardHeader row>
               <div>
                 <CardTitle>Recent deploys</CardTitle>
-                <CardDescription>forge-api · last 30 days</CardDescription>
+                <CardDescription>eidos-api · last 30 days</CardDescription>
               </div>
               <button className="btn xs outline">View all</button>
             </CardHeader>
@@ -530,7 +530,7 @@ export default function CardPage() {
     <CardHeader row>
       <div>
         <CardTitle>عمليات النشر الأخيرة</CardTitle>
-        <CardDescription>آخر ٣٠ يومًا · forge-api</CardDescription>
+        <CardDescription>آخر ٣٠ يومًا · eidos-api</CardDescription>
       </div>
       <Button size="xs">عرض الكل</Button>
     </CardHeader>
@@ -547,7 +547,7 @@ export default function CardPage() {
             <CardHeader row>
               <div>
                 <CardTitle>عمليات النشر الأخيرة</CardTitle>
-                <CardDescription>آخر ٣٠ يومًا · forge-api</CardDescription>
+                <CardDescription>آخر ٣٠ يومًا · eidos-api</CardDescription>
               </div>
               <button className="btn xs">عرض الكل</button>
             </CardHeader>
@@ -729,7 +729,7 @@ export default function CardPage() {
           <div className="body" style={{ padding: 14 }}>
             <Card style={{ width: '100%', maxWidth: 320 }}>
               <CardHeader>
-                <CardTitle>forge-api</CardTitle>
+                <CardTitle>eidos-api</CardTitle>
                 <CardDescription>REST gateway</CardDescription>
               </CardHeader>
               <CardContent style={{ paddingTop: 4, fontSize: 'var(--text-base)', color: 'var(--fg-muted)' }}>
@@ -748,7 +748,7 @@ export default function CardPage() {
           <div className="body" style={{ padding: 14 }}>
             <Card style={{ width: '100%', maxWidth: 320 }}>
               <CardHeader>
-                <CardTitle>forge-api</CardTitle>
+                <CardTitle>eidos-api</CardTitle>
               </CardHeader>
               <CardContent style={{ paddingTop: 4 }}>
                 <div
@@ -778,7 +778,7 @@ export default function CardPage() {
             <a href="#" onClick={(e) => e.preventDefault()} style={{ textDecoration: 'none' }}>
               <Card interactive style={{ width: '100%', maxWidth: 320 }}>
                 <CardHeader>
-                  <CardTitle>forge-ledger</CardTitle>
+                  <CardTitle>eidos-ledger</CardTitle>
                   <CardDescription>Event store · 3.2M events/day</CardDescription>
                 </CardHeader>
               </Card>
@@ -795,7 +795,7 @@ export default function CardPage() {
           <div className="body" style={{ padding: 14, flexDirection: 'column', alignItems: 'stretch', gap: 8 }}>
             <Card interactive style={{ width: '100%', maxWidth: 320, cursor: 'pointer' }}>
               <CardHeader>
-                <CardTitle>forge-ledger</CardTitle>
+                <CardTitle>eidos-ledger</CardTitle>
                 <CardDescription>Event store</CardDescription>
               </CardHeader>
               <CardFooter actions>

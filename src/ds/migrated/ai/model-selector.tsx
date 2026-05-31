@@ -12,16 +12,16 @@ const captn = { fontSize: 'var(--text-body)', color: 'var(--fg-muted)', marginTo
 
 // DEFAULT_MODELS — mirroring core/ai/prompt.tsx
 const DEFAULT_MODELS = [
-  { id: 'forge-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: '$3 / 1M' },
-  { id: 'forge-opus-4-7',   short: 'O', name: 'Opus 4.7',   cost: '$15 / 1M' },
-  { id: 'forge-haiku-4-5',  short: 'H', name: 'Haiku 4.5',  cost: '$1 / 1M' },
+  { id: 'eidos-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: '$3 / 1M' },
+  { id: 'eidos-opus-4-7',   short: 'O', name: 'Opus 4.7',   cost: '$15 / 1M' },
+  { id: 'eidos-haiku-4-5',  short: 'H', name: 'Haiku 4.5',  cost: '$1 / 1M' },
 ];
 
 // Custom model set with descriptive subtitles
 const CUSTOM_MODELS = [
   { id: 'anthropic/claude-sonnet-4-5', short: 'S', name: 'Claude Sonnet 4.5', cost: 'Fast · $3 / 1M' },
   { id: 'openai/gpt-5',                short: 'G', name: 'GPT-5',             cost: 'OpenAI · $15 / 1M' },
-  { id: 'forge-ai/sonnet-4-6',         short: 'F', name: 'Eidos Sonnet 4.6',  cost: 'Hosted · $3 / 1M' },
+  { id: 'eidos-ai/sonnet-4-6',         short: 'F', name: 'Eidos Sonnet 4.6',  cost: 'Hosted · $3 / 1M' },
   { id: 'anthropic/claude-haiku-4-5',  short: 'H', name: 'Claude Haiku 4.5', cost: 'Light · $1 / 1M' },
   { id: 'openai/gpt-4o-mini',          short: 'M', name: 'GPT-4o mini',      cost: 'Budget · $0.15 / 1M' },
 ];
@@ -30,7 +30,7 @@ const CUSTOM_MODELS = [
 
 // Usage demo — controlled selector, DEFAULT_MODELS
 const UsageDemo = () => {
-  const [value, setValue] = React.useState('forge-sonnet-4-6');
+  const [value, setValue] = React.useState('eidos-sonnet-4-6');
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'flex-start' }}>
       <ModelSelector value={value} onChange={setValue} models={DEFAULT_MODELS}/>
@@ -51,13 +51,13 @@ const CustomModelsDemo = () => {
 
 // Single-model fallback — the degenerate case (one model, nothing to pick)
 const SingleModelDemo = () => {
-  const [value, setValue] = React.useState('forge-sonnet-4-6');
+  const [value, setValue] = React.useState('eidos-sonnet-4-6');
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'flex-start' }}>
       <ModelSelector
         value={value}
         onChange={setValue}
-        models={[{ id: 'forge-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: 'Only model · $3 / 1M' }]}
+        models={[{ id: 'eidos-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: 'Only model · $3 / 1M' }]}
       />
       <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', fontVariantNumeric: 'tabular-nums' }}>
         Opens a one-row list — the active row is the only option.
@@ -68,7 +68,7 @@ const SingleModelDemo = () => {
 
 // Inside PromptInput — the canonical placement
 const InsidePromptDemo = () => {
-  const [model, setModel] = React.useState('forge-sonnet-4-6');
+  const [model, setModel] = React.useState('eidos-sonnet-4-6');
   const [text, setText] = React.useState('');
   return (
     <div style={{ width: '100%', maxWidth: 520 }}>
@@ -87,7 +87,7 @@ const InsidePromptDemo = () => {
 
 // Header context — model indicator in a conversation header bar
 const HeaderContextDemo = () => {
-  const [model, setModel] = React.useState('forge-opus-4-7');
+  const [model, setModel] = React.useState('eidos-opus-4-7');
   return (
     <div style={{ width: '100%', maxWidth: 520 }}>
       <div className="surface" style={{ padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 12, borderRadius: 'var(--radius-lg)' }}>
@@ -109,7 +109,7 @@ const INSTALL_CODE = installTabs('ai-model-selector');
 const USAGE_CODE = `import { ModelSelector } from "@/ds/core";
 
 function Demo() {
-  const [value, setValue] = React.useState("forge-sonnet-4-6");
+  const [value, setValue] = React.useState("eidos-sonnet-4-6");
   return (
     <ModelSelector
       value={value}
@@ -121,7 +121,7 @@ function Demo() {
 const CUSTOM_CODE = `const MODELS = [
   { id: "anthropic/claude-sonnet-4-5", short: "S", name: "Claude Sonnet 4.5", cost: "Fast · $3 / 1M" },
   { id: "openai/gpt-5",                short: "G", name: "GPT-5",             cost: "OpenAI · $15 / 1M" },
-  { id: "forge-ai/sonnet-4-6",         short: "F", name: "Eidos Sonnet 4.6",  cost: "Hosted · $3 / 1M" },
+  { id: "eidos-ai/sonnet-4-6",         short: "F", name: "Eidos Sonnet 4.6",  cost: "Hosted · $3 / 1M" },
   { id: "anthropic/claude-haiku-4-5",  short: "H", name: "Claude Haiku 4.5", cost: "Light · $1 / 1M" },
   { id: "openai/gpt-4o-mini",          short: "M", name: "GPT-4o mini",      cost: "Budget · $0.15 / 1M" },
 ];
@@ -131,10 +131,10 @@ const CUSTOM_CODE = `const MODELS = [
 const SINGLE_CODE = `// One model? The trigger still renders and stays interactive —
 // it opens a single-row list so the affordance is consistent.
 <ModelSelector
-  value="forge-sonnet-4-6"
+  value="eidos-sonnet-4-6"
   onChange={setValue}
   models={[
-    { id: "forge-sonnet-4-6", short: "S", name: "Sonnet 4.6", cost: "Only model · $3 / 1M" },
+    { id: "eidos-sonnet-4-6", short: "S", name: "Sonnet 4.6", cost: "Only model · $3 / 1M" },
   ]}
 />`;
 
@@ -248,12 +248,12 @@ export default function AiModelSelectorPage() {
       <SubHead meta="RTL · العربية">RTL</SubHead>
       <Frame label="dir=&quot;rtl&quot; — trigger reads from the start (right) edge; popup anchors inline-start" row>
         <div dir="rtl" style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'flex-start', width: '100%', maxWidth: 520 }}>
-          <ModelSelector value="forge-sonnet-4-6" onChange={() => {}} models={DEFAULT_MODELS}/>
+          <ModelSelector value="eidos-sonnet-4-6" onChange={() => {}} models={DEFAULT_MODELS}/>
           <div style={{ width: '100%' }}>
             <PromptInput
               status="ready"
               placeholder="اسأل أي شيء…"
-              modelValue="forge-sonnet-4-6"
+              modelValue="eidos-sonnet-4-6"
               onModelChange={() => {}}
             />
           </div>
@@ -321,12 +321,12 @@ export default function AiModelSelectorPage() {
           <div className="head"><Icons.check size={12}/> Do — label what differs between models</div>
           <div className="body" style={{ padding: 14 }}>
             <ModelSelector
-              value="forge-sonnet-4-6"
+              value="eidos-sonnet-4-6"
               onChange={() => {}}
               models={[
-                { id: 'forge-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: 'Fast · $3 / 1M' },
-                { id: 'forge-opus-4-7',   short: 'O', name: 'Opus 4.7',   cost: 'Deep · $15 / 1M' },
-                { id: 'forge-haiku-4-5',  short: 'H', name: 'Haiku 4.5',  cost: 'Light · $1 / 1M' },
+                { id: 'eidos-sonnet-4-6', short: 'S', name: 'Sonnet 4.6', cost: 'Fast · $3 / 1M' },
+                { id: 'eidos-opus-4-7',   short: 'O', name: 'Opus 4.7',   cost: 'Deep · $15 / 1M' },
+                { id: 'eidos-haiku-4-5',  short: 'H', name: 'Haiku 4.5',  cost: 'Light · $1 / 1M' },
               ]}
             />
           </div>
@@ -355,7 +355,7 @@ export default function AiModelSelectorPage() {
               <PromptInput
                 status="ready"
                 placeholder="Ask anything…"
-                modelValue="forge-sonnet-4-6"
+                modelValue="eidos-sonnet-4-6"
                 onModelChange={() => {}}
               />
             </div>

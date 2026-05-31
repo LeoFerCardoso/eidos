@@ -32,7 +32,7 @@ export function Demo() {
       >
         <div className="mdl-field">
           <label className="mdl-label" htmlFor="svc-name">Service name</label>
-          <input id="svc-name" defaultValue="forge-api" />
+          <input id="svc-name" defaultValue="eidos-api" />
         </div>
       </Modal>
     </>
@@ -72,7 +72,7 @@ const RTL_CODE = `<div dir="rtl">
   <Modal
     open={open}
     onOpenChange={setOpen}
-    title="مشاركة forge-api"
+    title="مشاركة eidos-api"
     footer={…}
   >
     …
@@ -85,7 +85,7 @@ const StaticPanel = () => (
   <div className="mdl-static" aria-hidden="true">
     <div className="mdl-header">
       <div className="mdl-titles">
-        <h2 className="mdl-title">Share forge-api</h2>
+        <h2 className="mdl-title">Share eidos-api</h2>
         <p className="mdl-desc">Anyone with the link can view the service overview and recent deploys.</p>
       </div>
       <button className="mdl-close" type="button" tabIndex={-1} aria-hidden="true">
@@ -96,7 +96,7 @@ const StaticPanel = () => (
       <div className="mdl-field">
         <span className="mdl-label">Link</span>
         <div style={{ display: 'flex', gap: 8 }}>
-          <input readOnly value="https://forge.acme.io/s/identity-svc" />
+          <input readOnly value="https://eidos.acme.io/s/identity-svc" />
           <button className="btn ghost sm" tabIndex={-1} type="button">
             <Icons.copy size={12} /> Copy
           </button>
@@ -158,7 +158,7 @@ export default function Page() {
         >
           <div className="mdl-field">
             <label className="mdl-label" htmlFor="mdl-rename">Service name</label>
-            <input id="mdl-rename" defaultValue="forge-api" />
+            <input id="mdl-rename" defaultValue="eidos-api" />
           </div>
         </Modal>
       </Frame>
@@ -177,7 +177,7 @@ export default function Page() {
   open={open}
   onOpenChange={setOpen}
   size="md"
-  title="Share forge-api"
+  title="Share eidos-api"
   desc="Anyone with the link can view the overview."
   footer={…}
 >
@@ -192,7 +192,7 @@ export default function Page() {
         <Modal
           open={openShare}
           onOpenChange={setOpenShare}
-          title="Share forge-api"
+          title="Share eidos-api"
           desc="Anyone with the link can view the service overview and recent deploys."
           footer={
             <div className="mdl-footer split" style={{ padding: 0, background: 'transparent', border: 'none', width: '100%' }}>
@@ -418,7 +418,7 @@ export default function Page() {
         <Modal
           open={openRtl}
           onOpenChange={setOpenRtl}
-          title="مشاركة forge-api"
+          title="مشاركة eidos-api"
           desc="يمكن لأي شخص لديه الرابط عرض الخدمة وعمليات النشر الأخيرة."
           footer={
             <>
@@ -524,10 +524,10 @@ export default function Page() {
         <div className="dd-card do">
           <div className="head"><Icons.check size={12} /> Do — name the noun in the title</div>
           <div className="body mdl-mini-stack">
-            <div className="mdl-mini-title">Share <span style={{ color: 'var(--ember)' }}>forge-api</span></div>
+            <div className="mdl-mini-title">Share <span style={{ color: 'var(--ember)' }}>eidos-api</span></div>
             <div className="mdl-mini-title">Rename <span style={{ color: 'var(--ember)' }}>v4.18.2</span></div>
           </div>
-          <div className="note">"Share forge-api" is locatable; "Share" is not. The user should know what they're acting on without reading the body.</div>
+          <div className="note">"Share eidos-api" is locatable; "Share" is not. The user should know what they're acting on without reading the body.</div>
         </div>
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12} /> Don&apos;t — bury the form behind a modal-on-modal</div>

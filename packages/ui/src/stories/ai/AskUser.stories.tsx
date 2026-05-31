@@ -35,7 +35,7 @@ const ONBOARDING_QUESTIONS: AskQuestion[] = [
   },
   {
     id: 'goals',
-    title: 'What do you want Forge to help with most?',
+    title: 'What do you want Eidos to help with most?',
     header: 'Goals',
     multiSelect: true,
     options: [

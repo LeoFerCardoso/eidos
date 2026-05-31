@@ -42,7 +42,7 @@ export const Default: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: 320 }}>
       <Label htmlFor="demo-email" {...args} />
       <div className="in-group">
-        <input id="demo-email" className="in-control" placeholder="you@forge.com" />
+        <input id="demo-email" className="in-control" placeholder="you@eidos.com" />
       </div>
     </div>
   ),
@@ -162,7 +162,7 @@ export const RTL: Story = {
       <div className="in-field">
         <Label htmlFor="rtl-email" required>البريد الإلكتروني</Label>
         <div className="in-group">
-          <input id="rtl-email" className="in-control" placeholder="you@forge.com" />
+          <input id="rtl-email" className="in-control" placeholder="you@eidos.com" />
         </div>
         <p className="in-help">يستخدم لتسجيل الدخول.</p>
       </div>

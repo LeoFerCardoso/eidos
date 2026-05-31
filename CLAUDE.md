@@ -8,8 +8,8 @@ is about.
 
 A Eidos component is **Done** iff `npm run eidos:verify -- --component <slug> --strict`
 exits 0 — the green gate beats any opinion; reviewers and builders never self-certify. The
-single machine-readable definition of "Done" is **`packages/registry/forge.contract.json`**
-(+ `forge.contract.schema.json`), spanning a component's **four surfaces**: the docs page
+single machine-readable definition of "Done" is **`packages/registry/eidos.contract.json`**
+(+ `eidos.contract.schema.json`), spanning a component's **four surfaces**: the docs page
 (`src/ds/migrated/**`), the `@eidos/ui` export (`packages/ui/src`), the Storybook story
 (`packages/ui/src/stories`), and the registry item (`packages/registry` → `eidos add`).
 Each clause maps to a deterministic verifier in `scripts/` (the existing `check-*`/`gen-*`

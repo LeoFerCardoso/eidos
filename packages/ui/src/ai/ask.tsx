@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge AI — AskUser. A faithful, tuned re-implementation of the
+// Eidos AI — AskUser. A faithful, tuned re-implementation of the
 // fluidfunctionalism.com/docs/ask-user-questions pattern, with the
 // mechanics the original docs leave open:
 //

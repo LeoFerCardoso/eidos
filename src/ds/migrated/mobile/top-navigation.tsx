@@ -54,7 +54,7 @@ function Logo() {
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
       <Icons.flame size={15} color="var(--accent)" />
-      <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, letterSpacing: '0.07em', fontSize: 14 }}>FORGE</span>
+      <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, letterSpacing: '0.07em', fontSize: 14 }}>EIDOS</span>
     </span>
   );
 }
@@ -223,7 +223,7 @@ const RN_TITLE_TEXT = `<TopNavigation
 
 const RN_TITLE_LOGO = `<TopNavigation
   titleType="logo"            // renders <Logo /> in the title area
-  logo={<ForgeWordmark />}
+  logo={<EidosWordmark />}
   leading={[{ icon: ChevronLeft, label: 'Back' }]}
   trailing={[{ icon: Star, label: 'Favourite' }, { icon: Close, label: 'Close', required: true }]}
 />`;
@@ -310,7 +310,7 @@ const RN_IN_CONTEXT = `<Screen>
 // A short activity list rendered under the bar so the component reads as a real screen.
 const FEED: [string, string, string][] = [
   ['Deploy succeeded', 'api-gateway · production', '2m'],
-  ['Review requested', 'forge-ds #214', '18m'],
+  ['Review requested', 'eidos-ds #214', '18m'],
   ['Incident resolved', 'checkout latency', '1h'],
 ];
 

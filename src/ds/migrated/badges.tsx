@@ -125,7 +125,7 @@ export default function Badges() {
 
       <SubHead meta="versioning">Version tag</SubHead>
       <Frame label="lives next to a service name · mono, tabular semver" row>
-        <span style={{...marker, fontFamily:'var(--font-mono)'}}>forge-api <Badge>v2.1.7</Badge></span>
+        <span style={{...marker, fontFamily:'var(--font-mono)'}}>eidos-api <Badge>v2.1.7</Badge></span>
         <span style={{...marker, fontFamily:'var(--font-mono)'}}>pix-router <Badge tone="warning">v1.0.0-rc.4</Badge></span>
         <span style={{...marker, fontFamily:'var(--font-mono)'}}>fraud-engine <Badge tone="danger">v0.9.2</Badge></span>
       </Frame>

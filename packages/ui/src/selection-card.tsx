@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Icons } from './icons';
 
-// Forge DS — Selection Cards
+// Eidos DS — Selection Cards
 //
 // CheckboxCard and RadioCard/RadioCardGroup: clickable card surfaces that
 // wrap native checkbox / radio inputs. The ENTIRE card is the selection

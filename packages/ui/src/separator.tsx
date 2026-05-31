@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cn } from './lib/utils';
 
-// Forge DS — Separator
+// Eidos DS — Separator
 //
 // A 1-px hairline divider. Supports horizontal and vertical orientation,
 // solid and dashed variants, and decorative vs semantic usage.

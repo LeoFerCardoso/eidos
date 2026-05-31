@@ -21,12 +21,12 @@ GROUND TRUTH (verify against disk — packages/ui/src/index.ts barrel, packages/
   forms: Input, Textarea, Select, Checkbox, Switch, RadioGroup, Slider, NumberInput, OTPInput, FileInput, DatePicker
   combobox: Combobox ; color-input: ColorInput, ColorPicker ; drawer: Drawer ; device: DeviceFrame, StatusBar, PhoneTop
   primitives: CopyButton, Code, CodeBlock, CodeTree, Tabs, TabbedCode, CollapsibleCode, Frame, PropsTable, SubHead, Lede, Mono, TokenSwatch, SpecRow, installTabs, Pagination, SimplePagination
-  charts: ForgeChart, ForgeTooltipContent, ChartLegend (+helpers)
+  charts: EidosChart, EidosTooltipContent, ChartLegend (+helpers)
   ai: many (ToolStatus, ChainOfThought, Checkpoint, Confirmation, ArtifactWidget, AskUser, Shimmer, Skeleton, ImageView, Diagram, MathView, ContextGauge, ContextBar, History*, AILabel, AILabelWithPopover, AgentAvatar, AgentIdentity, Message, MessageActions, Response, Conversation, PromptInput, Suggestion, ModelBadge, ModelSelector, Terminal, AudioPlayer, Persona, Citation/Sources, ...)
 - Existing Storybook stories (co-located packages/ui/src/stories/<family>/<Comp>.stories.tsx). Families with stories: atoms, blocks, forms, overlays, charts, primitives, docs, ai. (e.g. forms/{Calendar,RangeCalendar,Select,Combobox,DatePicker,RadioGroup,Input,Textarea,Switch,Checkbox,Slider,NumberInput,OTPInput,FileInput,ColorInput}, atoms/{CountUp,Counter,StatusDot,Trend,HealthBadge,LangBadge,SeverityPill,TierBadge,OwnerPill,CopyChip,RelativeTime,Avatar,Sparkline,KbdRow,Empty}, primitives/{Tabs,Pagination,...}).
 - Registry: ~125 installable items in packages/registry/registry.generated.json (one per real export). docs-only patterns are NOT in the registry.
 
-FORGE INVARIANTS to keep in mind while proposing APIs: single ember accent #FF6B35 (≤2×/screen), dark ink on ember fills (contrast non-negotiable), Geist Sans+Mono, compose existing CSS classes (NEVER per-page <style>; promote shared CSS to packages/ui/styles/tokens.css), logical CSS props (RTL first-class), framework-agnostic React over a semantic CSS layer (no Tailwind utilities, no Radix in the component layer).
+EIDOS INVARIANTS to keep in mind while proposing APIs: single ember accent #FF6B35 (≤2×/screen), dark ink on ember fills (contrast non-negotiable), Geist Sans+Mono, compose existing CSS classes (NEVER per-page <style>; promote shared CSS to packages/ui/styles/tokens.css), logical CSS props (RTL first-class), framework-agnostic React over a semantic CSS layer (no Tailwind utilities, no Radix in the component layer).
 Authoritative refs: docs/DS-PAGE-STANDARD.md, src/ds/migrated/buttons.tsx (gold page), src/ds/migrated/pills.tsx (the "Pills & Chips" reference the user cites for a COMPLETE badge), .claude/craft/anti-ai-slop.md.
 `
 

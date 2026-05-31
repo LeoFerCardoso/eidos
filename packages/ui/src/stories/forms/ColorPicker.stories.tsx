@@ -67,7 +67,7 @@ type Story = StoryObj<typeof meta>;
 
 /**
  * Minimal inline picker. The ember accent (`#FF6B35`) is the default value —
- * matching the Forge brand token. Drag the SV square or the hue bar to
+ * matching the Eidos brand token. Drag the SV square or the hue bar to
  * explore; the hex and RGB fields update in real time.
  */
 export const Default: Story = {

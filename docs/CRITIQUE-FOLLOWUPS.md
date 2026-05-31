@@ -15,10 +15,10 @@
 
 ## Estrutural — Lote 6 (programa próprio, não trivial)
 - [ ] **Promover Mobile/Charts/Patterns/block-examples a `@eidos/ui` + stories** — ~76 páginas doc-only (sem export/story). Via `promote-batch`. Decisão estratégica pendente (pode ser intencionalmente doc-only).
-- [ ] **`tree-view`** — docs+story já apontam para o `ForgeTree` real (`src/components/pierre-tree.tsx`, wrapper @pierre/trees). **Waivers `C-export` e `C-registry-sync` expiram 2026-08-31** — antes disso: re-exportar `ForgeTree` do barrel `@eidos/ui` + criar o registry source, e rodar `npm run gen:contract`. (Senão renovar/decidir.)
+- [ ] **`tree-view`** — docs+story já apontam para o `EidosTree` real (`src/components/pierre-tree.tsx`, wrapper @pierre/trees). **Waivers `C-export` e `C-registry-sync` expiram 2026-08-31** — antes disso: re-exportar `EidosTree` do barrel `@eidos/ui` + criar o registry source, e rodar `npm run gen:contract`. (Senão renovar/decidir.)
 
 ## Polish opcional (rubric-honesto deixar em "forte 7")
 - [ ] Empurrar **Detalhe** (152 págs em 7) e **Inovação** (≈133 não-utilitárias em 7) para 8.0 — só onde servir; risco de over-design nas utilitárias. Média atual já é saudável.
 - [ ] Advisories de gate pré-existentes: slop emoji `avatars`/`badges`/`banner` (confirmar se é dentro de `Frame code=`), 9 `story-matrix` de date-helpers.
 
-> Método que funcionou: workflow 2-rodadas (por-página → integrador de arquivos compartilhados) + verificação adversarial de P0 + re-score determinístico. Scripts em `/tmp/forge-*.mjs` na sessão de origem.
+> Método que funcionou: workflow 2-rodadas (por-página → integrador de arquivos compartilhados) + verificação adversarial de P0 + re-score determinístico. Scripts em `/tmp/eidos-*.mjs` na sessão de origem.

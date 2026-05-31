@@ -38,7 +38,7 @@ const FAMILIES = {
   'combobox.tsx':    { only: ['Combobox'] },
   'color-input.tsx': { only: ['ColorInput', 'ColorPicker'] },
   'blocks.tsx':      { only: ['Banner', 'MetricCard', 'Stat', 'Pipeline', 'Timeline', 'RingBar', 'ScoreGauge', 'LogViewer', 'DiffViewer', 'TreeView', 'JSONInspector', 'ServiceCard', 'AgentCard', 'FilterPanel', 'DataTable'] },
-  'charts.tsx':      { only: ['ForgeChart', 'ForgeTooltipContent', 'ChartLegend'], npm: ['recharts'] },
+  'charts.tsx':      { only: ['EidosChart', 'EidosTooltipContent', 'ChartLegend'], npm: ['recharts'] },
   'device.tsx':      { only: ['DeviceFrame', 'StatusBar', 'PhoneTop'] },
   'drawer.tsx':      { only: ['Drawer'] },
   'modal.tsx':       { only: ['Modal'] },
@@ -216,7 +216,7 @@ function sliceComponent(name, fam) {
   }
   lines.push('');
   if (usesMOCKS) {
-    lines.push(`// Inlined Forge mock palette (LangBadge) — keeps this file self-contained.`);
+    lines.push(`// Inlined Eidos mock palette (LangBadge) — keeps this file self-contained.`);
     lines.push(`const MOCKS = { LANGS: ${LANGS_LITERAL} } as { LANGS: Record<string, string> };`);
     lines.push('');
   }

@@ -15,15 +15,15 @@ import { Icons, Frame, Section, SubHead, TabbedCode, CodeBlock, PropsTable, inst
 const DEMO_MD = `# Deploying a service
 
 A **Eidos deployment** pushes one or more _services_ through a graduated ring
-rollout: canary → 25 % → 100 %. Use \`forge deploy\` from the repo root.
+rollout: canary → 25 % → 100 %. Use \`eidos deploy\` from the repo root.
 
 ## Prerequisites
 
 Before you deploy, confirm:
 
-- The service passes \`forge lint\` and \`forge test\`.
+- The service passes \`eidos lint\` and \`eidos test\`.
 - ~~Manually push a Docker image~~ — the CLI handles image build and push.
-- You have at least **one ring** configured in \`forge.yaml\`.
+- You have at least **one ring** configured in \`eidos.yaml\`.
 
 ### Ordered rollout steps
 
@@ -34,7 +34,7 @@ Before you deploy, confirm:
 
 #### Task list
 
-- [x] \`forge.yaml\` ring definitions committed
+- [x] \`eidos.yaml\` ring definitions committed
 - [x] CI passing on \`main\`
 - [ ] On-call notified
 - [ ] Rollback plan documented
@@ -49,7 +49,7 @@ Before you deploy, confirm:
 Here is the deploy command:
 
 \`\`\`bash
-forge deploy \\
+eidos deploy \\
   --service identity-svc \\
   --ring canary \\
   --hold
@@ -171,7 +171,7 @@ const STREAMING_CODE = `// Streaming: mark the surface live, trail the caret.
 const PROSE_ONLY_CODE = `// Static (non-streaming) — just the semantic wrapper.
 <Prose>
   <h2>Deploying a service</h2>
-  <p>Run <code>forge deploy</code> from the repo root.</p>
+  <p>Run <code>eidos deploy</code> from the repo root.</p>
   <ul>
     <li>Builds the image and tags it with the commit SHA</li>
     <li>Promotes through canary → 25% → 100%</li>
@@ -199,7 +199,7 @@ export default function AiMarkdown() {
       <Frame label="Prose — static assistant reply" code={PROSE_ONLY_CODE} height={260}>
         <Prose style={{ maxWidth: 560 }}>
           <h2>Deploying a service</h2>
-          <p>Run <code>forge deploy</code> from the service root — it builds, pushes, and rolls out across the configured rings.</p>
+          <p>Run <code>eidos deploy</code> from the service root — it builds, pushes, and rolls out across the configured rings.</p>
           <ul>
             <li>Builds the image and tags it with the commit SHA</li>
             <li>Promotes through <strong>canary → 25% → 100%</strong> on a healthy error budget</li>
@@ -248,12 +248,12 @@ export default function AiMarkdown() {
       <Frame label="ProseCode — fenced code block: language header · copy · scrollable body" height={300}>
         <Prose style={{ maxWidth: 640 }}>
           <p>Run the deploy command from the service root:</p>
-          <ProseCode lang="bash">{`forge deploy \\
+          <ProseCode lang="bash">{`eidos deploy \\
   --service identity-svc \\
   --ring canary \\
   --hold`}</ProseCode>
           <p>The CLI also accepts a <code>--dry-run</code> flag:</p>
-          <ProseCode lang="bash">{`forge deploy --service identity-svc --dry-run`}</ProseCode>
+          <ProseCode lang="bash">{`eidos deploy --service identity-svc --dry-run`}</ProseCode>
         </Prose>
       </Frame>
       <Lede>
@@ -287,7 +287,7 @@ export default function AiMarkdown() {
               <Icons.sparkle size={16} style={{ color: 'var(--ember)' }}/>
             </span>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1, minWidth: 0 }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--fg-subtle)' }}>FORGE PLATFORM AGENT</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--fg-subtle)' }}>EIDOS PLATFORM AGENT</span>
               <Prose>
                 <p>The canary ring receives <strong>5%</strong> of traffic. If the p95 latency stays below 400 ms and the error budget burn is under 1×, the ring auto-promotes after 15 minutes.</p>
                 <ul>
@@ -341,7 +341,7 @@ export default function AiMarkdown() {
           <Prose style={{ maxWidth: 560 }}>
             <h2>نشر الخدمة</h2>
             <p>
-              يرسل <code>forge deploy</code> الخدمة عبر مراحل الطرح التدريجي: قناة التجربة → 25% → 100%. تحقق من سلامة الميزانية في كل مرحلة قبل الترقية.
+              يرسل <code>eidos deploy</code> الخدمة عبر مراحل الطرح التدريجي: قناة التجربة → 25% → 100%. تحقق من سلامة الميزانية في كل مرحلة قبل الترقية.
             </p>
             <ul>
               <li>يبني الصورة ويضع علامة الإيداع عليها</li>
@@ -366,9 +366,9 @@ export default function AiMarkdown() {
               <Prose style={{ maxWidth: 560 }}>
                 <h2>Deploying a service</h2>
                 <p>
-                  Run <code>forge deploy</code> from the repo root. The deploy command builds the image, pushes it, and <a href="#" onClick={e => e.preventDefault()}>rolls out across rings</a>.
+                  Run <code>eidos deploy</code> from the repo root. The deploy command builds the image, pushes it, and <a href="#" onClick={e => e.preventDefault()}>rolls out across rings</a>.
                 </p>
-                <ProseCode lang="bash">{`forge deploy --service identity-svc --ring canary`}</ProseCode>
+                <ProseCode lang="bash">{`eidos deploy --service identity-svc --ring canary`}</ProseCode>
                 <blockquote>Tip: pin a ring with <code>--hold</code>.</blockquote>
               </Prose>
               {/* pins */}
@@ -414,7 +414,7 @@ export default function AiMarkdown() {
           <div className="head"><Icons.x size={12}/> Don't — dump raw markdown as text</div>
           <div className="body" style={{ padding: 14 }}>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-base)', color: 'var(--fg-muted)', lineHeight: 1.5 }}>
-              {'## Deploying a service\n\nRun `forge deploy` from…\n\n- Builds the image\n- Pushes to the registry'}
+              {'## Deploying a service\n\nRun `eidos deploy` from…\n\n- Builds the image\n- Pushes to the registry'}
             </div>
           </div>
           <div className="note">Displaying raw markdown text forces users to read the syntax noise. Always render through the pipeline into Prose.</div>

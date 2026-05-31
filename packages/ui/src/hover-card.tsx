@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { cn } from './lib/utils';
 
-// Forge DS — HoverCard.
+// Eidos DS — HoverCard.
 //
 // A rich hover-triggered card for previewing entities — users, links, refs.
 // Larger than Tooltip (text-only), smaller than Popover (actions via click).

@@ -52,8 +52,8 @@ composing existing Eidos classes — never per-page `<style>`.
 
 A single lo-fi sketch file is fine here (this is a throwaway planning artifact,
 not a DS page) — or describe the wireframe inline in the reply if a file isn't
-warranted. Either way it does **not** register in `window.PAGES` /
-`window.EXAMPLES` and does **not** ship; it informs the real build.
+warranted. Either way it does **not** register in the migrated / examples
+registries and does **not** ship; it informs the real build.
 
 ## Self-check
 

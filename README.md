@@ -81,7 +81,7 @@ The whole engineering harness lives in **`.claude/`** — see [`.claude/README.m
 It gives Claude Code 8 subagents (`.claude/agents/`), workflow + AI + web/DS skills
 (`.claude/skills/`, with the Open Design long-tail quiet in `_library/`), commands, hooks,
 and the three knowledge axes — **skills** (artifact shape), **design-systems** (brand;
-`forge/` canonical), and **craft** (universal rules). `npm run build:plugin` packages it
+`eidos/` canonical), and **craft** (universal rules). `npm run build:plugin` packages it
 for team distribution. Start a design task by invoking the matching skill.
 
 ## Credit

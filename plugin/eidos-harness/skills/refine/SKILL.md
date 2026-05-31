@@ -18,9 +18,10 @@ review) skills into an apply-then-verify loop on an existing Eidos artifact.
 
 ## 1. Locate the target
 
-Resolve `$ARGUMENTS` to a slug/file. Pages: `src/ds/pages/<group>/<slug>.jsx`.
-Examples: `src/ds/examples/<name>.jsx`. Confirm the route exists in
-`src/ds/core/nav-config.js`. Read the file fully before changing anything.
+Resolve `$ARGUMENTS` to a slug/file. Pages: `src/ds/migrated/<ds>/<slug>.tsx` (core
+pages: `src/ds/migrated/<slug>.tsx`). Examples: `src/ds/examples/<name>.tsx`. Confirm
+the route exists in `src/ds/core/nav-config.js`. Read the file fully before changing
+anything.
 
 ## 2. Pre-read
 
@@ -41,10 +42,11 @@ discipline, and removing AI-slop tells. Get the user's nod on scope if it's broa
 
 ## 4. Apply by composition
 
-Edit the `.jsx` only. Reuse existing classes/tokens — **never** add per-page `<style>`,
+Edit the `.tsx` only. Reuse existing classes/tokens — **never** add per-page `<style>`,
 never reinvent a class that exists. If a token genuinely must change, edit
 `src/styles/tokens.css` / `ds.css` and call it out. Keep ember to ≤2 visible uses;
-Geist Sans + Mono; logical CSS properties.
+Geist Sans + Mono; logical CSS properties. Section intros use `<Lede>`, inline code uses
+`<Mono>` (both from `@/ds/core`).
 
 ## 5. Re-verify (the whole point)
 
@@ -55,5 +57,6 @@ After applying, re-run all three gates and report results:
   reachability, contrast.
 - **RTL** (`rtl-and-bidi.md`) — logical properties only, directional icons mirror.
 
-Then run `node scripts/gen-manifest.mjs` if you touched nav, and offer `npm run verify`
-(the `verify-routes` command) to confirm the route still renders.
+Then run `node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs` (+ `gen-examples.mjs`)
+and restart `next dev` if you touched nav, and offer `npm run verify` (the `verify-routes`
+command) to confirm the route still renders.

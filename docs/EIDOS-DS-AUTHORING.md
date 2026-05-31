@@ -2,7 +2,7 @@
 
 > **Catálogo completo do DS:** `EIDOS-DS-REFERENCE.md` (raiz do projeto). Leia esse arquivo antes de criar páginas novas ou variações — ele lista TODOS os tokens, classes CSS, componentes React, ícones, e cada página de documentação (~180 entradas). Use composição em vez de reinventar.
 
-A multi-page design system documentation site. Entry point: `forge-design-system/design-system.html` (the Introduction / Overview page lives at root). Every other page lives under `forge-design-system/pages/<group>/<slug>.html`.
+A multi-page design system documentation site. Entry point: `eidos-design-system/design-system.html` (the Introduction / Overview page lives at root). Every other page lives under `eidos-design-system/pages/<group>/<slug>.html`.
 
 ## Architecture
 

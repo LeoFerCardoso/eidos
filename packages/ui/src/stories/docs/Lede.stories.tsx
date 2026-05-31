@@ -53,7 +53,7 @@ export const TightTop: Story = {
 export const Wide: Story = {
   args: {
     wide: true,
-    children: 'The Forge Design System is a family of interconnected systems — core tokens, component libraries for web, mobile, and AI — all sharing a single ember accent and Geist type scale.',
+    children: 'The Eidos Design System is a family of interconnected systems — core tokens, component libraries for web, mobile, and AI — all sharing a single ember accent and Geist type scale.',
   },
 };
 

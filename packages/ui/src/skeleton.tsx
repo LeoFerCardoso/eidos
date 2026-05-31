@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cn } from './lib/utils';
 
-// Forge DS — Skeleton
+// Eidos DS — Skeleton
 //
 // General-purpose loading placeholder. Three variants (line, box, circle),
 // flexible sizing, and a multi-line mode that covers the AI streaming use-case

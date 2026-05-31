@@ -251,7 +251,7 @@ export const InContext: Story = {
             background: 'var(--surface)',
           }}
         >
-          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--fg)' }}>forge-api</span>
+          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--fg)' }}>eidos-api</span>
           <div style={{ flex: 1 }} />
           <button
             className="ds-topbar-search"

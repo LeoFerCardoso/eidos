@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Icons } from './icons';
 
-// Forge DS — Color Input.
+// Eidos DS — Color Input.
 //
 // A swatch + hex code trigger that opens a popover with a real H/S/V picker:
 // saturation/value square, hue slider, optional alpha slider, hex + RGB inputs.

@@ -1,5 +1,5 @@
 /* ============================================================================
- * Forge — Design Tokens  (Color system rewritten from scratch, v1.2)
+ * Eidos — Design Tokens  (Color system rewritten from scratch, v1.2)
  *
  * Color philosophy:
  *   • OKLCH everywhere — perceptually uniform stepping in lightness
@@ -2117,7 +2117,7 @@ select.in-control::-ms-expand { display: none; }
 [dir="rtl"] .sl:not(.vertical) .sl-thumb.is-dragging { transform: translate(50%, -50%) scale(1.18); }
 
 /* ── File input — drop zone + selected-file list (promoted from the file-input
-   page so <FileInput> ships styled via forge-ui add). ─────────────────────── */
+   page so <FileInput> ships styled via eidos add). ─────────────────────── */
 .in-drop {
   border: 1.5px dashed var(--border-strong);
   border-radius: 10px;
@@ -2218,7 +2218,7 @@ select.in-control::-ms-expand { display: none; }
 .in-file-x:focus-visible { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
 
 /* ── Calendar (.cal-*) (promoted from the docs page so the component ships styled
-   via forge-ui add). ──────────────────────────────────────────────────── */
+   via eidos add). ──────────────────────────────────────────────────── */
 .cal {
   width: 280px;
   border: 1px solid var(--border); border-radius: 10px;
@@ -2317,7 +2317,7 @@ select.in-control::-ms-expand { display: none; }
 }
 
 /* ── DatePicker (.dp-*) (promoted from the docs page so the component ships styled
-   via forge-ui add). ──────────────────────────────────────────────────── */
+   via eidos add). ──────────────────────────────────────────────────── */
 .dp { position: relative; display: inline-block; }
 .dp-trigger {
   display: inline-flex; align-items: center; gap: 10px;
@@ -2445,7 +2445,7 @@ select.in-control::-ms-expand { display: none; }
 [dir="rtl"] .dp .cal-head .cal-btn svg { transform: scaleX(-1); }
 
 /* ── Combobox (.cb-*) (promoted from the docs page so the component ships styled
-   via forge-ui add). ──────────────────────────────────────────────────── */
+   via eidos add). ──────────────────────────────────────────────────── */
 .cb { position: relative; display: inline-flex; flex-direction: column; gap: 6px; width: 240px; max-width: 100%; }
 .cb.full { width: 100%; }
 
@@ -2550,7 +2550,7 @@ select.in-control::-ms-expand { display: none; }
 .cb-item.is-disabled { opacity: 0.5; pointer-events: none; }
 
 /* ── Select (.sel-*) (promoted from the docs page so the custom Select ships
-   styled via forge-ui add). ─────────────────────────────────────────────── */
+   styled via eidos add). ─────────────────────────────────────────────── */
 .sel-root { position: relative; display: inline-flex; flex-direction: column; min-width: 240px; max-width: 100%; }
 .sel-root.full { width: 100%; min-width: 0; }
 
@@ -2648,7 +2648,7 @@ select.in-control::-ms-expand { display: none; }
 .sel-field.error .sel-field-help { color: var(--danger); }
 
 /* ── ColorInput (.cp-*) (promoted from the docs page so the component ships styled
-   via forge-ui add). ──────────────────────────────────────────────────── */
+   via eidos add). ──────────────────────────────────────────────────── */
 .cp-trigger {
   display: inline-flex; align-items: center; gap: 0;
   padding: 0; height: 36px;

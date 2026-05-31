@@ -4,8 +4,8 @@
 // We render Pierre's actual FileTree web component (path-first model, virtualized
 // rows, git-status lane, search, drag-and-drop, context menus, keyboard a11y) and
 // re-skin ONLY the colours, typography and shapes to Eidos via the
-// `--trees-*-override` custom properties on `.forge-tree` (they inherit through
-// the component's Shadow DOM). See `.forge-tree` in ds.css. The tree logic,
+// `--trees-*-override` custom properties on `.eidos-tree` (they inherit through
+// the component's Shadow DOM). See `.eidos-tree` in ds.css. The tree logic,
 // layout and a11y are the library's.
 //
 // The component is a custom element that paints to the DOM, so it's loaded with
@@ -22,7 +22,7 @@ import type {
   ContextMenuTriggerMode,
 } from '@pierre/trees';
 
-export interface ForgeTreeProps {
+export interface EidosTreeProps {
   /** Path-first model — one canonical path string per leaf, e.g. "apps/api/src/index.ts". */
   paths: string[];
   /** Directory paths that start expanded. */
@@ -78,7 +78,7 @@ interface MenuContext {
 // rect — it escapes the container. Marked data-file-tree-context-menu-root so
 // the library doesn't treat in-menu clicks as outside-clicks. We own the look
 // + the actions (real model mutations).
-function ForgeTreeMenu({
+function EidosTreeMenu({
   item,
   context,
   model,
@@ -136,7 +136,7 @@ function ForgeTreeMenu({
   return createPortal(
     <div
       ref={ref}
-      className="forge-tree-menu"
+      className="eidos-tree-menu"
       data-file-tree-context-menu-root="true"
       role="menu"
       aria-label={`Actions for ${item.name}`}
@@ -161,7 +161,7 @@ function ForgeTreeMenu({
 }
 
 // IDE-style window chrome header (slotted above the tree).
-function ForgeTreeChrome({
+function EidosTreeChrome({
   title,
   model,
 }: {
@@ -177,7 +177,7 @@ function ForgeTreeChrome({
     model.startRenaming(make(n), { removeIfCanceled: true });
   };
   return (
-    <div className="forge-tree-chrome">
+    <div className="eidos-tree-chrome">
       <span className="ftc-lights" aria-hidden="true">
         <i /><i /><i />
       </span>
@@ -197,10 +197,10 @@ function ForgeTreeChrome({
 // Load Pierre's React entry inside the dynamic chunk and close over its
 // `useFileTree`/`FileTree` so the custom element never lands in the main bundle
 // and never runs during static generation.
-const ForgeTree = dynamic(
+const EidosTree = dynamic(
   async () => {
     const mod = await import('@pierre/trees/react');
-    function ForgeTreeInner({
+    function EidosTreeInner({
       paths,
       defaultExpanded,
       initialExpansion,
@@ -220,7 +220,7 @@ const ForgeTree = dynamic(
       height = 320,
       dir,
       style,
-    }: ForgeTreeProps) {
+    }: EidosTreeProps) {
       const locked = React.useMemo(() => new Set(lockedPaths ?? []), [lockedPaths]);
 
       // Merge the per-path meta tag with a "locked" tag for non-draggable rows.
@@ -286,22 +286,22 @@ const ForgeTree = dynamic(
       return (
         <mod.FileTree
           model={model}
-          className={`forge-tree${chrome ? ' has-chrome' : ''}`}
+          className={`eidos-tree${chrome ? ' has-chrome' : ''}`}
           dir={dir}
           style={{ height, ...style }}
-          header={chrome ? <ForgeTreeChrome title={chrome} model={model} /> : undefined}
+          header={chrome ? <EidosTreeChrome title={chrome} model={model} /> : undefined}
           renderContextMenu={
             contextMenu
               ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                (item: any, ctx: any) => <ForgeTreeMenu item={item} context={ctx} model={model} />
+                (item: any, ctx: any) => <EidosTreeMenu item={item} context={ctx} model={model} />
               : undefined
           }
         />
       );
     }
-    return ForgeTreeInner;
+    return EidosTreeInner;
   },
-  { ssr: false, loading: () => <div className="forge-tree-loading">Loading tree…</div> },
+  { ssr: false, loading: () => <div className="eidos-tree-loading">Loading tree…</div> },
 );
 
-export { ForgeTree };
+export { EidosTree };

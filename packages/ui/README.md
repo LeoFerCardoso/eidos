@@ -1,10 +1,10 @@
 # @eidos/ui
 
-The **Forge Design System** component library — framework-agnostic React components
+The **Eidos Design System** component library — framework-agnostic React components
 over a shared **semantic CSS** layer. One ember accent, Geist type, OKLCH tokens,
 RTL-first, contrast-safe.
 
-Forge is **owned, not imported**: you can consume it two ways.
+Eidos is **owned, not imported**: you can consume it two ways.
 
 ## 1. Copy components into your repo (recommended) — `eidos`
 
@@ -13,7 +13,7 @@ own and can edit it. The base layer (design tokens + `ds.css` + the `cn` helper)
 once; each component then copies its `.tsx` and resolves its dependencies.
 
 ```bash
-# 1. Install the Forge base layer once (tokens + ds.css + cn)
+# 1. Install the Eidos base layer once (tokens + ds.css + cn)
 npx eidos@latest init
 
 # 2. Add components — copied into components/forge/, deps resolved automatically
@@ -28,7 +28,7 @@ npx eidos@latest diff metric-card
 The registry is **shadcn-schema-compatible**, so the stock CLI works too:
 
 ```bash
-npx shadcn@latest add https://forge.equifax.dev/r/metric-card.json
+npx shadcn@latest add https://eidos.equifax.dev/r/metric-card.json
 ```
 
 After `init`, import the layer in your global stylesheet (order matters):
@@ -66,7 +66,7 @@ use those components.
 | **primitives** | Frame, Code, CodeBlock, CodeTree, Tabs, TabbedCode, CollapsibleCode, PropsTable, SubHead, Lede, Mono, TokenSwatch, SpecRow, Pagination, CopyButton |
 | **atoms** | StatusDot, HealthBadge, SeverityPill, Trend, Avatar, TierBadge, LangBadge, Counter, Sparkline, Empty, KbdRow, CopyChip, RelativeTime, OwnerPill |
 | **blocks** | MetricCard, Stat, Banner, Pipeline, Timeline, RingBar, ScoreGauge, LogViewer, DiffViewer, TreeView, JSONInspector, ServiceCard, AgentCard, FilterPanel, DataTable |
-| **charts** | ForgeChart, ChartLegend (recharts) |
+| **charts** | EidosChart, ChartLegend (recharts) |
 | **device** | DeviceFrame, PhoneTop, StatusBar |
 | **drawer** | Drawer |
 | **ai** | Tool, Reasoning, ChainOfThought, Plan, Task, Message, Conversation, Response, PromptInput, ModelSelector, Citation, Sources, Terminal, AskUser, and more |

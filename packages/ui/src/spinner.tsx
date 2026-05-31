@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cn } from './lib/utils';
 
-// Forge DS — Spinner
+// Eidos DS — Spinner
 //
 // Three visual flavors: ring (default), dots, bars.
 // Named sizes (sm=12, md=16, lg=24) or a raw number.

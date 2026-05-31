@@ -43,7 +43,7 @@ const LAST_WEEK_THREADS: HistoryThread[] = [
   {
     id: 'th-020',
     title: 'Map IAM permissions for data-pipeline service account',
-    preview: 'Needs storage.objectAdmin on gs://forge-pipeline-prod and BigQuery jobUser.',
+    preview: 'Needs storage.objectAdmin on gs://eidos-pipeline-prod and BigQuery jobUser.',
   },
   {
     id: 'th-021',

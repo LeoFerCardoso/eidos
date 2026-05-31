@@ -14,9 +14,9 @@
 
 - /CLAUDE.md — TL;DR authoring rules (read on every session start).
 - /EIDOS-DS-REFERENCE.md — long-form catalog (tokens, every CSS class, every React component, every icon, every page). ~920 lines.
-- /forge-design-system/assets/js/core/nav-config.js — single source of truth for navigation, slugs, and labels.
-- /forge-design-system/assets/css/tokens.css — every design token (colors, type, spacing, radius, shadow, motion).
-- /forge-design-system/assets/css/ds.css — every component class (.btn, .pill, .surface, .in-*, .fc-*, .cb-*, .menu, .tt, .ds-frame, .ds-grid, …).
+- /eidos-design-system/assets/js/core/nav-config.js — single source of truth for navigation, slugs, and labels.
+- /eidos-design-system/assets/css/tokens.css — every design token (colors, type, spacing, radius, shadow, motion).
+- /eidos-design-system/assets/css/ds.css — every component class (.btn, .pill, .surface, .in-*, .fc-*, .cb-*, .menu, .tt, .ds-frame, .ds-grid, …).
 
 ## Docs
 
@@ -138,7 +138,7 @@
 
 ## Charts
 
-Recharts wrappers themed with Forge tokens — viz palette lives in tokens.css. Use only for data visualization; not for layout decoration.
+Recharts wrappers themed with Eidos tokens — viz palette lives in tokens.css. Use only for data visualization; not for layout decoration.
 
 - [Overview](pages/charts/overview.html): Palette, color order, and shared options for every chart.
 - [Area chart](pages/charts/area.html): Filled time-series; supports stacked.
@@ -233,6 +233,6 @@ Full-product screens assembled exclusively from existing components. Reference t
 5. Spacing rhythm: caption after Frame uses marginTop: 14 (positive). Lede after SubHead uses marginTop: -6 (negative — attaches lede to its heading; intentional). Consecutive Frames separate with .ds-frame + .ds-frame { margin-top: 18px }.
 6. RTL: logical properties everywhere (inset-inline-*, padding-inline-*, margin-inline-*, border-inline-*, text-align: start). The only physical-property exception is transform: translateX(…) — that needs a [dir="rtl"] override.
 7. Adding a new page requires three coordinated changes: (1) append { id, label, href } in nav-config.js; (2) create pages/<group>/<slug>.html from pages/_template.html; (3) create assets/js/pages/<group>/<slug>.jsx registering window.PAGES['<slug>'].
-8. Version bumps happen in two places at once: sidebar sub-text and topbar badge in shell.jsx. They must always stay in sync. Bump cache-busting query strings via forge-design-system/scripts/bump-version.sh.
+8. Version bumps happen in two places at once: sidebar sub-text and topbar badge in shell.jsx. They must always stay in sync. Bump cache-busting query strings via eidos-design-system/scripts/bump-version.sh.
 9. React + Babel are pinned (react@18.3.1, react-dom@18.3.1, @babel/standalone@7.29.0). Each <script type="text/babel"> has its own scope — share components via Object.assign(window, { … }) at the end of each IIFE.
 10. Common gotchas: black screen → missing Icons.x reference or syntax error in the page JSX (check boot.jsx's diagnostic). Doubled focus ring → suppress on inner inputs with box-shadow: none !important. Dropdown clipped → .ds-frame has overflow: hidden; use position: fixed + getBoundingClientRect() to escape.

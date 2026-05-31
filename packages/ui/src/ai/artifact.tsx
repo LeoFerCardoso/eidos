@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge AI — Artifact.
+// Eidos AI — Artifact.
 //
 // An "artifact" is a self-contained thing the model produced that has its
 // own life outside the chat turn — a document, an HTML preview, a code

@@ -157,7 +157,7 @@ export const InPromptInput: Story = {
         value=""
         onChange={() => {}}
         onSubmit={() => {}}
-        modelValue="forge-sonnet-4-6"
+        modelValue="eidos-sonnet-4-6"
         onModelChange={() => {}}
         contextSlot={<Context used={142000} total={200000} files={3} variant="gauge" />}
         placeholder="Ask anything…"

@@ -16,7 +16,7 @@ function check(label, cond) {
   results.push({ label, pass: !!cond });
 }
 
-const proj = mkdtempSync(join(tmpdir(), 'forge-consumer-'));
+const proj = mkdtempSync(join(tmpdir(), 'eidos-consumer-'));
 // Make it look like a real project (npm) so PM detection works.
 writeFileSync(join(proj, 'package.json'), JSON.stringify({ name: 'consumer', private: true }, null, 2));
 
@@ -71,7 +71,7 @@ const summary =
   results.map((r) => `${r.pass ? 'PASS' : 'FAIL'}  ${r.label}`).join('\n') +
   `\n\n${failed.length === 0 ? 'ALL_PASS' : 'SOME_FAIL (' + failed.length + ')'}  [${results.length} checks]\n` +
   `project: ${proj}\n`;
-writeFileSync(join(tmpdir(), 'forge-cli-e2e.txt'), summary);
+writeFileSync(join(tmpdir(), 'eidos-cli-e2e.txt'), summary);
 console.log(summary);
 
 // keep the project dir for inspection on failure; clean on success

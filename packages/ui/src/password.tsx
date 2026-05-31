@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Icons } from './icons';
 
-// Forge DS — PasswordInput
+// Eidos DS — PasswordInput
 //
 // A text-entry field built on the .in-group/.in-control/.in-addon system with:
 //   • a trailing icon-button that toggles show/hide (type password↔text)

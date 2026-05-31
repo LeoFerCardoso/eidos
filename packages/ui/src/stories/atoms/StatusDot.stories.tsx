@@ -16,7 +16,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A 1-glyph status indicator — a tinted dot keyed to a Forge status tone. ' +
+          'A 1-glyph status indicator — a tinted dot keyed to a Eidos status tone. ' +
           'Decorative by default (`aria-hidden`); pair it with a visible label or pass `title` for a tooltip.',
       },
     },
@@ -145,7 +145,7 @@ export const InContext: Story = {
             gap: 4,
           }}
         >
-          <span style={row}><StatusDot tone="done" size="sm" /><span>12:42:03  202  POST /v1/deploys/forge-api</span></span>
+          <span style={row}><StatusDot tone="done" size="sm" /><span>12:42:03  202  POST /v1/deploys/eidos-api</span></span>
           <span style={row}><StatusDot tone="error" size="sm" /><span>12:42:04  500  POST /v1/agents/run</span></span>
           <span style={row}><StatusDot tone="skipped" size="sm" /><span>12:42:05  --   skipped: gate failed</span></span>
         </div>

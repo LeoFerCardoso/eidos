@@ -21,7 +21,7 @@ export function Demo() {
         open={open}
         onOpenChange={setOpen}
         variant="danger"
-        title="Delete forge-api?"
+        title="Delete eidos-api?"
         description="This permanently removes the service and all linked runbooks. There is no undo."
         cancelLabel="Cancel"
         confirmLabel="Delete service"
@@ -48,7 +48,7 @@ const VARIANT_CODE = `{/* warning — discard / leave */}
 {/* danger — delete / revoke */}
 <AlertDialog
   variant="danger"
-  title="Delete forge-api?"
+  title="Delete eidos-api?"
   description="4 runbooks and 12 deploys will also be removed. There is no undo."
   cancelLabel="Cancel"
   confirmLabel="Delete service"
@@ -70,7 +70,7 @@ const RTL_CODE = `<div dir="rtl">
     open={open}
     onOpenChange={setOpen}
     variant="danger"
-    title="حذف forge-api؟"
+    title="حذف eidos-api؟"
     description="سيؤدي هذا إلى إزالة الخدمة بشكل دائم. لا يمكن التراجع."
     cancelLabel="إلغاء"
     confirmLabel="حذف الخدمة"
@@ -153,7 +153,7 @@ export default function Page() {
           open={openDanger}
           onOpenChange={setOpenDanger}
           variant="danger"
-          title="Delete forge-api?"
+          title="Delete eidos-api?"
           description="This permanently removes the service, its deploy history, and 4 linked runbooks. There is no undo."
           cancelLabel="Cancel"
           confirmLabel="Delete service"
@@ -189,7 +189,7 @@ export default function Page() {
             <InlinePanel
               variant="warning"
               title="Discard unsaved changes?"
-              desc="You have edits to forge-api that will be lost if you close this tab now."
+              desc="You have edits to eidos-api that will be lost if you close this tab now."
               cancel="Keep editing"
               confirm="Discard"
             />
@@ -197,7 +197,7 @@ export default function Page() {
           <div className="adlg-stage">
             <InlinePanel
               variant="danger"
-              title="Delete forge-api?"
+              title="Delete eidos-api?"
               desc="This permanently removes the service, its deploy history, and 4 linked runbooks. There is no undo."
               cancel="Cancel"
               confirm="Delete service"
@@ -308,7 +308,7 @@ export default function Page() {
           <div className="adlg-stage">
             <InlinePanel
               variant="danger"
-              title="حذف forge-api؟"
+              title="حذف eidos-api؟"
               desc="سيؤدي هذا إلى إزالة الخدمة بشكل دائم، وتاريخ النشر، و٤ كتب تشغيل مرتبطة. لا يمكن التراجع."
               cancel="إلغاء"
               confirm="حذف الخدمة"
@@ -399,7 +399,7 @@ export default function Page() {
             </span>
             <span className="num">2</span>
             <span>
-              <b style={{ color: 'var(--fg)' }}>Title.</b> Geist 600, 15 px. A question or imperative. One line. Never generic ("Are you sure?") — always specific ("Delete forge-api?").
+              <b style={{ color: 'var(--fg)' }}>Title.</b> Geist 600, 15 px. A question or imperative. One line. Never generic ("Are you sure?") — always specific ("Delete eidos-api?").
             </span>
             <span className="num">3</span>
             <span>
@@ -421,7 +421,7 @@ export default function Page() {
           <div className="body" style={{ padding: 14 }}>
             <InlinePanel
               variant="danger"
-              title="Delete forge-api?"
+              title="Delete eidos-api?"
               desc="4 runbooks and 12 deploys will also be removed. There is no undo."
               cancel="Cancel"
               confirm="Delete service"

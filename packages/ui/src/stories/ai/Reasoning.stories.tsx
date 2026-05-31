@@ -182,7 +182,7 @@ export const InContext: Story = {
 
     return (
       <div style={{ maxWidth: 640 }}>
-        <Message from="assistant" meta={<>Forge AI · just now</>} streaming={streaming}>
+        <Message from="assistant" meta={<>Eidos AI · just now</>} streaming={streaming}>
           <Reasoning streaming={streaming} duration={duration}>
             {streaming ? (
               <SkeletonBody widths={['90%', '72%', '84%']} />

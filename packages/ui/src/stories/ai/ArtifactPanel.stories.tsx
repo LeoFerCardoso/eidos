@@ -38,7 +38,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A docked inline panel (wrapping the Forge Drawer in inline mode) that shows a ' +
+          'A docked inline panel (wrapping the Eidos Drawer in inline mode) that shows a ' +
           'model-produced artifact alongside the chat. Renders document, code, HTML, or app ' +
           'content by kind; supports a tab strip when multiple views are needed.',
       },

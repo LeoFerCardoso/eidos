@@ -15,8 +15,9 @@ Start with `git diff` (or the named range) to scope the review. Check, in order:
    secrets in code, anything destructive.
 2. **Eidos DS discipline** — no per-page `<style>`; composes existing classes; ember
    accent ≤2×/screen; Geist roles; logical CSS + RTL parity; directional icons mirror.
-   New DS page → the 3 coordinated edits present + `gen:manifest` run; no hand edits to
-   `manifest.generated.ts`.
+   New DS page → the route ritual present (nav-config.js entry + `src/ds/migrated/<ds>/<slug>.tsx`
+   default export + `gen-nav`/`gen-migrated` run); no hand edits to the generated
+   `src/ds/migrated/registry.ts` / `src/ds/examples/registry.ts` / `src/lib/nav.ts`.
 3. **Anti-AI-slop P0** — no Tailwind indigo, no trust gradient, no emoji-as-icon, no
    invented metrics, no lorem (see `${CLAUDE_PLUGIN_ROOT}/craft/anti-ai-slop.md`).
 4. **React/Next.js** — correct Server/Client boundaries, no client bloat, stable keys,

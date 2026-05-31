@@ -79,7 +79,7 @@ export const WithIcon: Story = {
 /** Removable pill — trailing × button with accessible label. */
 export const Removable: Story = {
   render: () => {
-    const [tags, setTags] = React.useState(['forge-api', 'us-east-1', 'production']);
+    const [tags, setTags] = React.useState(['eidos-api', 'us-east-1', 'production']);
     return (
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
         {tags.map((tag) => (
@@ -95,7 +95,7 @@ export const Removable: Story = {
         {tags.length === 0 && (
           <button
             style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-muted)', cursor: 'pointer' }}
-            onClick={() => setTags(['forge-api', 'us-east-1', 'production'])}
+            onClick={() => setTags(['eidos-api', 'us-east-1', 'production'])}
           >
             Restore filters
           </button>
@@ -217,10 +217,10 @@ export const Variants: Story = {
         {/* ── Health family ── */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--fg-muted)', minWidth: 90 }}>health</span>
-          <Pill tone="health-up" dot>forge-api</Pill>
-          <Pill tone="health-degraded" dot>forge-auth</Pill>
-          <Pill tone="health-down" dot>forge-cdn</Pill>
-          <Pill tone="health-unknown" dot>forge-mq</Pill>
+          <Pill tone="health-up" dot>eidos-api</Pill>
+          <Pill tone="health-degraded" dot>eidos-auth</Pill>
+          <Pill tone="health-down" dot>eidos-cdn</Pill>
+          <Pill tone="health-unknown" dot>eidos-mq</Pill>
         </div>
 
         {/* ── Severity family ── */}

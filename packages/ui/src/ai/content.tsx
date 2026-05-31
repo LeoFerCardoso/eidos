@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge AI — content blocks that show up inside a model reply.
+// Eidos AI — content blocks that show up inside a model reply.
 //
 // All dep-free: the heavy renderers (mermaid, katex, shiki) live in the doc
 // pages / the consumer's app, NOT here. These are the styled surfaces the

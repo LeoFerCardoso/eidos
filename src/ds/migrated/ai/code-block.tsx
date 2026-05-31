@@ -58,7 +58,7 @@ const USAGE_CODE = `import { CodeBlock } from "@/ds/core"
 <CodeBlock
   label="deploy command"
   lang="bash"
-  code="forge deploy --service identity-svc --ring canary"
+  code="eidos deploy --service identity-svc --ring canary"
 />`;
 
 const PROSE_CODE_USAGE = `import { Prose, ProseCode } from "@/ds/core"
@@ -66,7 +66,7 @@ const PROSE_CODE_USAGE = `import { Prose, ProseCode } from "@/ds/core"
 <Prose>
   <p>Run the deploy command:</p>
   <ProseCode lang="bash">
-    forge deploy --service identity-svc --ring canary --hold
+    eidos deploy --service identity-svc --ring canary --hold
   </ProseCode>
 </Prose>`;
 
@@ -76,7 +76,7 @@ const IN_CONTEXT_CODE = `// Inside a Message turn:
     <p>Based on the trace, p95 on <code>identity-svc</code> is degraded.</p>
     <p>Run this to inspect the live traffic:</p>
     <ProseCode lang="bash">
-      forge trace --service identity-svc --tail
+      eidos trace --service identity-svc --tail
     </ProseCode>
   </Prose>
 </div>`;
@@ -135,7 +135,7 @@ export default function AiCodeBlock() {
         <CodeBlock
           label="deploy command"
           lang="bash"
-          code="forge deploy --service identity-svc --ring canary"
+          code="eidos deploy --service identity-svc --ring canary"
         />
       </Frame>
       <Lede>
@@ -153,7 +153,7 @@ export default function AiCodeBlock() {
       <Frame label="ProseCode — fenced code block inside .ai-prose" code={PROSE_CODE_USAGE} height={200}>
         <Prose style={{ maxWidth: 560 }}>
           <p>Run the deploy command from the service root:</p>
-          <ProseCode lang="bash">{`forge deploy \\
+          <ProseCode lang="bash">{`eidos deploy \\
   --service identity-svc \\
   --ring canary \\
   --hold`}</ProseCode>
@@ -168,7 +168,7 @@ export default function AiCodeBlock() {
       <SubHead meta="languages">Variants — language support</SubHead>
       <Frame label="bash · ts · css · html — each uses the built-in tokenizer" height={260}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%', maxWidth: 560 }}>
-          <CodeBlock label="shell" lang="bash" code="forge deploy --service identity-svc --ring canary"/>
+          <CodeBlock label="shell" lang="bash" code="eidos deploy --service identity-svc --ring canary"/>
           <CodeBlock label="typescript" lang="ts" code={`const agent = new Agent({ model: 'anthropic/claude-sonnet-4-6' });`}/>
           <CodeBlock label="css" lang="css" code={`--ember: #FF6B35;\n.ai-code { border-radius: var(--radius-lg); }`}/>
         </div>
@@ -242,10 +242,10 @@ export default function AiCodeBlock() {
               <Icons.sparkle size={16} style={{ color: 'var(--ember)' }}/>
             </span>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <span className="t-mono-label" style={{ display: 'block', marginBottom: 8 }}>FORGE PLATFORM AGENT</span>
+              <span className="t-mono-label" style={{ display: 'block', marginBottom: 8 }}>EIDOS PLATFORM AGENT</span>
               <Prose>
                 <p>Based on the trace, p95 on <code>identity-svc</code> is 482 ms — above the 400 ms target. Run this to tail live traffic:</p>
-                <ProseCode lang="bash">{`forge trace --service identity-svc --tail`}</ProseCode>
+                <ProseCode lang="bash">{`eidos trace --service identity-svc --tail`}</ProseCode>
                 <p>You can narrow the window with <code>--last 5m</code> if you want only recent spans.</p>
               </Prose>
             </div>
@@ -292,14 +292,14 @@ export default function AiCodeBlock() {
         code={`<div dir="rtl">
   <Prose>
     <p>نفّذ الأمر التالي للنشر:</p>
-    <ProseCode lang="bash">forge deploy --service identity-svc</ProseCode>
+    <ProseCode lang="bash">eidos deploy --service identity-svc</ProseCode>
   </Prose>
 </div>`}
       >
         <div dir="rtl" style={{ width: '100%', maxWidth: 560 }}>
           <Prose>
             <p>نفّذ الأمر التالي لنشر الخدمة:</p>
-            <ProseCode lang="bash">{`forge deploy --service identity-svc --ring canary`}</ProseCode>
+            <ProseCode lang="bash">{`eidos deploy --service identity-svc --ring canary`}</ProseCode>
             <p>استخدم <code>--hold</code> لإيقاف الترقية التلقائية.</p>
           </Prose>
         </div>
@@ -318,7 +318,7 @@ export default function AiCodeBlock() {
               <CodeBlock
                 label="deploy command"
                 lang="bash"
-                code={`forge deploy --service identity-svc --ring canary --hold`}
+                code={`eidos deploy --service identity-svc --ring canary --hold`}
               />
               {/* pin 1 — header */}
               <span className="lead v" style={{ top: -22, left: 60, height: 18 }}/>
@@ -350,7 +350,7 @@ export default function AiCodeBlock() {
           <div className="head"><Icons.check size={12}/> Do — label the language and offer copy</div>
           <div className="body" style={{ padding: 14 }}>
             <div style={{ width: '100%', maxWidth: 340 }}>
-              <CodeBlock label="shell" lang="bash" code="forge deploy --service identity-svc"/>
+              <CodeBlock label="shell" lang="bash" code="eidos deploy --service identity-svc"/>
             </div>
           </div>
           <div className="note">A labelled language tag + copy button lets the reader scan and paste without re-typing. Both are always present — they're built into <Mono>CodeBlock</Mono> with no opt-out.</div>
@@ -359,7 +359,7 @@ export default function AiCodeBlock() {
           <div className="head"><Icons.x size={12}/> Don't — render runnable commands without a copy affordance</div>
           <div className="body" style={{ padding: 14 }}>
             <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: '10px 14px', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-base)', color: 'var(--fg-muted)' }}>
-              forge deploy --service identity-svc
+              eidos deploy --service identity-svc
             </div>
           </div>
           <div className="note">A bare mono block forces the user to select, copy, and paste manually — and risks transcription errors in a terminal command. Always use <Mono>CodeBlock</Mono> or <Mono>ProseCode</Mono>.</div>
@@ -370,7 +370,7 @@ export default function AiCodeBlock() {
           <div className="body" style={{ padding: 14 }}>
             <Prose style={{ maxWidth: 320 }}>
               <p>Inspect live traffic with:</p>
-              <ProseCode lang="bash">{`forge trace --service identity-svc`}</ProseCode>
+              <ProseCode lang="bash">{`eidos trace --service identity-svc`}</ProseCode>
             </Prose>
           </div>
           <div className="note">Each surface fits its context: <Mono>ProseCode</Mono> escapes the 68ch cap inside prose; <Mono>CodeBlock</Mono> is self-contained for standalone snippets.</div>
@@ -381,7 +381,7 @@ export default function AiCodeBlock() {
             <Prose style={{ maxWidth: 320 }}>
               <p>Run this command:</p>
               <div style={{ border: '2px dashed var(--danger)', borderRadius: 'var(--radius-lg)', padding: 8 }}>
-                <CodeBlock label="shell" lang="bash" code="forge deploy"/>
+                <CodeBlock label="shell" lang="bash" code="eidos deploy"/>
               </div>
             </Prose>
           </div>

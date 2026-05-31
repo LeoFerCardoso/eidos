@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge — atomic display helpers used across the system:
+// Eidos — atomic display helpers used across the system:
 // Sparkline · Counter · Avatar · TierBadge · LangBadge · Empty · StatusDot …
 // (Message + AICaret now live in core/ai/message.tsx)
 import { Icons } from './icons';
@@ -579,7 +579,7 @@ const HealthBadge = ({
 
 // ── SeverityPill ─────────────────────────────────────────────────────────
 // Incident / alert / change-risk severity. Wraps `.pill.severity-*` from
-// tokens.css. The Forge convention is P0 = highest (worst), P3 = lowest.
+// tokens.css. The Eidos convention is P0 = highest (worst), P3 = lowest.
 //
 //   level   "p0" | "p1" | "p2" | "p3"
 //   label   string — override default "P0 — Critical" / "P1 — Major" / etc.
@@ -734,7 +734,7 @@ const CopyChip = ({
 // Renders a humanised relative phrase ("3 min ago") inside a <time> element.
 // Ticks every 60s so the label stays fresh without a reload. By default the
 // absolute datetime is in the native `title` (browser default). Pass
-// `tooltip` to render it as a Forge `.tt` tooltip (designed bubble + caret).
+// `tooltip` to render it as a Eidos `.tt` tooltip (designed bubble + caret).
 //
 //   value     Date | number (ms) | ISO string
 //   absolute  boolean — show absolute alongside ("Mon · 3 min ago")
@@ -819,7 +819,7 @@ const RelativeTime = ({
 //
 //   person   { name, initials, role? }
 //   role     string — appended after the name in muted weight ("· SRE")
-//   ember    boolean — ember-tinted avatar (matches Forge accent)
+//   ember    boolean — ember-tinted avatar (matches Eidos accent)
 export interface OwnerPillProps {
   /** Person descriptor. `src` (optional) renders a photo avatar with initials fallback. */
   person?: { name: string; initials: string; role?: string; src?: string };

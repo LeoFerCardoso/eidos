@@ -36,12 +36,12 @@ import { FPageHeader, FSection, FShell, IconBubble } from './example-shell';
   const sloSpark = [99.92, 99.94, 99.95, 99.95, 99.97, 99.96, 99.97];
 
   const AUDIT = [
-    { time: '14:42:18', who: 'forge-bot', action: 'Ring 3 promote · auto · health window 8m clean' },
-    { time: '14:34:02', who: 'forge-bot', action: 'Ring 2 → 3 promotion approved by SLO gate' },
+    { time: '14:42:18', who: 'eidos-bot', action: 'Ring 3 promote · auto · health window 8m clean' },
+    { time: '14:34:02', who: 'eidos-bot', action: 'Ring 2 → 3 promotion approved by SLO gate' },
     { time: '14:33:51', who: 'Camila Tanaka', action: 'Acknowledged synthetic check flake on br-ne-1' },
-    { time: '14:21:08', who: 'forge-bot', action: 'Ring 2 promote · auto · err 0.18% ✓' },
-    { time: '14:08:44', who: 'forge-bot', action: 'Ring 1 promote · auto · canary clean' },
-    { time: '13:54:11', who: 'forge-bot', action: 'Ring 0 deploy · v4.18.2 · 8 internal pods' },
+    { time: '14:21:08', who: 'eidos-bot', action: 'Ring 2 promote · auto · err 0.18% ✓' },
+    { time: '14:08:44', who: 'eidos-bot', action: 'Ring 1 promote · auto · canary clean' },
+    { time: '13:54:11', who: 'eidos-bot', action: 'Ring 0 deploy · v4.18.2 · 8 internal pods' },
     { time: '13:51:02', who: 'Camila Tanaka', action: 'Started rollout · auto-promote enabled' },
   ];
 

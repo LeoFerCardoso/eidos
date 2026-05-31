@@ -3,7 +3,7 @@ import { cn } from './lib/utils';
 import { Icons } from './icons';
 
 // ═══════════════════════════════════════════════════════════════════════════
-// Table — Forge DS semantic table primitive.
+// Table — Eidos DS semantic table primitive.
 //
 // A thin, typed compound over the existing .tbl CSS layer. Distinct from the
 // stateful DataTable block — no built-in sorting/filtering state. Props:

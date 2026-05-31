@@ -43,7 +43,7 @@ export function Demo() {
 // localStorage, then survives a simulated reload (remount that re-reads it).
 // This is the page's thesis made executable, not described.
 // ==========================================================================
-const STORAGE_KEY = 'forge.docs.resizable.split';
+const STORAGE_KEY = 'eidos.docs.resizable.split';
 const FALLBACK: [number, number] = [40, 60];
 
 function readStoredSizes(): [number, number] {
@@ -68,7 +68,7 @@ function readStoredSizes(): [number, number] {
 
 const PERSISTED_CODE = `function PersistedSplit() {
   const [sizes, setSizes] = React.useState(() => {
-    const raw = localStorage.getItem("forge.docs.resizable.split");
+    const raw = localStorage.getItem("eidos.docs.resizable.split");
     return raw ? JSON.parse(raw) : [40, 60];
   });
 
@@ -79,7 +79,7 @@ const PERSISTED_CODE = `function PersistedSplit() {
       onSizesChange={(next) => {
         setSizes(next);
         localStorage.setItem(             // ← persist on every drag
-          "forge.docs.resizable.split",
+          "eidos.docs.resizable.split",
           JSON.stringify(next),
         );
       }}
@@ -165,7 +165,7 @@ function PersistedSplit() {
           }}
         >
           <span style={{ color: 'var(--fg-faint)' }}>localStorage[</span>
-          forge.docs.resizable.split
+          eidos.docs.resizable.split
           <span style={{ color: 'var(--fg-faint)' }}>] =</span>
           <span style={{ color: 'var(--fg)' }}>
             [{sizes[0].toFixed(0)}, {sizes[1].toFixed(0)}]
@@ -545,7 +545,7 @@ export default function ResizablePage() {
                     color: 'var(--fg-muted)',
                   }}
                 >{`function deploy() {
-  return forge.push('us-east-1');
+  return eidos.push('us-east-1');
 }`}</pre>
               </div>,
               <div

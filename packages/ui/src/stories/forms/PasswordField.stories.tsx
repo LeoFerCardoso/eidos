@@ -70,7 +70,7 @@ export const Default: Story = {
  */
 export const States: Story = {
   render: () => {
-    const [val, setVal] = React.useState('Forge$2026');
+    const [val, setVal] = React.useState('Eidos$2026');
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 32, maxWidth: 400 }}>
         {/* Empty — bar is dormant */}

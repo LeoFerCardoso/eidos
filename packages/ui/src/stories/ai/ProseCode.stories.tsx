@@ -31,7 +31,7 @@ const meta = {
   },
   args: {
     lang: 'bash',
-    children: 'forge deploy --service fraud-engine --ring 0 --version 3.4.7',
+    children: 'eidos deploy --service fraud-engine --ring 0 --version 3.4.7',
   },
 } satisfies Meta<typeof ProseCode>;
 
@@ -97,7 +97,7 @@ export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 680 }}>
       <ProseCode lang="bash">
-        {'forge deploy --service pix-router --version 2.1.0 --ring canary'}
+        {'eidos deploy --service pix-router --version 2.1.0 --ring canary'}
       </ProseCode>
 
       <ProseCode lang="ts">

@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
 } from './menu';
 
-// Forge DS — Breadcrumb
+// Eidos DS — Breadcrumb
 //
 // nav[aria-label="Breadcrumb"] > ol > li trail.
 //

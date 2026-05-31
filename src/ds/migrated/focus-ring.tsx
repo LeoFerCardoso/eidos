@@ -62,7 +62,7 @@ export default function FocusRing() {
           <Trigger kind="btn" state="focus" label="Deploy"/>
           <Trigger state="open" label="Next.js"/>
           <div className="in-group md" style={{width: 200, outline:'var(--ring-width) solid var(--ring)', outlineOffset:'var(--ring-offset)'}}>
-            <input className="in-control" defaultValue="forge-platform" readOnly/>
+            <input className="in-control" defaultValue="eidos-platform" readOnly/>
           </div>
           <label className="fc" style={{cursor:'default'}}>
             <input type="checkbox" defaultChecked readOnly className="fc-input" tabIndex={-1}/>
@@ -195,7 +195,7 @@ export default function FocusRing() {
           <div className="in-field">
             <label className="in-label">Outer container — focus ring projected via :focus-within</label>
             <div className="in-group md" style={{outline:'var(--ring-width) solid var(--ring)', outlineOffset:'var(--ring-offset)'}}>
-              <input className="in-control" defaultValue="forge-platform" readOnly/>
+              <input className="in-control" defaultValue="eidos-platform" readOnly/>
             </div>
           </div>
           <div className="in-field">

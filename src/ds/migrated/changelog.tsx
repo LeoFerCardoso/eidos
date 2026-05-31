@@ -7,7 +7,7 @@ import { ChangelogView, type ChangelogEntry } from '@/components/docs';
 const CHANGELOG: ChangelogEntry[] = [
   // ─── v1.15.0 — Catalog-wide design-critique remediation (2026-05-31) ──────
   { version: 'v1.15.0', date: '2026-05-31', type: 'fix', scope: 'core', title: 'Design-critique remediation across all 217 doc pages',
-    summary: 'A full design audit (every doc page + every Storybook story) drove a fix program closed against forge:verify (0 block-fail) + headless render. 11 P0 corrected: contrast on the Color ember-scale, Severity tiles, Textarea counter and mobile Snackbar — now token-driven and AA in both themes; emoji slop removed from Response/Pagination; status.tsx’s page-local CSS block promoted into ds.css. The single ember-on-fill invariant and the ≤220-char lede budget hold catalog-wide.' },
+    summary: 'A full design audit (every doc page + every Storybook story) drove a fix program closed against eidos:verify (0 block-fail) + headless render. 11 P0 corrected: contrast on the Color ember-scale, Severity tiles, Textarea counter and mobile Snackbar — now token-driven and AA in both themes; emoji slop removed from Response/Pagination; status.tsx’s page-local CSS block promoted into ds.css. The single ember-on-fill invariant and the ≤220-char lede budget hold catalog-wide.' },
   { version: 'v1.15.0', date: '2026-05-31', type: 'feat', scope: 'core', title: 'Doc↔code a11y/motion sync — documented behaviour implemented, not just described',
     summary: '~130 "docs claim X, component does Y" mismatches closed by IMPLEMENTING the documented behaviour in @eidos/ui (never by deleting the promise): LogViewer body gained real keyboard panning (arrows/PageUp/Down/Home/End) + role="log" + aria-live + a focus ring; mobile Checkbox rows regained their focus-visible ring; severity-chip aria-pressed, prefers-reduced-motion guards and missing ARIA wired across AI/IDP/mobile components. The few cases where implementing would change a shipped contract had their docs corrected to the truth instead.' },
   { version: 'v1.15.0', date: '2026-05-31', type: 'tokens', scope: 'core', title: 'New tokens — --ink-fixed, --snackbar-bg/-fg, --severity-p{0..3}-ink, --tnum',
@@ -28,8 +28,8 @@ const CHANGELOG: ChangelogEntry[] = [
     summary: 'Nav items now sort A-Z within each section (Get Started keeps its pedagogical order; each DS landing is pinned first), and Storybook sorts stories alphabetically within each group.' },
 
   // ─── v1.13.0 — Deterministic contract harness + consolidation (2026-05-29) ──────
-  { version: 'v1.13.0', date: '2026-05-30', type: 'feat', scope: 'core', title: 'Deterministic contract harness — npm run forge:verify',
-    summary: 'A single machine-readable forge.contract.json defines "a component is Done" across its four surfaces (docs page, @eidos/ui export, Storybook story, registry item). forge:verify aggregates every check — a11y, headless render, nav integrity, frame-code, visual regression, 4-surface parity, section structure, story coverage, registry validity — into per-component clause results, applies reviewed waivers, and renders a generated EIDOS-HEALTH.md wall. New PreToolUse + Stop hooks gate edits against the contract.' },
+  { version: 'v1.13.0', date: '2026-05-30', type: 'feat', scope: 'core', title: 'Deterministic contract harness — npm run eidos:verify',
+    summary: 'A single machine-readable eidos.contract.json defines "a component is Done" across its four surfaces (docs page, @eidos/ui export, Storybook story, registry item). eidos:verify aggregates every check — a11y, headless render, nav integrity, frame-code, visual regression, 4-surface parity, section structure, story coverage, registry validity — into per-component clause results, applies reviewed waivers, and renders a generated EIDOS-HEALTH.md wall. New PreToolUse + Stop hooks gate edits against the contract.' },
   { version: 'v1.13.0', date: '2026-05-29', type: 'feat', scope: 'core', title: 'Component consolidation + generated API tables',
     summary: 'The Pill/Chip/Badge trio was unified, Calendar gained a single selectionMode, CountUp/Counter de-duplicated, and Select rebuilt as a custom dropdown. API reference tables are now generated from the typed component props (<AutoPropsTable> backed by props.generated), so they can no longer drift from the source; the core components were typed and JSDoc-documented to feed them.' },
 
@@ -132,7 +132,7 @@ const CHANGELOG: ChangelogEntry[] = [
     summary: '.ds-link.active and .nav-item.active now use background: var(--surface-active) + color: var(--fg) + font-weight 600. The ember-coloured text was distracting; the existing left rail + bold + surface-active tone are enough to mark the current page. Both selectors stay in sync.' },
   { version: 'v1.8.0', date: '2026-05-17', type: 'fix',      scope: 'foundations',  title: 'Spacing scale — column gap + bar room',
     summary: 'Bar column 80px → 110px (so the 96px max bar stops touching the description), grid gap 16 → 24, paddingInlineStart: 8 on description cell. Each row of the spacing table now has breathing room between the bar end and the usage text.' },
-  { version: 'v1.8.0', date: '2026-05-17', type: 'docs',     scope: 'core',         title: 'Gap analysis report — forge-design-system/gap-analysis.html',
+  { version: 'v1.8.0', date: '2026-05-17', type: 'docs',     scope: 'core',         title: 'Gap analysis report — eidos-design-system/gap-analysis.html',
     summary: 'Long-form audit of the DS in 5 categories (token discipline, primitives, page structure, copywriting, component composition). 17 findings prioritised crit / high / med / low / ok with file references and recommendations. Findings TKN-01, TKN-02, TKN-03, TKN-04, CMP-03, PRI-03 all addressed in this version; the rest are scheduled.' },
   { version: 'v1.8.0', date: '2026-05-17', type: 'fix',      scope: 'core',         title: 'Version badge synced to v1.8.0 in sidebar + topbar',
     summary: 'Sidebar sub-text ("Design System v1.8.0") and topbar pill ("v1.8.0 · Stable") updated in shell.jsx — they always stay in sync.' },
@@ -195,7 +195,7 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.6.0', date: '2026-05-16', type: 'fix',      scope: 'charts',       title: 'Chart titles + legend titles + heatmap popover legibility',
     summary: 'fc-title bumped 14 → 15 px, fc-subtitle 12 → 13 px + weight 500 + brighter --fg-muted, fc-meta still mono but on --fg-muted (was --fg-faint). Recharts legend-item-text 13 → 13.5 px. Heatmap popover title 13 → 14 px / letter-spacing tightened. Cartesian axis ticks 11.5 → 12 px / weight 500. Polar ticks 12 → 12.5 px / weight 500 / --fg-muted → --fg.' },
   { version: 'v1.6.0', date: '2026-05-16', type: 'fix',      scope: 'charts',       title: 'Do / Don\'t live demos rendered empty',
-    summary: '.dd-card .body is a flex-center wrapper, so block-level chart children collapsed to 0 width — Recharts ResponsiveContainer reported 0×140 and emitted nothing. Added explicit width:100% on .forge-chart / .pipeline / .timeline / .ring-bar inside Do / Don\'t bodies so all live demos render at full container width.' },
+    summary: '.dd-card .body is a flex-center wrapper, so block-level chart children collapsed to 0 width — Recharts ResponsiveContainer reported 0×140 and emitted nothing. Added explicit width:100% on .eidos-chart / .pipeline / .timeline / .ring-bar inside Do / Don\'t bodies so all live demos render at full container width.' },
 
   // ─── v1.5.0 — Phase 3 polish round + Examples in sidebar (2026-05-16) ──
   { version: 'v1.5.0', date: '2026-05-16', type: 'feat',     scope: 'core',       title: 'Examples group in the sidebar',
@@ -211,7 +211,7 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.5.0', date: '2026-05-16', type: 'fix',      scope: 'charts',     title: 'Chart legend + axis text legibility',
     summary: 'Recharts default legend at 12px / --fg-muted was hard to read. Bumped to 13 px / --fg / 500 with 18px item gap. Cartesian axis ticks went from 11px / --fg-faint to 11.5px / --fg-muted. Polar (radar) ticks went to 12px / --fg-muted / 500. Polar grid softened to 0.55 opacity so data shapes pop.' },
   { version: 'v1.5.0', date: '2026-05-16', type: 'fix',      scope: 'chart-sankey', title: 'Sankey rendered empty — fixed the link renderer',
-    summary: 'The previous ForgeLink read props.d, but Recharts Sankey passes sourceX/targetX/sourceY/targetY/sourceControlX/targetControlX + linkWidth and expects the renderer to build the path. Rewrote ForgeLink to construct the cubic bezier; ribbons now appear with palette-indexed colours and stroke-opacity 0.28 → 0.6 on hover.' },
+    summary: 'The previous EidosLink read props.d, but Recharts Sankey passes sourceX/targetX/sourceY/targetY/sourceControlX/targetControlX + linkWidth and expects the renderer to build the path. Rewrote EidosLink to construct the cubic bezier; ribbons now appear with palette-indexed colours and stroke-opacity 0.28 → 0.6 on hover.' },
   { version: 'v1.5.0', date: '2026-05-16', type: 'fix',      scope: 'chart-radar', title: 'Radar polygons softer, axis text legible',
     summary: 'Stroke 2 → 1.25, fill opacity 0.25 → 0.18, polar grid radial lines off, axis labels promoted to 12 px / --fg / 500 via a shared angleTick style. Dots stroked in --surface so they pop without breaking the polygon shape. Comparison radar (two series) reads clearly now.' },
   { version: 'v1.5.0', date: '2026-05-16', type: 'feat',     scope: 'chart-heatmap', title: 'Heatmap cell hover popover (AI Label style)',
@@ -227,7 +227,7 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.4.0', date: '2026-05-16', type: 'feat',     scope: 'examples',   title: 'AI Insights — Eidos agent home',
     summary: 'Landing page of the Eidos IDP. Hero strip with top 3 ranked findings (drift, risk, cost), 4 KPI cards, agent-ranked insights feed, today\'s priorities sidebar, tribe pulse strip, weekly digest. Inspired by Linear AI / Github / Backstage homepage patterns.' },
   { version: 'v1.4.0', date: '2026-05-16', type: 'feat',     scope: 'examples',   title: 'Agent Chat — ChatGPT-in-the-platform drawer',
-    summary: 'Service detail page with the Eidos agent in a 480px right drawer. Demonstrates user turns, agent turns with citations, thinking blocks, tool calls (observability.read, forge.openPR), and inline PR drafts with Change Risk Score. Inspired by Cursor / Copilot Chat / Linear AI.' },
+    summary: 'Service detail page with the Eidos agent in a 480px right drawer. Demonstrates user turns, agent turns with citations, thinking blocks, tool calls (observability.read, eidos.openPR), and inline PR drafts with Change Risk Score. Inspired by Cursor / Copilot Chat / Linear AI.' },
   { version: 'v1.4.0', date: '2026-05-16', type: 'feat',     scope: 'patterns',   title: '5 pattern shells',
     summary: 'dashboard-shell · detail-shell · catalog-shell · wizard · console-split — composable layout templates that demonstrate how to wire primitives together for the most common page types in an IDP. All five live under Patterns.' },
   { version: 'v1.4.0', date: '2026-05-16', type: 'fix',      scope: 'charts',     title: 'Hover / highlight colours theme-aware',
@@ -237,7 +237,7 @@ const CHANGELOG: ChangelogEntry[] = [
 
   // ─── v1.3.0 — Phase 3 rework + Charts / Elements (2026-05-16) ────────────
   { version: 'v1.3.0', date: '2026-05-16', type: 'feat',     scope: 'charts',     title: 'Charts group with 11 chart types',
-    summary: 'Recharts-powered, themed with Eidos tokens. Bar, line, area, histogram, pie, gauge, composed, radar, radial, sankey, heatmap. Each page documents 2–4 variants and a real IDP-shaped dataset. New <ForgeChart>, <ForgeTooltipContent>, useChartColors helpers in charts.jsx.' },
+    summary: 'Recharts-powered, themed with Eidos tokens. Bar, line, area, histogram, pie, gauge, composed, radar, radial, sankey, heatmap. Each page documents 2–4 variants and a real IDP-shaped dataset. New <EidosChart>, <EidosTooltipContent>, useChartColors helpers in charts.jsx.' },
   { version: 'v1.3.0', date: '2026-05-16', type: 'feat',     scope: 'elements',   title: 'Elements group — IDP recipes',
     summary: 'New top-level group dedicated to compositions of existing primitives. 8 pages: severity-pill, health-badge, metric-card, score-gauge, service-card, agent-card, stat — plus an overview landing. Pages emphasise that these are recipes, not new components.' },
   { version: 'v1.3.0', date: '2026-05-16', type: 'feat',     scope: 'banner',     title: 'Banner (replaces Alert bar)',

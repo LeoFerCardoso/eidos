@@ -62,7 +62,7 @@ export const AllTones: Story = {
       </Alert>
       <Alert tone="success">
         <AlertTitle>Deployment succeeded</AlertTitle>
-        <AlertDescription>forge-api v2.14.0 rolled out to all regions in 4m 12s.</AlertDescription>
+        <AlertDescription>eidos-api v2.14.0 rolled out to all regions in 4m 12s.</AlertDescription>
       </Alert>
       <Alert tone="warning">
         <AlertTitle>Approaching quota</AlertTitle>

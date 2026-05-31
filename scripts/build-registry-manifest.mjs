@@ -25,7 +25,7 @@ items.push({
   type: 'registry:style',
   title: 'Forge base',
   description:
-    'The Forge design-system foundation — semantic design tokens (OKLCH, light + dark), the shared ds.css component layer, and the cn() class helper. Install this once before adding any component.',
+    'The Eidos design-system foundation (Forge theme) — semantic design tokens (OKLCH, light + dark), the shared ds.css component layer, and the cn() class helper. Install this once before adding any component.',
   dependencies: ['clsx', 'tailwind-merge'],
   registryDependencies: [],
   files: [
@@ -39,7 +39,7 @@ items.push({
   name: 'forge-ai',
   type: 'registry:file',
   title: 'Forge AI styles',
-  description: 'The ai.css layer that styles the Forge AI components (.ai-* classes). Pulled automatically when you add an AI component.',
+  description: 'The ai.css layer that styles the Eidos AI components (.ai-* classes). Pulled automatically when you add an AI component.',
   registryDependencies: ['forge'],
   files: [{ source: 'styles/ai.css', type: 'registry:file', target: 'styles/forge/ai.css' }],
 });
@@ -50,7 +50,7 @@ for (const it of gen.items) {
     name: it.name,
     type: 'registry:ui',
     title: TITLE(it.name),
-    description: `Forge ${TITLE(it.name)} component.`,
+    description: `Eidos ${TITLE(it.name)} component.`,
     ...(it.npm.length ? { dependencies: it.npm } : {}),
     registryDependencies: [...new Set(regDeps)],
     files: [{ source: `src/forge/${it.name}.tsx`, type: 'registry:ui', target: `components/forge/${it.name}.tsx` }],
@@ -59,7 +59,7 @@ for (const it of gen.items) {
 
 const out = {
   $schema: 'https://ui.shadcn.com/schema/registry.json',
-  name: 'forge',
+  name: 'eidos',
   homepage: 'https://eidos.equifax.dev',
   items,
 };

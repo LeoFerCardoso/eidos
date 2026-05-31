@@ -12,7 +12,7 @@ const meta = {
       description: {
         component:
           'A compact monospaced chip that displays a 1–2 letter model abbreviation inside ' +
-          'the ModelSelector trigger. Composes the Forge Chip (badge family) with a size ' +
+          'the ModelSelector trigger. Composes the Eidos Chip (badge family) with a size ' +
           'override tuned for inline use in the prompt composer footer. Use it wherever a ' +
           'model identity needs to appear in a constrained horizontal slot — trigger buttons, ' +
           'history rows, deployment cards, or agent-run meta lines.',
@@ -36,17 +36,17 @@ export const Default: Story = {
 };
 
 /**
- * All three Forge-hosted model abbreviations side by side.
+ * All three Eidos-hosted model abbreviations side by side.
  * S = Sonnet 4.6  ·  O = Opus 4.7  ·  H = Haiku 4.5
  * Shows how the chip scales across the roster of available models.
  */
 export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-      {/* Forge-hosted models */}
+      {/* Eidos-hosted models */}
       <div>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--fg-muted)', marginBottom: 8, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-          Forge-hosted models
+          Eidos-hosted models
         </p>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <ModelBadge short="S" />

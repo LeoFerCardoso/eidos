@@ -56,7 +56,7 @@ npx eidos@latest add metric-card
       </Lede>
       <CodeBlock
         label="terminal"
-        code={`npx shadcn@latest add https://forge.equifax.dev/r/metric-card.json`}
+        code={`npx shadcn@latest add https://eidos.equifax.dev/r/metric-card.json`}
         lang="bash"
       />
 

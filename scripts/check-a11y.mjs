@@ -19,7 +19,7 @@ if (!routes.length) routes = ['/', '/buttons', '/color', '/forms', '/table', '/i
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const getJSON = (p) => new Promise((res, rej) => http.get({ host: '127.0.0.1', port: PORT, path: p }, (r) => { let d = ''; r.on('data', (c) => (d += c)); r.on('end', () => res(JSON.parse(d))); }).on('error', rej));
-const chrome = spawn(CHROME, [`--remote-debugging-port=${PORT}`, '--headless=new', '--disable-gpu', '--no-first-run', '--user-data-dir=/tmp/forge-axe', 'about:blank']);
+const chrome = spawn(CHROME, [`--remote-debugging-port=${PORT}`, '--headless=new', '--disable-gpu', '--no-first-run', '--user-data-dir=/tmp/eidos-axe', 'about:blank']);
 
 async function main() {
   let targets;

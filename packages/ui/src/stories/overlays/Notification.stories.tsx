@@ -4,7 +4,7 @@ import { Notification, Toaster, useToast } from '@eidos/ui';
 import type { ToasterPosition, ToastTone } from '@eidos/ui';
 
 // ═══════════════════════════════════════════════════════════════════════════
-// Notification — Forge DS
+// Notification — Eidos DS
 //
 // The doc page (src/ds/migrated/notification.tsx) documents TWO surfaces:
 //   • Toaster + useToast()  — the PRIMARY surface: ephemeral portal toasts
@@ -273,7 +273,7 @@ export const WithUndo: Story = {
               toast({
                 tone: 'default',
                 title: 'Item deleted',
-                description: 'forge-api/deploy.md moved to trash.',
+                description: 'eidos-api/deploy.md moved to trash.',
                 duration: 5000,
                 action: { label: 'Undo', onClick: () => {} },
               })
@@ -310,7 +310,7 @@ export const InContext: Story = {
             }}
           >
             <div>
-              <div style={{ fontWeight: 600, fontSize: 16 }}>forge-api</div>
+              <div style={{ fontWeight: 600, fontSize: 16 }}>eidos-api</div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-muted)' }}>
                 us-east-1 {'·'} node20 {'·'} v4.18.2
               </div>
@@ -395,9 +395,9 @@ export const InlineAllTones: Story = {
   render: () => {
     const [dismissed, setDismissed] = React.useState<Set<string>>(new Set());
     const configs: Array<{ tone: NonNullable<React.ComponentProps<typeof Notification>['tone']>; title: string; description: string }> = [
-      { tone: 'default', title: 'Runbook updated', description: 'forge-api/deploy.md was edited 3 minutes ago.' },
-      { tone: 'info', title: 'New agent runtime available', description: 'Forge Agent Runtime v2.4.0 reduces cold-start latency.' },
-      { tone: 'success', title: 'Certificate renewed', description: 'TLS cert for api.forge.internal renewed. Expires 2027-05-30.' },
+      { tone: 'default', title: 'Runbook updated', description: 'eidos-api/deploy.md was edited 3 minutes ago.' },
+      { tone: 'info', title: 'New agent runtime available', description: 'Eidos Agent Runtime v2.4.0 reduces cold-start latency.' },
+      { tone: 'success', title: 'Certificate renewed', description: 'TLS cert for api.eidos.internal renewed. Expires 2027-05-30.' },
       { tone: 'warning', title: 'Quota at 91%', description: 'Your org has consumed 91 of 100 seat licences.' },
       { tone: 'danger', title: 'Webhook delivery failures', description: '12 events to orders.internal failed in the last hour.' },
     ];

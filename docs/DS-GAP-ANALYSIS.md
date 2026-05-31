@@ -153,7 +153,7 @@ not imported" DS this is a reasonable choice and it's well-built.
 
 **The one structural risk: code-string drift.** `Frame`'s `code` prop is a **hand-written
 string**, independent of the JSX actually rendered above it. Nothing guarantees they match — edit
-the demo, forget the string, and the page now shows working UI next to stale/wrong copy-paste
+the demo, eidost the string, and the page now shows working UI next to stale/wrong copy-paste
 code. This is the defining weakness of the no-Storybook approach and it is currently unguarded.
 
 **Also missing vs. a mature component workbench:** interactive prop controls (knobs), an isolated

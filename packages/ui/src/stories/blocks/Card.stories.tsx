@@ -159,7 +159,7 @@ export const WithMedia: Story = {
         SERVICE
       </CardMedia>
       <CardHeader>
-        <CardTitle>forge-api</CardTitle>
+        <CardTitle>eidos-api</CardTitle>
         <CardDescription>Edge-deployed REST gateway. 4 regions.</CardDescription>
       </CardHeader>
       <CardFooter>
@@ -195,9 +195,9 @@ export const Interactive: Story = {
       }}
     >
       {[
-        { name: 'forge-api', desc: 'REST gateway · 99.94% uptime' },
-        { name: 'forge-jobs', desc: 'Background workers · 12 active' },
-        { name: 'forge-ledger', desc: 'Event store · 3.2M events/day' },
+        { name: 'eidos-api', desc: 'REST gateway · 99.94% uptime' },
+        { name: 'eidos-jobs', desc: 'Background workers · 12 active' },
+        { name: 'eidos-ledger', desc: 'Event store · 3.2M events/day' },
       ].map((s) => (
         <a
           key={s.name}
@@ -226,7 +226,7 @@ export const HeaderWithAction: Story = {
       <CardHeader row>
         <div>
           <CardTitle>Recent deploys</CardTitle>
-          <CardDescription>Last 30 days · forge-api</CardDescription>
+          <CardDescription>Last 30 days · eidos-api</CardDescription>
         </div>
         <button className="btn xs">View all</button>
       </CardHeader>
@@ -265,7 +265,7 @@ export const ElevatedVariant: Story = {
     <Card {...args} style={{ width: 360 }}>
       <CardHeader>
         <CardTitle>Incident #4821</CardTitle>
-        <CardDescription>forge-api · SEV-2 · Resolved</CardDescription>
+        <CardDescription>eidos-api · SEV-2 · Resolved</CardDescription>
       </CardHeader>
       <CardContent>Latency spike on EU-West-1 node. Rollback deployed in 4 min.</CardContent>
       <CardFooter actions>
@@ -300,7 +300,7 @@ export const GhostVariant: Story = {
       </p>
       <Card {...args}>
         <CardHeader>
-          <CardTitle>forge-api</CardTitle>
+          <CardTitle>eidos-api</CardTitle>
           <CardDescription>No extra elevation inside the group surface.</CardDescription>
         </CardHeader>
         <CardContent>99.94% uptime · p50 12ms</CardContent>
@@ -365,7 +365,7 @@ export const InContext: Story = {
           <CardHeader row>
             <div>
               <CardTitle>Recent deploys</CardTitle>
-              <CardDescription>forge-api · last 30 days</CardDescription>
+              <CardDescription>eidos-api · last 30 days</CardDescription>
             </div>
             <button
               className="btn xs outline"
@@ -437,7 +437,7 @@ export const RTL: Story = {
         <CardHeader row>
           <div>
             <CardTitle>عمليات النشر الأخيرة</CardTitle>
-            <CardDescription>آخر ٣٠ يومًا · forge-api</CardDescription>
+            <CardDescription>آخر ٣٠ يومًا · eidos-api</CardDescription>
           </div>
           <button className="btn xs">عرض الكل</button>
         </CardHeader>

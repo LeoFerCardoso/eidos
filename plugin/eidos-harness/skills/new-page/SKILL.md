@@ -15,11 +15,15 @@ allowed-tools: [Read, Edit, Write, Bash, Grep]
 ## 1. Decide: PAGE or EXAMPLE
 
 - **Page** = a docs surface that renders inside the DS shell (Foundations, Patterns,
-  Get Started, a non-`components` doc page). Registers `window.PAGES['<slug>']`.
-  Read `${CLAUDE_PLUGIN_ROOT}/skills/component-page/SKILL.md`.
+  Get Started, a non-`components` doc page). It's idiomatic TSX at `src/ds/migrated/<slug>.tsx`
+  (core) or `src/ds/migrated/<ds>/<slug>.tsx` (sub-DS) — `'use client'`, default export,
+  imports from `@/ds/core`, auto-registered by `gen-migrated` (no `window.PAGES`).
+  Read `${CLAUDE_PLUGIN_ROOT}/skills/component-page/SKILL.md` **and follow `docs/DS-PAGE-STANDARD.md`**
+  (the canonical section order + the required Accessibility + visual Anatomy + Do/Don't).
 - **Example** = a complete, standalone IDP product screen rendered **without** the docs
-  shell. Registers `window.EXAMPLES['<name>']`, lives in `src/ds/examples/<name>.jsx`,
-  and its nav entry carries `external: true`. Read `${CLAUDE_PLUGIN_ROOT}/skills/idp-screen/SKILL.md`.
+  shell. Idiomatic TSX at `src/ds/examples/<name>.tsx` (default export), resolved by
+  `EXAMPLES_REG` (`gen-examples`); its nav entry carries `external: true`. Read
+  `${CLAUDE_PLUGIN_ROOT}/skills/idp-screen/SKILL.md`.
 
 When unsure: if it's a real product screen built from existing blocks, it's an Example.
 
@@ -32,21 +36,24 @@ When unsure: if it's a real product screen built from existing blocks, it's an E
   with forms also `form-validation.md`.
 - `llms.txt` **Examples** + **Elements** sections and `EIDOS-DS-REFERENCE.md` — the
   screen or block almost always already exists; adapt before building new.
-- Inspect a sibling for the exact registration pattern: examples in
-  `src/ds/examples/*.jsx` (e.g. `agent-catalog.jsx`, `dora-dashboard.jsx`), pages in
-  `src/ds/pages/foundations/*.jsx`.
+- Inspect a sibling for the exact pattern: examples in `src/ds/examples/*.tsx` (e.g.
+  `agent-catalog.tsx`, `dora-dashboard.tsx`), pages in `src/ds/migrated/*.tsx` /
+  `src/ds/migrated/<ds>/*.tsx`. `src/ds/migrated/buttons.tsx` is the gold-reference page.
 
-## 3. Route ritual (same THREE-step rule as any DS route)
+## 3. Route ritual (current architecture — idiomatic TSX; NO `window.PAGES`/`.jsx`/`gen-manifest`)
 
-1. **`src/ds/core/nav-config.js`** — add the leaf in the right group.
-   - Page: `{ id: '<slug>', label: '<Label>', href: 'pages/<group>/<slug>.html' }`.
-   - Example: `{ id: 'ex-<name>', label: '<Label>', href: 'pages/examples/<name>.html', external: true }`.
-2. **Source module**:
-   - Page → `src/ds/pages/<group>/<slug>.jsx` ending in `window.PAGES['<slug>'] = C;`.
-   - Example → `src/ds/examples/<name>.jsx` ending in `window.EXAMPLES['<name>'] = C;`
-     (use `FShell`/`FPageHeader` from `window`, render standalone — no docs sidebar).
-3. **`node scripts/gen-manifest.mjs`** (auto-run by dev/build). Confirms the route in
-   `src/ds/runtime/manifest.generated.ts`.
+1. **`src/ds/core/nav-config.js`** — add the leaf in the right `ds:`-tagged group.
+   - Page: `{ id:'<slug>', label:'<Label>', href:'pages/<ds>/<slug>.html', badge:'new' }`.
+   - Example: `{ id:'ex-<name>', label:'<Label>', href:'pages/examples/<name>.html', external:true }`.
+2. **Source module** (default export, `'use client'`, imports from `@/ds/core`):
+   - Page → `src/ds/migrated/<ds>/<slug>.tsx` (core: `src/ds/migrated/<slug>.tsx`) →
+     auto-registered into `src/ds/migrated/registry.ts` by `gen-migrated`.
+   - Example → `src/ds/examples/<name>.tsx` (full-screen, no docs shell) → registered into
+     `src/ds/examples/registry.ts` by `gen-examples`; use the `example-shell` helpers.
+3. **Regenerate + restart** — `node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs &&
+   node scripts/gen-examples.mjs` (auto-run by dev/build). **Restart `next dev`** — new routes
+   404 until restart. For a docs page, follow `docs/DS-PAGE-STANDARD.md` incl. **typography (§3.5,
+   use `<Lede>`/`<Mono>`)** and the **required RTL section (§3.6)**.
 
 ## 4. State coverage (mandatory for screens)
 

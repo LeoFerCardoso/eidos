@@ -179,7 +179,7 @@ for maintainability/scale · **P2** = polish.
 - **Recommendation:** A **registry** (à la shadcn): `registry/<name>/{component.tsx,
   demo.tsx, meta.ts}`. Doc pages render `<ComponentPreview name="button" />` which pulls
   the live demo + source from the registry — DRY, and the same registry can power a
-  future `npx forge add button` CLI.
+  future `npx eidos add button` CLI.
 
 ### L. Testing & quality — **P1**
 - **Gap:** No unit/component/e2e tests, no Storybook, ESLint ignored at build.

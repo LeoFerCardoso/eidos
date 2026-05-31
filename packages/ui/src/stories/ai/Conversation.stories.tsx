@@ -42,12 +42,12 @@ export const Default: Story = {
     children: (
       <>
         <Message from="system" variant="compact">
-          Session opened · forge-ai/sonnet-4-6
+          Session opened · eidos-ai/sonnet-4-6
         </Message>
         <Message from="user" variant="compact" userAvatar={{ initials: 'LM', name: 'Leonardo Mariga' }}>
           Where do I find the Tier-1 incident runbooks?
         </Message>
-        <Message from="assistant" variant="compact" meta={<>Forge AI · 14:02</>}>
+        <Message from="assistant" variant="compact" meta={<>Eidos AI · 14:02</>}>
           In <code>docs/runbooks/tier-1/</code> — each service has its own Markdown file with the
           on-call rotation, dashboards, and rollback steps for the last three releases.
         </Message>
@@ -65,7 +65,7 @@ export const Tall: Story = {
         <Message from="user" variant="compact" userAvatar={{ initials: 'RM', name: 'Rafael Mendonça' }}>
           Is it safe to promote pix-router 2.7.0 to Ring 3?
         </Message>
-        <Message from="assistant" variant="compact" meta={<>Forge AI · 14:02</>}>
+        <Message from="assistant" variant="compact" meta={<>Eidos AI · 14:02</>}>
           Not yet — the canary at Ring 2 is showing a p99 regression of ~120 ms. Hold until the next
           metrics window (ETA 12 min).
         </Message>
@@ -123,7 +123,7 @@ export const DocumentMode: Story = {
             should monitor in 0422.
           </div>
         </div>
-        <Response meta={<>Forge AI · 14:02 · gpt-5</>}>
+        <Response meta={<>Eidos AI · 14:02 · gpt-5</>}>
           <h2>What changed in 0421</h2>
           <p>
             Three things shipped together — none of them broke in isolation, but their interaction
@@ -197,9 +197,9 @@ export const LiveThread: Story = {
   render: () => {
     function Live() {
       const seed: { id: number; from: 'user' | 'assistant' | 'system'; body: string; meta?: React.ReactNode }[] = [
-        { id: 0, from: 'system', body: 'Session opened · forge-ai/sonnet-4-6' },
+        { id: 0, from: 'system', body: 'Session opened · eidos-ai/sonnet-4-6' },
         { id: 1, from: 'user', body: 'Stuck on grpc retries — anything jump out?' },
-        { id: 2, from: 'assistant', meta: <>Forge AI · 14:02</>, body: 'Retry budget on grpc.toml was bumped from 3 to 8 in the last deploy.' },
+        { id: 2, from: 'assistant', meta: <>Eidos AI · 14:02</>, body: 'Retry budget on grpc.toml was bumped from 3 to 8 in the last deploy.' },
         { id: 3, from: 'assistant', body: 'That can mask a downstream timeout — billing-svc looks like the suspect.' },
       ];
       const [turns, setTurns] = React.useState(seed);
@@ -233,9 +233,9 @@ export const LiveThread: Story = {
       React.useEffect(() => {
         const sample: { from: 'user' | 'assistant'; body: string; meta?: React.ReactNode }[] = [
           { from: 'user', body: 'And what about the deploy after?' },
-          { from: 'assistant', meta: <>Forge AI · 14:04</>, body: 'That one only touched the migration runner — safe to roll back independently.' },
+          { from: 'assistant', meta: <>Eidos AI · 14:04</>, body: 'That one only touched the migration runner — safe to roll back independently.' },
           { from: 'user', body: 'Got it. Anything else worth checking?' },
-          { from: 'assistant', meta: <>Forge AI · 14:06</>, body: 'Watch the p99 on identity-svc — the same retry-bump cascades there too.' },
+          { from: 'assistant', meta: <>Eidos AI · 14:06</>, body: 'Watch the p99 on identity-svc — the same retry-bump cascades there too.' },
         ];
         let i = 0;
         const id = setInterval(() => {
@@ -294,7 +294,7 @@ export const InContext: Story = {
     function Thread() {
       const [vote, setVote] = React.useState<'up' | 'down' | null>(null);
       return (
-        <Conversation title="Forge AI · Engineering Intelligence">
+        <Conversation title="Eidos AI · Engineering Intelligence">
           <Message from="user" variant="compact" userAvatar={{ initials: 'LM', name: 'Leonardo Mariga' }}>
             Which T1 services are at risk of breaching SLO this week?
           </Message>
@@ -303,7 +303,7 @@ export const InContext: Story = {
             variant="compact"
             meta={
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>
-                Forge AI · Sonnet 4.6 · just now
+                Eidos AI · Sonnet 4.6 · just now
               </span>
             }
             actions={<MessageActions vote={vote} onVote={setVote} onCopy={() => {}} onRegen={() => {}} />}

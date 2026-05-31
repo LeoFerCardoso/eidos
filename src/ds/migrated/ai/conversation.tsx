@@ -22,7 +22,7 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
         <button className="btn xs ghost" aria-label="Export thread"><Icons.download size={13}/></button>
       </div>
       <div className="conv-body" tabIndex={0} role="log" aria-live="polite" aria-relevant="additions" aria-label="Incident replay · 0421">
-        <M from="system">Session opened · forge-ai/sonnet-4-6</M>
+        <M from="system">Session opened · eidos-ai/sonnet-4-6</M>
         <M from="user">Where do I find the Tier-1 incident runbooks?</M>
         <M from="assistant" meta={<>Eidos AI · 14:02</>}>
           In <code>docs/runbooks/tier-1/</code> — each service has its own Markdown file with the on-call rotation, dashboards, and rollback steps for the last three releases.
@@ -64,7 +64,7 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
   // appears above the first of the burst.
   const LiveConversation = () => {
     const [turns, setTurns] = React.useState<Array<{ id: number; from: 'user' | 'assistant' | 'system'; body: string; meta?: React.ReactNode }>>([
-      { id: 0, from: 'system',    body: 'Session opened · forge-ai/sonnet-4-6' },
+      { id: 0, from: 'system',    body: 'Session opened · eidos-ai/sonnet-4-6' },
       { id: 1, from: 'user',      body: 'Stuck on grpc retries — anything jump out?' },
       { id: 2, from: 'assistant', meta: <>Eidos AI · 14:02</>, body: 'Retry budget on grpc.toml was bumped from 3 to 8 in the last deploy.' },
       { id: 3, from: 'assistant', body: 'That can mask a downstream timeout — billing-svc looks like the suspect.' },
@@ -183,7 +183,7 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
     const [text, setText] = React.useState('');
     const [pending, setPending] = React.useState(false);
     const [turns, setTurns] = React.useState<Array<{ id: number; from: string; meta?: React.ReactNode; body: React.ReactNode; streaming?: boolean }>>([
-      { id: 0, from: 'system',    body: 'Session opened · forge-ai/sonnet-4-6' },
+      { id: 0, from: 'system',    body: 'Session opened · eidos-ai/sonnet-4-6' },
       { id: 1, from: 'user',      body: 'What changed in the 0421 release?' },
       { id: 2, from: 'assistant', meta: <>Eidos AI · 14:02</>, body: <>Three migrations were promoted in the 0421 release — none of them touched the retry budget directly, but one bumped <code>identity-svc</code>'s default pool size from 8 to 32.</> },
       { id: 3, from: 'assistant', body: <>The retry-budget bump masked a downstream timeout in <code>billing-svc</code>. Because the alert rename silently un-bound the alert, the page didn't fire until error rate hit 4%.</> },
@@ -296,7 +296,7 @@ import { Icons, ForgeMark, Frame, Section, SubHead, TabbedCode, PropsTable, Auto
         <div style={{ alignSelf: 'stretch' }}>
           <Alert tone="danger" assertive>
             <AlertTitle>Couldn&rsquo;t reach the model</AlertTitle>
-            <AlertDescription>The request to <Mono>forge-ai/sonnet-4-6</Mono> timed out after 30 s. Your prompt is kept in the composer.</AlertDescription>
+            <AlertDescription>The request to <Mono>eidos-ai/sonnet-4-6</Mono> timed out after 30 s. Your prompt is kept in the composer.</AlertDescription>
             <AlertActions>
               <button className="btn sm"><Icons.refresh size={13}/> Retry</button>
             </AlertActions>

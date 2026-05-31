@@ -17,7 +17,7 @@ const meta = {
         component:
           'Humanised relative timestamp ("3 min ago") inside a `<time>` element. ' +
           'Ticks every 60 s to stay fresh; `absolute` mode appends the formatted date, ' +
-          '`tooltip` wraps in a Forge `.tt` with the full datetime on hover.',
+          '`tooltip` wraps in a Eidos `.tt` with the full datetime on hover.',
       },
     },
   },
@@ -29,7 +29,7 @@ const meta = {
   },
   argTypes: {
     absolute: { control: 'boolean', description: 'Show absolute date alongside the relative phrase.' },
-    tooltip: { control: 'boolean', description: 'Wrap in a Forge tooltip showing the full datetime.' },
+    tooltip: { control: 'boolean', description: 'Wrap in a Eidos tooltip showing the full datetime.' },
     tooltipSide: { control: 'inline-radio', options: ['top', 'bottom', 'left', 'right'] },
   },
 } satisfies Meta<typeof RelativeTime>;

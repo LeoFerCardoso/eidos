@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-// Forge AI — prompt-input composer + suggestion chips.
+// Eidos AI — prompt-input composer + suggestion chips.
 //
 // PromptInput parts: SubmitBtn (→ exported as PromptSubmit), ModelPicker
 // (→ ModelSelector), ModelBadge, Attachment, DropZone, DragDropOverlay.
@@ -69,7 +69,7 @@ export const ModelBadge = ({ short = 'S' }: { short?: string }) => (
 // Model drop-up inside the composer footer. Anchors above the trigger.
 //   value     string — current model id
 //   onChange  (id: string) => void
-//   models    optional array override (default: Forge-example models)
+//   models    optional array override (default: Eidos-example models)
 export interface ModelOption {
   id: string;
   short: string;
@@ -78,9 +78,9 @@ export interface ModelOption {
 }
 
 const DEFAULT_MODELS: ModelOption[] = [
-  { id: 'forge-sonnet-4-6', short: 'S',  name: 'Sonnet 4.6', cost: '$3 / 1M' },
-  { id: 'forge-opus-4-7',   short: 'O',  name: 'Opus 4.7',   cost: '$15 / 1M' },
-  { id: 'forge-haiku-4-5',  short: 'H',  name: 'Haiku 4.5',  cost: '$1 / 1M' },
+  { id: 'eidos-sonnet-4-6', short: 'S',  name: 'Sonnet 4.6', cost: '$3 / 1M' },
+  { id: 'eidos-opus-4-7',   short: 'O',  name: 'Opus 4.7',   cost: '$15 / 1M' },
+  { id: 'eidos-haiku-4-5',  short: 'H',  name: 'Haiku 4.5',  cost: '$1 / 1M' },
 ];
 
 export const ModelSelector = ({
@@ -92,7 +92,7 @@ export const ModelSelector = ({
   value: string;
   /** Called with the model id when the user selects a different option. The parent is responsible for updating value. */
   onChange: (id: string) => void;
-  /** Optional array of model definitions. Defaults to three Forge-hosted models (Sonnet, Opus, Haiku). */
+  /** Optional array of model definitions. Defaults to three Eidos-hosted models (Sonnet, Opus, Haiku). */
   models?: ModelOption[];
 }) => {
   const [open, setOpen] = React.useState(false);
@@ -314,7 +314,7 @@ export const Attachment = ({
 // Basic drag-and-drop compositor with a footer drop hint.
 export const DropZone = ({
   onDrop,
-  modelValue = 'forge-sonnet-4-6',
+  modelValue = 'eidos-sonnet-4-6',
   onModelChange,
   children,
 }: {
@@ -363,7 +363,7 @@ export const DropZone = ({
 // Full-shell ember overlay variant (paints a veil over the whole composer).
 export const DragDropOverlay = ({
   onDrop,
-  modelValue = 'forge-sonnet-4-6',
+  modelValue = 'eidos-sonnet-4-6',
   onModelChange,
   initialFiles = [],
   placeholder,

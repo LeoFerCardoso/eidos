@@ -134,7 +134,7 @@ export const InContext: Story = {
                 <span className="avatar md ember">LF</span>
                 <div>
                   <div style={{ fontWeight: 600, color: 'var(--fg)', fontSize: 'var(--text-base)' }}>Layla Faraj</div>
-                  <div style={{ color: 'var(--fg-muted)', fontSize: 'var(--text-sm)' }}>Lead designer · Forge core</div>
+                  <div style={{ color: 'var(--fg-muted)', fontSize: 'var(--text-sm)' }}>Lead designer · Eidos core</div>
                 </div>
               </div>
               <p style={{ margin: 0, color: 'var(--fg-muted)', fontSize: 'var(--text-sm)', lineHeight: 1.6 }}>

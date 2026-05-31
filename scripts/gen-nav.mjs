@@ -74,7 +74,7 @@ export type NavGroup = {
   subgroups?: { subgroup: string; items: NavItem[] }[];
 };
 
-export const NAV_VERSION = ${JSON.stringify(win.FORGE_VERSION || '1.8.0')};
+export const NAV_VERSION = ${JSON.stringify(win.EIDOS_VERSION || '1.8.0')};
 
 /** The ordered family of Design Systems. \`core\` is the shared base. */
 export const DESIGN_SYSTEMS: DesignSystem[] = ${JSON.stringify(DS, null, 2)};

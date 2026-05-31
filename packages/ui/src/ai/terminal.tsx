@@ -1,5 +1,5 @@
 import * as React from 'react';
-// Forge AI — Terminal.
+// Eidos AI — Terminal.
 //
 // A focused command surface for showing what the agent ran and what came
 // back. NOT a real terminal emulator: it's a styled mono container with

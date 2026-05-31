@@ -2,7 +2,7 @@ import * as React from 'react';
 import { cn } from './lib/utils';
 import { Icons } from './icons';
 
-// Forge DS — Collapsible
+// Eidos DS — Collapsible
 //
 // Single disclosure: one trigger + one animated region.
 // The atom beneath Accordion — use it directly when only one optional region

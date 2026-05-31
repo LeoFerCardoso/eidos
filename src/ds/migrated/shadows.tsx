@@ -209,7 +209,7 @@ export default function Elevation() {
                 color:'var(--fg-muted)', lineHeight: 1.6,
               }}>
                 <div className="t-mono-label" style={{padding:0, marginBottom: 4}}>--bg-elevated</div>
-                forge deploy --canary=10
+                eidos deploy --canary=10
               </pre>
             </div>
             <div style={{padding: 16, background:'var(--surface-hover)', borderRadius: 'var(--radius-xl)', border:'1px solid var(--border)', boxShadow:'var(--elev-2)'}}>
@@ -256,7 +256,7 @@ export default function Elevation() {
             where: 'card · row · panel divider',
             sample: (
               <div style={{display:'flex', flexDirection:'column', gap: 0, background:'var(--surface)', borderRadius: 'var(--radius-lg)', overflow:'hidden', border:'1px solid rgba(255,255,255,0.06)'}}>
-                {['forge-api', 'forge-web', 'forge-worker'].map((s, i) => (
+                {['eidos-api', 'eidos-web', 'eidos-worker'].map((s, i) => (
                   <div key={s} style={{padding:'8px 12px', fontSize: 'var(--text-base)', color:'var(--fg)', borderTop: i ? '1px solid rgba(255,255,255,0.06)' : 'none', display:'flex', justifyContent:'space-between'}}>
                     <span>{s}</span>
                     <span className="t-mono" style={{color:'var(--fg-subtle)', fontSize: 'var(--text-xs)'}}>healthy</span>
