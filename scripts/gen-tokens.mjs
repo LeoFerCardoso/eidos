@@ -25,7 +25,10 @@ function block(re) {
   return css.slice(start, i - 1);
 }
 const rootBody = block(/:root\s*\{/g);
-const lightBody = block(/\[data-theme="light"\]\s*\{/g); // the token block — component rules have a class before `{`
+// The Forge light token block. Anchored to line-start so it matches the bare
+// `[data-mode="light"] {` and never the Iris `[data-ds-theme="iris"][data-mode="light"]`
+// block (which starts with `[data-ds-theme=`) nor component rules (a class before `{`).
+const lightBody = block(/^\[data-mode="light"\]\s*\{/gm);
 
 const DECL = /--([\w-]+)\s*:\s*([^;]+);[ \t]*(?:\/\*([^*]*(?:\*(?!\/)[^*]*)*)\*\/)?/g;
 function decls(body) {

@@ -42,11 +42,11 @@ export default function NoiseGrainPage() {
       </Frame>
 
       <SubHead meta="theme behavior">Dark vs light</SubHead>
-      <Lede up>The blend mode and the noise tile both swap with <Mono>data-theme</Mono>: a white-channel tile on <Mono>screen</Mono> for dark, a black-channel tile on <Mono>multiply</Mono> for light. No JS, no prop — set the theme attribute and the grain inverts itself.</Lede>
+      <Lede up>The blend mode and the noise tile both swap with <Mono>data-mode</Mono>: a white-channel tile on <Mono>screen</Mono> for dark, a black-channel tile on <Mono>multiply</Mono> for light. No JS, no prop — set the theme attribute and the grain inverts itself.</Lede>
       <Frame label="screen blend in dark · multiply in light · auto-inverted">
         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap: 12, width:'100%'}}>
           <div className="pat-noise pat-mesh pat-demo">current theme</div>
-          <div data-theme="light" className="pat-noise pat-mesh pat-demo" style={{background:'var(--bg)', color:'var(--fg-muted)'}}>flip a child to light</div>
+          <div data-mode="light" className="pat-noise pat-mesh pat-demo" style={{background:'var(--bg)', color:'var(--fg-muted)'}}>flip a child to light</div>
         </div>
       </Frame>
 

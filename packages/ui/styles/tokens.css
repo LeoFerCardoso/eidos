@@ -258,7 +258,7 @@
    *
    * Pattern: each role exposes a solid color and a soft (~14% alpha)
    * variant for pill / chip backgrounds. Solids stay flat across
-   * themes; softs are re-derived under [data-theme="light"] below.
+   * themes; softs are re-derived under [data-mode="light"] below.
    * ============================================================ */
 
   /* Data viz — 12 categorical hues for charts. Order is meaningful:
@@ -423,7 +423,7 @@
   --shadow-5: var(--elev-4);
 }
 
-[data-theme="light"] {
+[data-mode="light"] {
   /* ── SURFACES — light mode (mirror of dark) ──────────────────────────────
      Same monotonic logic, deeper grey → pure white. Surface itself is #FFF
      so paper-white cards read as the workspace; canvas drops well below for
@@ -466,10 +466,10 @@
   --ember-fg:  #FFFFFF;
   --danger-fg: #FFFFFF;
   /* Switch knob stays white in light mode too (matches the existing
-     [data-theme="light"] .fc-toggle-thumb hardcode). */
+     [data-mode="light"] .fc-toggle-thumb hardcode). */
   --switch-thumb: #FFFFFF;
   /* Scrim — light theme overlay (mirrors the existing
-     [data-theme="light"] .mdl-overlay rgba(8,9,10,0.40)). */
+     [data-mode="light"] .mdl-overlay rgba(8,9,10,0.40)). */
   --scrim: rgba(8,9,10,0.40);
 
   /* ── COOL ACCENTS — same hues, slightly bumped chroma so they don't
@@ -631,6 +631,84 @@
   --risk-crit-soft:  rgba(185,28,28,0.10);
 }
 
+/* ============================================================================
+ * IRIS THEME — second color theme (multi-theme validation).
+ * Eidos is the design system; "Forge" (the :root default above) and "Iris"
+ * are interchangeable COLOR themes selected via [data-ds-theme] on <html>.
+ * Structural tokens (space/radius/type/motion/z/shadows-geometry) live in the
+ * shared :root and are NOT redefined here — a theme only swaps colors.
+ *
+ * Iris = a violet/indigo accent in place of ember + cool-leaning surfaces.
+ * It is a COMPACT override: everything it doesn't set (borders, fg, status,
+ * semantic roles, severity/health/risk, most data-viz) is inherited from the
+ * Forge default, so the two themes stay structurally identical.
+ *
+ * The dark-ink-on-bright / white-on-deep accent-foreground invariant is
+ * preserved for free: --ember-fg is NOT overridden, so it inherits the dark
+ * ink (#0A0907) in dark mode — correct for the BRIGHT iris accent — and white
+ * (#FFFFFF) in light mode — correct for the DEEP iris accent.
+ * ========================================================================== */
+[data-ds-theme="iris"] {
+  /* ── SURFACES — dark, cool violet tint (mirrors Forge dark L, hue 285) ─── */
+  --canvas:           oklch(0.13 0.008 285);
+  --bg:               oklch(0.165 0.010 285);
+  --bg-elevated:      oklch(0.2 0.012 285);
+  --surface:          oklch(0.235 0.014 285);
+  --surface-hover:    oklch(0.275 0.016 285);
+  --surface-overlay:  oklch(0.255 0.014 285);
+  --surface-active:   oklch(0.32 0.018 285);
+  --surface-selected: oklch(0.285 0.045 285);  /* violet-tinged selection */
+
+  /* ── ACCENT — bright violet (dark ink rides on top; --ember-fg inherited) ─ */
+  --ember:        #9B8CFF;
+  --ember-glow:   #B6ABFF;
+  --ember-deep:   #7C6BFF;
+  --ember-soft:   rgba(155,140,255,0.16);
+  --ember-softer: rgba(155,140,255,0.08);
+  --ember-border: rgba(155,140,255,0.32);
+  --ember-text:   #B6ABFF;
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(155,140,255,0.16),
+    0 8px 24px rgba(155,140,255,0.20);
+
+  /* ── AI surface + brand data-viz series follow the accent ─────────────── */
+  --ai-accent:          #9B8CFF;
+  --ai-streaming-caret: #9B8CFF;
+  --viz-cat-1:   #9B8CFF;
+  --viz-seq-mid: #9B8CFF;
+}
+
+[data-ds-theme="iris"][data-mode="light"] {
+  /* ── SURFACES — light, cool violet tint (mirrors Forge light L, hue 285) ─ */
+  --canvas:           oklch(0.93 0.006 285);
+  --bg:               oklch(0.97 0.005 285);
+  --bg-elevated:      oklch(0.995 0.002 285);
+  --surface:          oklch(1 0 0);
+  --surface-hover:    oklch(0.965 0.006 285);
+  --surface-overlay:  oklch(1 0 0);
+  --surface-active:   oklch(0.935 0.008 285);
+  --surface-selected: oklch(0.95 0.04 285);
+
+  /* ── ACCENT — deep violet (white ink rides on top; --ember-fg inherited) ─ */
+  --ember:        #6D28D9;
+  --ember-glow:   #7C3AED;
+  --ember-deep:   #5B21B6;
+  --ember-soft:   rgba(109,40,217,0.10);
+  --ember-softer: rgba(109,40,217,0.05);
+  --ember-border: rgba(109,40,217,0.30);
+  --ember-text:   #6D28D9;
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(109,40,217,0.14),
+    0 8px 24px rgba(109,40,217,0.18);
+
+  --ai-accent:          #6D28D9;
+  --ai-streaming-caret: #6D28D9;
+  --viz-cat-1:   #6D28D9;
+  --viz-seq-mid: #6D28D9;
+}
+
 * { box-sizing: border-box; }
 html, body {
   margin: 0; padding: 0;
@@ -723,7 +801,7 @@ a { color: inherit; text-decoration: none; }
    when the solid is bright (severity-p2 at #EAB308), so the pill text drops to
    a darker yellow that reads on the soft tint while the SWATCH (solid bg)
    keeps the vibrant value. Border also darkens to match. */
-[data-theme="light"] .pill.severity-p2 {
+[data-mode="light"] .pill.severity-p2 {
   color: #854D0E;
   border-color: color-mix(in oklab, #854D0E 35%, transparent);
 }
@@ -856,7 +934,7 @@ a { color: inherit; text-decoration: none; }
   transition: opacity 120ms var(--ease, ease-in-out), background 120ms var(--ease, ease-in-out);
 }
 .pill .pl-x:hover { opacity: 1; background: rgba(255,255,255,0.06); }
-[data-theme="light"] .pill .pl-x:hover { background: rgba(0,0,0,0.06); }
+[data-mode="light"] .pill .pl-x:hover { background: rgba(0,0,0,0.06); }
 .pill .pl-x:focus-visible { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
 /* Icon wrapper — inline-flex so the SVG centers on the cap-height of the
    pill label without a vertical-align baseline shift. line-height:0
@@ -1006,7 +1084,7 @@ a { color: inherit; text-decoration: none; }
   background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
   background-size: 24px 24px;
 }
-[data-theme="light"] .dot-grid { background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px); }
+[data-mode="light"] .dot-grid { background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px); }
 
 /* Hover row */
 .row-hover { transition: background-color var(--dur) var(--ease); }
@@ -1561,20 +1639,20 @@ a { color: inherit; text-decoration: none; }
  * Track ON: ember (same hue, slightly different shade than dark mode).
  * Thumb: always white — both OFF and ON. Matches shadcn's "thumb is the page
  * background color" pattern. The 1px shadow gives the floating-pill feel. */
-[data-theme="light"] .fc-toggle-track {
+[data-mode="light"] .fc-toggle-track {
   background: #E4E4E7;
   border-color: rgba(0,0,0,0.06);
   box-shadow: inset 0 1px 1px rgba(0,0,0,0.04);
 }
-[data-theme="light"] .fc-toggle-thumb {
+[data-mode="light"] .fc-toggle-thumb {
   background: #FFFFFF;
   box-shadow: 0 1px 2px rgba(0,0,0,0.16), 0 0 0 0.5px rgba(0,0,0,0.04);
 }
-[data-theme="light"] .fc-input:checked + .fc-toggle-track {
+[data-mode="light"] .fc-input:checked + .fc-toggle-track {
   background: var(--ember); border-color: var(--ember);
   box-shadow: inset 0 1px 1px rgba(0,0,0,0.10);
 }
-[data-theme="light"] .fc-input:checked + .fc-toggle-track .fc-toggle-thumb {
+[data-mode="light"] .fc-input:checked + .fc-toggle-track .fc-toggle-thumb {
   background: #FFFFFF;
   box-shadow: 0 1px 2px rgba(0,0,0,0.20), 0 0 0 0.5px rgba(0,0,0,0.04);
 }
@@ -1984,9 +2062,9 @@ select.in-control::-ms-expand { display: none; }
 }
 
 /* Light-mode tweaks */
-[data-theme="light"] .in-addon.text { background: #F4F4F5; }
-[data-theme="light"] .in-addon.select { background-color: #F4F4F5; }
-[data-theme="light"] .in-group.is-readonly { background: #FAFAFA; }
+[data-mode="light"] .in-addon.text { background: #F4F4F5; }
+[data-mode="light"] .in-addon.select { background-color: #F4F4F5; }
+[data-mode="light"] .in-group.is-readonly { background: #FAFAFA; }
 
 /* ===== Slider ============================================================
    Inspired by shadcn/ui Slider (Radix). Single thumb, range (two-thumbs),
@@ -2100,8 +2178,8 @@ select.in-control::-ms-expand { display: none; }
 }
 
 /* Light mode */
-[data-theme="light"] .sl-track { background: #E4E4E7; }
-[data-theme="light"] .sl-thumb {
+[data-mode="light"] .sl-track { background: #E4E4E7; }
+[data-mode="light"] .sl-thumb {
   background: #FFFFFF;
   box-shadow: 0 1px 2px rgba(0,0,0,0.10);
 }
@@ -2364,7 +2442,7 @@ select.in-control::-ms-expand { display: none; }
   pointer-events: none;
 }
 .dp-pop.is-open { opacity: 1; transform: translateY(0); pointer-events: auto; }
-[data-theme="light"] .dp-pop { box-shadow: 0 12px 32px rgba(0,0,0,0.10); }
+[data-mode="light"] .dp-pop { box-shadow: 0 12px 32px rgba(0,0,0,0.10); }
 
 .dp-pop.range-pop { display: flex; gap: 4px; }
 .dp-pop.range-pop .cal { width: 268px; }
@@ -2508,7 +2586,7 @@ select.in-control::-ms-expand { display: none; }
   display: flex; flex-direction: column;
   animation: cb-rise var(--dur-fast) var(--ease);
 }
-[data-theme="light"] .cb-panel { box-shadow: 0 8px 24px rgba(0,0,0,0.10); }
+[data-mode="light"] .cb-panel { box-shadow: 0 8px 24px rgba(0,0,0,0.10); }
 @keyframes cb-rise { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 @media (prefers-reduced-motion: reduce) { .cb-panel { animation: none; } .cb-trigger .chev { transition: none; } }
 
@@ -2594,7 +2672,7 @@ select.in-control::-ms-expand { display: none; }
   display: flex; flex-direction: column;
   animation: sel-in var(--dur-fast) var(--ease) both;
 }
-[data-theme="light"] .sel-panel { box-shadow: 0 12px 32px rgba(0,0,0,0.10); }
+[data-mode="light"] .sel-panel { box-shadow: 0 12px 32px rgba(0,0,0,0.10); }
 @keyframes sel-in { from { opacity: 0; transform: translateY(-2px); } to { opacity: 1; transform: translateY(0); } }
 @media (prefers-reduced-motion: reduce) { .sel-panel { animation: none; } }
 
@@ -2825,7 +2903,7 @@ linear-gradient(45deg, rgba(15,23,42,0.10) 25%, transparent 25%, transparent 75%
   transition: opacity 220ms cubic-bezier(0.32, 0.72, 0, 1);
   pointer-events: none;
 }
-[data-theme="light"] .mdl-overlay { background: rgba(8,9,10,0.40); }
+[data-mode="light"] .mdl-overlay { background: rgba(8,9,10,0.40); }
 .mdl-root[data-state="open"] .mdl-overlay { opacity: 1; pointer-events: auto; }
 
 /* Stage — flex-centers the panel; clicks here are scrim clicks */
@@ -2852,7 +2930,7 @@ linear-gradient(45deg, rgba(15,23,42,0.10) 25%, transparent 25%, transparent 75%
               transform 220ms cubic-bezier(0.32, 0.72, 0, 1);
   outline: none;
 }
-[data-theme="light"] .mdl { box-shadow: 0 24px 60px rgba(8,9,10,0.18); }
+[data-mode="light"] .mdl { box-shadow: 0 24px 60px rgba(8,9,10,0.18); }
 .mdl-root[data-state="open"] .mdl { opacity: 1; transform: none; }
 
 .mdl[data-size="sm"] { --mdl-w: 380px; }
@@ -3267,7 +3345,7 @@ linear-gradient(45deg, rgba(15,23,42,0.10) 25%, transparent 25%, transparent 75%
   box-shadow: var(--elev-3);
   animation: mb-in var(--dur-fast) var(--ease) both;
 }
-[data-theme="light"] .mb-panel { box-shadow: 0 12px 32px rgba(0,0,0,0.10); }
+[data-mode="light"] .mb-panel { box-shadow: 0 12px 32px rgba(0,0,0,0.10); }
 @keyframes mb-in {
   from { opacity: 0; transform: translateY(-3px) scale(0.98); }
   to   { opacity: 1; transform: translateY(0)   scale(1);    }
@@ -3985,7 +4063,7 @@ linear-gradient(45deg, rgba(15,23,42,0.10) 25%, transparent 25%, transparent 75%
               box-shadow var(--dur-fast) var(--ease);
 }
 
-[data-theme="light"] .carx-arrow {
+[data-mode="light"] .carx-arrow {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
 }
 

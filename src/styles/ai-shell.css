@@ -834,18 +834,18 @@ a { color: inherit; text-decoration: none; }
 /* ============================================================
    LIGHT-THEME OVERRIDES (anything that needs more lift than tokens give)
    ============================================================ */
-[data-theme="light"] .ai-prompt-card { background: #fff; border-color: rgba(0,0,0,0.10); }
-[data-theme="light"] .ai-prompt-premium { background: #F4F4F5; border-color: rgba(0,0,0,0.08); }
-[data-theme="light"] .ai-card { background: #fff; }
-[data-theme="light"] .ai-bubble-row.from-user .ai-bubble {
+[data-mode="light"] .ai-prompt-card { background: #fff; border-color: rgba(0,0,0,0.10); }
+[data-mode="light"] .ai-prompt-premium { background: #F4F4F5; border-color: rgba(0,0,0,0.08); }
+[data-mode="light"] .ai-card { background: #fff; }
+[data-mode="light"] .ai-bubble-row.from-user .ai-bubble {
   background: #F4F4F5;
   border-color: rgba(0,0,0,0.06);
 }
-[data-theme="dark"] .ai-prompt-premium { background: var(--surface); }
-[data-theme="dark"] .ai-create-btn {
+[data-mode="dark"] .ai-prompt-premium { background: var(--surface); }
+[data-mode="dark"] .ai-create-btn {
   background: var(--fg);
   color: var(--bg);
   border-color: var(--fg);
 }
-[data-theme="light"] .ai-create-btn { background: #18181B; color: #fff; border-color: #18181B; }
-[data-theme="light"] .ai-prompt-model-menu { box-shadow: 0 12px 32px rgba(15,23,42,0.10); }
+[data-mode="light"] .ai-create-btn { background: #18181B; color: #fff; border-color: #18181B; }
+[data-mode="light"] .ai-prompt-model-menu { box-shadow: 0 12px 32px rgba(15,23,42,0.10); }

@@ -511,9 +511,9 @@ body:active::-webkit-scrollbar-thumb,
 }
 
 /* Light theme adjustments */
-[data-theme="light"] .fp-rail,
-[data-theme="light"] .fp-topbar { background: var(--surface); }
-[data-theme="light"] .fp-topbar-search { background: var(--bg); }
+[data-mode="light"] .fp-rail,
+[data-mode="light"] .fp-topbar { background: var(--surface); }
+[data-mode="light"] .fp-topbar-search { background: var(--bg); }
 
 /* Section header for sub-sections within a page */
 .fp-section { margin-bottom: 24px; }

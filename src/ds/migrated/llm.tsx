@@ -31,7 +31,7 @@ const LLMS_TXT = `# Eidos Design System
 - [Introduction](design-system.html): What Eidos is, who maintains it, how it ships.
 - [Installation](/installation): Tailwind v4 preset + React copy-paste workflow. No npm install.
 - [Components catalog](/components-catalog): Searchable grid of every component with previews.
-- [Theming](/theming): Light/dark via data-theme, custom accents via CSS variables.
+- [Theming](/theming): Light/dark via data-mode, custom accents via CSS variables.
 - [Tailwind](/tailwind): Full @theme block (v4) plus tailwind.config.js (v3) presets.
 - [RTL](/rtl): Logical-property cookbook and direction-aware overrides.
 

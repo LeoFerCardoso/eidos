@@ -26,7 +26,7 @@ export default function RTL() {
       {/* How to enable */}
       <SubHead meta="enable">Turn it on</SubHead>
       <CodeBlock label="HTML root" lang="html" code={`<!-- Per-document — recommended -->
-<html lang="ar" dir="rtl" data-theme="dark">
+<html lang="ar" dir="rtl" data-mode="dark">
 
 <!-- Per-subtree — for a single Arabic block in an LTR product -->
 <aside dir="rtl">

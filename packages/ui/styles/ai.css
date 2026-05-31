@@ -2926,7 +2926,7 @@ button.ai-cite-panel-head { cursor: pointer; }
   transition: opacity 240ms cubic-bezier(0.32, 0.72, 0, 1);
   pointer-events: none;
 }
-[data-theme="light"] .dr-root.variant-overlay .dr-overlay { background: rgba(0,0,0,0.30); }
+[data-mode="light"] .dr-root.variant-overlay .dr-overlay { background: rgba(0,0,0,0.30); }
 .dr-root.variant-overlay[data-state="open"] .dr-overlay { opacity: 1; pointer-events: auto; }
 
 .dr-root.variant-overlay .dr {
@@ -2937,7 +2937,7 @@ button.ai-cite-panel-head { cursor: pointer; }
   transition: transform 280ms cubic-bezier(0.32, 0.72, 0, 1);
   will-change: transform;
 }
-[data-theme="light"] .dr-root.variant-overlay .dr { box-shadow: 0 18px 60px rgba(0,0,0,0.18); }
+[data-mode="light"] .dr-root.variant-overlay .dr { box-shadow: 0 18px 60px rgba(0,0,0,0.18); }
 
 .dr-root.variant-overlay .dr.right  { top: 0; bottom: 0; inset-inline-end: 0;
   inline-size: var(--dr-w, 460px); max-inline-size: 100%;

@@ -151,25 +151,25 @@ const FSubNav = ({ items }: { items?: any[] }) => {
 };
 
 // ─── Theme ────────────────────────────────────────────────────────────
-// Shares `forge-theme` localStorage with the DS shell so a user who picks
+// Shares `eidos-mode` localStorage with the DS shell so a user who picks
 // light in the DS and opens an example in a new tab lands in light.
 const useTheme = () => {
   const [theme, setTheme] = React.useState(() => {
     try {
-      return document.documentElement.dataset.theme
-          || localStorage.getItem('forge-theme')
+      return document.documentElement.dataset.mode
+          || localStorage.getItem('eidos-mode')
           || 'dark';
     } catch (e) { return 'dark'; }
   });
   React.useEffect(() => {
-    document.documentElement.dataset.theme = theme;
+    document.documentElement.dataset.mode = theme;
     document.documentElement.style.colorScheme = theme;
-    try { localStorage.setItem('forge-theme', theme); } catch (e) {}
+    try { localStorage.setItem('eidos-mode', theme); } catch (e) {}
   }, [theme]);
   // Cross-tab sync: when the DS tab flips, mirror here.
   React.useEffect(() => {
     const onStorage = (e) => {
-      if (e.key === 'forge-theme' && e.newValue && e.newValue !== theme) setTheme(e.newValue);
+      if (e.key === 'eidos-mode' && e.newValue && e.newValue !== theme) setTheme(e.newValue);
     };
     window.addEventListener('storage', onStorage);
     return () => window.removeEventListener('storage', onStorage);

@@ -95,7 +95,7 @@ const CHANGELOG: ChangelogEntry[] = [
   { version: 'v1.8.1', date: '2026-05-17', type: 'fix',     scope: 'sidebar',       title: 'Active nav item — neutral foreground, surface-active background',
     summary: '.ds-link.active and .nav-item.active dropped the ember text colour — the left rail + bold weight + surface-active tone already mark the page; ember text was distracting. Both selectors stay in sync. surface-active in dark mode is the lightest tier (oklch 0.32) so the row clearly lifts above the rest of the nav.' },
   { version: 'v1.8.1', date: '2026-05-17', type: 'fix',     scope: 'frame',         title: 'Frame chrome — canonical 3-surface assignment',
-    summary: 'Frame now always renders with three distinct surface tones in both themes: header = --surface, body = --bg-elevated, code well = --bg. The collapsible "Show code" wrapper (.ds-code-collapse) inherits the code-well background so long snippets don\'t drift back to body tone when revealed. Removed every [data-theme="light"] override on Frame internals — single source of truth in the surface ladder.' },
+    summary: 'Frame now always renders with three distinct surface tones in both themes: header = --surface, body = --bg-elevated, code well = --bg. The collapsible "Show code" wrapper (.ds-code-collapse) inherits the code-well background so long snippets don\'t drift back to body tone when revealed. Removed every [data-mode="light"] override on Frame internals — single source of truth in the surface ladder.' },
   { version: 'v1.8.1', date: '2026-05-17', type: 'fix',     scope: 'spacing',       title: 'Spacing scale page — column gap and bar room',
     summary: 'The 96px max bar in the spacing scale touched the description cell because the bar column was fixed at 80px. Bumped to 110px, grid gap 16 → 24, paddingInlineStart: 8 on the description so each row of the scale breathes.' },
   { version: 'v1.8.1', date: '2026-05-17', type: 'fix',     scope: 'core',          title: 'Version badge synced to v1.8.1 in sidebar + topbar',
@@ -283,7 +283,7 @@ const CHANGELOG: ChangelogEntry[] = [
 
   // ─── v1.2.0 — Phase 1 + Phase 2 + Phase 4 (2026-05-15) ──────────────────
   { version: 'v1.2.0', date: '2026-05-15', type: 'tokens',   scope: 'core',       title: 'IDP semantic palettes',
-    summary: '23 new tokens: data viz (cat-1..12, seq-low/mid/high, div-neg/zero/pos), severity (P0..P3), status (5-state), health (4-state), risk (4-state), breakpoints (--bp-sm..2xl), tabular nums + opacity scales. Mirror in [data-theme="light"].' },
+    summary: '23 new tokens: data viz (cat-1..12, seq-low/mid/high, div-neg/zero/pos), severity (P0..P3), status (5-state), health (4-state), risk (4-state), breakpoints (--bp-sm..2xl), tabular nums + opacity scales. Mirror in [data-mode="light"].' },
   { version: 'v1.2.0', date: '2026-05-15', type: 'feat',     scope: 'foundation', title: 'Severity & state foundation page',
     summary: 'New page documenting the four IDP semantic families (severity / status / health / risk) with a decision matrix and a one-row composition showing all four side-by-side.' },
   { version: 'v1.2.0', date: '2026-05-15', type: 'feat',     scope: 'core',       title: '10 new atoms (Phase 2)',

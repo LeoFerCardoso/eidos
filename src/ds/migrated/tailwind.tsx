@@ -97,8 +97,8 @@ const TW_V4 = `/* tailwind.css — Tailwind v4, CSS-first */
   --animate-progress: progress 2.6s var(--ease-eidos) infinite;
 }
 
-/* Light theme — opt in with [data-theme="light"] on <html> */
-[data-theme="light"] {
+/* Light theme — opt in with [data-mode="light"] on <html> */
+[data-mode="light"] {
   --color-bg: #FAFAFA;
   --color-bg-elevated: #FFFFFF;
   --color-surface: #FFFFFF;
@@ -116,8 +116,8 @@ const TW_V4 = `/* tailwind.css — Tailwind v4, CSS-first */
   --color-border-stronger: rgb(0 0 0 / 0.22);
 }
 
-/* Dark mode — variant so utilities work without [data-theme] */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+/* Dark mode — variant so utilities work without [data-mode] */
+@custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));
 
 @keyframes ember-pulse {
   0%, 100% { box-shadow: 0 0 0 0 rgb(255 107 53 / 0.5); }
@@ -139,7 +139,7 @@ const TW_V4 = `/* tailwind.css — Tailwind v4, CSS-first */
 const TW_V3 = `// tailwind.config.js — Tailwind v3 preset
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ['class', '[data-theme="dark"]'],
+  darkMode: ['class', '[data-mode="dark"]'],
   content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
     extend: {
@@ -240,7 +240,7 @@ const TW_TOKENS_CSS = `/* tokens.css — drop-in CSS variables (works without Ta
   --success: #34D399; --warning: #FBBF24; --danger: #F87171;
   --border: rgba(255,255,255,0.06); --border-strong: rgba(255,255,255,0.12); --border-stronger: rgba(255,255,255,0.18);
 }
-[data-theme="light"] {
+[data-mode="light"] {
   --bg: #FAFAFA; --bg-elevated: #FFFFFF;
   --surface: #FFFFFF; --surface-hover: #F4F4F5; --surface-active: #ECECEE;
   --fg: #0A0A0B; --fg-muted: #52525B; --fg-subtle: #71717A; --fg-faint: #A1A1AA;
@@ -266,7 +266,7 @@ export default function Tailwind() {
             <span className="t-body" style={{fontWeight: 600}}>Tailwind v4</span>
           </div>
           <div className="t-small" style={{color:'var(--fg-muted)'}}>
-            CSS-first via <Mono>@theme</Mono>. One <Mono>tailwind.css</Mono> file, no JS config. Light/dark via <Mono>data-theme</Mono>.
+            CSS-first via <Mono>@theme</Mono>. One <Mono>tailwind.css</Mono> file, no JS config. Light/dark via <Mono>data-mode</Mono>.
           </div>
         </div>
         <div className="surface" style={{padding: 'var(--space-4)'}}>
@@ -294,24 +294,24 @@ export default function Tailwind() {
         </div>
       </Frame>
       <Lede>
-        The <Mono>@custom-variant dark</Mono> at the bottom lets you write <Mono>dark:bg-surface</Mono> and have it match the <Mono>data-theme="dark"</Mono> selector — no class swap needed.
+        The <Mono>@custom-variant dark</Mono> at the bottom lets you write <Mono>dark:bg-surface</Mono> and have it match the <Mono>data-mode="dark"</Mono> selector — no class swap needed.
       </Lede>
 
       {/* v3 — legacy path */}
       <SubHead meta="legacy">Tailwind v3 — drop-in config</SubHead>
       <Lede up>
-        Still on v3? Same tokens, classic config. Pair this with <Mono>tokens.css</Mono> imported globally — the JS object reads CSS variables, so <Mono>data-theme</Mono> still drives theme switching.
+        Still on v3? Same tokens, classic config. Pair this with <Mono>tokens.css</Mono> imported globally — the JS object reads CSS variables, so <Mono>data-mode</Mono> still drives theme switching.
       </Lede>
       <Frame label="tailwind.config.js" lang="jsx" code={TW_V3}>
         <div className="t-small" style={{color:'var(--fg-muted)'}}>
-          <Mono>darkMode: ['class', '[data-theme="dark"]']</Mono> makes <Mono>dark:</Mono> utilities respect the same attribute selector v4 uses.
+          <Mono>darkMode: ['class', '[data-mode="dark"]']</Mono> makes <Mono>dark:</Mono> utilities respect the same attribute selector v4 uses.
         </div>
       </Frame>
 
       {/* Tokens-only escape hatch */}
       <SubHead meta="no Tailwind">tokens.css — escape hatch</SubHead>
       <Lede up>
-        Can't pull Tailwind into a project (legacy app, email template, embedded widget)? Drop just <Mono>tokens.css</Mono>. The variables work everywhere CSS does — including the dark/light theme switch via <Mono>[data-theme]</Mono>.
+        Can't pull Tailwind into a project (legacy app, email template, embedded widget)? Drop just <Mono>tokens.css</Mono>. The variables work everywhere CSS does — including the dark/light theme switch via <Mono>[data-mode]</Mono>.
       </Lede>
       <Frame label="tokens.css" lang="css" code={TW_TOKENS_CSS}>
         <div className="t-small" style={{color:'var(--fg-muted)'}}>

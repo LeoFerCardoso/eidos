@@ -242,20 +242,20 @@ export default function Page() {
       <Frame
         label="light theme — distinct from dark: zinc-200 track, white floating thumb"
         code={`/* The light-mode override in tokens.css */
-[data-theme="light"] .fc-toggle-track {
+[data-mode="light"] .fc-toggle-track {
   background: #E4E4E7;
   border-color: rgba(0,0,0,0.06);
   box-shadow: inset 0 1px 1px rgba(0,0,0,0.04);
 }
-[data-theme="light"] .fc-toggle-thumb {
+[data-mode="light"] .fc-toggle-thumb {
   background: #FFFFFF;
   box-shadow: 0 1px 2px rgba(0,0,0,0.16);
 }
-[data-theme="light"] .fc-input:checked + .fc-toggle-track .fc-toggle-thumb {
+[data-mode="light"] .fc-input:checked + .fc-toggle-track .fc-toggle-thumb {
   background: #FFFFFF;
 }`}
       >
-        <div data-theme="light" style={{background:'var(--bg)', borderRadius: 10, padding: 24, width:'100%', maxWidth: 520, color:'var(--fg)'}}>
+        <div data-mode="light" style={{background:'var(--bg)', borderRadius: 10, padding: 24, width:'100%', maxWidth: 520, color:'var(--fg)'}}>
           <div style={{display:'flex', flexDirection:'column', gap: 14}}>
             <Switch checked onChange={()=>{}}>Auto-deploy on merge</Switch>
             <Switch onChange={()=>{}}>Notify Slack on failure</Switch>

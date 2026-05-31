@@ -3,10 +3,10 @@ import * as React from 'react';
 import { Icons, Section, SubHead, CodeBlock, Mono, Lede, Alert, AlertTitle, AlertDescription } from '@/ds/core';
 
 const ThemePreview = ({ theme }: { theme: 'dark' | 'light' }) => (
-  <div data-theme={theme} className="surface" style={{padding: 16, display:'flex', flexDirection:'column', gap: 10, background:'var(--bg-elevated)', borderColor:'var(--border)'}}>
+  <div data-mode={theme} className="surface" style={{padding: 16, display:'flex', flexDirection:'column', gap: 10, background:'var(--bg-elevated)', borderColor:'var(--border)'}}>
     <div style={{display:'flex', alignItems:'baseline', gap: 10}}>
       <span className="ds-h-eyebrow">{theme}</span>
-      <span style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-faint)', fontVariantNumeric:'tabular-nums'}}>data-theme="{theme}"</span>
+      <span style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-faint)', fontVariantNumeric:'tabular-nums'}}>data-mode="{theme}"</span>
     </div>
     <div style={{fontSize: 'var(--text-lg)', fontWeight: 600, letterSpacing:'-0.01em'}}>The quick brown fox</div>
     <div style={{color:'var(--fg-muted)', fontSize: 'var(--text-base)'}}>jumps over the lazy dog. <span style={{fontFamily:'var(--font-mono)', fontVariantNumeric:'tabular-nums'}}>0123456789</span></div>
@@ -23,8 +23,8 @@ const ThemePreview = ({ theme }: { theme: 'dark' | 'light' }) => (
   </div>
 );
 
-// INNOVATION — the page documents the data-theme swap; this lets you perform it.
-// A real <button> segmented control flips data-theme on a live preview pane, so
+// INNOVATION — the page documents the data-mode swap; this lets you perform it.
+// A real <button> segmented control flips data-mode on a live preview pane, so
 // readers feel the same token-graph switch the docs describe. Honours
 // prefers-reduced-motion via the system .surface transition tokens.
 const LiveThemeSwitch = () => {
@@ -45,10 +45,10 @@ const LiveThemeSwitch = () => {
           </button>
         ))}
       </div>
-      <div data-theme={theme} aria-live="polite" style={{borderRadius: 8, padding: 16, background:'var(--bg)', color:'var(--fg)', display:'flex', flexDirection:'column', gap: 10, transition:'background var(--dur) var(--ease), color var(--dur) var(--ease)'}}>
+      <div data-mode={theme} aria-live="polite" style={{borderRadius: 8, padding: 16, background:'var(--bg)', color:'var(--fg)', display:'flex', flexDirection:'column', gap: 10, transition:'background var(--dur) var(--ease), color var(--dur) var(--ease)'}}>
         <div style={{display:'flex', alignItems:'baseline', gap: 10}}>
           <span className="ds-h-eyebrow">live</span>
-          <span style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-faint)', fontVariantNumeric:'tabular-nums'}}>document.documentElement.dataset.theme = "{theme}"</span>
+          <span style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-faint)', fontVariantNumeric:'tabular-nums'}}>document.documentElement.dataset.mode = "{theme}"</span>
         </div>
         <div style={{fontSize: 'var(--text-lg)', fontWeight: 600, letterSpacing:'-0.01em'}}>One graph, two surfaces</div>
         <div style={{color:'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.55}}>The same hierarchy, re-resolved against <Mono>{theme}</Mono>. <span style={{fontFamily:'var(--font-mono)', fontVariantNumeric:'tabular-nums'}}>4.5:1</span> text contrast holds in both.</div>
@@ -71,18 +71,18 @@ export default function Theming() {
       desc="Eidos ships dark and light. Both share one token graph — light is not a translation, it's the same hierarchy seen on paper. Customise per-product by overriding individual tokens."
     >
       {/* Toggle behavior */}
-      <SubHead meta="how it works">The data-theme attribute</SubHead>
+      <SubHead meta="how it works">The data-mode attribute</SubHead>
       <Lede up>
-        Theme is selected by setting <Mono>data-theme</Mono> on the document root. Every token in <Mono>tokens.css</Mono> reads that attribute and switches its underlying value — no JS theming layer, no class swap on every component.
+        Theme is selected by setting <Mono>data-mode</Mono> on the document root. Every token in <Mono>tokens.css</Mono> reads that attribute and switches its underlying value — no JS theming layer, no class swap on every component.
       </Lede>
       <CodeBlock label="HTML root" lang="html" code={`<!-- Default — both work -->
-<html data-theme="dark">
-<html data-theme="light">
+<html data-mode="dark">
+<html data-mode="light">
 
 <!-- Persist with localStorage in a tiny inline script -->
 <script>
-  const t = localStorage.getItem('forge-theme') || 'dark';
-  document.documentElement.dataset.theme = t;
+  const t = localStorage.getItem('eidos-mode') || 'dark';
+  document.documentElement.dataset.mode = t;
 </script>`}/>
 
       {/* Side-by-side preview */}
@@ -92,9 +92,9 @@ export default function Theming() {
         <ThemePreview theme="light"/>
       </div>
 
-      {/* Live switch — performs the documented data-theme swap */}
+      {/* Live switch — performs the documented data-mode swap */}
       <Lede up>
-        Flip it yourself — the control below sets <Mono>data-theme</Mono> on a live pane the same way your app's toggle would. Nothing re-mounts; the token graph just re-resolves.
+        Flip it yourself — the control below sets <Mono>data-mode</Mono> on a live pane the same way your app's toggle would. Nothing re-mounts; the token graph just re-resolves.
       </Lede>
       <LiveThemeSwitch/>
 
@@ -104,14 +104,14 @@ export default function Theming() {
         Override any token in your product's CSS — Eidos tokens are CSS variables, so the cascade does the work. Scope the override to <Mono>:root</Mono> for a global change or to a specific selector for a sub-tree.
       </Lede>
       <CodeBlock label="theme-overrides.css" lang="css" code={`/* Replace ember with a product-specific accent */
-:root[data-theme="dark"] {
+:root[data-mode="dark"] {
   --ember: oklch(72% 0.17 60);          /* warmer, more amber */
   --ember-soft: oklch(72% 0.17 60 / 0.12);
   --ember-glow: oklch(76% 0.20 60);
 }
 
 /* Light mode — keep contrast tuned for paper */
-:root[data-theme="light"] {
+:root[data-mode="light"] {
   --ember: oklch(60% 0.17 50);
 }
 
@@ -164,7 +164,7 @@ export default function Theming() {
             <dt style={{margin:0}}><kbd className="kbd">Tab</kbd></dt>
             <dd style={{margin:0, color:'var(--fg-muted)', fontSize:'var(--text-base)', lineHeight:1.55}}>Moves focus onto each theme button; the ember focus ring shows the target.</dd>
             <dt style={{margin:0}}><kbd className="kbd">Enter</kbd> / <kbd className="kbd">Space</kbd></dt>
-            <dd style={{margin:0, color:'var(--fg-muted)', fontSize:'var(--text-base)', lineHeight:1.55}}>Activates the focused button, sets <Mono>data-theme</Mono>, and flips <Mono>aria-pressed</Mono>.</dd>
+            <dd style={{margin:0, color:'var(--fg-muted)', fontSize:'var(--text-base)', lineHeight:1.55}}>Activates the focused button, sets <Mono>data-mode</Mono>, and flips <Mono>aria-pressed</Mono>.</dd>
           </dl>
         </div>
         <div className="surface" style={{padding: 'var(--space-5)'}}>
@@ -173,7 +173,7 @@ export default function Theming() {
         </div>
         <div className="surface" style={{padding: 'var(--space-5)'}}>
           <div style={{fontSize: 'var(--text-base)', fontWeight: 600, marginBlockEnd: 'var(--space-2)'}}>Respect the system</div>
-          <div style={{color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.55}}>Default the theme from <Mono>prefers-color-scheme</Mono> so users who chose light or dark at the OS level land in it, and let a manual <Mono>data-theme</Mono> override persist. Never force one theme on everyone.</div>
+          <div style={{color: 'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.55}}>Default the theme from <Mono>prefers-color-scheme</Mono> so users who chose light or dark at the OS level land in it, and let a manual <Mono>data-mode</Mono> override persist. Never force one theme on everyone.</div>
         </div>
         <div className="surface" style={{padding: 'var(--space-5)'}}>
           <div style={{fontSize: 'var(--text-base)', fontWeight: 600, marginBlockEnd: 'var(--space-2)'}}>Focus &amp; forced colours</div>

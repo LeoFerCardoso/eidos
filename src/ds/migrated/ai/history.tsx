@@ -24,7 +24,7 @@ import { Icons, Frame, Section, SubHead, AutoPropsTable, Lede, History, HistoryS
       { id: 'm2', title: 'Idea: token-budget overlay', preview: 'Overlay the prompt budget on top of the composer so the user sees the cost live.' },
     ],
     older: [
-      { id: 'o1', title: 'Original design crit · Eidos DS', preview: 'Tokens, then atoms, then primitives. Theme via [data-theme].' },
+      { id: 'o1', title: 'Original design crit · Eidos DS', preview: 'Tokens, then atoms, then primitives. Theme via [data-mode].' },
     ],
   };
 

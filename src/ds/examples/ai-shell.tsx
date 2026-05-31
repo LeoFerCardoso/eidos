@@ -4,7 +4,7 @@
 // Shared sidebar + topbar + improved PromptInput composer used by every
 // AI example surface. Two-pane layout (left rail ~272px · main).
 // Theme is reactive: a sun/moon button at the rail foot flips
-// [data-theme="light"|"dark"] on <html>, persisted to localStorage.
+// [data-mode="light"|"dark"] on <html>, persisted to localStorage.
 //
 // Composes existing Eidos primitives only — Avatar, Icons, .btn, .pill,
 // .in-* input chrome. No new tokens introduced.
@@ -45,11 +45,11 @@ const YESTERDAY = [
 // Initial paint comes from the inline boot script in each HTML shell so
 // there's no FOUC. This hook just lets the rail toggle re-flip the attr.
 const useTheme = () => {
-  const get = () => document.documentElement.getAttribute('data-theme') || 'light';
+  const get = () => document.documentElement.getAttribute('data-mode') || 'light';
   const [theme, setTheme] = React.useState(get);
   const toggle = React.useCallback(() => {
     const next = get() === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.setAttribute('data-mode', next);
     try { localStorage.setItem('eidos-ai-theme', next); } catch {}
     setTheme(next);
   }, []);

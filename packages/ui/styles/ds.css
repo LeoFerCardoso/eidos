@@ -91,22 +91,22 @@ a:focus-visible,
 }
 
 /* Light mode — make surfaces, cards and code blocks readable */
-[data-theme="light"] .surface,
-[data-theme="light"] .card { background: var(--surface); border-color: var(--border); }
-[data-theme="light"] .ds-frame { background: var(--surface); border-color: var(--border); }
-[data-theme="light"] .ds-code { background: var(--bg-elevated); color: #18181B; }
-[data-theme="light"] .ds-code .k { color: #0369A1; }
-[data-theme="light"] .ds-code .s { color: #B45309; }
-[data-theme="light"] .ds-code .c { color: #71717A; }
-[data-theme="light"] .ds-code .n { color: #6D28D9; }
-[data-theme="light"] .ds-code .a { color: #1D4ED8; }
-[data-theme="light"] .ds-code .f { color: #B91C1C; }
-[data-theme="light"] .code-block { background: var(--bg-elevated); color: var(--fg); border-color: var(--border-strong); }
-[data-theme="light"] .code-block .k { color: #0369A1; }
-[data-theme="light"] .code-block .s { color: #B45309; }
-[data-theme="light"] .code-block .c { color: #71717A; }
-[data-theme="light"] .code-block .n { color: #6D28D9; }
-[data-theme="light"] .code-block .f { color: #B91C1C; }
+[data-mode="light"] .surface,
+[data-mode="light"] .card { background: var(--surface); border-color: var(--border); }
+[data-mode="light"] .ds-frame { background: var(--surface); border-color: var(--border); }
+[data-mode="light"] .ds-code { background: var(--bg-elevated); color: #18181B; }
+[data-mode="light"] .ds-code .k { color: #0369A1; }
+[data-mode="light"] .ds-code .s { color: #B45309; }
+[data-mode="light"] .ds-code .c { color: #71717A; }
+[data-mode="light"] .ds-code .n { color: #6D28D9; }
+[data-mode="light"] .ds-code .a { color: #1D4ED8; }
+[data-mode="light"] .ds-code .f { color: #B91C1C; }
+[data-mode="light"] .code-block { background: var(--bg-elevated); color: var(--fg); border-color: var(--border-strong); }
+[data-mode="light"] .code-block .k { color: #0369A1; }
+[data-mode="light"] .code-block .s { color: #B45309; }
+[data-mode="light"] .code-block .c { color: #71717A; }
+[data-mode="light"] .code-block .n { color: #6D28D9; }
+[data-mode="light"] .code-block .f { color: #B91C1C; }
 
 .ds-app { display: grid; grid-template-columns: 256px 1fr; height: 100vh; min-height: 0; }
 .ds-sidenav {
@@ -468,6 +468,29 @@ a:focus-visible,
 .ds-theme-toggle button.active { background: var(--surface-active); color: var(--fg); }
 .ds-theme-toggle button:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--ember-soft); }
 
+/* Color-theme switch (Forge · Iris) — segmented pill beside the mode toggle.
+   Swatches are FIXED per theme (theme-independent preview of each accent). */
+.ds-theme-switch {
+  display: inline-flex; align-items: center; gap: 2px; padding: 2px; flex: 0 0 auto;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 999px;
+}
+.ds-theme-switch button {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 26px; padding: 0 10px; border-radius: 999px; border: 0; background: transparent;
+  font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.02em;
+  color: var(--fg-faint); cursor: pointer;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.ds-theme-switch button:hover { color: var(--fg-muted); }
+.ds-theme-switch button.active { background: var(--surface-active); color: var(--fg); }
+.ds-theme-switch button:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--ember-soft); }
+.ds-theme-swatch {
+  inline-size: 9px; block-size: 9px; border-radius: 999px; flex: 0 0 auto;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.22);
+}
+.ds-theme-swatch--forge { background: #FF6B35; }
+.ds-theme-swatch--iris  { background: #9B8CFF; }
+
 .ds-h-eyebrow {
   font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em;
   text-transform: uppercase; color: var(--ember);
@@ -779,14 +802,14 @@ a:focus-visible,
 .ds-codetree-body .ds-code { border-top: none; padding: 16px 18px; }
 
 /* Light-mode chrome */
-[data-theme="light"] .ds-frame-tree { background: var(--bg-elevated); }
-[data-theme="light"] .ds-codetree-sidebar { background: var(--bg); border-color: var(--border); }
-[data-theme="light"] .ds-codetree-body { background: var(--bg-elevated); }
-[data-theme="light"] .ds-codetree-file.active { background: var(--surface); border-color: var(--border-strong); }
-[data-theme="light"] .ds-codetree-folder .name,
-[data-theme="light"] .ds-codetree-file { color: var(--fg-muted); }
-[data-theme="light"] .ds-codetree-file:hover { background: var(--surface-hover); color: var(--fg); }
-[data-theme="light"] .ds-codetree-file.active { color: var(--fg); }
+[data-mode="light"] .ds-frame-tree { background: var(--bg-elevated); }
+[data-mode="light"] .ds-codetree-sidebar { background: var(--bg); border-color: var(--border); }
+[data-mode="light"] .ds-codetree-body { background: var(--bg-elevated); }
+[data-mode="light"] .ds-codetree-file.active { background: var(--surface); border-color: var(--border-strong); }
+[data-mode="light"] .ds-codetree-folder .name,
+[data-mode="light"] .ds-codetree-file { color: var(--fg-muted); }
+[data-mode="light"] .ds-codetree-file:hover { background: var(--surface-hover); color: var(--fg); }
+[data-mode="light"] .ds-codetree-file.active { color: var(--fg); }
 
 /* Stack below ~720px viewports inside the panel */
 @media (max-width: 760px) {
@@ -826,8 +849,8 @@ a:focus-visible,
   color: var(--fg);
   box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 1px 2px rgba(0,0,0,0.2);
 }
-[data-theme="light"] .ds-tabs { background: var(--bg-elevated); border-color: var(--border); }
-[data-theme="light"] .ds-tab.active {
+[data-mode="light"] .ds-tabs { background: var(--bg-elevated); border-color: var(--border); }
+[data-mode="light"] .ds-tab.active {
   background: var(--surface);
   box-shadow: var(--elev-1);
 }
@@ -1024,11 +1047,11 @@ a:focus-visible,
 }
 
 /* Light theme overrides */
-[data-theme="light"] .eidos-tablist--pills { background: var(--bg-elevated); }
-[data-theme="light"] .eidos-tablist--enclosed { background: var(--bg-elevated); }
-[data-theme="light"] .eidos-tablist--pills .eidos-tab--active { background: var(--surface); }
-[data-theme="light"] .eidos-tablist--enclosed .eidos-tab--active { background: var(--surface); }
-[data-theme="light"] .eidos-tabpanel { background: var(--surface); }
+[data-mode="light"] .eidos-tablist--pills { background: var(--bg-elevated); }
+[data-mode="light"] .eidos-tablist--enclosed { background: var(--bg-elevated); }
+[data-mode="light"] .eidos-tablist--pills .eidos-tab--active { background: var(--surface); }
+[data-mode="light"] .eidos-tablist--enclosed .eidos-tab--active { background: var(--surface); }
+[data-mode="light"] .eidos-tabpanel { background: var(--surface); }
 
 /* prefers-reduced-motion: kill transitions */
 @media (prefers-reduced-motion: reduce) {
@@ -1087,12 +1110,12 @@ a:focus-visible,
 /* Light-mode override only for the toggle pill itself — the fade gradient
    and toggle row both reference var(--bg) and resolve correctly per theme.
    The pill picks up --surface (matching .ds-frame-head) and a fg-muted text. */
-[data-theme="light"] .ds-code-toggle {
+[data-mode="light"] .ds-code-toggle {
   background: var(--surface);
   border-color: var(--border);
   color: var(--fg-muted);
 }
-[data-theme="light"] .ds-code-toggle:hover {
+[data-mode="light"] .ds-code-toggle:hover {
   background: var(--surface-hover);
   border-color: var(--border-strong);
   color: var(--fg);
@@ -1108,8 +1131,8 @@ a:focus-visible,
 /* Props table — the API reference at the bottom of each component page.
    Hairline rows, monospace cells for prop/type/default. */
 .ds-props-frame { background: var(--bg-elevated); }
-[data-theme="light"] .ds-props-frame { background: var(--bg-elevated); }
-[data-theme="light"] .ds-props-frame .ds-frame-head { background: var(--surface); }
+[data-mode="light"] .ds-props-frame { background: var(--bg-elevated); }
+[data-mode="light"] .ds-props-frame .ds-frame-head { background: var(--surface); }
 .ds-props-wrap { overflow-x: auto; }
 .ds-props-table {
   width: 100%;
@@ -1158,10 +1181,10 @@ a:focus-visible,
 }
 .ds-props-table .dim { color: var(--fg-faint); }
 .ds-props-table .desc { color: var(--fg-muted); max-width: 48ch; }
-[data-theme="light"] .ds-props-table th { background: var(--bg); }
-[data-theme="light"] .ds-props-table .prop code,
-[data-theme="light"] .ds-props-table .type code,
-[data-theme="light"] .ds-props-table .default code {
+[data-mode="light"] .ds-props-table th { background: var(--bg); }
+[data-mode="light"] .ds-props-table .prop code,
+[data-mode="light"] .ds-props-table .type code,
+[data-mode="light"] .ds-props-table .default code {
   background: var(--surface);
   border-color: var(--border);
 }
@@ -1403,15 +1426,15 @@ a:focus-visible,
 /* Gradient sample bar */
 .scale-bar { display: flex; height: 56px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }
 .scale-bar > div { flex: 1; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px; font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.7); }
-[data-theme="light"] .scale-bar > div { color: var(--fg); }
+[data-mode="light"] .scale-bar > div { color: var(--fg); }
 /* Solid ember-scale swatches: theme-independent bright fills, so they need a
    fixed dark ink (white-70% inherited from the base rule fails AA on ember). */
 .scale-bar .sb-deep  { background: #E04E1A; color: var(--ink-fixed); }
 .scale-bar .sb-ember { background: #FF6B35; color: var(--ink-fixed); }
 .scale-bar .sb-glow  { background: #FF8C42; color: var(--ink-fixed); }
-[data-theme="light"] .scale-bar .sb-deep,
-[data-theme="light"] .scale-bar .sb-ember,
-[data-theme="light"] .scale-bar .sb-glow { color: var(--ink-fixed); }
+[data-mode="light"] .scale-bar .sb-deep,
+[data-mode="light"] .scale-bar .sb-ember,
+[data-mode="light"] .scale-bar .sb-glow { color: var(--ink-fixed); }
 
 /* Live preview shell mini */
 .shell-mini {
@@ -2025,7 +2048,7 @@ a:focus-visible,
   padding-top: 14vh;
   animation: fade-in 140ms var(--ease) both;
 }
-[data-theme="light"] .cp-backdrop { background: rgba(15,23,42,0.30); }
+[data-mode="light"] .cp-backdrop { background: rgba(15,23,42,0.30); }
 .cp {
   width: min(640px, 92vw);
   background: var(--bg-elevated);
@@ -2218,7 +2241,7 @@ a:focus-visible,
   background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
   background-size: 24px 24px;
 }
-[data-theme="light"] .empty.dotted { background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px); }
+[data-mode="light"] .empty.dotted { background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px); }
 
 /* Sizes */
 .empty.sm {
@@ -3178,7 +3201,7 @@ a:focus-visible,
   --diffs-font-size: 12px;
   --diffs-header-font-family: var(--font-mono);
 }
-[data-theme="light"] .pierre-diff-surface { color-scheme: light; }
+[data-mode="light"] .pierre-diff-surface { color-scheme: light; }
 .pierre-diff-loading {
   padding: 18px; font-family: var(--font-mono); font-size: var(--text-xs);
   color: var(--fg-faint); background: var(--bg-elevated);
@@ -3251,7 +3274,7 @@ a:focus-visible,
   color: var(--fg-faint); background: var(--bg-elevated);
   border: 1px solid var(--border); border-radius: var(--radius-xl);
 }
-[data-theme="light"] .eidos-tree { color-scheme: light; }
+[data-mode="light"] .eidos-tree { color-scheme: light; }
 
 /* IDE-style window chrome header, slotted above the tree (macOS traffic lights,
    repo title, trailing action buttons). Composed from Eidos tokens only. */
@@ -3624,7 +3647,7 @@ a:focus-visible,
 .eidos-tooltip .ft-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
 .eidos-tooltip .ft-name { color: var(--fg-muted); font-size: 12px; }
 .eidos-tooltip .ft-value { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; font-size: 12px; font-family: var(--font-mono); }
-[data-theme="light"] .eidos-tooltip { background: var(--bg-elevated); border-color: var(--border-strong); }
+[data-mode="light"] .eidos-tooltip { background: var(--bg-elevated); border-color: var(--border-strong); }
 
 /* ChartLegend — manual legend (not Recharts'). Bigger labels + roomier
    gap so the legend can carry the visual weight when axis text alone
@@ -3695,7 +3718,7 @@ a:focus-visible,
   stroke-dasharray: 3 3 !important;
   stroke-width: 1 !important;
 }
-[data-theme="light"] .eidos-chart .recharts-tooltip-cursor {
+[data-mode="light"] .eidos-chart .recharts-tooltip-cursor {
   fill: var(--fg) !important;
   fill-opacity: 0.04 !important;
 }
@@ -3711,8 +3734,8 @@ a:focus-visible,
 .eidos-chart .recharts-active-bar rect {
   filter: brightness(1.18) !important;
 }
-[data-theme="light"] .eidos-chart .recharts-bar-rectangle:hover rect,
-[data-theme="light"] .eidos-chart .recharts-active-bar rect {
+[data-mode="light"] .eidos-chart .recharts-bar-rectangle:hover rect,
+[data-mode="light"] .eidos-chart .recharts-active-bar rect {
   filter: brightness(0.92) saturate(1.1) !important;
 }
 /* Pie / radial sector hover */
@@ -3720,8 +3743,8 @@ a:focus-visible,
 .eidos-chart .recharts-radial-bar-sector:hover path {
   filter: brightness(1.15) !important;
 }
-[data-theme="light"] .eidos-chart .recharts-pie-sector:hover path,
-[data-theme="light"] .eidos-chart .recharts-radial-bar-sector:hover path {
+[data-mode="light"] .eidos-chart .recharts-pie-sector:hover path,
+[data-mode="light"] .eidos-chart .recharts-radial-bar-sector:hover path {
   filter: brightness(0.94) !important;
 }
 /* Sankey link hover — the link path is a stroke, not a fill, so set
@@ -3916,11 +3939,11 @@ a:focus-visible,
 .pat-noise > * { position: relative; z-index: 1; }
 .pat-noise.is-subtle::before { opacity: 0.45; }
 .pat-noise.is-strong::before { opacity: 1; }
-[data-theme="light"] .pat-noise::before { mix-blend-mode: multiply; opacity: 0.32;
+[data-mode="light"] .pat-noise::before { mix-blend-mode: multiply; opacity: 0.32;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.48 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
-[data-theme="light"] .pat-noise.is-subtle::before { opacity: 0.18; }
-[data-theme="light"] .pat-noise.is-strong::before { opacity: 0.5; }
+[data-mode="light"] .pat-noise.is-subtle::before { opacity: 0.18; }
+[data-mode="light"] .pat-noise.is-strong::before { opacity: 0.5; }
 
 /* ── 7. EMBER GLOW HALO ──────────────────────────────────────────────────── */
 .pat-ember-glow {
@@ -4215,7 +4238,7 @@ a:focus-visible,
   justify-content: center;
   animation: adlg-fade var(--dur) var(--ease);
 }
-[data-theme="light"] .adlg-overlay { background: rgba(8, 9, 10, 0.38); }
+[data-mode="light"] .adlg-overlay { background: rgba(8, 9, 10, 0.38); }
 
 /* Panel */
 .adlg {
@@ -4310,7 +4333,7 @@ a:focus-visible,
   background: rgba(8, 9, 10, 0.32);
   pointer-events: none;
 }
-[data-theme="light"] .adlg-stage::before { background: rgba(8, 9, 10, 0.16); }
+[data-mode="light"] .adlg-stage::before { background: rgba(8, 9, 10, 0.16); }
 
 /* Entrance animations */
 @keyframes adlg-fade {
@@ -4412,7 +4435,7 @@ a:focus-visible,
 .hc-panel.hc-side-right:not(.hc-visible) { transform: translateX(-4px); }
 
 /* Light theme — softer shadow */
-[data-theme="light"] .hc-panel {
+[data-mode="light"] .hc-panel {
   box-shadow: 0 8px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06);
 }
 
@@ -4442,7 +4465,7 @@ a:focus-visible,
   z-index: var(--z-dropdown, 40);
   animation: m-menu-in 120ms var(--ease, cubic-bezier(0.16,1,0.3,1)) both;
 }
-[data-theme="light"] .dm-panel {
+[data-mode="light"] .dm-panel {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 /* Off-screen during the measurement pass */
@@ -4756,7 +4779,7 @@ a:focus-visible,
   padding-top: 14vh;
   animation: cmd-backdrop-in 140ms var(--ease) both;
 }
-[data-theme="light"] .cmd-backdrop { background: rgba(15, 23, 42, 0.30); }
+[data-mode="light"] .cmd-backdrop { background: rgba(15, 23, 42, 0.30); }
 
 .cmd-dialog {
   width: min(640px, 92vw);
@@ -4819,7 +4842,7 @@ a:focus-visible,
   color: var(--fg);
   animation: tst-in var(--dur) var(--ease) both;
 }
-[data-theme="light"] .tst {
+[data-mode="light"] .tst {
   box-shadow: 0 8px 24px rgba(0,0,0,0.10), 0 1px 0 rgba(255,255,255,0.6) inset;
 }
 .tst:focus-visible {
@@ -5951,7 +5974,7 @@ table.tbl:has(+ .tbl-bottom) { border-radius: 8px 8px 0 0; }
 }
 
 /* Light mode — shadow stays subtle */
-[data-theme="light"] .card-x.interactive:hover {
+[data-mode="light"] .card-x.interactive:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
 }
 
@@ -6173,7 +6196,7 @@ table.tbl:has(+ .tbl-bottom) { border-radius: 8px 8px 0 0; }
   box-shadow: 0 1px 2px rgba(0,0,0,0.30), 0 0 0 1px var(--border);
 }
 
-[data-theme="light"] .tg-btn.is-active {
+[data-mode="light"] .tg-btn.is-active {
   background: #fff;
   box-shadow: 0 1px 2px rgba(0,0,0,0.10), 0 0 0 1px var(--border-strong);
 }
@@ -6235,7 +6258,7 @@ table.tbl:has(+ .tbl-bottom) { border-radius: 8px 8px 0 0; }
   z-index: 1;
 }
 
-[data-theme="light"] .tg.outline .tg-btn.is-active {
+[data-mode="light"] .tg.outline .tg-btn.is-active {
   background: var(--ember-soft);
   border-color: var(--ember-border);
   color: var(--ember-text);
