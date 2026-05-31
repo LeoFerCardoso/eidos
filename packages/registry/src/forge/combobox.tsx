@@ -189,12 +189,16 @@ const Combobox = (props: ComboboxProps) => {
 
     place();
 
-    const closeOnScroll = () => setOpen(false);
-    window.addEventListener('scroll', closeOnScroll, true);
-    window.addEventListener('resize', closeOnScroll);
+    // Keep the fixed panel glued to the trigger as the page scrolls/resizes.
+    // (Previously this CLOSED the panel on any scroll — but auto-focusing the
+    // search input scrolls an ancestor to reveal it, which fired immediately
+    // and slammed the panel shut. Reposition instead; closing is owned by
+    // outside-click / Escape / selection.)
+    window.addEventListener('scroll', place, true);
+    window.addEventListener('resize', place);
     return () => {
-      window.removeEventListener('scroll', closeOnScroll, true);
-      window.removeEventListener('resize', closeOnScroll);
+      window.removeEventListener('scroll', place, true);
+      window.removeEventListener('resize', place);
     };
   }, [open]);
 

@@ -13,10 +13,12 @@ import { useColorTheme, type ColorTheme } from '@/components/color-theme-provide
 export function ThemePicker() {
   const { theme, setTheme, themes } = useColorTheme();
 
+  // The swatch already previews each theme's colour, so the row stays compact —
+  // swatch · name · (trailing check) — and fits the narrow topbar panel without
+  // truncating the name. (The `hint` lives in COLOR_THEMES for richer surfaces.)
   const options = themes.map((t) => ({
     value: t.id,
     label: t.label,
-    meta: t.hint,
     icon: <span className="ds-theme-dot" style={{ background: t.swatch }} aria-hidden="true" />,
   }));
 
@@ -24,7 +26,7 @@ export function ThemePicker() {
     <div className="ds-theme-picker">
       <Combobox
         size="sm"
-        width="150px"
+        width="140px"
         options={options}
         value={theme}
         onValueChange={(v) => setTheme(v as ColorTheme)}
