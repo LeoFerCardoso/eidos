@@ -30,7 +30,7 @@ When unsure: if it's a real product screen built from existing blocks, it's an E
 - `${CLAUDE_PLUGIN_ROOT}/craft/`: `typography.md`, `color.md`, `anti-ai-slop.md`,
   `accessibility-baseline.md`, `rtl-and-bidi.md`, `state-coverage.md`, and for screens
   with forms also `form-validation.md`.
-- `llms.txt` **Examples** + **Elements** sections and `FORGE-DS-REFERENCE.md` — the
+- `llms.txt` **Examples** + **Elements** sections and `EIDOS-DS-REFERENCE.md` — the
   screen or block almost always already exists; adapt before building new.
 - Inspect a sibling for the exact registration pattern: examples in
   `src/ds/examples/*.jsx` (e.g. `agent-catalog.jsx`, `dora-dashboard.jsx`), pages in
@@ -63,6 +63,6 @@ problem.
   cards). Never per-page `<style>`. Logical CSS properties throughout (RTL first-class).
 - Ember at most 2×/screen; Geist Sans + Geist Mono (mono for numerics/captions/eyebrows).
 - Run the harness skill's checklist + **anti-ai-slop**.
-- Watch the gotchas in `docs/FORGE-DS-AUTHORING.md` (black screen / focus ring /
+- Watch the gotchas in `docs/EIDOS-DS-AUTHORING.md` (black screen / focus ring /
   clipped dropdown / multi-fire onChange).
 - Offer `npm run verify` afterward (the `verify-routes` command).

@@ -1,7 +1,7 @@
 # Eidos — Harness Engineering Bootstrap (Meta-Prompt)
 
 > **O que é isto.** Um meta-prompt para colar no Claude Code (Opus 4.8, ultrathink + Workflow).
-> Ele **não** escreve componentes ainda — ele constrói o _harness_ que vai auditar o que veio do Forge,
+> Ele **não** escreve componentes ainda — ele constrói o _harness_ que vai auditar o que veio do Eidos,
 > medir o gap contra um contrato determinístico, e então padronizar/organizar tudo (código, Storybook, docs, tokens).
 > A entrega final do bootstrap são **arquivos versionados** (`.claude/`, contrato, scripts, templates) — o harness ganha vida própria no repo.
 >
@@ -59,11 +59,11 @@ Rode em ordem. Cada fase tem **gate de saída**: não avança sem o artefato/rel
 
 ---
 
-## FASE 0 — DISCOVERY & AUDIT (entender o que veio do Forge)
+## FASE 0 — DISCOVERY & AUDIT (entender o que veio do Eidos)
 
 **Objetivo:** inventário e gap report _machine-readable_, sem mudar nada.
 
-1. Use o subagent **`eidos-auditor`** (read-only, Explore). Varra o(s) caminho(s) onde os componentes do Forge vivem hoje (peça os globs ao usuário se ambíguos).
+1. Use o subagent **`eidos-auditor`** (read-only, Explore). Varra o(s) caminho(s) onde os componentes do Eidos vivem hoje (peça os globs ao usuário se ambíguos).
 2. Para cada componente encontrado, emita uma linha no inventário com avaliação **por cláusula C1–C10** (`pass` / `partial` / `fail` / `n/a`) + evidência (arquivo:linha).
 3. Detecte também: duplicatas/quase-duplicatas (mesmo botão escrito 3x), cores hardcoded, imports cruzados ilegais, componentes sem story, sem doc, sem teste, naming inconsistente, primitivos Shadcn forkados sem padrão.
 4. Saída obrigatória (não prosa):
@@ -124,13 +124,13 @@ Escreva:
 
 ## FASE 3 — MIGRATION & STANDARDIZATION (paralelo)
 
-**Objetivo:** levar cada componente do Forge ao contrato. Aqui mora o paralelismo.
+**Objetivo:** levar cada componente do Eidos ao contrato. Aqui mora o paralelismo.
 
 1. Leia `reports/audit/dependency-graph.json`. Migre em ondas (waves): tokens → primitivos → compostos. Dentro de cada onda, itens **independentes** rodam em paralelo.
 2. **Paralelismo (até 10 subagents):** para cada componente da onda, dispare uma instância de **`eidos-implementer`** em **git worktree** isolado (`git worktree add ../eidos-mig/<comp>`), para não colidir working tree. Para lotes grandes, orquestre via **Agent SDK** (script em `tooling/verify/migrate-batch.ts`) que abre worktrees, chama o subagent por componente, e coleta resultados.
 3. Pipeline por componente (o implementer executa, em ordem, e **não** se autodeclara pronto):
    - scaffold determinístico (`turbo gen component <Name>`) → estrutura C1 garantida
-   - portar lógica do Forge para dentro do template, substituindo cores/spacing por tokens (C3)
+   - portar lógica do Eidos para dentro do template, substituindo cores/spacing por tokens (C3)
    - **`eidos-doc-scribe`** gera/atualiza MDX + front-matter (C6) e stories por variante (C5)
    - **`eidos-visual-qa`** roda Storybook headless, tira screenshot por tema, faz vision review ("isto parece um botão correto? estados visíveis?") + cria/compara baseline VR (C7, C8)
    - **`eidos-reviewer`** roda `pnpm eidos:verify --component <Name>` e só aprova com **todas** as cláusulas verdes; senão devolve issues estruturadas e re-loop.
@@ -222,7 +222,7 @@ Process (do not skip, do not self-certify):
 
 1. Read eidos.contract.json and the component's audit entry in reports/audit/inventory.json.
 2. Run `turbo gen component <Name>` to get the canonical structure (C1).
-3. Port logic from the Forge source. Replace ALL raw color/spacing with tokens (C3).
+3. Port logic from the Eidos source. Replace ALL raw color/spacing with tokens (C3).
 4. Hand off to eidos-doc-scribe for MDX + stories, eidos-visual-qa for screenshots/VR.
 5. Run `pnpm eidos:verify --component <Name>`. If not 0, fix and repeat.
 6. Create a changeset. Return a structured summary: {component, clauses, remaining_issues}.
@@ -265,7 +265,7 @@ Create or compare the Playwright VR baseline (pixelmatch). Report C4/C7/C8 as pa
 
 ```md
 ---
-description: Migrate one or more Forge components to Eidos contract compliance, parallelized via worktrees.
+description: Migrate one or more Eidos components to Eidos contract compliance, parallelized via worktrees.
 argument-hint: <ComponentName | wave-number | --all>
 ---
 
@@ -398,7 +398,7 @@ exit 0
 - [ ] F3: pipeline de migração paralelo funcionando em 1 componente piloto (prova de conceito ponta a ponta).
 - [ ] F4: `EIDOS-HEALTH.md` com baseline.
 
-> Comece pela **Fase 0** com o subagent `eidos-auditor`. Pergunte os globs dos componentes do Forge se não estiverem óbvios, depois rode em plan mode e me mostre o `gap-report.md` antes de avançar.
+> Comece pela **Fase 0** com o subagent `eidos-auditor`. Pergunte os globs dos componentes do Eidos se não estiverem óbvios, depois rode em plan mode e me mostre o `gap-report.md` antes de avançar.
 
 ```
 

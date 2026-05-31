@@ -25,7 +25,7 @@ critique is grounded in the repo's own standards — not generic taste.
   automatic Detail/Philosophy hit; quote the offending P0 row.
 - `../../craft/{typography,color,state-coverage,accessibility-baseline,rtl-and-bidi,form-validation,animation-discipline}.md`
   — the specific rulebooks to check against.
-- `../../FORGE-DS-REFERENCE.md` — to verify the artifact composed existing
+- `../../EIDOS-DS-REFERENCE.md` — to verify the artifact composed existing
   components instead of reinventing them.
 
 ## When to use

@@ -1,4 +1,4 @@
-# Forge-DS Harness — Gap Analysis
+# Eidos-DS Harness — Gap Analysis
 
 > **Historical note (superseded):** this analysis was written when the content lived in a
 > separate `harness/` folder. It has since been **consolidated entirely into `.claude/`**
@@ -35,7 +35,7 @@ for a high-standard harness; **P2** = polish / scale.
 | Area | Present | Notes |
 |---|---|---|
 | Root `CLAUDE.md` | ✅ | Good: covers app + harness + invariants. |
-| `FORGE-DS-REFERENCE.md`, `llms.txt` | ✅ | DS catalog for authoring. |
+| `EIDOS-DS-REFERENCE.md`, `llms.txt` | ✅ | DS catalog for authoring. |
 | `harness/skills/` (76) | ⚠️ content-only | Open Design `od:` schema; not Claude Code skills; wrong location. |
 | `harness/design-systems/` (140) | ⚠️ | Brand library; only `forge/` is canonical for us. |
 | `harness/craft/` (8) | ✅ content | Brand-agnostic rulebooks; valuable, not wired. |
@@ -80,11 +80,11 @@ None exist in CC format. Proposed roster (`.claude/agents/`):
 |---|---|---|
 | `web-project-lead` | Plans web work, decomposes, routes to specialists, owns acceptance criteria | Read, Grep, Agent, TaskCreate |
 | `frontend-engineer` | Implements React/Next.js App Router features, RSC/client boundaries | all code tools |
-| `design-system-engineer` | Authors/edits Forge DS components & pages (the 3-file ritual), tokens/ds.css discipline | Read, Edit, Write, Bash |
+| `design-system-engineer` | Authors/edits Eidos DS components & pages (the 3-file ritual), tokens/ds.css discipline | Read, Edit, Write, Bash |
 | `ux-designer` | Applies `harness/craft/` + active `DESIGN.md`; anti-AI-slop; states/RTL/a11y review | Read, Edit |
 | `ai-feature-architect` | Picks `streamText` vs `ToolLoopAgent` vs Workflow `DurableAgent`; model via Gateway | Read, Grep, WebFetch |
 | `ai-sdk-engineer` | Builds AI SDK v6 chat/agents/streaming/artifacts | all code tools |
-| `code-reviewer` | PR/diff review against Forge invariants + craft + React best practices | Read, Grep, Bash |
+| `code-reviewer` | PR/diff review against Eidos invariants + craft + React best practices | Read, Grep, Bash |
 | `performance-optimizer` | Core Web Vitals, bundle, rendering strategy (pairs with Vercel skills) | Read, Bash |
 
 (Plus the existing global Vercel plugin agents — keep, don't duplicate.)
@@ -127,12 +127,12 @@ None of these exist yet (the 76 OD skills are decks/posters/landing/social, not 
   (the global Vercel plugin already offers `react-best-practices`/`nextjs` — wrap/point to
   them rather than re-implement).
 - **Design System for engineering platforms**: `ds-component-authoring`,
-  `ds-token-discipline`, `ds-a11y-rtl-review` — encode the Forge invariants + craft as
+  `ds-token-discipline`, `ds-a11y-rtl-review` — encode the Eidos invariants + craft as
   enforceable skills.
 
 ### E. Modern Claude platform features unused — **P1/P2**
 
-- **Plugin + private marketplace** (`.claude-plugin/`): bundle Forge agents/skills/commands/
+- **Plugin + private marketplace** (`.claude-plugin/`): bundle Eidos agents/skills/commands/
   hooks so any teammate gets the harness with one install. **This is the unlock for "a
   whole team uses it,"** not per-repo copy-paste.
 - **Hooks** (deterministic guardrails): PostToolUse format/lint on `Edit|Write`;
@@ -143,7 +143,7 @@ None of these exist yet (the 76 OD skills are decks/posters/landing/social, not 
   weekly dependency/AI-SDK-deprecation scan, PR-trigger DS review.
 - **`/loop`**: in-session polling of `next build`/dev compile across all 151 routes for
   regressions after a core change.
-- **Output style**: a "Forge reviewer" voice for design-critique sessions.
+- **Output style**: a "Eidos reviewer" voice for design-critique sessions.
 
 ### F. Engineering hygiene — **P1**
 
@@ -201,7 +201,7 @@ None of these exist yet (the 76 OD skills are decks/posters/landing/social, not 
 │   └── … (curated subset bridging harness/skills/*)
 ├── commands/                  # quick flows: /commit, /open-pr, /release, /verify-routes
 ├── hooks/                     # scripts invoked by settings.json hooks
-└── output-styles/forge-reviewer.md
+└── output-styles/eidos-reviewer.md
 
 .claude-plugin/                # later: bundle the above for team distribution
 └── plugin.json

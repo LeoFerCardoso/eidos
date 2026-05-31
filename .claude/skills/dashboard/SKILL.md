@@ -22,7 +22,7 @@ design; your job is to arrange it.
 
 1. `idp-screen` SKILL — the parent pattern for assembling screens from the
    catalog. A dashboard is one shape of IDP screen.
-2. `../../FORGE-DS-REFERENCE.md` + `../../llms.txt` — confirm the metric card,
+2. `../../EIDOS-DS-REFERENCE.md` + `../../llms.txt` — confirm the metric card,
    chart, data-table, and status components you need already exist. Check the
    **Examples** group first; a dashboard layout is often already built.
 3. `../../design-systems/forge/DESIGN.md` — color, type, density, anti-patterns.

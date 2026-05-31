@@ -4,7 +4,7 @@ import { ChangelogView, type ChangelogEntry } from '@/components/docs';
 const CHANGELOG: ChangelogEntry[] = [
   // ─── v1.11.0 — Blocks on the contract harness (2026-05-30) ──────
   { version: 'v1.11.0', date: '2026-05-30', type: 'docs', scope: 'blocks', title: 'Blocks verified against the contract harness',
-    summary: 'The page-level Blocks (hero, feature-grid, cta-banner, stat-band, split-feature, page-headers) were swept for the section standard — Accessibility, RTL, Do/Don\'t, and visual anatomy — and are tracked per-clause in the generated FORGE-HEALTH wall.' },
+    summary: 'The page-level Blocks (hero, feature-grid, cta-banner, stat-band, split-feature, page-headers) were swept for the section standard — Accessibility, RTL, Do/Don\'t, and visual anatomy — and are tracked per-clause in the generated EIDOS-HEALTH wall.' },
 
   // ─── v1.10.0 — Page standard (2026-05-22) ──────
   { version: 'v1.10.0', date: '2026-05-22', type: 'docs', scope: 'blocks', title: 'Thin blocks fleshed out + Accessibility + visual anatomy',

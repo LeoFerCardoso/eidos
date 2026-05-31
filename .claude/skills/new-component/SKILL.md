@@ -25,7 +25,7 @@ hand-roll a font size for prose.
 - `.claude/design-systems/forge/DESIGN.md` — brand: ember budget, Geist, density, motion.
 - `.claude/craft/`: `typography.md`, `color.md`, `anti-ai-slop.md`, `accessibility-baseline.md`,
   `rtl-and-bidi.md`, `state-coverage.md`.
-- `FORGE-DS-REFERENCE.md` + `llms.txt` — confirm every class/icon you'll use already exists.
+- `EIDOS-DS-REFERENCE.md` + `llms.txt` — confirm every class/icon you'll use already exists.
 - **`src/ds/migrated/buttons.tsx`** — the canonical page template. Read it fully; mirror its
   structure AND its typography (`<Lede>` / `<Mono>`, not inline styles).
 
@@ -77,5 +77,5 @@ Use existing class systems: `.btn .pill .surface .ds-frame .ds-grid .in-* .fc-* 
 - Ember ≤2×/screen; no Tailwind indigo; no emoji feature icons; dark ink on every ember fill.
 - `npm run verify` (headless render check) returns the route with no page errors.
 - Bump `DS_VERSION` in `src/lib/site.ts` + add a `migrated/<ds>/changelog.tsx` entry.
-- Sanity-check gotchas in `docs/FORGE-DS-AUTHORING.md`: black screen (missing `Icons.x`), doubled
+- Sanity-check gotchas in `docs/EIDOS-DS-AUTHORING.md`: black screen (missing `Icons.x`), doubled
   focus ring, dropdown clipped by `.ds-frame{overflow:hidden}`, multi-fire onChange, 404 (forgot to restart dev).

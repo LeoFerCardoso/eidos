@@ -24,8 +24,8 @@ write per-page `<style>` and never reinvent a class that already exists.
 - `${CLAUDE_PLUGIN_ROOT}/craft/` required for this artifact:
   `typography.md`, `color.md`, `anti-ai-slop.md`, `accessibility-baseline.md`,
   `rtl-and-bidi.md`, `state-coverage.md`.
-- `FORGE-DS-REFERENCE.md` + `llms.txt` (root) — confirm every class/icon you'll use
-  already exists. `docs/FORGE-DS-AUTHORING.md` — class systems + gotchas.
+- `EIDOS-DS-REFERENCE.md` + `llms.txt` (root) — confirm every class/icon you'll use
+  already exists. `docs/EIDOS-DS-AUTHORING.md` — class systems + gotchas.
 - `src/ds/pages/components/buttons.jsx` — the canonical page template. Read it fully;
   mirror its structure.
 
@@ -70,7 +70,7 @@ new building block is needed — and say so explicitly.
 - Run the component-page checklist from the harness skill **including anti-ai-slop**.
 - Ember used at most 2×/screen; no Tailwind indigo; no emoji feature icons.
 - Confirm gen-manifest ran and the new route appears in `manifest.generated.ts`.
-- Sanity-check the gotchas in `docs/FORGE-DS-AUTHORING.md` apply to your component:
+- Sanity-check the gotchas in `docs/EIDOS-DS-AUTHORING.md` apply to your component:
   black screen (missing `Icons.x`), doubled focus ring, dropdown clipped by
   `.ds-frame{overflow:hidden}` (use `position:fixed` + `getBoundingClientRect()`),
   multi-fire onChange (never `htmlFor` on a label that also wraps the input).

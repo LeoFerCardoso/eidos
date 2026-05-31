@@ -27,7 +27,7 @@ then re-verify the craft checks.
 3. `../../craft/anti-ai-slop.md` (P0 list), plus whichever of
    `{typography,color,state-coverage,accessibility-baseline,rtl-and-bidi,animation-discipline,form-validation}.md`
    the change touches.
-4. `../../FORGE-DS-REFERENCE.md` — to confirm a better-fitting existing class
+4. `../../EIDOS-DS-REFERENCE.md` — to confirm a better-fitting existing class
    exists before adding CSS.
 
 ## When to use vs. not

@@ -39,7 +39,7 @@ were removed, not archived.
 - **craft/** — *universal* rules a competent designer applies regardless of brand.
 
 A skill reads `design-systems/forge/DESIGN.md` + the craft sections it needs + the catalog
-(`FORGE-DS-REFERENCE.md`, `llms.txt`), then composes with the Eidos classes/components in
+(`EIDOS-DS-REFERENCE.md`, `llms.txt`), then composes with the Eidos classes/components in
 `src/styles/ds.css` and `src/ds/`. There is no daemon — the agent reads these files; the
 anti-AI-slop P0 list is a mandatory manual checklist. Eidos artifacts are built **in the
 repo** (the 3-file DS-page ritual), not emitted as standalone artifacts.

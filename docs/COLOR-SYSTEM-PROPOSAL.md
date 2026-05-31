@@ -1,11 +1,11 @@
-# Forge color system — proposal & relocation (v2)
+# Eidos color system — proposal & relocation (v2)
 
 **Date:** 2026-05-21 · **Scope:** core color tokens (`src/styles/tokens.css`, dark + light) +
 the `/color` page + where domain palettes live. **Status:** awaiting approval.
 
 ## TL;DR
 
-Forge's color foundation is strong — OKLCH surface tiers, alpha borders, a warm 4-step
+Eidos's color foundation is strong — OKLCH surface tiers, alpha borders, a warm 4-step
 foreground ramp, a single ember accent, and a full data-viz palette. Three gaps remain:
 
 1. **The status layer is inconsistent.** Ember has 6 variants; danger has `soft + fg`;
@@ -23,7 +23,7 @@ the two domain sections out of Core. Concrete values are in §4.
 
 ---
 
-## 1. What Forge has today
+## 1. What Eidos has today
 
 | Layer | Tokens | State |
 |---|---|---|

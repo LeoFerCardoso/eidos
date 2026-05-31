@@ -30,7 +30,7 @@ Architecture (post window-bridge cut — SWC, no .babelrc, no window registry):
 - Routes come from src/ds/core/nav-config.js (build-time data; groups tagged by DS via ds:/GROUP_DS) → gen-nav.mjs → src/lib/nav.ts (typed DESIGN_SYSTEMS/NAV/NAV_BY_DS/NAV_FLAT, dsHref, navForPath→ds). gen-nav/gen-migrated/gen-examples (recursive) auto-run on dev/build. Adding a page = add it to the right DS section in nav-config.js + drop src/ds/migrated/<ds>/<slug>.tsx. Do NOT reference window.PAGES/window.EXAMPLES/window.Icons/window.MOCKS — import from @/ds/core. After editing nav-config/design-systems, RESTART next dev (generateStaticParams is read once at start; dynamicParams=false → new routes 404 until restart).
 
 READ FIRST (links):
-- Project rules: CLAUDE.md (root). DS catalog: FORGE-DS-REFERENCE.md + llms.txt. Authoring notes: docs/FORGE-DS-AUTHORING.md.
+- Project rules: CLAUDE.md (root). DS catalog: EIDOS-DS-REFERENCE.md + llms.txt. Authoring notes: docs/EIDOS-DS-AUTHORING.md.
 - Canonical brand: .claude/design-systems/forge/DESIGN.md. Craft rulebooks: .claude/craft/* (incl. anti-ai-slop.md).
 - Memory (compiled project state/history/conventions): .claude/Memory/PROJECT-LOG.md + .claude/Memory/README.md.
 - Roadmaps: docs/REACT-NEXTJS-GAP-ANALYSIS.md (app), docs/HARNESS-GAP-ANALYSIS.md (harness).

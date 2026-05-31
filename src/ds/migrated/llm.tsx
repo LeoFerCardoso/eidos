@@ -5,7 +5,7 @@ import { Icons, Section, SubHead, CodeBlock, Lede } from '@/ds/core';
 // This is the canonical short-form index. Mirrors shadcn/ui's pattern:
 // a markdown-shaped, link-first catalog with one-line descriptions. Keep
 // it terse — descriptions must fit on one wrapped line in a 1024-token
-// context window. Long-form lives in FORGE-DS-REFERENCE.md.
+// context window. Long-form lives in EIDOS-DS-REFERENCE.md.
 const LLMS_TXT = `# Eidos Design System
 
 > Eidos is the design system that powers Equifax/Boa Vista's internal developer platform. It's CSS-first (Tailwind v4 + token CSS variables), framework-agnostic at the class layer, and ships React reference components meant to be copy-pasted into product code. There is no npm package to install — own your copy of every component.
@@ -21,7 +21,7 @@ const LLMS_TXT = `# Eidos Design System
 ## Files an LLM should read first
 
 - /CLAUDE.md — TL;DR authoring rules (read on every session start).
-- /FORGE-DS-REFERENCE.md — long-form catalog (tokens, every CSS class, every React component, every icon, every page). ~920 lines.
+- /EIDOS-DS-REFERENCE.md — long-form catalog (tokens, every CSS class, every React component, every icon, every page). ~920 lines.
 - /src/ds/core/nav-config.js — single source of truth for navigation, slugs, and labels (read by scripts/gen-nav.mjs → src/lib/nav.ts).
 - /packages/ui/styles/tokens.css — every design token (colors, type, spacing, radius, shadow, motion).
 - /packages/ui/styles/ds.css — every component class (.btn, .pill, .surface, .in-*, .fc-*, .cb-*, .menu, .tt, .ds-frame, .ds-grid, …); AI-surface classes live in ai.css.
@@ -233,7 +233,7 @@ Full-product screens assembled exclusively from existing components. Reference t
 
 ## Rules for code generation
 
-1. Read this file + FORGE-DS-REFERENCE.md before writing any new page. Skipping that step produces drift from the system.
+1. Read this file + EIDOS-DS-REFERENCE.md before writing any new page. Skipping that step produces drift from the system.
 2. Compose. If something can be built from Pill + Card + Avatar + Trend, build it that way — don't invent a new class.
 3. Never write a per-page <style> block. Use existing classes (.btn, .surface, .ds-frame, .ds-grid, .in-*, .fc-*, .cb-*, .menu, .tt, .pill, .chip, .badge, .avatar, .tbl) or extend tokens.css / ds.css.
 4. Every component page must include: live demo Frame, Anatomy, Decision matrix, Do/Don't with live UI demos (not just text), and an RTL example. See src/ds/migrated/buttons.tsx as the canonical template.
@@ -275,7 +275,7 @@ export default function LLM() {
         <div className="surface" style={{padding: 16}}>
           <div style={{display:'flex', alignItems:'center', gap: 8, marginBottom: 6}}>
             <span className="pill"><span className="dot"/>full reference</span>
-            <span style={{fontSize: 'var(--text-md)', fontWeight: 600, fontFamily:'var(--font-mono)'}}>FORGE-DS-REFERENCE.md</span>
+            <span style={{fontSize: 'var(--text-md)', fontWeight: 600, fontFamily:'var(--font-mono)'}}>EIDOS-DS-REFERENCE.md</span>
           </div>
           <div style={{color:'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.5}}>
             Long-form catalog — every token, every CSS class, every React export, every icon. <span style={{fontFamily:'var(--font-mono)', fontVariantNumeric:'tabular-nums'}}>~920</span> lines. Use when the model needs to write component-level code, not just navigate.
@@ -296,7 +296,7 @@ export default function LLM() {
             <span style={{fontSize: 'var(--text-base)', fontWeight: 600}}>Claude Code / Cursor</span>
           </div>
           <div style={{color:'var(--fg-muted)', fontSize: 'var(--text-base)', lineHeight: 1.5}}>
-            Both tools auto-read <code style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-subtle)'}}>CLAUDE.md</code> at session start. That file already points to <code style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-subtle)'}}>FORGE-DS-REFERENCE.md</code> — no extra step needed.
+            Both tools auto-read <code style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-subtle)'}}>CLAUDE.md</code> at session start. That file already points to <code style={{fontFamily:'var(--font-mono)', fontSize: 'var(--text-xs)', color:'var(--fg-subtle)'}}>EIDOS-DS-REFERENCE.md</code> — no extra step needed.
           </div>
         </div>
         <div className="surface" style={{padding: 16}}>
@@ -337,9 +337,9 @@ Rules:
 4. Cite specific pages when relevant ("see /buttons").
 5. If something is missing from the catalog, say so — don't fabricate it.
 
-<<<FORGE-DS>>>
+<<<EIDOS-DS>>>
 (paste the contents of llms.txt here)
-<<<END FORGE-DS>>>`}/>
+<<<END EIDOS-DS>>>`}/>
 
       {/* The actual file */}
       <SubHead meta="the file">llms.txt — full contents</SubHead>
@@ -355,7 +355,7 @@ Rules:
       </Lede>
       <div className="ds-grid cols-2">
         {[
-          ['Read the catalog first',              'Before writing any new page, read llms.txt + FORGE-DS-REFERENCE.md. Skipping this step produces drift.'],
+          ['Read the catalog first',              'Before writing any new page, read llms.txt + EIDOS-DS-REFERENCE.md. Skipping this step produces drift.'],
           ['Compose, never reinvent',             'If something can be built from Pill + Card + Avatar + Trend, build it that way. Don’t invent a new class.'],
           ['No per-page style blocks',            'Use existing classes (.btn, .surface, .ds-frame, .ds-grid, .in-*, .fc-*, .cb-*, .menu, .tt) or extend packages/ui/styles/tokens.css / ds.css.'],
           ['Every page = full template',          'Live demo + Anatomy + Decision matrix + Do/Don’t (with live UI, not text) + RTL example. See src/ds/migrated/buttons.tsx as the template.'],

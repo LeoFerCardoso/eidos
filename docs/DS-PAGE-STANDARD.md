@@ -1,4 +1,4 @@
-# Forge DS — page section standard (proposal)
+# Eidos DS — page section standard (proposal)
 
 **Date:** 2026-05-21 · **Goal:** one predictable section anatomy for every page across core +
 the 6 sub-DSs, so the DS reads as complete, detailed, and professional. **Status:** awaiting
@@ -97,7 +97,7 @@ Always use the left column; retire the variants on the right.
 
 ## 3.5 Typography — font sizes & prose (NEW — this is the rule)
 
-Pages must **not** hand-roll font sizes. Forge type is a **fixed 9-step scale**
+Pages must **not** hand-roll font sizes. Eidos type is a **fixed 9-step scale**
 (72·56·36·28·20·17·15·13·11) — the source of truth is **Foundations / Typography**
 + the `.t-*` utilities. **There is no 12.5, 13.5, 14 or 16.** Use the components /
 classes / `--text-*` tokens below. Gold reference: `buttons.tsx`.

@@ -1,8 +1,8 @@
-# forge-ds
+# eidos
 
 Two things live in this repo:
 
-1. **The Forge Design System app** — the multi-page DS documentation site
+1. **The Eidos Design System app** — the multi-page DS documentation site
    (Introduction, foundations, ~80 components, charts, elements, AI surfaces,
    patterns, and full IDP example screens), ported from the original Open Design
    project into a runnable **Next.js (App Router)** app.
@@ -25,7 +25,7 @@ page, chart, element, AI surface, and example screen is wired up.
 ## Project layout
 
 ```
-forge-ds/
+eidos/
 ├── app/                        # Next.js App Router
 │   ├── layout.tsx              #   <html>, fonts, theme no-FOUC, DS stylesheets
 │   ├── (ds)/layout.tsx         #   persisted two-column DocsShell (sidebar + topbar)
@@ -49,7 +49,7 @@ forge-ds/
 │   └── craft/                  #   8 brand-agnostic craft rulebooks
 ├── .claude-plugin/             # marketplace manifest (distribute the harness)
 ├── scripts/                    # gen-nav, gen-migrated, gen-examples, verify-render, build-plugin
-├── FORGE-DS-REFERENCE.md       # full DS catalog (tokens/classes/components/icons/pages)
+├── EIDOS-DS-REFERENCE.md       # full DS catalog (tokens/classes/components/icons/pages)
 ├── llms.txt                    # DS catalog index (read first when authoring DS pages)
 └── docs/                       # gap analysis, routines, original DS authoring notes
 ```

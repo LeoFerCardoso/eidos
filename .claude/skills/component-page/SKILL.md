@@ -23,7 +23,7 @@ inside the persisted `(ds)` DocsShell by `DSPageLoader`.
    rules (§3.5)**, the **required RTL section (§3.6)**, and the vocabulary (§3). This is the rule.
 2. **`src/ds/migrated/buttons.tsx`** — the gold-reference page. Copy its structure and its
    typography (it now uses `<Lede>` / `<Mono>` — see below).
-3. `FORGE-DS-REFERENCE.md` + `llms.txt` — catalog; confirm the class/icon already exists.
+3. `EIDOS-DS-REFERENCE.md` + `llms.txt` — catalog; confirm the class/icon already exists.
 4. `.claude/design-systems/forge/DESIGN.md` — brand (ember budget, Geist, density, motion).
 5. Craft: `.claude/craft/{typography,color,anti-ai-slop,accessibility-baseline,rtl-and-bidi,state-coverage}.md`.
 

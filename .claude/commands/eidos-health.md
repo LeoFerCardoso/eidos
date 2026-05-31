@@ -1,12 +1,12 @@
 ---
 name: eidos-health
-description: Render the Eidos DS health wall (FORGE-HEALTH.md) from the contract gate and surface the prioritized debt — block-fails first, then advisory — with the fewest-clauses-to-green ranking.
+description: Render the Eidos DS health wall (EIDOS-HEALTH.md) from the contract gate and surface the prioritized debt — block-fails first, then advisory — with the fewest-clauses-to-green ranking.
 allowed-tools: [Bash, Read]
 ---
 
 # /eidos-health — the health wall
 
-Generates `FORGE-HEALTH.md` from `reports/state.json` (per-component, per-clause status
+Generates `EIDOS-HEALTH.md` from `reports/state.json` (per-component, per-clause status
 across docs · export · story · registry · cross · tokens) — the "health wall" of the DS.
 
 ## Steps
@@ -18,7 +18,7 @@ across docs · export · story · registry · cross · tokens) — the "health w
    npm run eidos:health
    ```
    (Add `--heavy` to `eidos:verify` to include the route-level a11y/visual/render gates.)
-3. Read `FORGE-HEALTH.md`.
+3. Read `EIDOS-HEALTH.md`.
 
 ## Report
 

@@ -14,7 +14,7 @@ Elements catalog — almost always the layout is already ready to be adapted.
 ## Required pre-reading
 
 1. `../../llms.txt` **Examples** and **Elements** sections — odds are the screen already exists.
-2. `../../FORGE-DS-REFERENCE.md` — IDP blocks (Data table, Pipeline, Log viewer,
+2. `../../EIDOS-DS-REFERENCE.md` — IDP blocks (Data table, Pipeline, Log viewer,
    Tree view, Timeline, Ring bar) and elements (Metric card, Service card, Score gauge).
 3. The active `DESIGN.md`.
 

@@ -1,6 +1,6 @@
-# Forge Design System
+# Eidos Design System
 
-> Forge is the design system that powers Equifax/Boa Vista's internal developer platform. It's CSS-first (Tailwind v4 + token CSS variables), framework-agnostic at the class layer, and ships React reference components meant to be copy-pasted into product code. There is no npm package to install — own your copy of every component.
+> Eidos is the design system that powers Equifax/Boa Vista's internal developer platform. It's CSS-first (Tailwind v4 + token CSS variables), framework-agnostic at the class layer, and ships React reference components meant to be copy-pasted into product code. There is no npm package to install — own your copy of every component.
 
 ## Principles
 
@@ -13,14 +13,14 @@
 ## Files an LLM should read first
 
 - /CLAUDE.md — TL;DR authoring rules (read on every session start).
-- /FORGE-DS-REFERENCE.md — long-form catalog (tokens, every CSS class, every React component, every icon, every page). ~920 lines.
+- /EIDOS-DS-REFERENCE.md — long-form catalog (tokens, every CSS class, every React component, every icon, every page). ~920 lines.
 - /forge-design-system/assets/js/core/nav-config.js — single source of truth for navigation, slugs, and labels.
 - /forge-design-system/assets/css/tokens.css — every design token (colors, type, spacing, radius, shadow, motion).
 - /forge-design-system/assets/css/ds.css — every component class (.btn, .pill, .surface, .in-*, .fc-*, .cb-*, .menu, .tt, .ds-frame, .ds-grid, …).
 
 ## Docs
 
-- [Introduction](design-system.html): What Forge is, who maintains it, how it ships.
+- [Introduction](design-system.html): What Eidos is, who maintains it, how it ships.
 - [Installation](pages/get-started/installation.html): Tailwind v4 preset + React copy-paste workflow. No npm install.
 - [Components catalog](pages/get-started/components.html): Searchable grid of every component with previews.
 - [Theming](pages/get-started/theming.html): Light/dark via data-theme, custom accents via CSS variables.
@@ -167,7 +167,7 @@ Recharts wrappers themed with Forge tokens — viz palette lives in tokens.css. 
 
 ## AI
 
-Surfaces a Forge product needs once it's wired to a model. Every page composes existing components (pill, btn, in-group, collapsible, surface) — no new primitives.
+Surfaces a Eidos product needs once it's wired to a model. Every page composes existing components (pill, btn, in-group, collapsible, surface) — no new primitives.
 
 - [Citations](pages/ai/citations.html): Source citation pattern with hover preview.
 - [Conversation](pages/ai/conversation.html): Full thread layout — header, scroll area, composer.
@@ -226,7 +226,7 @@ Full-product screens assembled exclusively from existing components. Reference t
 
 ## Rules for code generation
 
-1. Read this file + FORGE-DS-REFERENCE.md before writing any new page. Skipping that step produces drift from the system.
+1. Read this file + EIDOS-DS-REFERENCE.md before writing any new page. Skipping that step produces drift from the system.
 2. Compose. If something can be built from Pill + Card + Avatar + Trend, build it that way — don't invent a new class.
 3. Never write a per-page <style> block. Use existing classes (.btn, .surface, .ds-frame, .ds-grid, .in-*, .fc-*, .cb-*, .menu, .tt, .pill, .chip, .badge, .avatar, .tbl) or extend tokens.css / ds.css.
 4. Every component page must include: live demo Frame, Anatomy, Decision matrix, Do/Don't with live UI demos (not just text), and an RTL example. See buttons.jsx as the canonical template.

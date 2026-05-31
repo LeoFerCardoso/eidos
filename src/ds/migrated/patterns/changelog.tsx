@@ -4,7 +4,7 @@ import { ChangelogView, type ChangelogEntry } from '@/components/docs';
 const CHANGELOG: ChangelogEntry[] = [
   // ─── v1.11.0 — Patterns on the contract harness (2026-05-30) ──────
   { version: 'v1.11.0', date: '2026-05-30', type: 'docs', scope: 'patterns', title: 'Patterns verified against the contract harness',
-    summary: 'The CSS pattern pages were swept for the section standard (Accessibility, reduced-motion, Do / Don\'t, CSS-variable reference) and are tracked per-clause in the generated FORGE-HEALTH wall.' },
+    summary: 'The CSS pattern pages were swept for the section standard (Accessibility, reduced-motion, Do / Don\'t, CSS-variable reference) and are tracked per-clause in the generated EIDOS-HEALTH wall.' },
 
   // ─── v1.10.0 — Page standard (2026-05-22) ──────
   { version: 'v1.10.0', date: '2026-05-22', type: 'docs', scope: 'patterns', title: 'Accessibility section on every pattern',

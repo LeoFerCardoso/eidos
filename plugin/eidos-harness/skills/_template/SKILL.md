@@ -19,7 +19,7 @@ Eidos classes, never write per-page CSS").
 
 ## Required pre-reading
 1. `${CLAUDE_PLUGIN_ROOT}/design-systems/forge/DESIGN.md` — the brand (ember budget, Geist, density).
-2. `FORGE-DS-REFERENCE.md` + `llms.txt` — catalog; don't reinvent an existing class/component.
+2. `EIDOS-DS-REFERENCE.md` + `llms.txt` — catalog; don't reinvent an existing class/component.
 3. The `${CLAUDE_PLUGIN_ROOT}/craft/*` sections this artifact needs (typography, color, anti-ai-slop, …).
 
 ## Workflow

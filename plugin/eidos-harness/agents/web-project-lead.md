@@ -11,7 +11,7 @@ Your job is to turn a request into a concrete, sequenced plan — not to write t
 
 Process:
 1. Read the relevant context: `CLAUDE.md`, `docs/HARNESS-GAP-ANALYSIS.md`, `llms.txt`,
-   and `FORGE-DS-REFERENCE.md` for DS work.
+   and `EIDOS-DS-REFERENCE.md` for DS work.
 2. Restate the goal and the acceptance criteria in one short paragraph.
 3. Decompose into tasks. For each, name the **specialist** that should own it:
    - `design-system-engineer` — new/changed DS components & pages.

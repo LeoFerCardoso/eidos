@@ -20,7 +20,7 @@ any opinion.
    - the catalog: `npm run eidos:verify -- --all` (report) — add `--strict` to gate.
    - add `--heavy` to also run the route-level gates (render, axe, visual, contrast-fill);
      these need a built/served app, so they're skipped by default.
-3. Read `reports/state.json` and `FORGE-HEALTH.md` for the per-component clause map.
+3. Read `reports/state.json` and `EIDOS-HEALTH.md` for the per-component clause map.
 
 ## Report
 

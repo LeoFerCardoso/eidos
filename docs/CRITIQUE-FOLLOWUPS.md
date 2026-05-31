@@ -1,7 +1,7 @@
 # Critique follow-ups — backlog (deferred)
 
 **Origem:** programa de design-critique + remediação das 217 páginas de doc, 2026-05-31.
-**Onde parou:** catálogo forte em todas as dimensões (média/DS — Filosofia 8.2 · Hierarquia 8.0 · Função 8.0 · Detalhe 7.3 · Inovação 7.3); `forge:verify` 0 block-fail; render headless limpo. Lotes 0–5 + elevação (2 passadas) concluídos. O abaixo foi **deliberadamente adiado** — sem valor marginal suficiente agora.
+**Onde parou:** catálogo forte em todas as dimensões (média/DS — Filosofia 8.2 · Hierarquia 8.0 · Função 8.0 · Detalhe 7.3 · Inovação 7.3); `eidos:verify` 0 block-fail; render headless limpo. Lotes 0–5 + elevação (2 passadas) concluídos. O abaixo foi **deliberadamente adiado** — sem valor marginal suficiente agora.
 
 ## P1 — doc afirma X, componente faz Y (dívida de confiança; corrigir = implementar o comportamento OU acertar o texto)
 - [ ] **reduced-motion sem guard real** — a seção a11y promete que a animação pausa sob `prefers-reduced-motion`, mas o componente/CSS não tem o guard: `mobile/tab-bar.tsx` (indicador live), `mobile/switch.tsx` (spring do thumb, inline), `file-input.tsx` (`.in-file-progress > span` + spinner). Adicionar `@media (prefers-reduced-motion: reduce){ transition:none }` (ou `useReducedMotion`) no componente.

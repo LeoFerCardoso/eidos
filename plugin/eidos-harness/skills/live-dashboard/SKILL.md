@@ -26,7 +26,7 @@ is no separate CLI or daemon.
 
 1. `dashboard` SKILL — layout, metric/chart/table composition, the 3-file
    ritual, and the accent/state rules. Don't repeat that work here.
-2. `../../FORGE-DS-REFERENCE.md` + `../../llms.txt` — metric, chart
+2. `../../EIDOS-DS-REFERENCE.md` + `../../llms.txt` — metric, chart
    (`window.ForgeChart`), table, status-dot, badge components.
 3. `../../design-systems/forge/DESIGN.md` and
    `../../craft/{anti-ai-slop,state-coverage,animation-discipline,color,typography}.md`.

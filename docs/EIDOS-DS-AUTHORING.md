@@ -1,6 +1,6 @@
-# Forge Design System — Project Notes
+# Eidos Design System — Project Notes
 
-> **Catálogo completo do DS:** `FORGE-DS-REFERENCE.md` (raiz do projeto). Leia esse arquivo antes de criar páginas novas ou variações — ele lista TODOS os tokens, classes CSS, componentes React, ícones, e cada página de documentação (~180 entradas). Use composição em vez de reinventar.
+> **Catálogo completo do DS:** `EIDOS-DS-REFERENCE.md` (raiz do projeto). Leia esse arquivo antes de criar páginas novas ou variações — ele lista TODOS os tokens, classes CSS, componentes React, ícones, e cada página de documentação (~180 entradas). Use composição em vez de reinventar.
 
 A multi-page design system documentation site. Entry point: `forge-design-system/design-system.html` (the Introduction / Overview page lives at root). Every other page lives under `forge-design-system/pages/<group>/<slug>.html`.
 

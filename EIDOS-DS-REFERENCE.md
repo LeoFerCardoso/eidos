@@ -1,6 +1,6 @@
-# Forge Design System — LLM Reference
+# Eidos Design System — LLM Reference
 
-> **Para o LLM:** este é o catálogo completo do Forge DS — tokens, classes CSS, componentes React, ícones, e cada página de documentação. Use-o antes de criar qualquer página, telas de exemplo, ou variação. **Nunca reinvente** algo que já existe aqui — composição é a regra.
+> **Para o LLM:** este é o catálogo completo do Eidos DS — tokens, classes CSS, componentes React, ícones, e cada página de documentação. Use-o antes de criar qualquer página, telas de exemplo, ou variação. **Nunca reinvente** algo que já existe aqui — composição é a regra.
 >
 > Arquivos canônicos relacionados:
 > - `CLAUDE.md` — regras de autoria curtas (versão TL;DR deste documento)
@@ -548,7 +548,7 @@ Todos exportados em `window` para uso em `<script type="text/babel">` separados.
 | Export | Notas |
 |---|---|
 | `ForgeChart({ title, subtitle, meta, height, padding, accent, children })` | Card surface + ResponsiveContainer. Children = nó Recharts. |
-| `ForgeTooltipContent` | Replace de `<Tooltip content>` com chrome Forge. |
+| `ForgeTooltipContent` | Replace de `<Tooltip content>` com chrome Eidos. |
 | `ChartLegend({ items })` | Legenda horizontal manual. |
 | `useChartColors()` | Retorna `var(--viz-cat-1..12)` (memo). |
 | `fmtCompact(n)` | Formato curto (k/M/B). |
@@ -568,7 +568,7 @@ Todos exportados em `window` para uso em `<script type="text/babel">` separados.
 | Export | Notas |
 |---|---|
 | `Icons` | Objeto com ~95 ícones Lucide-style (24×24, stroke 1.5, currentColor). |
-| `ForgeMark({ size, variant: 'solid'\|'outline'\|'expressive', color, strokeWidth, glow })` | Marca da Forge (flame + 3 sparkles em 32×32). |
+| `ForgeMark({ size, variant: 'solid'\|'outline'\|'expressive', color, strokeWidth, glow })` | Marca da Eidos (flame + 3 sparkles em 32×32). |
 
 **Ícones disponíveis** (chame como `<Icons.x size={16}/>`):
 
@@ -595,7 +595,7 @@ Todos exportados em `window` para uso em `<script type="text/babel">` separados.
 ### 5.1 Get Started (6)
 
 - **overview** — Landing/intro: filosofia, princípios, stats, FAQs. Stats vivos via getComputedStyle.
-- **installation** — Dois caminhos (usar Forge num produto vs. rodar docs local). Prerequisites (Node 20+, Tailwind v4), steps com circulos numerados, CDN pinning com SRI.
+- **installation** — Dois caminhos (usar Eidos num produto vs. rodar docs local). Prerequisites (Node 20+, Tailwind v4), steps com circulos numerados, CDN pinning com SRI.
 - **components-catalog** (`components.html`) — Catálogo auto-gerado via `SECTIONS.walk()`. Tile grid por group/subgroup com descrição e ícone.
 - **theming** — Dark/light via `[data-theme]`, override de tokens com `oklch()`, persistência em `localStorage`.
 - **tailwind** — Preset para Tailwind v4 (`@theme` block) + config v3 legacy. Inclui keyframes inline.
@@ -768,7 +768,7 @@ Todos exportados em `window` para uso em `<script type="text/babel">` separados.
 
 ### 5.14 Examples (21 — full-product screens)
 
-> Telas standalone (sem DS shell) que simulam o Forge IDP. Marcadas `external: true` na nav, abrem em nova aba.
+> Telas standalone (sem DS shell) que simulam o Eidos IDP. Marcadas `external: true` na nav, abrem em nova aba.
 
 `ex-ai-chat-empty`, `ex-ai-chat-thread`, `ex-ai-projects`, `ex-ai-project-detail`, `ex-ai-insights`, `ex-agent-chat`, `ex-agent-catalog`, `ex-cloud-inventory`, `ex-dora-dashboard`, `ex-feature-flags`, `ex-incident-room`, `ex-mcp-detail`, `ex-pipeline-console`, `ex-pipeline-view`, `ex-quality-gates`, `ex-ring-deployment`, `ex-score-cards`, `ex-service-catalog`, `ex-service-detail`, `ex-service-scaffold`, `ex-templates`.
 

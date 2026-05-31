@@ -12,7 +12,7 @@ classes and primitives — never by writing per-page CSS. `src/styles/tokens.css
 the Next.js app via the `window.PAGES` registry — there are no static HTML shells.
 
 ## Required pre-reading
-1. `FORGE-DS-REFERENCE.md` + `llms.txt` — catalog; confirm the class/icon already exists.
+1. `EIDOS-DS-REFERENCE.md` + `llms.txt` — catalog; confirm the class/icon already exists.
 2. `src/ds/pages/components/buttons.jsx` — the canonical component-page template.
 3. `${CLAUDE_PLUGIN_ROOT}/design-systems/forge/DESIGN.md` — brand (ember budget, Geist, density, motion).
 4. Craft: `${CLAUDE_PLUGIN_ROOT}/craft/{typography,color,anti-ai-slop,accessibility-baseline,rtl-and-bidi,state-coverage}.md`.

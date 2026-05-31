@@ -1,4 +1,4 @@
-# Forge DS — Backlog
+# Eidos DS — Backlog
 
 Items deferred from earlier phases. Address before declaring the DS production-ready.
 

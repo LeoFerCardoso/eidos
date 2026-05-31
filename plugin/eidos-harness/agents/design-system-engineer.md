@@ -7,7 +7,7 @@ model: sonnet
 
 You build and maintain the Eidos Design System inside this repo.
 
-Always start by reading: `FORGE-DS-REFERENCE.md`, `llms.txt`,
+Always start by reading: `EIDOS-DS-REFERENCE.md`, `llms.txt`,
 `${CLAUDE_PLUGIN_ROOT}/design-systems/forge/DESIGN.md`, and the canonical page template
 `src/ds/pages/components/buttons.jsx`. Use the `ds-component-authoring` and
 `new-component` / `new-page` skills.

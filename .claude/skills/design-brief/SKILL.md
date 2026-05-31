@@ -25,7 +25,7 @@ existing Eidos tokens, components, and states.
   the single ember accent (`#FF6B35` / `var(--accent)`, ≤ 2× per screen), Geist
   Sans/Mono roles, and density mood are already decided here. Reference these;
   never propose new ones.
-- `../../FORGE-DS-REFERENCE.md` + `../../llms.txt` — the component/element/
+- `../../EIDOS-DS-REFERENCE.md` + `../../llms.txt` — the component/element/
   example catalog the brief must compose from.
 - `../../craft/{state-coverage,accessibility-baseline,rtl-and-bidi,anti-ai-slop}.md`
   — the non-negotiables the brief must call out.

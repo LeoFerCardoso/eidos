@@ -23,7 +23,7 @@ composing existing Eidos classes — never per-page `<style>`.
 
 ## Required pre-reading
 
-1. `../../FORGE-DS-REFERENCE.md` + `../../llms.txt` — so each block you sketch
+1. `../../EIDOS-DS-REFERENCE.md` + `../../llms.txt` — so each block you sketch
    maps to a real Eidos component/element/example. Sketch what the DS can
    actually build; check the **Examples** group for an existing layout first.
 2. `../../design-systems/forge/DESIGN.md` — honor type roles and the single

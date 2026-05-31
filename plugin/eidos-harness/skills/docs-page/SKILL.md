@@ -20,7 +20,7 @@ itself in `window.PAGES['<slug>']` like every other DS page.
 
 1. `component-page` SKILL — the 3-file ritual, JSX page structure, and the
    shared hard rules. A docs page is the prose sibling of a component page.
-2. `../../FORGE-DS-REFERENCE.md` + `../../llms.txt` — confirm the prose, code,
+2. `../../EIDOS-DS-REFERENCE.md` + `../../llms.txt` — confirm the prose, code,
    callout/alert, and table classes you'll use already exist.
 3. `../../design-systems/forge/DESIGN.md` and
    `../../craft/{typography,rtl-and-bidi,accessibility-baseline,color}.md`.

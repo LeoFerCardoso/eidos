@@ -1,6 +1,6 @@
 # React + Next.js Architecture — Gap Analysis & Re-architecture Proposal
 
-> Assessment of the current forge-ds app against modern React + Next.js (App Router)
+> Assessment of the current eidos app against modern React + Next.js (App Router)
 > best practices, with a concrete re-architecture of the DS site (file/folder structure,
 > navigation, components, and the two-column page layout → reusable primitives).
 > Date: 2026-05-20.
@@ -39,7 +39,7 @@ for maintainability/scale · **P2** = polish.
 | Aspect | Today |
 |---|---|
 | Routing | `app/page.tsx` + `app/[...slug]/page.tsx` → one client `DSRuntime` that reads a route key, dynamically imports the matching page module, renders it inside `window.DSShell`. **Not** file-system routing. |
-| Rendering | 100% client-side. SSR emits a "Loading Forge…" splash; everything hydrates then imports core + page. No RSC, no streaming, no SSG. |
+| Rendering | 100% client-side. SSR emits a "Loading Eidos…" splash; everything hydrates then imports core + page. No RSC, no streaming, no SSG. |
 | Modules | `window.PAGES['slug'] = Comp`, `window.EXAMPLES`, `Object.assign(window,{Icons,DSShell,…})`. Shared code passed via `window`, not imports. `install-globals.ts` puts React/ReactDOM/Recharts on `window`. |
 | Language | **162 `.jsx`/`.js`** vs **5 `.ts/.tsx`** in `src/ds`. No prop types, no typed nav, no typed registry. |
 | Compiler | `next/babel` (`.babelrc`) — SWC disabled — because the ported JSX has constructs SWC rejects (e.g. a bare `>` in JSX text). Loses SWC speed + some Next features. |
@@ -83,7 +83,7 @@ for maintainability/scale · **P2** = polish.
 
 ### D. Compiler (Babel → SWC) — **P1**
 - **Gap:** `.babelrc` disables SWC for the whole project (slower builds, no `next/font`,
-  weaker Fast Refresh) — a workaround for ported JSX. The Forge banner even says "It
+  weaker Fast Refresh) — a workaround for ported JSX. The Eidos banner even says "It
   looks like there is a custom Babel configuration that can be removed."
 - **Recommendation:** Fix the source (JSX-text `>`/`<` escaping, etc.) during migration so
   SWC parses cleanly, then delete `.babelrc`.
@@ -243,7 +243,7 @@ pages port the JSX body verbatim.**
   DocsShell via `app/(ds)/[...slug]` → `DSPageLoader` (original components) → **SPA nav**
   (sidebar keeps scroll + selection; only the right column swaps). Examples moved to
   standalone `/example/<name>`. Theme via `next-themes`. shadcn scaffolding removed
-  (Forge is the component library); Tailwind v4 + token utilities kept for new code.
+  (Eidos is the component library); Tailwind v4 + token utilities kept for new code.
 - **Phase 1 — Doc primitives + migration mechanism. ✅ DONE.** `components/docs/*` exposes
   the reusable authoring primitives as clean TSX (`Section`, `SubHead`, `Frame`,
   `PropsTable`, `TokenSwatch`, `SpecRow`, `CopyButton` real TSX; `CodeBlock`/`TabbedCode`/

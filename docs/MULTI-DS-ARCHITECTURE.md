@@ -1,18 +1,18 @@
-# Forge — Multi-Design-System architecture
+# Eidos — Multi-Design-System architecture
 
-Forge is a **family of design systems** that share one base. The **core** DS owns the
+Eidos is a **family of design systems** that share one base. The **core** DS owns the
 brand: tokens (`tokens.css`), the component primitives (`@/ds/core`), the single ember
 accent, and the foundations. Every **sub-DS** inherits all of that and *only adds* its
 domain components, patterns, and examples — it never forks tokens or introduces a new
 accent.
 
 ```
-Forge (core)          /              Introduction · Foundations · Primitives · Resources
-├─ Forge Charts       /charts/*      data-viz components + overview
-├─ Forge AI           /ai/*          chat, streaming, markdown, tools, agents, contexts (+ examples)
-├─ Forge IDP          /idp/*         Blocks + Elements (+ IDP example screens)
-├─ Forge Patterns     /patterns/*    decorative textures & effects
-└─ Forge Mobile       /mobile/*      touch-first surfaces (scaffold)
+Eidos (core)          /              Introduction · Foundations · Primitives · Resources
+├─ Eidos Charts       /charts/*      data-viz components + overview
+├─ Eidos AI           /ai/*          chat, streaming, markdown, tools, agents, contexts (+ examples)
+├─ Eidos IDP          /idp/*         Blocks + Elements (+ IDP example screens)
+├─ Eidos Patterns     /patterns/*    decorative textures & effects
+└─ Eidos Mobile       /mobile/*      touch-first surfaces (scaffold)
 ```
 
 ## The registry

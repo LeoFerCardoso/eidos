@@ -12,8 +12,8 @@ allowed-tools: [Read, Grep]
 
 # ds-component-authoring — Eidos authoring rules & gotchas
 
-The authoritative catalog is `FORGE-DS-REFERENCE.md` + `llms.txt` (root) and
-`docs/FORGE-DS-AUTHORING.md`. This is the quick map; read those for detail.
+The authoritative catalog is `EIDOS-DS-REFERENCE.md` + `llms.txt` (root) and
+`docs/EIDOS-DS-AUTHORING.md`. This is the quick map; read those for detail.
 
 ## How a page exists (registry bridge)
 
@@ -47,7 +47,7 @@ two files ARE the system. Extend them only for a genuinely new building block.
 - Logical CSS properties everywhere — RTL is first-class.
 - Anti-AI-slop is a mandatory checklist (`${CLAUDE_PLUGIN_ROOT}/craft/anti-ai-slop.md`).
 
-## Known gotchas (from docs/FORGE-DS-AUTHORING.md)
+## Known gotchas (from docs/EIDOS-DS-AUTHORING.md)
 
 - **Black screen** → runtime crash, almost always a missing `Icons.x` reference or a
   syntax error in the page JSX. Check the boot diagnostic.

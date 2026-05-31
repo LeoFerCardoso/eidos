@@ -1,11 +1,11 @@
-# Forge DS — distribution model
+# Eidos DS — distribution model
 
 **Date:** 2026-05-29 · **Status:** decided (documents the model the app already implements).
-**Decision: Forge is source-shipped (shadcn-style), not a published black-box package.**
+**Decision: Eidos is source-shipped (shadcn-style), not a published black-box package.**
 
 ## The model
 
-Forge components are **copied into the consuming product's repo** via a CLI, the same way the
+Eidos components are **copied into the consuming product's repo** via a CLI, the same way the
 docs already present installation:
 
 ```
@@ -13,7 +13,7 @@ pnpm dlx eidos@latest add button     # copies button.tsx + its CSS into your rep
 ```
 
 The component source becomes *yours* — editable, reviewable in your PRs, no version-locked
-dependency to fight. This is the contract the docs already state ("Forge is source-shipped, not
+dependency to fight. This is the contract the docs already state ("Eidos is source-shipped, not
 a black-box dependency", `buttons.tsx`) and what the Installation page's tabs implement.
 
 **Why source-shipped (over a published `@eidos/core` package):**
@@ -34,7 +34,7 @@ a black-box dependency", `buttons.tsx`) and what the Installation page's tabs im
 
 ## Versioning & releases
 
-- **Versioning is per Design System.** Forge is a *family*; each DS evolves independently, so each
+- **Versioning is per Design System.** Eidos is a *family*; each DS evolves independently, so each
   has its own version in the `DS_VERSIONS` map in `src/lib/site.ts`, matching the latest entry in
   that DS's own Changelog. The topbar `VersionBadge` is **DS-aware** — it shows the version of the
   DS you're viewing (`DS_VERSIONS[useActiveDs()]`). Current: core `1.14.0` · ai `1.29.0` · idp
@@ -61,8 +61,8 @@ for teams that prefer a dependency.
 
 ## Consumer workflow (source-shipped)
 
-1. Add the Forge token + base CSS layer once (`tokens.css` + `ds.css`).
+1. Add the Eidos token + base CSS layer once (`tokens.css` + `ds.css`).
 2. `eidos add <component>` (or copy from `src/ds/core/**` + the Manual tab instructions).
 3. Pull `tokens/forge.tokens.json` into your design tooling so Figma/Style-Dictionary stay in
    sync with code (the tokens are the shared contract even though components are copied).
-4. Re-sync periodically against a Forge git tag; your local edits are yours to reconcile.
+4. Re-sync periodically against a Eidos git tag; your local edits are yours to reconcile.

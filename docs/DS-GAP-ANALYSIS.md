@@ -1,6 +1,6 @@
-# Forge DS — Gap Analysis (state of the system + what to fix)
+# Eidos DS — Gap Analysis (state of the system + what to fix)
 
-**Date:** 2026-05-29 · **Scope:** the runnable Forge DS app (`src/ds/**`, `src/styles/**`,
+**Date:** 2026-05-29 · **Scope:** the runnable Eidos DS app (`src/ds/**`, `src/styles/**`,
 `src/components/**`), not the `.claude/` harness. **Method:** read `DS-PAGE-STANDARD.md` +
 `PROJECT-LOG.md`, then grep-measured all **209 content pages** across the 7 design systems
 (core, charts, ai, idp, patterns, mobile, blocks). All numbers below are grep-verified, not
@@ -193,7 +193,7 @@ active state and TOC scroll-spy. This is a clean, maintainable architecture.
 
 ---
 
-## 6. Market best practices — where Forge stands
+## 6. Market best practices — where Eidos stands
 
 **On par or ahead of market leaders:** semantic OKLCH token model (role-named, theme-flips-one-
 variable), RTL-first with logical CSS properties, the anti-AI-slop craft checklist, per-DS
@@ -333,7 +333,7 @@ an inline `Skeleton` (`<div>`) inside a `<p>` — swapped for an inline `<span c
       `CopyChip text=`→`value=`, `level="P1"`→`"p1"`). **`next.config` `ignoreBuildErrors: false`**
       (so `next build` type-checks) + the **CI `typecheck` job is now blocking**. Build green,
       242/242 render clean.
-14. ✅ Distribution model decided + documented (R4): **`docs/DISTRIBUTION.md`** — Forge is
+14. ✅ Distribution model decided + documented (R4): **`docs/DISTRIBUTION.md`** — Eidos is
     **source-shipped** (shadcn-style CLI copies component source into the consumer repo), the
     model the Installation flow already implements; the shared single-sources-of-truth are the
     DTCG **tokens** + the base CSS, versioned via `DS_VERSION` + `/release` + per-DS changelogs.

@@ -15,7 +15,7 @@ single machine-readable definition of "Done" is **`packages/registry/forge.contr
 Each clause maps to a deterministic verifier in `scripts/` (the existing `check-*`/`gen-*`
 plus `check-ds-page-structure`, `check-4-surface-parity`, `check-stories`, `check-registry`,
 `check-no-page-style`, `check-slop`); `scripts/eidos-verify.mjs` aggregates them and writes
-`reports/state.json` + the generated **`FORGE-HEALTH.md`** wall. `npm run gen:contract`
+`reports/state.json` + the generated **`EIDOS-HEALTH.md`** wall. `npm run gen:contract`
 re-syncs the bindings from disk.
 
 The non-negotiables below (contrast, ember-2×, Geist, logical CSS, no per-page `<style>`,
@@ -84,10 +84,10 @@ spec: `HARNESS-IMPROVED.md`.
 - Compose, never reinvent. Logical CSS properties everywhere (RTL is first-class).
 - Anti-AI-slop is a mandatory checklist (see `.claude/craft/anti-ai-slop.md`).
 
-The full technical catalog is `FORGE-DS-REFERENCE.md` + `llms.txt` (read before
+The full technical catalog is `EIDOS-DS-REFERENCE.md` + `llms.txt` (read before
 authoring DS pages). Page-section standard: `docs/DS-PAGE-STANDARD.md`. DS-family
 architecture: `docs/MULTI-DS-ARCHITECTURE.md`. Colour model + roadmap:
-`docs/COLOR-SYSTEM-PROPOSAL.md`. Original authoring notes: `docs/FORGE-DS-AUTHORING.md`.
+`docs/COLOR-SYSTEM-PROPOSAL.md`. Original authoring notes: `docs/EIDOS-DS-AUTHORING.md`.
 **What exists today + the full timeline of decisions is in `.claude/Memory/PROJECT-LOG.md`**
 (read it at the start of a new session to know the current state — what's built, the
 conventions, and why). The live page inventory is `src/ds/core/nav-config.js`.

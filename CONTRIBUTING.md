@@ -1,6 +1,6 @@
-# Contributing to Forge DS
+# Contributing to Eidos DS
 
-Forge is a **family of design systems** on one token base (core + charts · ai · idp · patterns ·
+Eidos is a **family of design systems** on one token base (core + charts · ai · idp · patterns ·
 mobile · blocks). This repo holds the runnable docs app and the `.claude/` engineering harness.
 Read **`CLAUDE.md`** (session rules) and **`docs/DS-PAGE-STANDARD.md`** (page anatomy) first.
 
