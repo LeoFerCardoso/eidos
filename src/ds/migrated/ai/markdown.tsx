@@ -277,13 +277,13 @@ export default function AiMarkdown() {
         <div style={{ width: '100%', maxWidth: 680, display: 'flex', flexDirection: 'column', gap: 24 }}>
           {/* User question */}
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <div style={{ padding: '10px 14px', background: 'var(--ember-soft)', border: '1px solid rgba(255,107,53,0.22)', borderRadius: 12, borderEndEndRadius: 4, color: 'var(--fg)', fontSize: 'var(--text-md)', lineHeight: 1.55, maxWidth: '70%' }}>
+            <div style={{ padding: '10px 14px', background: 'var(--ember-soft)', border: '1px solid color-mix(in srgb, var(--ember) 22%, transparent)', borderRadius: 12, borderEndEndRadius: 4, color: 'var(--fg)', fontSize: 'var(--text-md)', lineHeight: 1.55, maxWidth: '70%' }}>
               What's the canary rollout strategy for identity-svc?
             </div>
           </div>
           {/* Assistant reply */}
           <div style={{ display: 'flex', gap: 12 }}>
-            <span style={{ width: 32, height: 32, borderRadius: 'var(--radius-lg)', background: 'var(--ember-soft)', border: '1px solid rgba(255,107,53,0.22)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}>
+            <span style={{ width: 32, height: 32, borderRadius: 'var(--radius-lg)', background: 'var(--ember-soft)', border: '1px solid color-mix(in srgb, var(--ember) 22%, transparent)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}>
               <Icons.sparkle size={16} style={{ color: 'var(--ember)' }}/>
             </span>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1, minWidth: 0 }}>

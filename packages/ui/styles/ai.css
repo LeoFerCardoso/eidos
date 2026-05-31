@@ -85,7 +85,7 @@
 .ai-resp.user .ai-resp-q {
   padding: 10px 14px;
   background: var(--ember-soft);
-  border: 1px solid rgba(255,107,53,0.22);
+  border: 1px solid color-mix(in srgb, var(--ember) 22%, transparent);
   border-radius: 12px;
   border-end-end-radius: 4px;
   color: var(--fg);
@@ -421,7 +421,7 @@
   font-feature-settings: 'tnum';
   color: var(--ember);
   background: var(--ember-soft);
-  border: 1px solid rgba(255,107,53,0.28);
+  border: 1px solid color-mix(in srgb, var(--ember) 28%, transparent);
   border-radius: 4px;
   cursor: pointer;
   vertical-align: 2px;
@@ -489,7 +489,7 @@ button.ai-cite-panel-head { cursor: pointer; }
   background: none; border: 1px solid var(--border); cursor: pointer;
   color: var(--fg-muted); transition: color 0.14s ease, border-color 0.14s ease;
 }
-.ai-cite-panel-pager-btn:hover:not(:disabled) { color: var(--ember); border-color: rgba(255,107,53,0.4); }
+.ai-cite-panel-pager-btn:hover:not(:disabled) { color: var(--ember); border-color: color-mix(in srgb, var(--ember) 40%, transparent); }
 .ai-cite-panel-pager-btn:disabled { color: var(--fg-faint); border-color: var(--border); cursor: not-allowed; opacity: 0.5; }
 .ai-cite-panel-list { list-style: none; padding: 0; margin: 0; }
 .ai-cite-panel-list li {
@@ -643,7 +643,7 @@ button.ai-cite-panel-head { cursor: pointer; }
 .ai-hist-item .act:hover { background: var(--surface-hover); color: var(--fg); }
 .ai-hist-item .act:focus-visible { outline: var(--ring-width) solid var(--ring); outline-offset: 1px; }
 .ai-hist-item .act.danger:hover { color: var(--danger); }
-.ai-hist-item .hl { color: var(--ember); background: rgba(255,107,53,0.12); border-radius: 2px; padding: 0 1px; }
+.ai-hist-item .hl { color: var(--ember); background: color-mix(in srgb, var(--ember) 12%, transparent); border-radius: 2px; padding: 0 1px; }
 
 .ai-hist-empty {
   padding: 32px 16px;
@@ -795,7 +795,7 @@ button.ai-cite-panel-head { cursor: pointer; }
 }
 .msg.user .msg-bubble {
   background: var(--ember-soft);
-  border-color: rgba(255,107,53,0.22);
+  border-color: color-mix(in srgb, var(--ember) 22%, transparent);
   color: var(--fg);
 }
 /* Assistant replies read as FLAT prose — no bubble surface. Only the user
@@ -1259,7 +1259,7 @@ button.ai-cite-panel-head { cursor: pointer; }
 .sg.is-on, .sg[aria-pressed="true"] {
   color: var(--ember-text);
   background: var(--ember-soft);
-  border-color: rgba(255,107,53,0.3);
+  border-color: color-mix(in srgb, var(--ember) 30%, transparent);
 }
 .sg.sm { padding: 4px 10px; font-size: var(--text-xs); }
 .sg.lg { padding: 8px 14px; font-size: var(--text-sm); }
@@ -1624,7 +1624,7 @@ button.ai-cite-panel-head { cursor: pointer; }
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   gap: 8px;
-  background: rgba(255,107,53,0.08);
+  background: color-mix(in srgb, var(--ember) 8%, transparent);
   border: 2px dashed var(--ember);
   border-radius: 14px;
   pointer-events: none;
@@ -1835,7 +1835,7 @@ button.ai-cite-panel-head { cursor: pointer; }
 .conv-doc-q-bubble {
   padding: 10px 14px;
   background: var(--ember-soft);
-  border: 1px solid rgba(255,107,53,0.22);
+  border: 1px solid color-mix(in srgb, var(--ember) 22%, transparent);
   border-radius: 12px;
   color: var(--fg);
   font-size: 14px;
@@ -1884,7 +1884,7 @@ button.ai-cite-panel-head { cursor: pointer; }
 .ai-label.box .ai-text { font-size: 9px; }
 .ai-label.pill {
   padding-block: 3px; padding-inline-start: 6px; padding-inline-end: 8px;
-  border: 1px solid rgba(255, 107, 53, 0.3);
+  border: 1px solid color-mix(in srgb, var(--ember) 30%, transparent);
   background: var(--ember-soft);
   border-radius: 999px;
 }
@@ -1909,7 +1909,7 @@ button.ai-cite-panel-head { cursor: pointer; }
   cursor: pointer; outline: none;
   transition: background-color var(--dur-fast) var(--ease);
 }
-.ai-label.pill.is-trigger:hover { background: rgba(255, 107, 53, 0.2); }
+.ai-label.pill.is-trigger:hover { background: color-mix(in srgb, var(--ember) 20%, transparent); }
 .ai-label.is-trigger:focus-visible {
   box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ember);
   border-radius: 4px;
@@ -2778,7 +2778,7 @@ button.ai-cite-panel-head { cursor: pointer; }
   text-transform: uppercase;
 }
 .ai-transcript-turn.is-user .ai-transcript-chip {
-  background: var(--ember-soft); border-color: rgba(255,107,53,0.25);
+  background: var(--ember-soft); border-color: color-mix(in srgb, var(--ember) 25%, transparent);
   color: var(--ember);
 }
 .ai-transcript-text { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }

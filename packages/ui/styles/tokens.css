@@ -56,6 +56,11 @@
   --ember-deep:   #E04E1A;
   --ember-soft:   rgba(255,107,53,0.14);
   --ember-softer: rgba(255,107,53,0.07);
+  /* Canonical accent alias. `--ember` is the Forge theme's accent; `--accent`
+     is the theme-NEUTRAL handle every component should reach for. It tracks the
+     active color theme automatically (Forge ember / Iris violet) because it
+     resolves through var(--ember), which each theme redefines. */
+  --accent: var(--ember);
   /* Foreground that rides on top of ember/danger surfaces. Dark mode keeps
      a dark text on the bright accent (high-contrast hot CTA). */
   --ember-fg:  #0A0907;

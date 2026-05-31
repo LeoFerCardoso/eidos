@@ -86,7 +86,7 @@ export default function Spacing() {
           {/* Card with padding shown */}
           <div style={{position:'relative', background:'var(--surface)', border:'1px solid var(--border)', borderRadius: 'var(--radius-xl)', padding: 16}}>
             <div style={{position:'absolute', inset: 0, padding: 16, pointerEvents:'none'}}>
-              <div style={{width:'100%', height:'100%', border:'1px dashed rgba(255,107,53,0.4)', borderRadius: 'var(--radius-sm)'}}/>
+              <div style={{width:'100%', height:'100%', border:'1px dashed color-mix(in srgb, var(--ember) 40%, transparent)', borderRadius: 'var(--radius-sm)'}}/>
             </div>
             <div style={{color:'var(--fg)', fontWeight: 600, marginBottom: 4}}>Card · padding space-4 (16px)</div>
             <div style={{color:'var(--fg-muted)', fontSize: 'var(--text-base)'}}>The dashed line shows the padding boundary.</div>
@@ -114,7 +114,7 @@ export default function Spacing() {
       <div className="ds-grid cols-4">
         {radii.map(([name,px,use]) => (
           <div key={name} className="surface" style={{padding: 14, display:'flex', flexDirection:'column', gap: 8}}>
-            <div style={{height: 64, borderRadius: px, background: 'var(--ember-soft)', border: '1px solid rgba(255,107,53,0.25)'}}/>
+            <div style={{height: 64, borderRadius: px, background: 'var(--ember-soft)', border: '1px solid color-mix(in srgb, var(--ember) 25%, transparent)'}}/>
             <div className="t-mono" style={{fontSize: 'var(--text-xs)', color:'var(--fg)'}}>{name}</div>
             <div className="t-mono" style={{fontSize: 'var(--text-xs)', color:'var(--fg-subtle)', fontVariantNumeric:'tabular-nums'}}>{px}</div>
             <div style={{fontSize: 'var(--text-base)', color:'var(--fg-muted)', lineHeight: 1.5}}>{use}</div>
@@ -151,7 +151,7 @@ export default function Spacing() {
           <div className="ana" style={{display:'flex', justifyContent:'center'}}>
             <div className="stage" style={{position:'relative', width: 360}} aria-hidden="true">
               <div style={{background:'var(--surface)', border:'1px solid var(--border)', borderRadius: 'var(--radius-xl)', padding: 16, position:'relative'}}>
-                <div style={{position:'absolute', inset: 16, border:'1px dashed rgba(255,107,53,0.3)', borderRadius: 'var(--radius-sm)', pointerEvents:'none'}}/>
+                <div style={{position:'absolute', inset: 16, border:'1px dashed color-mix(in srgb, var(--ember) 30%, transparent)', borderRadius: 'var(--radius-sm)', pointerEvents:'none'}}/>
                 <div style={{color:'var(--fg)', fontWeight: 600, marginBottom: 4, fontSize: 'var(--text-md)'}}>Service health</div>
                 <div style={{color:'var(--fg-muted)', fontSize: 'var(--text-sm)', marginBottom: 12}}>Uptime over the last 30 days.</div>
                 <div style={{color:'var(--fg)', fontSize: 'var(--text-md)'}}>99.94% — within SLO.</div>

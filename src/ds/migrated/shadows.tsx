@@ -577,7 +577,7 @@ export default function Elevation() {
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — coloured halos</div>
           <div className="body">
-            <div style={{padding: 14, background:'var(--surface)', borderRadius: 'var(--radius-lg)', width: 200, fontSize: 'var(--text-base)', color:'var(--fg)', boxShadow:'0 8px 24px rgba(255,107,53,0.6)', border:'1px solid var(--ember)'}}>
+            <div style={{padding: 14, background:'var(--surface)', borderRadius: 'var(--radius-lg)', width: 200, fontSize: 'var(--text-base)', color:'var(--fg)', boxShadow:'0 8px 24px color-mix(in srgb, var(--ember) 60%, transparent)', border:'1px solid var(--ember)'}}>
               Ember halo on chrome
             </div>
           </div>

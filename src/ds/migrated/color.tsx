@@ -40,7 +40,7 @@ export default function Color() {
     ['Danger',  '--danger',  '#F87171', '#DC2626'],
   ];
   return (
-    <Section id="color" num="02" title="Color" desc="Semantic, theme-driven palette in OKLCH — a seven-tier surface ladder, four foreground steps, the single ember accent, and a success / warning / danger trio. Tokens name a role, never a hue.">
+    <Section id="color" num="02" title="Color" desc="Semantic, theme-driven palette in OKLCH — a seven-tier surface ladder, four foreground steps, the single theme-driven accent, and a success / warning / danger trio. Tokens name a role, never a hue.">
       <p style={{color:'var(--fg-muted)', maxWidth:'68ch', marginBottom: 22, lineHeight: 1.6}}>
         Eidos v1.1 redefines the surface scale in <b style={{color:'var(--fg)'}}>OKLCH</b> with a subtle warm undertone (~60° hue, very low chroma). The page background is <b style={{color:'var(--fg)'}}>not pure black</b> — true black is reserved for <code style={{fontFamily:'var(--font-mono)', color:'var(--ember)'}}>--canvas</code>, used only behind floating layers so the modal/sidesheet feels lifted. Seven tiers from canvas to overlay let UI compose real depth even in dark mode. The severity / run-status / health / risk vocabularies live on their own pages.
       </p>
@@ -49,7 +49,7 @@ export default function Color() {
       <div className="ds-grid cols-3" style={{marginBottom: 24}}>
         {[
           ['Semantic, not literal', 'Tokens name a role (--fg-muted), not a hue (--gray-400). Theme switching costs zero per-component work.'],
-          ['One ember', 'Ember is reserved for primary action, focus, active nav, the spark, and T1 highlights. Nothing else.'],
+          ['One accent', 'The accent — ember in Forge, violet in Iris — is reserved for primary action, focus, active nav, the spark, and T1 highlights. Nothing else.'],
           ['Hairlines only', 'No 2px borders, no shadows on cards. Separation comes from a 6%–18% border on a darker surface.'],
         ].map(([t,d]) => (
           <div key={t} className="surface" style={{padding: 16}}>
@@ -130,29 +130,29 @@ export default function Color() {
         ))}
       </div>
 
-      {/* Ember scale */}
-      <SubHead meta="single accent">Ember (the one accent)</SubHead>
+      {/* Accent scale — theme-driven */}
+      <SubHead meta="theme-driven">The accent (one per theme)</SubHead>
       <p style={{marginTop: -6, marginBottom: 14, fontSize: 'var(--text-body)', color:'var(--fg-muted)', maxWidth:'68ch', lineHeight: 1.6}}>
-        Five values total. The two soft variants are tinted overlays for halos, hover surfaces, and selection backgrounds where full-strength ember would be too loud.
+        One accent, swapped by the active theme. Components never name a hue — they reach for <Mono>--accent</Mono>, an alias of the theme&rsquo;s <Mono>--ember</Mono>, so every CTA, focus ring, active-nav bar and spark re-colours at once. <b style={{color:'var(--fg)'}}>Forge</b> ships ember; the <b style={{color:'var(--fg)'}}>Iris</b> theme swaps it for violet. Flip the theme in the topbar — the scale below recolours live. The two soft variants are tinted overlays for halos, hover surfaces, and selection backgrounds where the full-strength accent would be too loud.
       </p>
       <div className="ds-frame">
-        <div className="ds-frame-head"><span className="label">Ember scale</span><CopyButton text={'--ember: #FF6B35;\n--ember-glow: #FF8C42;\n--ember-deep: #E04E1A;\n--ember-soft: rgba(255,107,53,0.14);\n--ember-softer: rgba(255,107,53,0.07);'}/></div>
+        <div className="ds-frame-head"><span className="label">Accent scale · active theme</span><CopyButton text={'/* Components use the theme-neutral alias … */\n--accent: var(--ember);\n\n/* … the active theme defines the ramp. Forge ships: */\n--ember: #FF6B35;\n--ember-glow: #FF8C42;\n--ember-deep: #E04E1A;\n--ember-soft: rgba(255,107,53,0.14);\n--ember-softer: rgba(255,107,53,0.07);'}/></div>
         <div className="ds-frame-body">
           <div className="scale-bar">
             <div className="sb-deep">deep</div>
-            <div className="sb-ember">ember</div>
+            <div className="sb-ember">accent</div>
             <div className="sb-glow">glow</div>
             <div style={{background:'var(--ember-soft)', color:'var(--fg)'}}>soft</div>
             <div style={{background:'var(--ember-softer)', color:'var(--fg-muted)'}}>softer</div>
           </div>
           <div style={{fontSize: 'var(--text-sm)', color:'var(--fg-muted)', marginTop: 14, lineHeight: 1.6}}>
-            Use full ember for: <b style={{color:'var(--fg)'}}>primary CTA</b>, <b style={{color:'var(--fg)'}}>active nav indicator</b>, <b style={{color:'var(--fg)'}}>focus ring</b>, <b style={{color:'var(--fg)'}}>the spark</b>, <b style={{color:'var(--fg)'}}>T1 service highlights</b>. Use soft for selection halos, current-row tints, and hover backgrounds. Nothing else.
+            Use the full accent for: <b style={{color:'var(--fg)'}}>primary CTA</b>, <b style={{color:'var(--fg)'}}>active nav indicator</b>, <b style={{color:'var(--fg)'}}>focus ring</b>, <b style={{color:'var(--fg)'}}>the spark</b>, <b style={{color:'var(--fg)'}}>T1 service highlights</b>. Use soft for selection halos, current-row tints, and hover backgrounds. Nothing else — and because they all resolve through <Mono>--accent</Mono>, the whole set re-themes together.
           </div>
         </div>
       </div>
 
-      {/* Ember surfaces in context */}
-      <SubHead meta="ember at work">Where ember lives</SubHead>
+      {/* Accent surfaces in context */}
+      <SubHead meta="accent at work">Where the accent lives</SubHead>
       <p style={{marginTop: -6, marginBottom: 14, fontSize: 'var(--text-body)', color:'var(--fg-muted)', maxWidth:'68ch', lineHeight: 1.6}}>
         The focus ring below is <b style={{color:'var(--fg)'}}>real</b>, not painted on — press <Kbd>Tab</Kbd> into this
         preview and the ember <Mono>--ring</Mono> halo appears on keyboard focus only (a mouse click leaves it off, by

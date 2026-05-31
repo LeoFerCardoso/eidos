@@ -169,6 +169,10 @@
         "com.forge.theme.light": "rgba(232,90,40,0.05)"
       }
     },
+    "accent": {
+      "$value": "{color.ember}",
+      "$type": "color"
+    },
     "ember-fg": {
       "$value": "#0A0907",
       "$type": "color",

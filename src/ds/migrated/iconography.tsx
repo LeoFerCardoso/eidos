@@ -332,7 +332,7 @@ export default function Iconography() {
         <div className="dd-card dont">
           <div className="head"><Icons.x size={12}/> Don't — hardcoded fills</div>
           <div className="body" style={{gap: 16}}>
-            <svg width={20} height={20} viewBox="0 0 24 24" fill="#FF6B35" stroke="none"><circle cx={12} cy={12} r={10}/></svg>
+            <svg width={20} height={20} viewBox="0 0 24 24" fill="var(--accent)" stroke="none"><circle cx={12} cy={12} r={10}/></svg>
             <svg width={20} height={20} viewBox="0 0 24 24" fill="#7DD3FC" stroke="none"><circle cx={12} cy={12} r={10}/></svg>
           </div>
           <div className="note">Hardcoded fills break theming. Light-mode flips will leave them looking wrong.</div>

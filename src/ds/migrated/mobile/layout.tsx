@@ -3,7 +3,7 @@
 import { Section, SubHead, Frame, CodeBlock, SpecRow, DeviceFrame, Icons, Lede, Mono } from '@/ds/core';
 
 const guide = { position: 'absolute', insetBlock: 0, width: 1, background: 'var(--ember)', opacity: 0.4, pointerEvents: 'none' } as const;
-const band = (label: string) => ({ background: 'var(--ember-soft)', borderBlock: '1px dashed rgba(255,107,53,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--ember)', letterSpacing: '0.04em' } as const);
+const band = (label: string) => ({ background: 'var(--ember-soft)', borderBlock: '1px dashed color-mix(in srgb, var(--ember) 40%, transparent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--ember)', letterSpacing: '0.04em' } as const);
 
 function LayoutScreen() {
   return (

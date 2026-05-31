@@ -1427,14 +1427,13 @@ a:focus-visible,
 .scale-bar { display: flex; height: 56px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }
 .scale-bar > div { flex: 1; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px; font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.7); }
 [data-mode="light"] .scale-bar > div { color: var(--fg); }
-/* Solid ember-scale swatches: theme-independent bright fills, so they need a
-   fixed dark ink (white-70% inherited from the base rule fails AA on ember). */
-.scale-bar .sb-deep  { background: #E04E1A; color: var(--ink-fixed); }
-.scale-bar .sb-ember { background: #FF6B35; color: var(--ink-fixed); }
-.scale-bar .sb-glow  { background: #FF8C42; color: var(--ink-fixed); }
-[data-mode="light"] .scale-bar .sb-deep,
-[data-mode="light"] .scale-bar .sb-ember,
-[data-mode="light"] .scale-bar .sb-glow { color: var(--ink-fixed); }
+/* Accent-scale swatches: paint the ACTIVE theme's accent ramp (Forge ember /
+   Iris violet) via the --ember-{deep,glow} tokens, so the scale re-themes with
+   the rest of the system. The label uses the on-accent ink (--ember-fg) — dark
+   on the bright dark-mode accent, white on the deep light-mode accent. */
+.scale-bar .sb-deep  { background: var(--ember-deep); color: var(--ember-fg); }
+.scale-bar .sb-ember { background: var(--ember);      color: var(--ember-fg); }
+.scale-bar .sb-glow  { background: var(--ember-glow); color: var(--ember-fg); }
 
 /* Live preview shell mini */
 .shell-mini {

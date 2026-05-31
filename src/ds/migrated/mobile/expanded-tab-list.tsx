@@ -424,7 +424,7 @@ export default function MobileExpandedTabList() {
                     return (
                       <div
                         key={d.id}
-                        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4, borderRadius: 8, background: active ? 'rgba(255,107,53,0.10)' : 'var(--surface)', border: active ? '1.5px solid var(--accent)' : '1px solid var(--border)', padding: '10px 4px' }}
+                        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4, borderRadius: 8, background: active ? 'color-mix(in srgb, var(--ember) 10%, transparent)' : 'var(--surface)', border: active ? '1.5px solid var(--accent)' : '1px solid var(--border)', padding: '10px 4px' }}
                       >
                         <DstIcon name={d.icon} size={18} color={active ? 'var(--accent)' : 'var(--fg-muted)'} />
                         <span style={{ fontSize: 9, fontWeight: active ? 600 : 500, color: active ? 'var(--accent)' : 'var(--fg-muted)' }}>{d.label}</span>
@@ -497,7 +497,7 @@ export default function MobileExpandedTabList() {
             {ALL_DESTINATIONS.slice(0, 6).map((d, i) => {
               const active = i === 1;
               return (
-                <div key={d.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, padding: '8px 4px', borderRadius: 8, background: active ? 'rgba(255,107,53,0.10)' : 'var(--surface)', border: active ? '1.5px solid var(--accent)' : '1px solid var(--border)' }}>
+                <div key={d.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, padding: '8px 4px', borderRadius: 8, background: active ? 'color-mix(in srgb, var(--ember) 10%, transparent)' : 'var(--surface)', border: active ? '1.5px solid var(--accent)' : '1px solid var(--border)' }}>
                   <DstIcon name={d.icon} size={16} color={active ? 'var(--accent)' : 'var(--fg-muted)'} />
                   <span style={{ fontSize: 9, fontWeight: active ? 600 : 400, color: active ? 'var(--accent)' : 'var(--fg-muted)' }}>{d.label}</span>
                 </div>

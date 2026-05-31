@@ -348,7 +348,7 @@ export default function Page() {
           <div className="body" style={{ padding: 14 }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 2, width: '100%' }}>
               {Array.from({ length: 36 }, (_, i) => (
-                <div key={i} style={{ height: 18, background: `rgba(255, 107, 53, ${0.05 + (i % 12) * 0.075})`, borderRadius: 2 }}/>
+                <div key={i} style={{ height: 18, background: `color-mix(in srgb, var(--ember) ${(0.05 + (i % 12) * 0.075) * 100}%, transparent)`, borderRadius: 2 }}/>
               ))}
             </div>
           </div>
