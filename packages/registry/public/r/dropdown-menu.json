@@ -3,7 +3,7 @@
   "name": "dropdown-menu",
   "type": "registry:ui",
   "title": "Dropdown Menu",
-  "description": "Forge Dropdown Menu component.",
+  "description": "Eidos Dropdown Menu component.",
   "registryDependencies": [
     "forge"
   ],

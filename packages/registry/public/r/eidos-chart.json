@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "eidos-chart",
+  "type": "registry:ui",
+  "title": "Eidos Chart",
+  "description": "Eidos Eidos Chart component.",
+  "dependencies": [
+    "recharts"
+  ],
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/eidos-chart.tsx",
+      "target": "components/forge/eidos-chart.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport * as Re from 'recharts';\n\nconst REDUCE_MOTION_QUERY = '(prefers-reduced-motion: reduce)';\n\nconst usePrefersReducedMotion = () => {\n  const [reduced, setReduced] = React.useState(false);\n  React.useEffect(() => {\n    if (typeof window === 'undefined' || !window.matchMedia) return;\n    const mq = window.matchMedia(REDUCE_MOTION_QUERY);\n    const sync = () => setReduced(mq.matches);\n    sync();\n    mq.addEventListener('change', sync);\n    return () => mq.removeEventListener('change', sync);\n  }, []);\n  return reduced;\n};\n\nconst EidosChart = ({ title, subtitle, meta, height = 280, padding = 18, accent, state, fallback, children }: {\n  title?: React.ReactNode;\n  subtitle?: React.ReactNode;\n  meta?: React.ReactNode;\n  height?: number;\n  padding?: number | string;\n  accent?: string;\n  state?: 'loading' | 'empty' | 'ready';\n  fallback?: React.ReactNode;\n  children?: React.ReactElement;\n}) => {\n  const reduced = usePrefersReducedMotion();\n  // Gate the enter animation DS-wide: clone the chart child and force\n  // isAnimationActive={false} on any series sub-element that does not already\n  // set it explicitly. Recharts reads the prop off each series, so we recurse\n  // one level into the chart's children.\n  const body = React.useMemo(() => {\n    if (!reduced || !React.isValidElement(children)) return children;\n    const series = (children.props as { children?: React.ReactNode }).children;\n    if (series == null) return children;\n    const gated = React.Children.map(series, (node) => {\n      if (!React.isValidElement(node)) return node;\n      const props = node.props as { isAnimationActive?: boolean };\n      if (props.isAnimationActive !== undefined) return node; // honour explicit page choice\n      return React.cloneElement(node, { isAnimationActive: false } as Partial<typeof props>);\n    });\n    return React.cloneElement(children, undefined as never, gated);\n  }, [reduced, children]);\n\n  const showFallback = fallback != null || (state && state !== 'ready');\n  return (\n    <div className=\"eidos-chart\" style={accent ? ({ '--chart-accent': accent } as React.CSSProperties) : undefined}>\n      {(title || meta) && (\n        <div className=\"fc-head\">\n          <div className=\"fc-head-text\">\n            {title && <span className=\"fc-title\">{title}</span>}\n            {subtitle && <span className=\"fc-subtitle\">{subtitle}</span>}\n          </div>\n          {meta && <span className=\"fc-meta\">{meta}</span>}\n        </div>\n      )}\n      <div className=\"fc-body\" style={{ padding }}>\n        {showFallback ? (\n          <div\n            className=\"fc-state\"\n            style={{ minBlockSize: height }}\n            data-state={state ?? 'custom'}\n            role=\"status\"\n            aria-live=\"polite\"\n            aria-busy={state === 'loading' ? true : undefined}\n          >\n            {fallback ?? (state === 'loading' ? 'Loading…' : 'No data')}\n          </div>\n        ) : (\n          <Re.ResponsiveContainer width=\"100%\" height={height}>\n            {body as React.ReactElement}\n          </Re.ResponsiveContainer>\n        )}\n      </div>\n    </div>\n  );\n};\n\nexport { EidosChart };\n"
+    }
+  ]
+}

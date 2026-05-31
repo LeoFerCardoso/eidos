@@ -3,7 +3,7 @@
   "name": "attachment",
   "type": "registry:ui",
   "title": "Attachment",
-  "description": "Forge Attachment component.",
+  "description": "Eidos Attachment component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

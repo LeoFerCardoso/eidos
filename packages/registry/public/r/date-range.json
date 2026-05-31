@@ -3,7 +3,7 @@
   "name": "date-range",
   "type": "registry:ui",
   "title": "Date Range",
-  "description": "Forge Date Range component.",
+  "description": "Eidos Date Range component.",
   "registryDependencies": [
     "forge"
   ],

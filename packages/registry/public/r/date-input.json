@@ -3,7 +3,7 @@
   "name": "date-input",
   "type": "registry:ui",
   "title": "Date Input",
-  "description": "Forge Date Input component.",
+  "description": "Eidos Date Input component.",
   "registryDependencies": [
     "forge",
     "icons"

@@ -3,7 +3,7 @@
   "name": "month-grid",
   "type": "registry:ui",
   "title": "Month Grid",
-  "description": "Forge Month Grid component.",
+  "description": "Eidos Month Grid component.",
   "registryDependencies": [
     "forge",
     "start-of-month"

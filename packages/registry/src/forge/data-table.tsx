@@ -48,19 +48,29 @@ const DataTable = ({
           <tr>
             {columns.map(c => {
               const isSorted = sort && sort.col === c.id;
+              const chevs = c.sortable && (
+                <span className="th-chevs" aria-hidden="true">
+                  <span className={'chev-up ' + (isSorted && sort.dir === 'asc' ? 'on' : '')}>▲</span>
+                  <span className={'chev-dn ' + (isSorted && sort.dir === 'desc' ? 'on' : '')}>▼</span>
+                </span>
+              );
               return (
-                <th key={c.id} style={{ textAlign: c.align || 'left', width: c.width }}
+                <th key={c.id} scope="col" style={{ textAlign: c.align || 'left', width: c.width }}
                     className={(c.sortable ? 'is-sortable ' : '') + (isSorted ? 'is-sorted ' + sort.dir : '')}
-                    onClick={c.sortable && onSort ? () => onSort(c.id) : undefined}>
-                  <span className="th-inner">
-                    <span>{c.label}</span>
-                    {c.sortable && (
-                      <span className="th-chevs">
-                        <span className={'chev-up ' + (isSorted && sort.dir === 'asc' ? 'on' : '')}>▲</span>
-                        <span className={'chev-dn ' + (isSorted && sort.dir === 'desc' ? 'on' : '')}>▼</span>
+                    aria-sort={isSorted ? (sort.dir === 'asc' ? 'ascending' : 'descending') : (c.sortable ? 'none' : undefined)}>
+                  {c.sortable && onSort ? (
+                    <button type="button" className="th-btn" onClick={() => onSort(c.id)}>
+                      <span className="th-inner">
+                        <span>{c.label}</span>
+                        {chevs}
                       </span>
-                    )}
-                  </span>
+                    </button>
+                  ) : (
+                    <span className="th-inner">
+                      <span>{c.label}</span>
+                      {chevs}
+                    </span>
+                  )}
                 </th>
               );
             })}
@@ -73,7 +83,12 @@ const DataTable = ({
           {rows.map(r => (
             <tr key={keyFn(r)} onClick={onRowClick ? () => onRowClick(r) : undefined}
                 className={onRowClick ? 'is-clickable' : ''}
-                tabIndex={onRowClick ? 0 : undefined}>
+                tabIndex={onRowClick ? 0 : undefined}
+                role={onRowClick ? 'button' : undefined}
+                aria-label={onRowClick ? 'Open row ' + String(keyFn(r)) : undefined}
+                onKeyDown={onRowClick ? (e) => {
+                  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onRowClick(r); }
+                } : undefined}>
               {columns.map(c => (
                 <td key={c.id} style={{ textAlign: c.align || 'left' }}>
                   {c.render ? c.render(r) : r[c.id]}

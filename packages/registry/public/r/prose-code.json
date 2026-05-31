@@ -3,7 +3,7 @@
   "name": "prose-code",
   "type": "registry:ui",
   "title": "Prose Code",
-  "description": "Forge Prose Code component.",
+  "description": "Eidos Prose Code component.",
   "dependencies": [
     "react-markdown",
     "remark-gfm"

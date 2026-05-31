@@ -3,7 +3,7 @@
   "name": "diagram",
   "type": "registry:ui",
   "title": "Diagram",
-  "description": "Forge Diagram component.",
+  "description": "Eidos Diagram component.",
   "registryDependencies": [
     "forge",
     "forge-ai"

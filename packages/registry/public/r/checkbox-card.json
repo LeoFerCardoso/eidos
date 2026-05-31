@@ -3,7 +3,7 @@
   "name": "checkbox-card",
   "type": "registry:ui",
   "title": "Checkbox Card",
-  "description": "Forge Checkbox Card component.",
+  "description": "Eidos Checkbox Card component.",
   "registryDependencies": [
     "forge",
     "icons"

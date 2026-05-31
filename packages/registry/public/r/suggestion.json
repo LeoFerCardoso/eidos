@@ -3,7 +3,7 @@
   "name": "suggestion",
   "type": "registry:ui",
   "title": "Suggestion",
-  "description": "Forge Suggestion component.",
+  "description": "Eidos Suggestion component.",
   "registryDependencies": [
     "forge",
     "forge-ai"

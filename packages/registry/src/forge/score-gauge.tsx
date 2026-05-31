@@ -41,14 +41,16 @@ const ScoreGaugeSpeedo = ({ value, min, max, ticks, labels, inverted, label, siz
   ];
   const tickCount = 10;
   return (
-    <div className="score-speedo" style={{ width: w }}>
-      <svg width={w} height={h + 8} viewBox={`0 0 ${w} ${h + 8}`}>
+    <div className="score-speedo" style={{ width: w }}
+         role="meter" aria-label={label}
+         aria-valuenow={Math.round(value)} aria-valuemin={min} aria-valuemax={max}
+         aria-valuetext={`${Math.round(value)} of ${max}`}>
+      <svg width={w} height={h + 8} viewBox={`0 0 ${w} ${h + 8}`} aria-hidden="true">
         {segs.map((s, i) => (
           <path key={i} d={arcPath(startA + s.from * sweep, startA + s.to * sweep)}
                 fill="none" stroke={s.color} strokeWidth={thickness} strokeLinecap="butt" opacity="0.32"/>
         ))}
-        <path d={arcPath(startA, angle)} fill="none" stroke={ringTone(norm, inverted)} strokeWidth={thickness} strokeLinecap="round"
-              style={{ transition: 'all 600ms var(--ease)' }}/>
+        <path className="ss-arc" d={arcPath(startA, angle)} fill="none" stroke={ringTone(norm, inverted)} strokeWidth={thickness} strokeLinecap="round"/>
         {ticks !== false && Array.from({ length: tickCount + 1 }).map((_, i) => {
           const t = i / tickCount;
           const a = startA + t * sweep;
@@ -72,7 +74,7 @@ const ScoreGaugeSpeedo = ({ value, min, max, ticks, labels, inverted, label, siz
           </>
         )}
         {/* Needle */}
-        <g style={{ transition: 'transform 600ms var(--ease)' }}>
+        <g className="ss-needle">
           <line x1={cx} y1={cy} x2={px(angle)} y2={py(angle)}
                 stroke="var(--fg)" strokeWidth="2" strokeLinecap="round"/>
           <circle cx={cx} cy={cy} r="6" fill="var(--surface-strong)" stroke="var(--fg-muted)" strokeWidth="1.2"/>
@@ -101,7 +103,9 @@ const ScoreGaugeCompact = ({ value, min, max, label, size = 96, thickness = 8, i
   const c = 2 * Math.PI * r;
   const norm = Math.max(0, Math.min(1, (value - min) / (max - min)));
   return (
-    <div className="score-compact" style={{ width: size, height: size }}>
+    <div className="score-compact" style={{ width: size, height: size }}
+         role="meter" aria-label={label}
+         aria-valuenow={Math.round(value)} aria-valuemin={min} aria-valuemax={max}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
         <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="var(--border)" strokeWidth={thickness}/>
         <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={ringTone(norm, inverted)} strokeWidth={thickness}
@@ -125,7 +129,9 @@ const ScoreGaugeLinear = ({ value, min, max, label, inverted }: {
 }) => {
   const norm = Math.max(0, Math.min(1, (value - min) / (max - min)));
   return (
-    <div className="score-linear">
+    <div className="score-linear"
+         role="meter" aria-label={label}
+         aria-valuenow={Math.round(value)} aria-valuemin={min} aria-valuemax={max}>
       <div className="sl-row">
         {label && <span className="sl-label">{label}</span>}
         <span className="sl-value" style={{ color: ringTone(norm, inverted) }}>{Math.round(value)}<span className="sl-max">/{max}</span></span>

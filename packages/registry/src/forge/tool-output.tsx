@@ -7,7 +7,7 @@ const ToolOutput = ({
 }: {
   /** Section label. Switch to "Error" when state = output-error. */
   label?: string;
-  /** Rendered result. Use Forge primitives — Table, Code, plain prose, error card. */
+  /** Rendered result. Use Eidos primitives — Table, Code, plain prose, error card. */
   children?: React.ReactNode;
   /** Right-aligned meta — row count, HTTP status, etc. */
   meta?: string;

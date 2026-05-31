@@ -19,12 +19,17 @@ const PipelineStepper = ({ steps, currentIndex, compact }: { steps: PipeStep[]; 
       const tone = PIPE_STATUS[s.status] || s.status || 'pending';
       const isCurrent = currentIndex !== undefined ? i === currentIndex : tone === 'running';
       const Icn = pipeIcon(tone);
+      const a11yName = [s.label, tone].filter(Boolean).join(', ');
       return (
-        <li key={s.id || s.label || i} className={'pipe-step ' + tone + (isCurrent ? ' is-current' : '')}>
+        <li key={s.id || s.label || i} className={'pipe-step ' + tone + (isCurrent ? ' is-current' : '')}
+            aria-current={isCurrent ? 'step' : undefined}>
           <span className="pipe-dot" aria-hidden="true">
             {isCurrent && <span className="pipe-halo"/>}
             {Icn ? <Icn size={11}/> : <span className="pipe-bullet"/>}
           </span>
+          {/* Status glyph is colour-only/aria-hidden, so name the step for SR; */}
+          {/* announce the in-flight step politely as the run advances.        */}
+          <span className="sr-only" aria-live={isCurrent ? 'polite' : undefined}>{a11yName}</span>
           {!compact && (
             <div className="pipe-text">
               <span className="pipe-label">{s.label}</span>
@@ -44,12 +49,17 @@ const PipelineChevron = ({ steps, currentIndex }: { steps: PipeStep[]; currentIn
       const isCurrent = currentIndex !== undefined ? i === currentIndex : tone === 'running';
       const Icn = pipeIcon(tone);
       const positionCls = i === 0 ? ' chev-first' : i === steps.length - 1 ? ' chev-last' : '';
+      const a11yName = [s.label, tone].filter(Boolean).join(', ');
       return (
-        <li key={s.id || i} className={'chev-step ' + tone + (isCurrent ? ' is-current' : '') + positionCls}>
+        <li key={s.id || i} className={'chev-step ' + tone + (isCurrent ? ' is-current' : '') + positionCls}
+            aria-current={isCurrent ? 'step' : undefined}>
           <span className="chev-inner">
             <span className="chev-glyph" aria-hidden="true">
               {Icn ? <Icn size={11}/> : <StatusDot tone={tone} pulse={tone === 'running'} size="sm"/>}
             </span>
+            {/* Glyph conveys status by colour only — name the step for SR and  */}
+            {/* announce the in-flight step politely as the run advances.       */}
+            <span className="sr-only" aria-live={isCurrent ? 'polite' : undefined}>{a11yName}</span>
             <span className="chev-text">
               <span className="chev-label">{s.label}</span>
               {s.meta && <span className="chev-meta">{s.meta}</span>}

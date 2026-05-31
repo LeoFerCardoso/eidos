@@ -3,7 +3,7 @@
   "name": "card",
   "type": "registry:ui",
   "title": "Card",
-  "description": "Forge Card component.",
+  "description": "Eidos Card component.",
   "registryDependencies": [
     "forge"
   ],

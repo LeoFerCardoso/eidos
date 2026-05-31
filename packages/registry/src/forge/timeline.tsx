@@ -32,7 +32,7 @@ const Timeline = ({ items = [], compact = false }: {
         if (isCurrent) cls.push('is-current');
         if (isDone) cls.push('is-done');
         return (
-          <li key={it.id || i} className={cls.join(' ')}>
+          <li key={it.id || i} className={cls.join(' ')} aria-current={isCurrent ? 'true' : undefined}>
             <span className={'tl-pin ' + (it.tone || 'default')} aria-hidden="true">
               {isCurrent && <span className="tl-halo" aria-hidden="true"/>}
               {it.person ? <Avatar p={it.person} size={22}/> :

@@ -50,6 +50,12 @@ interface SliderProps {
   /** Accessible label for the thumb(s). Used for aria-label. */
   label?: string;
   /**
+   * Maps a raw value to a human-readable string for `aria-valuetext`
+   * (e.g. currency, percent, time). When omitted, no aria-valuetext is set
+   * and assistive tech falls back to `aria-valuenow`.
+   */
+  formatValue?: (value: number) => string;
+  /**
    * Fires on every drag tick / key step. Receives the new value.
    * For docs-API compatibility also accept `onValueChange`.
    */
@@ -72,7 +78,7 @@ interface SliderProps {
   className?: string;
 }
 
-function Slider({ value, defaultValue = 0, min = 0, max = 100, step = 1, disabled = false, invalid = false, orientation = 'horizontal', label, onChange, size = 'md' }: SliderProps) {
+function Slider({ value, defaultValue = 0, min = 0, max = 100, step = 1, disabled = false, invalid = false, orientation = 'horizontal', label, formatValue, onChange, onValueChange, onValueCommit, size = 'md' }: SliderProps) {
   const isControlled = value !== undefined;
   const [internal, setInternal] = React.useState<number | [number, number]>(defaultValue);
   const current = isControlled ? (value as number | [number, number]) : internal;
@@ -85,11 +91,16 @@ function Slider({ value, defaultValue = 0, min = 0, max = 100, step = 1, disable
     .filter(Boolean).join(' ');
   const pct = (v: number) => (max === min ? 0 : ((v - min) / (max - min)) * 100);
 
+  const normalize = (next: number[]) =>
+    next.length === 2 ? ([...next].sort((a, b) => a - b) as [number, number]) : next[0];
+  const asArray = (v: number | [number, number]) => (Array.isArray(v) ? v : [v]);
   const emit = (next: number[]) => {
-    const sorted = next.length === 2 ? ([...next].sort((a, b) => a - b) as [number, number]) : next[0];
+    const sorted = normalize(next);
     if (!isControlled) setInternal(sorted);
     onChange?.(sorted);
+    onValueChange?.(asArray(sorted));
   };
+  const commit = (next: number[]) => onValueCommit?.(asArray(normalize(next)));
   const valueAtPos = (cx: number, cy: number) => {
     const el = trackRef.current;
     if (!el) return min;
@@ -116,7 +127,10 @@ function Slider({ value, defaultValue = 0, min = 0, max = 100, step = 1, disable
     (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
   };
   const onPointerMove = (e: React.PointerEvent) => { if (drag >= 0) updateAt(drag, valueAtPos(e.clientX, e.clientY)); };
-  const onPointerUp = () => setDrag(-1);
+  const onPointerUp = () => {
+    if (drag >= 0) commit(values.slice());
+    setDrag(-1);
+  };
   const onKey = (idx: number, e: React.KeyboardEvent) => {
     const cur = values[idx];
     const big = (max - min) * 0.1;
@@ -129,7 +143,11 @@ function Slider({ value, defaultValue = 0, min = 0, max = 100, step = 1, disable
     else if (e.key === 'End') next = max;
     else return;
     e.preventDefault();
-    updateAt(idx, clamp(snap(next, step), min, max));
+    const committed = clamp(snap(next, step), min, max);
+    updateAt(idx, committed);
+    const after = values.slice();
+    after[idx] = committed;
+    commit(after);
   };
 
   const lo = values.length === 2 ? Math.min(...values) : min;
@@ -158,7 +176,8 @@ function Slider({ value, defaultValue = 0, min = 0, max = 100, step = 1, disable
           aria-valuemin={min}
           aria-valuemax={max}
           aria-valuenow={v}
-          aria-label={label || (values.length === 2 ? (i === 0 ? 'Lower' : 'Upper') : 'Value')}
+          aria-valuetext={formatValue ? formatValue(v) : undefined}
+          aria-label={label || (values.length === 2 ? (i === 0 ? 'Minimum' : 'Maximum') : 'Value')}
           aria-orientation={orientation}
           onKeyDown={(e) => onKey(i, e)}
           style={isVert ? { bottom: `${pct(v)}%`, left: '50%' } : { insetInlineStart: `${pct(v)}%`, top: '50%' }}

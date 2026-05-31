@@ -3,7 +3,7 @@
   "name": "relative-time",
   "type": "registry:ui",
   "title": "Relative Time",
-  "description": "Forge Relative Time component.",
+  "description": "Eidos Relative Time component.",
   "registryDependencies": [
     "forge"
   ],

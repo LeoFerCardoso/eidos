@@ -24,7 +24,7 @@ const AgentIdentity = ({
     <AgentAvatar size={size} status={agent.status} name={agent.name}/>
     <span className="ai-agent-id-text">
       <span className="ai-agent-id-name">
-        {agent.name || 'Forge AI'}
+        {agent.name || 'Eidos AI'}
         {label && <AILabel variant="pill" size="sm">AI</AILabel>}
       </span>
       {agent.model && <span className="ai-agent-id-model">{agent.model}</span>}

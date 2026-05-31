@@ -3,7 +3,7 @@
   "name": "simple-pagination",
   "type": "registry:ui",
   "title": "Simple Pagination",
-  "description": "Forge Simple Pagination component.",
+  "description": "Eidos Simple Pagination component.",
   "registryDependencies": [
     "forge",
     "icons"

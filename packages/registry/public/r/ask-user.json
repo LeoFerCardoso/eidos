@@ -3,7 +3,7 @@
   "name": "ask-user",
   "type": "registry:ui",
   "title": "Ask User",
-  "description": "Forge Ask User component.",
+  "description": "Eidos Ask User component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

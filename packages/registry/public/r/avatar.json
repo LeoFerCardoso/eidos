@@ -3,7 +3,7 @@
   "name": "avatar",
   "type": "registry:ui",
   "title": "Avatar",
-  "description": "Forge Avatar component.",
+  "description": "Eidos Avatar component.",
   "registryDependencies": [
     "forge"
   ],

@@ -19,10 +19,10 @@ const ChainOfThought = ({
   return (
     <div className="ai-cot" data-open={open ? 'true' : 'false'}>
       <button className="ai-cot-head" onClick={() => setOpen(v => !v)} aria-expanded={open}>
-        <span className="ico"><Icons.sparkle size={13}/></span>
+        <span className="ico"><Icons.sparkle size={13} aria-hidden="true"/></span>
         <span className="label">{title || 'Chain of thought'}</span>
         <span className="count">{steps.length} steps</span>
-        <Icons.chevronDown size={13} className="chev"/>
+        <Icons.chevronDown size={13} className="chev" aria-hidden="true"/>
       </button>
       <div className="ai-cot-body" aria-hidden={!open}>
         <ol className="ai-cot-steps">
@@ -30,7 +30,7 @@ const ChainOfThought = ({
             const Ico = (Icons as Record<string, any>)[COT_ICON[s.kind] || 'sparkle'] || Icons.sparkle;
             return (
               <li key={i} className="ai-cot-step" data-status={s.status || 'done'}>
-                <span className="ai-cot-mark"><Ico size={12}/></span>
+                <span className="ai-cot-mark"><Ico size={12} aria-hidden="true"/></span>
                 <div className="ai-cot-content">
                   <div className="ai-cot-label">{s.label}</div>
                   {s.detail && <div className="ai-cot-detail">{s.detail}</div>}

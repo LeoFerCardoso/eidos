@@ -3,7 +3,7 @@
   "name": "agent-card",
   "type": "registry:ui",
   "title": "Agent Card",
-  "description": "Forge Agent Card component.",
+  "description": "Eidos Agent Card component.",
   "registryDependencies": [
     "forge",
     "icons",

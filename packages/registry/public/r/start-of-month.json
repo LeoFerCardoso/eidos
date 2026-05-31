@@ -3,7 +3,7 @@
   "name": "start-of-month",
   "type": "registry:ui",
   "title": "Start Of Month",
-  "description": "Forge Start Of Month component.",
+  "description": "Eidos Start Of Month component.",
   "registryDependencies": [
     "forge"
   ],

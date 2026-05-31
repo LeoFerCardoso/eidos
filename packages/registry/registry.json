@@ -1,13 +1,13 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "forge",
-  "homepage": "https://forge.equifax.dev",
+  "name": "eidos",
+  "homepage": "https://eidos.equifax.dev",
   "items": [
     {
       "name": "forge",
       "type": "registry:style",
       "title": "Forge base",
-      "description": "The Forge design-system foundation — semantic design tokens (OKLCH, light + dark), the shared ds.css component layer, and the cn() class helper. Install this once before adding any component.",
+      "description": "The Eidos design-system foundation (Forge theme) — semantic design tokens (OKLCH, light + dark), the shared ds.css component layer, and the cn() class helper. Install this once before adding any component.",
       "dependencies": [
         "clsx",
         "tailwind-merge"
@@ -35,7 +35,7 @@
       "name": "forge-ai",
       "type": "registry:file",
       "title": "Forge AI styles",
-      "description": "The ai.css layer that styles the Forge AI components (.ai-* classes). Pulled automatically when you add an AI component.",
+      "description": "The ai.css layer that styles the Eidos AI components (.ai-* classes). Pulled automatically when you add an AI component.",
       "registryDependencies": [
         "forge"
       ],
@@ -51,7 +51,7 @@
       "name": "icons",
       "type": "registry:ui",
       "title": "Icons",
-      "description": "Forge Icons component.",
+      "description": "Eidos Icons component.",
       "registryDependencies": [
         "forge"
       ],
@@ -67,7 +67,7 @@
       "name": "forge-mark",
       "type": "registry:ui",
       "title": "Forge Mark",
-      "description": "Forge Forge Mark component.",
+      "description": "Eidos Forge Mark component.",
       "registryDependencies": [
         "forge"
       ],
@@ -83,7 +83,7 @@
       "name": "pill",
       "type": "registry:ui",
       "title": "Pill",
-      "description": "Forge Pill component.",
+      "description": "Eidos Pill component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -100,7 +100,7 @@
       "name": "chip",
       "type": "registry:ui",
       "title": "Chip",
-      "description": "Forge Chip component.",
+      "description": "Eidos Chip component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -117,7 +117,7 @@
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "Forge Badge component.",
+      "description": "Eidos Badge component.",
       "registryDependencies": [
         "forge"
       ],
@@ -133,7 +133,7 @@
       "name": "sparkline",
       "type": "registry:ui",
       "title": "Sparkline",
-      "description": "Forge Sparkline component.",
+      "description": "Eidos Sparkline component.",
       "registryDependencies": [
         "forge"
       ],
@@ -149,7 +149,7 @@
       "name": "counter",
       "type": "registry:ui",
       "title": "Counter",
-      "description": "Forge Counter component.",
+      "description": "Eidos Counter component.",
       "registryDependencies": [
         "forge",
         "count-up"
@@ -166,7 +166,7 @@
       "name": "count-up",
       "type": "registry:ui",
       "title": "Count Up",
-      "description": "Forge Count Up component.",
+      "description": "Eidos Count Up component.",
       "registryDependencies": [
         "forge"
       ],
@@ -182,7 +182,7 @@
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "Forge Avatar component.",
+      "description": "Eidos Avatar component.",
       "registryDependencies": [
         "forge"
       ],
@@ -198,7 +198,7 @@
       "name": "tier-badge",
       "type": "registry:ui",
       "title": "Tier Badge",
-      "description": "Forge Tier Badge component.",
+      "description": "Eidos Tier Badge component.",
       "registryDependencies": [
         "forge",
         "chip"
@@ -215,7 +215,7 @@
       "name": "lang-badge",
       "type": "registry:ui",
       "title": "Lang Badge",
-      "description": "Forge Lang Badge component.",
+      "description": "Eidos Lang Badge component.",
       "registryDependencies": [
         "forge",
         "chip"
@@ -232,7 +232,7 @@
       "name": "empty",
       "type": "registry:ui",
       "title": "Empty",
-      "description": "Forge Empty component.",
+      "description": "Eidos Empty component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -249,7 +249,7 @@
       "name": "status-dot",
       "type": "registry:ui",
       "title": "Status Dot",
-      "description": "Forge Status Dot component.",
+      "description": "Eidos Status Dot component.",
       "registryDependencies": [
         "forge"
       ],
@@ -265,7 +265,7 @@
       "name": "trend",
       "type": "registry:ui",
       "title": "Trend",
-      "description": "Forge Trend component.",
+      "description": "Eidos Trend component.",
       "registryDependencies": [
         "forge"
       ],
@@ -281,7 +281,7 @@
       "name": "health-badge",
       "type": "registry:ui",
       "title": "Health Badge",
-      "description": "Forge Health Badge component.",
+      "description": "Eidos Health Badge component.",
       "registryDependencies": [
         "forge",
         "pill"
@@ -298,7 +298,7 @@
       "name": "severity-pill",
       "type": "registry:ui",
       "title": "Severity Pill",
-      "description": "Forge Severity Pill component.",
+      "description": "Eidos Severity Pill component.",
       "registryDependencies": [
         "forge",
         "pill",
@@ -316,7 +316,7 @@
       "name": "kbd",
       "type": "registry:ui",
       "title": "Kbd",
-      "description": "Forge Kbd component.",
+      "description": "Eidos Kbd component.",
       "registryDependencies": [
         "forge"
       ],
@@ -332,7 +332,7 @@
       "name": "kbd-row",
       "type": "registry:ui",
       "title": "Kbd Row",
-      "description": "Forge Kbd Row component.",
+      "description": "Eidos Kbd Row component.",
       "registryDependencies": [
         "forge",
         "kbd"
@@ -349,7 +349,7 @@
       "name": "copy-chip",
       "type": "registry:ui",
       "title": "Copy Chip",
-      "description": "Forge Copy Chip component.",
+      "description": "Eidos Copy Chip component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -366,7 +366,7 @@
       "name": "relative-time",
       "type": "registry:ui",
       "title": "Relative Time",
-      "description": "Forge Relative Time component.",
+      "description": "Eidos Relative Time component.",
       "registryDependencies": [
         "forge"
       ],
@@ -382,7 +382,7 @@
       "name": "owner-pill",
       "type": "registry:ui",
       "title": "Owner Pill",
-      "description": "Forge Owner Pill component.",
+      "description": "Eidos Owner Pill component.",
       "registryDependencies": [
         "forge",
         "avatar"
@@ -399,7 +399,7 @@
       "name": "copy-button",
       "type": "registry:ui",
       "title": "Copy Button",
-      "description": "Forge Copy Button component.",
+      "description": "Eidos Copy Button component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -416,7 +416,7 @@
       "name": "code",
       "type": "registry:ui",
       "title": "Code",
-      "description": "Forge Code component.",
+      "description": "Eidos Code component.",
       "registryDependencies": [
         "forge"
       ],
@@ -432,7 +432,7 @@
       "name": "code-block",
       "type": "registry:ui",
       "title": "Code Block",
-      "description": "Forge Code Block component.",
+      "description": "Eidos Code Block component.",
       "registryDependencies": [
         "forge",
         "copy-button",
@@ -450,7 +450,7 @@
       "name": "code-tree",
       "type": "registry:ui",
       "title": "Code Tree",
-      "description": "Forge Code Tree component.",
+      "description": "Eidos Code Tree component.",
       "registryDependencies": [
         "forge",
         "copy-button",
@@ -469,7 +469,7 @@
       "name": "tabbed-code",
       "type": "registry:ui",
       "title": "Tabbed Code",
-      "description": "Forge Tabbed Code component.",
+      "description": "Eidos Tabbed Code component.",
       "registryDependencies": [
         "forge",
         "copy-button",
@@ -487,7 +487,7 @@
       "name": "collapsible-code",
       "type": "registry:ui",
       "title": "Collapsible Code",
-      "description": "Forge Collapsible Code component.",
+      "description": "Eidos Collapsible Code component.",
       "registryDependencies": [
         "forge",
         "code",
@@ -505,7 +505,7 @@
       "name": "frame",
       "type": "registry:ui",
       "title": "Frame",
-      "description": "Forge Frame component.",
+      "description": "Eidos Frame component.",
       "registryDependencies": [
         "forge",
         "copy-button",
@@ -523,7 +523,7 @@
       "name": "props-table",
       "type": "registry:ui",
       "title": "Props Table",
-      "description": "Forge Props Table component.",
+      "description": "Eidos Props Table component.",
       "registryDependencies": [
         "forge"
       ],
@@ -539,7 +539,7 @@
       "name": "sub-head",
       "type": "registry:ui",
       "title": "Sub Head",
-      "description": "Forge Sub Head component.",
+      "description": "Eidos Sub Head component.",
       "registryDependencies": [
         "forge"
       ],
@@ -555,7 +555,7 @@
       "name": "lede",
       "type": "registry:ui",
       "title": "Lede",
-      "description": "Forge Lede component.",
+      "description": "Eidos Lede component.",
       "registryDependencies": [
         "forge"
       ],
@@ -571,7 +571,7 @@
       "name": "mono",
       "type": "registry:ui",
       "title": "Mono",
-      "description": "Forge Mono component.",
+      "description": "Eidos Mono component.",
       "registryDependencies": [
         "forge"
       ],
@@ -587,7 +587,7 @@
       "name": "token-swatch",
       "type": "registry:ui",
       "title": "Token Swatch",
-      "description": "Forge Token Swatch component.",
+      "description": "Eidos Token Swatch component.",
       "registryDependencies": [
         "forge",
         "copy-button"
@@ -604,7 +604,7 @@
       "name": "spec-row",
       "type": "registry:ui",
       "title": "Spec Row",
-      "description": "Forge Spec Row component.",
+      "description": "Eidos Spec Row component.",
       "registryDependencies": [
         "forge"
       ],
@@ -620,7 +620,7 @@
       "name": "pagination",
       "type": "registry:ui",
       "title": "Pagination",
-      "description": "Forge Pagination component.",
+      "description": "Eidos Pagination component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -637,7 +637,7 @@
       "name": "simple-pagination",
       "type": "registry:ui",
       "title": "Simple Pagination",
-      "description": "Forge Simple Pagination component.",
+      "description": "Eidos Simple Pagination component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -654,7 +654,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
-      "description": "Forge Tabs component.",
+      "description": "Eidos Tabs component.",
       "registryDependencies": [
         "forge"
       ],
@@ -670,7 +670,7 @@
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "Forge Input component.",
+      "description": "Eidos Input component.",
       "registryDependencies": [
         "forge"
       ],
@@ -686,7 +686,7 @@
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
-      "description": "Forge Textarea component.",
+      "description": "Eidos Textarea component.",
       "registryDependencies": [
         "forge"
       ],
@@ -702,7 +702,7 @@
       "name": "native-select",
       "type": "registry:ui",
       "title": "Native Select",
-      "description": "Forge Native Select component.",
+      "description": "Eidos Native Select component.",
       "registryDependencies": [
         "forge"
       ],
@@ -718,7 +718,7 @@
       "name": "select-native",
       "type": "registry:ui",
       "title": "Select Native",
-      "description": "Forge Select Native component.",
+      "description": "Eidos Select Native component.",
       "registryDependencies": [
         "forge",
         "native-select"
@@ -735,7 +735,7 @@
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
-      "description": "Forge Checkbox component.",
+      "description": "Eidos Checkbox component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -752,7 +752,7 @@
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
-      "description": "Forge Switch component.",
+      "description": "Eidos Switch component.",
       "registryDependencies": [
         "forge"
       ],
@@ -768,7 +768,7 @@
       "name": "radio-group",
       "type": "registry:ui",
       "title": "Radio Group",
-      "description": "Forge Radio Group component.",
+      "description": "Eidos Radio Group component.",
       "registryDependencies": [
         "forge"
       ],
@@ -784,7 +784,7 @@
       "name": "slider",
       "type": "registry:ui",
       "title": "Slider",
-      "description": "Forge Slider component.",
+      "description": "Eidos Slider component.",
       "registryDependencies": [
         "forge"
       ],
@@ -800,7 +800,7 @@
       "name": "number-input",
       "type": "registry:ui",
       "title": "Number Input",
-      "description": "Forge Number Input component.",
+      "description": "Eidos Number Input component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -817,7 +817,7 @@
       "name": "otp-input",
       "type": "registry:ui",
       "title": "Otp Input",
-      "description": "Forge Otp Input component.",
+      "description": "Eidos Otp Input component.",
       "registryDependencies": [
         "forge"
       ],
@@ -833,7 +833,7 @@
       "name": "file-input",
       "type": "registry:ui",
       "title": "File Input",
-      "description": "Forge File Input component.",
+      "description": "Eidos File Input component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -850,7 +850,7 @@
       "name": "date-input",
       "type": "registry:ui",
       "title": "Date Input",
-      "description": "Forge Date Input component.",
+      "description": "Eidos Date Input component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -867,7 +867,7 @@
       "name": "date-picker",
       "type": "registry:ui",
       "title": "Date Picker",
-      "description": "Forge Date Picker component.",
+      "description": "Eidos Date Picker component.",
       "registryDependencies": [
         "forge",
         "icons",
@@ -885,7 +885,7 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "Forge Select component.",
+      "description": "Eidos Select component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -902,7 +902,7 @@
       "name": "calendar",
       "type": "registry:ui",
       "title": "Calendar",
-      "description": "Forge Calendar component.",
+      "description": "Eidos Calendar component.",
       "registryDependencies": [
         "forge",
         "calendar-props",
@@ -926,7 +926,7 @@
       "name": "range-calendar",
       "type": "registry:ui",
       "title": "Range Calendar",
-      "description": "Forge Range Calendar component.",
+      "description": "Eidos Range Calendar component.",
       "registryDependencies": [
         "forge",
         "range-calendar-props",
@@ -945,7 +945,7 @@
       "name": "date-range",
       "type": "registry:ui",
       "title": "Date Range",
-      "description": "Forge Date Range component.",
+      "description": "Eidos Date Range component.",
       "registryDependencies": [
         "forge"
       ],
@@ -961,7 +961,7 @@
       "name": "calendar-props",
       "type": "registry:ui",
       "title": "Calendar Props",
-      "description": "Forge Calendar Props component.",
+      "description": "Eidos Calendar Props component.",
       "registryDependencies": [
         "forge",
         "date-range"
@@ -978,7 +978,7 @@
       "name": "range-calendar-props",
       "type": "registry:ui",
       "title": "Range Calendar Props",
-      "description": "Forge Range Calendar Props component.",
+      "description": "Eidos Range Calendar Props component.",
       "registryDependencies": [
         "forge",
         "calendar-props",
@@ -996,7 +996,7 @@
       "name": "start-of-month",
       "type": "registry:ui",
       "title": "Start Of Month",
-      "description": "Forge Start Of Month component.",
+      "description": "Eidos Start Of Month component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1012,7 +1012,7 @@
       "name": "same-day",
       "type": "registry:ui",
       "title": "Same Day",
-      "description": "Forge Same Day component.",
+      "description": "Eidos Same Day component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1028,7 +1028,7 @@
       "name": "iso-date",
       "type": "registry:ui",
       "title": "Iso Date",
-      "description": "Forge Iso Date component.",
+      "description": "Eidos Iso Date component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1044,7 +1044,7 @@
       "name": "month-grid",
       "type": "registry:ui",
       "title": "Month Grid",
-      "description": "Forge Month Grid component.",
+      "description": "Eidos Month Grid component.",
       "registryDependencies": [
         "forge",
         "start-of-month"
@@ -1061,7 +1061,7 @@
       "name": "month-label",
       "type": "registry:ui",
       "title": "Month Label",
-      "description": "Forge Month Label component.",
+      "description": "Eidos Month Label component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1077,7 +1077,7 @@
       "name": "combobox",
       "type": "registry:ui",
       "title": "Combobox",
-      "description": "Forge Combobox component.",
+      "description": "Eidos Combobox component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1094,7 +1094,7 @@
       "name": "color-input",
       "type": "registry:ui",
       "title": "Color Input",
-      "description": "Forge Color Input component.",
+      "description": "Eidos Color Input component.",
       "registryDependencies": [
         "forge",
         "icons",
@@ -1112,7 +1112,7 @@
       "name": "color-picker",
       "type": "registry:ui",
       "title": "Color Picker",
-      "description": "Forge Color Picker component.",
+      "description": "Eidos Color Picker component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1129,7 +1129,7 @@
       "name": "banner",
       "type": "registry:ui",
       "title": "Banner",
-      "description": "Forge Banner component.",
+      "description": "Eidos Banner component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1146,7 +1146,7 @@
       "name": "metric-card",
       "type": "registry:ui",
       "title": "Metric Card",
-      "description": "Forge Metric Card component.",
+      "description": "Eidos Metric Card component.",
       "registryDependencies": [
         "forge",
         "trend",
@@ -1164,7 +1164,7 @@
       "name": "stat",
       "type": "registry:ui",
       "title": "Stat",
-      "description": "Forge Stat component.",
+      "description": "Eidos Stat component.",
       "registryDependencies": [
         "forge",
         "trend"
@@ -1181,7 +1181,7 @@
       "name": "pipeline",
       "type": "registry:ui",
       "title": "Pipeline",
-      "description": "Forge Pipeline component.",
+      "description": "Eidos Pipeline component.",
       "registryDependencies": [
         "forge",
         "icons",
@@ -1199,7 +1199,7 @@
       "name": "timeline",
       "type": "registry:ui",
       "title": "Timeline",
-      "description": "Forge Timeline component.",
+      "description": "Eidos Timeline component.",
       "registryDependencies": [
         "forge",
         "icons",
@@ -1218,7 +1218,7 @@
       "name": "ring-bar",
       "type": "registry:ui",
       "title": "Ring Bar",
-      "description": "Forge Ring Bar component.",
+      "description": "Eidos Ring Bar component.",
       "registryDependencies": [
         "forge",
         "status-dot"
@@ -1235,7 +1235,7 @@
       "name": "score-gauge",
       "type": "registry:ui",
       "title": "Score Gauge",
-      "description": "Forge Score Gauge component.",
+      "description": "Eidos Score Gauge component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1251,7 +1251,7 @@
       "name": "log-viewer",
       "type": "registry:ui",
       "title": "Log Viewer",
-      "description": "Forge Log Viewer component.",
+      "description": "Eidos Log Viewer component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1268,7 +1268,7 @@
       "name": "diff-viewer",
       "type": "registry:ui",
       "title": "Diff Viewer",
-      "description": "Forge Diff Viewer component.",
+      "description": "Eidos Diff Viewer component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1285,7 +1285,7 @@
       "name": "tree-view",
       "type": "registry:ui",
       "title": "Tree View",
-      "description": "Forge Tree View component.",
+      "description": "Eidos Tree View component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1302,7 +1302,7 @@
       "name": "json-inspector",
       "type": "registry:ui",
       "title": "Json Inspector",
-      "description": "Forge Json Inspector component.",
+      "description": "Eidos Json Inspector component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1318,7 +1318,7 @@
       "name": "service-card",
       "type": "registry:ui",
       "title": "Service Card",
-      "description": "Forge Service Card component.",
+      "description": "Eidos Service Card component.",
       "registryDependencies": [
         "forge",
         "icons",
@@ -1338,7 +1338,7 @@
       "name": "agent-card",
       "type": "registry:ui",
       "title": "Agent Card",
-      "description": "Forge Agent Card component.",
+      "description": "Eidos Agent Card component.",
       "registryDependencies": [
         "forge",
         "icons",
@@ -1357,10 +1357,11 @@
       "name": "filter-panel",
       "type": "registry:ui",
       "title": "Filter Panel",
-      "description": "Forge Filter Panel component.",
+      "description": "Eidos Filter Panel component.",
       "registryDependencies": [
         "forge",
-        "icons"
+        "icons",
+        "empty"
       ],
       "files": [
         {
@@ -1374,7 +1375,7 @@
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data Table",
-      "description": "Forge Data Table component.",
+      "description": "Eidos Data Table component.",
       "registryDependencies": [
         "forge",
         "empty"
@@ -1388,10 +1389,10 @@
       ]
     },
     {
-      "name": "forge-chart",
+      "name": "eidos-chart",
       "type": "registry:ui",
-      "title": "Forge Chart",
-      "description": "Forge Forge Chart component.",
+      "title": "Eidos Chart",
+      "description": "Eidos Eidos Chart component.",
       "dependencies": [
         "recharts"
       ],
@@ -1400,17 +1401,17 @@
       ],
       "files": [
         {
-          "source": "src/forge/forge-chart.tsx",
+          "source": "src/forge/eidos-chart.tsx",
           "type": "registry:ui",
-          "target": "components/forge/forge-chart.tsx"
+          "target": "components/forge/eidos-chart.tsx"
         }
       ]
     },
     {
-      "name": "forge-tooltip-content",
+      "name": "eidos-tooltip-content",
       "type": "registry:ui",
-      "title": "Forge Tooltip Content",
-      "description": "Forge Forge Tooltip Content component.",
+      "title": "Eidos Tooltip Content",
+      "description": "Eidos Eidos Tooltip Content component.",
       "dependencies": [
         "recharts"
       ],
@@ -1419,9 +1420,9 @@
       ],
       "files": [
         {
-          "source": "src/forge/forge-tooltip-content.tsx",
+          "source": "src/forge/eidos-tooltip-content.tsx",
           "type": "registry:ui",
-          "target": "components/forge/forge-tooltip-content.tsx"
+          "target": "components/forge/eidos-tooltip-content.tsx"
         }
       ]
     },
@@ -1429,7 +1430,7 @@
       "name": "chart-legend",
       "type": "registry:ui",
       "title": "Chart Legend",
-      "description": "Forge Chart Legend component.",
+      "description": "Eidos Chart Legend component.",
       "dependencies": [
         "recharts"
       ],
@@ -1448,7 +1449,7 @@
       "name": "device-frame",
       "type": "registry:ui",
       "title": "Device Frame",
-      "description": "Forge Device Frame component.",
+      "description": "Eidos Device Frame component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1464,7 +1465,7 @@
       "name": "status-bar",
       "type": "registry:ui",
       "title": "Status Bar",
-      "description": "Forge Status Bar component.",
+      "description": "Eidos Status Bar component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1480,7 +1481,7 @@
       "name": "phone-top",
       "type": "registry:ui",
       "title": "Phone Top",
-      "description": "Forge Phone Top component.",
+      "description": "Eidos Phone Top component.",
       "registryDependencies": [
         "forge",
         "status-bar"
@@ -1497,7 +1498,7 @@
       "name": "drawer",
       "type": "registry:ui",
       "title": "Drawer",
-      "description": "Forge Drawer component.",
+      "description": "Eidos Drawer component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1514,7 +1515,7 @@
       "name": "modal",
       "type": "registry:ui",
       "title": "Modal",
-      "description": "Forge Modal component.",
+      "description": "Eidos Modal component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1531,7 +1532,7 @@
       "name": "alert-dialog",
       "type": "registry:ui",
       "title": "Alert Dialog",
-      "description": "Forge Alert Dialog component.",
+      "description": "Eidos Alert Dialog component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1548,7 +1549,7 @@
       "name": "popover",
       "type": "registry:ui",
       "title": "Popover",
-      "description": "Forge Popover component.",
+      "description": "Eidos Popover component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1564,7 +1565,7 @@
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
-      "description": "Forge Tooltip component.",
+      "description": "Eidos Tooltip component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1580,7 +1581,7 @@
       "name": "hover-card",
       "type": "registry:ui",
       "title": "Hover Card",
-      "description": "Forge Hover Card component.",
+      "description": "Eidos Hover Card component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1596,7 +1597,7 @@
       "name": "dropdown-menu",
       "type": "registry:ui",
       "title": "Dropdown Menu",
-      "description": "Forge Dropdown Menu component.",
+      "description": "Eidos Dropdown Menu component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1612,7 +1613,7 @@
       "name": "menubar",
       "type": "registry:ui",
       "title": "Menubar",
-      "description": "Forge Menubar component.",
+      "description": "Eidos Menubar component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1628,7 +1629,7 @@
       "name": "command",
       "type": "registry:ui",
       "title": "Command",
-      "description": "Forge Command component.",
+      "description": "Eidos Command component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1645,7 +1646,7 @@
       "name": "command-dialog",
       "type": "registry:ui",
       "title": "Command Dialog",
-      "description": "Forge Command Dialog component.",
+      "description": "Eidos Command Dialog component.",
       "registryDependencies": [
         "forge",
         "command"
@@ -1662,7 +1663,7 @@
       "name": "toaster",
       "type": "registry:ui",
       "title": "Toaster",
-      "description": "Forge Toaster component.",
+      "description": "Eidos Toaster component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1679,7 +1680,7 @@
       "name": "notification",
       "type": "registry:ui",
       "title": "Notification",
-      "description": "Forge Notification component.",
+      "description": "Eidos Notification component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1696,7 +1697,7 @@
       "name": "separator",
       "type": "registry:ui",
       "title": "Separator",
-      "description": "Forge Separator component.",
+      "description": "Eidos Separator component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1712,7 +1713,7 @@
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "Aspect Ratio",
-      "description": "Forge Aspect Ratio component.",
+      "description": "Eidos Aspect Ratio component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1728,7 +1729,7 @@
       "name": "scroll-area",
       "type": "registry:ui",
       "title": "Scroll Area",
-      "description": "Forge Scroll Area component.",
+      "description": "Eidos Scroll Area component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1744,7 +1745,7 @@
       "name": "button-group",
       "type": "registry:ui",
       "title": "Button Group",
-      "description": "Forge Button Group component.",
+      "description": "Eidos Button Group component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1760,7 +1761,7 @@
       "name": "breadcrumb",
       "type": "registry:ui",
       "title": "Breadcrumb",
-      "description": "Forge Breadcrumb component.",
+      "description": "Eidos Breadcrumb component.",
       "registryDependencies": [
         "forge",
         "dropdown-menu",
@@ -1778,7 +1779,7 @@
       "name": "toolbar",
       "type": "registry:ui",
       "title": "Toolbar",
-      "description": "Forge Toolbar component.",
+      "description": "Eidos Toolbar component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1794,7 +1795,7 @@
       "name": "navigation-menu",
       "type": "registry:ui",
       "title": "Navigation Menu",
-      "description": "Forge Navigation Menu component.",
+      "description": "Eidos Navigation Menu component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1810,7 +1811,7 @@
       "name": "sidebar",
       "type": "registry:ui",
       "title": "Sidebar",
-      "description": "Forge Sidebar component.",
+      "description": "Eidos Sidebar component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1827,7 +1828,7 @@
       "name": "resizable",
       "type": "registry:ui",
       "title": "Resizable",
-      "description": "Forge Resizable component.",
+      "description": "Eidos Resizable component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1844,7 +1845,7 @@
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "Forge Accordion component.",
+      "description": "Eidos Accordion component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1860,7 +1861,7 @@
       "name": "collapsible",
       "type": "registry:ui",
       "title": "Collapsible",
-      "description": "Forge Collapsible component.",
+      "description": "Eidos Collapsible component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1876,7 +1877,7 @@
       "name": "carousel",
       "type": "registry:ui",
       "title": "Carousel",
-      "description": "Forge Carousel component.",
+      "description": "Eidos Carousel component.",
       "dependencies": [
         "embla-carousel-react"
       ],
@@ -1895,7 +1896,7 @@
       "name": "table",
       "type": "registry:ui",
       "title": "Table",
-      "description": "Forge Table component.",
+      "description": "Eidos Table component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1911,7 +1912,7 @@
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
-      "description": "Forge Card component.",
+      "description": "Eidos Card component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1927,7 +1928,7 @@
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "Forge Alert component.",
+      "description": "Eidos Alert component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -1944,7 +1945,7 @@
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
-      "description": "Forge Progress component.",
+      "description": "Eidos Progress component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1960,7 +1961,7 @@
       "name": "spinner",
       "type": "registry:ui",
       "title": "Spinner",
-      "description": "Forge Spinner component.",
+      "description": "Eidos Spinner component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1976,7 +1977,7 @@
       "name": "skeleton",
       "type": "registry:ui",
       "title": "Skeleton",
-      "description": "Forge Skeleton component.",
+      "description": "Eidos Skeleton component.",
       "registryDependencies": [
         "forge"
       ],
@@ -1992,7 +1993,7 @@
       "name": "toggle",
       "type": "registry:ui",
       "title": "Toggle",
-      "description": "Forge Toggle component.",
+      "description": "Eidos Toggle component.",
       "registryDependencies": [
         "forge"
       ],
@@ -2008,7 +2009,7 @@
       "name": "toggle-group",
       "type": "registry:ui",
       "title": "Toggle Group",
-      "description": "Forge Toggle Group component.",
+      "description": "Eidos Toggle Group component.",
       "registryDependencies": [
         "forge"
       ],
@@ -2024,7 +2025,7 @@
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
-      "description": "Forge Label component.",
+      "description": "Eidos Label component.",
       "registryDependencies": [
         "forge"
       ],
@@ -2040,7 +2041,7 @@
       "name": "input-group",
       "type": "registry:ui",
       "title": "Input Group",
-      "description": "Forge Input Group component.",
+      "description": "Eidos Input Group component.",
       "registryDependencies": [
         "forge"
       ],
@@ -2056,7 +2057,7 @@
       "name": "tag-input",
       "type": "registry:ui",
       "title": "Tag Input",
-      "description": "Forge Tag Input component.",
+      "description": "Eidos Tag Input component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -2073,7 +2074,7 @@
       "name": "password-input",
       "type": "registry:ui",
       "title": "Password Input",
-      "description": "Forge Password Input component.",
+      "description": "Eidos Password Input component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -2090,7 +2091,7 @@
       "name": "password-field",
       "type": "registry:ui",
       "title": "Password Field",
-      "description": "Forge Password Field component.",
+      "description": "Eidos Password Field component.",
       "registryDependencies": [
         "forge",
         "password-input"
@@ -2107,7 +2108,7 @@
       "name": "checkbox-card",
       "type": "registry:ui",
       "title": "Checkbox Card",
-      "description": "Forge Checkbox Card component.",
+      "description": "Eidos Checkbox Card component.",
       "registryDependencies": [
         "forge",
         "icons"
@@ -2124,7 +2125,7 @@
       "name": "radio-card",
       "type": "registry:ui",
       "title": "Radio Card",
-      "description": "Forge Radio Card component.",
+      "description": "Eidos Radio Card component.",
       "registryDependencies": [
         "forge"
       ],
@@ -2140,7 +2141,7 @@
       "name": "radio-card-group",
       "type": "registry:ui",
       "title": "Radio Card Group",
-      "description": "Forge Radio Card Group component.",
+      "description": "Eidos Radio Card Group component.",
       "registryDependencies": [
         "forge",
         "radio-card"
@@ -2157,7 +2158,7 @@
       "name": "tool-status",
       "type": "registry:ui",
       "title": "Tool Status",
-      "description": "Forge Tool Status component.",
+      "description": "Eidos Tool Status component.",
       "dependencies": [
         "ai"
       ],
@@ -2179,7 +2180,7 @@
       "name": "tool",
       "type": "registry:ui",
       "title": "Tool",
-      "description": "Forge Tool component.",
+      "description": "Eidos Tool component.",
       "dependencies": [
         "ai"
       ],
@@ -2201,7 +2202,7 @@
       "name": "tool-input",
       "type": "registry:ui",
       "title": "Tool Input",
-      "description": "Forge Tool Input component.",
+      "description": "Eidos Tool Input component.",
       "dependencies": [
         "ai"
       ],
@@ -2222,7 +2223,7 @@
       "name": "tool-output",
       "type": "registry:ui",
       "title": "Tool Output",
-      "description": "Forge Tool Output component.",
+      "description": "Eidos Tool Output component.",
       "dependencies": [
         "ai"
       ],
@@ -2242,7 +2243,7 @@
       "name": "reasoning",
       "type": "registry:ui",
       "title": "Reasoning",
-      "description": "Forge Reasoning component.",
+      "description": "Eidos Reasoning component.",
       "dependencies": [
         "ai"
       ],
@@ -2263,7 +2264,7 @@
       "name": "chain-of-thought",
       "type": "registry:ui",
       "title": "Chain Of Thought",
-      "description": "Forge Chain Of Thought component.",
+      "description": "Eidos Chain Of Thought component.",
       "dependencies": [
         "ai"
       ],
@@ -2284,7 +2285,7 @@
       "name": "plan",
       "type": "registry:ui",
       "title": "Plan",
-      "description": "Forge Plan component.",
+      "description": "Eidos Plan component.",
       "dependencies": [
         "ai"
       ],
@@ -2306,7 +2307,7 @@
       "name": "task",
       "type": "registry:ui",
       "title": "Task",
-      "description": "Forge Task component.",
+      "description": "Eidos Task component.",
       "dependencies": [
         "ai"
       ],
@@ -2328,7 +2329,7 @@
       "name": "checkpoint",
       "type": "registry:ui",
       "title": "Checkpoint",
-      "description": "Forge Checkpoint component.",
+      "description": "Eidos Checkpoint component.",
       "dependencies": [
         "ai"
       ],
@@ -2349,7 +2350,7 @@
       "name": "confirmation",
       "type": "registry:ui",
       "title": "Confirmation",
-      "description": "Forge Confirmation component.",
+      "description": "Eidos Confirmation component.",
       "dependencies": [
         "ai"
       ],
@@ -2370,7 +2371,7 @@
       "name": "queue",
       "type": "registry:ui",
       "title": "Queue",
-      "description": "Forge Queue component.",
+      "description": "Eidos Queue component.",
       "dependencies": [
         "ai"
       ],
@@ -2391,7 +2392,7 @@
       "name": "artifact-widget",
       "type": "registry:ui",
       "title": "Artifact Widget",
-      "description": "Forge Artifact Widget component.",
+      "description": "Eidos Artifact Widget component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2409,7 +2410,7 @@
       "name": "artifact-panel",
       "type": "registry:ui",
       "title": "Artifact Panel",
-      "description": "Forge Artifact Panel component.",
+      "description": "Eidos Artifact Panel component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2428,7 +2429,7 @@
       "name": "ask-user",
       "type": "registry:ui",
       "title": "Ask User",
-      "description": "Forge Ask User component.",
+      "description": "Eidos Ask User component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2446,7 +2447,7 @@
       "name": "shimmer",
       "type": "registry:ui",
       "title": "Shimmer",
-      "description": "Forge Shimmer component.",
+      "description": "Eidos Shimmer component.",
       "registryDependencies": [
         "forge",
         "forge-ai"
@@ -2463,7 +2464,7 @@
       "name": "image-view",
       "type": "registry:ui",
       "title": "Image View",
-      "description": "Forge Image View component.",
+      "description": "Eidos Image View component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2481,7 +2482,7 @@
       "name": "diagram",
       "type": "registry:ui",
       "title": "Diagram",
-      "description": "Forge Diagram component.",
+      "description": "Eidos Diagram component.",
       "registryDependencies": [
         "forge",
         "forge-ai"
@@ -2498,7 +2499,7 @@
       "name": "math-view",
       "type": "registry:ui",
       "title": "Math View",
-      "description": "Forge Math View component.",
+      "description": "Eidos Math View component.",
       "registryDependencies": [
         "forge",
         "forge-ai"
@@ -2515,7 +2516,7 @@
       "name": "context",
       "type": "registry:ui",
       "title": "Context",
-      "description": "Forge Context component.",
+      "description": "Eidos Context component.",
       "registryDependencies": [
         "forge",
         "forge-ai"
@@ -2532,7 +2533,7 @@
       "name": "context-gauge",
       "type": "registry:ui",
       "title": "Context Gauge",
-      "description": "Forge Context Gauge component.",
+      "description": "Eidos Context Gauge component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2550,7 +2551,7 @@
       "name": "context-bar",
       "type": "registry:ui",
       "title": "Context Bar",
-      "description": "Forge Context Bar component.",
+      "description": "Eidos Context Bar component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2568,7 +2569,7 @@
       "name": "history-item",
       "type": "registry:ui",
       "title": "History Item",
-      "description": "Forge History Item component.",
+      "description": "Eidos History Item component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2586,7 +2587,7 @@
       "name": "history-group",
       "type": "registry:ui",
       "title": "History Group",
-      "description": "Forge History Group component.",
+      "description": "Eidos History Group component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2604,7 +2605,7 @@
       "name": "history",
       "type": "registry:ui",
       "title": "History",
-      "description": "Forge History component.",
+      "description": "Eidos History component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2622,7 +2623,7 @@
       "name": "history-shell",
       "type": "registry:ui",
       "title": "History Shell",
-      "description": "Forge History Shell component.",
+      "description": "Eidos History Shell component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2640,7 +2641,7 @@
       "name": "ai-label",
       "type": "registry:ui",
       "title": "Ai Label",
-      "description": "Forge Ai Label component.",
+      "description": "Eidos Ai Label component.",
       "registryDependencies": [
         "forge",
         "forge-ai"
@@ -2657,7 +2658,7 @@
       "name": "ai-label-with-popover",
       "type": "registry:ui",
       "title": "Ai Label With Popover",
-      "description": "Forge Ai Label With Popover component.",
+      "description": "Eidos Ai Label With Popover component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2675,7 +2676,7 @@
       "name": "agent-avatar",
       "type": "registry:ui",
       "title": "Agent Avatar",
-      "description": "Forge Agent Avatar component.",
+      "description": "Eidos Agent Avatar component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2693,7 +2694,7 @@
       "name": "agent-identity",
       "type": "registry:ui",
       "title": "Agent Identity",
-      "description": "Forge Agent Identity component.",
+      "description": "Eidos Agent Identity component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2712,7 +2713,7 @@
       "name": "message",
       "type": "registry:ui",
       "title": "Message",
-      "description": "Forge Message component.",
+      "description": "Eidos Message component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2731,7 +2732,7 @@
       "name": "message-actions",
       "type": "registry:ui",
       "title": "Message Actions",
-      "description": "Forge Message Actions component.",
+      "description": "Eidos Message Actions component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2749,7 +2750,7 @@
       "name": "response",
       "type": "registry:ui",
       "title": "Response",
-      "description": "Forge Response component.",
+      "description": "Eidos Response component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2768,7 +2769,7 @@
       "name": "conversation",
       "type": "registry:ui",
       "title": "Conversation",
-      "description": "Forge Conversation component.",
+      "description": "Eidos Conversation component.",
       "registryDependencies": [
         "forge",
         "forge-ai"
@@ -2785,7 +2786,7 @@
       "name": "prompt-submit",
       "type": "registry:ui",
       "title": "Prompt Submit",
-      "description": "Forge Prompt Submit component.",
+      "description": "Eidos Prompt Submit component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2803,7 +2804,7 @@
       "name": "model-badge",
       "type": "registry:ui",
       "title": "Model Badge",
-      "description": "Forge Model Badge component.",
+      "description": "Eidos Model Badge component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2821,7 +2822,7 @@
       "name": "model-selector",
       "type": "registry:ui",
       "title": "Model Selector",
-      "description": "Forge Model Selector component.",
+      "description": "Eidos Model Selector component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2840,7 +2841,7 @@
       "name": "model-picker",
       "type": "registry:ui",
       "title": "Model Picker",
-      "description": "Forge Model Picker component.",
+      "description": "Eidos Model Picker component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2858,7 +2859,7 @@
       "name": "attachment",
       "type": "registry:ui",
       "title": "Attachment",
-      "description": "Forge Attachment component.",
+      "description": "Eidos Attachment component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2876,7 +2877,7 @@
       "name": "drop-zone",
       "type": "registry:ui",
       "title": "Drop Zone",
-      "description": "Forge Drop Zone component.",
+      "description": "Eidos Drop Zone component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2896,7 +2897,7 @@
       "name": "drag-drop-overlay",
       "type": "registry:ui",
       "title": "Drag Drop Overlay",
-      "description": "Forge Drag Drop Overlay component.",
+      "description": "Eidos Drag Drop Overlay component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2917,7 +2918,7 @@
       "name": "prompt-banner",
       "type": "registry:ui",
       "title": "Prompt Banner",
-      "description": "Forge Prompt Banner component.",
+      "description": "Eidos Prompt Banner component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2935,7 +2936,7 @@
       "name": "prompt-input",
       "type": "registry:ui",
       "title": "Prompt Input",
-      "description": "Forge Prompt Input component.",
+      "description": "Eidos Prompt Input component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -2956,7 +2957,7 @@
       "name": "suggestion",
       "type": "registry:ui",
       "title": "Suggestion",
-      "description": "Forge Suggestion component.",
+      "description": "Eidos Suggestion component.",
       "registryDependencies": [
         "forge",
         "forge-ai"
@@ -2973,7 +2974,7 @@
       "name": "suggestion-card",
       "type": "registry:ui",
       "title": "Suggestion Card",
-      "description": "Forge Suggestion Card component.",
+      "description": "Eidos Suggestion Card component.",
       "registryDependencies": [
         "forge",
         "forge-ai"
@@ -2990,7 +2991,7 @@
       "name": "prose",
       "type": "registry:ui",
       "title": "Prose",
-      "description": "Forge Prose component.",
+      "description": "Eidos Prose component.",
       "dependencies": [
         "react-markdown",
         "remark-gfm"
@@ -3011,7 +3012,7 @@
       "name": "prose-code",
       "type": "registry:ui",
       "title": "Prose Code",
-      "description": "Forge Prose Code component.",
+      "description": "Eidos Prose Code component.",
       "dependencies": [
         "react-markdown",
         "remark-gfm"
@@ -3033,7 +3034,7 @@
       "name": "citation",
       "type": "registry:ui",
       "title": "Citation",
-      "description": "Forge Citation component.",
+      "description": "Eidos Citation component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -3051,7 +3052,7 @@
       "name": "sources",
       "type": "registry:ui",
       "title": "Sources",
-      "description": "Forge Sources component.",
+      "description": "Eidos Sources component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -3069,7 +3070,7 @@
       "name": "sources-panel",
       "type": "registry:ui",
       "title": "Sources Panel",
-      "description": "Forge Sources Panel component.",
+      "description": "Eidos Sources Panel component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -3087,7 +3088,7 @@
       "name": "terminal",
       "type": "registry:ui",
       "title": "Terminal",
-      "description": "Forge Terminal component.",
+      "description": "Eidos Terminal component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -3105,7 +3106,7 @@
       "name": "persona",
       "type": "registry:ui",
       "title": "Persona",
-      "description": "Forge Persona component.",
+      "description": "Eidos Persona component.",
       "registryDependencies": [
         "forge",
         "forge-ai"
@@ -3122,7 +3123,7 @@
       "name": "speech-input",
       "type": "registry:ui",
       "title": "Speech Input",
-      "description": "Forge Speech Input component.",
+      "description": "Eidos Speech Input component.",
       "registryDependencies": [
         "forge",
         "forge-ai",
@@ -3140,7 +3141,7 @@
       "name": "transcription",
       "type": "registry:ui",
       "title": "Transcription",
-      "description": "Forge Transcription component.",
+      "description": "Eidos Transcription component.",
       "registryDependencies": [
         "forge",
         "forge-ai"
@@ -3157,7 +3158,7 @@
       "name": "audio-player",
       "type": "registry:ui",
       "title": "Audio Player",
-      "description": "Forge Audio Player component.",
+      "description": "Eidos Audio Player component.",
       "registryDependencies": [
         "forge",
         "forge-ai",

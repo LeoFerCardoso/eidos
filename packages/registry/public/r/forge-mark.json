@@ -3,7 +3,7 @@
   "name": "forge-mark",
   "type": "registry:ui",
   "title": "Forge Mark",
-  "description": "Forge Forge Mark component.",
+  "description": "Eidos Forge Mark component.",
   "registryDependencies": [
     "forge"
   ],

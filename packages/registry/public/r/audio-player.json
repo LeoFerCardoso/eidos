@@ -3,7 +3,7 @@
   "name": "audio-player",
   "type": "registry:ui",
   "title": "Audio Player",
-  "description": "Forge Audio Player component.",
+  "description": "Eidos Audio Player component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

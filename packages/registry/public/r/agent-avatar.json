@@ -3,7 +3,7 @@
   "name": "agent-avatar",
   "type": "registry:ui",
   "title": "Agent Avatar",
-  "description": "Forge Agent Avatar component.",
+  "description": "Eidos Agent Avatar component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

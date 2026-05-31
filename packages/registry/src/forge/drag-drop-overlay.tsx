@@ -14,7 +14,7 @@ interface AttachmentFile {
 
 const DragDropOverlay = ({
   onDrop,
-  modelValue = 'forge-sonnet-4-6',
+  modelValue = 'eidos-sonnet-4-6',
   onModelChange,
   initialFiles = [],
   placeholder,

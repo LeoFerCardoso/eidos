@@ -3,7 +3,7 @@
   "name": "context-gauge",
   "type": "registry:ui",
   "title": "Context Gauge",
-  "description": "Forge Context Gauge component.",
+  "description": "Eidos Context Gauge component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

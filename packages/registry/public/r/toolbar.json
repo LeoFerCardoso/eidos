@@ -3,7 +3,7 @@
   "name": "toolbar",
   "type": "registry:ui",
   "title": "Toolbar",
-  "description": "Forge Toolbar component.",
+  "description": "Eidos Toolbar component.",
   "registryDependencies": [
     "forge"
   ],

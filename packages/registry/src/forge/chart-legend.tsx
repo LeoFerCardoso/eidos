@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 const ChartLegend = ({ items }: { items: { label: string; color?: string }[] }) => (
-  <ul className="forge-legend">
+  <ul className="eidos-legend">
     {items.map((it, i) => (
       <li key={i}>
         <span className="legend-dot" style={{ background: it.color }}/>

@@ -3,7 +3,7 @@
   "name": "same-day",
   "type": "registry:ui",
   "title": "Same Day",
-  "description": "Forge Same Day component.",
+  "description": "Eidos Same Day component.",
   "registryDependencies": [
     "forge"
   ],

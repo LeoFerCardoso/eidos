@@ -3,7 +3,7 @@
   "name": "history-shell",
   "type": "registry:ui",
   "title": "History Shell",
-  "description": "Forge History Shell component.",
+  "description": "Eidos History Shell component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

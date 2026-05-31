@@ -3,7 +3,7 @@
   "name": "number-input",
   "type": "registry:ui",
   "title": "Number Input",
-  "description": "Forge Number Input component.",
+  "description": "Eidos Number Input component.",
   "registryDependencies": [
     "forge",
     "icons"

@@ -3,7 +3,7 @@
   "name": "image-view",
   "type": "registry:ui",
   "title": "Image View",
-  "description": "Forge Image View component.",
+  "description": "Eidos Image View component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

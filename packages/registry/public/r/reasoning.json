@@ -3,7 +3,7 @@
   "name": "reasoning",
   "type": "registry:ui",
   "title": "Reasoning",
-  "description": "Forge Reasoning component.",
+  "description": "Eidos Reasoning component.",
   "dependencies": [
     "ai"
   ],

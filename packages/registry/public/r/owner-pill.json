@@ -3,7 +3,7 @@
   "name": "owner-pill",
   "type": "registry:ui",
   "title": "Owner Pill",
-  "description": "Forge Owner Pill component.",
+  "description": "Eidos Owner Pill component.",
   "registryDependencies": [
     "forge",
     "avatar"

@@ -3,7 +3,7 @@
   "name": "sources",
   "type": "registry:ui",
   "title": "Sources",
-  "description": "Forge Sources component.",
+  "description": "Eidos Sources component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

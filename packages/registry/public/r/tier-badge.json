@@ -3,7 +3,7 @@
   "name": "tier-badge",
   "type": "registry:ui",
   "title": "Tier Badge",
-  "description": "Forge Tier Badge component.",
+  "description": "Eidos Tier Badge component.",
   "registryDependencies": [
     "forge",
     "chip"

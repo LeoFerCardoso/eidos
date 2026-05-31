@@ -3,7 +3,7 @@
   "name": "banner",
   "type": "registry:ui",
   "title": "Banner",
-  "description": "Forge Banner component.",
+  "description": "Eidos Banner component.",
   "registryDependencies": [
     "forge",
     "icons"

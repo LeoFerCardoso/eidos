@@ -3,7 +3,7 @@
   "name": "checkbox",
   "type": "registry:ui",
   "title": "Checkbox",
-  "description": "Forge Checkbox component.",
+  "description": "Eidos Checkbox component.",
   "registryDependencies": [
     "forge",
     "icons"

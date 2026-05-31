@@ -3,7 +3,7 @@
   "name": "status-bar",
   "type": "registry:ui",
   "title": "Status Bar",
-  "description": "Forge Status Bar component.",
+  "description": "Eidos Status Bar component.",
   "registryDependencies": [
     "forge"
   ],

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "eidos-tooltip-content",
+  "type": "registry:ui",
+  "title": "Eidos Tooltip Content",
+  "description": "Eidos Eidos Tooltip Content component.",
+  "dependencies": [
+    "recharts"
+  ],
+  "registryDependencies": [
+    "forge"
+  ],
+  "files": [
+    {
+      "path": "components/forge/eidos-tooltip-content.tsx",
+      "target": "components/forge/eidos-tooltip-content.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\n\nconst fmtNumber = (n, unit) => {\n  if (n == null || Number.isNaN(n)) return '';\n  const t = typeof n === 'number' ? n.toLocaleString(undefined, { maximumFractionDigits: 2 }) : String(n);\n  return unit ? `${t} ${unit}` : t;\n};\n\ntype TooltipPayloadItem = {\n  name?: string;\n  dataKey?: string;\n  value?: number | string;\n  unit?: string;\n  color?: string;\n  fill?: string;\n  stroke?: string;\n};\n\ntype EidosTooltipContentProps = {\n  active?: boolean;\n  payload?: TooltipPayloadItem[];\n  label?: React.ReactNode;\n  [key: string]: any;\n};\n\nconst EidosTooltipContent = (props: EidosTooltipContentProps) => {\n  if (!props.active || !props.payload || props.payload.length === 0) return null;\n  const items = props.payload;\n  return (\n    <div className=\"eidos-tooltip\">\n      {props.label != null && <div className=\"ft-label\">{props.label}</div>}\n      <div className=\"ft-rows\">\n        {items.map((it, i) => (\n          <div key={i} className=\"ft-row\">\n            <span className=\"ft-dot\" style={{ background: it.color || it.fill || it.stroke || 'var(--ember)' }}/>\n            <span className=\"ft-name\">{it.name || it.dataKey}</span>\n            <span className=\"ft-value t-mono\">{fmtNumber(it.value, it.unit)}</span>\n          </div>\n        ))}\n      </div>\n    </div>\n  );\n};\n\nexport { EidosTooltipContent };\n"
+    }
+  ]
+}

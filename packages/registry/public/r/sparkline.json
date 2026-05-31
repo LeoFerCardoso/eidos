@@ -3,7 +3,7 @@
   "name": "sparkline",
   "type": "registry:ui",
   "title": "Sparkline",
-  "description": "Forge Sparkline component.",
+  "description": "Eidos Sparkline component.",
   "registryDependencies": [
     "forge"
   ],
@@ -12,7 +12,7 @@
       "path": "components/forge/sparkline.tsx",
       "target": "components/forge/sparkline.tsx",
       "type": "registry:ui",
-      "content": "import * as React from 'react';\n\nconst Sparkline = ({\n  data,\n  w = 120,\n  h = 32,\n  color = 'var(--ember)',\n  fill = true,\n}: {\n  data: number[];\n  w?: number;\n  h?: number;\n  color?: string;\n  fill?: boolean;\n}) => {\n  const min = Math.min(...data), max = Math.max(...data);\n  const range = max - min || 1;\n  const points = data.map((v,i) => [ (i/(data.length-1))*w, h - ((v-min)/range)*(h-4) - 2 ]);\n  const path = points.map((p,i) => (i===0?'M':'L') + p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');\n  const fillPath = path + ` L ${w},${h} L 0,${h} Z`;\n  return (\n    <svg width={w} height={h} className=\"sparkline\" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio=\"none\">\n      {fill && <path d={fillPath} fill={color} opacity=\"0.12\"/>}\n      <path d={path} fill=\"none\" stroke={color} strokeWidth=\"1.5\" strokeLinejoin=\"round\" strokeLinecap=\"round\"/>\n      {points.map((p,i)=> i===points.length-1 && <circle key={i} cx={p[0]} cy={p[1]} r=\"2\" fill={color}/>)}\n    </svg>\n  );\n};\n\nexport { Sparkline };\n"
+      "content": "import * as React from 'react';\n\nconst Sparkline = ({\n  data,\n  w = 120,\n  h = 32,\n  color = 'var(--ember)',\n  fill = true,\n}: {\n  data: number[];\n  w?: number;\n  h?: number;\n  color?: string;\n  fill?: boolean;\n}) => {\n  const min = Math.min(...data), max = Math.max(...data);\n  const range = max - min || 1;\n  const points = data.map((v,i) => [ (i/(data.length-1))*w, h - ((v-min)/range)*(h-4) - 2 ]);\n  const path = points.map((p,i) => (i===0?'M':'L') + p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');\n  const fillPath = path + ` L ${w},${h} L 0,${h} Z`;\n  return (\n    <svg width={w} height={h} className=\"sparkline\" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio=\"none\" aria-hidden=\"true\" focusable=\"false\">\n      {fill && <path d={fillPath} fill={color} opacity=\"0.12\"/>}\n      <path d={path} fill=\"none\" stroke={color} strokeWidth=\"1.5\" strokeLinejoin=\"round\" strokeLinecap=\"round\"/>\n      {points.map((p,i)=> i===points.length-1 && <circle key={i} cx={p[0]} cy={p[1]} r=\"2\" fill={color}/>)}\n    </svg>\n  );\n};\n\nexport { Sparkline };\n"
     }
   ]
 }

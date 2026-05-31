@@ -3,7 +3,7 @@
   "name": "service-card",
   "type": "registry:ui",
   "title": "Service Card",
-  "description": "Forge Service Card component.",
+  "description": "Eidos Service Card component.",
   "registryDependencies": [
     "forge",
     "icons",

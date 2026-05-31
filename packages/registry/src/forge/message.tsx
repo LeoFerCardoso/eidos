@@ -47,7 +47,7 @@ const Message = ({
   const showAvatar = avatar !== false && resolvedVariant === 'bubble' && role !== 'system';
   const rawAvatar = role === 'user'
     ? (userAvatar || { initials: 'L', name: 'You' })
-    : (botAvatar  || { initials: 'F', name: 'Forge AI' });
+    : (botAvatar  || { initials: 'F', name: 'Eidos AI' });
   const avatarObj = { name: rawAvatar.name ?? 'User', initials: rawAvatar.initials ?? rawAvatar.name?.[0] ?? '?' };
 
   return (

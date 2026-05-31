@@ -3,7 +3,7 @@
   "name": "props-table",
   "type": "registry:ui",
   "title": "Props Table",
-  "description": "Forge Props Table component.",
+  "description": "Eidos Props Table component.",
   "registryDependencies": [
     "forge"
   ],

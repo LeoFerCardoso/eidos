@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Empty } from '@/components/forge/empty';
 import { Icons } from '@/components/forge/icons';
 
 type FilterItem = { value: string; label?: string; count?: number };
@@ -26,6 +27,10 @@ const FilterPanel = ({ groups = [], onClear, query, onQueryChange, placeholder =
 }) => {
   const q = (query || '').trim().toLowerCase();
   const match = (label) => !q || String(label).toLowerCase().includes(q);
+  // When a search query filters every facet out of every group, show one quiet
+  // Empty region instead of a blank column (fp-head + fp-search stay visible).
+  const anyVisible = groups.some(g => g.items.some(it => match(it.label)));
+  const showEmpty = q !== '' && !anyVisible;
   return (
     <aside className="filter-panel" aria-label="Filters">
       <div className="fp-head">
@@ -37,12 +42,16 @@ const FilterPanel = ({ groups = [], onClear, query, onQueryChange, placeholder =
         <input type="search" value={query || ''} onChange={(e) => onQueryChange && onQueryChange(e.target.value)}
                placeholder={placeholder} aria-label="Filter facets"/>
       </div>
-      {groups.map((g, gi) => {
+      {showEmpty
+        ? <Empty size="sm" title="No facets match" desc="Try a shorter or different search."/>
+        : groups.map((g, gi) => {
         const visible = g.items.filter(it => match(it.label));
         if (visible.length === 0) return null;
+        const titleId = `fp-grp-${g.id || gi}`;
+        const radioName = `fp-${g.id || gi}`;
         return (
-          <div key={g.id || gi} className="fp-group">
-            <div className="fp-group-title">{g.title}</div>
+          <div key={g.id || gi} className="fp-group" role="group" aria-labelledby={titleId}>
+            <div className="fp-group-title" id={titleId}>{g.title}</div>
             <ul className="fp-list">
               {visible.map(it => {
                 const isSel = g.selected ? g.selected.has(it.value) : false;
@@ -52,6 +61,7 @@ const FilterPanel = ({ groups = [], onClear, query, onQueryChange, placeholder =
                   <li key={it.value}>
                     <label className={'fc-control fp-row' + (isSel ? ' is-on' : '')}>
                       <input type={inputType} className="fc-input" checked={isSel}
+                             name={g.multi ? undefined : radioName}
                              onChange={() => g.onToggle && g.onToggle(it.value)}/>
                       <span className={boxCls} aria-hidden="true">
                         {g.multi

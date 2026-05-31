@@ -3,7 +3,7 @@
   "name": "ai-label",
   "type": "registry:ui",
   "title": "Ai Label",
-  "description": "Forge Ai Label component.",
+  "description": "Eidos Ai Label component.",
   "registryDependencies": [
     "forge",
     "forge-ai"

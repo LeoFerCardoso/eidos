@@ -3,7 +3,7 @@
   "name": "tool-output",
   "type": "registry:ui",
   "title": "Tool Output",
-  "description": "Forge Tool Output component.",
+  "description": "Eidos Tool Output component.",
   "dependencies": [
     "ai"
   ],
@@ -16,7 +16,7 @@
       "path": "components/forge/tool-output.tsx",
       "target": "components/forge/tool-output.tsx",
       "type": "registry:ui",
-      "content": "import * as React from 'react';\n\nconst ToolOutput = ({\n  label = 'Output',\n  children,\n  meta,\n}: {\n  /** Section label. Switch to \"Error\" when state = output-error. */\n  label?: string;\n  /** Rendered result. Use Forge primitives — Table, Code, plain prose, error card. */\n  children?: React.ReactNode;\n  /** Right-aligned meta — row count, HTTP status, etc. */\n  meta?: string;\n}) => (\n  <div className=\"tool-section\">\n    <div className=\"tool-section-label\">\n      <span>{label}</span>\n      {meta && <span className=\"meta\">{meta}</span>}\n    </div>\n    {children}\n  </div>\n);\n\nexport { ToolOutput };\n"
+      "content": "import * as React from 'react';\n\nconst ToolOutput = ({\n  label = 'Output',\n  children,\n  meta,\n}: {\n  /** Section label. Switch to \"Error\" when state = output-error. */\n  label?: string;\n  /** Rendered result. Use Eidos primitives — Table, Code, plain prose, error card. */\n  children?: React.ReactNode;\n  /** Right-aligned meta — row count, HTTP status, etc. */\n  meta?: string;\n}) => (\n  <div className=\"tool-section\">\n    <div className=\"tool-section-label\">\n      <span>{label}</span>\n      {meta && <span className=\"meta\">{meta}</span>}\n    </div>\n    {children}\n  </div>\n);\n\nexport { ToolOutput };\n"
     }
   ]
 }

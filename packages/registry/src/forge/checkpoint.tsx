@@ -17,7 +17,7 @@ const Checkpoint = ({
       <Icons.flag size={11} className="flag-mark" aria-hidden="true"/>
       <span className="lbl">{label}</span>
       {time && <><span className="sep">·</span><span className="t">{time}</span></>}
-      {onRestore && <button className="ai-checkpoint-restore" onClick={onRestore}>Restore</button>}
+      {onRestore && <button className="ai-checkpoint-restore" onClick={onRestore} aria-label={`Restore conversation to ${label}`}>Restore</button>}
     </span>
     <span className="ai-checkpoint-rule"/>
   </div>

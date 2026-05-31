@@ -3,7 +3,7 @@
   "name": "label",
   "type": "registry:ui",
   "title": "Label",
-  "description": "Forge Label component.",
+  "description": "Eidos Label component.",
   "registryDependencies": [
     "forge"
   ],

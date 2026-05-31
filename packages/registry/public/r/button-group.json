@@ -3,7 +3,7 @@
   "name": "button-group",
   "type": "registry:ui",
   "title": "Button Group",
-  "description": "Forge Button Group component.",
+  "description": "Eidos Button Group component.",
   "registryDependencies": [
     "forge"
   ],

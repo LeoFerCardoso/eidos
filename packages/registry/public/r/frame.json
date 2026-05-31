@@ -3,7 +3,7 @@
   "name": "frame",
   "type": "registry:ui",
   "title": "Frame",
-  "description": "Forge Frame component.",
+  "description": "Eidos Frame component.",
   "registryDependencies": [
     "forge",
     "copy-button",

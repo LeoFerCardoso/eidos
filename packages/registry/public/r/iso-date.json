@@ -3,7 +3,7 @@
   "name": "iso-date",
   "type": "registry:ui",
   "title": "Iso Date",
-  "description": "Forge Iso Date component.",
+  "description": "Eidos Iso Date component.",
   "registryDependencies": [
     "forge"
   ],

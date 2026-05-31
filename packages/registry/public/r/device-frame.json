@@ -3,7 +3,7 @@
   "name": "device-frame",
   "type": "registry:ui",
   "title": "Device Frame",
-  "description": "Forge Device Frame component.",
+  "description": "Eidos Device Frame component.",
   "registryDependencies": [
     "forge"
   ],

@@ -3,7 +3,7 @@
   "name": "scroll-area",
   "type": "registry:ui",
   "title": "Scroll Area",
-  "description": "Forge Scroll Area component.",
+  "description": "Eidos Scroll Area component.",
   "registryDependencies": [
     "forge"
   ],

@@ -3,7 +3,7 @@
   "name": "tag-input",
   "type": "registry:ui",
   "title": "Tag Input",
-  "description": "Forge Tag Input component.",
+  "description": "Eidos Tag Input component.",
   "registryDependencies": [
     "forge",
     "icons"

@@ -3,7 +3,7 @@
   "name": "suggestion-card",
   "type": "registry:ui",
   "title": "Suggestion Card",
-  "description": "Forge Suggestion Card component.",
+  "description": "Eidos Suggestion Card component.",
   "registryDependencies": [
     "forge",
     "forge-ai"

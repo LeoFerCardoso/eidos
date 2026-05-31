@@ -3,7 +3,7 @@
   "name": "tool-status",
   "type": "registry:ui",
   "title": "Tool Status",
-  "description": "Forge Tool Status component.",
+  "description": "Eidos Tool Status component.",
   "dependencies": [
     "ai"
   ],

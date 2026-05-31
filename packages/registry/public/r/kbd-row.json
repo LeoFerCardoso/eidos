@@ -3,7 +3,7 @@
   "name": "kbd-row",
   "type": "registry:ui",
   "title": "Kbd Row",
-  "description": "Forge Kbd Row component.",
+  "description": "Eidos Kbd Row component.",
   "registryDependencies": [
     "forge",
     "kbd"

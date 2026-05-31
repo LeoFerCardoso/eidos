@@ -3,7 +3,7 @@
   "name": "empty",
   "type": "registry:ui",
   "title": "Empty",
-  "description": "Forge Empty component.",
+  "description": "Eidos Empty component.",
   "registryDependencies": [
     "forge",
     "icons"

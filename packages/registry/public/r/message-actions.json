@@ -3,7 +3,7 @@
   "name": "message-actions",
   "type": "registry:ui",
   "title": "Message Actions",
-  "description": "Forge Message Actions component.",
+  "description": "Eidos Message Actions component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

@@ -3,7 +3,7 @@
   "name": "color-picker",
   "type": "registry:ui",
   "title": "Color Picker",
-  "description": "Forge Color Picker component.",
+  "description": "Eidos Color Picker component.",
   "registryDependencies": [
     "forge",
     "icons"

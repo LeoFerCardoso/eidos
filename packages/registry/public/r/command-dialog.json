@@ -3,7 +3,7 @@
   "name": "command-dialog",
   "type": "registry:ui",
   "title": "Command Dialog",
-  "description": "Forge Command Dialog component.",
+  "description": "Eidos Command Dialog component.",
   "registryDependencies": [
     "forge",
     "command"

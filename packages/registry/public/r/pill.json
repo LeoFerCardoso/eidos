@@ -3,7 +3,7 @@
   "name": "pill",
   "type": "registry:ui",
   "title": "Pill",
-  "description": "Forge Pill component.",
+  "description": "Eidos Pill component.",
   "registryDependencies": [
     "forge",
     "icons"

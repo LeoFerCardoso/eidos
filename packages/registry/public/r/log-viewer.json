@@ -3,7 +3,7 @@
   "name": "log-viewer",
   "type": "registry:ui",
   "title": "Log Viewer",
-  "description": "Forge Log Viewer component.",
+  "description": "Eidos Log Viewer component.",
   "registryDependencies": [
     "forge",
     "icons"

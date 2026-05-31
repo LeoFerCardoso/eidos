@@ -3,7 +3,7 @@
   "name": "progress",
   "type": "registry:ui",
   "title": "Progress",
-  "description": "Forge Progress component.",
+  "description": "Eidos Progress component.",
   "registryDependencies": [
     "forge"
   ],

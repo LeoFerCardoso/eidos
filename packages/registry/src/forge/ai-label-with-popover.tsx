@@ -5,7 +5,7 @@ const AILabelWithPopover = ({
   variant = 'pill',
   size = 'md',
   label = 'AI summary',
-  model = 'forge-ai/gpt-4o-mini',
+  model = 'eidos-ai/gpt-4o-mini',
   ts = '2 min ago',
   confidence = 0.92,
   children,

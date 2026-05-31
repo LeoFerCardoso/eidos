@@ -3,7 +3,7 @@
   "name": "tool-input",
   "type": "registry:ui",
   "title": "Tool Input",
-  "description": "Forge Tool Input component.",
+  "description": "Eidos Tool Input component.",
   "dependencies": [
     "ai"
   ],

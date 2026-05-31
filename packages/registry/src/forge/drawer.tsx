@@ -41,6 +41,12 @@ const Drawer = (props: DrawerProps) => {
   const [state, setState] = React.useState<'open' | 'closed'>(open ? 'open' : 'closed');
   const panelRef = React.useRef<HTMLDivElement>(null);
   const dragRef = React.useRef({ active: false, startY: 0, startT: 0, dy: 0 });
+  // Remember what had focus before the drawer opened so we can restore it on close.
+  const restoreFocusRef = React.useRef<HTMLElement | null>(null);
+
+  const baseId = React.useId();
+  const titleId = `${baseId}-title`;
+  const descId = `${baseId}-desc`;
 
   React.useEffect(() => {
     if (open) {
@@ -62,6 +68,64 @@ const Drawer = (props: DrawerProps) => {
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [mounted, persistent, onClose]);
+
+  // ── Focus management + focus trap (overlay variant) ────────────────────
+  // On open: capture the previously-focused element, then move focus into the
+  // panel. While open: trap Tab/Shift+Tab so it cycles within `.dr`. On close
+  // (unmount): restore focus to the opener. Inline drawers dock into the page
+  // flow and do not own focus, so this is scoped to the overlay variant.
+  React.useEffect(() => {
+    if (!mounted || variant !== 'overlay') return;
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    restoreFocusRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const getFocusable = () =>
+      Array.from(panel.querySelectorAll<HTMLElement>(focusableSelector)).filter(
+        (el) => el.offsetParent !== null || el === document.activeElement,
+      );
+
+    // Move focus into the panel — first focusable, else the panel itself.
+    const first = getFocusable()[0];
+    if (first) first.focus();
+    else panel.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+      const focusable = getFocusable();
+      if (focusable.length === 0) {
+        e.preventDefault();
+        panel.focus();
+        return;
+      }
+      const firstEl = focusable[0];
+      const lastEl = focusable[focusable.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey) {
+        if (active === firstEl || !panel.contains(active)) {
+          e.preventDefault();
+          lastEl.focus();
+        }
+      } else {
+        if (active === lastEl || !panel.contains(active)) {
+          e.preventDefault();
+          firstEl.focus();
+        }
+      }
+    };
+    panel.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      panel.removeEventListener('keydown', onKeyDown);
+      const toRestore = restoreFocusRef.current;
+      if (toRestore && typeof toRestore.focus === 'function') toRestore.focus();
+      restoreFocusRef.current = null;
+    };
+  }, [mounted, variant]);
 
   // ── Drag-to-close (bottom drawer, overlay variant only) ────────────────
   const isBottom = side === 'bottom';
@@ -111,8 +175,8 @@ const Drawer = (props: DrawerProps) => {
   const headerNode = (title || desc || onClose) ? (
     <div className="dr-header">
       <div style={{ flex: 1, minWidth: 0 }}>
-        {title && <div className="dr-title">{title}</div>}
-        {desc && <div className="dr-desc">{desc}</div>}
+        {title && <div className="dr-title" id={titleId}>{title}</div>}
+        {desc && <div className="dr-desc" id={descId}>{desc}</div>}
       </div>
       {onClose && (
         <button className="dr-close" type="button" onClick={() => onClose && onClose()} aria-label="Close drawer">
@@ -125,7 +189,16 @@ const Drawer = (props: DrawerProps) => {
   const cls = ['dr', side, 'variant-' + variant, className].filter(Boolean).join(' ');
 
   const panel = (
-    <div ref={panelRef} className={cls} role="dialog" aria-modal={variant === 'overlay'} style={style}>
+    <div
+      ref={panelRef}
+      className={cls}
+      role="dialog"
+      aria-modal={variant === 'overlay'}
+      aria-labelledby={title ? titleId : undefined}
+      aria-describedby={desc ? descId : undefined}
+      tabIndex={-1}
+      style={style}
+    >
       {variant === 'overlay' && isBottom ? (
         <div
           className="dr-drag"

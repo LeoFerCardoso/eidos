@@ -3,7 +3,7 @@
   "name": "spec-row",
   "type": "registry:ui",
   "title": "Spec Row",
-  "description": "Forge Spec Row component.",
+  "description": "Eidos Spec Row component.",
   "registryDependencies": [
     "forge"
   ],

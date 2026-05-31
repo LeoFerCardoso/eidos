@@ -27,7 +27,7 @@ const SpeechInput = ({
 
   // A click while processing is a no-op — but the button stays focusable (no
   // `disabled`) so Tab-reachability and the documented focus-never-lost
-  // behaviour hold even if the parent forgets to gate the transition.
+  // behaviour hold even if the parent eidosts to gate the transition.
   const handleToggle = () => { if (state !== 'processing') onToggle?.(); };
 
   // Compact: just the icon button — reuses .pi-tool chrome so it lines up

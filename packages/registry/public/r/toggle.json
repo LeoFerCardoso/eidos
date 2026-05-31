@@ -3,7 +3,7 @@
   "name": "toggle",
   "type": "registry:ui",
   "title": "Toggle",
-  "description": "Forge Toggle component.",
+  "description": "Eidos Toggle component.",
   "registryDependencies": [
     "forge"
   ],

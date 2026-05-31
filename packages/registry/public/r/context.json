@@ -3,7 +3,7 @@
   "name": "context",
   "type": "registry:ui",
   "title": "Context",
-  "description": "Forge Context component.",
+  "description": "Eidos Context component.",
   "registryDependencies": [
     "forge",
     "forge-ai"

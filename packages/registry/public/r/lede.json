@@ -3,7 +3,7 @@
   "name": "lede",
   "type": "registry:ui",
   "title": "Lede",
-  "description": "Forge Lede component.",
+  "description": "Eidos Lede component.",
   "registryDependencies": [
     "forge"
   ],

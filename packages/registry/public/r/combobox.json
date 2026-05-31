@@ -3,7 +3,7 @@
   "name": "combobox",
   "type": "registry:ui",
   "title": "Combobox",
-  "description": "Forge Combobox component.",
+  "description": "Eidos Combobox component.",
   "registryDependencies": [
     "forge",
     "icons"

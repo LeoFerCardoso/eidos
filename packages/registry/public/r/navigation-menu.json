@@ -3,7 +3,7 @@
   "name": "navigation-menu",
   "type": "registry:ui",
   "title": "Navigation Menu",
-  "description": "Forge Navigation Menu component.",
+  "description": "Eidos Navigation Menu component.",
   "registryDependencies": [
     "forge"
   ],

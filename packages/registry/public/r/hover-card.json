@@ -3,7 +3,7 @@
   "name": "hover-card",
   "type": "registry:ui",
   "title": "Hover Card",
-  "description": "Forge Hover Card component.",
+  "description": "Eidos Hover Card component.",
   "registryDependencies": [
     "forge"
   ],

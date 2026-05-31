@@ -3,7 +3,7 @@
   "name": "alert",
   "type": "registry:ui",
   "title": "Alert",
-  "description": "Forge Alert component.",
+  "description": "Eidos Alert component.",
   "registryDependencies": [
     "forge",
     "icons"

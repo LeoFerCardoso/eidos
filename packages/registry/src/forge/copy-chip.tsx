@@ -30,11 +30,19 @@ const CopyChip = ({
   if (tone !== 'default') cls.push(tone);
   if (copied) cls.push('is-copied');
   return (
-    <button type="button" className={cls.join(' ')} onClick={onClick}
-            aria-label={`Copy ${value}`} title={copied ? 'Copied' : `Copy ${value}`}>
-      <span>{label || value}</span>
-      {copied ? <Icons.check size={10}/> : <Icons.copy size={10}/>}
-    </button>
+    <>
+      <button type="button" className={cls.join(' ')} onClick={onClick}
+              aria-label={`Copy ${value}`} title={copied ? 'Copied' : `Copy ${value}`}>
+        <span>{label || value}</span>
+        {copied ? <Icons.check size={10}/> : <Icons.copy size={10}/>}
+      </button>
+      {/* Visually-hidden live region: announces the success transition once,
+          satisfying the documented role="status" aria-live="polite" SR contract.
+          Empty while idle so AT only speaks on the copied → true transition. */}
+      <span role="status" aria-live="polite" className="sr-only">
+        {copied ? `Copied ${value}` : ''}
+      </span>
+    </>
   );
 };
 

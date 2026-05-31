@@ -3,7 +3,7 @@
   "name": "accordion",
   "type": "registry:ui",
   "title": "Accordion",
-  "description": "Forge Accordion component.",
+  "description": "Eidos Accordion component.",
   "registryDependencies": [
     "forge"
   ],

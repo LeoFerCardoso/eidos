@@ -3,7 +3,7 @@
   "name": "modal",
   "type": "registry:ui",
   "title": "Modal",
-  "description": "Forge Modal component.",
+  "description": "Eidos Modal component.",
   "registryDependencies": [
     "forge",
     "icons"

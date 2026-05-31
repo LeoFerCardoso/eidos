@@ -3,7 +3,7 @@
   "name": "input",
   "type": "registry:ui",
   "title": "Input",
-  "description": "Forge Input component.",
+  "description": "Eidos Input component.",
   "registryDependencies": [
     "forge"
   ],

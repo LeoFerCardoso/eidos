@@ -3,7 +3,7 @@
   "name": "radio-group",
   "type": "registry:ui",
   "title": "Radio Group",
-  "description": "Forge Radio Group component.",
+  "description": "Eidos Radio Group component.",
   "registryDependencies": [
     "forge"
   ],

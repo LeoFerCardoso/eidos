@@ -11,9 +11,9 @@ interface ModelOption {
 }
 
 const DEFAULT_MODELS: ModelOption[] = [
-  { id: 'forge-sonnet-4-6', short: 'S',  name: 'Sonnet 4.6', cost: '$3 / 1M' },
-  { id: 'forge-opus-4-7',   short: 'O',  name: 'Opus 4.7',   cost: '$15 / 1M' },
-  { id: 'forge-haiku-4-5',  short: 'H',  name: 'Haiku 4.5',  cost: '$1 / 1M' },
+  { id: 'eidos-sonnet-4-6', short: 'S',  name: 'Sonnet 4.6', cost: '$3 / 1M' },
+  { id: 'eidos-opus-4-7',   short: 'O',  name: 'Opus 4.7',   cost: '$15 / 1M' },
+  { id: 'eidos-haiku-4-5',  short: 'H',  name: 'Haiku 4.5',  cost: '$1 / 1M' },
 ];
 
 const ModelSelector = ({
@@ -25,7 +25,7 @@ const ModelSelector = ({
   value: string;
   /** Called with the model id when the user selects a different option. The parent is responsible for updating value. */
   onChange: (id: string) => void;
-  /** Optional array of model definitions. Defaults to three Forge-hosted models (Sonnet, Opus, Haiku). */
+  /** Optional array of model definitions. Defaults to three Eidos-hosted models (Sonnet, Opus, Haiku). */
   models?: ModelOption[];
 }) => {
   const [open, setOpen] = React.useState(false);

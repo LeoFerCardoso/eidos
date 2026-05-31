@@ -6,7 +6,7 @@ const Response = ({
   from = 'assistant',
   meta,
   avatar = false,
-  botAvatar = { initials: 'F', name: 'Forge AI' },
+  botAvatar = { initials: 'F', name: 'Eidos AI' },
   actions,
   streaming = false,
   children,
@@ -26,7 +26,7 @@ const Response = ({
   /** Pre-rendered prose nodes — headings, paragraphs, lists, tables, code blocks, figures. */
   children?: React.ReactNode;
 }) => {
-  const resolvedBot = { name: botAvatar.name ?? 'Forge AI', initials: botAvatar.initials ?? 'F' };
+  const resolvedBot = { name: botAvatar.name ?? 'Eidos AI', initials: botAvatar.initials ?? 'F' };
   return (
   <div className={'ai-resp ' + from} role="article" aria-roledescription={`${from} response`}>
     {from === 'assistant' && avatar && <Avatar p={resolvedBot} size={32} ember/>}

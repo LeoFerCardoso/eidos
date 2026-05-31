@@ -3,7 +3,7 @@
   "name": "artifact-panel",
   "type": "registry:ui",
   "title": "Artifact Panel",
-  "description": "Forge Artifact Panel component.",
+  "description": "Eidos Artifact Panel component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

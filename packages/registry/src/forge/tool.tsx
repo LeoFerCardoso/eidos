@@ -4,7 +4,7 @@ import { ToolStatus } from '@/components/forge/tool-status';
 
 const Tool = ({
   name,
-  ns = 'forge.ai',
+  ns = 'eidos.ai',
   state,
   ms,
   defaultOpen,

@@ -3,7 +3,7 @@
   "name": "severity-pill",
   "type": "registry:ui",
   "title": "Severity Pill",
-  "description": "Forge Severity Pill component.",
+  "description": "Eidos Severity Pill component.",
   "registryDependencies": [
     "forge",
     "pill",

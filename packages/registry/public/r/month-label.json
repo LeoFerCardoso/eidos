@@ -3,7 +3,7 @@
   "name": "month-label",
   "type": "registry:ui",
   "title": "Month Label",
-  "description": "Forge Month Label component.",
+  "description": "Eidos Month Label component.",
   "registryDependencies": [
     "forge"
   ],

@@ -3,7 +3,7 @@
   "name": "count-up",
   "type": "registry:ui",
   "title": "Count Up",
-  "description": "Forge Count Up component.",
+  "description": "Eidos Count Up component.",
   "registryDependencies": [
     "forge"
   ],

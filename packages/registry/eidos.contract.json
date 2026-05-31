@@ -1191,6 +1191,34 @@
       }
     },
     {
+      "name": "eidos-chart",
+      "kind": "component",
+      "ds": "core",
+      "title": "Eidos Chart",
+      "surfaces": {
+        "docs": "",
+        "export": "EidosChart",
+        "exportFile": "packages/ui/src/charts.tsx",
+        "story": "packages/ui/src/stories/charts/EidosChart.stories.tsx",
+        "registry": "eidos-chart",
+        "registrySrc": "src/forge/eidos-chart.tsx"
+      }
+    },
+    {
+      "name": "eidos-tooltip-content",
+      "kind": "component",
+      "ds": "core",
+      "title": "Eidos Tooltip Content",
+      "surfaces": {
+        "docs": "",
+        "export": "EidosTooltipContent",
+        "exportFile": "packages/ui/src/charts.tsx",
+        "story": "",
+        "registry": "eidos-tooltip-content",
+        "registrySrc": "src/forge/eidos-tooltip-content.tsx"
+      }
+    },
+    {
       "name": "empty",
       "kind": "component",
       "ds": "core",
@@ -1233,20 +1261,6 @@
       }
     },
     {
-      "name": "forge-chart",
-      "kind": "component",
-      "ds": "core",
-      "title": "Forge Chart",
-      "surfaces": {
-        "docs": "",
-        "export": "ForgeChart",
-        "exportFile": "packages/ui/src/charts.tsx",
-        "story": "packages/ui/src/stories/charts/ForgeChart.stories.tsx",
-        "registry": "forge-chart",
-        "registrySrc": "src/forge/forge-chart.tsx"
-      }
-    },
-    {
       "name": "forge-mark",
       "kind": "component",
       "ds": "core",
@@ -1258,20 +1272,6 @@
         "story": "packages/ui/src/stories/icons/ForgeMark.stories.tsx",
         "registry": "forge-mark",
         "registrySrc": "src/forge/forge-mark.tsx"
-      }
-    },
-    {
-      "name": "forge-tooltip-content",
-      "kind": "component",
-      "ds": "core",
-      "title": "Forge Tooltip Content",
-      "surfaces": {
-        "docs": "",
-        "export": "ForgeTooltipContent",
-        "exportFile": "packages/ui/src/charts.tsx",
-        "story": "",
-        "registry": "forge-tooltip-content",
-        "registrySrc": "src/forge/forge-tooltip-content.tsx"
       }
     },
     {
@@ -2835,8 +2835,8 @@
       "title": "Tree View",
       "surfaces": {
         "docs": "src/ds/migrated/idp/tree-view.tsx",
-        "export": "ForgeTree",
-        "exportFile": "src/components/pierre-tree.tsx",
+        "export": "TreeView",
+        "exportFile": "packages/ui/src/blocks.tsx",
         "story": "packages/ui/src/stories/blocks/TreeView.stories.tsx",
         "registry": "tree-view",
         "registrySrc": "src/forge/tree-view.tsx"
@@ -2929,14 +2929,14 @@
       "reason": "Shared prop-type helper for RangeCalendar; not a component."
     },
     {
-      "component": "forge-tooltip-content",
+      "component": "eidos-tooltip-content",
       "clause": "C-export",
-      "reason": "Recharts tooltip-content render helper; documented with ForgeChart."
+      "reason": "Recharts tooltip-content render helper; documented with EidosChart."
     },
     {
-      "component": "forge-tooltip-content",
+      "component": "eidos-tooltip-content",
       "clause": "C-story",
-      "reason": "Recharts tooltip-content render helper; documented with ForgeChart."
+      "reason": "Recharts tooltip-content render helper; documented with EidosChart."
     },
     {
       "component": "agent-avatar",
@@ -3059,7 +3059,7 @@
       "reason": "Variant/sub-part documented with its base component \"menu\"."
     },
     {
-      "component": "forge-chart",
+      "component": "eidos-chart",
       "clause": "C-export",
       "reason": "Documented in context on changelog.tsx, charts/area.tsx, charts/bar.tsx; atom/sub-part, not a standalone-page component."
     },

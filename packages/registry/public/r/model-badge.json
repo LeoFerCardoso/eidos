@@ -3,7 +3,7 @@
   "name": "model-badge",
   "type": "registry:ui",
   "title": "Model Badge",
-  "description": "Forge Model Badge component.",
+  "description": "Eidos Model Badge component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

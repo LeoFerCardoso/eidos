@@ -3,7 +3,7 @@
   "name": "carousel",
   "type": "registry:ui",
   "title": "Carousel",
-  "description": "Forge Carousel component.",
+  "description": "Eidos Carousel component.",
   "dependencies": [
     "embla-carousel-react"
   ],

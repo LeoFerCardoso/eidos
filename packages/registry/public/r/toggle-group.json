@@ -3,7 +3,7 @@
   "name": "toggle-group",
   "type": "registry:ui",
   "title": "Toggle Group",
-  "description": "Forge Toggle Group component.",
+  "description": "Eidos Toggle Group component.",
   "registryDependencies": [
     "forge"
   ],

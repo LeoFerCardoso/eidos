@@ -3,7 +3,7 @@
   "name": "kbd",
   "type": "registry:ui",
   "title": "Kbd",
-  "description": "Forge Kbd component.",
+  "description": "Eidos Kbd component.",
   "registryDependencies": [
     "forge"
   ],

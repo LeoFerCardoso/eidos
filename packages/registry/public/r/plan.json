@@ -3,7 +3,7 @@
   "name": "plan",
   "type": "registry:ui",
   "title": "Plan",
-  "description": "Forge Plan component.",
+  "description": "Eidos Plan component.",
   "dependencies": [
     "ai"
   ],

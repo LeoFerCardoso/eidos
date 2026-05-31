@@ -3,7 +3,7 @@
   "name": "shimmer",
   "type": "registry:ui",
   "title": "Shimmer",
-  "description": "Forge Shimmer component.",
+  "description": "Eidos Shimmer component.",
   "registryDependencies": [
     "forge",
     "forge-ai"

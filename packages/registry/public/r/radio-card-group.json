@@ -3,7 +3,7 @@
   "name": "radio-card-group",
   "type": "registry:ui",
   "title": "Radio Card Group",
-  "description": "Forge Radio Card Group component.",
+  "description": "Eidos Radio Card Group component.",
   "registryDependencies": [
     "forge",
     "radio-card"

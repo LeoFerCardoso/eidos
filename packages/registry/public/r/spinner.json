@@ -3,7 +3,7 @@
   "name": "spinner",
   "type": "registry:ui",
   "title": "Spinner",
-  "description": "Forge Spinner component.",
+  "description": "Eidos Spinner component.",
   "registryDependencies": [
     "forge"
   ],

@@ -3,7 +3,7 @@
   "name": "sidebar",
   "type": "registry:ui",
   "title": "Sidebar",
-  "description": "Forge Sidebar component.",
+  "description": "Eidos Sidebar component.",
   "registryDependencies": [
     "forge",
     "icons"

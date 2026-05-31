@@ -3,7 +3,7 @@
   "name": "collapsible-code",
   "type": "registry:ui",
   "title": "Collapsible Code",
-  "description": "Forge Collapsible Code component.",
+  "description": "Eidos Collapsible Code component.",
   "registryDependencies": [
     "forge",
     "code",

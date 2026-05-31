@@ -3,7 +3,7 @@
   "name": "tooltip",
   "type": "registry:ui",
   "title": "Tooltip",
-  "description": "Forge Tooltip component.",
+  "description": "Eidos Tooltip component.",
   "registryDependencies": [
     "forge"
   ],

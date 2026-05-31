@@ -3,7 +3,7 @@
   "name": "artifact-widget",
   "type": "registry:ui",
   "title": "Artifact Widget",
-  "description": "Forge Artifact Widget component.",
+  "description": "Eidos Artifact Widget component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

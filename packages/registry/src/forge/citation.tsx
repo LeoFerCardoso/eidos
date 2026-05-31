@@ -28,16 +28,33 @@ const Citation = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   const closeT = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const btnRef = React.useRef<HTMLButtonElement>(null);
   const onEnter = () => { if (closeT.current) clearTimeout(closeT.current); setOpen(true); };
   const onLeave = () => { closeT.current = setTimeout(() => setOpen(false), 150); };
+  const linkUrl = href || source?.url;
+  // Click contract: when the popover is open and a target exists, the chip
+  // navigates to the source in a new tab; otherwise it toggles the popover.
+  const onClick = () => {
+    if (open && linkUrl) { window.open(linkUrl, '_blank', 'noopener'); return; }
+    setOpen(v => !v);
+  };
+  // Keyboard contract: Escape closes the popover and returns focus to the chip.
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape' && open) {
+      e.stopPropagation();
+      setOpen(false);
+      btnRef.current?.focus();
+    }
+  };
   return (
-    <span className="ai-cite-wrap" onMouseEnter={onEnter} onMouseLeave={onLeave}>
+    <span className="ai-cite-wrap" onMouseEnter={onEnter} onMouseLeave={onLeave} onKeyDown={onKeyDown}>
       <button
+        ref={btnRef}
         className={'ai-cite-chip' + (tone === 'neutral' ? ' neutral' : '')}
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-label={source ? `Source ${n}, ${source.domain}` : `Source ${n}`}
-        onClick={() => setOpen(v => !v)}
+        onClick={onClick}
         onFocus={onEnter}
         onBlur={onLeave}
       >{n}</button>
@@ -49,10 +66,15 @@ const Citation = ({
           </span>
           <span className="ai-cite-pop-title">{source.title}</span>
           <span className="ai-cite-pop-snip">{source.snippet}</span>
-          <span className="ai-cite-pop-foot">
+          <a
+            className="ai-cite-pop-foot"
+            href={linkUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
             <Icons.link size={11}/>
-            <span className="url">{(href || source.url).replace(/^https?:\/\//, '')}</span>
-          </span>
+            <span className="url">{(linkUrl || '').replace(/^https?:\/\//, '')}</span>
+          </a>
         </span>
       )}
     </span>

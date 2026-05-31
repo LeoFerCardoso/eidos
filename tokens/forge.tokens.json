@@ -1,5 +1,5 @@
 {
-  "$description": "Forge Design System tokens — generated from packages/ui/styles/tokens.css. Do not edit by hand; edit the CSS and re-run scripts/gen-tokens.mjs.",
+  "$description": "Eidos Design System tokens — generated from packages/ui/styles/tokens.css. Do not edit by hand; edit the CSS and re-run scripts/gen-tokens.mjs.",
   "color": {
     "canvas": {
       "$value": "oklch(0.13 0.005 60)",

@@ -3,7 +3,7 @@
   "name": "queue",
   "type": "registry:ui",
   "title": "Queue",
-  "description": "Forge Queue component.",
+  "description": "Eidos Queue component.",
   "dependencies": [
     "ai"
   ],

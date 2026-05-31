@@ -3,7 +3,7 @@
   "name": "skeleton",
   "type": "registry:ui",
   "title": "Skeleton",
-  "description": "Forge Skeleton component.",
+  "description": "Eidos Skeleton component.",
   "registryDependencies": [
     "forge"
   ],

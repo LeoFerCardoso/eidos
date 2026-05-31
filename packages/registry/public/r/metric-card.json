@@ -3,7 +3,7 @@
   "name": "metric-card",
   "type": "registry:ui",
   "title": "Metric Card",
-  "description": "Forge Metric Card component.",
+  "description": "Eidos Metric Card component.",
   "registryDependencies": [
     "forge",
     "trend",

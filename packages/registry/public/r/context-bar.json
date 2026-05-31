@@ -3,7 +3,7 @@
   "name": "context-bar",
   "type": "registry:ui",
   "title": "Context Bar",
-  "description": "Forge Context Bar component.",
+  "description": "Eidos Context Bar component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

@@ -3,7 +3,7 @@
   "name": "breadcrumb",
   "type": "registry:ui",
   "title": "Breadcrumb",
-  "description": "Forge Breadcrumb component.",
+  "description": "Eidos Breadcrumb component.",
   "registryDependencies": [
     "forge",
     "dropdown-menu",

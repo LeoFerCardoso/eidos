@@ -3,7 +3,7 @@
   "name": "prompt-input",
   "type": "registry:ui",
   "title": "Prompt Input",
-  "description": "Forge Prompt Input component.",
+  "description": "Eidos Prompt Input component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

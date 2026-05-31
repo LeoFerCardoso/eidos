@@ -55,7 +55,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
     },
     ref,
   ) => {
-    const [uid] = React.useState(() => `forge-tabs-${++uidCounter}`);
+    const [uid] = React.useState(() => `eidos-tabs-${++uidCounter}`);
     const [internalValue, setInternalValue] = React.useState(defaultValue ?? '');
     const isControlled = controlledValue !== undefined;
     const activeValue = isControlled ? controlledValue : internalValue;
@@ -102,8 +102,8 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
     );
 
     const classes = [
-      'forge-tabs',
-      orientation === 'vertical' ? 'forge-tabs--vertical' : '',
+      'eidos-tabs',
+      orientation === 'vertical' ? 'eidos-tabs--vertical' : '',
       className,
     ]
       .filter(Boolean)

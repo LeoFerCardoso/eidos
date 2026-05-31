@@ -3,7 +3,7 @@
   "name": "tree-view",
   "type": "registry:ui",
   "title": "Tree View",
-  "description": "Forge Tree View component.",
+  "description": "Eidos Tree View component.",
   "registryDependencies": [
     "forge",
     "icons"

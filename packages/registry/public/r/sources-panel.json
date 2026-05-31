@@ -3,7 +3,7 @@
   "name": "sources-panel",
   "type": "registry:ui",
   "title": "Sources Panel",
-  "description": "Forge Sources Panel component.",
+  "description": "Eidos Sources Panel component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

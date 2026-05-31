@@ -3,7 +3,7 @@
   "name": "textarea",
   "type": "registry:ui",
   "title": "Textarea",
-  "description": "Forge Textarea component.",
+  "description": "Eidos Textarea component.",
   "registryDependencies": [
     "forge"
   ],

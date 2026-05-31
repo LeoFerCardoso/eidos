@@ -3,7 +3,7 @@
   "name": "transcription",
   "type": "registry:ui",
   "title": "Transcription",
-  "description": "Forge Transcription component.",
+  "description": "Eidos Transcription component.",
   "registryDependencies": [
     "forge",
     "forge-ai"

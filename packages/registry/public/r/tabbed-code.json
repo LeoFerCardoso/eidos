@@ -3,7 +3,7 @@
   "name": "tabbed-code",
   "type": "registry:ui",
   "title": "Tabbed Code",
-  "description": "Forge Tabbed Code component.",
+  "description": "Eidos Tabbed Code component.",
   "registryDependencies": [
     "forge",
     "copy-button",

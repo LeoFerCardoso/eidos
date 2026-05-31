@@ -2,7 +2,13 @@ import * as React from 'react';
 
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
 
-const renderValue = (v, path, expanded, toggle, depth) => {
+const branchLabel = (keyLabel, open, count, kind) => {
+  const noun = kind === 'array' ? (count === 1 ? 'item' : 'items') : (count === 1 ? 'key' : 'keys');
+  const head = keyLabel ? `${keyLabel}, ` : '';
+  return `${head}${open ? 'expanded' : 'collapsed'}, ${count} ${noun}`;
+};
+
+const renderValue = (v, path, expanded, toggle, depth, keyLabel?) => {
   if (v === null) return <span className="json-null">null</span>;
   if (typeof v === 'string') return <span className="json-str">"{v}"</span>;
   if (typeof v === 'number') return <span className="json-num">{String(v)}</span>;
@@ -12,13 +18,14 @@ const renderValue = (v, path, expanded, toggle, depth) => {
     if (v.length === 0) return <span className="json-bracket">[]</span>;
     return (
       <>
-        <button type="button" className="json-toggle" onClick={() => toggle(path)} aria-expanded={open}>
+        <button type="button" className="json-toggle" onClick={() => toggle(path)}
+                aria-expanded={open} aria-label={branchLabel(keyLabel, open, v.length, 'array')}>
           <span className="json-bracket">{open ? '[' : `[ … ${v.length} ]`}</span>
         </button>
         {open && (
           <ul className="json-list">
             {v.map((item, i) => (
-              <li key={i}><span className="json-key">{i}:</span> {renderValue(item, path + '.' + i, expanded, toggle, depth + 1)}</li>
+              <li key={i}><span className="json-key">{i}:</span> {renderValue(item, path + '.' + i, expanded, toggle, depth + 1, String(i))}</li>
             ))}
           </ul>
         )}
@@ -32,13 +39,14 @@ const renderValue = (v, path, expanded, toggle, depth) => {
     if (keys.length === 0) return <span className="json-bracket">{'{}'}</span>;
     return (
       <>
-        <button type="button" className="json-toggle" onClick={() => toggle(path)} aria-expanded={open}>
+        <button type="button" className="json-toggle" onClick={() => toggle(path)}
+                aria-expanded={open} aria-label={branchLabel(keyLabel, open, keys.length, 'object')}>
           <span className="json-bracket">{open ? '{' : `{ … ${keys.length} }`}</span>
         </button>
         {open && (
           <ul className="json-list">
             {keys.map(k => (
-              <li key={k}><span className="json-key">"{k}":</span> {renderValue(v[k], path + '.' + k, expanded, toggle, depth + 1)}</li>
+              <li key={k}><span className="json-key">"{k}":</span> {renderValue(v[k], path + '.' + k, expanded, toggle, depth + 1, k)}</li>
             ))}
           </ul>
         )}

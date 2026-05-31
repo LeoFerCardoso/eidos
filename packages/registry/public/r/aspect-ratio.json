@@ -3,7 +3,7 @@
   "name": "aspect-ratio",
   "type": "registry:ui",
   "title": "Aspect Ratio",
-  "description": "Forge Aspect Ratio component.",
+  "description": "Eidos Aspect Ratio component.",
   "registryDependencies": [
     "forge"
   ],

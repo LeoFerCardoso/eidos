@@ -3,7 +3,7 @@
   "name": "agent-identity",
   "type": "registry:ui",
   "title": "Agent Identity",
-  "description": "Forge Agent Identity component.",
+  "description": "Eidos Agent Identity component.",
   "registryDependencies": [
     "forge",
     "forge-ai",
@@ -15,7 +15,7 @@
       "path": "components/forge/agent-identity.tsx",
       "target": "components/forge/agent-identity.tsx",
       "type": "registry:ui",
-      "content": "import * as React from 'react';\nimport { AILabel } from '@/components/forge/ai-label';\nimport { AgentAvatar } from '@/components/forge/agent-avatar';\n\nconst AgentIdentity = ({\n  agent = {},\n  size = 32,\n  label = false,\n  className,\n  style,\n}: {\n  /** Agent descriptor — name, model id, and optional presence status. */\n  agent?: { name?: string; model?: string; status?: 'online' | 'away' | 'offline' | 'busy' };\n  /** Avatar diameter in px. Controls the AgentAvatar inside this row. */\n  size?: number;\n  /** When true, appends an AILabel pill after the agent name. */\n  label?: boolean;\n  /** Extra class names applied to the root span. */\n  className?: string;\n  /** Inline styles merged onto the root span. */\n  style?: React.CSSProperties;\n}) => (\n  <span className={'ai-agent-id' + (className ? ' ' + className : '')} style={style}>\n    <AgentAvatar size={size} status={agent.status} name={agent.name}/>\n    <span className=\"ai-agent-id-text\">\n      <span className=\"ai-agent-id-name\">\n        {agent.name || 'Forge AI'}\n        {label && <AILabel variant=\"pill\" size=\"sm\">AI</AILabel>}\n      </span>\n      {agent.model && <span className=\"ai-agent-id-model\">{agent.model}</span>}\n    </span>\n  </span>\n);\n\nexport { AgentIdentity };\n"
+      "content": "import * as React from 'react';\nimport { AILabel } from '@/components/forge/ai-label';\nimport { AgentAvatar } from '@/components/forge/agent-avatar';\n\nconst AgentIdentity = ({\n  agent = {},\n  size = 32,\n  label = false,\n  className,\n  style,\n}: {\n  /** Agent descriptor — name, model id, and optional presence status. */\n  agent?: { name?: string; model?: string; status?: 'online' | 'away' | 'offline' | 'busy' };\n  /** Avatar diameter in px. Controls the AgentAvatar inside this row. */\n  size?: number;\n  /** When true, appends an AILabel pill after the agent name. */\n  label?: boolean;\n  /** Extra class names applied to the root span. */\n  className?: string;\n  /** Inline styles merged onto the root span. */\n  style?: React.CSSProperties;\n}) => (\n  <span className={'ai-agent-id' + (className ? ' ' + className : '')} style={style}>\n    <AgentAvatar size={size} status={agent.status} name={agent.name}/>\n    <span className=\"ai-agent-id-text\">\n      <span className=\"ai-agent-id-name\">\n        {agent.name || 'Eidos AI'}\n        {label && <AILabel variant=\"pill\" size=\"sm\">AI</AILabel>}\n      </span>\n      {agent.model && <span className=\"ai-agent-id-model\">{agent.model}</span>}\n    </span>\n  </span>\n);\n\nexport { AgentIdentity };\n"
     }
   ]
 }

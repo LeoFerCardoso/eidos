@@ -3,7 +3,7 @@
   "name": "prompt-submit",
   "type": "registry:ui",
   "title": "Prompt Submit",
-  "description": "Forge Prompt Submit component.",
+  "description": "Eidos Prompt Submit component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

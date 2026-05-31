@@ -3,7 +3,7 @@
   "name": "code-tree",
   "type": "registry:ui",
   "title": "Code Tree",
-  "description": "Forge Code Tree component.",
+  "description": "Eidos Code Tree component.",
   "registryDependencies": [
     "forge",
     "copy-button",

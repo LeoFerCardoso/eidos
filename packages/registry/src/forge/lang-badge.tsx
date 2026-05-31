@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Chip } from '@/components/forge/chip';
 
-// Inlined Forge mock palette (LangBadge) — keeps this file self-contained.
+// Inlined Eidos mock palette (LangBadge) — keeps this file self-contained.
 const MOCKS = { LANGS: { TypeScript: '#3178C6', Go: '#00ADD8', Java: '#F89820', Python: '#FFD43B', Rust: '#CE422B' } } as { LANGS: Record<string, string> };
 
 const LangBadge = ({

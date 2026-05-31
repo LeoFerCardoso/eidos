@@ -3,7 +3,7 @@
   "name": "toaster",
   "type": "registry:ui",
   "title": "Toaster",
-  "description": "Forge Toaster component.",
+  "description": "Eidos Toaster component.",
   "registryDependencies": [
     "forge",
     "icons"

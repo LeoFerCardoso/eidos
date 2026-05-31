@@ -3,7 +3,7 @@
   "name": "trend",
   "type": "registry:ui",
   "title": "Trend",
-  "description": "Forge Trend component.",
+  "description": "Eidos Trend component.",
   "registryDependencies": [
     "forge"
   ],

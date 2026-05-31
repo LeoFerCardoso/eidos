@@ -3,7 +3,7 @@
   "name": "code",
   "type": "registry:ui",
   "title": "Code",
-  "description": "Forge Code component.",
+  "description": "Eidos Code component.",
   "registryDependencies": [
     "forge"
   ],

@@ -3,7 +3,7 @@
   "name": "select-native",
   "type": "registry:ui",
   "title": "Select Native",
-  "description": "Forge Select Native component.",
+  "description": "Eidos Select Native component.",
   "registryDependencies": [
     "forge",
     "native-select"

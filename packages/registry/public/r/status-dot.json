@@ -3,7 +3,7 @@
   "name": "status-dot",
   "type": "registry:ui",
   "title": "Status Dot",
-  "description": "Forge Status Dot component.",
+  "description": "Eidos Status Dot component.",
   "registryDependencies": [
     "forge"
   ],

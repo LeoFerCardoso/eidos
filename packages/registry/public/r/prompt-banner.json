@@ -3,7 +3,7 @@
   "name": "prompt-banner",
   "type": "registry:ui",
   "title": "Prompt Banner",
-  "description": "Forge Prompt Banner component.",
+  "description": "Eidos Prompt Banner component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

@@ -3,7 +3,7 @@
   "name": "terminal",
   "type": "registry:ui",
   "title": "Terminal",
-  "description": "Forge Terminal component.",
+  "description": "Eidos Terminal component.",
   "registryDependencies": [
     "forge",
     "forge-ai",

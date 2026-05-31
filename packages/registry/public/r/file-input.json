@@ -3,7 +3,7 @@
   "name": "file-input",
   "type": "registry:ui",
   "title": "File Input",
-  "description": "Forge File Input component.",
+  "description": "Eidos File Input component.",
   "registryDependencies": [
     "forge",
     "icons"

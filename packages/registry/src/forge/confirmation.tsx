@@ -26,7 +26,7 @@ const Confirmation = ({
 }) => (
   <div className="ai-confirm" data-state={state} data-tone={tone} role="group" aria-label={typeof title === 'string' ? title : 'Confirmation'}>
     <div className="ai-confirm-body">
-      <span className="ai-confirm-ico"><Icons.alert size={14}/></span>
+      <span className="ai-confirm-ico" aria-hidden="true"><Icons.alert size={14}/></span>
       <div className="ai-confirm-text">
         {title && <div className="ai-confirm-title">{title}</div>}
         {message && <div className="ai-confirm-msg">{message}</div>}
@@ -41,8 +41,8 @@ const Confirmation = ({
     ) : (
       <div className="ai-confirm-result" data-state={state}>
         {state === 'confirmed'
-          ? <><Icons.check size={12}/> {confirmLabel}</>
-          : <><Icons.x size={12}/> {cancelLabel}</>}
+          ? <><Icons.check size={12} aria-hidden="true"/> {confirmLabel}</>
+          : <><Icons.x size={12} aria-hidden="true"/> {cancelLabel}</>}
       </div>
     )}
   </div>

@@ -33,9 +33,9 @@ interface HistoryProps {
   onSelect?: (id: string) => void;
   /** Fired by the New Chat CTA. Should create a thread and route to it. */
   onNewChat?: () => void;
-  /** When provided, hover reveals a rename action; commit fires this callback. */
+  /** When provided, hover/focus reveals a rename action; commit fires this callback. */
   onRename?: (id: string, title: string) => void;
-  /** When provided, hover reveals a delete action. Soft-confirm in your toast layer — never block with a dialog. */
+  /** When provided, hover/focus reveals a delete action. Soft-confirm in your toast layer — never block with a dialog. */
   onDelete?: (id: string) => void;
   /** recency: Today / Yesterday / Previous 7 / Previous 30 / Older. project: groups by projectId, requires the projects prop. */
   groupBy?: 'recency' | 'project';
@@ -45,32 +45,57 @@ interface HistoryProps {
   fluid?: boolean;
   /** Shows the panel-toggle icon button at the top right. */
   showActions?: boolean;
+  /**
+   * Result count for the `aria-live="polite"` region announced under the
+   * search field. Pass the number of matching threads while a query is active.
+   */
+  resultCount?: number;
   /** HistoryGroup(s) + list wrapper slotted inside the rail. */
   children?: React.ReactNode;
 }
 
 const History = ({
   fluid = false,
-  activeId,
   query = '',
   showActions = true,
+  onSearch,
+  onNewChat,
+  resultCount,
   children,
-}: HistoryProps) => (
-  <div className={'ai-hist' + (fluid ? ' fluid' : '')}>
-    <div className="ai-hist-head">
-      <button className="ai-hist-new"><Icons.plus size={13}/> New chat</button>
-      {showActions && (
-        <button className="ai-hist-icon-btn" title="Open in panel">
-          <Icons.panelLeft size={14}/>
+}: HistoryProps) => {
+  const searchId = React.useId();
+  return (
+    <div className={'ai-hist' + (fluid ? ' fluid' : '')}>
+      <div className="ai-hist-head">
+        <button className="ai-hist-new" type="button" onClick={onNewChat}>
+          <Icons.plus size={13}/> New chat
         </button>
+        {showActions && (
+          <button className="ai-hist-icon-btn" type="button" title="Open in panel" aria-label="Open in panel">
+            <Icons.panelLeft size={14}/>
+          </button>
+        )}
+      </div>
+      <div className={'ai-hist-search' + (query ? ' is-active' : '')}>
+        <Icons.search size={13}/>
+        <label htmlFor={searchId} className="sr-only">Search conversation history</label>
+        <input
+          id={searchId}
+          type="search"
+          placeholder="Search history…"
+          value={query}
+          aria-label="Search conversation history"
+          onChange={e => onSearch?.(e.target.value)}
+        />
+      </div>
+      {query && typeof resultCount === 'number' && (
+        <span role="status" aria-live="polite" className="sr-only">
+          {resultCount === 1 ? '1 conversation' : `${resultCount} conversations`} match “{query}”
+        </span>
       )}
+      {children}
     </div>
-    <div className={'ai-hist-search' + (query ? ' is-active' : '')}>
-      <Icons.search size={13}/>
-      <input placeholder="Search history…" defaultValue={query} readOnly/>
-    </div>
-    {children}
-  </div>
-);
+  );
+};
 
 export { History };

@@ -3,7 +3,7 @@
   "name": "color-input",
   "type": "registry:ui",
   "title": "Color Input",
-  "description": "Forge Color Input component.",
+  "description": "Eidos Color Input component.",
   "registryDependencies": [
     "forge",
     "icons",

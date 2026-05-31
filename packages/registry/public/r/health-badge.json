@@ -3,7 +3,7 @@
   "name": "health-badge",
   "type": "registry:ui",
   "title": "Health Badge",
-  "description": "Forge Health Badge component.",
+  "description": "Eidos Health Badge component.",
   "registryDependencies": [
     "forge",
     "pill"

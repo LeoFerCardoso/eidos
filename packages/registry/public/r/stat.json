@@ -3,7 +3,7 @@
   "name": "stat",
   "type": "registry:ui",
   "title": "Stat",
-  "description": "Forge Stat component.",
+  "description": "Eidos Stat component.",
   "registryDependencies": [
     "forge",
     "trend"

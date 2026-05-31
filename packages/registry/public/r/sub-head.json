@@ -3,7 +3,7 @@
   "name": "sub-head",
   "type": "registry:ui",
   "title": "Sub Head",
-  "description": "Forge Sub Head component.",
+  "description": "Eidos Sub Head component.",
   "registryDependencies": [
     "forge"
   ],

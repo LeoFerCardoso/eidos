@@ -3,7 +3,7 @@
   "name": "table",
   "type": "registry:ui",
   "title": "Table",
-  "description": "Forge Table component.",
+  "description": "Eidos Table component.",
   "registryDependencies": [
     "forge"
   ],

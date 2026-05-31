@@ -3,7 +3,7 @@
   "name": "copy-button",
   "type": "registry:ui",
   "title": "Copy Button",
-  "description": "Forge Copy Button component.",
+  "description": "Eidos Copy Button component.",
   "registryDependencies": [
     "forge",
     "icons"

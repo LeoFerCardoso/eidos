@@ -5,7 +5,7 @@ import { PromptSubmit } from '@/components/forge/prompt-submit';
 
 const DropZone = ({
   onDrop,
-  modelValue = 'forge-sonnet-4-6',
+  modelValue = 'eidos-sonnet-4-6',
   onModelChange,
   children,
 }: {

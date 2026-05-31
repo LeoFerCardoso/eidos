@@ -3,7 +3,7 @@
   "name": "chip",
   "type": "registry:ui",
   "title": "Chip",
-  "description": "Forge Chip component.",
+  "description": "Eidos Chip component.",
   "registryDependencies": [
     "forge",
     "icons"

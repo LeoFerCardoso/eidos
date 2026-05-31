@@ -16,18 +16,18 @@ type TooltipPayloadItem = {
   stroke?: string;
 };
 
-type ForgeTooltipContentProps = {
+type EidosTooltipContentProps = {
   active?: boolean;
   payload?: TooltipPayloadItem[];
   label?: React.ReactNode;
   [key: string]: any;
 };
 
-const ForgeTooltipContent = (props: ForgeTooltipContentProps) => {
+const EidosTooltipContent = (props: EidosTooltipContentProps) => {
   if (!props.active || !props.payload || props.payload.length === 0) return null;
   const items = props.payload;
   return (
-    <div className="forge-tooltip">
+    <div className="eidos-tooltip">
       {props.label != null && <div className="ft-label">{props.label}</div>}
       <div className="ft-rows">
         {items.map((it, i) => (
@@ -42,4 +42,4 @@ const ForgeTooltipContent = (props: ForgeTooltipContentProps) => {
   );
 };
 
-export { ForgeTooltipContent };
+export { EidosTooltipContent };

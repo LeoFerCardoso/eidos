@@ -23,7 +23,7 @@ const Task = ({
 }) => (
   <div className="ai-task" data-status={status}>
     <div className="ai-task-head">
-      <span className="ai-task-mark">{taskMark(status)}</span>
+      <span className="ai-task-mark"><span aria-hidden="true">{taskMark(status)}</span><span className="sr-only">{status}</span></span>
       <span className="ai-task-title">{title}</span>
       {detail && <span className="ai-task-detail">{detail}</span>}
     </div>
@@ -31,7 +31,7 @@ const Task = ({
       <ul className="ai-task-subs">
         {items.map((s, i) => (
           <li key={i} className="ai-task-sub" data-status={s.status || 'pending'}>
-            <span className="ai-task-mark sm">{taskMark(s.status || 'pending')}</span>
+            <span className="ai-task-mark sm"><span aria-hidden="true">{taskMark(s.status || 'pending')}</span><span className="sr-only">{s.status || 'pending'}</span></span>
             <span>{s.title}</span>
           </li>
         ))}

@@ -3,7 +3,7 @@
   "name": "token-swatch",
   "type": "registry:ui",
   "title": "Token Swatch",
-  "description": "Forge Token Swatch component.",
+  "description": "Eidos Token Swatch component.",
   "registryDependencies": [
     "forge",
     "copy-button"

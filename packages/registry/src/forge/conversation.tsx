@@ -29,8 +29,19 @@ const Conversation = ({
         <span className="spacer"/>
       </div>
     )}
-    {/* .conv-body carries the scroll + the L/R padding that keeps avatars off the edges */}
-    <div className="conv-body">{children}</div>
+    {/* .conv-body carries the scroll + the inline padding that keeps avatars off the edges.
+        It is a focusable polite live-region log so screen readers announce new turns and
+        keyboard users can scroll the thread — matches the documented a11y contract. */}
+    <div
+      className="conv-body"
+      tabIndex={0}
+      role="log"
+      aria-live="polite"
+      aria-relevant="additions"
+      aria-label={title || 'Conversation'}
+    >
+      {children}
+    </div>
   </div>
 );
 

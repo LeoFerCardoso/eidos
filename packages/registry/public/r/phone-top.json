@@ -3,7 +3,7 @@
   "name": "phone-top",
   "type": "registry:ui",
   "title": "Phone Top",
-  "description": "Forge Phone Top component.",
+  "description": "Eidos Phone Top component.",
   "registryDependencies": [
     "forge",
     "status-bar"

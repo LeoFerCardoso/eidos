@@ -3,7 +3,7 @@
   "name": "notification",
   "type": "registry:ui",
   "title": "Notification",
-  "description": "Forge Notification component.",
+  "description": "Eidos Notification component.",
   "registryDependencies": [
     "forge",
     "icons"

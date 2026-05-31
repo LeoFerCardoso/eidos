@@ -63,19 +63,36 @@ interface OTPInputProps {
   className?: string;
 }
 
-function OTPInput({ layout, length = 6, groupEvery = 0, value, defaultValue = '', onValueChange, onChange, onComplete, invalid = false, disabled = false, size = 'md', id, ariaLabel = 'One-time code', autoFocus = false, className }: OTPInputProps) {
+function deriveGroupsFromLength(length: number, every: number): number[] {
+  if (every <= 0) return [length];
+  const groups: number[] = [];
+  let left = length;
+  while (left > 0) { groups.push(Math.min(every, left)); left -= every; }
+  return groups.length ? groups : [length];
+}
+
+function OTPInput({ layout, length = 6, groupEvery = 0, value, defaultValue = '', onValueChange, onChange, onComplete, invalid = false, disabled = false, size = 'md', id, ariaLabel = 'One-time code', autoFocus = false, className = '' }: OTPInputProps) {
   const reactId = React.useId();
   const gid = id || reactId;
   const refs = React.useRef<(HTMLInputElement | null)[]>([]);
-  // `layout` (group sizes) takes precedence over `length` + `groupEvery`.
-  const groups = layout && layout.length ? layout : undefined;
-  const total = groups ? groups.reduce((a, b) => a + b, 0) : length;
   const [internal, setInternal] = React.useState(defaultValue);
   const isControlled = value !== undefined;
   const val = (isControlled ? value : internal) || '';
+
+  // Groups drive both the total cell count and where separators sit.
+  // `layout` wins when provided; otherwise fall back to length + groupEvery.
+  const groups = layout ?? (groupEvery > 0 ? deriveGroupsFromLength(length, groupEvery) : [length]);
+  const total = groups.reduce((a, b) => a + b, 0);
+  // Cell index → true when a separator should precede this cell (group boundary).
+  const sepBefore = React.useMemo(() => {
+    const set = new Set<number>();
+    let acc = 0;
+    for (let g = 0; g < groups.length - 1; g++) { acc += groups[g]; set.add(acc); }
+    return set;
+  }, [groups]);
+
   const cells = Array.from({ length: total }, (_, i) => val[i] || '');
 
-  // Focus the first cell on mount when requested.
   React.useEffect(() => {
     if (autoFocus) refs.current[0]?.focus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,7 +102,7 @@ function OTPInput({ layout, length = 6, groupEvery = 0, value, defaultValue = ''
     if (!isControlled) setInternal(next);
     onValueChange?.(next);
     onChange?.(next);
-    if (next.length === total) onComplete?.(next);
+    if (next.length === total && [...next].every(Boolean)) onComplete?.(next);
   };
   const setAt = (i: number, ch: string) => {
     const arr = cells.slice();
@@ -107,25 +124,11 @@ function OTPInput({ layout, length = 6, groupEvery = 0, value, defaultValue = ''
     refs.current[Math.min(i + digits.length, total - 1)]?.focus();
   };
 
-  // Decide where separators land: between explicit `layout` groups, else every `groupEvery` cells.
-  const isSeparatorBefore = (i: number) => {
-    if (i === 0) return false;
-    if (groups) {
-      let acc = 0;
-      for (let g = 0; g < groups.length - 1; g++) {
-        acc += groups[g];
-        if (i === acc) return true;
-      }
-      return false;
-    }
-    return groupEvery > 0 && i % groupEvery === 0;
-  };
-
   return (
     <div className={`in-otp ${size}${className ? ` ${className}` : ''}`} role="group" aria-label={ariaLabel} id={gid}>
       {cells.map((c, i) => (
         <React.Fragment key={i}>
-          {isSeparatorBefore(i) && <span className="in-otp-sep" aria-hidden="true">–</span>}
+          {sepBefore.has(i) && <span className="in-otp-sep" aria-hidden="true">–</span>}
           <input
             ref={(el) => { refs.current[i] = el; }}
             className={`in-otp-cell${invalid ? ' is-invalid' : ''}`}

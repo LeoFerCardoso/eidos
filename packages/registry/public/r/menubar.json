@@ -3,7 +3,7 @@
   "name": "menubar",
   "type": "registry:ui",
   "title": "Menubar",
-  "description": "Forge Menubar component.",
+  "description": "Eidos Menubar component.",
   "registryDependencies": [
     "forge"
   ],

@@ -3,7 +3,7 @@
   "name": "math-view",
   "type": "registry:ui",
   "title": "Math View",
-  "description": "Forge Math View component.",
+  "description": "Eidos Math View component.",
   "registryDependencies": [
     "forge",
     "forge-ai"

@@ -3,7 +3,7 @@
   "name": "command",
   "type": "registry:ui",
   "title": "Command",
-  "description": "Forge Command component.",
+  "description": "Eidos Command component.",
   "registryDependencies": [
     "forge",
     "icons"

@@ -3,7 +3,7 @@
   "name": "calendar-props",
   "type": "registry:ui",
   "title": "Calendar Props",
-  "description": "Forge Calendar Props component.",
+  "description": "Eidos Calendar Props component.",
   "registryDependencies": [
     "forge",
     "date-range"
