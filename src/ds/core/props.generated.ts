@@ -210,7 +210,7 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
     {
       "prop": "children",
       "type": "React.ReactNode",
-      "description": "Rendered result. Use Eidos primitives — Table, Code, plain prose, error card."
+      "description": "Rendered result. Use Forge primitives — Table, Code, plain prose, error card."
     },
     {
       "prop": "meta",
@@ -1205,7 +1205,7 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
     {
       "prop": "botAvatar",
       "type": "{ initials?: string; name?: string }",
-      "default": "{ initials: 'F', name: 'Eidos AI' }",
+      "default": "{ initials: 'F', name: 'Forge AI' }",
       "description": "Person object passed to the underlying Avatar atom when avatar is true."
     },
     {
@@ -1302,7 +1302,7 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
       "prop": "models",
       "type": "ModelOption[]",
       "default": "DEFAULT_MODELS",
-      "description": "Optional array of model definitions. Defaults to three Eidos-hosted models (Sonnet, Opus, Haiku)."
+      "description": "Optional array of model definitions. Defaults to three Forge-hosted models (Sonnet, Opus, Haiku)."
     }
   ],
   "FakeImage": [
@@ -7778,7 +7778,7 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
       "prop": "models",
       "type": "ModelOption[]",
       "default": "DEFAULT_MODELS",
-      "description": "Optional array of model definitions. Defaults to three Eidos-hosted models (Sonnet, Opus, Haiku)."
+      "description": "Optional array of model definitions. Defaults to three Forge-hosted models (Sonnet, Opus, Haiku)."
     }
   ],
   "SourcesPanel": [

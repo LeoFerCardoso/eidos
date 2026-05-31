@@ -6,7 +6,7 @@
 //
 //   node scripts/check-contract.mjs [--json]
 //
-// Exit 0 when valid; 1 otherwise. Exports run() for forge-verify aggregation.
+// Exit 0 when valid; 1 otherwise. Exports run() for eidos-verify aggregation.
 import { readFileSync } from 'node:fs';
 import {
   ROOT, abs, CONTRACT_PATH, SCHEMA_PATH, dsVersion, resolveVerifier,

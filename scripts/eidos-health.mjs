@@ -3,7 +3,7 @@
 //
 //   node scripts/eidos-health.mjs   # re-render from the committed state.json
 //
-// Also exports renderHealth(state, contract) so forge-verify regenerates it inline.
+// Also exports renderHealth(state, contract) so eidos-verify regenerates it inline.
 import { readFileSync } from 'node:fs';
 import { abs, STATE_PATH, loadContract } from './eidos-lib.mjs';
 

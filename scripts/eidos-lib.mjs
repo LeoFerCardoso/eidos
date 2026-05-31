@@ -3,7 +3,7 @@
 // One place defines: where the contract lives, the registry of known verifiers,
 // the surface-resolution helpers, and the slug normaliser that joins a component
 // across its FOUR surfaces (docs page · @eidos/ui export · Storybook story ·
-// registry item). forge-verify / forge-gen / forge-health / check-contract all
+// registry item). eidos-verify / eidos-gen / eidos-health / check-contract all
 // import from here so the bar can never drift between tools.
 //
 // Zero runtime dependencies (node builtins only), matching packages/cli.
@@ -83,7 +83,7 @@ export function walk(dirRel, filter = () => true, out = []) {
 //   - 'script'  : a node script under scripts/ exporting `run({ components, contract })`
 //   - 'ext'     : an npm workspace script; shelled out, exit code = pass/fail (repo-level)
 //   - 'self'    : check-contract (runs first, separately)
-// `ready:false` → not yet implemented; forge-verify reports its clauses as `skip`
+// `ready:false` → not yet implemented; eidos-verify reports its clauses as `skip`
 // (never blocks) and check-contract still treats the id as resolved. Flip to true
 // as each verifier lands. This is the honest path from spine → full coverage.
 export const VERIFIERS = {

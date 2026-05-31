@@ -2,7 +2,7 @@
 // binds, verify all four surfaces resolve on disk: docs page · @eidos/ui export ·
 // Storybook story · registry item. A component that exists on only 1–2 surfaces is
 // broken — the registry/CLI promise is "install any component, component-by-component".
-// Backs clause C-export. Honors waivers via forge-verify.
+// Backs clause C-export. Honors waivers via eidos-verify.
 //
 //   node scripts/check-4-surface-parity.mjs [--json] [--strict]
 import { existsSync } from 'node:fs';
