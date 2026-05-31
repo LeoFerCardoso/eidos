@@ -780,7 +780,7 @@ a { color: inherit; text-decoration: none; }
   background: var(--surface);
 }
 .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.pill.ember { color: var(--ember-text); border-color: rgba(255,107,53,0.3); background: var(--ember-soft); }
+.pill.ember { color: var(--ember-text); border-color: color-mix(in srgb, var(--ember) 30%, transparent); background: var(--ember-soft); }
 .pill.ice { color: var(--ice); border-color: rgba(125,211,252,0.3); background: var(--ice-soft); }
 .pill.success { color: var(--success); border-color: rgba(52,211,153,0.3); background: var(--success-soft); }
 .pill.warning { color: var(--warning); border-color: rgba(251,191,36,0.3); background: var(--warning-soft); }
@@ -894,7 +894,7 @@ a { color: inherit; text-decoration: none; }
 .chip.tier-t1 {
   color: var(--ember-text);
   background: var(--ember-soft);
-  border-color: rgba(255,107,53,0.35);
+  border-color: color-mix(in srgb, var(--ember) 35%, transparent);
 }
 .chip.tier-t2 {
   color: var(--warning);
@@ -1093,8 +1093,8 @@ a { color: inherit; text-decoration: none; }
 /* Animations */
 @keyframes fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes ember-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,53,0.5); }
-  50% { box-shadow: 0 0 0 6px rgba(255,107,53,0); }
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ember) 50%, transparent); }
+  50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--ember) 0%, transparent); }
 }
 @keyframes spark-trail {
   0% { transform: translate(0,0); opacity: 0; }
@@ -1186,7 +1186,7 @@ a { color: inherit; text-decoration: none; }
 .chip.ok { color: var(--success); background: var(--success-soft); border-color: rgba(52,211,153,0.2); }
 .chip.warn { color: var(--warning); background: var(--warning-soft); border-color: rgba(251,191,36,0.2); }
 .chip.bad { color: var(--danger); background: var(--danger-soft); border-color: rgba(248,113,113,0.2); }
-.chip.ember { color: var(--ember-text); background: var(--ember-soft); border-color: rgba(255,107,53,0.25); }
+.chip.ember { color: var(--ember-text); background: var(--ember-soft); border-color: color-mix(in srgb, var(--ember) 25%, transparent); }
 .chip.ice { color: var(--ice); background: var(--ice-soft); border-color: rgba(125,211,252,0.25); }
 /* Borderless variant — no background/border chrome; the content (leading dot, text)
    is the only affordance. Use for dense contexts where the chip border would add noise.
@@ -1213,7 +1213,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--ember);
   background-color: var(--bg-elevated);
   background-image: linear-gradient(var(--ember-soft), var(--ember-soft));
-  border-color: rgba(255,107,53,0.25);
+  border-color: color-mix(in srgb, var(--ember) 25%, transparent);
 }
 /* Image / decorative children: clip to the circle without losing overflow on the wrapper */
 .avatar > img,
@@ -1327,7 +1327,7 @@ a { color: inherit; text-decoration: none; }
 /* Subtle glow */
 .ember-glow-bg {
   position: absolute; pointer-events: none;
-  background: radial-gradient(ellipse at center, rgba(255,107,53,0.18) 0%, transparent 60%);
+  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--ember) 18%, transparent) 0%, transparent 60%);
   filter: blur(20px);
 }
 
@@ -2221,7 +2221,7 @@ select.in-control::-ms-expand { display: none; }
 }
 .in-drop.is-dragging {
   border-color: var(--ember);
-  background: rgba(255,107,53,0.06);
+  background: color-mix(in srgb, var(--ember) 6%, transparent);
 }
 .in-drop.is-invalid { border-color: var(--danger); background: rgba(248,113,113,0.04); }
 .in-drop.compact { padding: 14px 18px; flex-direction: row; gap: 14px; text-align: start; }
@@ -2565,7 +2565,7 @@ select.in-control::-ms-expand { display: none; }
 .cb-chip {
   display: inline-flex; align-items: center; gap: 6px; max-width: 100%;
   padding: 2px 4px 2px 8px;
-  background: var(--ember-soft); border: 1px solid rgba(255,107,53,0.30);
+  background: var(--ember-soft); border: 1px solid color-mix(in srgb, var(--ember) 30%, transparent);
   border-radius: 4px; color: var(--ember-text); font-size: 12px; line-height: 1;
 }
 .cb-chip .label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
@@ -2575,7 +2575,7 @@ select.in-control::-ms-expand { display: none; }
   border: none; background: transparent; color: var(--ember-text);
   border-radius: 3px; cursor: pointer; padding: 0;
 }
-.cb-chip .x:hover { background: rgba(255,107,53,0.15); }
+.cb-chip .x:hover { background: color-mix(in srgb, var(--ember) 15%, transparent); }
 
 /* panel — fixed positioning so it escapes parent overflow:hidden (e.g. .ds-frame) */
 .cb-panel {
