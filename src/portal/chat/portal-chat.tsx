@@ -971,7 +971,15 @@ const ArtifactPreview = ({ a }: { a: ArtifactItem }) => {
 
 const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => {
   const [sel, setSel] = React.useState<ArtifactItem | null>(null);
+  const [mode, setMode] = React.useState<'grid' | 'list'>('grid');
+  const [q, setQ] = React.useState('');
   const kind = sel ? ART_KIND[sel.kind] : null;
+
+  const items = ARTIFACTS.filter((a) => {
+    const s = q.trim().toLowerCase();
+    if (!s) return true;
+    return a.title.toLowerCase().includes(s) || ART_KIND[a.kind].label.toLowerCase().includes(s) || a.meta.toLowerCase().includes(s);
+  });
 
   return (
     <div className="fp-chat-pane fp-chat-artifacts">
@@ -981,37 +989,79 @@ const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => 
         <p className="lede">Everything Forge AI built for you — diagrams, docs, pages, apps, code and datasets. Open one to preview it and jump back to the chat that made it.</p>
       </header>
 
-      <div className="fp-chat-art-grid">
-        {ARTIFACTS.map((a) => {
-          const k = ART_KIND[a.kind];
-          const I = ICON(k.icon);
-          return (
-            <Card
-              key={a.id}
-              variant="elevated"
-              interactive
-              compact
-              role="button"
-              tabIndex={0}
-              className="fp-chat-art-card"
-              aria-label={`${a.title} — ${k.label}`}
-              onClick={() => setSel(a)}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSel(a); } }}
-            >
-              <CardMedia alt={`${k.label} artifact`} className="fp-chat-art-media" style={{ background: k.bg, color: k.fg }}>
-                <I size={26} />
-              </CardMedia>
-              <CardHeader>
-                <CardTitle as="h3">{a.title}</CardTitle>
-              </CardHeader>
-              <CardFooter>
-                <Pill tone="neutral" icon={<I size={11} />}>{k.label}</Pill>
-                <span className="fp-chat-art-meta">{a.meta} · {a.created}</span>
-              </CardFooter>
-            </Card>
-          );
-        })}
+      {/* Toolbar — search (leading) · grid/list toggle (trailing). */}
+      <div className="fp-chat-art-toolbar">
+        <div className="in-group fp-chat-art-search">
+          <span className="in-addon"><Icons.search size={13} /></span>
+          <input className="in-control" type="search" placeholder="Search artifacts…" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search artifacts" />
+        </div>
+        <div className="fp-chat-art-toggle" role="group" aria-label="View mode">
+          <button type="button" className={'fp-chat-art-toggle-btn' + (mode === 'grid' ? ' is-active' : '')} aria-pressed={mode === 'grid'} onClick={() => setMode('grid')} title="Grid view" aria-label="Grid view">
+            <Icons.grid size={14} />
+          </button>
+          <button type="button" className={'fp-chat-art-toggle-btn' + (mode === 'list' ? ' is-active' : '')} aria-pressed={mode === 'list'} onClick={() => setMode('list')} title="List view" aria-label="List view">
+            <Icons.list size={14} />
+          </button>
+        </div>
       </div>
+
+      {items.length === 0 ? (
+        <div className="fp-chat-pane-empty">
+          <Icons.grid size={26} />
+          <p>No artifacts match &ldquo;{q.trim()}&rdquo;.</p>
+        </div>
+      ) : mode === 'grid' ? (
+        <div className="fp-chat-art-grid">
+          {items.map((a) => {
+            const k = ART_KIND[a.kind];
+            const I = ICON(k.icon);
+            return (
+              <Card
+                key={a.id}
+                variant="elevated"
+                interactive
+                compact
+                role="button"
+                tabIndex={0}
+                className="fp-chat-art-card"
+                aria-label={`${a.title} — ${k.label}`}
+                onClick={() => setSel(a)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSel(a); } }}
+              >
+                <CardMedia alt={`${k.label} artifact`} className="fp-chat-art-media" style={{ background: k.bg, color: k.fg }}>
+                  <I size={26} />
+                </CardMedia>
+                <CardHeader>
+                  <CardTitle as="h3">{a.title}</CardTitle>
+                </CardHeader>
+                <CardFooter>
+                  <Pill tone="neutral" icon={<I size={11} />}>{k.label}</Pill>
+                  <span className="fp-chat-art-meta">{a.meta} · {a.created}</span>
+                </CardFooter>
+              </Card>
+            );
+          })}
+        </div>
+      ) : (
+        <ul className="fp-chat-art-list">
+          {items.map((a) => {
+            const k = ART_KIND[a.kind];
+            const I = ICON(k.icon);
+            return (
+              <li key={a.id} className="fp-chat-art-row">
+                <button type="button" className="fp-chat-art-row-btn" onClick={() => setSel(a)} aria-label={`${a.title} — ${k.label}`}>
+                  <span className="fp-chat-art-row-ico" style={{ background: k.bg, color: k.fg }} aria-hidden="true"><I size={15} /></span>
+                  <span className="fp-chat-art-row-body">
+                    <span className="title">{a.title}</span>
+                    <span className="sub">{k.label} · {a.meta}</span>
+                  </span>
+                  <span className="fp-chat-art-row-when">{a.created}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
 
       <Modal
         open={!!sel}
