@@ -10,9 +10,10 @@
 import * as React from 'react';
 import Link from 'next/link';
 import {
-  HealthBadge, Icons, Pill,
+  Icons, Pill,
   ForgeMark, Message, PromptInput, Suggestion,
 } from '@/ds/core';
+import { RootCauseWidget } from './forge-ai-widgets';
 
 const STARTERS: { icon: string; label: string }[] = [
   { icon: 'gauge',    label: 'Why is acerta-api degraded?' },
@@ -36,14 +37,21 @@ function answer(qRaw: string): React.ReactNode {
           <code className="mono">acerta-api</code> p99 is up <strong>41%</strong> since the{' '}
           <code className="mono">v4.12.0</code> deploy (2h ago). I correlated it with its dependencies:
         </p>
-        <div className="surface" style={{ padding: 12, borderRadius: 8, marginBlockEnd: 10 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 'var(--text-sm)' }}>
-            <code className="mono" style={{ fontWeight: 600 }}>konduto-antifraud</code>
-            <HealthBadge state="degraded" pulse />
-            <span style={{ color: 'var(--fg-muted)' }}>false-positive +18% since v3.1.7</span>
-          </div>
-        </div>
-        <p style={{ margin: '0 0 12px' }}>
+        <RootCauseWidget
+          nodes={[
+            {
+              name: 'acerta-api', icon: 'server', health: 'degraded',
+              metric: { label: 'p99 240ms', delta: 41, inverted: true },
+              version: 'v4.12.0', age: '2h ago',
+            },
+            {
+              name: 'konduto-antifraud', icon: 'shield', health: 'degraded', root: true,
+              metric: { label: 'false-positive', delta: 18, inverted: true },
+              version: 'v3.1.7', age: '1d ago',
+            },
+          ]}
+        />
+        <p style={{ margin: '12px 0 12px' }}>
           Likely cause: the new fraud-score rule in <code className="mono">konduto-antifraud v3.1.7</code> is adding
           latency and rejections upstream. <strong>Recommended:</strong> roll back konduto-antifraud to{' '}
           <code className="mono">v3.1.6</code>, or gate the rule behind a flag.

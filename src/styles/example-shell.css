@@ -1112,3 +1112,57 @@ body:active::-webkit-scrollbar-thumb,
 }
 .fp-ai-empty-suggests .sg { inline-size: 100%; justify-content: flex-start; }
 .fp-ai-followups { display: flex; flex-wrap: wrap; gap: 6px; margin-block-start: 2px; }
+
+/* ---- Forge AI conversation widgets (forge-ai-widgets.tsx) --------------------- */
+/* Root-cause / dependency-correlation widget: one bordered surface holding a
+   linked chain of service-health nodes. Flat, square atoms; ember only on the
+   header glyph + the suspected-cause node. */
+.fp-aiw {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  overflow: hidden;
+  margin-block: 6px 4px;
+}
+.fp-aiw-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.fp-aiw-ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  inline-size: 22px; block-size: 22px; flex-shrink: 0;
+  border-radius: 6px;
+  background: var(--ember-soft);
+  color: var(--ember-text);
+}
+.fp-aiw-title { font-size: var(--text-sm); font-weight: 600; color: var(--fg); letter-spacing: -0.005em; }
+
+.fp-aiw-chain { padding: 8px 12px; }
+.fp-aiw-node { padding-block: 6px; }
+.fp-aiw-node.is-root {
+  background: var(--ember-soft);
+  border-radius: 6px;
+  margin-inline: -8px;
+  padding-inline: 8px;
+}
+.fp-aiw-node-head { display: flex; align-items: center; gap: 8px; }
+.fp-aiw-node-ic { display: inline-flex; color: var(--fg-muted); flex-shrink: 0; }
+.fp-aiw-node.is-root .fp-aiw-node-ic { color: var(--ember-text); }
+.fp-aiw-name { font-size: var(--text-sm); font-weight: 600; color: var(--fg); }
+.fp-aiw-node-head > :last-child { margin-inline-start: auto; }   /* push the HealthBadge to the edge */
+.fp-aiw-node-meta {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+  margin-block-start: 3px; padding-inline-start: 22px;           /* align under the name, past the icon */
+  font-size: var(--text-xs); color: var(--fg-muted);
+}
+.fp-aiw-metric { font-weight: 500; color: var(--fg); }
+.fp-aiw-node.is-root .fp-aiw-metric { color: var(--fg); }
+.fp-aiw-sep { color: var(--fg-faint); }
+.fp-aiw-link {
+  display: flex; align-items: center; gap: 5px;
+  padding: 6px 0 6px 4px;
+  font-family: var(--font-mono); font-size: 10.5px;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--fg-faint);
+}
