@@ -214,9 +214,7 @@ export function ForgeAIChat() {
             { id: 'search',  icon: 'search',    label: 'Search the catalog',  description: 'Services, deploys, runbooks' },
             { id: 'tool',    icon: 'terminal',  label: 'Run a tool',          description: 'Pick a tool for the agent to call' },
           ]}
-          footerHint={
-            <>Demo mode. Wire to the live model by setting <code className="mono">VERCEL_AI_GATEWAY_API_KEY</code>.</>
-          }
+          footerHint="Grounded in your live catalog. Verify before you act on production."
         />
       </div>
     </div>
