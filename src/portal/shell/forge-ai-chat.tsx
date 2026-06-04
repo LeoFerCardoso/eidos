@@ -13,7 +13,16 @@ import {
   Icons, Pill,
   ForgeMark, Message, PromptInput, Suggestion, SuggestionCard,
 } from '@/ds/core';
-import { RootCauseWidget } from './forge-ai-widgets';
+import { RootCauseWidget, UserMention } from './forge-ai-widgets';
+
+const COMMANDER = {
+  name: 'Bruno Mendes',
+  role: 'Staff SRE',
+  tribe: 'Score & Risk',
+  status: 'busy' as const,
+  presence: 'On-call now · paged 6h ago',
+  href: '/portal',
+};
 
 const STARTERS: { icon: string; title: string; line: string }[] = [
   { icon: 'gauge',    title: 'Why is acerta-api degraded?', line: 'Correlate the p99 spike with its dependencies.' },
@@ -75,7 +84,8 @@ function answer(qRaw: string): React.ReactNode {
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBlockEnd: 10 }}>
           <Pill tone="severity-p2">P2</Pill>
           <span style={{ fontSize: 'var(--text-sm)' }}>
-            <strong>INC-2041</strong> · p95 spike after konduto-antifraud v3.1.7, opened 6h ago, commander Bruno Mendes.
+            <strong>INC-2041</strong> · p95 spike after konduto-antifraud v3.1.7, opened 6h ago, commander{' '}
+            <UserMention person={COMMANDER} />.
           </span>
         </div>
         <Link className="btn ghost sm" href="/portal/catalog/acerta-api">
