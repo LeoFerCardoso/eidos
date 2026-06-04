@@ -135,6 +135,13 @@ export default function CatalogPage() {
             onChange={(e) => setQuery(e.target.value)}
             aria-label="Filter services"
           />
+          {query ? (
+            <button type="button" className="in-addon btn" onClick={() => setQuery('')} aria-label="Clear search">
+              <Icons.x size={13} />
+            </button>
+          ) : (
+            <span className="in-addon" style={{ paddingInline: 10 }}><span className="kbd">⌘K</span></span>
+          )}
         </div>
 
         {/* Tribe filter — DS Select */}

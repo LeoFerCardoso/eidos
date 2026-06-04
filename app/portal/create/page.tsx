@@ -291,6 +291,13 @@ function Gallery({ onUse }: { onUse: (id: string) => void }) {
         <div className="in-group" style={{ flex: 1, minWidth: 280, maxWidth: 460 }}>
           <span className="in-addon icon"><Icons.search size={13} /></span>
           <input className="in-control" placeholder="Filter by name, framework, language" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Filter templates" />
+          {query ? (
+            <button type="button" className="in-addon btn" onClick={() => setQuery('')} aria-label="Clear search">
+              <Icons.x size={13} />
+            </button>
+          ) : (
+            <span className="in-addon" style={{ paddingInline: 10 }}><span className="kbd">⌘K</span></span>
+          )}
         </div>
         <span className="fp-filter-select">
           <Select value={lang} onValueChange={setLang} options={langOptions} />
