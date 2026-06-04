@@ -110,32 +110,36 @@ const ICON = (key: string): React.FC<{ size?: number }> =>
 // with a leading .in-addon.icon magnifier and a trailing affordance that swaps
 // between the keyboard-shortcut hint (empty) and a clear-✕ button (typed).
 const ChatSearch = ({
-  value, onChange, placeholder, shortcut = '⌘K', className,
+  value, onChange, placeholder, shortcut = '⌘K', className, size = 'md',
 }: {
   value: string;
   onChange: (v: string) => void;
   placeholder: string;
   shortcut?: string;
   className?: string;
-}) => (
-  <div className={'in-group' + (className ? ` ${className}` : '')}>
-    <span className="in-addon icon"><Icons.search size={14} /></span>
-    <input
-      className="in-control"
-      placeholder={placeholder}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      aria-label={placeholder}
-    />
-    {value ? (
-      <button type="button" className="in-addon btn" onClick={() => onChange('')} aria-label="Clear search">
-        <Icons.x size={14} />
-      </button>
-    ) : (
-      <span className="in-addon" style={{ paddingInline: 10 }}><span className="kbd">{shortcut}</span></span>
-    )}
-  </div>
-);
+  size?: 'md' | 'lg';
+}) => {
+  const lg = size === 'lg';
+  return (
+    <div className={'in-group' + (lg ? ' fp-search-hero' : '') + (className ? ` ${className}` : '')}>
+      <span className="in-addon icon"><Icons.search size={lg ? 16 : 14} /></span>
+      <input
+        className="in-control"
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        aria-label={placeholder}
+      />
+      {value ? (
+        <button type="button" className="in-addon btn" onClick={() => onChange('')} aria-label="Clear search">
+          <Icons.x size={lg ? 15 : 14} />
+        </button>
+      ) : (
+        <span className="in-addon" style={{ paddingInline: 10 }}><span className="kbd">{shortcut}</span></span>
+      )}
+    </div>
+  );
+};
 
 // ── Sub-sidebar ─────────────────────────────────────────────────────────────
 const SideRow = ({
@@ -573,17 +577,8 @@ const SearchView = ({ onOpen }: { onOpen: (id: string) => void }) => {
         <p className="lede">Find an answer the assistant already gave, or jump back into a thread. Searches across every chat across every project.</p>
       </header>
 
-      <div className="fp-chat-search-field">
-        <span className="ic"><Icons.search size={16} /></span>
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search chats, messages, citations…" aria-label="Search chats" />
-        {/* Trailing slot swaps the ⌘K shortcut hint for a clear-✕ once typed,
-            in the same spot (DS search affordance). */}
-        {q ? (
-          <button type="button" className="clear" onClick={() => setQ('')} aria-label="Clear search"><Icons.x size={14} /></button>
-        ) : (
-          <span className="kbd">⌘K</span>
-        )}
-      </div>
+      {/* Same DS search component as everywhere else, just the large (hero) size. */}
+      <ChatSearch size="lg" value={q} onChange={setQ} placeholder="Search chats, messages, citations…" />
 
       <div className="fp-chat-search-recent">
         <span className="fp-chat-search-recent-label">Recent</span>

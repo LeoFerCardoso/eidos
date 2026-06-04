@@ -1487,30 +1487,15 @@ body:active::-webkit-scrollbar-thumb,
 }
 .fp-chat-search-head h1 { font-size: 24px; font-weight: 600; color: var(--fg); letter-spacing: -0.015em; margin: 6px 0; }
 .fp-chat-search-head .lede { font-size: 13.5px; line-height: 1.55; color: var(--fg-muted); margin: 0; max-inline-size: 64ch; }
-.fp-chat-search-field {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 12px;
-  background: var(--surface); border: 1px solid var(--border-strong);
-  border-radius: var(--radius-xl); margin-block-end: 14px;
+/* Hero search — the DS .in-group search at a large size for the dedicated Search
+   screen. Same component (magnifier · ⌘K hint / clear-✕ · DS .kbd) as the toolbar
+   searches, just scaled up — so the kbd chrome is identical everywhere. */
+.in-group.fp-search-hero {
+  inline-size: 100%; min-block-size: 48px;
+  border-radius: var(--radius-xl);
+  margin-block-end: 14px;
 }
-.fp-chat-search-field:focus-within { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
-/* inline-flex so the SVG centres in its box instead of riding the text baseline
-   (which pushed the magnifier slightly above the input's vertical centre). */
-.fp-chat-search-field .ic { display: inline-flex; align-items: center; color: var(--fg-subtle); flex: 0 0 auto; }
-.fp-chat-search-field input { flex: 1 1 auto; background: transparent; border: 0; outline: none; color: var(--fg); font: 400 15px/1.4 var(--font-sans); }
-.fp-chat-search-field input::placeholder { color: var(--fg-faint); }
-.fp-chat-search-field input::-webkit-search-cancel-button,
-.fp-chat-search-field input::-webkit-search-decoration { -webkit-appearance: none; appearance: none; display: none; }
-.fp-chat-search-field .clear {
-  background: transparent; border: 0; inline-size: 22px; block-size: 22px;
-  display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 4px; color: var(--fg-subtle); cursor: pointer;
-}
-.fp-chat-search-field .clear:hover { background: var(--surface-hover); color: var(--fg); }
-.fp-chat-search-field .kbd {
-  font-family: var(--font-mono); font-size: 10px; color: var(--fg-faint);
-  padding: 2px 6px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 4px;
-}
+.in-group.fp-search-hero .in-control { font-size: 15px; line-height: 24px; padding: 11px 12px; }
 .fp-chat-search-recent { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-block-end: 18px; }
 .fp-chat-search-recent-label {
   font-family: var(--font-mono); font-size: 10.5px;
