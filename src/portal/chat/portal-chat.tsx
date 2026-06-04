@@ -575,9 +575,14 @@ const SearchView = ({ onOpen }: { onOpen: (id: string) => void }) => {
 
       <div className="fp-chat-search-field">
         <span className="ic"><Icons.search size={16} /></span>
-        <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search chats, messages, citations…" aria-label="Search chats" />
-        {q && <button type="button" className="clear" onClick={() => setQ('')} aria-label="Clear search"><Icons.x size={12} /></button>}
-        <span className="kbd">esc</span>
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search chats, messages, citations…" aria-label="Search chats" />
+        {/* Trailing slot swaps the ⌘K shortcut hint for a clear-✕ once typed,
+            in the same spot (DS search affordance). */}
+        {q ? (
+          <button type="button" className="clear" onClick={() => setQ('')} aria-label="Clear search"><Icons.x size={14} /></button>
+        ) : (
+          <span className="kbd">⌘K</span>
+        )}
       </div>
 
       <div className="fp-chat-search-recent">
@@ -930,7 +935,13 @@ const ProjectDetailView = ({ projectId, onBack, onOpenChat }: { projectId: strin
 const ArchiveView = ({ onOpen }: { onOpen: (id: string) => void }) => {
   // Restoring un-archives a chat (rollback) — it leaves the archive list.
   const [restored, setRestored] = React.useState<Set<string>>(new Set());
-  const rows = ARCHIVED.filter((c) => !restored.has(c.id));
+  const [q, setQ] = React.useState('');
+  const all = ARCHIVED.filter((c) => !restored.has(c.id));
+  const rows = all.filter((c) => {
+    const s = q.trim().toLowerCase();
+    if (!s) return true;
+    return c.title.toLowerCase().includes(s) || c.preview.toLowerCase().includes(s);
+  });
 
   return (
     <div className="fp-chat-pane fp-chat-archive">
@@ -940,11 +951,22 @@ const ArchiveView = ({ onOpen }: { onOpen: (id: string) => void }) => {
         <p className="lede">Conversations you&apos;ve put away. Restore one to roll it back into your active Chats list.</p>
       </header>
 
-      {rows.length === 0 ? (
+      {all.length > 0 && (
+        <div className="fp-chat-arc-toolbar">
+          <ChatSearch value={q} onChange={setQ} placeholder="Search archived chats…" className="fp-chat-arc-search" />
+        </div>
+      )}
+
+      {all.length === 0 ? (
         <div className="fp-chat-pane-empty">
           <Icons.inbox size={26} />
           <p>No archived chats.</p>
           <p className="hint">Chats you archive will collect here.</p>
+        </div>
+      ) : rows.length === 0 ? (
+        <div className="fp-chat-pane-empty">
+          <Icons.inbox size={26} />
+          <p>No archived chats match &ldquo;{q.trim()}&rdquo;.</p>
         </div>
       ) : (
         <ul className="fp-chat-arc-list">

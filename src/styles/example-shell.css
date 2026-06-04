@@ -1796,6 +1796,9 @@ body:active::-webkit-scrollbar-thumb,
 .fp-chat-pane-empty p { margin: 0; }
 .fp-chat-pane-empty .hint { font-size: 12px; }
 
+/* Archive toolbar — the DS search field above the list. */
+.fp-chat-arc-toolbar { margin-block-end: 18px; }
+.fp-chat-arc-search { inline-size: 100%; max-inline-size: 360px; }
 /* Archive list — flat rows, hover Restore action. */
 .fp-chat-arc-list { list-style: none; padding: 0; margin: 0; }
 .fp-chat-arc-row {
