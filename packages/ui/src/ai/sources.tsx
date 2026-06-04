@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 // Eidos AI — inline citation chip + sources panel.
 //
 // Citation: an inline superscript chip that opens a hover/focus popover with
@@ -47,8 +48,12 @@ export const Citation = ({
   tone?: 'ember' | 'neutral';
 }) => {
   const [open, setOpen] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
+  const [pos, setPos] = React.useState<{ top: number; left: number } | null>(null);
   const closeT = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const btnRef = React.useRef<HTMLButtonElement>(null);
+  const popRef = React.useRef<HTMLSpanElement>(null);
+  React.useEffect(() => setMounted(true), []);
   const onEnter = () => { if (closeT.current) clearTimeout(closeT.current); setOpen(true); };
   const onLeave = () => { closeT.current = setTimeout(() => setOpen(false), 150); };
   const linkUrl = href || source?.url;
@@ -66,6 +71,75 @@ export const Citation = ({
       btnRef.current?.focus();
     }
   };
+
+  // Position the popover relative to the chip. It is PORTALLED to <body> (below)
+  // so it escapes the `isolation: isolate` stacking context that every .ds-frame
+  // establishes — otherwise the popover is trapped inside the frame and the
+  // sticky page chrome (the on-this-page TOC) bleeds over it. Fixed positioning,
+  // anchored above the chip (flips below when there isn't room); RTL anchors the
+  // popover's inline-end edge to the chip.
+  const place = React.useCallback(() => {
+    const chip = btnRef.current;
+    if (!chip) return;
+    const r = chip.getBoundingClientRect();
+    const popW = popRef.current?.offsetWidth || 280;
+    const popH = popRef.current?.offsetHeight || 140;
+    const gap = 8;
+    const rtl = getComputedStyle(chip).direction === 'rtl';
+    let left = rtl ? r.right - popW : r.left;
+    left = Math.max(8, Math.min(left, window.innerWidth - popW - 8));
+    const above = r.top - gap - popH;
+    const top = above >= 8 ? above : r.bottom + gap;
+    setPos({ top, left });
+  }, []);
+
+  React.useLayoutEffect(() => {
+    if (!open || !source) { setPos(null); return; }
+    place();
+  }, [open, source, place]);
+
+  React.useEffect(() => {
+    if (!open) return;
+    const update = () => place();
+    window.addEventListener('scroll', update, true);
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update, true);
+      window.removeEventListener('resize', update);
+    };
+  }, [open, place]);
+
+  const popover = open && source && mounted
+    ? ReactDOM.createPortal(
+        <span
+          ref={popRef}
+          className="ai-cite-pop"
+          role="dialog"
+          aria-label={source.title}
+          onMouseEnter={onEnter}
+          onMouseLeave={onLeave}
+          style={{
+            position: 'fixed',
+            top: pos ? pos.top : -9999,
+            left: pos ? pos.left : -9999,
+            bottom: 'auto',
+          }}
+        >
+          <span className="ai-cite-pop-head">
+            <span className="ai-cite-pop-dom">{source.domain}</span>
+            <span className="ai-cite-pop-rank">[{n}]</span>
+          </span>
+          <span className="ai-cite-pop-title">{source.title}</span>
+          <span className="ai-cite-pop-snip">{source.snippet}</span>
+          <a className="ai-cite-pop-foot" href={linkUrl} target="_blank" rel="noreferrer">
+            <Icons.link size={11}/>
+            <span className="url">{(linkUrl || '').replace(/^https?:\/\//, '')}</span>
+          </a>
+        </span>,
+        document.body,
+      )
+    : null;
+
   return (
     <span className="ai-cite-wrap" onMouseEnter={onEnter} onMouseLeave={onLeave} onKeyDown={onKeyDown}>
       <button
@@ -78,25 +152,7 @@ export const Citation = ({
         onFocus={onEnter}
         onBlur={onLeave}
       >{n}</button>
-      {open && source && (
-        <span className="ai-cite-pop" role="dialog" aria-label={source.title}>
-          <span className="ai-cite-pop-head">
-            <span className="ai-cite-pop-dom">{source.domain}</span>
-            <span className="ai-cite-pop-rank">[{n}]</span>
-          </span>
-          <span className="ai-cite-pop-title">{source.title}</span>
-          <span className="ai-cite-pop-snip">{source.snippet}</span>
-          <a
-            className="ai-cite-pop-foot"
-            href={linkUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Icons.link size={11}/>
-            <span className="url">{(linkUrl || '').replace(/^https?:\/\//, '')}</span>
-          </a>
-        </span>
-      )}
+      {popover}
     </span>
   );
 };
