@@ -1266,12 +1266,13 @@ body:active::-webkit-scrollbar-thumb,
 .fp-chat-newchat:hover { background: var(--ember-glow, var(--ember)); }
 .fp-chat-newchat > svg { color: var(--ember-fg); flex: 0 0 auto; }
 
-.fp-chat-nav { display: flex; flex-direction: column; gap: 1px; padding: 2px 0; }
+/* Match the primary Sidebar's item rhythm (.sb-section gap + .sb-item box). */
+.fp-chat-nav { display: flex; flex-direction: column; gap: 2px; padding: 2px 0; }
 .fp-chat-row {
   display: flex; align-items: center; gap: 10px;
   inline-size: 100%;
-  padding: 7px 10px;
-  border-radius: var(--radius-md);
+  padding: 6px 10px;
+  border-radius: var(--radius-lg);
   background: transparent; border: 0;
   color: var(--fg);
   font: 500 13px/1.2 var(--font-sans);
@@ -1304,10 +1305,13 @@ body:active::-webkit-scrollbar-thumb,
   color: var(--fg-faint);
   padding: 8px 10px 4px;
 }
-/* Group header with a trailing "View more" link (Projects). */
+/* Group header with a trailing "View more" link (Projects). The link's trailing
+   edge aligns to the New chat / Search boxes (the section's right edge), so its
+   inline-end padding is 0 while the label keeps the 10px inline-start inset. */
 .fp-chat-grouphead {
   display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
-  padding: 8px 10px 4px;
+  padding-block: 8px 4px;
+  padding-inline: 10px 0;
   font-family: var(--font-mono); font-size: 10px;
   text-transform: uppercase; letter-spacing: 0.08em;
   color: var(--fg-faint);
@@ -1315,19 +1319,21 @@ body:active::-webkit-scrollbar-thumb,
 .fp-chat-viewmore {
   display: inline-flex; align-items: center; gap: 2px;
   background: none; border: 0; cursor: pointer;
-  font: inherit; letter-spacing: inherit; text-transform: inherit;
+  /* Sentence-case sans link — not the mono uppercase eyebrow of the header. */
+  font: 500 11px/1 var(--font-sans);
+  text-transform: none; letter-spacing: normal;
   color: var(--fg-muted);
   transition: color var(--dur-fast) var(--ease);
 }
 .fp-chat-viewmore:hover { color: var(--ember); }
-.fp-chat-viewmore > svg { margin-block-start: -1px; }
+.fp-chat-viewmore > svg { margin-block-start: 0; }
 
 /* Agent rows — avatar + name; clicking starts a fresh chat with that agent. */
 .fp-chat-agent {
-  display: flex; align-items: center; gap: 9px;
+  display: flex; align-items: center; gap: 10px;
   inline-size: 100%;
   padding: 6px 10px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: transparent; border: 0;
   color: var(--fg);
   font: 500 13px/1.2 var(--font-sans);
