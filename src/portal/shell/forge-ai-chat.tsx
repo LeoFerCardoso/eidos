@@ -128,6 +128,8 @@ export function ForgeAIChat() {
   const [turns, setTurns] = React.useState<Turn[]>([]);
   const [input, setInput] = React.useState('');
   const [thinking, setThinking] = React.useState(false);
+  // Follow-up suggestions stay highlighted once picked.
+  const [usedSuggestions, setUsedSuggestions] = React.useState<Set<string>>(new Set());
   const counter = React.useRef(0);
   const endRef = React.useRef<HTMLDivElement>(null);
   const started = turns.length > 0;
@@ -192,7 +194,17 @@ export function ForgeAIChat() {
             {!thinking && (
               <div className="fp-ai-followups">
                 {FOLLOWUPS.map((f) => (
-                  <Suggestion key={f} size="sm" onClick={() => ask(f)}>{f}</Suggestion>
+                  <Suggestion
+                    key={f}
+                    size="sm"
+                    pressed={usedSuggestions.has(f)}
+                    onClick={() => {
+                      setUsedSuggestions((u) => new Set(u).add(f));
+                      ask(f);
+                    }}
+                  >
+                    {f}
+                  </Suggestion>
                 ))}
               </div>
             )}
