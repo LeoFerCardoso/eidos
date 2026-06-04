@@ -11,15 +11,15 @@ import * as React from 'react';
 import Link from 'next/link';
 import {
   Icons, Pill,
-  ForgeMark, Message, PromptInput, Suggestion,
+  ForgeMark, Message, PromptInput, Suggestion, SuggestionCard,
 } from '@/ds/core';
 import { RootCauseWidget } from './forge-ai-widgets';
 
-const STARTERS: { icon: string; label: string }[] = [
-  { icon: 'gauge',    label: 'Why is acerta-api degraded?' },
-  { icon: 'incident', label: 'Summarize open incidents' },
-  { icon: 'rocket',   label: 'Scaffold a scoring service' },
-  { icon: 'pulse',    label: "What's my estate health?" },
+const STARTERS: { icon: string; title: string; line: string }[] = [
+  { icon: 'gauge',    title: 'Why is acerta-api degraded?', line: 'Correlate the p99 spike with its dependencies.' },
+  { icon: 'incident', title: 'Summarize open incidents',   line: 'Severity, owner and blast radius at a glance.' },
+  { icon: 'rocket',   title: 'Scaffold a scoring service', line: 'Start from the paved-road template.' },
+  { icon: 'pulse',    title: "What's my estate health?",   line: 'Health score, degraded services, deploys this week.' },
 ];
 
 // Mid-thread follow-ups offered after the first answer — keeps the conversation
@@ -158,13 +158,17 @@ export function ForgeAIChat() {
             <p className="fp-ai-empty-sub">
               It reads your estate, services, deploys, incidents and SLOs, and acts on it. Pick a starter or ask anything.
             </p>
-            <div className="fp-ai-empty-suggests">
+            <div className="sg-cards fp-ai-empty-cards">
               {STARTERS.map((s) => {
                 const I = (Icons as Record<string, React.FC<{ size?: number }>>)[s.icon] ?? Icons.sparkle;
                 return (
-                  <Suggestion key={s.label} icon={<I size={13} />} onClick={() => ask(s.label)}>
-                    {s.label}
-                  </Suggestion>
+                  <SuggestionCard
+                    key={s.title}
+                    icon={<I size={16} />}
+                    title={s.title}
+                    line={s.line}
+                    onClick={() => ask(s.title)}
+                  />
                 );
               })}
             </div>

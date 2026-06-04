@@ -1106,11 +1106,9 @@ body:active::-webkit-scrollbar-thumb,
   font-size: var(--text-sm); color: var(--fg-muted);
   margin: 0; max-inline-size: 42ch; line-height: 1.55;
 }
-.fp-ai-empty-suggests {
-  display: flex; flex-direction: column; gap: 8px;
-  inline-size: 100%; margin-block-start: 12px;
-}
-.fp-ai-empty-suggests .sg { inline-size: 100%; justify-content: flex-start; }
+/* Empty-state starters as DS SuggestionCards (.sg-cards grid handles the layout;
+   one column in the narrow drawer). */
+.fp-ai-empty-cards { margin-block-start: 14px; text-align: start; }
 .fp-ai-followups { display: flex; flex-wrap: wrap; gap: 6px; margin-block-start: 2px; }
 
 /* ---- Forge AI conversation widgets (forge-ai-widgets.tsx) --------------------- */
