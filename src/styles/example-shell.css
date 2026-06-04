@@ -1627,6 +1627,42 @@ body:active::-webkit-scrollbar-thumb,
 }
 .fp-chat-projects-empty code { color: var(--fg-muted); font-family: var(--font-mono); font-size: 12px; }
 
+/* ── View: Agents (reuses the Projects header / toolbar / grid; avatar card) ─ */
+.fp-chat-agents-card {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 18px; min-block-size: 172px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl);
+  color: var(--fg); text-align: start; cursor: pointer;
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.fp-chat-agents-card:hover { background: var(--bg-elevated); border-color: var(--border-strong); transform: translateY(-1px); }
+.fp-chat-agents-card .head { display: flex; align-items: center; gap: 11px; }
+.fp-chat-agents-card .head .avatar { flex: 0 0 auto; }
+.fp-chat-agents-card .id { flex: 1 1 auto; min-inline-size: 0; }
+.fp-chat-agents-card .name { font-size: 14px; font-weight: 600; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-chat-agents-card .role { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-chat-agents-card .model {
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; border-radius: 999px;
+  background: var(--surface-active); border: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 10px; color: var(--fg-muted); white-space: nowrap;
+}
+.fp-chat-agents-card .model > svg { color: var(--fg-subtle); }
+.fp-chat-agents-card .desc {
+  font-size: 12.5px; line-height: 1.5; color: var(--fg-muted);
+  display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.fp-chat-agents-card .stats {
+  display: flex; align-items: center; gap: 6px;
+  padding-block-start: 10px; margin-block-start: auto;
+  border-block-start: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-faint); letter-spacing: 0.02em;
+}
+.fp-chat-agents-card .stats b { color: var(--fg); font-weight: 600; }
+.fp-chat-agents-card .stats .dot { color: var(--fg-faint); }
+.fp-chat-agents-card .stats .updated { margin-inline-start: auto; }
+
 /* ── View: Project detail (/portal/chat → a pinned space or a project tile) ─ */
 .fp-chat-pd {
   inline-size: 100%; max-inline-size: var(--fp-chat-content); margin-inline: auto;
