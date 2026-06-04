@@ -430,8 +430,20 @@
 }
 .ai-cite-chip:hover { background: var(--ember); color: var(--ember-fg); border-color: var(--ember); }
 .ai-cite-chip:focus-visible { outline: 2px solid var(--ember); outline-offset: 1px; }
+/* Neutral tone — supplemental / ungrounded references. Muted grey so it reads
+   as secondary at a glance, clearly distinct from the ember (grounded) chip. */
+.ai-cite-chip.neutral {
+  color: var(--fg-muted);
+  background: var(--surface);
+  border-color: var(--border);
+}
+.ai-cite-chip.neutral:hover { background: var(--surface-active); color: var(--fg); border-color: var(--border-strong); }
+.ai-cite-chip.neutral:focus-visible { outline-color: var(--fg-muted); }
 .ai-cite-pop {
-  position: absolute; z-index: 40;
+  /* Tooltip tier (var(--z-tooltip)=300) so the popover floats above page chrome
+     like the sticky on-this-page TOC rail — z-index:40 let that rail bleed
+     over it. */
+  position: absolute; z-index: var(--z-tooltip, 300);
   bottom: calc(100% + 8px); inset-inline-start: 0;
   width: 280px;
   display: flex; flex-direction: column; gap: 4px;

@@ -42,6 +42,28 @@ import { Icons, Frame, Section, SubHead, TabbedCode, AutoPropsTable, Citation, S
     },
   ];
 
+  // ─── Arabic sources — for the RTL demo, so the popover + Sources panel read
+  //     in a real RTL language, not English. Domains stay Latin (real hosts);
+  //     title + snippet + fetched are localised. ───────────────────────────
+  const SOURCES_AR = [
+    {
+      id: 1,
+      domain: 'datadog.com',
+      title: 'أحداث التتبع للحادثة 0421 — billing-svc',
+      url: 'https://app.datadoghq.com/apm/trace/0421',
+      snippet: 'ارتفع زمن الاستجابة p99 إلى ٤١٢ مللي ثانية بين الساعة ٠٢:١٤ و٠٢:٣٨ بالتوقيت العالمي؛ يعود السبب الجذري إلى عاصفة إعادة محاولة على الحافة.',
+      fetched: 'قبل ١٨ ثانية · ١٤:٠١',
+    },
+    {
+      id: 2,
+      domain: 'github.com',
+      title: 'config/grpc.toml — رفع ميزانية إعادة المحاولة إلى ٨',
+      url: 'https://github.com/eidos/repo/commit/ab12cd',
+      snippet: 'زيادة retry_budget من ٣ إلى ٨ لاستيعاب دفعة الترحيل على identity-svc. روجعت بواسطة @ops.',
+      fetched: 'قبل ١٨ ثانية · ١٤:٠١',
+    },
+  ];
+
   // ─── helpers ────────────────────────────────────────────────────────────
   const RespFrame = ({ children, meta }) => (
     <div className="ai-resp">
@@ -238,7 +260,7 @@ export default function CitationsPage() {
           <RespFrame meta={<><span className="name">Eidos AI</span></>}>
             <p>
               The retry storm is confirmed in the trace data<Citation n={1} source={SOURCES[0]} tone="ember"/>.
-              See also the general gRPC docs<Citation n={2} tone="neutral"/> for background on retry budgets.
+              See also the general gRPC docs<Citation n={2} source={SOURCES[1]} tone="neutral"/> for background on retry budgets.
             </p>
           </RespFrame>
         </div>
@@ -308,11 +330,11 @@ export default function CitationsPage() {
       <SubHead meta="RTL · العربية">RTL</SubHead>
       <Frame label="dir=&quot;rtl&quot; — chip + popover anchor mirror automatically" height={380}>
         <div dir="rtl" style={{ width: '100%' }}>
-          <RespFrame meta={<><span className="name">Eidos AI</span></>}>
-            <p>تم رفع ميزانية إعادة المحاولة في <code>grpc.toml</code> من 3 إلى 8<Citation n={2} source={SOURCES[1]}/>، مما أخفى مهلة منتهية في <code>billing-svc</code><Citation n={1} source={SOURCES[0]}/>.</p>
+          <RespFrame meta={<><span className="name">إيدوس الذكاء الاصطناعي</span></>}>
+            <p>تم رفع ميزانية إعادة المحاولة في <code>grpc.toml</code> من ٣ إلى ٨<Citation n={2} source={SOURCES_AR[1]}/>، مما أخفى مهلة منتهية في <code>billing-svc</code><Citation n={1} source={SOURCES_AR[0]}/>.</p>
           </RespFrame>
           <div style={{ marginTop: 18 }}>
-            <Sources sources={SOURCES.slice(0, 2)} title="المصادر"/>
+            <Sources sources={SOURCES_AR} title="المصادر"/>
           </div>
         </div>
       </Frame>
@@ -327,17 +349,34 @@ export default function CitationsPage() {
               <RespFrame meta={<><span className="name">Eidos AI</span></>}>
                 <p>The retry budget bump<span className="ai-cite-chip" style={{ marginInlineStart: 2 }}>2</span> masked a timeout in billing-svc.</p>
               </RespFrame>
-              <div style={{ marginTop: 14 }}>
+
+              {/* The popover, rendered statically so the anatomy can label it
+                  (the live component shows it on hover / focus). */}
+              <span className="ai-cite-pop" style={{ position: 'static', width: 300, marginBlockStart: 16 }}>
+                <span className="ai-cite-pop-head">
+                  <span className="ai-cite-pop-dom">{SOURCES[1].domain}</span>
+                  <span className="ai-cite-pop-rank">[2]</span>
+                </span>
+                <span className="ai-cite-pop-title">{SOURCES[1].title}</span>
+                <span className="ai-cite-pop-snip">{SOURCES[1].snippet}</span>
+                <span className="ai-cite-pop-foot">
+                  <Icons.link size={11}/>
+                  <span className="url">github.com/eidos/repo/commit/ab12cd</span>
+                </span>
+              </span>
+
+              <div style={{ marginTop: 16 }}>
                 <Sources sources={SOURCES.slice(0, 2)}/>
               </div>
-              <span className="lead h" style={{ top: 36, left: -32, width: 28 }}/>
-              <span className="lead h" style={{ top: 100, left: -32, width: 28 }}/>
-              <span className="lead h" style={{ top: 154, left: -32, width: 28 }}/>
-              <span className="lead h" style={{ top: 220, left: -32, width: 28 }}/>
-              <div className="pin" style={{ top: 30, left: -54 }}>1</div>
-              <div className="pin" style={{ top: 94, left: -54 }}>2</div>
-              <div className="pin" style={{ top: 148, left: -54 }}>3</div>
-              <div className="pin" style={{ top: 214, left: -54 }}>4</div>
+
+              <span className="lead h" style={{ top: 34, left: -32, width: 28 }}/>
+              <div className="pin" style={{ top: 28, left: -54 }}>1</div>
+              <span className="lead h" style={{ top: 110, left: -32, width: 28 }}/>
+              <div className="pin" style={{ top: 104, left: -54 }}>2</div>
+              <span className="lead h" style={{ top: 110, right: -32, width: 28 }}/>
+              <div className="pin" style={{ top: 104, right: -54 }}>3</div>
+              <span className="lead h" style={{ top: 290, left: -32, width: 28 }}/>
+              <div className="pin" style={{ top: 284, left: -54 }}>4</div>
             </div>
           </div>
           <div className="ana-list" style={{ maxWidth: 620, margin: '64px auto 0' }}>
