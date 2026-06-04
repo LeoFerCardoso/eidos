@@ -735,9 +735,14 @@ body:active::-webkit-scrollbar-thumb,
   gap: 10px;
   padding: 12px 16px;
   border-bottom: 1px solid var(--border);
+  transition: background .12s ease;
 }
 .fp-notif-row:last-child { border-bottom: none; }
+.fp-notif-row:hover { background: var(--surface-hover); }
 .fp-notif-row.unread { background: var(--ember-soft); }
+/* Unread rows already carry the ember-soft band — deepen it a touch on hover so
+   the highlight still reads on the warm wash. */
+.fp-notif-row.unread:hover { background: color-mix(in oklch, var(--ember) 20%, var(--bg-elevated)); }
 /* Avatars are the DS <Avatar> component (photo · ember-system · placeholder).
    On the unread band, give the avatar's status-dot ring the band colour so the
    cutout reads against the warm wash instead of the panel bg. */
