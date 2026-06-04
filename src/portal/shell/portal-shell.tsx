@@ -68,6 +68,7 @@ const RAIL: RailItem[] = [
   { key: 'notifications', icon: 'bell',    label: 'Notifications', href: '/portal/notifications' },
   { key: 'chat',          icon: 'chat',    label: 'Chat',          href: '/portal/chat' },
   { key: 'catalog',       icon: 'catalog', label: 'Catalog',       href: '/portal/catalog' },
+  { key: 'agents',        icon: 'agent',   label: 'Agents',        href: '/portal/agents' },
   { key: 'create',     icon: 'package',    label: 'Templates',    href: '/portal/create' },
   { key: 'pipelines',  icon: 'pipeline',   label: 'Pipelines'                     },
   { key: 'fraud',      icon: 'shield',     label: 'Fraud & Risk'                  },
@@ -91,6 +92,7 @@ function activeKey(pathname: string): string {
 const CRUMB_LABELS: Record<string, string> = {
   portal:        'Forge',
   catalog:       'Catalog',
+  agents:        'Agents',
   create:        'Templates',
   assistant:     'Forge AI',
   notifications: 'Notifications',

@@ -11,7 +11,7 @@
 // chrome is the .fp-chat-* layer in src/styles/example-shell.css.
 import * as React from 'react';
 import {
-  Icons, ForgeMark, Avatar, Pill,
+  Icons, ForgeMark, Avatar,
   PromptInput, PromptBanner, SuggestionCard,
   Message, Response, MessageActions, ProseCode, Prose,
   ChainOfThought, Citation, Sources,
@@ -20,6 +20,8 @@ import {
   ToggleGroup, ToggleGroupItem,
 } from '@/ds/core';
 import { usePageCrumb } from '@/portal/shell/portal-shell';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { AGENTS, type Agent } from '@/portal/data/agents';
 
 // ── Sidebar data (one source of truth for every view) ───────────────────────
 const PINNED = [
@@ -42,20 +44,7 @@ const YESTERDAY = [
   { id: 'offer-flag',  title: 'offer-orchestrator cohort rollout',       preview: 'Suggest cohort 2 (10%) for tomorrow…' },
 ];
 
-// Pre-built agents — each opens a fresh chat scoped to its domain. The sidebar
-// shows the first three; the Agents screen lists them all.
-const AGENTS = [
-  { id: 'sre',     name: 'SRE Copilot',      role: 'Incident response · runbooks', desc: 'Triages alerts, correlates p99 spikes with deploys, drafts postmortems and proposes safe rollbacks across the estate.', model: 'Opus 4.7',   tools: 6, chats: 128, updated: '2h ago' },
-  { id: 'fraud',   name: 'Fraud Analyst',    role: 'konduto rules · chargebacks',  desc: 'Investigates false-positive spikes, tunes the antifraud rule set and explains the approval impact before you ship.',     model: 'Sonnet 4.6', tools: 5, chats: 86,  updated: '5h ago' },
-  { id: 'bureau',  name: 'Bureau Assistant', role: 'SCR · Cadastro Positivo',      desc: 'Answers bureau reconciliation questions against the SCR layout and the Boa Vista feed contracts.',                     model: 'Sonnet 4.6', tools: 4, chats: 53,  updated: 'Yesterday' },
-  { id: 'score',   name: 'Score Reviewer',   role: 'Models · feature store',       desc: 'Reviews score-engine shadow results, reason-code drift and Ignite feature freshness for the thin-file cohort.',        model: 'Opus 4.7',   tools: 5, chats: 41,  updated: '2d ago' },
-  { id: 'lgpd',    name: 'LGPD Auditor',     role: 'Consent · PII',                desc: 'Flags services logging PII without a registered consent scope and drafts the remediation each one needs.',              model: 'Haiku 4.5',  tools: 3, chats: 22,  updated: '3d ago' },
-  { id: 'onboard', name: 'Onboarding Buddy', role: 'Paved road · setup',           desc: 'Walks new engineers through day-1 setup, pager rotation, escalation paths and the golden-path templates.',              model: 'Haiku 4.5',  tools: 4, chats: 17,  updated: '1w ago' },
-];
-
-type Agent = (typeof AGENTS)[number];
-
-type View = 'new' | 'thread' | 'search' | 'projects' | 'project' | 'archive' | 'artifacts' | 'agents';
+type View = 'new' | 'thread' | 'search' | 'projects' | 'project' | 'archive' | 'artifacts';
 type Nav = { view: View; chatId?: string; projectId?: string; agentId?: string };
 
 // Archived chats — restorable (rollback un-archives them).
@@ -189,7 +178,9 @@ const HistoryBucket = ({
   </div>
 );
 
-const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => (
+const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => {
+  const router = useRouter();
+  return (
   <aside className="fp-chat-side" aria-label="Chat navigation">
     <button
       type="button"
@@ -229,10 +220,11 @@ const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => (
 
     <div className="fp-chat-sep" role="separator" />
 
-    {/* Agents — a fresh chat scoped to a domain assistant. */}
+    {/* Agents — quick new-chat with a domain assistant; View more opens the
+        external Agents catalog (/portal/agents). */}
     <div className="fp-chat-grouphead">
       <span>Agents</span>
-      <button type="button" className="fp-chat-viewmore" onClick={() => go({ view: 'agents' })}>
+      <button type="button" className="fp-chat-viewmore" onClick={() => router.push('/portal/agents')}>
         View more <Icons.chevronRight size={11} />
       </button>
     </div>
@@ -255,7 +247,8 @@ const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => (
     <HistoryBucket label="Chats"     items={RECENTS}   activeChat={nav.view === 'thread' ? nav.chatId : undefined} onOpen={(id) => go({ view: 'thread', chatId: id })} />
     <HistoryBucket label="Yesterday" items={YESTERDAY} activeChat={nav.view === 'thread' ? nav.chatId : undefined} onOpen={(id) => go({ view: 'thread', chatId: id })} />
   </aside>
-);
+  );
+};
 
 // ── View: New chat (empty hero) ─────────────────────────────────────────────
 const STARTERS: { icon: string; title: string; line: string; prompt: string }[] = [
@@ -697,64 +690,6 @@ const ProjectsView = ({ onOpen }: { onOpen: (id: string) => void }) => {
         <div className="fp-chat-projects-empty">
           <Icons.folder size={28} />
           <p>No projects match <code>{q}</code>.</p>
-        </div>
-      )}
-    </div>
-  );
-};
-
-// ── View: Agents ────────────────────────────────────────────────────────────
-const AgentsView = ({ onOpen }: { onOpen: (id: string) => void }) => {
-  const [q, setQ] = React.useState('');
-  const filtered = AGENTS.filter((a) => {
-    const s = q.trim().toLowerCase();
-    if (!s) return true;
-    return a.name.toLowerCase().includes(s) || a.role.toLowerCase().includes(s) || a.desc.toLowerCase().includes(s) || a.model.toLowerCase().includes(s);
-  });
-
-  return (
-    <div className="fp-chat-projects fp-chat-agents">
-      <header className="fp-chat-projects-head">
-        <div className="head-left">
-          <span className="eyebrow">Forge AI · Agents</span>
-          <h1>Agents</h1>
-          <p className="lede">Pre-built assistants scoped to a domain — each ships its own tools, instructions and model. Open one to start a chat already grounded in its context.</p>
-        </div>
-        <button className="btn ember fp-chat-projects-create"><Icons.plus size={13} /> Create agent</button>
-      </header>
-
-      <div className="fp-chat-projects-toolbar">
-        <ChatSearch value={q} onChange={setQ} placeholder="Search agents…" className="fp-chat-projects-search" />
-        <div className="fp-chat-projects-toolbar-end">
-          <span className="fp-chat-projects-count">{filtered.length} {filtered.length === 1 ? 'agent' : 'agents'}</span>
-        </div>
-      </div>
-
-      <div className="fp-chat-projects-grid">
-        {filtered.map((a) => (
-          <button key={a.id} type="button" className="fp-chat-agents-card" onClick={() => onOpen(a.id)} aria-label={`Chat with ${a.name}`}>
-            <div className="head">
-              <Avatar name={a.name} size={40} />
-              <div className="id">
-                <div className="name">{a.name}</div>
-                <div className="role">{a.role}</div>
-              </div>
-              <Pill tone="neutral" icon={<Icons.sparkle size={10} />} className="fp-chat-agents-model">{a.model}</Pill>
-            </div>
-            <div className="desc">{a.desc}</div>
-            <div className="stats">
-              <span><b>{a.tools}</b> tools</span><span className="dot">·</span>
-              <span><b>{a.chats}</b> chats</span>
-              <span className="updated">{a.updated}</span>
-            </div>
-          </button>
-        ))}
-      </div>
-
-      {filtered.length === 0 && (
-        <div className="fp-chat-projects-empty">
-          <Icons.sparkle size={28} />
-          <p>No agents match <code>{q.trim()}</code>.</p>
         </div>
       )}
     </div>
@@ -1211,6 +1146,14 @@ export default function PortalChat() {
   const [nav, setNav] = React.useState<Nav>({ view: 'new' });
   const go = React.useCallback((n: Nav) => setNav(n), []);
 
+  // Deep link from the Agents catalog: /portal/chat?agent=<id> opens a fresh
+  // chat already scoped to that agent.
+  const searchParams = useSearchParams();
+  React.useEffect(() => {
+    const agentId = searchParams.get('agent');
+    if (agentId && AGENTS.some((a) => a.id === agentId)) setNav({ view: 'new', agentId });
+  }, [searchParams]);
+
   // Surface the open chat's title in the topbar breadcrumb (Forge / Chat / …).
   const { setCrumb } = usePageCrumb();
   React.useEffect(() => {
@@ -1229,7 +1172,6 @@ export default function PortalChat() {
         {nav.view === 'project' && <ProjectDetailView projectId={nav.projectId ?? 'space-score'} onBack={() => go({ view: 'projects' })} onOpenChat={(id) => go({ view: 'thread', chatId: id })} />}
         {nav.view === 'archive' && <ArchiveView onOpen={(id) => go({ view: 'thread', chatId: id })} />}
         {nav.view === 'artifacts' && <ArtifactsView onOpenChat={(id) => go({ view: 'thread', chatId: id })} />}
-        {nav.view === 'agents' && <AgentsView onOpen={(id) => go({ view: 'new', agentId: id })} />}
       </section>
     </div>
   );
