@@ -1236,7 +1236,7 @@ body:active::-webkit-scrollbar-thumb,
    padding) so the banner can run edge-to-edge; the body owns its own padding. */
 .hc-panel.fp-profile-hc { padding: 0; overflow: hidden; }
 .fp-profile-cover {
-  block-size: 56px;
+  block-size: 88px;
   background: linear-gradient(120deg, var(--ember-deep), var(--ember) 58%, var(--ember-glow));
 }
 .fp-profile-av {
@@ -1249,12 +1249,24 @@ body:active::-webkit-scrollbar-thumb,
   box-shadow: var(--elev-1);
 }
 .fp-profile-body { padding: 10px 16px 2px; }
-.fp-profile-name { font-size: var(--text-md); font-weight: 600; color: var(--fg); letter-spacing: -0.01em; }
+.fp-profile-name {
+  display: flex; align-items: center; gap: 8px;
+  font-size: var(--text-md); font-weight: 600; color: var(--fg); letter-spacing: -0.01em;
+}
+/* Presence dot beside the name (presence text is its tooltip). */
+.fp-profile-dot {
+  inline-size: 8px; block-size: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--fg-faint);
+}
+.fp-profile-dot[data-status="online"] { background: var(--success); }
+.fp-profile-dot[data-status="away"]   { background: var(--warning); }
+.fp-profile-dot[data-status="busy"]   { background: var(--danger); }
 .fp-profile-role { font-size: var(--text-sm); color: var(--fg-muted); margin-block-start: 2px; }
-.fp-profile-presence {
-  display: inline-flex; align-items: center; gap: 6px;
-  margin-block-start: 9px;
-  font-size: 11px; color: var(--fg-muted); font-family: var(--font-mono);
+.fp-profile-bio {
+  margin: 9px 0 0;
+  font-size: var(--text-sm); line-height: 1.5; color: var(--fg-muted);
+  display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3;
+  -webkit-box-orient: vertical; overflow: hidden;
 }
 .fp-profile-rows { margin-block-start: 12px; display: flex; flex-direction: column; gap: 7px; }
 .fp-profile-row {

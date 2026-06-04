@@ -22,9 +22,11 @@ const COMMANDER = {
   tribe: 'Score & Risk',
   status: 'busy' as const,
   presence: 'On-call now · paged 6h ago',
+  bio: 'SRE on the Score & Risk platform. Owns the on-call rotation and the konduto rollback runbooks. Ask me about incident response and SLOs.',
   region: 'São Paulo · Brazil',
   email: 'bruno.mendes@equifax.com',
   joined: 'Joined Mar 2021',
+  chatHref: 'https://chat.google.com/',
   href: '/portal',
 };
 

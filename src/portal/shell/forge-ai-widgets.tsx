@@ -4,7 +4,7 @@
 // the contrast/flat rules. Grow this file as new widget types land.
 import * as React from 'react';
 import Link from 'next/link';
-import { HealthBadge, Trend, Icons, Avatar, StatusDot, HoverCard } from '@/ds/core';
+import { HealthBadge, Trend, Icons, Avatar, HoverCard } from '@/ds/core';
 
 type Health = 'up' | 'degraded' | 'down';
 
@@ -30,10 +30,14 @@ export interface MentionPerson {
   src?: string;
   role?: string;
   tribe?: string;
-  /** Presence, drives the avatar dot. */
+  /** Presence — drives the status dot beside the name; presence text is its tooltip. */
   status?: 'online' | 'away' | 'busy' | 'offline';
-  /** One-line presence note shown in the card, e.g. "On-call now · paged 6h ago". */
+  /** Presence note used as the status-dot tooltip, e.g. "On-call now · paged 6h ago". */
   presence?: string;
+  /** Short self-written professional summary shown as the support line. */
+  bio?: string;
+  /** Direct-message link (Google Chat). */
+  chatHref?: string;
   /** Location / region line. */
   region?: string;
   /** Contact email. */
@@ -66,18 +70,19 @@ export function UserMention({ person }: { person: MentionPerson }) {
       <div className="fp-profile">
         <div className="fp-profile-cover" aria-hidden="true" />
         <span className="fp-profile-av">
-          <Avatar name={person.name} src={person.src} size={52} status={person.status} />
+          <Avatar name={person.name} src={person.src} size={52} />
         </span>
         <div className="fp-profile-body">
-          <div className="fp-profile-name">{person.name}</div>
+          <div className="fp-profile-name">
+            <span>{person.name}</span>
+            {person.status && (
+              <span className="fp-profile-dot" data-status={person.status} title={person.presence} />
+            )}
+          </div>
           {(person.role || person.tribe) && (
             <div className="fp-profile-role">{[person.role, person.tribe].filter(Boolean).join(' · ')}</div>
           )}
-          {person.presence && (
-            <div className="fp-profile-presence">
-              <StatusDot tone="warning" pulse /> {person.presence}
-            </div>
-          )}
+          {person.bio && <p className="fp-profile-bio">{person.bio}</p>}
           {(person.region || person.email) && (
             <div className="fp-profile-rows">
               {person.region && (
@@ -93,7 +98,15 @@ export function UserMention({ person }: { person: MentionPerson }) {
           {person.joined && <span className="fp-profile-joined">{person.joined}</span>}
           <span className="fp-profile-actions">
             <Link href={profile} className="btn ghost sm"><Icons.user size={13} /> Profile</Link>
-            <button type="button" className="btn ghost sm"><Icons.zap size={13} /> Page</button>
+            <a
+              href={person.chatHref ?? 'https://chat.google.com/'}
+              target="_blank"
+              rel="noreferrer"
+              className="btn ember sm"
+              title={`Message ${person.name} on Google Chat`}
+            >
+              <Icons.chat size={13} /> Message
+            </a>
           </span>
         </div>
       </div>
