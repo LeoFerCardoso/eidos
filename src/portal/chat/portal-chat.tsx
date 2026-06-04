@@ -11,7 +11,7 @@
 // chrome is the .fp-chat-* layer in src/styles/example-shell.css.
 import * as React from 'react';
 import {
-  Icons, ForgeMark, Avatar,
+  Icons, ForgeMark, Avatar, Pill,
   PromptInput, PromptBanner, SuggestionCard,
   Message, Response, MessageActions, ProseCode, Prose,
   ChainOfThought, Citation, Sources,
@@ -739,7 +739,7 @@ const AgentsView = ({ onOpen }: { onOpen: (id: string) => void }) => {
                 <div className="name">{a.name}</div>
                 <div className="role">{a.role}</div>
               </div>
-              <span className="model"><Icons.sparkle size={10} /> {a.model}</span>
+              <Pill tone="neutral" icon={<Icons.sparkle size={10} />} className="fp-chat-agents-model">{a.model}</Pill>
             </div>
             <div className="desc">{a.desc}</div>
             <div className="stats">
