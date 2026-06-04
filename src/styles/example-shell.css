@@ -1072,7 +1072,7 @@ body:active::-webkit-scrollbar-thumb,
 /* Inline inset matches the drawer header/body (28px) so messages, composer and
    header all align to the same column. */
 .fp-ai-chat-scroll { flex: 1 1 auto; min-block-size: 0; overflow-y: auto; padding: 16px 28px; }
-.fp-ai-thread { display: flex; flex-direction: column; gap: 14px; }
+.fp-ai-thread { display: flex; flex-direction: column; gap: 24px; }
 .fp-ai-chat-composer {
   flex-shrink: 0;
   position: sticky;
