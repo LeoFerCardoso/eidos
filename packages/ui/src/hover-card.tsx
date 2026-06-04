@@ -190,6 +190,10 @@ function Panel({
       ref={panelRef}
       id={id}
       role="tooltip"
+      // Portalled to <body> (LTR), so set the reading direction explicitly —
+      // otherwise the panel's logical CSS (margin-inline, justify, text-align)
+      // resolves LTR even when triggered from an RTL context. Mirrors the card.
+      dir={isRtl ? 'rtl' : 'ltr'}
       data-side={resolvedSide}
       className={cn('hc-panel', sideAttr, isVisible && 'hc-visible', className)}
       style={{

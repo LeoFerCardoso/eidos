@@ -49,6 +49,42 @@ const BACKUP = {
   href: '#',
 };
 
+// ── Arabic sample data (for the RTL section) ────────────────────────────────
+// Whole-card translation so the RTL demo reads as a native Arabic card, not a
+// half-mirrored English one. Email/phone stay Latin — they are technical
+// identifiers and render LTR inside the RTL rows, which is the real-world case.
+const COMMANDER_AR: MentionPerson = {
+  name: 'ماركوس جونسون',
+  src: '/avatars/Marcus-Johnson.jpg',
+  role: 'كبير مهندسي الموثوقية',
+  tribe: 'المخاطر والتقييم',
+  status: 'busy',
+  presence: 'مناوب الآن · استُدعي قبل ٦ ساعات',
+  bio: 'مهندس موثوقية في منصّة المخاطر والتقييم. مسؤول عن جدول المناوبة وكتيّبات التراجع. اسألني عن الاستجابة للحوادث ومستويات الخدمة.',
+  region: 'ساو باولو · البرازيل',
+  email: 'marcus.johnson@equifax.com',
+  phone: '+55 11 99876-5432',
+  joined: 'انضمّ في مارس ٢٠٢١',
+  chatHref: 'https://chat.google.com/',
+  href: '#',
+};
+
+const BACKUP_AR: MentionPerson = {
+  name: 'دييغو فيريرا',
+  src: '/avatars/Diego-Ferreira.jpg',
+  role: 'مهندس منصّات',
+  tribe: 'المخاطر والتقييم',
+  status: 'online',
+  presence: 'متاح · مناوب احتياطي',
+  bio: 'مهندس منصّات في فريق المخاطر والتقييم. المناوب الاحتياطي هذا الأسبوع. يملك ربط مخزن الميزات.',
+  region: 'ريو دي جانيرو · البرازيل',
+  email: 'diego.ferreira@equifax.com',
+  phone: '+55 21 98123-4567',
+  joined: 'انضمّ في أغسطس ٢٠٢٢',
+  chatHref: 'https://chat.google.com/',
+  href: '#',
+};
+
 // ── Inline Mention component (self-contained for the docs page) ──────────────
 // The DS component lives in packages/ui/src/ai/mention.tsx — exported via
 // @eidos/ui. This local alias renders identically to keep the page fully
@@ -222,7 +258,15 @@ const BUBBLE_CODE = `<div className="msg-thread">
 </div>`;
 
 const RTL_CODE = `<p dir="rtl">
-  قائد الحادثة هو <Mention person={{ name: 'مارك', role: 'مهندس', status: 'online' }} />
+  قائد الحادثة هو{" "}
+  <Mention person={{
+    name: 'ماركوس جونسون',
+    role: 'كبير مهندسي الموثوقية',
+    tribe: 'المخاطر والتقييم',
+    status: 'busy',
+    region: 'ساو باولو · البرازيل',
+    joined: 'انضمّ في مارس ٢٠٢١',
+  }} />
 </p>`;
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -246,24 +290,7 @@ export default function MentionPage() {
           1. INSTALLATION
           ==================================================================== */}
       <SubHead meta="package managers">Installation</SubHead>
-      <TabbedCode
-        tabs={[
-          ...installTabs('mention'),
-          {
-            label: 'Manual',
-            lang: 'bash',
-            code: `# 1. Base layer (tokens + ds.css + ai.css)
-npx eidos@latest init
-
-# 2. Copy the component
-npx eidos@latest add mention
-
-# 3. Import ai.css in your app root (already done if you added any AI component)
-#    import '@eidos/ui/styles/ai.css'`,
-          },
-        ]}
-        ariaLabel="package manager"
-      />
+      <TabbedCode tabs={installTabs('mention')} ariaLabel="package manager" />
       <Lede>
         <Mono>Mention</Mono> depends on{' '}
         <Mono>Avatar</Mono>, <Mono>HoverCard</Mono>, and the CSS layer in{' '}
@@ -389,80 +416,109 @@ npx eidos@latest add mention
       >
         <div dir="rtl" style={{ width: '100%' }}>
           <p style={{ ...prose, textAlign: 'right' }}>
-            قائد الحادثة هو{' '}
-            <Mention person={{ ...COMMANDER, name: 'ماركوس', href: '#' }} />{' '}
-            والاحتياطي هو{' '}
-            <Mention person={{ ...BACKUP, name: 'دييغو', href: '#' }} />.
+            قائد الحادثة هو <Mention person={COMMANDER_AR} /> والمناوب الاحتياطي هو{' '}
+            <Mention person={BACKUP_AR} />.
           </p>
         </div>
       </Frame>
       <Lede>
         All layout uses logical CSS properties (<Mono>inline-start</Mono>,{' '}
         <Mono>inline-end</Mono>, <Mono>block-start</Mono>). The pill mirrors without
-        overrides. The HoverCard engine re-anchors to the trigger&apos;s{' '}
-        <Mono>inline-end</Mono> edge when <Mono>dir="rtl"</Mono> is detected on open.
+        overrides. The HoverCard reads the trigger&apos;s direction on open: it
+        re-anchors the panel to the <Mono>inline-end</Mono> edge <em>and</em> sets{' '}
+        <Mono>dir</Mono> on the portalled panel, so the card itself mirrors — avatar
+        and contact icons flip to the inline-end, the joined date and action buttons
+        swap sides.
       </Lede>
 
       {/* ====================================================================
           6. ANATOMY
           ==================================================================== */}
       <SubHead meta="anatomy">Anatomy</SubHead>
-      <div className="ana">
-        <div className="stage" style={{ padding: '32px 24px', display: 'flex', gap: 40, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-          {/* Pill anatomy */}
-          <div style={{ position: 'relative', display: 'inline-block' }}>
-            <a className="mention" href="#" style={{ pointerEvents: 'none' }}>@Marcus Johnson</a>
-            <span className="pin" style={{ top: -14, left: 8 }}>1</span>
+      <div className="ds-frame">
+        <div className="ds-frame-head"><span className="label">anatomy</span></div>
+        <div className="ds-frame-body" style={{ padding: '64px 36px 60px' }}>
+          <div
+            className="ana"
+            style={{ display: 'flex', gap: 96, justifyContent: 'center', alignItems: 'flex-start', flexWrap: 'wrap' }}
+            aria-hidden="true"
+          >
+            {/* Pill */}
+            <div className="stage" style={{ position: 'relative', marginBlockStart: 44 }}>
+              <a className="mention" href="#" style={{ pointerEvents: 'none' }}>@Marcus Johnson</a>
+              <span className="lead v" style={{ top: -22, left: 14, height: 16 }} />
+              <div className="pin" style={{ top: -42, left: 14, transform: 'translateX(-50%)' }}>1</div>
+            </div>
+
+            {/* Profile card — faithful static render of the component */}
+            <div className="stage" style={{ position: 'relative' }}>
+              <div className="mention-card" style={{ width: 300, border: '1px solid var(--border)', borderRadius: 10, overflow: 'hidden', background: 'var(--bg-elevated)' }}>
+                <div className="mention-cover" />
+                <span className="mention-av"><Avatar name="Marcus Johnson" size={64} /></span>
+                <div className="mention-body">
+                  <div className="mention-name">
+                    <span>Marcus Johnson</span>
+                    <span className="mention-dot" data-status="busy" title="On-call now" />
+                  </div>
+                  <div className="mention-role">Staff SRE · Score &amp; Risk</div>
+                  <p className="mention-bio">SRE on the Score &amp; Risk platform. Owns the on-call rotation and the konduto rollback runbooks.</p>
+                  <div className="mention-rows">
+                    <p className="mention-row"><Icons.region size={13} aria-hidden="true" /> São Paulo · Brazil</p>
+                    <p className="mention-row mention-link"><Icons.mail size={13} aria-hidden="true" /> <span>marcus@equifax.com</span></p>
+                  </div>
+                </div>
+                <div className="mention-foot">
+                  <span className="mention-joined">Joined Mar 2021</span>
+                  <span className="mention-actions">
+                    <a className="btn ghost sm" href="#">Profile</a>
+                    <a className="btn ember sm" href="#">Message</a>
+                  </span>
+                </div>
+              </div>
+
+              {/* 2 — cover */}
+              <span className="lead v" style={{ top: -22, left: '50%', height: 18 }} />
+              <div className="pin" style={{ top: -42, left: '50%', transform: 'translateX(-50%)' }}>2</div>
+              {/* 3 — avatar */}
+              <span className="lead h" style={{ top: 80, left: -28, width: 24 }} />
+              <div className="pin" style={{ top: 72, left: -52 }}>3</div>
+              {/* 4 — name */}
+              <span className="lead h" style={{ top: 118, left: -28, width: 24 }} />
+              <div className="pin" style={{ top: 110, left: -52 }}>4</div>
+              {/* 5 — presence dot */}
+              <span className="lead h" style={{ top: 118, right: -28, width: 24 }} />
+              <div className="pin" style={{ top: 110, right: -52 }}>5</div>
+              {/* 6 — role · tribe */}
+              <span className="lead h" style={{ top: 150, left: -28, width: 24 }} />
+              <div className="pin" style={{ top: 142, left: -52 }}>6</div>
+              {/* 7 — bio */}
+              <span className="lead h" style={{ top: 190, right: -28, width: 24 }} />
+              <div className="pin" style={{ top: 182, right: -52 }}>7</div>
+              {/* 8 — contact rows */}
+              <span className="lead h" style={{ top: 238, left: -28, width: 24 }} />
+              <div className="pin" style={{ top: 230, left: -52 }}>8</div>
+              {/* 9 — joined */}
+              <span className="lead v" style={{ bottom: -22, left: 44, height: 18 }} />
+              <div className="pin" style={{ bottom: -42, left: 44, transform: 'translateX(-50%)' }}>9</div>
+              {/* 10 — actions */}
+              <span className="lead v" style={{ bottom: -22, right: 44, height: 18 }} />
+              <div className="pin" style={{ bottom: -42, right: 44, transform: 'translateX(50%)' }}>10</div>
+            </div>
           </div>
 
-          {/* Profile card anatomy — static mock */}
-          <div className="mention-card" style={{ width: 300, border: '1px solid var(--border)', borderRadius: 10, overflow: 'hidden', position: 'relative', background: 'var(--bg-elevated)' }}>
-            <div className="mention-cover" style={{ position: 'relative' }}>
-              <span className="pin" style={{ top: 8, left: 8 }}>2</span>
-            </div>
-            <span className="mention-av" style={{ position: 'relative', display: 'block' }}>
-              <Avatar name="Marcus Johnson" size={64} />
-              <span className="pin" style={{ top: -8, left: 56 }}>3</span>
-            </span>
-            <div className="mention-body">
-              <div className="mention-name" style={{ position: 'relative' }}>
-                <span>Marcus Johnson</span>
-                <span className="mention-dot" data-status="busy" title="On-call" />
-                <span className="pin" style={{ top: -12, left: 90 }}>4</span>
-                <span className="pin" style={{ top: -12, left: 150 }}>5</span>
-              </div>
-              <div className="mention-role" style={{ position: 'relative' }}>
-                Staff SRE · Score & Risk
-                <span className="pin" style={{ top: -10, right: 0 }}>6</span>
-              </div>
-              <div className="mention-rows" style={{ position: 'relative' }}>
-                <p className="mention-row"><Icons.region size={13} aria-hidden="true" /> São Paulo · Brazil</p>
-                <p className="mention-row mention-link"><Icons.mail size={13} aria-hidden="true" /> <span>marcus@equifax.com</span></p>
-                <span className="pin" style={{ top: 0, right: 0 }}>7</span>
-              </div>
-            </div>
-            <div className="mention-foot" style={{ position: 'relative' }}>
-              <span className="mention-joined">Joined Mar 2021</span>
-              <span className="mention-actions">
-                <a className="btn ghost sm" href="#">Profile</a>
-                <a className="btn ember sm" href="#">Message</a>
-              </span>
-              <span className="pin" style={{ top: -12, left: 8 }}>8</span>
-              <span className="pin" style={{ top: -12, right: 8 }}>9</span>
-            </div>
+          <div className="ana-list" style={{ maxWidth: 620, margin: '64px auto 0' }}>
+            <span className="num">1</span><span><b style={{ color: 'var(--fg)' }}>Pill trigger.</b> <Mono>{'<a className="mention">'}</Mono> — ember-soft background + ember-text. Inline, flows with prose; overrides the link styles inside <Mono>.msg-bubble</Mono> / <Mono>.ai-prose</Mono>.</span>
+            <span className="num">2</span><span><b style={{ color: 'var(--fg)' }}>Cover banner.</b> <Mono>.mention-cover</Mono> — 88px ember gradient, left→right. Decorative only, no text.</span>
+            <span className="num">3</span><span><b style={{ color: 'var(--fg)' }}>Avatar.</b> <Mono>{'<Avatar size={64}>'}</Mono> in <Mono>.mention-av</Mono> — a negative block-start margin straddles the banner edge; a bg-elevated ring lifts it off the cover.</span>
+            <span className="num">4</span><span><b style={{ color: 'var(--fg)' }}>Name.</b> Bold, <Mono>--text-md</Mono>, tracked at <Mono>-0.01em</Mono>.</span>
+            <span className="num">5</span><span><b style={{ color: 'var(--fg)' }}>Presence dot.</b> <Mono>.mention-dot</Mono> — 8px circle coloured by <Mono>data-status</Mono>; carries <Mono>title</Mono> + <Mono>aria-label</Mono>.</span>
+            <span className="num">6</span><span><b style={{ color: 'var(--fg)' }}>Role · tribe.</b> <Mono>.mention-role</Mono> — muted sm text, the two joined with " · ".</span>
+            <span className="num">7</span><span><b style={{ color: 'var(--fg)' }}>Bio.</b> <Mono>.mention-bio</Mono> — short professional summary, clamped to ~3 lines.</span>
+            <span className="num">8</span><span><b style={{ color: 'var(--fg)' }}>Contact rows.</b> <Mono>.mention-rows</Mono> — region (plain), email (Gmail compose link), phone (<Mono>tel:</Mono>). Hover tints the text ember.</span>
+            <span className="num">9</span><span><b style={{ color: 'var(--fg)' }}>Joined date.</b> <Mono>.mention-joined</Mono> — mono xs, fg-faint, at the footer&apos;s inline-start.</span>
+            <span className="num">10</span><span><b style={{ color: 'var(--fg)' }}>Actions.</b> <Mono>.mention-actions</Mono> — ghost "Profile" + ember "Message" sm buttons at the inline-end.</span>
           </div>
         </div>
-        <ol className="ana-list">
-          <li><strong>Pill trigger</strong> — <Mono>{'<a className="mention">'}</Mono>: ember-soft background + ember-text. Inline, flows with prose, overrides link styles inside bubble/prose surfaces.</li>
-          <li><strong>Cover banner</strong> — <Mono>.mention-cover</Mono>: 88px tall, ember gradient left→right. Decorative only.</li>
-          <li><strong>Avatar</strong> — <Mono>{'<Avatar size={64}>'}</Mono> inside <Mono>.mention-av</Mono>: negative block-start margin straddles the banner edge. 3px bg-elevated border creates the ring.</li>
-          <li><strong>Name</strong> — bold, <Mono>--text-md</Mono>, tracks at <Mono>-0.01em</Mono>.</li>
-          <li><strong>Presence dot</strong> — <Mono>.mention-dot</Mono>: 8px circle coloured by <Mono>data-status</Mono>. Has <Mono>title</Mono> and <Mono>aria-label</Mono>.</li>
-          <li><strong>Role · tribe</strong> — <Mono>.mention-role</Mono>: muted sm text joined with " · ".</li>
-          <li><strong>Contact rows</strong> — <Mono>.mention-rows</Mono>: region (plain), email (Gmail compose link), phone (tel: link). Hover: ember colour + underline on text span.</li>
-          <li><strong>Joined date</strong> — <Mono>.mention-joined</Mono>: mono xs, fg-faint.</li>
-          <li><strong>Actions</strong> — <Mono>.mention-actions</Mono>: ghost "Profile" + ember "Message" sm buttons.</li>
-        </ol>
       </div>
 
       {/* ====================================================================
@@ -532,7 +588,33 @@ npx eidos@latest add mention
         <Mono>MentionPerson</Mono> object. All fields on the person are optional
         except <Mono>name</Mono>.
       </Lede>
-      <AutoPropsTable component="Mention" />
+      <AutoPropsTable component="Mention" label="<Mention />" />
+
+      <Lede>
+        The component&apos;s real surface is the <Mono>person</Mono> object. Only{' '}
+        <Mono>name</Mono> is required — every other field is progressive: supply
+        what you have and the card grows to fit.
+      </Lede>
+      <table className="tbl" style={{ marginTop: 12 }}>
+        <thead>
+          <tr><th style={{ width: 130 }}>Field</th><th style={{ width: 230 }}>Type</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><Mono>name</Mono> <span style={{ color: 'var(--danger)' }}>*</span></td><td><Mono tone="subtle">string</Mono></td><td>Display name — rendered as <Mono tone="subtle">@Name</Mono> in the pill.</td></tr>
+          <tr><td><Mono>src</Mono></td><td><Mono tone="subtle">string</Mono></td><td>Photo URL. Falls back to generated initials.</td></tr>
+          <tr><td><Mono>role</Mono></td><td><Mono tone="subtle">string</Mono></td><td>Job title, e.g. "Staff SRE".</td></tr>
+          <tr><td><Mono>tribe</Mono></td><td><Mono tone="subtle">string</Mono></td><td>Team / tribe. Joined to <Mono tone="subtle">role</Mono> with " · ".</td></tr>
+          <tr><td><Mono>status</Mono></td><td><Mono tone="subtle">'online' | 'away' | 'busy' | 'offline'</Mono></td><td>Drives the presence-dot colour beside the name.</td></tr>
+          <tr><td><Mono>presence</Mono></td><td><Mono tone="subtle">string</Mono></td><td>Dot tooltip + <Mono tone="subtle">aria-label</Mono>, e.g. "On-call now". Rendered only when <Mono tone="subtle">status</Mono> is set.</td></tr>
+          <tr><td><Mono>bio</Mono></td><td><Mono tone="subtle">string</Mono></td><td>Short professional summary. Clamped to ~3 lines.</td></tr>
+          <tr><td><Mono>region</Mono></td><td><Mono tone="subtle">string</Mono></td><td>Location row, e.g. "São Paulo · Brazil".</td></tr>
+          <tr><td><Mono>email</Mono></td><td><Mono tone="subtle">string</Mono></td><td>Renders a Gmail compose link row.</td></tr>
+          <tr><td><Mono>phone</Mono></td><td><Mono tone="subtle">string</Mono></td><td>Renders a <Mono tone="subtle">tel:</Mono> link row.</td></tr>
+          <tr><td><Mono>joined</Mono></td><td><Mono tone="subtle">string</Mono></td><td>Footer label, e.g. "Joined Mar 2021".</td></tr>
+          <tr><td><Mono>chatHref</Mono></td><td><Mono tone="subtle">string</Mono></td><td>Target for the ember "Message" button (Google Chat by default).</td></tr>
+          <tr><td><Mono>href</Mono></td><td><Mono tone="subtle">string</Mono></td><td>Profile route — the pill and "Profile" button both link here.</td></tr>
+        </tbody>
+      </table>
     </Section>
   );
 }
