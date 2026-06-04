@@ -1071,25 +1071,51 @@ body:active::-webkit-scrollbar-thumb,
 .fp-ai-chat { display: flex; flex-direction: column; min-block-size: 100%; inline-size: 100%; }
 /* Inline inset matches the drawer header/body (28px) so messages, composer and
    header all align to the same column. */
-.fp-ai-chat-scroll { flex: 1 1 auto; min-block-size: 0; overflow-y: auto; padding: 16px 28px; }
+.fp-ai-chat-scroll {
+  flex: 1 1 auto; min-block-size: 0; overflow-y: auto;
+  padding: 16px 28px;
+  --sb: 10px;                            /* scrollbar gutter width */
+  /* Thin auto-hiding scrollbar (transparent until hover), so the --sb gutter is real. */
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  /* Fade the content at the top + bottom edges so messages dissolve into the
+     header and the composer (no hard divider). TWO mask layers: a vertical fade
+     over the content, and a SOLID strip over the scrollbar gutter so the
+     scrollbar is left intact (leave room for it, don't mask it too). */
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0, #000 16px, #000 calc(100% - 44px), transparent 100%),
+    linear-gradient(#000, #000);
+  mask-image:
+    linear-gradient(to bottom, transparent 0, #000 16px, #000 calc(100% - 44px), transparent 100%),
+    linear-gradient(#000, #000);
+  -webkit-mask-size: calc(100% - var(--sb)) 100%, var(--sb) 100%;
+  mask-size: calc(100% - var(--sb)) 100%, var(--sb) 100%;
+  -webkit-mask-position: top left, top right;
+  mask-position: top left, top right;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+[dir="rtl"] .fp-ai-chat-scroll {
+  -webkit-mask-position: top right, top left;
+  mask-position: top right, top left;
+}
+.fp-ai-chat-scroll:hover { scrollbar-color: var(--border-strong) transparent; }
+.fp-ai-chat-scroll::-webkit-scrollbar { width: 10px; }
+.fp-ai-chat-scroll::-webkit-scrollbar-thumb {
+  background: transparent; border-radius: 999px;
+  border: 2px solid transparent; background-clip: content-box;
+  transition: background .12s ease;
+}
+.fp-ai-chat-scroll:hover::-webkit-scrollbar-thumb { background: var(--border-strong); background-clip: content-box; }
 .fp-ai-thread { display: flex; flex-direction: column; gap: 24px; }
+/* The composer sits below the (masked) scroll; no scrim needed — the mask fades
+   the messages into it. */
 .fp-ai-chat-composer {
   flex-shrink: 0;
   position: sticky;
   inset-block-end: 0;
   padding: 8px 28px 14px;
   background: var(--bg-elevated);
-}
-/* No hard divider above the composer — a gradient scrim instead, so messages
-   fade into the input as they approach it. */
-.fp-ai-chat-composer::before {
-  content: '';
-  position: absolute;
-  inset-block-end: 100%;
-  inset-inline: 0;
-  block-size: 40px;
-  background: linear-gradient(to top, var(--bg-elevated), transparent);
-  pointer-events: none;
 }
 
 /* Empty state — ForgeMark hero + stacked starter Suggestions. */
