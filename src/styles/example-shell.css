@@ -851,9 +851,16 @@ body:active::-webkit-scrollbar-thumb,
   font-size: var(--text-sm);
 }
 
-/* 'full' variant — full-bleed row (content aligns to the page inset, hover
-   spans the column). */
-.fp-feed .fp-notif-row { padding-inline: 0; }
+/* 'full' variant — each item gets side margins so the unread band / hover read
+   as a contained, inset rounded surface instead of a full-bleed slab. Drop the
+   slab divider; the inset surface + row rhythm separate items (still flat, no
+   card). */
+.fp-feed .fp-notif-row {
+  padding: 12px 14px;
+  margin-inline: 8px;
+  border-radius: 10px;
+  border-bottom: none;
+}
 .fp-notif-body {
   margin: 4px 0 0;
   font-size: var(--text-sm);
