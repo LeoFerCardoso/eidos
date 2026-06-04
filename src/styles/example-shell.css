@@ -852,14 +852,13 @@ body:active::-webkit-scrollbar-thumb,
   font-size: var(--text-sm);
 }
 
-/* 'full' variant — each item gets side margins so the unread band / hover read
-   as a contained, inset rounded surface instead of a full-bleed slab. Drop the
-   slab divider; the inset surface + row rhythm separate items (still flat, no
-   card). */
+/* 'full' variant — the list itself has NO lateral margin: each item's surface
+   (unread band / hover) aligns its edges with the column (tabs + title). The
+   breathing room lives INSIDE the item as padding. Small radius; no slab
+   divider — the surface + row rhythm separate items (flat, no card). */
 .fp-feed .fp-notif-row {
   padding: 12px 14px;
-  margin-inline: 8px;
-  border-radius: 10px;
+  border-radius: 6px;
   border-bottom: none;
 }
 .fp-notif-body {
