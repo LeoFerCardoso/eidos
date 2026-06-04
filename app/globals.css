@@ -17,3 +17,10 @@ body {
 body > div:first-child {
   min-height: 100dvh;
 }
+
+/* Text selection follows the active accent (ember by default, Dusk/Fjord swap
+   --accent), instead of the browser's default blue. Force --fg on the selected
+   text so it stays legible on the tinted wash. Firefox needs its own rule —
+   keep them separate so one bad selector can't invalidate the other. */
+::selection { background: color-mix(in oklch, var(--accent, #FF6B35) 28%, transparent); color: var(--fg); }
+::-moz-selection { background: color-mix(in oklch, var(--accent, #FF6B35) 28%, transparent); color: var(--fg); }

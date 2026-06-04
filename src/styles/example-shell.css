@@ -1414,17 +1414,8 @@ body:active::-webkit-scrollbar-thumb,
 .fp-chat-empty-composer > .pi-shell { max-inline-size: 720px; }
 
 /* ── View: Active thread ───────────────────────────────────────────────── */
+/* No in-page title header — the chat title lives in the topbar breadcrumb. */
 .fp-chat-thread { display: flex; flex-direction: column; min-block-size: 100%; }
-.fp-chat-thread-crumb {
-  position: sticky; inset-block-start: 0; z-index: 2;
-  display: flex; align-items: center; gap: 8px;
-  padding: 12px 24px;
-  background: color-mix(in oklab, var(--bg) 88%, transparent);
-  backdrop-filter: blur(8px);
-  border-block-end: 1px solid var(--border);
-  font-size: 13px; font-weight: 600; color: var(--fg);
-}
-.fp-chat-thread-crumb > svg { color: var(--fg-muted); }
 /* Two-class selector (matches .msg-thread.fluid's specificity, and loads after
    ai.css) so the 820px cap + centring actually beat the .fluid `max-width: none`
    rule — otherwise the thread spans the whole column instead of sitting centred. */

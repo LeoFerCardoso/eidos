@@ -42,6 +42,17 @@ import { NOTIFS, NOTIF_PREVIEW, filterByTab, type NotifTab } from '@/portal/data
 // without changing their import paths.
 export { FPageHeader, FSection, FKpi, IconBubble } from '@/ds/examples/example-shell';
 
+// ── Page crumb context ──────────────────────────────────────────────────────
+// Lets a full-bleed page (e.g. the Chat thread) push a trailing breadcrumb
+// segment — the active chat title — into the topbar, instead of repeating it
+// as an in-page header. The page sets it; PortalTopbar appends it.
+type PageCrumb = { label: string } | null;
+const PageCrumbContext = React.createContext<{ crumb: PageCrumb; setCrumb: (c: PageCrumb) => void }>({
+  crumb: null,
+  setCrumb: () => {},
+});
+export const usePageCrumb = () => React.useContext(PageCrumbContext);
+
 // ── Rail items ────────────────────────────────────────────────────────────────
 
 type RailItem = {
@@ -566,14 +577,21 @@ const PortalTopbar = ({
   onToggleSidebar,
   onOpenAI,
   onOpenPalette,
+  pageCrumb,
 }: {
   pathname: string;
   sidebarOpen: boolean;
   onToggleSidebar: () => void;
   onOpenAI: () => void;
   onOpenPalette: () => void;
+  pageCrumb: PageCrumb;
 }) => {
-  const crumbs = buildCrumbs(pathname);
+  const base = buildCrumbs(pathname);
+  // A page-supplied crumb (e.g. the open chat's title) becomes the new current
+  // segment; the prior last crumb turns into a link back to the section.
+  const crumbs = pageCrumb
+    ? [...base.slice(0, -1), { label: base[base.length - 1]?.label ?? '', href: pathname }, { label: pageCrumb.label }]
+    : base;
 
   return (
     <header className="fp-topbar">
@@ -649,6 +667,10 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
   const [aiOpen, setAiOpen] = React.useState(false);
   const [paletteOpen, setPaletteOpen] = React.useState(false);
+  const [pageCrumb, setPageCrumb] = React.useState<PageCrumb>(null);
+  const crumbCtx = React.useMemo(() => ({ crumb: pageCrumb, setCrumb: setPageCrumb }), [pageCrumb]);
+  // Drop any page-supplied crumb when navigating away from its route.
+  React.useEffect(() => { setPageCrumb(null); }, [pathname]);
 
   // ⌘K / Ctrl+K toggles the command palette anywhere in the portal.
   React.useEffect(() => {
@@ -663,6 +685,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
+    <PageCrumbContext.Provider value={crumbCtx}>
     <div className="fp-app">
       {/* DS Sidebar — controlled, collapsible to icon-only rail.
           The Sidebar's own internal .sb-toggle button is hidden via CSS
@@ -741,6 +764,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         onToggleSidebar={() => setSidebarOpen((o) => !o)}
         onOpenAI={() => setAiOpen(true)}
         onOpenPalette={() => setPaletteOpen(true)}
+        pageCrumb={pageCrumb}
       />
 
       <main className={'fp-main' + (fullBleed ? ' fp-main--full' : '')}>{children}</main>
@@ -782,5 +806,6 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         onOpenAI={() => setAiOpen(true)}
       />
     </div>
+    </PageCrumbContext.Provider>
   );
 }

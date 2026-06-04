@@ -17,6 +17,7 @@ import {
   ChainOfThought, Citation, Sources,
   Diagram, MathView,
 } from '@/ds/core';
+import { usePageCrumb } from '@/portal/shell/portal-shell';
 
 // ── Sidebar data (one source of truth for every view) ───────────────────────
 const PINNED = [
@@ -270,15 +271,11 @@ const SOURCES = [
 const ThreadView = ({ chatId }: { chatId: string }) => {
   const [text, setText] = React.useState('');
   const [model, setModel] = React.useState('eidos-opus-4-7');
-  const title = findChatTitle(chatId);
 
+  // The chat title lives in the topbar breadcrumb (set by PortalChat), not as an
+  // in-page header.
   return (
     <div className="fp-chat-thread">
-      <div className="fp-chat-thread-crumb">
-        <Icons.chat size={13} />
-        <span>{title}</span>
-      </div>
-
       <div className="msg-thread fluid fp-chat-msgs">
         <Message from="user" meta={<><span className="t-mono-label">You</span> · 14:01</>}>
           Compare our three production Postgres databases and recommend which one to migrate to
@@ -796,6 +793,13 @@ const ProjectDetailView = ({ projectId, onBack, onOpenChat }: { projectId: strin
 export default function PortalChat() {
   const [nav, setNav] = React.useState<Nav>({ view: 'new' });
   const go = React.useCallback((n: Nav) => setNav(n), []);
+
+  // Surface the open chat's title in the topbar breadcrumb (Forge / Chat / …).
+  const { setCrumb } = usePageCrumb();
+  React.useEffect(() => {
+    setCrumb(nav.view === 'thread' ? { label: findChatTitle(nav.chatId ?? 'acerta-p99') } : null);
+    return () => setCrumb(null);
+  }, [nav, setCrumb]);
 
   return (
     <div className="fp-chat">
