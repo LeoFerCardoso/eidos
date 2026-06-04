@@ -14,6 +14,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTheme } from 'next-themes';
 import {
   Sidebar,
   SidebarSection,
@@ -31,7 +32,7 @@ import {
   Drawer,
   Avatar,
 } from '@/ds/core';
-import { ThemePicker } from '@/components/layout/theme-picker';
+import { useColorTheme, type ColorTheme } from '@/components/color-theme-provider';
 import { ForgeAIChat } from './forge-ai-chat';
 import { PortalCommandPalette } from './portal-command-palette';
 
@@ -470,6 +471,84 @@ const USER_ROWS: UserRow[] = [
   { icon: 'command',  label: 'Command menu',  shortcut: '⌘K' },
 ];
 
+// Appearance — a true submenu INSIDE the account menu (replaces the old standalone
+// topbar ThemePicker). It carries both DS axes — dark/light mode + accent theme —
+// the same controls as the DS docs picker. The flyout is rendered as a panel
+// DESCENDANT (not portaled) so the parent Popover's click-outside never fires when
+// you pick an option; it opens to the inline-start since the menu hugs the topbar's
+// trailing edge. Selecting an option keeps both menus open so you can tune freely.
+const AppearanceSubmenu = () => {
+  const { theme, setTheme, themes } = useColorTheme();
+  const { resolvedTheme, setTheme: setMode } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  React.useEffect(() => setMounted(true), []);
+
+  const mode = mounted ? resolvedTheme ?? 'dark' : 'dark';
+  const current = themes.find((t) => t.id === theme) ?? themes[0];
+
+  return (
+    <div
+      className="fp-user-sub"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        className="fp-user-row"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+      >
+        <Icons.palette size={15} />
+        <span className="label">Appearance</span>
+        <span className="fp-user-sub-val">{current.label} · {mode === 'dark' ? 'Dark' : 'Light'}</span>
+        <Icons.chevronRight size={14} />
+      </button>
+
+      {open && (
+        <div className="fp-user-flyout" role="menu" aria-label="Appearance">
+          <span className="fp-user-flyout-label">Mode</span>
+          {([['light', 'Light', 'sun'], ['dark', 'Dark', 'moon']] as const).map(([val, label, icon]) => {
+            const Icon = (Icons as Record<string, React.FC<{ size?: number }>>)[icon];
+            return (
+              <button
+                key={val}
+                type="button"
+                role="menuitemradio"
+                aria-checked={mode === val}
+                className="fp-user-opt"
+                onClick={() => setMode(val)}
+              >
+                <Icon size={14} />
+                <span className="label">{label}</span>
+                {mode === val && <Icons.check size={14} />}
+              </button>
+            );
+          })}
+
+          <span className="fp-user-flyout-sep" />
+          <span className="fp-user-flyout-label">Accent</span>
+          {themes.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              role="menuitemradio"
+              aria-checked={theme === t.id}
+              className="fp-user-opt"
+              onClick={() => setTheme(t.id as ColorTheme)}
+            >
+              <span className="fp-user-swatch" style={{ background: t.swatch }} aria-hidden="true" />
+              <span className="label">{t.label}</span>
+              {theme === t.id && <Icons.check size={14} />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const UserMenu = () => (
   <Popover
     align="end"
@@ -512,6 +591,7 @@ const UserMenu = () => (
               </button>
             );
           })}
+          <AppearanceSubmenu />
         </div>
 
         <div className="fp-user-plan">
@@ -537,10 +617,10 @@ const UserMenu = () => (
 );
 
 // ── TopBar ────────────────────────────────────────────────────────────────────
-// Order (inline-end): appearance picker · Forge AI · notifications · avatar.
-// Appearance uses the canonical DS <ThemePicker/> (mode + accent) so the portal
-// shares the exact control from the design-system docs. Forge AI opens an
-// in-context slide-over drawer; notifications + avatar open rich Popovers.
+// Order (inline-end): Forge AI · notifications · avatar. Appearance (mode +
+// accent) now lives as a submenu INSIDE the avatar account menu, not as a
+// standalone control. Forge AI opens an in-context slide-over drawer;
+// notifications + avatar open rich Popovers; the search opens the ⌘K palette.
 
 const PortalTopbar = ({
   pathname,
@@ -599,9 +679,6 @@ const PortalTopbar = ({
       </button>
 
       <div className="fp-topbar-actions">
-        {/* Appearance — the canonical DS picker (dark/light mode + accent theme) */}
-        <ThemePicker />
-
         {/* Forge AI — opens the copilot in an in-context slide-over drawer */}
         <button
           type="button"

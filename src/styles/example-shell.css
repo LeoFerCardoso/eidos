@@ -828,6 +828,63 @@ body:active::-webkit-scrollbar-thumb,
   border: 1px solid var(--border);
   border-radius: 4px;
 }
+/* Appearance submenu — a flyout rendered as a panel descendant (no portal), so
+   the parent Popover's click-outside never fires. Opens to the inline-start
+   because the account menu hugs the topbar's trailing edge. */
+.fp-user-sub { position: relative; }
+.fp-user-sub-val {
+  font-family: var(--font-mono); font-size: 10.5px;
+  color: var(--fg-faint);
+  white-space: nowrap;
+}
+.fp-user-sub .fp-user-row > svg:last-child { color: var(--fg-faint); flex-shrink: 0; }
+.fp-user-flyout {
+  position: absolute;
+  inset-block-start: -7px;
+  inset-inline-end: calc(100% + 5px);
+  inline-size: 188px;
+  padding: 6px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  box-shadow: var(--elev-3);
+  z-index: 5;
+  animation: pop-in var(--dur-fast) var(--ease) both;
+}
+.fp-user-flyout-label {
+  display: block;
+  padding: 6px 8px 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-faint);
+}
+.fp-user-flyout-sep { display: block; block-size: 1px; background: var(--border); margin: 6px 4px; }
+.fp-user-opt {
+  display: flex; align-items: center; gap: 10px;
+  inline-size: 100%;
+  padding: 7px 8px;
+  border-radius: var(--radius-md);
+  background: none; border: none;
+  color: var(--fg);
+  font-size: var(--text-sm);
+  text-align: start;
+  cursor: pointer;
+  transition: background .12s ease;
+}
+.fp-user-opt:hover { background: var(--surface); }
+.fp-user-opt > svg:first-child { color: var(--fg-muted); flex-shrink: 0; }
+.fp-user-opt .label { flex: 1; min-inline-size: 0; }
+.fp-user-opt[aria-checked='true'] { color: var(--fg); font-weight: 500; }
+.fp-user-opt[aria-checked='true'] > svg:last-child { color: var(--ember); flex-shrink: 0; }
+.fp-user-swatch {
+  inline-size: 14px; block-size: 14px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--fg) 18%, transparent);
+}
+
 .fp-user-plan { padding: 12px 14px; border-top: 1px solid var(--border); }
 .fp-user-plan-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .fp-user-plan-name { font-size: var(--text-sm); font-weight: 600; color: var(--fg); }
