@@ -3040,3 +3040,210 @@ button.ai-cite-panel-head { cursor: pointer; }
   .dr-header, .dr-footer { padding-inline: 20px; }
   .dr-body { padding-inline: 20px; }
 }
+
+/* ─── 13. Mention (.mention / .mention-card-*) ──────────────────────────────
+ *
+ * Inline @-mention pill with a HoverCard profile preview. The pill flows
+ * with prose text; the card is a full-bleed profile panel.
+ *
+ * Class contract:
+ *   .mention          the <a> trigger pill (inline, ember-soft)
+ *   .mention-hc       HoverCard panel class — flatten padding + clip overflow
+ *   .mention-card     root <div> inside the panel
+ *   .mention-cover    ember cover banner (~88px)
+ *   .mention-av       avatar wrapper (negative margin to straddle banner bottom)
+ *   .mention-body     identity body (name, role, bio, rows)
+ *   .mention-name     name + presence dot row
+ *   .mention-dot      presence dot (coloured by data-status)
+ *   .mention-role     role · tribe line
+ *   .mention-bio      bio paragraph (clamped 3 lines)
+ *   .mention-rows     contact rows container
+ *   .mention-row      single contact row (icon + text)
+ *   .mention-link     email/phone anchor override (hover ember)
+ *   .mention-foot     footer (joined + action buttons)
+ *   .mention-joined   left-aligned joined date (mono xs)
+ *   .mention-actions  right-aligned button cluster
+ */
+
+/* ── Pill ─────────────────────────────────────────────────────────────────── */
+
+/* Inline text token: @name pill that flows with the sentence and sits on the
+   text baseline. ember-soft wash + ember-text, no underline.
+   Uses !important on text-decoration and color to defeat .msg-bubble a { } and
+   .ai-prose a { } overrides that would re-apply the default link appearance. */
+.mention {
+  display: inline;
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
+  background: var(--ember-soft);
+  color: var(--ember-text) !important;
+  font-weight: 500;
+  white-space: nowrap;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: background var(--dur-fast) var(--ease);
+  text-decoration: none !important;
+}
+.mention:hover,
+.mention:focus-visible {
+  background: color-mix(in oklch, var(--ember) 24%, transparent);
+  outline: none;
+}
+/* Keyboard focus: show a ring on the outer span wrapper that HoverCard injects. */
+.mention:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+/* ── HoverCard panel override ─────────────────────────────────────────────── */
+
+/* Flatten the panel so the cover banner runs edge-to-edge (no padding, no
+   overflow:hidden on hc-panel itself since the panel is portalled). */
+.hc-panel.mention-hc {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ── Profile card ─────────────────────────────────────────────────────────── */
+
+.mention-card {
+  /* No padding here — the cover fills the top; body owns its inset. */
+}
+
+.mention-cover {
+  block-size: 88px;
+  background: linear-gradient(120deg, var(--ember-deep), var(--ember) 58%, var(--ember-glow));
+}
+
+/* Avatar wrapper — negative block-start margin to straddle the cover bottom.
+   34px = (64px avatar / 2) + 2px border. */
+.mention-av {
+  display: block;
+  margin-block-start: -34px;
+  margin-inline-start: 16px;
+}
+/* Ring: thick border using bg-elevated colour for a gap-like effect. */
+.mention-av .avatar {
+  border: 3px solid var(--bg-elevated) !important;
+  box-shadow: var(--elev-1);
+}
+
+.mention-body {
+  padding: 10px 16px 2px;
+}
+
+/* Name row — name + presence dot */
+.mention-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+
+/* Presence dot: small coloured circle beside the name; tooltip carries the
+   status note. offline uses fg-faint (neutral / unknown). */
+.mention-dot {
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--fg-faint);        /* default: offline */
+}
+.mention-dot[data-status="online"] { background: var(--success); }
+.mention-dot[data-status="away"]   { background: var(--warning); }
+.mention-dot[data-status="busy"]   { background: var(--danger); }
+
+/* Role · tribe line */
+.mention-role {
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+  margin-block-start: 2px;
+}
+
+/* Bio paragraph — clamped to 3 lines */
+.mention-bio {
+  margin: 9px 0 0;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--fg-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Contact rows container */
+.mention-rows {
+  margin-block-start: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+/* Single contact row: icon (leading) + text. Truncate to one line. */
+.mention-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.mention-row > svg {
+  color: var(--fg-faint);
+  flex-shrink: 0;
+}
+
+/* Email / phone anchors: no underline at rest, ember on hover with underline
+   on the text span only. */
+.mention-link {
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease);
+}
+.mention-link:hover {
+  color: var(--ember-text);
+}
+.mention-link:hover > svg {
+  color: var(--ember-text);
+}
+.mention-link:hover > span {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Footer — joined date (start) + action buttons (end) */
+.mention-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-block-start: 12px;
+  padding: 10px 16px;
+  border-block-start: 1px solid var(--border);
+}
+
+.mention-joined {
+  font-size: var(--text-xs);
+  color: var(--fg-faint);
+  font-family: var(--font-mono);
+}
+
+.mention-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ── RTL mirroring ───────────────────────────────────────────────────────────
+   All layout uses logical CSS properties (inline-start / block-start / gap).
+   No directional overrides needed for the pill or body rows.
+   The HoverCard engine re-anchors the panel when dir="rtl" is set on the
+   trigger's containing element (align="start" maps to inline-end in RTL). */
+

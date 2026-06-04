@@ -27,6 +27,7 @@ export const MIGRATED: Record<string, () => Promise<{ default: ComponentType }>>
   "ai/label": () => import('./ai/label'),
   "ai/markdown": () => import('./ai/markdown'),
   "ai/math": () => import('./ai/math'),
+  "ai/mention": () => import('./ai/mention'),
   "ai/mermaid": () => import('./ai/mermaid'),
   "ai/message": () => import('./ai/message'),
   "ai/model-selector": () => import('./ai/model-selector'),

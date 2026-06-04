@@ -208,6 +208,7 @@
       { group: 'AI', items: [
         { id: 'overview',     label: 'Overview',     href: 'pages/ai/overview.html',     badge: 'new' },
         { id: 'message',      label: 'Message',      href: 'pages/ai/message.html',      badge: 'updated' },
+        { id: 'mention',      label: 'Mention',      href: 'pages/ai/mention.html',      badge: 'new' },
         { id: 'conversation', label: 'Conversation', href: 'pages/ai/conversation.html', badge: 'updated' },
         { id: 'prompt-input', label: 'Prompt Input', href: 'pages/ai/prompt-input.html', badge: 'updated' },
         { id: 'streaming',    label: 'Streaming',    href: 'pages/ai/streaming.html',    badge: 'new' },

@@ -1555,6 +1555,20 @@
       }
     },
     {
+      "name": "mention",
+      "kind": "ai",
+      "ds": "ai",
+      "title": "Mention",
+      "surfaces": {
+        "docs": "src/ds/migrated/ai/mention.tsx",
+        "export": "Mention",
+        "exportFile": "packages/ui/src/ai/mention.tsx",
+        "story": "packages/ui/src/stories/ai/Mention.stories.tsx",
+        "registry": "mention",
+        "registrySrc": "src/forge/mention.tsx"
+      }
+    },
+    {
       "name": "menubar",
       "kind": "component",
       "ds": "core",

@@ -82,6 +82,7 @@ const FAMILIES = {
   'ai/context.tsx':  { only: ['Context', 'ContextGauge', 'ContextBar'] },
   'ai/history.tsx':  { only: ['HistoryItem', 'HistoryGroup', 'History', 'HistoryShell'] },
   'ai/identity.tsx': { only: ['AILabel', 'AILabelWithPopover', 'AgentAvatar', 'AgentIdentity'] },
+  'ai/mention.tsx':  { only: ['Mention'] },
   'ai/message.tsx':  { only: ['Message', 'MessageActions', 'Response', 'Conversation'] },
   'ai/prompt.tsx':   { only: ['PromptSubmit', 'ModelBadge', 'ModelSelector', 'ModelPicker', 'Attachment', 'DropZone', 'DragDropOverlay', 'PromptBanner', 'PromptInput', 'Suggestion', 'SuggestionCard'] },
   'ai/prose.tsx':    { only: ['Prose', 'ProseCode'], npm: ['react-markdown', 'remark-gfm'] },
