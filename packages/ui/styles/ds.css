@@ -4397,6 +4397,9 @@ a:focus-visible,
 
 /* Floating panel — base state (invisible, off-screen until JS positions it) */
 .hc-panel {
+  /* Sits above drawers/modals/popovers — a hovercard is tooltip-tier. Without
+     this it inherits z-index:auto and renders BEHIND a Drawer (z 61). */
+  z-index: var(--z-tooltip, 300);
   background: var(--bg-elevated);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-xl);          /* 8px */
