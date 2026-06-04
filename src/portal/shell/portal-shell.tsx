@@ -33,6 +33,7 @@ import {
 } from '@/ds/core';
 import { ThemePicker } from '@/components/layout/theme-picker';
 import { ForgeAIChat } from './forge-ai-chat';
+import { PortalCommandPalette } from './portal-command-palette';
 
 // Re-export the shared layout helpers so portal pages can import from here
 // without changing their import paths.
@@ -546,11 +547,13 @@ const PortalTopbar = ({
   sidebarOpen,
   onToggleSidebar,
   onOpenAI,
+  onOpenPalette,
 }: {
   pathname: string;
   sidebarOpen: boolean;
   onToggleSidebar: () => void;
   onOpenAI: () => void;
+  onOpenPalette: () => void;
 }) => {
   const crumbs = buildCrumbs(pathname);
 
@@ -584,11 +587,16 @@ const PortalTopbar = ({
         ))}
       </nav>
 
-      <div className="fp-topbar-search" role="button" tabIndex={0} title="Search (coming soon)">
+      <button
+        type="button"
+        className="fp-topbar-search"
+        onClick={onOpenPalette}
+        aria-label="Search Forge — open command palette"
+      >
         <Icons.search size={13} />
-        <span className="label">Search services, scores, deploys…</span>
+        <span className="label">Search services, screens, actions…</span>
         <span className="kbd">⌘K</span>
-      </div>
+      </button>
 
       <div className="fp-topbar-actions">
         {/* Appearance — the canonical DS picker (dark/light mode + accent theme) */}
@@ -622,6 +630,19 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
   const active = activeKey(pathname);
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
   const [aiOpen, setAiOpen] = React.useState(false);
+  const [paletteOpen, setPaletteOpen] = React.useState(false);
+
+  // ⌘K / Ctrl+K toggles the command palette anywhere in the portal.
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setPaletteOpen((v) => !v);
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
 
   return (
     <div className="fp-app">
@@ -701,6 +722,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         sidebarOpen={sidebarOpen}
         onToggleSidebar={() => setSidebarOpen((o) => !o)}
         onOpenAI={() => setAiOpen(true)}
+        onOpenPalette={() => setPaletteOpen(true)}
       />
 
       <main className="fp-main">{children}</main>
@@ -727,6 +749,14 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
       >
         {aiOpen && <ForgeAIChat autoFocus />}
       </Drawer>
+
+      {/* ⌘K command palette — product-scoped (services · screens · actions). Grows
+          as new screens ship (see buildEntries in portal-command-palette). */}
+      <PortalCommandPalette
+        open={paletteOpen}
+        onClose={() => setPaletteOpen(false)}
+        onOpenAI={() => setAiOpen(true)}
+      />
     </div>
   );
 }
