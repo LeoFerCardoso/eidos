@@ -851,14 +851,16 @@ body:active::-webkit-scrollbar-thumb,
   z-index: 5;
   animation: pop-in var(--dur-fast) var(--ease) both;
 }
+/* Section labels adopt the panel-title voice (like "Notifications"): bold
+   Geist Sans, sentence case — one scale step down (13px vs the 15px menu title)
+   so they read as sub-sections, not an uppercase mono eyebrow. */
 .fp-user-flyout-label {
   display: block;
-  padding: 6px 8px 4px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--fg-faint);
+  padding: 8px 8px 5px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--fg);
 }
 .fp-user-flyout-sep { display: block; block-size: 1px; background: var(--border); margin: 6px 4px; }
 .fp-user-opt {
