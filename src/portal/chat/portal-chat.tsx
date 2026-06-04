@@ -11,7 +11,7 @@
 // chrome is the .fp-chat-* layer in src/styles/example-shell.css.
 import * as React from 'react';
 import {
-  Icons, ForgeMark,
+  Icons, ForgeMark, Avatar,
   PromptInput, PromptBanner, Suggestion,
   Message, Response, MessageActions, ProseCode,
   ChainOfThought, Citation, Sources,
@@ -39,8 +39,17 @@ const YESTERDAY = [
   { id: 'offer-flag',  title: 'offer-orchestrator cohort rollout',       preview: 'Suggest cohort 2 (10%) for tomorrow…' },
 ];
 
+// Pre-built agents — each opens a fresh chat scoped to its domain.
+const AGENTS = [
+  { id: 'sre',    name: 'SRE Copilot',      role: 'Incident response · runbooks' },
+  { id: 'fraud',  name: 'Fraud Analyst',    role: 'konduto rules · chargebacks' },
+  { id: 'bureau', name: 'Bureau Assistant', role: 'SCR · Cadastro Positivo' },
+];
+
+type Agent = (typeof AGENTS)[number];
+
 type View = 'new' | 'thread' | 'search' | 'projects' | 'project';
-type Nav = { view: View; chatId?: string; projectId?: string };
+type Nav = { view: View; chatId?: string; projectId?: string; agentId?: string };
 
 const findChatTitle = (id: string): string => {
   const all = [...RECENTS, ...YESTERDAY];
@@ -104,7 +113,7 @@ const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => (
   <aside className="fp-chat-side" aria-label="Chat navigation">
     <button
       type="button"
-      className={'fp-chat-newchat' + (nav.view === 'new' ? ' is-active' : '')}
+      className={'fp-chat-newchat' + (nav.view === 'new' && !nav.agentId ? ' is-active' : '')}
       onClick={() => go({ view: 'new' })}
     >
       <Icons.plus size={14} />
@@ -112,14 +121,19 @@ const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => (
     </button>
 
     <nav className="fp-chat-nav" aria-label="Primary">
-      <SideRow icon="folder" label="Projects"     count={PINNED.length} active={nav.view === 'projects'} onClick={() => go({ view: 'projects' })} />
-      <SideRow icon="search" label="Search chats" kbd="⌘K"              active={nav.view === 'search'}   onClick={() => go({ view: 'search' })} />
+      <SideRow icon="search" label="Search chats" kbd="⌘K" active={nav.view === 'search'} onClick={() => go({ view: 'search' })} />
     </nav>
 
     <div className="fp-chat-sep" role="separator" />
 
-    <div className="fp-chat-group">Pinned</div>
-    <nav className="fp-chat-nav" aria-label="Pinned spaces">
+    {/* Projects — the pinned spaces, with a link through to the full gallery. */}
+    <div className="fp-chat-grouphead">
+      <span>Projects</span>
+      <button type="button" className="fp-chat-viewmore" onClick={() => go({ view: 'projects' })}>
+        View more <Icons.chevronRight size={11} />
+      </button>
+    </div>
+    <nav className="fp-chat-nav" aria-label="Projects">
       {PINNED.map((p) => (
         <SideRow
           key={p.id}
@@ -133,7 +147,25 @@ const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => (
 
     <div className="fp-chat-sep" role="separator" />
 
-    <HistoryBucket label="Recents"   items={RECENTS}   activeChat={nav.view === 'thread' ? nav.chatId : undefined} onOpen={(id) => go({ view: 'thread', chatId: id })} />
+    {/* Agents — a fresh chat scoped to a domain assistant. */}
+    <div className="fp-chat-group">Agents</div>
+    <nav className="fp-chat-nav" aria-label="Agents">
+      {AGENTS.map((a) => (
+        <button
+          key={a.id}
+          type="button"
+          className={'fp-chat-agent' + (nav.view === 'new' && nav.agentId === a.id ? ' is-active' : '')}
+          onClick={() => go({ view: 'new', agentId: a.id })}
+        >
+          <Avatar name={a.name} size={22} />
+          <span className="label">{a.name}</span>
+        </button>
+      ))}
+    </nav>
+
+    <div className="fp-chat-sep" role="separator" />
+
+    <HistoryBucket label="Chats"     items={RECENTS}   activeChat={nav.view === 'thread' ? nav.chatId : undefined} onOpen={(id) => go({ view: 'thread', chatId: id })} />
     <HistoryBucket label="Yesterday" items={YESTERDAY} activeChat={nav.view === 'thread' ? nav.chatId : undefined} onOpen={(id) => go({ view: 'thread', chatId: id })} />
   </aside>
 );
@@ -146,7 +178,7 @@ const STARTERS = [
   { icon: 'incident', label: 'Draft a postmortem for INC-2041' },
 ];
 
-const NewChatView = ({ onSend }: { onSend: () => void }) => {
+const NewChatView = ({ onSend, agent }: { onSend: () => void; agent?: Agent }) => {
   const [text, setText] = React.useState('');
   const [model, setModel] = React.useState('eidos-sonnet-4-6');
   const [banner, setBanner] = React.useState(true);
@@ -157,11 +189,13 @@ const NewChatView = ({ onSend }: { onSend: () => void }) => {
     <div className="fp-chat-empty">
       <div className="fp-chat-empty-hero">
         <div className="fp-chat-empty-mark" aria-hidden="true">
-          <ForgeMark size={56} color="currentColor" />
+          {agent ? <Avatar name={agent.name} size={56} /> : <ForgeMark size={56} color="currentColor" />}
         </div>
-        <h1 className="fp-chat-empty-title">Hello, Leonardo</h1>
+        <h1 className="fp-chat-empty-title">{agent ? `Chat with ${agent.name}` : 'Hello, Leonardo'}</h1>
         <p className="fp-chat-empty-sub">
-          What can Forge AI help you with today? Ask about a service, draft a runbook, or kick off an incident review.
+          {agent
+            ? `${agent.role}. Ask anything in this domain — it answers from the right runbooks and catalog services.`
+            : 'What can Forge AI help you with today? Ask about a service, draft a runbook, or kick off an incident review.'}
         </p>
       </div>
 
@@ -743,7 +777,7 @@ export default function PortalChat() {
     <div className="fp-chat">
       <ChatSidebar nav={nav} go={go} />
       <section className="fp-chat-main">
-        {nav.view === 'new' && <NewChatView onSend={() => go({ view: 'thread', chatId: 'acerta-p99' })} />}
+        {nav.view === 'new' && <NewChatView agent={AGENTS.find((a) => a.id === nav.agentId)} onSend={() => go({ view: 'thread', chatId: 'acerta-p99' })} />}
         {nav.view === 'thread' && <ThreadView chatId={nav.chatId ?? 'acerta-p99'} />}
         {nav.view === 'search' && <SearchView onOpen={(id) => go({ view: 'thread', chatId: id })} />}
         {nav.view === 'projects' && <ProjectsView onOpen={(id) => go({ view: 'project', projectId: id })} />}
