@@ -46,6 +46,7 @@ function buildEntries(actions: { openAI: () => void }): CmdEntry[] {
     { id: 'nav-catalog',   label: 'Software Catalog', group: 'Navigate', icon: 'catalog', href: '/portal/catalog', keywords: 'services' },
     { id: 'nav-templates', label: 'Templates',        group: 'Navigate', icon: 'package', href: '/portal/create', keywords: 'golden path scaffold new service' },
     { id: 'nav-notifs',    label: 'Notifications',    group: 'Navigate', icon: 'bell',    href: '/portal/notifications', keywords: 'inbox alerts' },
+    { id: 'nav-chat',      label: 'Chat',             group: 'Navigate', icon: 'chat',    href: '/portal/chat', keywords: 'forge ai assistant projects conversations threads' },
 
     // Actions — quick verbs; this list is where future commands accrue.
     { id: 'act-ai', label: 'Ask Forge AI', group: 'Action', icon: 'sparkle', onRun: actions.openAI, keywords: 'copilot assistant chat estate' },

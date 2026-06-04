@@ -55,6 +55,7 @@ type RailItem = {
 const RAIL: RailItem[] = [
   { key: 'home',          icon: 'home',    label: 'Home',          href: '/portal' },
   { key: 'notifications', icon: 'bell',    label: 'Notifications', href: '/portal/notifications' },
+  { key: 'chat',          icon: 'chat',    label: 'Chat',          href: '/portal/chat' },
   { key: 'catalog',       icon: 'catalog', label: 'Catalog',       href: '/portal/catalog' },
   { key: 'create',     icon: 'package',    label: 'Templates',    href: '/portal/create' },
   { key: 'pipelines',  icon: 'pipeline',   label: 'Pipelines'                     },
@@ -82,6 +83,7 @@ const CRUMB_LABELS: Record<string, string> = {
   create:        'Templates',
   assistant:     'Forge AI',
   notifications: 'Notifications',
+  chat:          'Chat',
 };
 
 function buildCrumbs(pathname: string): { label: string; href?: string }[] {
@@ -405,21 +407,36 @@ const AppearanceSubmenu = () => {
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
 
+  // Submenu opens to the inline-start with a small gap; closing instantly on
+  // mouseleave makes the diagonal trip to the flyout lose it mid-way. Hold the
+  // close on a short timer so crossing the gap (and moving diagonally) re-enters
+  // and cancels it before it fires.
+  const closeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cancelClose = React.useCallback(() => {
+    if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null; }
+  }, []);
+  const openSub = React.useCallback(() => { cancelClose(); setOpen(true); }, [cancelClose]);
+  const scheduleClose = React.useCallback(() => {
+    cancelClose();
+    closeTimer.current = setTimeout(() => setOpen(false), 220);
+  }, [cancelClose]);
+  React.useEffect(() => cancelClose, [cancelClose]);
+
   const mode = mounted ? resolvedTheme ?? 'dark' : 'dark';
   const current = themes.find((t) => t.id === theme) ?? themes[0];
 
   return (
     <div
       className="fp-user-sub"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={openSub}
+      onMouseLeave={scheduleClose}
     >
       <button
         type="button"
         className="fp-user-row"
         aria-haspopup="menu"
         aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => { cancelClose(); setOpen((o) => !o); }}
       >
         <Icons.palette size={15} />
         <span className="label">Appearance</span>
@@ -626,6 +643,9 @@ const PortalTopbar = ({
 export function PortalShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() ?? '/portal';
   const active = activeKey(pathname);
+  // The Chat surface is full-bleed (its own sub-sidebar + independent scroll),
+  // so it opts out of the padded, max-width content column.
+  const fullBleed = pathname.startsWith('/portal/chat');
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
   const [aiOpen, setAiOpen] = React.useState(false);
   const [paletteOpen, setPaletteOpen] = React.useState(false);
@@ -723,7 +743,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         onOpenPalette={() => setPaletteOpen(true)}
       />
 
-      <main className="fp-main">{children}</main>
+      <main className={'fp-main' + (fullBleed ? ' fp-main--full' : '')}>{children}</main>
 
       {/* Forge AI — in-context copilot slide-over (same thread as /portal/assistant) */}
       <Drawer
