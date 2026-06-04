@@ -3013,6 +3013,17 @@ button.ai-cite-panel-head { cursor: pointer; }
   transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
 }
 .dr-close:hover { background: var(--surface-hover); color: var(--fg); }
+/* Trailing header cluster: optional actions + the close button. Action buttons
+   share the .dr-close geometry so they read as a set. */
+.dr-header-actions { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 2px; }
+.dr-header-action {
+  width: 32px; height: 32px; border-radius: 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--fg-faint); background: transparent; border: none; cursor: pointer;
+  text-decoration: none;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.dr-header-action:hover { background: var(--surface-hover); color: var(--fg); }
 
 .dr-body {
   flex: 1; min-block-size: 0; overflow-y: auto;

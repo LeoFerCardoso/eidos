@@ -739,9 +739,15 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
           </span>
         }
         desc="Reads your estate and acts on it."
-        footer={
-          <Link href="/portal/assistant" className="btn ghost sm" onClick={() => setAiOpen(false)}>
-            Open full page <Icons.externalLink size={13} />
+        headerActions={
+          <Link
+            href="/portal/assistant"
+            className="dr-header-action"
+            title="Open the full Forge AI page"
+            aria-label="Open the full Forge AI page"
+            onClick={() => setAiOpen(false)}
+          >
+            <Icons.maximize size={16} />
           </Link>
         }
       >
