@@ -74,26 +74,14 @@ export default function NotificationsInboxPage() {
 
   const panelRows = (t: NotifTab) => search(filterByTab(rows, t));
   const unreadOf = (t: NotifTab) => filterByTab(rows, t).filter((n) => n.unread).length;
-
-  const total = filterByTab(rows, 'all').length;
   const allUnread = unreadOf('all');
-  const needAction = rows.filter((n) => n.kind === 'approval' && !n.archived).length;
-
-  // Support line: lead with what's actionable, then the unread count. Real
-  // numbers, plain sentences, no em-dash.
-  const subtitle = (() => {
-    const parts: string[] = [];
-    if (needAction > 0) parts.push(`${needAction} approval${needAction > 1 ? 's' : ''} waiting on you`);
-    if (allUnread > 0) parts.push(`${allUnread} unread of ${total}`);
-    return parts.length ? `${parts.join('. ')}.` : "You're all caught up.";
-  })();
 
   return (
     <>
       <FPageHeader
         eyebrow="Inbox"
         title="Notifications"
-        subtitle={subtitle}
+        subtitle="Deploys, reviews, incidents and approvals from the services you own."
         actions={
           <>
             <button type="button" className="btn ghost">
@@ -106,7 +94,7 @@ export default function NotificationsInboxPage() {
         }
       />
 
-      <Tabs value={tab} onValueChange={(v) => setTab(v as NotifTab)}>
+      <Tabs className="fp-feed-tabs" value={tab} onValueChange={(v) => setTab(v as NotifTab)}>
         <div className="fp-feed-bar">
           <TabsList aria-label="Notification filter">
             {TABS.map(([id, label]) => {

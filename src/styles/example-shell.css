@@ -830,6 +830,19 @@ body:active::-webkit-scrollbar-thumb,
 .fp-feed-bar .eidos-tablist--line { border-bottom: none; }
 .fp-feed-search { margin-inline-start: auto; inline-size: 260px; margin-block: 7px; }
 
+/* The DS TabsContent (.eidos-tabpanel) is a carded panel by default — padding +
+   border + elevated bg. The inbox has ONE subject per tab, so flatten it to
+   nothing: the feed is just a list, no card. (Scoped, not a global DS change.) */
+.fp-feed-tabs .eidos-tabpanel,
+[data-mode="light"] .fp-feed-tabs .eidos-tabpanel {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  min-height: 0;
+}
+
 .fp-feed { display: flex; flex-direction: column; }
 .fp-feed-empty {
   display: flex; flex-direction: column; align-items: center; gap: 8px;
