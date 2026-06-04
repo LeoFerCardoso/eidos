@@ -106,6 +106,37 @@ const findChatTitle = (id: string): string => {
 const ICON = (key: string): React.FC<{ size?: number }> =>
   (Icons as Record<string, React.FC<{ size?: number }>>)[key] ?? Icons.folder;
 
+// Canonical DS search field (mirrors the Inputs doc's Search demo): an .in-group
+// with a leading .in-addon.icon magnifier and a trailing affordance that swaps
+// between the keyboard-shortcut hint (empty) and a clear-✕ button (typed).
+const ChatSearch = ({
+  value, onChange, placeholder, shortcut = '⌘K', className,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder: string;
+  shortcut?: string;
+  className?: string;
+}) => (
+  <div className={'in-group' + (className ? ` ${className}` : '')}>
+    <span className="in-addon icon"><Icons.search size={14} /></span>
+    <input
+      className="in-control"
+      placeholder={placeholder}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      aria-label={placeholder}
+    />
+    {value ? (
+      <button type="button" className="in-addon btn" onClick={() => onChange('')} aria-label="Clear search">
+        <Icons.x size={14} />
+      </button>
+    ) : (
+      <span className="in-addon" style={{ paddingInline: 10 }}><span className="kbd">{shortcut}</span></span>
+    )}
+  </div>
+);
+
 // ── Sub-sidebar ─────────────────────────────────────────────────────────────
 const SideRow = ({
   icon, label, count, kbd, active, onClick,
@@ -634,10 +665,7 @@ const ProjectsView = ({ onOpen }: { onOpen: (id: string) => void }) => {
       </header>
 
       <div className="fp-chat-projects-toolbar">
-        <div className="in-group fp-chat-projects-search">
-          <span className="in-addon"><Icons.search size={13} /></span>
-          <input className="in-control" type="search" placeholder="Search projects…" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search projects" />
-        </div>
+        <ChatSearch value={q} onChange={setQ} placeholder="Search projects…" className="fp-chat-projects-search" />
         <div className="fp-chat-projects-toolbar-end">
           <span className="fp-chat-projects-count">{filtered.length} {filtered.length === 1 ? 'project' : 'projects'}</span>
           <button className="btn sm outline"><span style={{ color: 'var(--fg-muted)' }}>Sort:</span><span>Recent activity</span><Icons.chevronDown size={11} /></button>
@@ -696,10 +724,7 @@ const AgentsView = ({ onOpen }: { onOpen: (id: string) => void }) => {
       </header>
 
       <div className="fp-chat-projects-toolbar">
-        <div className="in-group fp-chat-projects-search">
-          <span className="in-addon"><Icons.search size={13} /></span>
-          <input className="in-control" type="search" placeholder="Search agents…" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search agents" />
-        </div>
+        <ChatSearch value={q} onChange={setQ} placeholder="Search agents…" className="fp-chat-projects-search" />
         <div className="fp-chat-projects-toolbar-end">
           <span className="fp-chat-projects-count">{filtered.length} {filtered.length === 1 ? 'agent' : 'agents'}</span>
         </div>
@@ -1062,10 +1087,7 @@ const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => 
 
       {/* Toolbar — search (leading) · grid/list toggle (trailing). */}
       <div className="fp-chat-art-toolbar">
-        <div className="in-group fp-chat-art-search">
-          <span className="in-addon"><Icons.search size={13} /></span>
-          <input className="in-control" type="search" placeholder="Search artifacts…" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search artifacts" />
-        </div>
+        <ChatSearch value={q} onChange={setQ} placeholder="Search artifacts…" className="fp-chat-art-search" />
         <ToggleGroup
           type="single"
           variant="default"
