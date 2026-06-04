@@ -8,6 +8,12 @@
    ========================================================================== */
 
 html, body { margin: 0; padding: 0; height: 100%; }
+/* Reserve the scrollbar gutter on the document so a page that scrolls and one
+   that doesn't share the SAME content width — no horizontal shift between a
+   short page and a long one. The thumb is auto-hidden (transparent until you
+   scroll), so the reserved gutter reads as a constant thin margin, not a pushy
+   bar — close to a floating scrollbar in feel while staying consistent. */
+html { scrollbar-gutter: stable; }
 body {
   font-family: var(--font-body);
   background: var(--bg);
