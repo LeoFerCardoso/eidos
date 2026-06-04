@@ -53,8 +53,9 @@ type RailItem = {
 
 // Product IA — live routes have an href; the rest are disabled (vision placeholders).
 const RAIL: RailItem[] = [
-  { key: 'home',       icon: 'home',       label: 'Home',         href: '/portal' },
-  { key: 'catalog',    icon: 'catalog',    label: 'Catalog',   href: '/portal/catalog' },
+  { key: 'home',          icon: 'home',    label: 'Home',          href: '/portal' },
+  { key: 'notifications', icon: 'bell',    label: 'Notifications', href: '/portal/notifications' },
+  { key: 'catalog',       icon: 'catalog', label: 'Catalog',       href: '/portal/catalog' },
   { key: 'create',     icon: 'package',    label: 'Templates',    href: '/portal/create' },
   { key: 'pipelines',  icon: 'pipeline',   label: 'Pipelines'                     },
   { key: 'fraud',      icon: 'shield',     label: 'Fraud & Risk'                  },

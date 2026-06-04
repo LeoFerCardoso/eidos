@@ -2,15 +2,29 @@
 // One notification row — shared by the topbar bell preview and the
 // /portal/notifications inbox. Resolves the avatar policy (photo · ember-system
 // · initials · anonymous silhouette) and the optional approval / file affordances.
+//
+// variant:
+//   'compact' (bell)  — time sits inline in the meta line; tight popover width.
+//   'full'    (inbox) — time is pulled to a right-aligned column so the wider
+//                       page row uses its width like a real inbox.
 import * as React from 'react';
 import { Avatar, Icons } from '@/ds/core';
 import type { Notif } from '@/portal/data/notifications';
 
-export function NotifRow({ n, onRead }: { n: Notif; onRead?: (id: string) => void }) {
+export function NotifRow({
+  n,
+  onRead,
+  variant = 'compact',
+}: {
+  n: Notif;
+  onRead?: (id: string) => void;
+  variant?: 'compact' | 'full';
+}) {
   const SysIcon = n.system ? (Icons as Record<string, React.FC<{ size?: number }>>)[n.system] : null;
+  const full = variant === 'full';
   return (
     <div
-      className={`fp-notif-row${n.unread ? ' unread' : ''}`}
+      className={`fp-notif-row${full ? ' fp-notif-row--full' : ''}${n.unread ? ' unread' : ''}`}
       onMouseEnter={() => n.unread && onRead?.(n.id)}
     >
       <Avatar
@@ -31,8 +45,12 @@ export function NotifRow({ n, onRead }: { n: Notif; onRead?: (id: string) => voi
           {n.target ? <> {n.target}</> : null}
         </p>
         <p className="fp-notif-meta">
-          <span>{n.time}</span>
-          <span className="fp-notif-sep">·</span>
+          {!full && (
+            <>
+              <span>{n.time}</span>
+              <span className="fp-notif-sep">·</span>
+            </>
+          )}
           <span>{n.context}</span>
         </p>
 
@@ -51,6 +69,8 @@ export function NotifRow({ n, onRead }: { n: Notif; onRead?: (id: string) => voi
           </span>
         )}
       </div>
+
+      {full && <span className="fp-notif-time">{n.time}</span>}
     </div>
   );
 }

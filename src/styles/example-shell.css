@@ -811,19 +811,55 @@ body:active::-webkit-scrollbar-thumb,
 }
 
 /* ---- Notifications inbox page (/portal/notifications) ----------------------- */
-/* The dedicated full feed. Reuses the .fp-notif-* row + tab atoms inside a
-   bordered card, in a reading-width column. */
+/* The dedicated full feed. Follows the portal page rhythm: a toolbar (canonical
+   DS Tabs + search) over a bordered list card, in a constrained reading column
+   left-aligned under the header. Rows are the shared .fp-notif-* in 'full'
+   variant (time pulled to a right-aligned column). */
+.fp-inbox-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-inline-size: 920px;
+  border-bottom: 1px solid var(--border);
+  margin-block-end: 16px;
+}
+/* Move the tablist's own line onto the toolbar so the divider spans tabs + search;
+   the active tab's ember indicator still sits on that border, like the bell. */
+.fp-inbox-toolbar .eidos-tablist--line { border-bottom: none; }
+.fp-inbox-search { margin-inline-start: auto; inline-size: 240px; margin-block: 7px; }
+
 .fp-inbox {
-  max-inline-size: 760px;
-  margin-inline: auto;
+  max-inline-size: 920px;
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   background: var(--bg-elevated);
   overflow: hidden;
 }
-.fp-inbox .fp-notif-tabs { padding-inline: 18px; }
 .fp-inbox-list { display: flex; flex-direction: column; }
 .fp-inbox-list .fp-notif-row { padding-inline: 18px; }
+.fp-inbox-foot {
+  max-inline-size: 920px;
+  margin-block-start: 12px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--fg-faint);
+}
+
+/* 'full' row variant — right-aligned timestamp column so the wide page row
+   uses its width. On unread rows the time rides the ember-soft band, so it
+   takes the in-hue muted tone (same contrast rule as .on-accent-soft). */
+.fp-notif-time {
+  margin-inline-start: auto;
+  align-self: flex-start;
+  flex-shrink: 0;
+  padding-block-start: 1px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-faint);
+  white-space: nowrap;
+}
+.fp-notif-row.unread .fp-notif-time { color: var(--ember-soft-text-muted); }
 
 /* ---- Account menu ----------------------------------------------------------- */
 .fp-user-pop.pop {
