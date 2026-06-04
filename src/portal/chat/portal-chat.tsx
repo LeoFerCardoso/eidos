@@ -12,7 +12,7 @@
 import * as React from 'react';
 import {
   Icons, ForgeMark, Avatar,
-  PromptInput, PromptBanner, Suggestion,
+  PromptInput, PromptBanner, SuggestionCard,
   Message, Response, MessageActions, ProseCode,
   ChainOfThought, Citation, Sources,
   Diagram, MathView,
@@ -171,19 +171,37 @@ const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => (
 );
 
 // ── View: New chat (empty hero) ─────────────────────────────────────────────
-const STARTERS = [
-  { icon: 'gauge',    label: 'Audit p99 on the score-serving path' },
-  { icon: 'shield',   label: 'Why did konduto-antifraud rejections spike?' },
-  { icon: 'book',     label: 'Find services without an LGPD consent scope' },
-  { icon: 'incident', label: 'Draft a postmortem for INC-2041' },
+const STARTERS: { icon: string; title: string; line: string; prompt: string }[] = [
+  {
+    icon: 'gauge',
+    title: 'Audit the score-serving path',
+    line: 'Correlate acerta-api p99 with its dependencies.',
+    prompt: 'Audit p99 latency on the score-serving path (acerta-api → onescore-gateway → score-engine). Correlate the spike with recent deploys and upstream dependencies, and tell me the most likely root cause.',
+  },
+  {
+    icon: 'shield',
+    title: 'konduto-antifraud rejections',
+    line: 'Why did the false-positive rate spike?',
+    prompt: 'konduto-antifraud false-positive rejections spiked after the v3.1.7 deploy. Walk me through which rule changed, the expected impact on approvals, and whether I should roll it back or gate it behind a flag.',
+  },
+  {
+    icon: 'book',
+    title: 'LGPD consent gaps',
+    line: 'Find services logging PII without a consent scope.',
+    prompt: 'Find every service in the catalog that logs PII (CPF, CNPJ, name or address) without a registered LGPD consent scope, rank them by request volume, and suggest the consent scope each one should declare.',
+  },
+  {
+    icon: 'incident',
+    title: 'Draft a postmortem',
+    line: 'Blameless write-up for INC-2041.',
+    prompt: 'Draft a blameless postmortem for INC-2041 in the Forge IC template: timeline, contributing factors, customer impact, and 3–5 corrective actions with owners and due dates.',
+  },
 ];
 
 const NewChatView = ({ onSend, agent }: { onSend: () => void; agent?: Agent }) => {
   const [text, setText] = React.useState('');
   const [model, setModel] = React.useState('eidos-sonnet-4-6');
   const [banner, setBanner] = React.useState(true);
-  const selected = React.useMemo(() => STARTERS.find((s) => text.startsWith(s.label))?.label || null, [text]);
-  const pick = (label: string) => setText(selected === label ? '' : label + ' ');
 
   return (
     <div className="fp-chat-empty">
@@ -199,13 +217,17 @@ const NewChatView = ({ onSend, agent }: { onSend: () => void; agent?: Agent }) =
         </p>
       </div>
 
-      <div className="fp-chat-empty-suggests">
+      <div className="sg-cards fp-chat-empty-cards">
         {STARTERS.map((s) => {
           const I = ICON(s.icon);
           return (
-            <Suggestion key={s.label} icon={<I size={12} />} size="md" pressed={selected === s.label} onClick={() => pick(s.label)}>
-              {s.label}
-            </Suggestion>
+            <SuggestionCard
+              key={s.title}
+              icon={<I size={14} />}
+              title={s.title}
+              line={s.line}
+              onClick={() => setText(s.prompt)}
+            />
           );
         })}
       </div>
