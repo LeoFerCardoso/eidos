@@ -1275,6 +1275,11 @@ body:active::-webkit-scrollbar-thumb,
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .fp-profile-row > svg { color: var(--fg-faint); flex-shrink: 0; }
+/* The email row is a link to Gmail compose — reads as clickable on hover. */
+.fp-profile-link { text-decoration: none; cursor: pointer; transition: color .12s ease; }
+.fp-profile-link:hover { color: var(--ember-text); }
+.fp-profile-link:hover > svg { color: var(--ember-text); }
+.fp-profile-link:hover > span { text-decoration: underline; text-underline-offset: 2px; }
 .fp-profile-foot {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
   margin-block-start: 12px; padding: 10px 16px;

@@ -89,7 +89,15 @@ export function UserMention({ person }: { person: MentionPerson }) {
                 <p className="fp-profile-row"><Icons.region size={13} /> {person.region}</p>
               )}
               {person.email && (
-                <p className="fp-profile-row"><Icons.mail size={13} /> {person.email}</p>
+                <a
+                  className="fp-profile-row fp-profile-link"
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(person.email)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  title={`Email ${person.name}`}
+                >
+                  <Icons.mail size={13} /> <span>{person.email}</span>
+                </a>
               )}
             </div>
           )}
