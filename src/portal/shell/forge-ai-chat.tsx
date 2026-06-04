@@ -16,7 +16,7 @@ import {
 import { RootCauseWidget, UserMention } from './forge-ai-widgets';
 
 const COMMANDER = {
-  name: 'Bruno Mendes',
+  name: 'Marcus Johnson',
   src: '/avatars/Marcus-Johnson.jpg',
   role: 'Staff SRE',
   tribe: 'Score & Risk',
@@ -24,9 +24,26 @@ const COMMANDER = {
   presence: 'On-call now · paged 6h ago',
   bio: 'SRE on the Score & Risk platform. Owns the on-call rotation and the konduto rollback runbooks. Ask me about incident response and SLOs.',
   region: 'São Paulo · Brazil',
-  email: 'bruno.mendes@equifax.com',
+  email: 'marcus.johnson@equifax.com',
   phone: '+55 11 99876-5432',
   joined: 'Joined Mar 2021',
+  chatHref: 'https://chat.google.com/',
+  href: '/portal',
+};
+
+// Backup on-call (real headshot, so the mention hovercard reads right).
+const BACKUP = {
+  name: 'Diego Ferreira',
+  src: '/avatars/Diego-Ferreira.jpg',
+  role: 'Platform Eng',
+  tribe: 'Score & Risk',
+  status: 'online' as const,
+  presence: 'Available · backup on-call',
+  bio: 'Platform engineer on Score & Risk. Secondary pager this week. Owns the Ignite feature-store wiring.',
+  region: 'Rio de Janeiro · Brazil',
+  email: 'diego.ferreira@equifax.com',
+  phone: '+55 21 98123-4567',
+  joined: 'Joined Aug 2022',
   chatHref: 'https://chat.google.com/',
   href: '/portal',
 };
@@ -46,7 +63,23 @@ const FOLLOWUPS = ['Roll back konduto-antifraud', 'Who is on-call?', 'Open the i
 function answer(qRaw: string): React.ReactNode {
   const q = qRaw.toLowerCase();
 
-  if (/acerta|degrad|slow|latenc|p99|p95|rollback|roll back|konduto/.test(q)) {
+  if (/roll ?back/.test(q)) {
+    return (
+      <>
+        <p style={{ margin: '0 0 12px' }}>
+          This rolls back <code className="mono">konduto-antifraud</code> from <code className="mono">v3.1.7</code> to{' '}
+          <code className="mono">v3.1.6</code> in prod, reverting the new fraud-score rule. Gated rollout, about 4
+          minutes, and I'll watch <code className="mono">acerta-api</code> p99 for 10 minutes after.
+        </p>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <button className="btn ember sm"><Icons.rollback size={12} /> Confirm rollback</button>
+          <button className="btn ghost sm">Cancel</button>
+        </div>
+      </>
+    );
+  }
+
+  if (/acerta|degrad|slow|latenc|p99|p95|konduto/.test(q)) {
     return (
       <>
         <p style={{ margin: '0 0 10px' }}>
@@ -84,7 +117,21 @@ function answer(qRaw: string): React.ReactNode {
     );
   }
 
-  if (/incident|inc-|on-?call|page/.test(q)) {
+  if (/on-?call|who('?s| is)? on|rotation|the pager/.test(q)) {
+    return (
+      <>
+        <p style={{ margin: '0 0 10px' }}>
+          <UserMention person={COMMANDER} /> has the <strong>Score &amp; Risk</strong> pager right now. On since 12:00,
+          off at 18:00, paged 6h ago for INC-2041. Backup is <UserMention person={BACKUP} />.
+        </p>
+        <a className="btn ghost sm" href={COMMANDER.chatHref} target="_blank" rel="noreferrer">
+          <Icons.chat size={12} /> Message on-call
+        </a>
+      </>
+    );
+  }
+
+  if (/incident|inc-|open the|page/.test(q)) {
     return (
       <>
         <p style={{ margin: '0 0 10px' }}>There is <strong>1 open incident</strong> right now:</p>
