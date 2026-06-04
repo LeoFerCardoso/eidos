@@ -1241,7 +1241,7 @@ body:active::-webkit-scrollbar-thumb,
 }
 .fp-profile-av {
   display: block;
-  margin-block-start: -28px;
+  margin-block-start: -34px;
   margin-inline-start: 16px;
 }
 .fp-profile-av .avatar {

@@ -42,6 +42,8 @@ export interface MentionPerson {
   region?: string;
   /** Contact email. */
   email?: string;
+  /** Contact phone. */
+  phone?: string;
   /** Joined date, e.g. "Joined Mar 2021". */
   joined?: string;
   /** Profile route. */
@@ -70,7 +72,7 @@ export function UserMention({ person }: { person: MentionPerson }) {
       <div className="fp-profile">
         <div className="fp-profile-cover" aria-hidden="true" />
         <span className="fp-profile-av">
-          <Avatar name={person.name} src={person.src} size={52} />
+          <Avatar name={person.name} src={person.src} size={64} />
         </span>
         <div className="fp-profile-body">
           <div className="fp-profile-name">
@@ -83,7 +85,7 @@ export function UserMention({ person }: { person: MentionPerson }) {
             <div className="fp-profile-role">{[person.role, person.tribe].filter(Boolean).join(' · ')}</div>
           )}
           {person.bio && <p className="fp-profile-bio">{person.bio}</p>}
-          {(person.region || person.email) && (
+          {(person.region || person.email || person.phone) && (
             <div className="fp-profile-rows">
               {person.region && (
                 <p className="fp-profile-row"><Icons.region size={13} /> {person.region}</p>
@@ -97,6 +99,15 @@ export function UserMention({ person }: { person: MentionPerson }) {
                   title={`Email ${person.name}`}
                 >
                   <Icons.mail size={13} /> <span>{person.email}</span>
+                </a>
+              )}
+              {person.phone && (
+                <a
+                  className="fp-profile-row fp-profile-link"
+                  href={`tel:${person.phone.replace(/[^\d+]/g, '')}`}
+                  title={`Call ${person.name}`}
+                >
+                  <Icons.phone size={13} /> <span>{person.phone}</span>
                 </a>
               )}
             </div>
