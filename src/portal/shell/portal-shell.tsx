@@ -745,7 +745,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
           </Link>
         }
       >
-        {aiOpen && <ForgeAIChat autoFocus />}
+        {aiOpen && <ForgeAIChat />}
       </Drawer>
 
       {/* ⌘K command palette — product-scoped (services · screens · actions). Grows
