@@ -17,6 +17,7 @@ import {
   ChainOfThought, Citation, Sources,
   Diagram, MathView,
   Modal, Card, CardMedia, CardHeader, CardTitle, CardContent, CardFooter,
+  ToggleGroup, ToggleGroupItem,
 } from '@/ds/core';
 import { usePageCrumb } from '@/portal/shell/portal-shell';
 
@@ -995,14 +996,17 @@ const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => 
           <span className="in-addon"><Icons.search size={13} /></span>
           <input className="in-control" type="search" placeholder="Search artifacts…" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search artifacts" />
         </div>
-        <div className="fp-chat-art-toggle" role="group" aria-label="View mode">
-          <button type="button" className={'fp-chat-art-toggle-btn' + (mode === 'grid' ? ' is-active' : '')} aria-pressed={mode === 'grid'} onClick={() => setMode('grid')} title="Grid view" aria-label="Grid view">
-            <Icons.grid size={14} />
-          </button>
-          <button type="button" className={'fp-chat-art-toggle-btn' + (mode === 'list' ? ' is-active' : '')} aria-pressed={mode === 'list'} onClick={() => setMode('list')} title="List view" aria-label="List view">
-            <Icons.list size={14} />
-          </button>
-        </div>
+        <ToggleGroup
+          type="single"
+          variant="default"
+          value={mode}
+          onValueChange={(v) => v && setMode(v as 'grid' | 'list')}
+          aria-label="View mode"
+          className="fp-chat-art-toggle"
+        >
+          <ToggleGroupItem value="grid" aria-label="Grid view"><Icons.grid size={12} /></ToggleGroupItem>
+          <ToggleGroupItem value="list" aria-label="List view"><Icons.menu size={12} /></ToggleGroupItem>
+        </ToggleGroup>
       </div>
 
       {items.length === 0 ? (
