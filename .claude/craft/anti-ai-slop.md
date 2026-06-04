@@ -64,6 +64,39 @@ These are the patterns the linter blocks at P0 (must-fix):
   auto-checked)* — alternating density (one tight section, one
   breathing section) reads as intentional.
 
+## Layout & copy discipline (P0 — these are the ones humans notice)
+
+These caught real reviewer ire. Treat as must-fix.
+
+- **Card-in-card / gratuitous carding.** A card's job is to *separate
+  concerns* — distinct subjects that need a visual boundary. A region with
+  **one subject** (a single list, a single table, one tab's content) gets
+  **no card**, just the content. NEVER nest a card inside a card. A list inside
+  a bordered box inside a tab panel is three frames around one idea. Default to
+  the bare list/table; add a card only when two or more subjects share a row and
+  must be told apart.
+- **Primary content runs full-bleed inside its content area.** Don't shrink a
+  list / table / feed into a centered narrow card with a max-width and a border.
+  The list spans edge-to-edge of the column it owns (respecting the page inset),
+  so rows use the width: right-aligned timestamps, trailing actions, metadata
+  columns. Centered-narrow-card-on-a-wide-page is an AI tell.
+- **No em-dash (the long dash glyph) in UI copy.** It is a default-LLM
+  signature; humans use it in long-form literary prose, not interface text. In
+  rendered copy use a period, comma, colon, or middot (`·`). (Applies to copy,
+  not code comments.)
+- **Support text must earn its place.** Eyebrow then title then support line is
+  fine, but the support line must add what the title does not: a real count, the
+  actionable item, a status. Not a decorative restatement ("Everything across
+  your estate…"). If deleting it loses no information, it was filler. Lead with
+  what the user can act on.
+- **Utility controls don't crowd primary navigation.** Search / filter / view
+  toggle pin to the trailing (right) edge of their bar, clear of the tabs. Tabs
+  are navigation; a search box wedged against them reads as unconsidered.
+- **A richer surface shows richer content.** A full page is not a blown-up
+  popover. If a compact surface summarises (one line per item), the dedicated
+  page shows more per item: a detail/snippet line, real metadata, per-row
+  actions. Not the same summary stretched across more whitespace.
+
 ## How to add soul without breaking the rules
 
 Aim for **~80% proven patterns + ~20% distinctive choice**. The 20%
