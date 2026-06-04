@@ -68,6 +68,12 @@ These are the patterns the linter blocks at P0 (must-fix):
 
 These caught real reviewer ire. Treat as must-fix.
 
+- **Flat-first is the default.** Prioritise a flat screen; reach for a card /
+  border / elevated surface ONLY when two or more distinct concerns genuinely
+  need a boundary. When in doubt, no card. Beware components that are carded by
+  default when you don't want it — e.g. the DS `TabsContent` (`.eidos-tabpanel`)
+  ships with padding + border + elevated bg; flatten it (scoped) when the panel
+  holds a single list.
 - **Card-in-card / gratuitous carding.** A card's job is to *separate
   concerns* — distinct subjects that need a visual boundary. A region with
   **one subject** (a single list, a single table, one tab's content) gets
