@@ -576,3 +576,278 @@ body:active::-webkit-scrollbar-thumb,
   border: 1px solid color-mix(in oklch, var(--ember) 22%, transparent);
 }
 .fp-card--ember-hero > * { position: relative; z-index: 1; }
+
+/* Portal service-detail: flatten the DS tab panels. TabsContent renders the
+   .eidos-tabpanel surface (border + bg-elevated + 18px padding), which wraps a
+   "card around all the cards" in every tab. Scoped to .fp-flat-tabs so the DS
+   docs tabpanels are untouched. Higher specificity than the base + light rules. */
+.fp-flat-tabs .eidos-tabpanel {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  min-height: 0;
+  color: inherit;
+}
+
+/* Portal sidebar: the workspace header is a flush 48px band whose bottom border
+   aligns with the topbar (48px grid row). Zero the DS .sb-rail top padding so
+   the band starts at the very top (the header's own marginInline:-8 + width calc
+   cancel the 8px side padding for a full-width divider). Scoped via .fp-app. */
+.fp-app .sb-rail { padding-block-start: 0; }
+
+/* Portal dropdown menus (workspace switcher · notifications) render their own
+   leading visuals (avatars/icons), so suppress the DS empty icon-slot gutter
+   that otherwise reserves blank space at the start of every row. */
+.fp-menu-flush .dm-item-icon-slot { display: none; }
+
+/* GitHub-style shield badges (label | value) for the service README. Two flat
+   segments; the value segment carries the tone colour with contrast-safe ink. */
+.shield {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+  border: 1px solid var(--border);
+}
+.shield-l {
+  background: color-mix(in oklch, var(--fg) 10%, var(--bg-elevated));
+  color: var(--fg-muted);
+  padding: 4px 7px;
+  display: inline-flex;
+  align-items: center;
+}
+.shield-v {
+  padding: 4px 7px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  color: #08090a; /* dark ink on the light-ish tone fills (contrast invariant) */
+}
+.shield-green  { background: var(--success); }
+.shield-blue   { background: #4aa8ff; }
+.shield-yellow { background: #f5c451; }
+.shield-cyan   { background: #00add8; }
+.shield-red    { background: var(--danger); color: #fff; }
+.shield-gray   { background: var(--surface-active, #2a2d33); color: var(--fg); }
+
+/* Templates gallery: match the filter Select height to the search input (36px). */
+.fp-filter-select .sel-trigger { height: 36px; }
+
+/* Wizard stepper: center the step cluster with even gaps (connectors stay intact
+   because each dot keeps its flex-start position within its own step). */
+.fp-steps .pipeline-stepper { justify-content: center; }
+.fp-steps .pipe-step { flex: 0 0 auto; min-width: 0; padding-inline-end: 64px; }
+.fp-steps .pipe-step:last-child { padding-inline-end: 0; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Topbar surfaces — Notifications inbox · Account menu (both DS <Popover>s).
+   ember stays the single accent: the unread band (ember-soft) + one primary
+   action ("Approve") are the only ember touches; tabs/counts/icons are neutral.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ---- Notifications inbox ---------------------------------------------------- */
+.fp-notif-pop.pop {
+  inline-size: 384px;
+  max-inline-size: min(384px, calc(100vw - 16px));
+  padding: 0;
+  overflow: hidden;
+}
+.fp-notif-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px 10px;
+}
+.fp-notif-title { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--fg); }
+.fp-notif-link {
+  font-size: 12px;
+  color: var(--fg-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  padding: 0;
+}
+.fp-notif-link:hover:not(:disabled) { color: var(--fg); }
+.fp-notif-link:disabled { color: var(--fg-faint); cursor: default; text-decoration: none; }
+
+.fp-notif-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-inline: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.fp-notif-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 2px;
+  margin-block-end: -1px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color .12s ease, border-color .12s ease;
+}
+.fp-notif-tab:not(:first-child) { margin-inline-start: 12px; }
+.fp-notif-tab:hover { color: var(--fg); }
+/* Active state mirrors the canonical DS Tabs (.eidos-tab--active): ember
+   underline + ember-soft/ember count — the sanctioned accent location, not a
+   raw --fg/--bg inverse chip (which is off-palette). */
+.fp-notif-tab.is-active { color: var(--fg); border-bottom-color: var(--ember); font-weight: 600; }
+.fp-notif-count {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  line-height: 1;
+  padding: 3px 6px;
+  border-radius: var(--radius-full);
+  background: var(--surface-hover);
+  color: var(--fg-faint);
+}
+.fp-notif-tab.is-active .fp-notif-count { background: var(--ember-soft); color: var(--ember); }
+.fp-notif-gear {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 28px; block-size: 28px;
+  border-radius: 6px;
+  background: none; border: none;
+  color: var(--fg-faint);
+  cursor: pointer;
+}
+.fp-notif-gear:hover { background: var(--surface); color: var(--fg); }
+
+.fp-notif-list { max-block-size: min(60vh, 460px); overflow-y: auto; }
+.fp-notif-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.fp-notif-row:last-child { border-bottom: none; }
+.fp-notif-row.unread { background: var(--ember-soft); }
+/* Avatars are the DS <Avatar> component (photo · ember-system · placeholder).
+   On the unread band, give the avatar's status-dot ring the band colour so the
+   cutout reads against the warm wash instead of the panel bg. */
+.fp-notif-row .avatar { margin-block-start: 1px; }
+.fp-notif-row.unread .avatar .status-dot {
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--ember-soft), var(--bg-elevated) 86%);
+}
+.fp-notif-main { flex: 1; min-inline-size: 0; }
+.fp-notif-text { margin: 0; font-size: var(--text-sm); line-height: 1.4; color: var(--fg); }
+.fp-notif-text strong { font-weight: 600; }
+.fp-notif-meta {
+  margin: 3px 0 0;
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-faint);
+}
+.fp-notif-meta .fp-notif-sep { opacity: 0.5; }
+.fp-notif-cta { display: flex; gap: 8px; margin-block-start: 8px; }
+.fp-notif-file {
+  margin-block-start: 8px;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--fg-muted);
+  max-inline-size: 100%;
+}
+.fp-notif-file .name { font-size: 12px; font-weight: 500; color: var(--fg); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fp-notif-file .size { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-faint); flex-shrink: 0; }
+.fp-notif-empty {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 40px 16px;
+  color: var(--fg-faint);
+  font-size: var(--text-sm);
+}
+
+/* ---- Account menu ----------------------------------------------------------- */
+.fp-user-pop.pop {
+  inline-size: 264px;
+  max-inline-size: min(264px, calc(100vw - 16px));
+  padding: 0;
+}
+.fp-user-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 14px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.fp-user-av {
+  flex-shrink: 0;
+  inline-size: 36px; block-size: 36px;
+  border-radius: var(--radius-full);
+  background: var(--ember-soft);
+  color: var(--ember);
+  font-size: 13px; font-weight: 600;
+  display: inline-flex; align-items: center; justify-content: center;
+  letter-spacing: -0.01em;
+}
+.fp-user-id { display: flex; flex-direction: column; min-inline-size: 0; }
+.fp-user-id .name { font-size: var(--text-sm); font-weight: 600; color: var(--fg); line-height: 1.3; }
+.fp-user-id .email {
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted);
+  line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.fp-user-group { padding: 6px; }
+.fp-user-group + .fp-user-group { border-top: 1px solid var(--border); }
+.fp-user-row {
+  display: flex; align-items: center; gap: 10px;
+  inline-size: 100%;
+  padding: 7px 8px;
+  border-radius: var(--radius-md);
+  background: none; border: none;
+  color: var(--fg);
+  font-size: var(--text-sm);
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .12s ease;
+}
+.fp-user-row:hover { background: var(--surface); }
+.fp-user-row > svg { color: var(--fg-muted); flex-shrink: 0; }
+.fp-user-row .label { flex: 1; min-inline-size: 0; }
+.fp-user-row .kbd {
+  font-family: var(--font-mono); font-size: 10.5px;
+  color: var(--fg-faint);
+  padding: 2px 5px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.fp-user-plan { padding: 12px 14px; border-top: 1px solid var(--border); }
+.fp-user-plan-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.fp-user-plan-name { font-size: var(--text-sm); font-weight: 600; color: var(--fg); }
+.fp-user-plan .btn.sm { padding-block: 3px; }
+.fp-user-usage { margin-block-start: 10px; }
+.fp-user-usage-bar {
+  block-size: 6px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  overflow: hidden;
+}
+.fp-user-usage-bar > span { display: block; block-size: 100%; background: var(--ember); border-radius: inherit; }
+.fp-user-usage-label {
+  display: block; margin-block-start: 6px;
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-muted);
+}
+
+/* ---- Forge AI slide-over ----------------------------------------------------- */
+/* The drawer body is a flex column; the thread (first child) grows so the
+   composer + hint settle at the bottom, and the body scrolls when the thread
+   overflows (ForgeAIChat's composer is position:sticky for long threads). */
+.fp-ai-drawer .dr-body { display: flex; flex-direction: column; }
+.fp-ai-drawer .dr-body > div:first-child { flex: 1 0 auto; }
