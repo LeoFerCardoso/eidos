@@ -8,12 +8,26 @@
    ========================================================================== */
 
 html, body { margin: 0; padding: 0; height: 100%; }
-/* Reserve the scrollbar gutter on the document so a page that scrolls and one
-   that doesn't share the SAME content width — no horizontal shift between a
-   short page and a long one. The thumb is auto-hidden (transparent until you
-   scroll), so the reserved gutter reads as a constant thin margin, not a pushy
-   bar — close to a floating scrollbar in feel while staying consistent. */
-html { scrollbar-gutter: stable; }
+/* The document scrolls on <html>. Reserve the gutter so a page that scrolls and
+   one that doesn't share the same content width (no horizontal shift), AND keep
+   the thumb auto-hidden (transparent until hover/scroll) like the rest of the
+   shell. Styling <html> is required: with only the gutter, the reserved track
+   would show a default, always-on scrollbar. */
+html {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+html:hover { scrollbar-color: var(--border-strong) transparent; }
+html::-webkit-scrollbar { width: 10px; height: 10px; }
+html::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background .12s ease;
+}
+html:hover::-webkit-scrollbar-thumb { background: var(--border-strong); background-clip: content-box; }
 body {
   font-family: var(--font-body);
   background: var(--bg);
