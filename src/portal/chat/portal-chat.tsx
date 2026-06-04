@@ -478,7 +478,7 @@ const highlight = (text: string, q: string): React.ReactNode => {
 };
 
 const SearchView = ({ onOpen }: { onOpen: (id: string) => void }) => {
-  const [q, setQ] = React.useState('spike');
+  const [q, setQ] = React.useState('');
   const matches = CORPUS.filter((r) => !q || r.title.toLowerCase().includes(q.toLowerCase()) || r.snippet.toLowerCase().includes(q.toLowerCase()));
   const buckets: { key: SearchResult['bucket']; label: string }[] = [
     { key: 'today', label: 'Today' },
@@ -513,9 +513,11 @@ const SearchView = ({ onOpen }: { onOpen: (id: string) => void }) => {
       </div>
 
       <div className="fp-chat-search-summary">
-        {matches.length === 0
-          ? <>No matches for <code>{q}</code></>
-          : <><b>{matches.length}</b> {matches.length === 1 ? 'result' : 'results'} for <code>{q}</code></>}
+        {!q.trim()
+          ? <><b>{matches.length}</b> chats across every project · type to filter</>
+          : matches.length === 0
+            ? <>No matches for <code>{q}</code></>
+            : <><b>{matches.length}</b> {matches.length === 1 ? 'result' : 'results'} for <code>{q}</code></>}
       </div>
 
       {buckets.map((b) => {

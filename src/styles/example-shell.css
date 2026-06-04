@@ -1463,7 +1463,9 @@ body:active::-webkit-scrollbar-thumb,
   border-radius: var(--radius-xl); margin-block-end: 14px;
 }
 .fp-chat-search-field:focus-within { outline: var(--ring-width) solid var(--ring); outline-offset: var(--ring-offset); }
-.fp-chat-search-field .ic { color: var(--fg-subtle); flex: 0 0 auto; }
+/* inline-flex so the SVG centres in its box instead of riding the text baseline
+   (which pushed the magnifier slightly above the input's vertical centre). */
+.fp-chat-search-field .ic { display: inline-flex; align-items: center; color: var(--fg-subtle); flex: 0 0 auto; }
 .fp-chat-search-field input { flex: 1 1 auto; background: transparent; border: 0; outline: none; color: var(--fg); font: 400 15px/1.4 var(--font-sans); }
 .fp-chat-search-field input::placeholder { color: var(--fg-faint); }
 .fp-chat-search-field input::-webkit-search-cancel-button,
