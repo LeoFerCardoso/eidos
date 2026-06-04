@@ -459,8 +459,14 @@
 .ai-cite-pop-rank { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--ember); }
 .ai-cite-pop-title { color: var(--fg); font-weight: 500; font-size: var(--text-sm); line-height: 1.35; }
 .ai-cite-pop-snip { color: var(--fg-muted); font-size: var(--text-xs); line-height: 1.5; }
-.ai-cite-pop-foot { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; padding-top: 6px; border-top: 1px solid var(--border); color: var(--fg-faint); font-family: var(--font-mono); font-size: var(--text-xs); }
+.ai-cite-pop-foot { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; padding-top: 6px; border-top: 1px solid var(--border); color: var(--fg-faint); font-family: var(--font-mono); font-size: var(--text-xs); text-decoration: none; transition: color var(--dur-fast) var(--ease); }
 .ai-cite-pop-foot .url { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* The footer is a real link — light it up ember on hover/focus so it reads as
+   tappable (icon + URL together). */
+.ai-cite-pop-foot:hover,
+.ai-cite-pop-foot:focus-visible { color: var(--ember); }
+.ai-cite-pop-foot:hover .url,
+.ai-cite-pop-foot:focus-visible .url { text-decoration: underline; text-underline-offset: 2px; }
 /* Sources panel — flat: no outer card, no per-row borders (hairlines only),
    no chip on rank (just mono number). Typography carries the structure.
    Header matches ChainOfThought: chevron + mono uppercase label + count. */
