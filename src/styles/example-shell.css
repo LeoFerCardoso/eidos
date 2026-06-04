@@ -811,55 +811,83 @@ body:active::-webkit-scrollbar-thumb,
 }
 
 /* ---- Notifications inbox page (/portal/notifications) ----------------------- */
-/* The dedicated full feed. Follows the portal page rhythm: a toolbar (canonical
-   DS Tabs + search) over a bordered list card, in a constrained reading column
-   left-aligned under the header. Rows are the shared .fp-notif-* in 'full'
-   variant (time pulled to a right-aligned column). */
-.fp-inbox-toolbar {
+/* One subject per tab, so NO card: just a full-bleed feed under a toolbar.
+   The toolbar holds the canonical DS Tabs (left) and the search pinned to the
+   trailing edge (right), clear of the tabs. The feed runs edge-to-edge of the
+   page content area; rows align their content with the page inset and the
+   hover highlight spans the full width. Rows are .fp-notif-* in 'full' variant:
+   a detail body line, a right-aligned time + on-hover actions. */
+.fp-feed-bar {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   flex-wrap: wrap;
-  max-inline-size: 920px;
   border-bottom: 1px solid var(--border);
-  margin-block-end: 16px;
+  margin-block-end: 4px;
 }
-/* Move the tablist's own line onto the toolbar so the divider spans tabs + search;
+/* The tablist's own line moves onto the bar so the divider spans tabs + search;
    the active tab's ember indicator still sits on that border, like the bell. */
-.fp-inbox-toolbar .eidos-tablist--line { border-bottom: none; }
-.fp-inbox-search { margin-inline-start: auto; inline-size: 240px; margin-block: 7px; }
+.fp-feed-bar .eidos-tablist--line { border-bottom: none; }
+.fp-feed-search { margin-inline-start: auto; inline-size: 260px; margin-block: 7px; }
 
-.fp-inbox {
-  max-inline-size: 920px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  background: var(--bg-elevated);
-  overflow: hidden;
-}
-.fp-inbox-list { display: flex; flex-direction: column; }
-.fp-inbox-list .fp-notif-row { padding-inline: 18px; }
-.fp-inbox-foot {
-  max-inline-size: 920px;
-  margin-block-start: 12px;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
+.fp-feed { display: flex; flex-direction: column; }
+.fp-feed-empty {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 64px 16px;
   color: var(--fg-faint);
+  font-size: var(--text-sm);
 }
 
-/* 'full' row variant — right-aligned timestamp column so the wide page row
-   uses its width. On unread rows the time rides the ember-soft band, so it
-   takes the in-hue muted tone (same contrast rule as .on-accent-soft). */
-.fp-notif-time {
+/* 'full' variant — full-bleed row (content aligns to the page inset, hover
+   spans the column). */
+.fp-feed .fp-notif-row { padding-inline: 0; }
+.fp-notif-body {
+  margin: 4px 0 0;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--fg-muted);
+  max-inline-size: 78ch;
+}
+.fp-notif-row--full .fp-notif-meta { margin-block-start: 5px; }
+
+/* Right column: timestamp on top, hover actions below. On unread rows the time
+   rides the ember-soft band, so it takes the in-hue muted tone (the .on-accent-soft
+   contrast rule). */
+.fp-notif-aside {
   margin-inline-start: auto;
-  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
   flex-shrink: 0;
   padding-block-start: 1px;
+}
+.fp-notif-time {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--fg-faint);
   white-space: nowrap;
 }
 .fp-notif-row.unread .fp-notif-time { color: var(--ember-soft-text-muted); }
+.fp-notif-act {
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity .12s ease;
+}
+.fp-notif-row:hover .fp-notif-act,
+.fp-notif-row:focus-within .fp-notif-act { opacity: 1; }
+.fp-notif-act-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  inline-size: 26px; block-size: 26px;
+  border-radius: 6px;
+  background: none; border: none;
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: background .12s ease, color .12s ease;
+}
+.fp-notif-act-btn:hover { background: var(--surface-hover); color: var(--fg); }
+.fp-notif-row.unread .fp-notif-act-btn:hover { background: color-mix(in oklch, var(--ember) 14%, transparent); }
 
 /* ---- Account menu ----------------------------------------------------------- */
 .fp-user-pop.pop {

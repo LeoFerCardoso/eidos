@@ -4,9 +4,10 @@
 // · initials · anonymous silhouette) and the optional approval / file affordances.
 //
 // variant:
-//   'compact' (bell)  — time sits inline in the meta line; tight popover width.
-//   'full'    (inbox) — time is pulled to a right-aligned column so the wider
-//                       page row uses its width like a real inbox.
+//   'compact' (bell)  — one summary line + context; time inline; tight popover.
+//   'full'    (inbox) — adds the detail body line, a right-aligned time column,
+//                       and on-hover row actions (mark read · archive). A richer
+//                       surface shows richer content, not a stretched summary.
 import * as React from 'react';
 import { Avatar, Icons } from '@/ds/core';
 import type { Notif } from '@/portal/data/notifications';
@@ -14,10 +15,12 @@ import type { Notif } from '@/portal/data/notifications';
 export function NotifRow({
   n,
   onRead,
+  onArchive,
   variant = 'compact',
 }: {
   n: Notif;
   onRead?: (id: string) => void;
+  onArchive?: (id: string) => void;
   variant?: 'compact' | 'full';
 }) {
   const SysIcon = n.system ? (Icons as Record<string, React.FC<{ size?: number }>>)[n.system] : null;
@@ -44,6 +47,9 @@ export function NotifRow({
           <strong>{n.actor}</strong> {n.action}
           {n.target ? <> {n.target}</> : null}
         </p>
+
+        {full && n.body && <p className="fp-notif-body">{n.body}</p>}
+
         <p className="fp-notif-meta">
           {!full && (
             <>
@@ -70,7 +76,23 @@ export function NotifRow({
         )}
       </div>
 
-      {full && <span className="fp-notif-time">{n.time}</span>}
+      {full && (
+        <div className="fp-notif-aside">
+          <span className="fp-notif-time">{n.time}</span>
+          <div className="fp-notif-act">
+            {n.unread && onRead && (
+              <button type="button" className="fp-notif-act-btn" title="Mark as read" aria-label="Mark as read" onClick={() => onRead(n.id)}>
+                <Icons.check size={14} />
+              </button>
+            )}
+            {onArchive && !n.archived && (
+              <button type="button" className="fp-notif-act-btn" title="Archive" aria-label="Archive" onClick={() => onArchive(n.id)}>
+                <Icons.folder size={14} />
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
