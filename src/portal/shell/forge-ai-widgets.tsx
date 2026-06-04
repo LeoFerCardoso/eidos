@@ -52,10 +52,7 @@ export function UserMention({ person }: { person: MentionPerson }) {
       side="top"
       align="start"
       trigger={
-        <Link href={profile} className="fp-mention">
-          <Avatar name={person.name} src={person.src} size={18} />
-          <span>{person.name}</span>
-        </Link>
+        <Link href={profile} className="fp-mention">@{person.name}</Link>
       }
     >
       <div className="fp-mention-card">
