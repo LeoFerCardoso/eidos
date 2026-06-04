@@ -1106,9 +1106,22 @@ body:active::-webkit-scrollbar-thumb,
   font-size: var(--text-sm); color: var(--fg-muted);
   margin: 0; max-inline-size: 42ch; line-height: 1.55;
 }
-/* Empty-state starters as DS SuggestionCards (.sg-cards grid handles the layout;
-   one column in the narrow drawer). */
-.fp-ai-empty-cards { margin-block-start: 14px; text-align: start; }
+/* Empty-state starters as DS SuggestionCards in a compact 2x2 grid (the default
+   .sg-cards auto-fit would stack them full-bleed and huge in the narrow drawer). */
+.fp-ai-empty-cards {
+  margin-block-start: 14px;
+  text-align: start;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.fp-ai-empty-cards .sg-card { padding: 11px; gap: 4px; border-radius: 8px; }
+.fp-ai-empty-cards .sg-card .ico { inline-size: 24px; block-size: 24px; margin-block-end: 2px; }
+.fp-ai-empty-cards .sg-card .title { font-size: 12.5px; line-height: 1.3; }
+.fp-ai-empty-cards .sg-card .line {
+  font-size: 11px; line-height: 1.4;
+  display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
 .fp-ai-followups { display: flex; flex-wrap: wrap; gap: 6px; margin-block-start: 2px; }
 
 /* ---- Forge AI conversation widgets (forge-ai-widgets.tsx) --------------------- */

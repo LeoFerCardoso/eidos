@@ -164,7 +164,7 @@ export function ForgeAIChat() {
                 return (
                   <SuggestionCard
                     key={s.title}
-                    icon={<I size={16} />}
+                    icon={<I size={14} />}
                     title={s.title}
                     line={s.line}
                     onClick={() => ask(s.title)}
