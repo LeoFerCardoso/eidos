@@ -35,6 +35,8 @@ import {
 import { useColorTheme, type ColorTheme } from '@/components/color-theme-provider';
 import { ForgeAIChat } from './forge-ai-chat';
 import { PortalCommandPalette } from './portal-command-palette';
+import { NotifRow } from '@/portal/notifications/notif-row';
+import { NOTIFS, NOTIF_PREVIEW, filterByTab, type NotifTab } from '@/portal/data/notifications';
 
 // Re-export the shared layout helpers so portal pages can import from here
 // without changing their import paths.
@@ -74,10 +76,11 @@ function activeKey(pathname: string): string {
 // ── Breadcrumb labels ─────────────────────────────────────────────────────────
 
 const CRUMB_LABELS: Record<string, string> = {
-  portal:    'Forge',
-  catalog:   'Catalog',
-  create:    'Templates',
-  assistant: 'Forge AI',
+  portal:        'Forge',
+  catalog:       'Catalog',
+  create:        'Templates',
+  assistant:     'Forge AI',
+  notifications: 'Notifications',
 };
 
 function buildCrumbs(pathname: string): { label: string; href?: string }[] {
@@ -276,106 +279,12 @@ const WorkspaceHeader = ({ collapsed }: { collapsed: boolean }) => {
 
 // ── Notifications panel ───────────────────────────────────────────────────────
 // A wide Popover (not the narrow DropdownMenu) so it can hold tabs, actor
-// avatars, inline approve/decline actions and file chips — the richer
-// inbox pattern. Content is IDP-domain (deploys, incidents, approvals, PRs)
-// rather than the social-media reference. Unread rows carry an ember-soft
-// band; ember stays the single accent (the soft tint + one primary "Approve").
-
-// Avatar policy (per the contrast + identity rules):
-//   • person WITH a headshot → photo Avatar (src) + presence status
-//   • SYSTEM actor (Platform, CI/CD, Agent…) → ember Avatar with a glyph child
-//   • named person WITHOUT a headshot → neutral Avatar with computed INITIALS
-//   • truly ANONYMOUS actor (no name) → neutral Avatar with a user silhouette
-type Notif = {
-  id: string;
-  actor: string;            // display name ('' for anonymous → silhouette)
-  src?: string;             // headshot → photo avatar
-  system?: keyof typeof Icons; // system actor → ember avatar carrying this glyph
-  anonymous?: boolean;      // unknown identity → user silhouette instead of initials
-  status?: 'online' | 'away' | 'busy' | 'offline'; // presence dot (people only)
-  action: React.ReactNode;  // "promoted", "mentioned you in", …
-  target?: React.ReactNode; // the object, rendered bold
-  time: string;
-  context: string;          // "acerta-api · deploys"
-  unread?: boolean;
-  following?: boolean;
-  kind?: 'approval' | 'file' | 'text';
-  file?: { name: string; size: string };
-};
-
-const NOTIFS: Notif[] = [
-  {
-    id: 'n1', actor: 'Ashley Williams', src: '/avatars/Ashley-Williams.jpg',
-    status: 'online', following: true, unread: true,
-    action: 'promoted', target: '🚀 v4.18.2 to Ring 4', time: '2h ago', context: 'acerta-api · deploys',
-  },
-  {
-    id: 'n2', actor: 'Mariana Rossi', src: '/avatars/Mariana-Rossi.jpg',
-    status: 'busy', following: true, unread: true,
-    action: 'mentioned you in', target: '🔥 INC-2041', time: '4h ago', context: 'acerta-api · incident',
-  },
-  {
-    id: 'n3', actor: 'Platform', system: 'gate', kind: 'approval',
-    action: 'requests promotion of', target: 'konduto-antifraud → prod', time: '12h ago', context: 'konduto-antifraud · gates',
-  },
-  {
-    id: 'n4', actor: 'CI · golden-pipeline', system: 'pipeline', kind: 'file',
-    action: 'published a build artifact', time: '1d ago', context: 'scoring-service · build',
-    file: { name: 'scoring-service_v2.3.1.tar', size: '18 MB' },
-  },
-  {
-    id: 'n5', actor: 'Bruno Mendes', status: 'away', following: true,
-    action: 'edited', target: '📓 the rollback runbook', time: '1d ago', context: 'acerta-api · runbooks',
-  },
-];
-
-type NotifTab = 'all' | 'following' | 'archive';
-
-const NotifRow = ({ n, onRead }: { n: Notif; onRead: (id: string) => void }) => {
-  const SysIcon = n.system ? (Icons as Record<string, React.FC<{ size?: number }>>)[n.system] : null;
-  return (
-  <div className={`fp-notif-row${n.unread ? ' unread' : ''}`} onMouseEnter={() => n.unread && onRead(n.id)}>
-    <Avatar
-      name={n.actor}
-      size={36}
-      src={n.src}
-      ember={!!n.system}
-      status={n.system ? undefined : n.status}
-    >
-      {SysIcon ? <SysIcon size={16} /> : (n.anonymous ? <Icons.user size={16} /> : undefined)}
-    </Avatar>
-    {/* on-accent-soft re-maps the muted/faint text tiers to legible in-hue ember
-        on the unread (--ember-soft) band — the neutral greys lose contrast on the
-        warm wash. Scoped to the text block so the neutral-surface avatar is unaffected. */}
-    <div className={`fp-notif-main${n.unread ? ' on-accent-soft' : ''}`}>
-      <p className="fp-notif-text">
-        <strong>{n.actor}</strong> {n.action}
-        {n.target ? <> {n.target}</> : null}
-      </p>
-      <p className="fp-notif-meta">
-        <span>{n.time}</span>
-        <span className="fp-notif-sep">·</span>
-        <span>{n.context}</span>
-      </p>
-
-      {n.kind === 'approval' && (
-        <div className="fp-notif-cta">
-          <button className="btn ember sm" type="button" onClick={() => onRead(n.id)}>Approve</button>
-          <button className="btn ghost sm" type="button" onClick={() => onRead(n.id)}>Decline</button>
-        </div>
-      )}
-
-      {n.kind === 'file' && n.file && (
-        <span className="fp-notif-file">
-          <Icons.file size={13} />
-          <span className="name">{n.file.name}</span>
-          <span className="size">{n.file.size}</span>
-        </span>
-      )}
-    </div>
-  </div>
-  );
-};
+// avatars, inline approve/decline actions and file chips — the richer inbox
+// pattern. It is a PREVIEW: it shows the first NOTIF_PREVIEW rows, then a styled
+// footer links to the dedicated /portal/notifications inbox for the full list.
+// Data + the row component are shared with that page (src/portal/data +
+// src/portal/notifications). Unread rows carry an ember-soft band; ember stays
+// the single accent (the soft tint + one primary "Approve").
 
 const NotificationsPanel = () => {
   const [tab, setTab] = React.useState<NotifTab>('all');
@@ -385,14 +294,11 @@ const NotificationsPanel = () => {
   const markAll = () => setRead(Object.fromEntries(NOTIFS.map((n) => [n.id, true])));
 
   const rows = NOTIFS.map((n) => ({ ...n, unread: n.unread && !read[n.id] }));
-  const visible =
-    tab === 'following' ? rows.filter((n) => n.following) :
-    tab === 'archive' ? [] :
-    rows;
+  const filtered = filterByTab(rows, tab);
+  const preview = filtered.slice(0, NOTIF_PREVIEW);
 
-  const allCount = rows.filter((n) => n.unread).length;
-  const followingCount = rows.filter((n) => n.following && n.unread).length;
-
+  const allCount = rows.filter((n) => n.unread && !n.archived).length;
+  const followingCount = rows.filter((n) => n.following && n.unread && !n.archived).length;
   const hasUnread = allCount > 0;
 
   return (
@@ -412,46 +318,60 @@ const NotificationsPanel = () => {
         </button>
       }
     >
-      <div className="fp-notif-head">
-        <span className="fp-notif-title">Notifications</span>
-        <button type="button" className="fp-notif-link" onClick={markAll} disabled={!hasUnread}>
-          Mark all as read
-        </button>
-      </div>
-
-      <div className="fp-notif-tabs" role="tablist" aria-label="Notification filter">
-        {([
-          ['all', 'All', allCount],
-          ['following', 'Following', followingCount],
-          ['archive', 'Archive', 0],
-        ] as [NotifTab, string, number][]).map(([id, label, count]) => (
-          <button
-            key={id}
-            type="button"
-            role="tab"
-            aria-selected={tab === id}
-            className={`fp-notif-tab${tab === id ? ' is-active' : ''}`}
-            onClick={() => setTab(id)}
-          >
-            {label}
-            {count > 0 && <span className="fp-notif-count">{count}</span>}
-          </button>
-        ))}
-        <button type="button" className="fp-notif-gear" aria-label="Notification settings">
-          <Icons.settings size={14} />
-        </button>
-      </div>
-
-      <div className="fp-notif-list">
-        {visible.length === 0 ? (
-          <div className="fp-notif-empty">
-            <Icons.inbox size={18} />
-            <span>You're all caught up.</span>
+      {({ close }) => (
+        <>
+          <div className="fp-notif-head">
+            <span className="fp-notif-title">Notifications</span>
+            <button type="button" className="fp-notif-link" onClick={markAll} disabled={!hasUnread}>
+              Mark all as read
+            </button>
           </div>
-        ) : (
-          visible.map((n) => <NotifRow key={n.id} n={n} onRead={markRead} />)
-        )}
-      </div>
+
+          <div className="fp-notif-tabs" role="tablist" aria-label="Notification filter">
+            {([
+              ['all', 'All', allCount],
+              ['following', 'Following', followingCount],
+              ['archive', 'Archive', 0],
+            ] as [NotifTab, string, number][]).map(([id, label, count]) => (
+              <button
+                key={id}
+                type="button"
+                role="tab"
+                aria-selected={tab === id}
+                className={`fp-notif-tab${tab === id ? ' is-active' : ''}`}
+                onClick={() => setTab(id)}
+              >
+                {label}
+                {count > 0 && <span className="fp-notif-count">{count}</span>}
+              </button>
+            ))}
+            <button type="button" className="fp-notif-gear" aria-label="Notification settings">
+              <Icons.settings size={14} />
+            </button>
+          </div>
+
+          <div className="fp-notif-list">
+            {preview.length === 0 ? (
+              <div className="fp-notif-empty">
+                <Icons.inbox size={18} />
+                <span>You're all caught up.</span>
+              </div>
+            ) : (
+              preview.map((n) => <NotifRow key={n.id} n={n} onRead={markRead} />)
+            )}
+          </div>
+
+          {/* Styled footer — the bell is a preview; the full feed lives in the inbox. */}
+          <Link href="/portal/notifications" className="fp-notif-foot" onClick={close}>
+            <Icons.inbox size={14} />
+            <span>View all notifications</span>
+            {filtered.length > preview.length && (
+              <span className="fp-notif-foot-more">+{filtered.length - preview.length}</span>
+            )}
+            <Icons.chevronRight size={14} />
+          </Link>
+        </>
+      )}
     </Popover>
   );
 };

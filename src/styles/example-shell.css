@@ -776,6 +776,50 @@ body:active::-webkit-scrollbar-thumb,
   font-size: var(--text-sm);
 }
 
+/* Styled footer — the bell preview's last row: a link to the full inbox. */
+.fp-notif-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--fg);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background .12s ease, color .12s ease;
+}
+.fp-notif-foot:hover { background: var(--surface); color: var(--ember); }
+.fp-notif-foot > svg:first-child { color: var(--fg-muted); flex-shrink: 0; }
+.fp-notif-foot:hover > svg:first-child { color: var(--ember); }
+.fp-notif-foot > span:nth-of-type(1) { flex: 1; min-inline-size: 0; }
+.fp-notif-foot > svg:last-child { color: var(--fg-faint); flex-shrink: 0; }
+.fp-notif-foot-more {
+  flex: 0 0 auto !important;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--fg-muted);
+}
+
+/* ---- Notifications inbox page (/portal/notifications) ----------------------- */
+/* The dedicated full feed. Reuses the .fp-notif-* row + tab atoms inside a
+   bordered card, in a reading-width column. */
+.fp-inbox {
+  max-inline-size: 760px;
+  margin-inline: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--bg-elevated);
+  overflow: hidden;
+}
+.fp-inbox .fp-notif-tabs { padding-inline: 18px; }
+.fp-inbox-list { display: flex; flex-direction: column; }
+.fp-inbox-list .fp-notif-row { padding-inline: 18px; }
+
 /* ---- Account menu ----------------------------------------------------------- */
 .fp-user-pop.pop {
   inline-size: 264px;
