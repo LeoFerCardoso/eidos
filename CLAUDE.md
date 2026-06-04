@@ -77,8 +77,12 @@ spec: `HARNESS-IMPROVED.md`.
   **ember/accent fill** the foreground is **dark ink** (`#08090A` / `var(--bg)`),
   never ember; dark surface → light fg; light surface → dark fg. Applies to brand
   tiles, badges/pills on accent, buttons, chips, avatars, icon buttons, status dots,
-  charts — everything layered on a non-default background. When unsure, verify the
-  rendered result (headless screenshot) before declaring done.
+  charts — everything layered on a non-default background. On a **soft accent band**
+  (`--ember-soft` / any `--{role}-soft` tint — unread rows, accent cards) the neutral
+  `--fg-muted`/`--fg-faint` greys lose contrast on the warm wash: keep `--fg` for the
+  primary tier but re-map muted/faint to legible in-hue tones via the **`.on-accent-soft`**
+  utility (tokens `--ember-soft-text` / `--ember-soft-text-muted`), scoped to the text
+  block. When unsure, verify the rendered result (headless screenshot) before declaring done.
 - Single accent **ember `#FF6B35`** (`var(--accent)`), at most 2× per screen.
 - **Geist Sans** (UI/body) + **Geist Mono** (numerics, captions, eyebrows).
 - Compose, never reinvent. Logical CSS properties everywhere (RTL is first-class).

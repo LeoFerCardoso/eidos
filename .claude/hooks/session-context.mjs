@@ -19,6 +19,7 @@ const context = `Eidos harness session context (Design System ${version}):
 CONTRAST IS NON-NEGOTIABLE (applies to EVERY component — never repeat the ForgeMark-on-ember mistake):
 - Whenever you place a foreground (text, icon, glyph, brand mark, value) on a colored/elevated surface, you MUST set an explicitly contrasting color — never let the foreground inherit or keep a color equal or near-equal to its background.
 - On an ember/accent fill (var(--accent) / #FF6B35), the foreground is DARK INK (#08090A or var(--bg)), NOT ember. On dark surfaces use a light fg; on light surfaces use a dark fg.
+- On a SOFT accent BAND (--ember-soft / any --{role}-soft tint — unread rows, accent cards, soft pills), the neutral --fg-muted / --fg-faint greys are tuned for --bg and LOSE contrast on the warm wash. Keep the primary tier (--fg) but re-map the muted/faint tiers to legible in-hue tones via the .on-accent-soft utility (scope it to the TEXT block so neutral-surface children — avatars, chips — keep their greys). Tokens: --ember-soft-text / --ember-soft-text-muted.
 - This covers brand tiles, badges/pills on accent, buttons, chips, avatars, icon buttons, status dots, charts — anything layered on a non-default background. If unsure, verify the rendered result (a headless screenshot) before declaring done.
 
 Eidos visual invariants:

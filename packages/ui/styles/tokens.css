@@ -110,6 +110,15 @@
   --ember-subtle: var(--ember-softer);
   --ember-border: rgba(255,107,53,0.30);
   --ember-text:   var(--ember-glow);
+  /* Secondary / muted text tiers for content sitting ON a soft accent band
+     (--ember-soft). The neutral --fg-muted / --fg-faint greys are tuned for the
+     default --bg and lose contrast on the warm tint, so on a soft band the muted
+     tiers re-map to in-hue ember tones (legible, but quieter than --ember-text so
+     they still read as secondary). Derived from --ember-text + --fg-muted via
+     color-mix, so they track every theme automatically. Apply through the
+     .on-accent-soft utility — never hand-pick greys on an --ember-soft surface. */
+  --ember-soft-text:       color-mix(in oklch, var(--ember-text) 80%, var(--fg-muted));
+  --ember-soft-text-muted: color-mix(in oklch, var(--ember-text) 60%, var(--fg-muted));
   /* info (sky) — promotes --accent-2 */
   --info:         #38BDF8;
   --info-strong:  #0EA5E9;
@@ -3291,6 +3300,18 @@ linear-gradient(45deg, rgba(15,23,42,0.10) 25%, transparent 25%, transparent 75%
   .mdl-header { padding: 18px 18px 10px; }
   .mdl-body   { padding: 8px 18px 18px; }
   .mdl-footer { padding: 12px 14px; }
+}
+
+/* ── Foreground on a SOFT ACCENT band — the canonical contrast rule ──────────
+   When text sits over an --ember-soft (or any --{role}-soft) tint, the neutral
+   --fg-muted / --fg-faint greys lose contrast on the warm/colored wash. Wrap the
+   text content in .on-accent-soft and its muted/faint tiers re-map to legible
+   in-hue tones; the primary --fg tier is left intact (white/dark still reads).
+   Scope it to the TEXT block, not a whole card, so nested neutral-surface
+   children (avatars, chips on --surface) keep their own greys. */
+.on-accent-soft {
+  --fg-muted: var(--ember-soft-text);
+  --fg-faint: var(--ember-soft-text-muted);
 }
 
 /* Popover — promoted from popover.tsx
