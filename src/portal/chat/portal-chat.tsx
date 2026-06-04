@@ -11,12 +11,12 @@
 // chrome is the .fp-chat-* layer in src/styles/example-shell.css.
 import * as React from 'react';
 import {
-  Icons, ForgeMark, Avatar, Pill,
+  Icons, ForgeMark, Avatar,
   PromptInput, PromptBanner, SuggestionCard,
   Message, Response, MessageActions, ProseCode, Prose,
   ChainOfThought, Citation, Sources,
   Diagram, MathView,
-  Modal, Card, CardMedia, CardHeader, CardTitle, CardContent, CardFooter,
+  Modal, Card, CardMedia, CardHeader, CardTitle, CardContent,
   ToggleGroup, ToggleGroupItem,
 } from '@/ds/core';
 import { usePageCrumb } from '@/portal/shell/portal-shell';
@@ -1032,16 +1032,14 @@ const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => 
                 onClick={() => setSel(a)}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSel(a); } }}
               >
-                <CardMedia alt={`${k.label} artifact`} className="fp-chat-art-media" style={{ background: k.bg, color: k.fg }}>
-                  <I size={26} />
+                <CardMedia alt={`${k.label} artifact`} className="fp-chat-art-media" style={{ ['--art-accent']: k.fg } as React.CSSProperties}>
+                  <span className="fp-chat-art-tag">{k.label}</span>
+                  <span className="fp-chat-art-glyph"><I size={30} /></span>
                 </CardMedia>
                 <CardHeader>
                   <CardTitle as="h3">{a.title}</CardTitle>
                 </CardHeader>
-                <CardFooter>
-                  <Pill tone="neutral" icon={<I size={11} />}>{k.label}</Pill>
-                  <span className="fp-chat-art-meta">{a.meta} · {a.created}</span>
-                </CardFooter>
+                <CardContent className="fp-chat-art-meta">{a.meta} · {a.created}</CardContent>
               </Card>
             );
           })}
