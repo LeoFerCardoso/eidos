@@ -17,10 +17,14 @@ import { RootCauseWidget, UserMention } from './forge-ai-widgets';
 
 const COMMANDER = {
   name: 'Bruno Mendes',
+  src: '/avatars/Marcus-Johnson.jpg',
   role: 'Staff SRE',
   tribe: 'Score & Risk',
   status: 'busy' as const,
   presence: 'On-call now · paged 6h ago',
+  region: 'São Paulo · Brazil',
+  email: 'bruno.mendes@equifax.com',
+  joined: 'Joined Mar 2021',
   href: '/portal',
 };
 

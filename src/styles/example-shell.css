@@ -1230,15 +1230,43 @@ body:active::-webkit-scrollbar-thumb,
   background: color-mix(in oklch, var(--ember) 24%, transparent);
   outline: none;
 }
-/* HoverCard panel (.hc-panel) provides padding + surface; this is just layout. */
-.fp-mention-card-head { display: flex; align-items: center; gap: 10px; }
-.fp-mention-card-id { display: flex; flex-direction: column; min-inline-size: 0; }
-.fp-mention-card-id .name { font-size: var(--text-sm); font-weight: 600; color: var(--fg); }
-.fp-mention-card-id .meta { font-size: var(--text-xs); color: var(--fg-muted); }
-.fp-mention-card-presence {
-  display: flex; align-items: center; gap: 6px;
-  margin: 12px 0 0; padding-block-start: 10px;
-  border-block-start: 1px solid var(--border);
+/* ---- Mention HoverCard → profile card ----------------------------------------
+   A richer preview: an ember cover banner, an avatar straddling its edge, then
+   identity, presence, contact rows and a footer. The panel is flattened (no
+   padding) so the banner can run edge-to-edge; the body owns its own padding. */
+.hc-panel.fp-profile-hc { padding: 0; overflow: hidden; }
+.fp-profile-cover {
+  block-size: 56px;
+  background: linear-gradient(120deg, var(--ember-deep), var(--ember) 58%, var(--ember-glow));
+}
+.fp-profile-av {
+  display: block;
+  margin-block-start: -28px;
+  margin-inline-start: 16px;
+}
+.fp-profile-av .avatar {
+  border: 3px solid var(--bg-elevated) !important;
+  box-shadow: var(--elev-1);
+}
+.fp-profile-body { padding: 10px 16px 2px; }
+.fp-profile-name { font-size: var(--text-md); font-weight: 600; color: var(--fg); letter-spacing: -0.01em; }
+.fp-profile-role { font-size: var(--text-sm); color: var(--fg-muted); margin-block-start: 2px; }
+.fp-profile-presence {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-block-start: 9px;
   font-size: 11px; color: var(--fg-muted); font-family: var(--font-mono);
 }
-.fp-mention-card-actions { display: flex; gap: 6px; margin-block-start: 10px; }
+.fp-profile-rows { margin-block-start: 12px; display: flex; flex-direction: column; gap: 7px; }
+.fp-profile-row {
+  display: flex; align-items: center; gap: 8px;
+  margin: 0; font-size: var(--text-sm); color: var(--fg-muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.fp-profile-row > svg { color: var(--fg-faint); flex-shrink: 0; }
+.fp-profile-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  margin-block-start: 12px; padding: 10px 16px;
+  border-block-start: 1px solid var(--border);
+}
+.fp-profile-joined { font-size: var(--text-xs); color: var(--fg-faint); font-family: var(--font-mono); }
+.fp-profile-actions { display: flex; gap: 6px; flex-shrink: 0; }

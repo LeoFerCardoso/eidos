@@ -34,6 +34,12 @@ export interface MentionPerson {
   status?: 'online' | 'away' | 'busy' | 'offline';
   /** One-line presence note shown in the card, e.g. "On-call now · paged 6h ago". */
   presence?: string;
+  /** Location / region line. */
+  region?: string;
+  /** Contact email. */
+  email?: string;
+  /** Joined date, e.g. "Joined Mar 2021". */
+  joined?: string;
   /** Profile route. */
   href?: string;
 }
@@ -51,32 +57,44 @@ export function UserMention({ person }: { person: MentionPerson }) {
       openDelay={150}
       side="top"
       align="start"
+      minWidth={320}
+      className="fp-profile-hc"
       trigger={
         <a href={profile} className="fp-mention">@{person.name}</a>
       }
     >
-      <div className="fp-mention-card">
-        <div className="fp-mention-card-head">
-          <Avatar name={person.name} src={person.src} size={40} status={person.status} />
-          <span className="fp-mention-card-id">
-            <span className="name">{person.name}</span>
-            {(person.role || person.tribe) && (
-              <span className="meta">{[person.role, person.tribe].filter(Boolean).join(' · ')}</span>
-            )}
-          </span>
+      <div className="fp-profile">
+        <div className="fp-profile-cover" aria-hidden="true" />
+        <span className="fp-profile-av">
+          <Avatar name={person.name} src={person.src} size={52} status={person.status} />
+        </span>
+        <div className="fp-profile-body">
+          <div className="fp-profile-name">{person.name}</div>
+          {(person.role || person.tribe) && (
+            <div className="fp-profile-role">{[person.role, person.tribe].filter(Boolean).join(' · ')}</div>
+          )}
+          {person.presence && (
+            <div className="fp-profile-presence">
+              <StatusDot tone="warning" pulse /> {person.presence}
+            </div>
+          )}
+          {(person.region || person.email) && (
+            <div className="fp-profile-rows">
+              {person.region && (
+                <p className="fp-profile-row"><Icons.region size={13} /> {person.region}</p>
+              )}
+              {person.email && (
+                <p className="fp-profile-row"><Icons.mail size={13} /> {person.email}</p>
+              )}
+            </div>
+          )}
         </div>
-        {person.presence && (
-          <p className="fp-mention-card-presence">
-            <StatusDot tone="warning" pulse /> {person.presence}
-          </p>
-        )}
-        <div className="fp-mention-card-actions">
-          <Link href={profile} className="btn ghost sm">
-            <Icons.user size={13} /> View profile
-          </Link>
-          <button type="button" className="btn ghost sm">
-            <Icons.zap size={13} /> Page
-          </button>
+        <div className="fp-profile-foot">
+          {person.joined && <span className="fp-profile-joined">{person.joined}</span>}
+          <span className="fp-profile-actions">
+            <Link href={profile} className="btn ghost sm"><Icons.user size={13} /> Profile</Link>
+            <button type="button" className="btn ghost sm"><Icons.zap size={13} /> Page</button>
+          </span>
         </div>
       </div>
     </HoverCard>

@@ -132,6 +132,7 @@ const Icons = {
   chevronDown: I(<polyline points="6 9 12 15 18 9"/>),
   chevronUp: I(<polyline points="6 15 12 9 18 15"/>),
   calendar: I(<><rect x="4" y="5" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="9" y1="3" x2="9" y2="7"/><line x1="15" y1="3" x2="15" y2="7"/></>),
+  mail: I(<><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></>),
   clock: I(<><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></>),
   image: I(<><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><polyline points="5 18 10 13 14 17 17 14 21 18"/></>),
   user: I(<><circle cx="12" cy="8" r="4"/><path d="M4 21 c0 -4 4 -7 8 -7 s8 3 8 7"/></>),
