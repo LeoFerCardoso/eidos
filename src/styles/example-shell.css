@@ -1234,6 +1234,11 @@ body:active::-webkit-scrollbar-thumb,
   block-size: calc(100dvh - 48px);
   background: var(--bg);
   overflow: hidden;
+  /* Single content width + inline padding shared by EVERY chat view (thread,
+     search, projects, project detail, archive, artifacts) so they line up
+     edge-to-edge with the conversation — no width jump when switching views. */
+  --fp-chat-content: 820px;
+  --fp-chat-inset: 24px;
 }
 @media (max-width: 880px) {
   .fp-chat { grid-template-columns: minmax(0, 1fr); }
@@ -1421,8 +1426,8 @@ body:active::-webkit-scrollbar-thumb,
    rule — otherwise the thread spans the whole column instead of sitting centred. */
 .fp-chat-thread > .msg-thread.fp-chat-msgs {
   flex: 1 1 auto; inline-size: 100%;
-  max-inline-size: 820px; margin-inline: auto;
-  padding: 28px 24px 24px;
+  max-inline-size: var(--fp-chat-content); margin-inline: auto;
+  padding: 28px var(--fp-chat-inset) 24px;
 }
 .fp-chat-thread-foot {
   position: sticky; inset-block-end: 0;
@@ -1439,7 +1444,7 @@ body:active::-webkit-scrollbar-thumb,
 .fp-chat-thread-foot > .pi-shell { max-inline-size: 760px; }
 
 /* ── View: Search ──────────────────────────────────────────────────────── */
-.fp-chat-search { inline-size: 100%; max-inline-size: 920px; margin-inline: auto; padding: 32px 28px 48px; }
+.fp-chat-search { inline-size: 100%; max-inline-size: var(--fp-chat-content); margin-inline: auto; padding: 32px var(--fp-chat-inset) 48px; }
 .fp-chat-search-head { margin-block-end: 22px; }
 .fp-chat-search-head .eyebrow {
   font-family: var(--font-mono); font-size: 10.5px;
@@ -1541,7 +1546,7 @@ body:active::-webkit-scrollbar-thumb,
 .fp-chat-search-empty .hint { font-size: 12px; }
 
 /* ── View: Projects ────────────────────────────────────────────────────── */
-.fp-chat-projects { inline-size: 100%; max-inline-size: 1120px; margin-inline: auto; padding: 32px 28px 48px; }
+.fp-chat-projects { inline-size: 100%; max-inline-size: var(--fp-chat-content); margin-inline: auto; padding: 32px var(--fp-chat-inset) 48px; }
 .fp-chat-projects-head { display: flex; align-items: flex-start; gap: 18px; margin-block-end: 24px; }
 .fp-chat-projects-head .head-left { flex: 1 1 auto; min-inline-size: 0; }
 .fp-chat-projects-head .eyebrow {
@@ -1589,8 +1594,8 @@ body:active::-webkit-scrollbar-thumb,
 
 /* ── View: Project detail (/portal/chat → a pinned space or a project tile) ─ */
 .fp-chat-pd {
-  inline-size: 100%; max-inline-size: 880px; margin-inline: auto;
-  padding: 24px 28px 56px;
+  inline-size: 100%; max-inline-size: var(--fp-chat-content); margin-inline: auto;
+  padding: 24px var(--fp-chat-inset) 56px;
   display: flex; flex-direction: column; gap: 22px;
 }
 .fp-chat-pd-back {
@@ -1711,8 +1716,7 @@ body:active::-webkit-scrollbar-thumb,
    a DS Modal (the viewer) with a link back to the chat that created it.
    ════════════════════════════════════════════════════════════════════════ */
 /* Shared pane scaffold (mirrors the Search / Projects header). */
-.fp-chat-pane { inline-size: 100%; max-inline-size: 1120px; margin-inline: auto; padding: 32px 28px 48px; }
-.fp-chat-archive { max-inline-size: 900px; }
+.fp-chat-pane { inline-size: 100%; max-inline-size: var(--fp-chat-content); margin-inline: auto; padding: 32px var(--fp-chat-inset) 48px; }
 .fp-chat-pane-head { margin-block-end: 22px; }
 .fp-chat-pane-head .eyebrow { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ember); }
 .fp-chat-pane-head h1 { font-size: 24px; font-weight: 600; color: var(--fg); letter-spacing: -0.015em; margin: 6px 0; }
