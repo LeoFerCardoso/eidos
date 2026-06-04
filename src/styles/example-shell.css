@@ -852,15 +852,16 @@ body:active::-webkit-scrollbar-thumb,
   font-size: var(--text-sm);
 }
 
-/* 'full' variant — the list itself has NO lateral margin: each item's surface
-   (unread band / hover) aligns its edges with the column (tabs + title). The
-   breathing room lives INSIDE the item as padding. Small radius; no slab
-   divider — the surface + row rhythm separate items (flat, no card). */
+/* 'full' variant — the list has NO lateral margin: each item's surface (unread
+   band / hover) aligns its edges with the column (tabs + title). Breathing room
+   lives INSIDE the item as padding. Square corners (a list row, like a table
+   row, is not rounded); a hairline divider separates rows. Flat, no card. */
 .fp-feed .fp-notif-row {
   padding: 12px 14px;
-  border-radius: 6px;
-  border-bottom: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--border);
 }
+.fp-feed .fp-notif-row:last-child { border-bottom: none; }
 .fp-notif-body {
   margin: 4px 0 0;
   font-size: var(--text-sm);
