@@ -81,13 +81,15 @@ export function NotifRow({
           <span className="fp-notif-time">{n.time}</span>
           <div className="fp-notif-act">
             {n.unread && onRead && (
-              <button type="button" className="fp-notif-act-btn" title="Mark as read" aria-label="Mark as read" onClick={() => onRead(n.id)}>
+              <button type="button" className="fp-notif-act-btn" onClick={() => onRead(n.id)}>
                 <Icons.check size={14} />
+                <span>Mark read</span>
               </button>
             )}
             {onArchive && !n.archived && (
-              <button type="button" className="fp-notif-act-btn" title="Archive" aria-label="Archive" onClick={() => onArchive(n.id)}>
+              <button type="button" className="fp-notif-act-btn" onClick={() => onArchive(n.id)}>
                 <Icons.folder size={14} />
+                <span>Archive</span>
               </button>
             )}
           </div>

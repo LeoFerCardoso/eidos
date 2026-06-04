@@ -899,14 +899,19 @@ body:active::-webkit-scrollbar-thumb,
 .fp-notif-row:hover .fp-notif-act,
 .fp-notif-row:focus-within .fp-notif-act { opacity: 1; }
 .fp-notif-act-btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  inline-size: 26px; block-size: 26px;
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 9px;
   border-radius: 6px;
-  background: none; border: none;
+  background: none;
+  border: 1px solid var(--border);
   color: var(--fg-muted);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  white-space: nowrap;
   cursor: pointer;
-  transition: background .12s ease, color .12s ease;
+  transition: background .12s ease, color .12s ease, border-color .12s ease;
 }
+.fp-notif-act-btn:hover { border-color: var(--border-strong); }
 .fp-notif-act-btn:hover { background: var(--surface-hover); color: var(--fg); }
 .fp-notif-row.unread .fp-notif-act-btn:hover { background: color-mix(in oklch, var(--ember) 14%, transparent); }
 
