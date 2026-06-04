@@ -78,7 +78,7 @@ const ART_KIND: Record<ArtifactKind, { icon: string; label: string; bg: string; 
   image:    { icon: 'image',    label: 'Image',    bg: 'rgba(52, 211, 153, 0.14)', fg: '#34D399' },
   document: { icon: 'doc',      label: 'Document', bg: 'rgba(96, 165, 250, 0.16)', fg: '#60A5FA' },
   html:     { icon: 'globe',    label: 'HTML',     bg: 'rgba(192, 132, 252, 0.16)', fg: '#C084FC' },
-  app:      { icon: 'rocket',   label: 'App',      bg: 'rgba(251, 146, 60, 0.16)', fg: '#FB923C' },
+  app:      { icon: 'appWindow', label: 'App',     bg: 'rgba(251, 146, 60, 0.16)', fg: '#FB923C' },
   code:     { icon: 'terminal', label: 'Code',     bg: 'rgba(56, 189, 248, 0.16)', fg: '#38BDF8' },
   data:     { icon: 'database', label: 'Dataset',  bg: 'rgba(163, 230, 53, 0.14)', fg: '#A3E635' },
 };

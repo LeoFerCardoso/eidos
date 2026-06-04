@@ -217,6 +217,7 @@ const Icons = {
   sidebar:     I(<><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="6" y1="8" x2="6" y2="8"/><line x1="6" y1="12" x2="6" y2="12"/></>),
   gripVertical:I(<><circle cx="9" cy="6" r="0.8" fill="currentColor"/><circle cx="9" cy="12" r="0.8" fill="currentColor"/><circle cx="9" cy="18" r="0.8" fill="currentColor"/><circle cx="15" cy="6" r="0.8" fill="currentColor"/><circle cx="15" cy="12" r="0.8" fill="currentColor"/><circle cx="15" cy="18" r="0.8" fill="currentColor"/></>),
   maximize:    I(<><polyline points="4 9 4 4 9 4"/><polyline points="20 9 20 4 15 4"/><polyline points="20 15 20 20 15 20"/><polyline points="4 15 4 20 9 20"/></>),
+  appWindow:   I(<><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4"/><path d="M2 8h20"/><path d="M6 4v4"/></>),
   minimize:    I(<><polyline points="9 4 9 9 4 9"/><polyline points="15 4 15 9 20 9"/><polyline points="20 15 15 15 15 20"/><polyline points="4 15 9 15 9 20"/></>),
   minus2:      I(<><line x1="4" y1="12" x2="20" y2="12"/></>),
 
