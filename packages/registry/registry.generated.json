@@ -1321,6 +1321,17 @@
       "ai": true
     },
     {
+      "name": "mention",
+      "component": "Mention",
+      "deps": [
+        "hover-card",
+        "avatar",
+        "icons"
+      ],
+      "npm": [],
+      "ai": true
+    },
+    {
       "name": "message",
       "component": "Message",
       "deps": [

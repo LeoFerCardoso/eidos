@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 // DS stylesheets, in the same order the original HTML shells loaded them.
 // The base layer (tokens + ds + ai) ships from the extracted @eidos/ui package.
 import '@eidos/ui/styles/tokens.css';
@@ -24,7 +25,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" data-mode="dark" data-ds-theme="forge" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: NO_FOUC_THEME }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -33,6 +33,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        {/* No-FOUC: set data-ds-theme from localStorage before paint. next/script
+            beforeInteractive belongs in <body> in the App Router (Next hoists it
+            into the initial HTML ahead of hydration); rendering a raw <script> in
+            the React-rendered <head> triggers Next 16's "script tag while
+            rendering" warning. */}
+        <Script id="no-fouc-theme" strategy="beforeInteractive">
+          {NO_FOUC_THEME}
+        </Script>
         {/* next-themes manages data-mode + the eidos-mode storage key (no-FOUC script
             injected by the provider). The legacy DSShell shares the same contract. */}
         <ThemeProvider>

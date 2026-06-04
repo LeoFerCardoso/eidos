@@ -1227,7 +1227,10 @@ a { color: inherit; text-decoration: none; }
 .row-hover:hover { background: var(--surface-hover); }
 
 /* Animations */
-@keyframes fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+/* `to` ends at transform:none (not translateY(0)) so .page-enter/.fade-in with
+   `both` fill do NOT retain a transform — a lingering transform makes the element
+   a containing block and breaks position:fixed overlays (Select/Combobox panels). */
+@keyframes fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes ember-pulse {
   0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ember) 50%, transparent); }
   50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--ember) 0%, transparent); }
@@ -1282,6 +1285,12 @@ a { color: inherit; text-decoration: none; }
 
 /* Page transition */
 .page-enter { animation: fade-in 360ms var(--ease) both; }
+
+/* fade-in/page-enter translateY is a vestibular trigger — strip motion when the
+   user asks for reduced motion (the other DS animations already guard this). */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in, .page-enter { animation: none; }
+}
 
 /* Code block */
 .code-block {

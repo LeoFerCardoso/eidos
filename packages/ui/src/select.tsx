@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { createPortal } from 'react-dom';
 import { Icons } from './icons';
 // Eidos DS — Custom Select.
 //
@@ -329,7 +330,7 @@ export const Select = (props: SelectProps) => {
         <Icons.chevronDown size={14} className="sel-chev" />
       </button>
 
-      {open && panelPos && (
+      {open && panelPos && typeof document !== 'undefined' && createPortal(
         <div
           ref={panelRef}
           className="sel-panel"
@@ -352,7 +353,8 @@ export const Select = (props: SelectProps) => {
             </div>
           )}
           <div className="sel-list">{panelBody}</div>
-        </div>
+        </div>,
+        document.body,
       )}
     </div>
   );

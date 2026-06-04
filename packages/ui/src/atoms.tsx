@@ -803,12 +803,15 @@ const RelativeTime = ({
     const ttCls = ['tt', tooltipSide !== 'top' ? tooltipSide : ''].filter(Boolean).join(' ');
     return (
       <span className={ttCls} data-tt={full}>
-        <time className={cls} dateTime={d.toISOString()}>{text}</time>
+        {/* relative text + dateTime are computed against the current clock and the
+            user's locale, so they legitimately differ between SSR and the client —
+            suppress the (expected) hydration mismatch. */}
+        <time className={cls} dateTime={d.toISOString()} suppressHydrationWarning>{text}</time>
       </span>
     );
   }
   return (
-    <time className={cls} dateTime={d.toISOString()} title={full}>{text}</time>
+    <time className={cls} dateTime={d.toISOString()} title={full} suppressHydrationWarning>{text}</time>
   );
 };
 

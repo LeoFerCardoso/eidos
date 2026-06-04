@@ -1747,6 +1747,20 @@
       "dependencies": []
     },
     {
+      "name": "mention",
+      "type": "registry:ui",
+      "title": "Mention",
+      "description": "Eidos Mention component.",
+      "registryDependencies": [
+        "forge",
+        "forge-ai",
+        "hover-card",
+        "avatar",
+        "icons"
+      ],
+      "dependencies": []
+    },
+    {
       "name": "message",
       "type": "registry:ui",
       "title": "Message",

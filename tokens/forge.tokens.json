@@ -920,6 +920,23 @@
       }
     }
   },
+  "other": {
+    "ember-soft-text": {
+      "$value": "color-mix(in oklch, var(--ember-text) 80%, var(--fg-muted))"
+    },
+    "ember-soft-text-muted": {
+      "$value": "color-mix(in oklch, var(--ember-text) 60%, var(--fg-muted))"
+    },
+    "tnum": {
+      "$value": "'tnum', 'zero'"
+    },
+    "elev-0": {
+      "$value": "none"
+    },
+    "shadow-0": {
+      "$value": "{other.elev-0}"
+    }
+  },
   "easing": {
     "ease": {
       "$value": "cubic-bezier(0.16, 1, 0.3, 1)",
@@ -1193,17 +1210,6 @@
     "bp-2xl": {
       "$value": "1536px",
       "$type": "dimension"
-    }
-  },
-  "other": {
-    "tnum": {
-      "$value": "'tnum', 'zero'"
-    },
-    "elev-0": {
-      "$value": "none"
-    },
-    "shadow-0": {
-      "$value": "{other.elev-0}"
     }
   },
   "opacity": {

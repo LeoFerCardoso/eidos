@@ -175,8 +175,9 @@ function Panel({
         top: rect ? rect.top : -9999,
         left: rect ? rect.left : -9999,
         minWidth,
-        // Use --z-popover level (60) — hover cards sit above content, below modals.
-        zIndex: 60,
+        // Tooltip tier — a hovercard previews whatever you point at, including
+        // content inside a drawer/modal, so it must float ABOVE those overlays.
+        zIndex: 'var(--z-tooltip, 300)',
       }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

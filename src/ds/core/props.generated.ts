@@ -1089,6 +1089,17 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
       "description": "Inline styles merged onto the root span."
     }
   ],
+  "Mention": [
+    {
+      "prop": "person",
+      "type": "MentionPerson",
+      "required": true
+    },
+    {
+      "prop": "className",
+      "type": "string"
+    }
+  ],
   "Message": [
     {
       "prop": "from",
@@ -4425,6 +4436,11 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
       "description": "Subtitle / description shown below the title inside `.dr-header`."
     },
     {
+      "prop": "headerActions",
+      "type": "React.ReactNode",
+      "description": "Actions rendered in the header's trailing cluster, before the close button — e.g. an \"open full page\" or overflow icon button."
+    },
+    {
       "prop": "footer",
       "type": "React.ReactNode",
       "description": "Content pinned to the panel bottom in `.dr-footer`. Render cancel (ghost) then primary (ember) left-to-right."
@@ -5228,6 +5244,10 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
     {
       "prop": "onValueChange",
       "type": "(v: string) => void"
+    },
+    {
+      "prop": "indicator",
+      "type": "'dot' | 'check'"
     }
   ],
   "DropdownMenu": [
@@ -5358,6 +5378,12 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
     {
       "prop": "onValueChange",
       "type": "(value: string) => void"
+    },
+    {
+      "prop": "indicator",
+      "type": "'dot' | 'check'",
+      "default": "'dot'",
+      "description": "Selection indicator for the group's items. `'dot'` (default) is the canonical radio bullet; `'check'` shows a check mark instead — useful for settings-style single-select menus (appearance, sort order, …) where a check reads more naturally than a radio dot. The role stays `menuitemradio` either way; only the glyph changes."
     },
     {
       "prop": "children",

@@ -19,6 +19,8 @@ interface DrawerProps {
   title?: React.ReactNode;
   /** Subtitle / description shown below the title inside `.dr-header`. */
   desc?: React.ReactNode;
+  /** Actions rendered in the header's trailing cluster, before the close button — e.g. an "open full page" or overflow icon button. */
+  headerActions?: React.ReactNode;
   /** Content pinned to the panel bottom in `.dr-footer`. Render cancel (ghost) then primary (ember) left-to-right. */
   footer?: React.ReactNode;
   /** Callback fired when the drawer requests dismissal — Escape key, scrim click, X button, or drag-to-dismiss velocity threshold. Wire to toggle your `open` state. */
@@ -34,7 +36,7 @@ interface DrawerProps {
 const Drawer = (props: DrawerProps) => {
   const {
     open, side = 'right', variant = 'overlay', persistent,
-    title, desc, footer, onClose, style, className, children,
+    title, desc, headerActions, footer, onClose, style, className, children,
   } = props;
 
   const [mounted, setMounted] = React.useState(open);
@@ -172,16 +174,21 @@ const Drawer = (props: DrawerProps) => {
 
   if (!mounted) return null;
 
-  const headerNode = (title || desc || onClose) ? (
+  const headerNode = (title || desc || onClose || headerActions) ? (
     <div className="dr-header">
       <div style={{ flex: 1, minWidth: 0 }}>
         {title && <div className="dr-title" id={titleId}>{title}</div>}
         {desc && <div className="dr-desc" id={descId}>{desc}</div>}
       </div>
-      {onClose && (
-        <button className="dr-close" type="button" onClick={() => onClose && onClose()} aria-label="Close drawer">
-          <Icons.x size={16}/>
-        </button>
+      {(headerActions || onClose) && (
+        <div className="dr-header-actions">
+          {headerActions}
+          {onClose && (
+            <button className="dr-close" type="button" onClick={() => onClose && onClose()} aria-label="Close drawer">
+              <Icons.x size={16}/>
+            </button>
+          )}
+        </div>
       )}
     </div>
   ) : null;

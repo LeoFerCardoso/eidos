@@ -7,6 +7,18 @@
    typography and spacing — adds only structural CSS specific to product chrome.
    ========================================================================== */
 
+/* ---- Spacing contract — single source of truth for all portal/example pages */
+:root {
+  --fp-page-inset-block:    36px;
+  --fp-page-inset-inline:   28px;
+  --fp-header-gap:          24px;
+  --fp-header-gap-compact:  14px;
+  --fp-section-gap:         18px;
+  --fp-filter-gap:          14px;
+  --fp-toolbar-gap:         16px;
+  --fp-card-pad:            16px;
+}
+
 html, body { margin: 0; padding: 0; height: 100%; }
 /* The document scrolls on <html>. Reserve the gutter so a page that scrolls and
    one that doesn't share the same content width (no horizontal shift), AND keep
@@ -81,7 +93,7 @@ body:active::-webkit-scrollbar-thumb,
 /* ---- Root layout --------------------------------------------------------- */
 .fp-app {
   display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
   grid-template-rows: 48px 1fr;
   grid-template-areas:
     "rail topbar"
@@ -325,7 +337,9 @@ body:active::-webkit-scrollbar-thumb,
 /* ---- Main content -------------------------------------------------------- */
 .fp-main {
   grid-area: main;
-  padding: 24px 28px 64px;
+  padding-block-start: var(--fp-page-inset-block);
+  padding-block-end: 64px;
+  padding-inline: var(--fp-page-inset-inline);
   max-width: 1480px;
   margin: 0 auto;
   width: 100%;
@@ -341,7 +355,7 @@ body:active::-webkit-scrollbar-thumb,
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-block-end: var(--fp-header-gap);
 }
 .fp-page-header > div:first-child { flex: 1; min-width: 0; }
 .fp-page-header .eyebrow {
@@ -387,7 +401,7 @@ body:active::-webkit-scrollbar-thumb,
   margin-top: 14px;
 }
 .fp-page-header.is-compact {
-  margin-bottom: 14px;
+  margin-block-end: var(--fp-header-gap-compact);
   align-items: center;
 }
 .fp-page-header.is-compact h1 {
@@ -403,7 +417,7 @@ body:active::-webkit-scrollbar-thumb,
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  padding: 16px;
+  padding: var(--fp-card-pad);
 }
 .fp-card-head {
   display: flex;
@@ -448,7 +462,7 @@ body:active::-webkit-scrollbar-thumb,
   display: flex;
   gap: 0;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 18px;
+  margin-block-end: var(--fp-section-gap);
   overflow-x: auto;
 }
 .fp-tab {
@@ -530,14 +544,35 @@ body:active::-webkit-scrollbar-thumb,
   padding: 12px 16px;
 }
 
+/* ---- DS Sidebar in the portal grid --------------------------------------- */
+/* When the portal uses the DS <Sidebar> component instead of the legacy
+   .fp-rail, the .sb-rail element sits in grid-area: rail. Give it a sticky
+   full-height position that mirrors the old .fp-rail behaviour. */
+.fp-app > .sb-rail {
+  grid-area: rail;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  align-self: start;
+}
+
+/* Suppress the Sidebar's own built-in collapse trigger (.sb-toggle) inside the
+   portal shell. The single collapse control lives in the topbar (panelLeft
+   button). Hiding the internal trigger removes the dead space above the
+   workspace header so the header butts up to the top of the rail. */
+.fp-app > .sb-rail .sb-toggle {
+  display: none;
+}
+
 /* Light theme adjustments */
 [data-mode="light"] .fp-rail,
 [data-mode="light"] .fp-topbar { background: var(--surface); }
 [data-mode="light"] .fp-topbar-search { background: var(--bg); }
+[data-mode="light"] .fp-app > .sb-rail { background: var(--surface); }
 
 /* Section header for sub-sections within a page */
-.fp-section { margin-bottom: 24px; }
-.fp-section + .fp-section { margin-top: 24px; }
+.fp-section { margin-block-end: var(--fp-section-gap); }
+.fp-section + .fp-section { margin-block-start: 0; }
 .fp-section-title {
   font-size: 11px;
   text-transform: uppercase;

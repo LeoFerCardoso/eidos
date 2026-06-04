@@ -65,8 +65,6 @@ export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'o
   manualActivation?: boolean;
 }
 
-let uidCounter = 0;
-
 export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
   (
     {
@@ -83,7 +81,10 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
     },
     ref,
   ) => {
-    const [uid] = React.useState(() => `eidos-tabs-${++uidCounter}`);
+    // SSR-safe stable id. A module counter (`++uidCounter`) diverges between the
+    // server and client render (the server increments across all Tabs in the
+    // tree), causing a hydration id mismatch. React.useId() is stable across both.
+    const uid = `eidos-tabs-${React.useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
     const [internalValue, setInternalValue] = React.useState(defaultValue ?? '');
     const isControlled = controlledValue !== undefined;
     const activeValue = isControlled ? controlledValue : internalValue;
