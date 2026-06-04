@@ -11,11 +11,12 @@
 // chrome is the .fp-chat-* layer in src/styles/example-shell.css.
 import * as React from 'react';
 import {
-  Icons, ForgeMark, Avatar,
+  Icons, ForgeMark, Avatar, Pill,
   PromptInput, PromptBanner, SuggestionCard,
-  Message, Response, MessageActions, ProseCode,
+  Message, Response, MessageActions, ProseCode, Prose,
   ChainOfThought, Citation, Sources,
   Diagram, MathView,
+  Modal, Card, CardMedia, CardHeader, CardTitle, CardContent, CardFooter,
 } from '@/ds/core';
 import { usePageCrumb } from '@/portal/shell/portal-shell';
 
@@ -49,11 +50,49 @@ const AGENTS = [
 
 type Agent = (typeof AGENTS)[number];
 
-type View = 'new' | 'thread' | 'search' | 'projects' | 'project';
+type View = 'new' | 'thread' | 'search' | 'projects' | 'project' | 'archive' | 'artifacts';
 type Nav = { view: View; chatId?: string; projectId?: string; agentId?: string };
 
+// Archived chats — restorable (rollback un-archives them).
+const ARCHIVED = [
+  { id: 'arc-pix-throttle', title: 'Pix throttle config — 06/04 spike',  preview: 'Added a 2s throttle on the offline path until the rail recovered.', when: 'Archived 2w ago' },
+  { id: 'arc-q4-cost',      title: 'Q4 cost review — Cloud Run',          preview: 'Cloud Run was 18% of the platform bill; rightsized to cut ~30%.',  when: 'Archived 3w ago' },
+  { id: 'arc-sast-q1',      title: 'SAST sweep — Q1 services',            preview: 'Triaged 9 high-severity findings; 7 fixed, 2 accepted.',          when: 'Archived 1mo ago' },
+  { id: 'arc-onb-runbook',  title: 'Onboarding runbook for new SREs',     preview: 'Drafted the day-1 setup, pager rotation and escalation paths.',    when: 'Archived 2mo ago' },
+];
+
+// Artifacts created through chat — each links back to the chat that made it.
+type ArtifactKind = 'image' | 'document' | 'html' | 'app' | 'code' | 'data';
+type ArtifactItem = {
+  id: string;
+  kind: ArtifactKind;
+  title: string;
+  meta: string;
+  created: string;
+  chatId: string;
+  chatTitle: string;
+};
+
+const ART_KIND: Record<ArtifactKind, { icon: string; label: string; bg: string; fg: string }> = {
+  image:    { icon: 'image',    label: 'Image',    bg: 'rgba(52, 211, 153, 0.14)', fg: '#34D399' },
+  document: { icon: 'doc',      label: 'Document', bg: 'rgba(96, 165, 250, 0.16)', fg: '#60A5FA' },
+  html:     { icon: 'globe',    label: 'HTML',     bg: 'rgba(192, 132, 252, 0.16)', fg: '#C084FC' },
+  app:      { icon: 'rocket',   label: 'App',      bg: 'rgba(251, 146, 60, 0.16)', fg: '#FB923C' },
+  code:     { icon: 'terminal', label: 'Code',     bg: 'rgba(56, 189, 248, 0.16)', fg: '#38BDF8' },
+  data:     { icon: 'database', label: 'Dataset',  bg: 'rgba(163, 230, 53, 0.14)', fg: '#A3E635' },
+};
+
+const ARTIFACTS: ArtifactItem[] = [
+  { id: 'art-cutover-svg', kind: 'image',    title: 'Cutover sequence diagram',          meta: 'SVG · 24 KB',            created: '2h ago',   chatId: 'acerta-p99', chatTitle: 'acerta-api p99 spike after v4.12' },
+  { id: 'art-runbook',     kind: 'document',  title: 'Runbook — score-engine → Aurora',   meta: 'Markdown · 5.4 KB',      created: 'Yesterday', chatId: 'breaker',    chatTitle: 'Circuit breaker for onescore-gateway' },
+  { id: 'art-status-page', kind: 'html',      title: 'Incident status page',              meta: 'Static · 8 KB',          created: 'Yesterday', chatId: 'fraud-fp',   chatTitle: 'konduto-antifraud false-positive spike' },
+  { id: 'art-breaker-cfg', kind: 'code',      title: 'Resilience4j breaker config',       meta: 'YAML · 1.2 KB',          created: '2d ago',   chatId: 'breaker',    chatTitle: 'Circuit breaker for onescore-gateway' },
+  { id: 'art-fp-dash',     kind: 'app',       title: 'False-positive triage mini-app',    meta: 'React · interactive',    created: '3d ago',   chatId: 'fraud-fp',   chatTitle: 'konduto-antifraud false-positive spike' },
+  { id: 'art-cpf-sample',  kind: 'data',      title: 'SCR reconciliation sample',         meta: 'CSV · 240 rows',         created: '4d ago',   chatId: 'cp-backfill', chatTitle: 'cadastro-positivo-ingestor backfill' },
+];
+
 const findChatTitle = (id: string): string => {
-  const all = [...RECENTS, ...YESTERDAY];
+  const all = [...RECENTS, ...YESTERDAY, ...ARCHIVED];
   return all.find((t) => t.id === id)?.title
     ?? PINNED.find((p) => p.id === id)?.label
     ?? RECENTS[0].title;
@@ -122,7 +161,9 @@ const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => (
     </button>
 
     <nav className="fp-chat-nav" aria-label="Primary">
-      <SideRow icon="search" label="Search chats" kbd="⌘K" active={nav.view === 'search'} onClick={() => go({ view: 'search' })} />
+      <SideRow icon="search" label="Search chats" kbd="⌘K"        active={nav.view === 'search'}    onClick={() => go({ view: 'search' })} />
+      <SideRow icon="inbox"  label="Archive"      count={ARCHIVED.length}  active={nav.view === 'archive'}   onClick={() => go({ view: 'archive' })} />
+      <SideRow icon="grid"   label="Artifacts"    count={ARTIFACTS.length} active={nav.view === 'artifacts'} onClick={() => go({ view: 'artifacts' })} />
     </nav>
 
     <div className="fp-chat-sep" role="separator" />
@@ -789,6 +830,221 @@ const ProjectDetailView = ({ projectId, onBack, onOpenChat }: { projectId: strin
   );
 };
 
+// ── View: Archive ───────────────────────────────────────────────────────────
+const ArchiveView = ({ onOpen }: { onOpen: (id: string) => void }) => {
+  // Restoring un-archives a chat (rollback) — it leaves the archive list.
+  const [restored, setRestored] = React.useState<Set<string>>(new Set());
+  const rows = ARCHIVED.filter((c) => !restored.has(c.id));
+
+  return (
+    <div className="fp-chat-pane fp-chat-archive">
+      <header className="fp-chat-pane-head">
+        <span className="eyebrow">Forge AI · Archive</span>
+        <h1>Archived chats</h1>
+        <p className="lede">Conversations you&apos;ve put away. Restore one to roll it back into your active Chats list.</p>
+      </header>
+
+      {rows.length === 0 ? (
+        <div className="fp-chat-pane-empty">
+          <Icons.inbox size={26} />
+          <p>No archived chats.</p>
+          <p className="hint">Chats you archive will collect here.</p>
+        </div>
+      ) : (
+        <ul className="fp-chat-arc-list">
+          {rows.map((c) => (
+            <li key={c.id} className="fp-chat-arc-row">
+              <span className="fp-chat-arc-ico" aria-hidden="true"><Icons.chat size={14} /></span>
+              <button type="button" className="fp-chat-arc-body" onClick={() => onOpen(c.id)}>
+                <span className="title">{c.title}</span>
+                <span className="preview">{c.preview}</span>
+              </button>
+              <span className="fp-chat-arc-when">{c.when}</span>
+              <button
+                type="button"
+                className="btn sm ghost fp-chat-arc-restore"
+                onClick={() => setRestored((s) => new Set(s).add(c.id))}
+                title="Restore — move back to Chats"
+              >
+                <Icons.undo size={13} /> Restore
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+// ── View: Artifacts ─────────────────────────────────────────────────────────
+// Lightweight, self-contained previews per artifact kind (no network / no real
+// files) so the gallery + viewer are demonstrable offline.
+const HTML_SRC = `<!doctype html><html><head><meta charset="utf-8"><style>
+  :root{color-scheme:dark}body{font:14px/1.5 system-ui,sans-serif;margin:0;background:#0b0b0d;color:#e7e7ea;padding:28px}
+  .ok{color:#34d399}.bad{color:#f87171}h1{font-size:20px;margin:0 0 4px}.sub{color:#9b9ba3;margin:0 0 20px}
+  .row{display:flex;justify-content:space-between;padding:11px 0;border-top:1px solid #ffffff14}
+  .dot{display:inline-block;inline-size:8px;block-size:8px;border-radius:50%;margin-inline-end:8px}
+  .pill{font:11px/1 ui-monospace,monospace;color:#08090a;background:#ff6b35;padding:3px 7px;border-radius:6px}
+</style></head><body>
+  <h1>Forge · Status</h1><p class="sub">Score &amp; Risk platform · updated 14:06 BRT</p>
+  <div class="row"><span><span class="dot" style="background:#f87171"></span>acerta-api</span><span class="bad">Degraded · p99 240ms</span></div>
+  <div class="row"><span><span class="dot" style="background:#34d399"></span>onescore-gateway</span><span class="ok">Operational</span></div>
+  <div class="row"><span><span class="dot" style="background:#34d399"></span>score-engine</span><span class="ok">Operational</span></div>
+  <div class="row"><span><span class="dot" style="background:#f87171"></span>konduto-antifraud</span><span class="bad">Degraded · v3.1.7</span></div>
+  <p style="margin-top:22px"><span class="pill">INC-2041 · P2</span></p>
+</body></html>`;
+
+const APP_SRC = `<!doctype html><html><head><meta charset="utf-8"><style>
+  :root{color-scheme:dark}body{font:14px/1.5 system-ui,sans-serif;margin:0;background:#111113;color:#e7e7ea;padding:24px}
+  h1{font-size:16px;margin:0 0 16px}.card{background:#19191c;border:1px solid #ffffff14;border-radius:10px;padding:14px;margin-block-end:10px;display:flex;justify-content:space-between;align-items:center}
+  .t{font-weight:600}.m{color:#9b9ba3;font-size:12px}button{font:600 12px system-ui;color:#08090a;background:#ff6b35;border:0;border-radius:7px;padding:7px 12px;cursor:pointer}
+  button.gh{background:transparent;color:#e7e7ea;border:1px solid #ffffff20}
+</style></head><body>
+  <h1>False-positive triage</h1>
+  <div class="card"><div><div class="t">tx_8841 · R$ 1.240,00</div><div class="m">score 0.92 · rule fraud-score-v3</div></div><div><button>Approve</button> <button class="gh" onclick="this.closest('.card').remove()">Reject</button></div></div>
+  <div class="card"><div><div class="t">tx_8842 · R$ 89,90</div><div class="m">score 0.71 · rule velocity-cap</div></div><div><button>Approve</button> <button class="gh" onclick="this.closest('.card').remove()">Reject</button></div></div>
+  <div class="card"><div><div class="t">tx_8843 · R$ 4.500,00</div><div class="m">score 0.88 · rule device-mismatch</div></div><div><button>Approve</button> <button class="gh" onclick="this.closest('.card').remove()">Reject</button></div></div>
+</body></html>`;
+
+const BREAKER_YAML = `# onescore-gateway — Resilience4j circuit breaker
+resilience4j.circuitbreaker:
+  instances:
+    scpc:
+      slidingWindowType: TIME_BASED
+      slidingWindowSize: 30          # seconds
+      failureRateThreshold: 50       # %
+      slowCallDurationThreshold: 2s
+      slowCallRateThreshold: 80      # %
+      waitDurationInOpenState: 10s
+      permittedNumberOfCallsInHalfOpenState: 5
+      minimumNumberOfCalls: 20`;
+
+const CSV_ROWS = [
+  ['cpf_hash', 'bureau', 'scr_status', 'delta'],
+  ['a91f…3c', 'boavista', 'matched', '0'],
+  ['7b20…e1', 'scpc', 'mismatch', '+2'],
+  ['c4d8…9a', 'boavista', 'matched', '0'],
+  ['18ee…0f', 'scpc', 'missing', '−1'],
+];
+
+const ArtifactPreview = ({ a }: { a: ArtifactItem }) => {
+  if (a.kind === 'image') {
+    return (
+      <div className="fp-art-image" role="img" aria-label={a.title}>
+        <Icons.image size={44} />
+        <span className="dims">SVG diagram · 920 × 360</span>
+      </div>
+    );
+  }
+  if (a.kind === 'document') {
+    return (
+      <Prose>
+        <h2>Runbook — score-engine → Aurora migration</h2>
+        <p><strong>Owners:</strong> score-platform · <strong>Window:</strong> Sun 02:00 UTC</p>
+        <h3>1 · Pre-flight</h3>
+        <ul>
+          <li>Confirm RPO ≤ 5 min in the catalog SLO panel</li>
+          <li>Take a logical backup → S3</li>
+          <li>Notify <code>#release</code> 30 min before the window</li>
+        </ul>
+        <h3>2 · Cutover</h3>
+        <ol>
+          <li>Snapshot the source RDS instance</li>
+          <li>Restore as an Aurora cluster from the snapshot</li>
+          <li>Re-point the <code>score-engine</code> secret, rolling restart</li>
+        </ol>
+        <blockquote><strong>If any check fails, roll back.</strong> The rollback path is faster than the forward path inside the window.</blockquote>
+      </Prose>
+    );
+  }
+  if (a.kind === 'html') return <iframe className="fp-art-frame" srcDoc={HTML_SRC} title={a.title} sandbox="" />;
+  if (a.kind === 'app') return <iframe className="fp-art-frame" srcDoc={APP_SRC} title={a.title} sandbox="allow-scripts" />;
+  if (a.kind === 'code') return <ProseCode lang="yaml">{BREAKER_YAML}</ProseCode>;
+  // data
+  return (
+    <table className="fp-art-table">
+      <thead><tr>{CSV_ROWS[0].map((h) => <th key={h}>{h}</th>)}</tr></thead>
+      <tbody>{CSV_ROWS.slice(1).map((r, i) => <tr key={i}>{r.map((c, j) => <td key={j}><code className="mono">{c}</code></td>)}</tr>)}</tbody>
+    </table>
+  );
+};
+
+const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => {
+  const [sel, setSel] = React.useState<ArtifactItem | null>(null);
+  const kind = sel ? ART_KIND[sel.kind] : null;
+
+  return (
+    <div className="fp-chat-pane fp-chat-artifacts">
+      <header className="fp-chat-pane-head">
+        <span className="eyebrow">Forge AI · Artifacts</span>
+        <h1>Artifacts</h1>
+        <p className="lede">Everything Forge AI built for you — diagrams, docs, pages, apps, code and datasets. Open one to preview it and jump back to the chat that made it.</p>
+      </header>
+
+      <div className="fp-chat-art-grid">
+        {ARTIFACTS.map((a) => {
+          const k = ART_KIND[a.kind];
+          const I = ICON(k.icon);
+          return (
+            <Card
+              key={a.id}
+              variant="elevated"
+              interactive
+              compact
+              role="button"
+              tabIndex={0}
+              className="fp-chat-art-card"
+              aria-label={`${a.title} — ${k.label}`}
+              onClick={() => setSel(a)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSel(a); } }}
+            >
+              <CardMedia alt={`${k.label} artifact`} className="fp-chat-art-media" style={{ background: k.bg, color: k.fg }}>
+                <I size={26} />
+              </CardMedia>
+              <CardHeader>
+                <CardTitle as="h3">{a.title}</CardTitle>
+              </CardHeader>
+              <CardFooter>
+                <Pill tone="neutral" icon={<I size={11} />}>{k.label}</Pill>
+                <span className="fp-chat-art-meta">{a.meta} · {a.created}</span>
+              </CardFooter>
+            </Card>
+          );
+        })}
+      </div>
+
+      <Modal
+        open={!!sel}
+        onOpenChange={(o) => { if (!o) setSel(null); }}
+        size="xl"
+        icon={kind ? ICON(kind.icon) : undefined}
+        title={sel?.title}
+        desc={sel ? `${kind?.label} · ${sel.meta} · created ${sel.created}` : undefined}
+        className="fp-art-modal"
+        footer={sel ? (
+          <>
+            <span className="fp-art-foot-src">
+              From{' '}
+              <button type="button" className="fp-art-foot-link" onClick={() => { onOpenChat(sel.chatId); setSel(null); }}>
+                {sel.chatTitle}
+              </button>
+            </span>
+            <span className="fp-art-foot-actions">
+              <button type="button" className="btn sm outline"><Icons.copy size={13} /> Copy</button>
+              <button type="button" className="btn sm outline"><Icons.download size={13} /> Download</button>
+              <button type="button" className="btn sm ember" onClick={() => { onOpenChat(sel.chatId); setSel(null); }}>
+                <Icons.chat size={13} /> Open chat
+              </button>
+            </span>
+          </>
+        ) : undefined}
+      >
+        {sel && <div className="fp-art-view">{<ArtifactPreview a={sel} />}</div>}
+      </Modal>
+    </div>
+  );
+};
+
 // ── Root ────────────────────────────────────────────────────────────────────
 export default function PortalChat() {
   const [nav, setNav] = React.useState<Nav>({ view: 'new' });
@@ -810,6 +1066,8 @@ export default function PortalChat() {
         {nav.view === 'search' && <SearchView onOpen={(id) => go({ view: 'thread', chatId: id })} />}
         {nav.view === 'projects' && <ProjectsView onOpen={(id) => go({ view: 'project', projectId: id })} />}
         {nav.view === 'project' && <ProjectDetailView projectId={nav.projectId ?? 'space-score'} onBack={() => go({ view: 'projects' })} onOpenChat={(id) => go({ view: 'thread', chatId: id })} />}
+        {nav.view === 'archive' && <ArchiveView onOpen={(id) => go({ view: 'thread', chatId: id })} />}
+        {nav.view === 'artifacts' && <ArtifactsView onOpenChat={(id) => go({ view: 'thread', chatId: id })} />}
       </section>
     </div>
   );
