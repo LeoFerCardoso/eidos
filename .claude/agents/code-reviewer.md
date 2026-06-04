@@ -20,6 +20,13 @@ Start with `git diff` (or the named range) to scope the review. Check, in order:
    `src/ds/migrated/registry.ts` / `src/ds/examples/registry.ts` / `src/lib/nav.ts`.
 3. **Anti-AI-slop P0** — no Tailwind indigo, no trust gradient, no emoji-as-icon, no
    invented metrics, no lorem (see `.claude/craft/anti-ai-slop.md`).
+3a. **Layout & alignment P0** (see `.claude/craft/layout-and-spacing.md`) — in the diff,
+   flag: `margin-inline`/`margin-left`/`margin-right` on a list/table/feed ROW (outer
+   margin breaks column alignment; spacing goes inside as padding); `border-radius` on a
+   list/table row (rows are square + hairline divider, not chips); a single-subject region
+   wrapped in a card / a nested card / an un-flattened carded-by-default panel
+   (`.eidos-tabpanel`); a weak support line that restates the title; an em-dash in UI copy.
+   Alignment itself is a pixel property — note that it must be confirmed on a screenshot.
 4. **React/Next.js** — correct Server/Client boundaries, no client bloat, stable keys,
    effect hygiene; consult `vercel:react-best-practices` / `vercel:nextjs`.
 5. **AI SDK v6** — no deprecated APIs (`maxSteps`, `parameters`, `generateObject`,

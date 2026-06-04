@@ -25,7 +25,7 @@ inside the persisted `(ds)` DocsShell by `DSPageLoader`.
    typography (it now uses `<Lede>` / `<Mono>` — see below).
 3. `EIDOS-DS-REFERENCE.md` + `llms.txt` — catalog; confirm the class/icon already exists.
 4. `.claude/design-systems/forge/DESIGN.md` — brand (ember budget, Geist, density, motion).
-5. Craft: `.claude/craft/{typography,color,anti-ai-slop,accessibility-baseline,rtl-and-bidi,state-coverage}.md`.
+5. Craft: `.claude/craft/{typography,color,anti-ai-slop,layout-and-spacing,accessibility-baseline,rtl-and-bidi,state-coverage}.md`.
 
 ## The route ritual (a page = TWO coordinated changes, then regen)
 1. **Register the route** — add `{ id:'<slug>', label:'<Label>', href:'pages/<ds>/<slug>.html', badge }`

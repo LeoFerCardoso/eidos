@@ -48,7 +48,11 @@ a source = a labeled placeholder, never an invented number. Mock data lives in
 `src/ds/core/mocks.js`.
 
 ### Step 5 — Self-check
-Run `npm run verify` (route mounts) + the manual checklist in `.claude/craft/anti-ai-slop.md`.
+Run `npm run verify` (route mounts) + the manual checklists in
+`.claude/craft/anti-ai-slop.md` AND `.claude/craft/layout-and-spacing.md`. For layout,
+screenshot the screen and drop a vertical guide on the title's left edge: the eyebrow,
+tabs, toolbar and every list-row surface must meet it. No outer margin on rows, no rounded
+list rows, no single-subject card.
 
 ## Hard rules
 - **Compose, never reinvent.** If it comes out of Pill + Card + Avatar + Trend + StatusDot,
