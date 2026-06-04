@@ -819,16 +819,17 @@ body:active::-webkit-scrollbar-thumb,
    a detail body line, a right-aligned time + on-hover actions. */
 .fp-feed-bar {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 16px;
   flex-wrap: wrap;
   border-bottom: 1px solid var(--border);
   margin-block-end: 4px;
 }
-/* The tablist's own line moves onto the bar so the divider spans tabs + search;
-   the active tab's ember indicator still sits on that border, like the bell. */
+/* The tablist's own line moves onto the bar so the divider spans tabs + search.
+   align-items:flex-end drops the tablist to the bar's baseline, so the active
+   tab's ember indicator (::after at bottom:-1px) sits exactly on that border. */
 .fp-feed-bar .eidos-tablist--line { border-bottom: none; }
-.fp-feed-search { margin-inline-start: auto; inline-size: 260px; margin-block: 7px; }
+.fp-feed-search { margin-inline-start: auto; inline-size: 260px; margin-block-end: 6px; }
 
 /* The DS TabsContent (.eidos-tabpanel) is a carded panel by default — padding +
    border + elevated bg. The inbox has ONE subject per tab, so flatten it to
