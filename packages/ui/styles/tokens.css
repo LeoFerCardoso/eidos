@@ -48,7 +48,7 @@
   --fg:        #F2EEE8;  /* primary text — warm white */
   --fg-muted:  #A8A39B;  /* secondary — descriptions, helper */
   --fg-subtle: #756F66;  /* tertiary — metadata, placeholders */
-  --fg-faint:  #524C44;  /* quaternary — decorative only, never required */
+  --fg-faint:  #6A6359;  /* quaternary — faint labels/metadata (lifted for legibility on non-retina) */
 
   /* ── EMBER — the single accent. Bright in dark, deep in light ────────── */
   --ember:        #FF6B35;
@@ -470,7 +470,7 @@
   --fg:        #0E0C09;
   --fg-muted:  #595550;
   --fg-subtle: #78736D;
-  --fg-faint:  #A8A39B;
+  --fg-faint:  #8F8980;  /* quaternary — darkened for legibility on the light surface */
 
   /* ── EMBER — deeper in light so it doesn't bloom on white ─────────────── */
   --ember:        #E85A28;

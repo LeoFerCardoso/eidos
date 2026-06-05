@@ -210,15 +210,22 @@ export const Popover = ({
     // After the panel renders, measure + position it.
     const frame = requestAnimationFrame(placePanel);
 
-    const onClose = () => setOpen(false);
-    window.addEventListener('scroll', onClose, true);
-    window.addEventListener('resize', onClose);
+    // Re-anchor (don't close) when an ancestor or the page scrolls. Scrolls that
+    // originate inside the panel itself (e.g. a scrollable list) are ignored, so
+    // wheeling through the panel content never dismisses it.
+    const onScroll = (e: Event) => {
+      const t = e.target as Node | null;
+      if (panelRef.current && t && panelRef.current.contains(t)) return;
+      placePanel();
+    };
+    window.addEventListener('scroll', onScroll, true);
+    window.addEventListener('resize', placePanel);
     return () => {
       cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', onClose, true);
-      window.removeEventListener('resize', onClose);
+      window.removeEventListener('scroll', onScroll, true);
+      window.removeEventListener('resize', placePanel);
     };
-  }, [open, placePanel, setOpen]);
+  }, [open, placePanel]);
 
   // On open: capture trigger for focus-restore, then move focus into the panel.
   // On close: restore focus to the trigger.
