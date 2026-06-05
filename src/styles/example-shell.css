@@ -1260,6 +1260,61 @@ body:active::-webkit-scrollbar-thumb,
 }
 .fp-aiw-title { font-size: var(--text-sm); font-weight: 600; color: var(--fg); letter-spacing: -0.005em; }
 
+/* Incident-summary header — incident identity above the dependency chain. */
+.fp-aiw-inc-head {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.fp-aiw-inc-top { display: flex; align-items: center; gap: 8px; }
+.fp-aiw-inc-id { font-size: var(--text-sm); font-weight: 600; color: var(--fg); }
+.fp-aiw-inc-status {
+  margin-inline-start: auto;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: var(--text-xs); color: var(--fg-muted);
+  font-family: var(--font-mono);
+}
+.fp-aiw-inc-dot {
+  inline-size: 6px; block-size: 6px; border-radius: 50%;
+  background: var(--severity-p2); flex-shrink: 0;
+}
+.fp-aiw-inc-title {
+  margin-block-start: 7px;
+  font-size: var(--text-sm); font-weight: 600; color: var(--fg);
+  line-height: 1.4;
+}
+.fp-aiw-inc-meta {
+  margin-block-start: 4px;
+  display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
+  font-size: var(--text-xs); color: var(--fg-muted);
+}
+.fp-aiw-inc-meta svg { color: var(--fg-faint); }
+
+/* Recovery widget — green head icon for the "estate healthy again" state. */
+.fp-aiw-ic.is-ok { background: var(--success-soft); color: var(--success-text); }
+
+/* Feature-flag widget — flag key + on/off state pill, then key/value rows. */
+.fp-aiw-flag-name { font-size: var(--text-sm); font-weight: 600; color: var(--fg); }
+.fp-aiw-flag-state {
+  margin-inline-start: auto;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+}
+.fp-aiw-flag-dot {
+  inline-size: 6px; block-size: 6px; border-radius: 50%;
+  background: var(--fg-faint); flex-shrink: 0;
+}
+.fp-aiw-flag-state.is-on { color: var(--warning-text); }
+.fp-aiw-flag-state.is-on .fp-aiw-flag-dot { background: var(--warning); }
+.fp-aiw-flag-body { padding: 8px 12px; display: flex; flex-direction: column; gap: 6px; }
+.fp-aiw-flag-row { display: flex; gap: 10px; font-size: var(--text-xs); }
+.fp-aiw-flag-k {
+  flex: 0 0 52px; color: var(--fg-faint);
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.04em;
+}
+.fp-aiw-flag-v { color: var(--fg-muted); min-inline-size: 0; }
+
 .fp-aiw-chain { padding: 8px 12px; }
 .fp-aiw-node { padding-block: 6px; }
 .fp-aiw-node.is-root {

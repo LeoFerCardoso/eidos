@@ -10,10 +10,10 @@
 import * as React from 'react';
 import Link from 'next/link';
 import {
-  Icons, Pill,
+  Icons,
   ForgeMark, Message, PromptInput, Suggestion, SuggestionCard,
 } from '@/ds/core';
-import { RootCauseWidget, UserMention } from './forge-ai-widgets';
+import { RootCauseWidget, IncidentWidget, FlagWidget, RecoveryWidget, UserMention } from './forge-ai-widgets';
 
 const COMMANDER = {
   name: 'Marcus Johnson',
@@ -56,11 +56,15 @@ const STARTERS: { icon: string; title: string; line: string }[] = [
 ];
 
 // Mid-thread follow-ups offered after the first answer — keeps the conversation
-// going with one tap (Suggestion in its sm, inline size).
-const FOLLOWUPS = ['Roll back konduto-antifraud', 'Who is on-call?', 'Open the incident'];
+// going with one tap (Suggestion in its sm, inline size). Ordered as the
+// incident-response escalation: mitigate (flag) → durable fix (rollback) → people.
+const FOLLOWUPS = ['Disable the feature flag', 'Roll back konduto-antifraud', 'Who is on-call?'];
 
 // ── Scripted answers (the acerta-api degradation scenario) ──────────────────────
-function answer(qRaw: string): React.ReactNode {
+// `ask` is threaded in so an action button inside an answer can advance the
+// thread — the agentic escalation is: mitigate (kill the feature flag) → confirm
+// recovery → propose the durable rollback while the fix is prepared.
+function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
   const q = qRaw.toLowerCase();
 
   if (/roll ?back/.test(q)) {
@@ -73,6 +77,69 @@ function answer(qRaw: string): React.ReactNode {
         </p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           <button className="btn ember sm"><Icons.rollback size={12} /> Confirm rollback</button>
+          <button className="btn ghost sm">Cancel</button>
+        </div>
+      </>
+    );
+  }
+
+  // Mitigation confirmed — the flag is off, the estate recovers, and only then
+  // do I propose the durable rollback (the flag-off is temporary).
+  if (/turn off|flag (is )?off|disabled the flag|mitigat|recovered|healthy now/.test(q)) {
+    return (
+      <>
+        <p style={{ margin: '0 0 10px' }}>
+          Done — <code className="mono">konduto.fraud-score-v2</code> is <strong>off</strong> in production. The new
+          fraud-score rule stopped running and the estate is recovering:
+        </p>
+        <RecoveryWidget
+          nodes={[
+            { name: 'acerta-api', icon: 'server', metric: 'p95 118ms', note: 'back within SLO' },
+            { name: 'konduto-antifraud', icon: 'shield', metric: 'false-positive 2.1%', note: 'baseline restored' },
+          ]}
+        />
+        <p style={{ margin: '12px 0 12px' }}>
+          This is a <strong>temporary</strong> mitigation — the rule is only gated, not removed, so it can't ship to
+          users but it's still in the build. While the team prepares the proper fix, I recommend rolling back{' '}
+          <code className="mono">konduto-antifraud</code> from <code className="mono">v3.1.7</code> to{' '}
+          <code className="mono">v3.1.6</code> in production so the release is clean.
+        </p>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <button className="btn ember sm" onClick={() => ask('Roll back konduto-antifraud')}>
+            <Icons.rollback size={12} /> Roll back konduto-antifraud
+          </button>
+          <Link className="btn ghost sm" href="/portal/catalog/acerta-api">
+            <Icons.server size={12} /> View acerta-api
+          </Link>
+        </div>
+      </>
+    );
+  }
+
+  // Fastest, fully-reversible mitigation — flip the feature flag that wraps the
+  // offending rule. No deploy; proposed BEFORE any rollback.
+  if (/feature ?-?flag|disable .*flag|kill ?switch|gate the rule|toggle .*flag/.test(q)) {
+    return (
+      <>
+        <p style={{ margin: '0 0 10px' }}>
+          Good — the new fraud-score rule didn't ship as raw code. It's wrapped in a feature flag,{' '}
+          <code className="mono">konduto.fraud-score-v2</code>, so we don't need a deploy to stop it:
+        </p>
+        <FlagWidget
+          name="konduto.fraud-score-v2"
+          state="on"
+          wraps="New fraud-score rule · konduto-antifraud v3.1.7"
+          scope="production · 100% of traffic"
+        />
+        <p style={{ margin: '12px 0 12px' }}>
+          Turning it off is a runtime config change — it takes effect in <strong>~5s</strong>, needs no deploy and is
+          fully reversible. The rejections stop immediately and p95 should normalize, buying time while the fix is
+          prepared.
+        </p>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <button className="btn ember sm" onClick={() => ask('Turn off the flag now')}>
+            <Icons.flag size={12} /> Disable the flag
+          </button>
           <button className="btn ghost sm">Cancel</button>
         </div>
       </>
@@ -102,12 +169,13 @@ function answer(qRaw: string): React.ReactNode {
         />
         <p style={{ margin: '12px 0 12px' }}>
           Likely cause: the new fraud-score rule in <code className="mono">konduto-antifraud v3.1.7</code> is adding
-          latency and rejections upstream. <strong>Recommended:</strong> roll back konduto-antifraud to{' '}
-          <code className="mono">v3.1.6</code>, or gate the rule behind a flag.
+          latency and rejections upstream. It's wrapped in a feature flag, so the{' '}
+          <strong>fastest mitigation is to turn the flag off</strong> — no deploy, instantly reversible — then roll back
+          for a clean release once the fix is ready.
         </p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <button className="btn ember sm">
-            <Icons.rollback size={12} /> Roll back konduto-antifraud
+          <button className="btn ember sm" onClick={() => ask('Disable the feature flag')}>
+            <Icons.flag size={12} /> Disable the feature flag
           </button>
           <Link className="btn ghost sm" href="/portal/catalog/acerta-api">
             <Icons.server size={12} /> Open acerta-api
@@ -134,17 +202,45 @@ function answer(qRaw: string): React.ReactNode {
   if (/incident|inc-|open the|page/.test(q)) {
     return (
       <>
-        <p style={{ margin: '0 0 10px' }}>There is <strong>1 open incident</strong> right now:</p>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBlockEnd: 10 }}>
-          <Pill tone="severity-p2">P2</Pill>
-          <span style={{ fontSize: 'var(--text-sm)' }}>
-            <strong>INC-2041</strong> · p95 spike after konduto-antifraud v3.1.7, opened 6h ago, commander{' '}
-            <UserMention person={COMMANDER} />.
-          </span>
+        <p style={{ margin: '0 0 10px' }}>
+          There is <strong>1 open incident</strong> right now. Commander is <UserMention person={COMMANDER} /> —
+          here's the summary and what's driving it:
+        </p>
+        <IncidentWidget
+          id="INC-2041"
+          severity="p2"
+          title="p95 spike after konduto-antifraud v3.1.7"
+          status="Open · 6h"
+          opened="opened 6h ago"
+          impacted={2}
+          nodes={[
+            {
+              name: 'acerta-api', icon: 'server', health: 'degraded',
+              metric: { label: 'p95 240ms', delta: 41, inverted: true },
+              version: 'v4.12.0', age: '2h ago',
+            },
+            {
+              name: 'konduto-antifraud', icon: 'shield', health: 'degraded', root: true,
+              metric: { label: 'false-positive', delta: 18, inverted: true },
+              version: 'v3.1.7', age: '1d ago',
+            },
+          ]}
+        />
+        <p style={{ margin: '12px 0 12px' }}>
+          <code className="mono">acerta-api</code> is degraded because its dependency{' '}
+          <code className="mono">konduto-antifraud</code> (the suspected root cause) is also degraded — the new
+          fraud-score rule in <code className="mono">v3.1.7</code> is adding latency and rejections upstream. That rule
+          shipped behind a feature flag, so the <strong>fastest mitigation is to flip it off</strong> — no deploy,
+          instantly reversible — before we touch the release.
+        </p>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <button className="btn ember sm" onClick={() => ask('Disable the feature flag')}>
+            <Icons.flag size={12} /> Disable the feature flag
+          </button>
+          <Link className="btn ghost sm" href="/portal/catalog/acerta-api">
+            <Icons.server size={12} /> View impacted service
+          </Link>
         </div>
-        <Link className="btn ghost sm" href="/portal/catalog/acerta-api">
-          View impacted service <Icons.chevronRight size={12} />
-        </Link>
       </>
     );
   }
@@ -195,6 +291,10 @@ export function ForgeAIChat() {
   // Follow-up suggestions stay highlighted once picked.
   const [usedSuggestions, setUsedSuggestions] = React.useState<Set<string>>(new Set());
   const counter = React.useRef(0);
+  // Guard against re-entrancy from a ref (not the `thinking` state) so `ask` can
+  // be a stable callback — action buttons baked into an earlier answer call the
+  // very same `ask`, with no stale-closure surprises.
+  const thinkingRef = React.useRef(false);
   const endRef = React.useRef<HTMLDivElement>(null);
   const started = turns.length > 0;
 
@@ -202,17 +302,19 @@ export function ForgeAIChat() {
     endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [turns, thinking]);
 
-  const ask = (text: string) => {
+  const ask = React.useCallback((text: string) => {
     const t = text.trim();
-    if (!t || thinking) return;
+    if (!t || thinkingRef.current) return;
+    thinkingRef.current = true;
     setTurns((m) => [...m, { id: `u${++counter.current}`, role: 'user', content: t }]);
     setInput('');
     setThinking(true);
     window.setTimeout(() => {
-      setTurns((m) => [...m, { id: `a${++counter.current}`, role: 'assistant', content: answer(t) }]);
+      setTurns((m) => [...m, { id: `a${++counter.current}`, role: 'assistant', content: answer(t, ask) }]);
+      thinkingRef.current = false;
       setThinking(false);
     }, 850);
-  };
+  }, []);
 
   return (
     <div className="fp-ai-chat">
