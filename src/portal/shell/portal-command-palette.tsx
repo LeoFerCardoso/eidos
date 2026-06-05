@@ -43,7 +43,7 @@ function buildEntries(actions: { openAI: () => void }): CmdEntry[] {
   return [
     // Navigate — the live product IA (mirrors the sidebar rail's enabled routes).
     { id: 'nav-home',      label: 'Home',             group: 'Navigate', icon: 'home',    href: '/portal' },
-    { id: 'nav-catalog',   label: 'Software Catalog', group: 'Navigate', icon: 'catalog', href: '/portal/catalog', keywords: 'services' },
+    { id: 'nav-catalog',   label: 'Software Catalog', group: 'Navigate', icon: 'server', href: '/portal/catalog', keywords: 'services' },
     { id: 'nav-templates', label: 'Templates',        group: 'Navigate', icon: 'package', href: '/portal/create', keywords: 'golden path scaffold new service' },
     { id: 'nav-notifs',    label: 'Notifications',    group: 'Navigate', icon: 'bell',    href: '/portal/notifications', keywords: 'inbox alerts' },
     { id: 'nav-chat',      label: 'Chat',             group: 'Navigate', icon: 'chat',    href: '/portal/chat', keywords: 'forge ai assistant projects conversations threads' },

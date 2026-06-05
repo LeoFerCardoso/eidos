@@ -74,7 +74,7 @@ const RAIL: RailItem[] = [
   { key: 'home',          icon: 'home',    label: 'Home',          href: '/portal' },
   { key: 'notifications', icon: 'bell',    label: 'Notifications', href: '/portal/notifications' },
   { key: 'chat',          icon: 'chat',    label: 'Chat',          href: '/portal/chat' },
-  { key: 'catalog',       icon: 'catalog', label: 'Catalog',       href: '/portal/catalog' },
+  { key: 'catalog',       icon: 'server',  label: 'Catalog',       href: '/portal/catalog' },
   { key: 'agents',        icon: 'agent',   label: 'Agents',        href: '/portal/agents' },
   { key: 'create',     icon: 'package',    label: 'Templates',    href: '/portal/create' },
   { key: 'pipelines',  icon: 'pipeline',   label: 'Pipelines'                     },
@@ -687,7 +687,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
   // The Agent detail (/portal/agents/<id>) is a fixed-height two-pane layout —
   // its left column and sidebar scroll independently, so the main area doesn't
   // scroll as a whole.
-  const paneled = /^\/portal\/agents\/[^/]+$/.test(pathname);
+  const paneled = /^\/portal\/agents\/(?!new$)[^/]+$/.test(pathname);
   const [sidebarOpen, setSidebarOpen] = usePersistentState('forge.sidebar.open', true);
   const [workspace, setWorkspace] = usePersistentState('forge.workspace', 0);
   const [aiOpen, setAiOpen] = React.useState(false);

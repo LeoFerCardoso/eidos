@@ -111,7 +111,7 @@ export interface AppDef {
   tools: string[];
 }
 
-const APP_POOL: AppDef[] = [
+export const APP_POOL: AppDef[] = [
   { slug: 'github', name: 'GitHub', kind: 'MCP', desc: 'Source control, pull requests and Actions.', tools: ['create_pull_request', 'get_repo', 'list_commits', 'comment_issue', 'dispatch_workflow'] },
   { slug: 'gitlab', name: 'GitLab', kind: 'API', desc: 'Pipelines, merge requests and registry.', tools: ['get_pipeline', 'create_mr', 'list_jobs', 'retry_job'] },
   { slug: 'datadog', name: 'Datadog', kind: 'MCP', desc: 'Metrics, monitors, traces and logs.', tools: ['query_metrics', 'list_monitors', 'get_logs', 'mute_monitor'] },
@@ -125,6 +125,25 @@ const APP_POOL: AppDef[] = [
   { slug: 'kubernetes', name: 'Kubernetes', kind: 'MCP', desc: 'Workloads, rollouts and scaling.', tools: ['get_pods', 'rollout_status', 'scale_deployment'] },
   { slug: 'snowflake', name: 'Snowflake', kind: 'API', desc: 'Warehouse queries and schemas.', tools: ['run_query', 'describe_table'] },
   { slug: 'confluence', name: 'Confluence', kind: 'API', desc: 'Knowledge base search.', tools: ['search_pages', 'get_page'] },
+  { slug: 'github-actions', name: 'GitHub Actions', kind: 'API', desc: 'CI workflows and runners.', tools: ['list_runs', 'rerun_workflow', 'cancel_run', 'get_artifact'] },
+  { slug: 'argocd', name: 'Argo CD', kind: 'MCP', desc: 'GitOps deployments and sync.', tools: ['sync_app', 'get_app', 'rollback', 'list_apps'] },
+  { slug: 'jenkins', name: 'Jenkins', kind: 'API', desc: 'Build jobs and pipelines.', tools: ['trigger_build', 'get_build', 'list_jobs'] },
+  { slug: 'circleci', name: 'CircleCI', kind: 'API', desc: 'Pipelines and workflows.', tools: ['trigger_pipeline', 'get_workflow', 'rerun'] },
+  { slug: 'terraform', name: 'Terraform', kind: 'MCP', desc: 'Plans, state and applies.', tools: ['plan', 'apply', 'show_state', 'list_workspaces'] },
+  { slug: 'dynatrace', name: 'Dynatrace', kind: 'MCP', desc: 'Observability and problems.', tools: ['list_problems', 'query_metrics', 'get_trace'] },
+  { slug: 'new-relic', name: 'New Relic', kind: 'API', desc: 'APM, NRQL and alerts.', tools: ['run_nrql', 'list_alerts', 'get_apm'] },
+  { slug: 'splunk', name: 'Splunk', kind: 'API', desc: 'Log search and dashboards.', tools: ['search', 'get_dashboard'] },
+  { slug: 'elastic', name: 'Elastic', kind: 'API', desc: 'Search and observability.', tools: ['search', 'get_index', 'list_alerts'] },
+  { slug: 'opsgenie', name: 'Opsgenie', kind: 'MCP', desc: 'Alerting and on-call.', tools: ['create_alert', 'list_oncall', 'ack_alert', 'close_alert'] },
+  { slug: 'redis', name: 'Redis', kind: 'API', desc: 'Cache keys and metrics.', tools: ['get_key', 'del_key', 'info'] },
+  { slug: 'postgresql', name: 'PostgreSQL', kind: 'API', desc: 'SQL queries and schemas.', tools: ['run_query', 'describe_table', 'list_schemas'] },
+  { slug: 'mongodb', name: 'MongoDB', kind: 'API', desc: 'Collections and queries.', tools: ['find', 'aggregate', 'list_collections'] },
+  { slug: 'linear', name: 'Linear', kind: 'MCP', desc: 'Issues and projects.', tools: ['create_issue', 'search', 'update_issue'] },
+  { slug: 'notion', name: 'Notion', kind: 'API', desc: 'Docs and databases.', tools: ['search', 'get_page', 'query_database'] },
+  { slug: 'bitbucket', name: 'Bitbucket', kind: 'API', desc: 'Repos and pull requests.', tools: ['create_pr', 'get_repo', 'list_commits'] },
+  { slug: 'vercel', name: 'Vercel', kind: 'API', desc: 'Deployments and projects.', tools: ['list_deployments', 'get_deployment', 'promote'] },
+  { slug: 'cloudflare', name: 'Cloudflare', kind: 'API', desc: 'DNS, WAF and cache.', tools: ['purge_cache', 'list_dns', 'get_waf'] },
+  { slug: 'zendesk', name: 'Zendesk', kind: 'API', desc: 'Support tickets.', tools: ['list_tickets', 'update_ticket'] },
 ];
 
 export function appsFor(agent: Agent): AppDef[] {
@@ -149,22 +168,22 @@ export const addableApps = (current: AppDef[]): AppDef[] => {
 // ── Capabilities ──────────────────────────────────────────────────────────────
 // The market-standard capability matrix (à la OpenAI / Anthropic / Google).
 
-export interface Capability { id: string; label: string; icon: string }
+export interface Capability { id: string; label: string; icon: string; desc: string }
 
 export const CAPABILITIES: Capability[] = [
-  { id: 'conversation',  label: 'Conversation',      icon: 'chat' },
-  { id: 'web-search',    label: 'Web search',        icon: 'globe' },
-  { id: 'vision',        label: 'Image recognition', icon: 'eye' },
-  { id: 'image-gen',     label: 'Image generation',  icon: 'image' },
-  { id: 'video',         label: 'Video generation',  icon: 'video' },
-  { id: 'audio',         label: 'Audio & speech',    icon: 'volume' },
-  { id: 'code',          label: 'Code execution',    icon: 'terminal' },
-  { id: 'tools',         label: 'Function calling',  icon: 'toolCall' },
-  { id: 'structured',    label: 'Structured output', icon: 'braces' },
-  { id: 'files',         label: 'File analysis',     icon: 'doc' },
-  { id: 'retrieval',     label: 'Retrieval (RAG)',   icon: 'database' },
-  { id: 'long-context',  label: 'Long context',      icon: 'layers' },
-  { id: 'reasoning',     label: 'Reasoning',         icon: 'brain' },
+  { id: 'conversation',  label: 'Conversation',      icon: 'chat',     desc: 'Multi-turn back and forth chat.' },
+  { id: 'web-search',    label: 'Web search',        icon: 'globe',    desc: 'Look up live information on the web.' },
+  { id: 'vision',        label: 'Image recognition', icon: 'eye',      desc: 'Read and interpret images and screenshots.' },
+  { id: 'image-gen',     label: 'Image generation',  icon: 'image',    desc: 'Create images from a prompt.' },
+  { id: 'video',         label: 'Video generation',  icon: 'video',    desc: 'Generate short video clips.' },
+  { id: 'audio',         label: 'Audio & speech',    icon: 'volume',   desc: 'Transcribe speech and synthesize voice.' },
+  { id: 'code',          label: 'Code execution',    icon: 'terminal', desc: 'Run code in a sandbox and use the result.' },
+  { id: 'tools',         label: 'Function calling',  icon: 'toolCall', desc: 'Call connected app tools and APIs.' },
+  { id: 'structured',    label: 'Structured output', icon: 'braces',   desc: 'Return typed JSON that matches a schema.' },
+  { id: 'files',         label: 'File analysis',     icon: 'doc',      desc: 'Parse uploaded documents and data files.' },
+  { id: 'retrieval',     label: 'Retrieval (RAG)',   icon: 'database', desc: 'Ground answers in your attached contexts.' },
+  { id: 'long-context',  label: 'Long context',      icon: 'layers',   desc: 'Hold very large inputs in one request.' },
+  { id: 'reasoning',     label: 'Reasoning',         icon: 'brain',    desc: 'Think step by step before answering.' },
 ];
 
 export function capabilitiesFor(agent: Agent): Capability[] {
@@ -185,7 +204,7 @@ export function capabilitiesFor(agent: Agent): Capability[] {
 
 export interface SkillDef { name: string; icon: string; desc: string }
 
-const SKILL_POOL: SkillDef[] = [
+export const SKILL_POOL: SkillDef[] = [
   { name: 'Postmortem writer', icon: 'edit', desc: 'Drafts a blameless postmortem from the incident timeline.' },
   { name: 'Root-cause analysis', icon: 'target', desc: 'Correlates symptoms to a likely cause across the estate.' },
   { name: 'Runbook authoring', icon: 'book', desc: 'Turns a fix into a repeatable runbook.' },
@@ -194,6 +213,20 @@ const SKILL_POOL: SkillDef[] = [
   { name: 'LGPD remediation', icon: 'shield', desc: 'Drafts consent-scope remediation steps.' },
   { name: 'Cost optimization', icon: 'gauge', desc: 'Finds the safest places to trim spend.' },
   { name: 'Reason-code analysis', icon: 'score', desc: 'Explains score reason-code drift.' },
+  { name: 'SLO design', icon: 'target', desc: 'Sets SLO targets and burn-rate alerts per service.' },
+  { name: 'Trace analysis', icon: 'activity', desc: 'Walks a distributed trace and ranks the slowest spans.' },
+  { name: 'Query optimization', icon: 'database', desc: 'Rewrites slow SQL and proposes indexes.' },
+  { name: 'Chargeback evidence', icon: 'doc', desc: 'Assembles a dispute evidence packet from the trail.' },
+  { name: 'Feature freshness', icon: 'refresh', desc: 'Checks Ignite feature lineage and staleness.' },
+  { name: 'PII discovery', icon: 'eye', desc: 'Scans logs and payloads for unregistered PII.' },
+  { name: 'Release notes', icon: 'book', desc: 'Turns a diff and its GMUD into clean release notes.' },
+  { name: 'Flaky test triage', icon: 'flag', desc: 'Quarantines the flakiest tests and finds the cause.' },
+  { name: 'Capacity planning', icon: 'gauge', desc: 'Projects load and right-sizes the fleet.' },
+  { name: 'Threat modeling', icon: 'shield', desc: 'Maps the attack surface and proposes mitigations.' },
+  { name: 'Schema diffing', icon: 'braces', desc: 'Diffs an API change against its consumers.' },
+  { name: 'Incident comms', icon: 'chat', desc: 'Drafts status-page and stakeholder updates.' },
+  { name: 'Deploy gating', icon: 'pipeline', desc: 'Checks quality gates before a release ships.' },
+  { name: 'Anomaly detection', icon: 'activity', desc: 'Flags metric anomalies against the baseline.' },
 ];
 
 export function skillsFor(agent: Agent): SkillDef[] {
@@ -213,6 +246,19 @@ export const CONTEXT_POOL: ContextDef[] = [
   { id: 'features',   name: 'Ignite feature store',icon: 'database',   desc: 'Feature freshness and lineage.' },
   { id: 'runbooks',   name: 'Runbook library',     icon: 'book',       desc: 'Approved operational runbooks.' },
   { id: 'incidents',  name: 'Incident history',    icon: 'incident',   desc: 'Past incidents and resolutions.' },
+  { id: 'scr',        name: 'SCR layout spec',     icon: 'layers',     desc: 'SCR record layout and field contracts.' },
+  { id: 'bureau',     name: 'Boa Vista feeds',     icon: 'doc',        desc: 'Bureau feed schemas and SLAs.' },
+  { id: 'pipelines',  name: 'Pipeline registry',   icon: 'pipeline',   desc: 'CI/CD pipelines and quality gates.' },
+  { id: 'dashboards', name: 'Dashboards & metrics',icon: 'activity',   desc: 'Grafana dashboards and key metrics.' },
+  { id: 'oncall',     name: 'On-call schedule',    icon: 'clock',      desc: 'Rotations and escalation paths.' },
+  { id: 'adr',        name: 'Architecture decisions',icon: 'book',     desc: 'ADRs and design records.' },
+  { id: 'secrets',    name: 'Access & secrets',    icon: 'lock',       desc: 'Access scopes and rotation policy.' },
+  { id: 'finops',     name: 'FinOps ledger',       icon: 'gauge',      desc: 'Cloud spend by service and team.' },
+  { id: 'fraudrules', name: 'konduto rule set',    icon: 'shield',     desc: 'Active antifraud rules and thresholds.' },
+  { id: 'scoremodels',name: 'Score model registry',icon: 'score',      desc: 'Model versions and reason codes.' },
+  { id: 'apidocs',    name: 'API contracts',       icon: 'braces',     desc: 'OpenAPI specs and consumers.' },
+  { id: 'tickets',    name: 'Ticket history',      icon: 'mail',       desc: 'Past tickets and resolutions.' },
+  { id: 'glossary',   name: 'Domain glossary',     icon: 'book',       desc: 'Bureau and credit terms.' },
 ];
 
 /** Contexts the agent already has — none yet; the layer ships later. */

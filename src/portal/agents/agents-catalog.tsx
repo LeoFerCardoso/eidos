@@ -251,7 +251,7 @@ export default function AgentsCatalog() {
         actions={
           <>
             <button type="button" className="btn ghost"><Icons.book size={13} /> Docs</button>
-            <button type="button" className="btn ember"><Icons.plus size={13} /> New agent</button>
+            <button type="button" className="btn ember" onClick={() => router.push('/portal/agents/new')}><Icons.plus size={13} /> New agent</button>
           </>
         }
       />

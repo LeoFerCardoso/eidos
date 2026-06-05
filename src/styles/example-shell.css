@@ -2296,3 +2296,231 @@ body:active::-webkit-scrollbar-thumb,
 .fp-art-foot-link { background: none; border: 0; padding: 0; cursor: pointer; color: var(--fg); font: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .fp-art-foot-link:hover { color: var(--ember); }
 .fp-art-foot-actions { display: inline-flex; gap: 8px; flex: 0 0 auto; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   New-agent wizard (/portal/agents/new) — focused creation flow: a step rail
+   on the inline-start, the active step panel beside it, a sticky footer with
+   Back / Continue. Composed from DS form primitives; reuses .fp-agentd-* list,
+   add-menu, empty-state and kind-chip styles.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fp-wizard { max-inline-size: 1000px; margin-inline: auto; }
+/* Header — same eyebrow/title/lede pattern as the chat panes (.fp-chat-pane-head),
+   with the Cancel action pinned to the inline-end. */
+.fp-wizard-head {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+  padding-block-end: 18px; margin-block-end: 22px; border-block-end: 1px solid var(--border);
+}
+.fp-wizard-head .fp-chat-pane-head { margin-block-end: 0; }
+.fp-wizard-head .btn { flex: 0 0 auto; }
+
+.fp-wizard-body { display: grid; grid-template-columns: 232px minmax(0, 1fr); gap: 40px; align-items: start; }
+
+/* Step rail */
+.fp-wizard-rail { display: flex; flex-direction: column; gap: 2px; position: sticky; inset-block-start: 16px; }
+.fp-wizard-step {
+  display: flex; align-items: center; gap: 12px; inline-size: 100%; text-align: start;
+  padding: 10px 12px; border: 0; border-radius: var(--radius-md); background: transparent;
+  cursor: pointer; color: var(--fg-muted); transition: background 0.12s ease;
+}
+.fp-wizard-step:hover:not(:disabled) { background: var(--surface); }
+.fp-wizard-step:disabled { cursor: default; opacity: 0.5; }
+.fp-wizard-step.is-active { background: var(--surface); }
+.fp-wizard-step .mk {
+  flex: 0 0 auto; inline-size: 24px; block-size: 24px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  border: 1px solid var(--border-strong); color: var(--fg-faint); background: var(--bg);
+}
+.fp-wizard-step.is-active .mk { border-color: var(--ember); color: var(--bg); background: var(--ember); }
+.fp-wizard-step.is-done .mk { border-color: color-mix(in oklch, var(--accent-2) 50%, transparent); color: var(--accent-2); }
+.fp-wizard-step .tx { display: flex; flex-direction: column; min-inline-size: 0; }
+.fp-wizard-step .t { font-size: 13px; font-weight: 600; color: var(--fg); }
+.fp-wizard-step.is-todo .t { color: var(--fg-muted); }
+.fp-wizard-step .s { font-size: 11px; color: var(--fg-faint); }
+
+/* Panel */
+.fp-wizard-panel { min-inline-size: 0; }
+.fp-wizard-content { display: flex; flex-direction: column; gap: 26px; }
+.fp-wizard-stephead { display: flex; flex-direction: column; gap: 4px; }
+.fp-wizard-stephead h2 { margin: 0; font-size: var(--text-lg); font-weight: 700; letter-spacing: -0.01em; }
+.fp-wizard-stephead p { margin: 0; font-size: 13px; color: var(--fg-muted); line-height: 1.5; max-inline-size: 64ch; }
+
+/* Field — golden rule: label + support text are one group (2px between them,
+   tightened for line-height); that group sits 8px above the control. Label
+   only ⇒ 8px to the control. */
+.fp-wizard-field { display: flex; flex-direction: column; gap: 8px; }
+.fp-wizard-field-grp { display: flex; flex-direction: column; gap: 2px; }
+.fp-wizard-field-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.fp-wizard-field-row .act { flex: 0 0 auto; }
+.fp-wizard-field-lbl { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--fg); }
+.fp-wizard-field-lbl .req { color: var(--ember-text); }
+.fp-wizard-field-lbl .bdg { display: inline-flex; }
+.fp-wizard-field-sub { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.fp-wizard-field-sub .act { flex: 0 0 auto; align-self: center; }
+.fp-wizard-field-hint { font-size: 12px; color: var(--fg-muted); line-height: 1.45; margin: 0; max-inline-size: none; }
+
+/* Golden rule, portal-wide: every DS field (Input / Textarea / Select native /
+   custom .in-field) keeps an 8px gap between its label and the control. */
+.fp-app .in-field { gap: 8px; }
+
+/* Searchable add-picker popover (Skills / Contexts / Apps) — host the Command
+   edge to edge inside the popover panel. */
+.fp-wizard-addpop { padding: 0; inline-size: 300px; max-inline-size: 340px; overflow: hidden; }
+.fp-wizard-addpop .cmd { border: 0; box-shadow: none; background: transparent; }
+/* The Command always renders its footer bar; we hide it in this compact picker. */
+.fp-wizard-addpop .cmd-foot { display: none; }
+.fp-wizard-count { font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); }
+/* Inline ember action link (Start from a template / Generate with AI) */
+.fp-wizard-tpl {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: none; border: 0; padding: 0; cursor: pointer; font-size: 12px; color: var(--ember);
+}
+.fp-wizard-tpl:hover:not(:disabled) { text-decoration: underline; }
+.fp-wizard-tpl:disabled { color: var(--fg-faint); cursor: default; }
+
+.fp-wizard-instr { font-family: var(--font-mono); font-size: 12.5px; line-height: 1.55; }
+.fp-wizard-preview {
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: 16px 18px; background: var(--surface); min-block-size: 120px;
+}
+
+.fp-spin { animation: fp-spin 0.8s linear infinite; }
+@keyframes fp-spin { to { transform: rotate(360deg); } }
+
+/* Output radio cards — two columns; each card is [icon + title] / [support] */
+.fp-wizard-outputs.sel-card-group { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.fp-wizard-outputs .sel-card { align-items: flex-start; padding: 12px 14px; }
+.fp-wizard-outputs .sel-card__body { gap: 3px; }
+.fp-wizard-out-t { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.fp-wizard-out-t svg { color: var(--fg-muted); flex: 0 0 auto; }
+.sel-card--checked .fp-wizard-out-t svg { color: var(--ember-text); }
+
+/* Capabilities — a stacked checkbox list (title + support each on its own row) */
+.fp-wizard-caps { display: flex; flex-direction: column; }
+.fp-wizard-caps > label { padding-block: 9px; border-block-end: 1px solid var(--border); align-items: flex-start; }
+.fp-wizard-caps > label:last-child { border-block-end: 0; }
+
+.fp-wizard-file { margin-block-start: 4px; }
+
+/* Connected apps + their tools */
+.fp-wizard-apps { display: flex; flex-direction: column; gap: 10px; }
+.fp-wizard-app { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+.fp-wizard-app .head {
+  display: flex; align-items: center; gap: 9px; padding: 10px 12px; background: var(--surface);
+  border-block-end: 1px solid var(--border);
+}
+.fp-wizard-app .head .logo { display: inline-flex; color: var(--fg); }
+.fp-wizard-app .head .nm { font-size: 13px; font-weight: 600; color: var(--fg); }
+.fp-wizard-app .head .ct { margin-inline-start: auto; font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); }
+.fp-wizard-app .head .fp-agentd-rm { position: static; opacity: 0.55; }
+.fp-wizard-app .head:hover .fp-agentd-rm { opacity: 1; }
+.fp-wizard-app .tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 16px; padding: 10px 12px; }
+.fp-wizard-app .tool {
+  display: inline-flex; align-items: center; gap: 7px; padding-block: 4px; cursor: pointer;
+  font-size: 12px; color: var(--fg-muted);
+}
+.fp-wizard-app .tool input { accent-color: var(--ember); inline-size: 14px; block-size: 14px; flex: 0 0 auto; }
+.fp-wizard-app .tool code { font-size: 11.5px; color: var(--fg); }
+.fp-wizard-app .tool.off { opacity: 0.5; }
+.fp-wizard-app .tool.off code { color: var(--fg-muted); text-decoration: line-through; }
+
+/* Review recap */
+.fp-wizard-review { display: flex; flex-direction: column; gap: 30px; }
+.fp-wizard-review .rv-id { display: flex; align-items: center; gap: 12px; }
+.fp-wizard-review .rv-id .nm { font-size: 15px; font-weight: 700; color: var(--fg); }
+.fp-wizard-review .rv-id .sm { font-size: 12.5px; color: var(--fg-muted); line-height: 1.45; margin-block-start: 2px; }
+.fp-wizard-review .ph { color: var(--fg-faint); font-weight: 400; font-style: italic; }
+/* Properties — two columns; each pair spans its column end to end (label start,
+   value end), with a hairline divider so it reads across the full width. */
+.fp-wizard-review .rv-props { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; margin: 0; font-size: 13px; }
+.fp-wizard-review .rvp { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 11px; border-block-end: 1px solid var(--border); }
+.fp-wizard-review .rv-props dt { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-faint); }
+.fp-wizard-review .rv-props dd { margin: 0; color: var(--fg); text-align: end; }
+.fp-wizard-review .rv-model { display: inline-flex; align-items: center; gap: 7px; }
+.fp-wizard-review .rv-block { display: flex; flex-direction: column; gap: 9px; }
+.fp-wizard-review .rv-h { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); }
+.fp-wizard-review .rv-count { font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); }
+.fp-wizard-review .rv-none { font-size: 12.5px; color: var(--fg-faint); }
+
+/* Apps — overlapping avatar group of brand logos + an enabled-tools label. */
+.fp-wizard-appgroup { display: flex; align-items: center; gap: 12px; }
+.fp-wizard-appgroup .avs { display: inline-flex; }
+.fp-wizard-appgroup .av {
+  inline-size: 30px; block-size: 30px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface); border: 1px solid var(--border-strong); color: var(--fg);
+  margin-inline-start: -8px; box-shadow: 0 0 0 2px var(--bg);
+}
+.fp-wizard-appgroup .av:first-child { margin-inline-start: 0; }
+.fp-wizard-appgroup .lbl { font-size: 12px; color: var(--fg-muted); }
+
+/* Instructions recap — scrolls inside so the page doesn't grow unbounded. */
+.fp-wizard-review-instr { max-block-size: 280px; overflow-y: auto; }
+
+/* Footer */
+.fp-wizard-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-block-start: 32px; padding-block-start: 18px; border-block-start: 1px solid var(--border);
+}
+.fp-wizard-progress { font-size: 11px; color: var(--fg-faint); }
+
+/* Success panel */
+.fp-wizard-done {
+  position: relative; max-inline-size: 520px; margin: 56px auto; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+/* DS green success check (not the info blue). */
+.fp-wizard-done .ic {
+  inline-size: 60px; block-size: 60px; border-radius: 999px; display: inline-flex;
+  align-items: center; justify-content: center; color: var(--success);
+  background: var(--success-soft);
+}
+.fp-wizard-done h1 { margin: 0; font-size: var(--text-xl); font-weight: 700; }
+/* Pull the support text close under the title (the title's own gap stays). */
+.fp-wizard-done p { margin: -7px 0 0; font-size: 13.5px; color: var(--fg-muted); line-height: 1.6; max-inline-size: 46ch; }
+.fp-wizard-done .row { display: flex; gap: 12px; margin-block-start: 8px; }
+/* Slightly wider buttons, both forced to the same height (primary + secondary). */
+.fp-wizard-done .row .btn { min-inline-size: 150px; block-size: 36px; justify-content: center; }
+
+/* Mini summary card — left-aligned, full width of the success panel. */
+.fp-wizard-donecard {
+  align-self: stretch; text-align: start; margin-block-start: 6px;
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  background: var(--surface); padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.fp-wizard-donecard .dc-id { display: flex; align-items: center; gap: 11px; }
+.fp-wizard-donecard .dc-idtx { display: flex; flex-direction: column; min-inline-size: 0; }
+.fp-wizard-donecard .dc-nm { font-size: 14px; font-weight: 700; color: var(--fg); }
+.fp-wizard-donecard .dc-sm { font-size: 12px; color: var(--fg-muted); line-height: 1.4; margin-block-start: 2px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.fp-wizard-donecard .dc-props { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; margin: 0; font-size: 12.5px; }
+.fp-wizard-donecard .dcp { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 8px; border-block-end: 1px solid var(--border); }
+.fp-wizard-donecard .dcp dt { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-faint); }
+.fp-wizard-donecard .dcp dd { margin: 0; color: var(--fg); text-align: end; }
+.fp-wizard-donecard .rv-model { display: inline-flex; align-items: center; gap: 6px; }
+.fp-wizard-appgroup.is-mini { gap: 6px; }
+.fp-wizard-appgroup.is-mini .av { inline-size: 22px; block-size: 22px; margin-inline-start: -6px; }
+.fp-wizard-appgroup.is-mini .lbl { font-size: 11px; }
+
+/* Celebration confetti — a one-shot rain over the success screen. */
+.fp-confetti { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 4; }
+.fp-confetti-bit {
+  position: absolute; inset-block-start: -6vh; border-radius: 1px; opacity: 0;
+  animation-name: fp-confetti-fall; animation-timing-function: cubic-bezier(0.25, 0.6, 0.4, 1);
+  animation-iteration-count: 1; animation-fill-mode: forwards; will-change: transform, opacity;
+}
+.fp-confetti-bit.round { border-radius: 999px; }
+@keyframes fp-confetti-fall {
+  0%   { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  8%   { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--drift), 112vh) rotate(var(--rot)); }
+}
+@media (prefers-reduced-motion: reduce) { .fp-confetti { display: none; } }
+
+@media (max-width: 860px) {
+  .fp-wizard-body { grid-template-columns: 1fr; gap: 24px; }
+  .fp-wizard-rail { position: static; flex-direction: row; overflow-x: auto; }
+  .fp-wizard-step .tx { display: none; }
+  .fp-wizard-outputs.sel-card-group { grid-template-columns: 1fr; }
+}
