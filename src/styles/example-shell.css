@@ -52,19 +52,23 @@ body {
 
 /* Auto-hide scrollbars: invisible until hover/scroll — mirrors the DS shell
    (.ds-sidenav / .ds-main) so /examples/ pages feel native when scrolling. */
-body, .fp-main, .fp-drawer-body, .cp-results {
+body, .fp-main, .fp-drawer-body, .cp-results, .fp-agentd-main, .fp-agentd-aside {
   scrollbar-width: none;
 }
 body::-webkit-scrollbar,
 .fp-main::-webkit-scrollbar,
 .fp-drawer-body::-webkit-scrollbar,
-.cp-results::-webkit-scrollbar {
+.cp-results::-webkit-scrollbar,
+.fp-agentd-main::-webkit-scrollbar,
+.fp-agentd-aside::-webkit-scrollbar {
   width: 10px; height: 10px;
 }
 body::-webkit-scrollbar-thumb,
 .fp-main::-webkit-scrollbar-thumb,
 .fp-drawer-body::-webkit-scrollbar-thumb,
-.cp-results::-webkit-scrollbar-thumb {
+.cp-results::-webkit-scrollbar-thumb,
+.fp-agentd-main::-webkit-scrollbar-thumb,
+.fp-agentd-aside::-webkit-scrollbar-thumb {
   background: transparent;
   border-radius: 999px;
   border: 2px solid transparent;
@@ -74,11 +78,14 @@ body::-webkit-scrollbar-thumb,
 body:hover::-webkit-scrollbar-thumb,
 .fp-main:hover::-webkit-scrollbar-thumb,
 .fp-drawer-body:hover::-webkit-scrollbar-thumb,
-.cp-results:hover::-webkit-scrollbar-thumb {
+.cp-results:hover::-webkit-scrollbar-thumb,
+.fp-agentd-main:hover::-webkit-scrollbar-thumb,
+.fp-agentd-aside:hover::-webkit-scrollbar-thumb {
   background: var(--border-strong);
   background-clip: content-box;
 }
-body:hover, .fp-main:hover, .fp-drawer-body:hover, .cp-results:hover {
+body:hover, .fp-main:hover, .fp-drawer-body:hover, .cp-results:hover,
+.fp-agentd-main:hover, .fp-agentd-aside:hover {
   scrollbar-width: thin;
   scrollbar-color: var(--border-strong) transparent;
 }
@@ -345,6 +352,13 @@ body:active::-webkit-scrollbar-thumb,
   width: 100%;
 }
 .fp-main--full { max-width: none; padding: 0; }
+/* Paneled layout (Agent detail): fixed height, no own scroll — the two columns
+   scroll independently. Full width so the sidebar sits on the right (the main
+   content is centred in the leftover); not the centred max-width column. */
+.fp-main--panes { max-width: none; margin: 0; padding: 0; overflow: hidden; block-size: calc(100dvh - 48px); }
+@media (max-width: 1000px) {
+  .fp-main--panes { block-size: auto; overflow: visible; padding-block: var(--fp-page-inset-block) 64px; padding-inline: var(--fp-page-inset-inline); }
+}
 
 /* ---- Page header — mirrors the DS canonical pattern (.ds-page-header /
        .t-h1 / .ds-h-eyebrow). Same proportions, same rhythm: 36px h1, 17px
@@ -1798,6 +1812,8 @@ body:active::-webkit-scrollbar-thumb,
 .fp-agents-section-count {
   font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint);
 }
+/* Per-section tools (e.g. the All-agents source filter) pinned to the inline-end. */
+.fp-agents-section-tools { margin-inline-start: auto; }
 
 /* Starred carousel (grid mode) — the DS <Carousel>. Each slide holds one card;
    make the card fill the 268px slide and equal-height across the row. */
@@ -1839,6 +1855,204 @@ body:active::-webkit-scrollbar-thumb,
 
 /* Load-more — centred ghost button under a section. */
 .fp-agents-more { display: flex; justify-content: center; margin-block-start: 18px; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Agent detail / settings (/portal/agents/[id])
+   Two columns — a wide left (header + rendered instructions) and a right
+   metadata sidebar, separated by a full-height hairline rule.
+   ════════════════════════════════════════════════════════════════════════ */
+.fp-agentd {
+  display: grid;
+  /* Aside pinned to the right (≈340 content + a left gutter + a right margin);
+     the rule sits at its left; the main takes the rest and centres its content. */
+  grid-template-columns: minmax(0, 1fr) 1px 408px;
+  /* Fill the fixed-height paneled main; the rule + columns stretch full height. */
+  block-size: 100%;
+  align-items: stretch;
+  overflow: hidden;
+}
+.fp-agentd-rule { background: var(--border); }
+/* Each column scrolls on its own. */
+.fp-agentd-main,
+.fp-agentd-aside { overflow-y: auto; min-block-size: 0; padding-block: 32px 56px; }
+/* Left: content centred in the leftover, keeping ~its previous width. */
+.fp-agentd-main { padding-inline: var(--fp-page-inset-inline); }
+.fp-agentd-main-in { inline-size: 100%; max-inline-size: 1040px; margin-inline: auto; }
+/* Right: the sidebar has a left gutter + a right margin (not flush to the edge). */
+.fp-agentd-aside { padding-inline: 40px var(--fp-page-inset-inline); }
+@media (max-width: 1000px) {
+  .fp-agentd { grid-template-columns: 1fr; row-gap: 28px; block-size: auto; overflow: visible; }
+  .fp-agentd-rule { display: none; }
+  .fp-agentd-main,
+  .fp-agentd-aside { overflow: visible; padding: 0; }
+  .fp-agentd-main-in { max-inline-size: none; }
+}
+
+/* ── Left: header ─────────────────────────────────────────────────────────── */
+.fp-agentd-topbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-block-end: 20px; }
+.fp-agentd-title { display: flex; align-items: center; gap: 12px; }
+.fp-agentd-title h1 {
+  flex: 1; min-inline-size: 0; margin: 0;
+  display: inline-flex; align-items: center; gap: 2px;
+  font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: var(--fg);
+}
+.fp-agentd-title .fp-agents-star { position: static; flex: 0 0 auto; }
+.fp-agentd-summary { margin: 12px 0 0; font-size: 14px; line-height: 1.6; color: var(--fg-muted); max-inline-size: 68ch; }
+.fp-agentd-instructions { margin-block-start: 22px; padding-block-start: 22px; border-block-start: 1px solid var(--border); }
+
+/* ── Right: metadata sidebar ──────────────────────────────────────────────── */
+.fp-agentd-aside { display: flex; flex-direction: column; gap: 32px; }
+.fp-agentd-sec-head { display: flex; align-items: center; gap: 8px; margin-block-end: 12px; }
+.fp-agentd-sec-head .t { font-family: var(--font-mono); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-muted); }
+.fp-agentd-sec-count { font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); }
+.fp-agentd-sec-action { margin-inline-start: auto; }
+.fp-agentd-more { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--ember); text-decoration: none; }
+.fp-agentd-more:hover { text-decoration: underline; }
+/* "+ Add" — an ember text link, matching the "View more →" link. */
+.fp-agentd-add {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; color: var(--ember); background: transparent; border: 0; cursor: pointer; padding: 0;
+}
+.fp-agentd-add:hover { text-decoration: underline; }
+.fp-agentd-add-item { display: inline-flex; align-items: center; gap: 8px; }
+.fp-agentd-add-menu { max-block-size: 320px; overflow-y: auto; }
+
+/* Compact empty state — for Apps / Skills / Contexts with nothing yet. */
+.fp-agentd-empty {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; border: 1px dashed var(--border-strong); border-radius: var(--radius-md);
+  font-size: 12px; color: var(--fg-faint);
+}
+.fp-agentd-empty .ic { display: inline-flex; color: var(--fg-faint); }
+
+/* Kind chip — MCP / API / Webhook. */
+.fp-agentd-kind {
+  flex: 0 0 auto; font-family: var(--font-mono); font-size: 9.5px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 1px 6px; border-radius: 999px; border: 1px solid var(--border-strong); color: var(--fg-muted);
+}
+.fp-agentd-kind.k-mcp { color: var(--accent-2); border-color: color-mix(in oklch, var(--accent-2) 40%, transparent); }
+.fp-agentd-kind.k-api { color: var(--ember-text); border-color: color-mix(in oklch, var(--ember) 38%, transparent); }
+
+/* Response kind — what the agent returns (clearly flags non-conversational). */
+.fp-agentd-output {
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 12px 13px; border: 1px solid var(--border); border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.fp-agentd-output .io {
+  flex: 0 0 auto; inline-size: 30px; block-size: 30px; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--ember-soft); color: var(--ember-text);
+}
+.fp-agentd-output.is-artifact .io {
+  background: var(--accent-2-soft, color-mix(in oklch, var(--accent-2) 16%, transparent)); color: var(--accent-2);
+}
+.fp-agentd-output .lbl { font-size: 13px; font-weight: 600; color: var(--fg); }
+.fp-agentd-output .note { margin: 3px 0 0; font-size: 11.5px; line-height: 1.45; color: var(--fg-muted); }
+
+/* Properties — key/value grid. */
+.fp-agentd-props { display: grid; grid-template-columns: auto 1fr; gap: 9px 14px; align-items: center; margin: 0; }
+.fp-agentd-props dt { font-size: 12px; color: var(--fg-faint); }
+.fp-agentd-props dd { margin: 0; justify-self: end; text-align: end; font-size: 12.5px; color: var(--fg); }
+.fp-agentd-props dd.tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+/* Model — avatar pill: the LLM logo in a round avatar + the model name. */
+.fp-agentd-modelpill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 3px 10px 3px 3px; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--surface);
+}
+.fp-agentd-modelpill .av {
+  flex: 0 0 auto; inline-size: 20px; block-size: 20px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface-active); color: var(--fg);
+}
+.fp-agentd-modelpill .nm { font-size: 12px; font-weight: 500; color: var(--fg); white-space: nowrap; }
+
+/* Usage — FinOps mini bars + token heatmap. */
+/* Capabilities — icon chips. */
+.fp-agentd-caps { display: flex; flex-wrap: wrap; gap: 6px; }
+.fp-agentd-caps .cap {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11.5px; color: var(--fg); padding: 4px 9px;
+  border: 1px solid var(--border); border-radius: 999px; background: var(--surface);
+}
+.fp-agentd-caps .cap svg { color: var(--fg-muted); flex: 0 0 auto; }
+
+/* Apps — clickable rows (logo · name · kind chip · chevron). Inset-hover bleeds
+   on the container so row content (incl. the chevron) stays flush to the edge. */
+.fp-agentd-apps { display: flex; flex-direction: column; margin-inline: -8px; }
+.fp-agentd-apps .app {
+  display: flex; align-items: center; gap: 10px; inline-size: 100%;
+  padding: 9px 8px; border-radius: var(--radius-md);
+  background: transparent; border: 0; cursor: pointer; text-align: start; color: var(--fg);
+  transition: background var(--dur-fast) var(--ease);
+}
+.fp-agentd-apps .app:hover { background: var(--surface); }
+.fp-agentd-apps .app .logo {
+  flex: 0 0 auto; inline-size: 28px; block-size: 28px; border-radius: 7px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface-active); color: var(--fg);
+}
+.fp-agentd-apps .app .nm { flex: 1 1 auto; min-inline-size: 0; font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-agentd-apps .app .chev { color: var(--fg-faint); flex: 0 0 auto; }
+
+/* Skills / Contexts — labelled rows with a description. */
+.fp-agentd-list { display: flex; flex-direction: column; gap: 2px; }
+.fp-agentd-list .item { display: flex; align-items: flex-start; gap: 9px; padding-block: 7px; }
+.fp-agentd-list .item .ic { flex: 0 0 auto; margin-block-start: 1px; color: var(--ember-text); }
+.fp-agentd-list .item .tx { display: flex; flex-direction: column; min-inline-size: 0; flex: 1 1 auto; }
+.fp-agentd-list .item .nm { font-size: 12.5px; font-weight: 600; color: var(--fg); }
+.fp-agentd-list .item .ds { font-size: 11.5px; color: var(--fg-muted); line-height: 1.4; }
+/* Remove (×) — right-aligned, revealed on row hover/focus. */
+.fp-agentd-rm {
+  flex: 0 0 auto; margin-block-start: 1px;
+  display: inline-flex; align-items: center; justify-content: center;
+  inline-size: 20px; block-size: 20px; border-radius: var(--radius-sm);
+  background: transparent; border: 0; color: var(--fg-faint); cursor: pointer;
+  opacity: 0; transition: opacity var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.fp-agentd-list .item:hover .fp-agentd-rm,
+.fp-agentd-rm:focus-visible { opacity: 1; }
+.fp-agentd-rm:hover { color: var(--danger); background: var(--surface-active); }
+
+/* Usage — bare bar chart (no card/title/axes) + the token heatmap below it. */
+/* Usage metric cards — Tokens / Spend over 30 days, each with a DS Trend. */
+.fp-agentd-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-block-end: 16px; }
+.fp-agentd-metric {
+  display: flex; flex-direction: column; gap: 5px;
+  padding: 11px 12px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface);
+}
+.fp-agentd-metric .k { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--fg-muted); }
+.fp-agentd-metric .vrow { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
+.fp-agentd-metric .v { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; color: var(--fg); }
+
+.fp-agentd-chart-head { display: flex; align-items: baseline; font-size: 11.5px; margin-block-end: 8px; }
+.fp-agentd-chart-head .t { color: var(--fg-muted); }
+
+/* Versions — compact timeline; the row spans the full sidebar width. */
+.fp-agentd-versions { display: flex; flex-direction: column; }
+.fp-agentd-versions .ver { display: flex; gap: 10px; padding-block: 7px; }
+.fp-agentd-versions .ver .dot { flex: 0 0 auto; inline-size: 7px; block-size: 7px; border-radius: 50%; background: var(--border-stronger); margin-block-start: 5px; }
+.fp-agentd-versions .ver:first-child .dot { background: var(--ember); }
+.fp-agentd-versions .ver .b { flex: 1 1 auto; min-inline-size: 0; }
+.fp-agentd-versions .ver .top { display: flex; align-items: center; gap: 8px; }
+.fp-agentd-versions .ver .top code { font-size: 12px; font-weight: 600; color: var(--fg); }
+.fp-agentd-versions .ver .cur { font-family: var(--font-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ember-text); border: 1px solid color-mix(in oklch, var(--ember) 38%, transparent); border-radius: 999px; padding: 0 6px; }
+.fp-agentd-versions .ver .date { margin-inline-start: auto; font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-faint); }
+.fp-agentd-versions .ver .note { font-size: 11.5px; color: var(--fg-muted); line-height: 1.4; }
+
+/* App popup — hero logo + enabled tools. */
+.fp-agentd-apphero { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 22px 0 4px; }
+.fp-agentd-apphero .logo {
+  inline-size: 56px; block-size: 56px; border-radius: var(--radius-xl);
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface-active); border: 1px solid var(--border);
+}
+.fp-agentd-apptools .h { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--fg); margin-block-end: 10px; }
+.fp-agentd-apptools .grid { display: flex; flex-direction: column; gap: 4px; }
+.fp-agentd-apptools .tool { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: var(--radius-md); background: var(--surface); border: 1px solid var(--border); }
+.fp-agentd-apptools .tool svg { color: var(--ember-text); flex: 0 0 auto; }
+.fp-agentd-apptools .tool code { font-size: 12px; color: var(--fg); }
 
 /* ── View: Project detail (/portal/chat → a pinned space or a project tile) ─ */
 .fp-chat-pd {

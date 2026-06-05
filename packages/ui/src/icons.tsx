@@ -254,6 +254,8 @@ const Icons = {
   bot:         I(<><rect x="4" y="8" width="16" height="12" rx="2"/><circle cx="9" cy="14" r="1" fill="currentColor"/><circle cx="15" cy="14" r="1" fill="currentColor"/><line x1="12" y1="4" x2="12" y2="8"/><circle cx="12" cy="4" r="1" fill="currentColor"/></>),
   cloud:       I(<path d="M7 19 H17 a4 4 0 1 0 -1 -7.9 A5 5 0 0 0 7 11 a4 4 0 0 0 0 8 z"/>),
   database:    I(<><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5 V12 a8 3 0 0 0 16 0 V5"/><path d="M4 12 V19 a8 3 0 0 0 16 0 V12"/></>),
+  braces:      I(<><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></>),
+  brain:       I(<><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></>),
   terminal:    I(<><rect x="3" y="4" width="18" height="16" rx="2"/><polyline points="7 9 10 12 7 15"/><line x1="12" y1="16" x2="17" y2="16"/></>),
   package:     I(<><polyline points="3 7 12 12 21 7"/><path d="M3 7 V17 L12 22 L21 17 V7 L12 2 z"/><line x1="12" y1="12" x2="12" y2="22"/></>),
   gitFork:     I(<><circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="M6 7 V11 a2 2 0 0 0 2 2 H16 a2 2 0 0 0 2 -2 V7"/><line x1="12" y1="13" x2="12" y2="17"/></>),

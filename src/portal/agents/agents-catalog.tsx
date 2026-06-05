@@ -8,7 +8,7 @@
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import {
-  Icons, Avatar, Pill, ToggleGroup, ToggleGroupItem,
+  Icons, Avatar, Pill, Select, ToggleGroup, ToggleGroupItem,
   Carousel, CarouselSlide, CarouselControls, CarouselDots,
 } from '@/ds/core';
 import { FPageHeader, FSearch } from '@/portal/shell/portal-shell';
@@ -163,14 +163,31 @@ function AgentRow({
   );
 }
 
-function SectionHead({ icon, title, count }: { icon?: React.ReactNode; title: string; count: number }) {
+function SectionHead({
+  icon,
+  title,
+  count,
+  right,
+}: {
+  icon?: React.ReactNode;
+  title: string;
+  count: number;
+  right?: React.ReactNode;
+}) {
   return (
     <div className="fp-agents-section-head">
       <span className="fp-agents-section-title">{icon}{title}</span>
       <span className="fp-agents-section-count">{count}</span>
+      {right && <div className="fp-agents-section-tools">{right}</div>}
     </div>
   );
 }
+
+const SOURCE_OPTIONS = [
+  { value: 'all', label: 'All sources' },
+  { value: 'official', label: 'Official' },
+  { value: 'collab', label: 'Collaborator' },
+];
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
@@ -180,9 +197,13 @@ export default function AgentsCatalog() {
   const [mode, setMode] = usePersistentState<'grid' | 'list'>('forge.agents.mode', 'grid');
   const [starredIds, setStarredIds] = usePersistentState<string[]>('forge.agents.starred', SEED_STARRED);
   const [visible, setVisible] = React.useState(PAGE);
+  // Source filter — scoped to the "All agents" list (official vs collaborator).
+  const [source, setSource] = React.useState<'all' | 'official' | 'collab'>('all');
+  React.useEffect(() => setVisible(PAGE), [source, q]);
 
   const starred = React.useMemo(() => new Set(starredIds), [starredIds]);
-  const open = (id: string) => router.push('/portal/chat?agent=' + id);
+  // Opening a card goes to the agent's detail/settings page (not straight to chat).
+  const open = (id: string) => router.push('/portal/agents/' + id);
 
   const toggleStar = (id: string) =>
     setStarredIds((ids) => {
@@ -206,7 +227,9 @@ export default function AgentsCatalog() {
   // The Starred band is a quick-access shortcut to the favourites; "All agents"
   // stays the COMPLETE list — starring a card pins it above without removing it.
   const starredList = filtered.filter((a) => starred.has(a.id)).slice(0, STAR_LIMIT);
-  const allList = filtered;
+  const allList = filtered.filter(
+    (a) => source === 'all' || (source === 'official' ? a.official : !a.official),
+  );
   const allShown = allList.slice(0, visible);
 
   const cardProps = (a: Agent) => ({
@@ -301,7 +324,21 @@ export default function AgentsCatalog() {
 
           {/* ── The complete list (starred included) — grid or list, load-more ── */}
           <div className="fp-agents-section">
-            <SectionHead title="All agents" count={allList.length} />
+            <SectionHead
+              title="All agents"
+              count={allList.length}
+              right={
+                <Select
+                  size="sm"
+                  width="168px"
+                  value={source}
+                  onValueChange={(v) => setSource(v as 'all' | 'official' | 'collab')}
+                  options={SOURCE_OPTIONS}
+                  leadingIcon={Icons.filter}
+                  aria-label="Filter by source"
+                />
+              }
+            />
             {mode === 'grid' ? (
               <div className="fp-grid fp-grid-auto">
                 {allShown.map((a) => <AgentCard key={a.id} {...cardProps(a)} />)}

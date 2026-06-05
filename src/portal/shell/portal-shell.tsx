@@ -45,11 +45,15 @@ export { FPageHeader, FSection, FKpi, IconBubble } from '@/ds/examples/example-s
 export { FSearch, type FSearchProps } from './fsearch';
 export { FCardHead, FRows, FRow, Sub } from './layout';
 
+// useLayoutEffect on the client, useEffect on the server (no SSR warning).
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
+
 // ── Page crumb context ──────────────────────────────────────────────────────
-// Lets a full-bleed page (e.g. the Chat thread) push a trailing breadcrumb
-// segment — the active chat title — into the topbar, instead of repeating it
-// as an in-page header. The page sets it; PortalTopbar appends it.
-type PageCrumb = { label: string } | null;
+// Lets a page push the trailing breadcrumb segment into the topbar instead of
+// repeating it as an in-page header. By default it APPENDS (e.g. the chat title
+// under "Chat"); `replace: true` swaps the last base segment instead — used by
+// the agent detail page so a raw id ("…/agents/sre") reads as the agent name.
+type PageCrumb = { label: string; replace?: boolean } | null;
 const PageCrumbContext = React.createContext<{ crumb: PageCrumb; setCrumb: (c: PageCrumb) => void }>({
   crumb: null,
   setCrumb: () => {},
@@ -600,11 +604,14 @@ const PortalTopbar = ({
   pageCrumb: PageCrumb;
 }) => {
   const base = buildCrumbs(pathname);
-  // A page-supplied crumb (e.g. the open chat's title) becomes the new current
-  // segment; the prior last crumb turns into a link back to the section.
-  const crumbs = pageCrumb
-    ? [...base.slice(0, -1), { label: base[base.length - 1]?.label ?? '', href: pathname }, { label: pageCrumb.label }]
-    : base;
+  // A page-supplied crumb becomes the trailing segment. `replace` swaps the last
+  // base segment (e.g. a raw id) for it; otherwise it appends under the section,
+  // turning the prior last crumb into a link back.
+  const crumbs = !pageCrumb
+    ? base
+    : pageCrumb.replace
+      ? [...base.slice(0, -1), { label: pageCrumb.label }]
+      : [...base.slice(0, -1), { label: base[base.length - 1]?.label ?? '', href: pathname }, { label: pageCrumb.label }];
 
   return (
     <header className="fp-topbar">
@@ -677,14 +684,20 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
   // The Chat surface is full-bleed (its own sub-sidebar + independent scroll),
   // so it opts out of the padded, max-width content column.
   const fullBleed = pathname.startsWith('/portal/chat');
+  // The Agent detail (/portal/agents/<id>) is a fixed-height two-pane layout —
+  // its left column and sidebar scroll independently, so the main area doesn't
+  // scroll as a whole.
+  const paneled = /^\/portal\/agents\/[^/]+$/.test(pathname);
   const [sidebarOpen, setSidebarOpen] = usePersistentState('forge.sidebar.open', true);
   const [workspace, setWorkspace] = usePersistentState('forge.workspace', 0);
   const [aiOpen, setAiOpen] = React.useState(false);
   const [paletteOpen, setPaletteOpen] = React.useState(false);
   const [pageCrumb, setPageCrumb] = React.useState<PageCrumb>(null);
   const crumbCtx = React.useMemo(() => ({ crumb: pageCrumb, setCrumb: setPageCrumb }), [pageCrumb]);
-  // Drop any page-supplied crumb when navigating away from its route.
-  React.useEffect(() => { setPageCrumb(null); }, [pathname]);
+  // Drop any page-supplied crumb when navigating away from its route. This runs
+  // as a layout effect (before paint) so a page that re-sets its crumb in a
+  // mount useEffect (which runs after) wins instead of being cleared by it.
+  useIsomorphicLayoutEffect(() => { setPageCrumb(null); }, [pathname]);
 
   // ⌘K / Ctrl+K toggles the command palette anywhere in the portal.
   React.useEffect(() => {
@@ -787,7 +800,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         pageCrumb={pageCrumb}
       />
 
-      <main className={'fp-main' + (fullBleed ? ' fp-main--full' : '')}>{children}</main>
+      <main className={'fp-main' + (fullBleed ? ' fp-main--full' : paneled ? ' fp-main--panes' : '')}>{children}</main>
 
       {/* Forge AI — in-context copilot slide-over (same thread as /portal/assistant) */}
       <Drawer
