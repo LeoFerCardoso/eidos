@@ -16,7 +16,8 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from '@/ds/core';
-import { FPageHeader } from '@/portal/shell/portal-shell';
+import { FPageHeader, FSearch } from '@/portal/shell/portal-shell';
+import { usePersistentState } from '@/portal/shell/use-persistent-state';
 import { SERVICES, TRIBES } from '@/portal/data/services';
 
 function initials(squad: string): string {
@@ -36,7 +37,7 @@ export default function CatalogPage() {
   const [query, setQuery] = React.useState('');
   const [view, setView] = React.useState<SavedView>('All');
   const [tribe, setTribe] = React.useState<string>('All tribes');
-  const [mode, setMode] = React.useState<'grid' | 'list'>('grid');
+  const [mode, setMode] = usePersistentState<'grid' | 'list'>('forge.catalog.mode', 'grid');
   const [page, setPage] = React.useState(1);
 
   // Reset to page 1 whenever filters change
@@ -114,43 +115,27 @@ export default function CatalogPage() {
         ))}
       </div>
 
-      {/* Toolbar: search · tribe filter · view toggle */}
-      <div
-        style={{
-          display: 'flex',
-          gap: 10,
-          marginBlockEnd: 'var(--fp-toolbar-gap, 16px)',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        <div className="in-group" style={{ flex: 1, minWidth: 240, maxWidth: 460 }}>
-          <span className="in-addon icon">
-            <Icons.search size={13} />
-          </span>
-          <input
-            className="in-control"
-            placeholder="Filter by name, tribe, description…"
+      {/* Toolbar: search · tribe filter · view toggle — 12px gap, matched heights */}
+      <div className="fp-toolbar">
+        <div style={{ flex: 1, minWidth: 240, maxWidth: 460, display: 'flex' }}>
+          <FSearch
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={setQuery}
+            placeholder="Filter by name, tribe, description…"
             aria-label="Filter services"
+            className="fluid"
           />
-          {query ? (
-            <button type="button" className="in-addon btn" onClick={() => setQuery('')} aria-label="Clear search">
-              <Icons.x size={13} />
-            </button>
-          ) : (
-            <span className="in-addon" style={{ paddingInline: 10 }}><span className="kbd">⌘K</span></span>
-          )}
         </div>
 
-        {/* Tribe filter — DS Select */}
-        <Select
-          value={tribe}
-          onValueChange={setTribe}
-          options={tribeOptions}
-          width="180px"
-        />
+        {/* Tribe filter — DS Select (36px to match search + toggle) */}
+        <span className="fp-filter-select">
+          <Select
+            value={tribe}
+            onValueChange={setTribe}
+            options={tribeOptions}
+            width="180px"
+          />
+        </span>
 
         {/* Grid / List toggle — DS ToggleGroup (default variant, md height) */}
         <ToggleGroup

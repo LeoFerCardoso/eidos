@@ -40,20 +40,33 @@ const useQueryParam = () => {
 // <IconBubble icon="ring" size={36} tone="ember"/> — the recurring
 // section-icon bubble that sits next to page titles, KPI cards, etc.
 // Replaces ~9 hand-rolled instances across the example set.
-const IconBubble = ({ icon, size = 36, tone = 'ember', children }: {
+const IconBubble = ({ icon, size = 36, tone = 'ember', solid = false, children }: {
   icon?: string;
   size?: number;
   tone?: string;
+  /** Solid fill (strong tone bg + dark ink) instead of the soft tint. For bold,
+   *  featured treatments (hero tiles). Contrast-correct: ink is var(--bg). */
+  solid?: boolean;
   children?: React.ReactNode;
 }) => {
   const Icon = (Icons && Icons[icon]) || null;
-  const palette = {
-    ember:  { bg: 'var(--ember-soft)',   fg: 'var(--ember)' },
-    ice:    { bg: 'var(--accent-2-soft, color-mix(in oklch, var(--accent-2) 16%, transparent))', fg: 'var(--accent-2)' },
-    danger: { bg: 'var(--danger-soft)',  fg: 'var(--danger)' },
-    warn:   { bg: 'var(--warning-soft)', fg: 'var(--warning)' },
-    neutral:{ bg: 'var(--surface-active)', fg: 'var(--fg-muted)' },
-  }[tone] || { bg: 'var(--ember-soft)', fg: 'var(--ember)' };
+  const palette = (solid
+    ? {
+        ember:  { bg: 'var(--ember)',          fg: 'var(--bg)' },
+        ice:    { bg: 'var(--accent-2)',        fg: 'var(--bg)' },
+        danger: { bg: 'var(--danger)',          fg: 'var(--bg)' },
+        warn:   { bg: 'var(--warning)',         fg: 'var(--bg)' },
+        neutral:{ bg: 'var(--surface-active)',  fg: 'var(--fg)'  },
+      }
+    : {
+        ember:  { bg: 'var(--ember-soft)',   fg: 'var(--ember)' },
+        ice:    { bg: 'var(--accent-2-soft, color-mix(in oklch, var(--accent-2) 16%, transparent))', fg: 'var(--accent-2)' },
+        danger: { bg: 'var(--danger-soft)',  fg: 'var(--danger)' },
+        warn:   { bg: 'var(--warning-soft)', fg: 'var(--warning)' },
+        neutral:{ bg: 'var(--surface-active)', fg: 'var(--fg-muted)' },
+      })[tone] || (solid
+        ? { bg: 'var(--ember)', fg: 'var(--bg)' }
+        : { bg: 'var(--ember-soft)', fg: 'var(--ember)' });
   const radius = size <= 28 ? 'var(--radius-lg)' : 'var(--radius-xl)';
   return (
     <span style={{

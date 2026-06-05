@@ -13,7 +13,7 @@ import {
   Sparkline,
   Trend,
 } from '@/ds/core';
-import { FPageHeader, FKpi, FSection, IconBubble } from '@/portal/shell/portal-shell';
+import { FPageHeader, FKpi, FSection, IconBubble, FCardHead, FRows, FRow, Sub } from '@/portal/shell/portal-shell';
 import { SERVICES, getService } from '@/portal/data/services';
 
 // ── Forge AI morning digest ───────────────────────────────────────────────────
@@ -224,12 +224,7 @@ export default function PortalHome() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           {/* On-call */}
           <div className="fp-card">
-            <div className="fp-card-head">
-              <div className="fp-card-title">On-call · my tribe</div>
-              <Pill tone="ember" dot>
-                paged
-              </Pill>
-            </div>
+            <FCardHead title="On-call · my tribe" action={<Pill tone="ember" dot>paged</Pill>} />
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingBlockStart: 4 }}>
               <Avatar name="Bruno Mendes" size="lg" ember />
               <div style={{ flex: 1, minWidth: 0 }}>
@@ -244,37 +239,27 @@ export default function PortalHome() {
 
           {/* My services */}
           <div className="fp-card">
-            <div className="fp-card-head">
-              <div className="fp-card-title">My services</div>
-              <Link href="/portal/catalog" className="ds-link-inline" style={{ fontSize: 'var(--text-sm)' }}>
-                View all
-              </Link>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {MY_SERVICES.map((id, i) => {
+            <FCardHead
+              title="My services"
+              action={
+                <Link href="/portal/catalog" className="ds-link-inline" style={{ fontSize: 'var(--text-sm)' }}>
+                  View all
+                </Link>
+              }
+            />
+            <FRows>
+              {MY_SERVICES.map((id) => {
                 const s = getService(id);
                 if (!s) return null;
                 return (
-                  <Link
-                    key={id}
-                    href={`/portal/catalog/${id}`}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 10,
-                      padding: '9px 0',
-                      borderBlockEnd: i < MY_SERVICES.length - 1 ? '1px solid var(--border)' : 'none',
-                      textDecoration: 'none',
-                      color: 'inherit',
-                    }}
-                  >
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', fontWeight: 500, flex: 1 }}>{s.name}</span>
+                  <FRow key={id} href={`/portal/catalog/${id}`}>
+                    <span className="fp-row-main" style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', fontWeight: 500 }}>{s.name}</span>
                     <span className="mono" style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>{s.p95}ms</span>
                     <HealthBadge state={s.alert ? 'degraded' : 'up'} pulse={s.alert} />
-                  </Link>
+                  </FRow>
                 );
               })}
-            </div>
+            </FRows>
           </div>
 
           {/* CTA */}
@@ -295,7 +280,3 @@ export default function PortalHome() {
     </>
   );
 }
-
-const Sub = ({ children, muted }: { children: React.ReactNode; muted?: boolean }) => (
-  <div style={{ fontSize: 'var(--text-xs)', color: muted ? 'var(--fg-muted)' : 'var(--fg)', marginBlockStart: 2 }}>{children}</div>
-);

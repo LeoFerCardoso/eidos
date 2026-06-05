@@ -70,6 +70,14 @@ export interface SidebarItemProps extends React.AnchorHTMLAttributes<HTMLAnchorE
   badge?: SidebarBadge;
   /** Tooltip label shown when the rail is in icon-only mode. Falls back to children text. */
   tooltip?: string;
+  /**
+   * Render the provided child element as the link instead of a bare <a>
+   * (Slot pattern). Use this to compose with a framework router link —
+   * e.g. `<SidebarItem asChild ...><Link href="…">Label</Link></SidebarItem>` —
+   * so navigation stays client-side. The item's icon/label/badge are injected
+   * as the child's content; the child keeps its own href/onClick.
+   */
+  asChild?: boolean;
   children?: React.ReactNode;
   className?: string;
 }
@@ -377,32 +385,56 @@ SidebarGroup.displayName = 'SidebarGroup';
  * screen readers via aria-label, and a CSS tooltip appears on hover.
  */
 export const SidebarItem = React.forwardRef<HTMLAnchorElement, SidebarItemProps>(
-  ({ icon, active, badge, tooltip, children, className, ...rest }, ref) => {
+  ({ icon, active, badge, tooltip, asChild = false, children, className, ...rest }, ref) => {
     const { collapsed } = useSidebarCtx();
 
-    // Derive accessible label for collapsed state
+    // Derive accessible label for collapsed state. With asChild the link text
+    // is nested inside the slotted element (e.g. a <Link>), so unwrap one level.
+    const labelNode = asChild && React.isValidElement(children)
+      ? (children.props as { children?: React.ReactNode }).children
+      : children;
     const childText =
-      typeof children === 'string'
-        ? children
-        : React.Children.toArray(children)
+      typeof labelNode === 'string'
+        ? labelNode
+        : React.Children.toArray(labelNode)
             .filter((c) => typeof c === 'string')
             .join('');
     const tooltipLabel = tooltip ?? childText;
 
-    return (
-      <a
-        ref={ref}
-        className={cn('sb-item', active && 'sb-item--active', collapsed && 'sb-item--collapsed', className)}
-        aria-current={active ? 'page' : undefined}
-        aria-label={collapsed ? tooltipLabel : undefined}
-        data-tt={collapsed ? tooltipLabel : undefined}
-        {...rest}
-      >
+    // Inner composition shared by both the bare <a> and the slotted element.
+    const inner = (
+      <>
         {icon && <span className="sb-item-icon" aria-hidden="true">{icon}</span>}
-        {!collapsed && <span className="sb-item-label">{children}</span>}
+        {!collapsed && <span className="sb-item-label">{labelNode}</span>}
         {!collapsed && badge !== undefined && (
           <span className="sb-item-badge badge" aria-label={`${badge} items`}>{badge}</span>
         )}
+      </>
+    );
+
+    const sharedProps = {
+      className: cn('sb-item', active && 'sb-item--active', collapsed && 'sb-item--collapsed', className),
+      'aria-current': active ? ('page' as const) : undefined,
+      'aria-label': collapsed ? tooltipLabel : undefined,
+      'data-tt': collapsed ? tooltipLabel : undefined,
+    };
+
+    // Slot pattern: render the consumer's element (e.g. a router <Link>) as the
+    // link, merging our chrome/aria and replacing its children with `inner`.
+    if (asChild && React.isValidElement(children)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const child = children as React.ReactElement<any>;
+      return React.cloneElement(child, {
+        ref,
+        ...sharedProps,
+        className: cn(sharedProps.className, child.props.className),
+        ...rest,
+      }, inner);
+    }
+
+    return (
+      <a ref={ref} {...sharedProps} {...rest}>
+        {inner}
       </a>
     );
   },

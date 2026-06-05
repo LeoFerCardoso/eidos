@@ -19,7 +19,7 @@ import {
   Modal, Card, CardMedia, CardHeader, CardTitle, CardContent,
   ToggleGroup, ToggleGroupItem,
 } from '@/ds/core';
-import { usePageCrumb } from '@/portal/shell/portal-shell';
+import { usePageCrumb, FSearch } from '@/portal/shell/portal-shell';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AGENTS, type Agent } from '@/portal/data/agents';
 
@@ -95,40 +95,10 @@ const findChatTitle = (id: string): string => {
 const ICON = (key: string): React.FC<{ size?: number }> =>
   (Icons as Record<string, React.FC<{ size?: number }>>)[key] ?? Icons.folder;
 
-// Canonical DS search field (mirrors the Inputs doc's Search demo): an .in-group
-// with a leading .in-addon.icon magnifier and a trailing affordance that swaps
-// between the keyboard-shortcut hint (empty) and a clear-✕ button (typed).
-const ChatSearch = ({
-  value, onChange, placeholder, shortcut = '⌘K', className, size = 'md',
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  placeholder: string;
-  shortcut?: string;
-  className?: string;
-  size?: 'md' | 'lg';
-}) => {
-  const lg = size === 'lg';
-  return (
-    <div className={'in-group' + (lg ? ' fp-search-hero' : '') + (className ? ` ${className}` : '')}>
-      <span className="in-addon icon"><Icons.search size={lg ? 16 : 14} /></span>
-      <input
-        className="in-control"
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        aria-label={placeholder}
-      />
-      {value ? (
-        <button type="button" className="in-addon btn" onClick={() => onChange('')} aria-label="Clear search">
-          <Icons.x size={lg ? 15 : 14} />
-        </button>
-      ) : (
-        <span className="in-addon" style={{ paddingInline: 10 }}><span className="kbd">{shortcut}</span></span>
-      )}
-    </div>
-  );
-};
+// The canonical portal search field now lives in the shell (FSearch). Alias it
+// locally so the chat call-sites (toolbars, archive, artifacts, the search hero)
+// keep their existing names.
+const ChatSearch = FSearch;
 
 // ── Sub-sidebar ─────────────────────────────────────────────────────────────
 const SideRow = ({

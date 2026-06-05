@@ -35,12 +35,15 @@ import {
 import { useColorTheme, type ColorTheme } from '@/components/color-theme-provider';
 import { ForgeAIChat } from './forge-ai-chat';
 import { PortalCommandPalette } from './portal-command-palette';
+import { usePersistentState } from './use-persistent-state';
 import { NotifRow } from '@/portal/notifications/notif-row';
 import { NOTIFS, NOTIF_PREVIEW, filterByTab, type NotifTab } from '@/portal/data/notifications';
 
 // Re-export the shared layout helpers so portal pages can import from here
 // without changing their import paths.
 export { FPageHeader, FSection, FKpi, IconBubble } from '@/ds/examples/example-shell';
+export { FSearch, type FSearchProps } from './fsearch';
+export { FCardHead, FRows, FRow, Sub } from './layout';
 
 // ── Page crumb context ──────────────────────────────────────────────────────
 // Lets a full-bleed page (e.g. the Chat thread) push a trailing breadcrumb
@@ -157,8 +160,16 @@ const WsAvatar = ({
 // The DS sidebar renders its own internal .sb-toggle button; we suppress it
 // via CSS in example-shell.css so the ONLY collapse control is the topbar button.
 
-const WorkspaceHeader = ({ collapsed }: { collapsed: boolean }) => {
-  const ws = WORKSPACES[0];
+const WorkspaceHeader = ({
+  collapsed,
+  current,
+  onSelect,
+}: {
+  collapsed: boolean;
+  current: number;
+  onSelect: (i: number) => void;
+}) => {
+  const ws = WORKSPACES[current] ?? WORKSPACES[0];
 
   return (
     <DropdownMenu>
@@ -244,7 +255,7 @@ const WorkspaceHeader = ({ collapsed }: { collapsed: boolean }) => {
         <DropdownMenuLabel>Workspaces</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {WORKSPACES.map((w, i) => (
-          <DropdownMenuItem key={w.name} onSelect={(e) => e.preventDefault()}>
+          <DropdownMenuItem key={w.name} onSelect={() => onSelect(i)}>
             <span
               style={{
                 display: 'flex',
@@ -279,7 +290,7 @@ const WorkspaceHeader = ({ collapsed }: { collapsed: boolean }) => {
                   {w.region}
                 </span>
               </span>
-              {i === 0 && (
+              {i === current && (
                 <Icons.check
                   size={13}
                   style={{ color: 'var(--ember)', flexShrink: 0 } as React.CSSProperties}
@@ -666,7 +677,8 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
   // The Chat surface is full-bleed (its own sub-sidebar + independent scroll),
   // so it opts out of the padded, max-width content column.
   const fullBleed = pathname.startsWith('/portal/chat');
-  const [sidebarOpen, setSidebarOpen] = React.useState(true);
+  const [sidebarOpen, setSidebarOpen] = usePersistentState('forge.sidebar.open', true);
+  const [workspace, setWorkspace] = usePersistentState('forge.workspace', 0);
   const [aiOpen, setAiOpen] = React.useState(false);
   const [paletteOpen, setPaletteOpen] = React.useState(false);
   const [pageCrumb, setPageCrumb] = React.useState<PageCrumb>(null);
@@ -699,31 +711,37 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         onOpenChange={setSidebarOpen}
         aria-label="Forge — primary navigation"
       >
-        <WorkspaceHeader collapsed={!sidebarOpen} />
+        <WorkspaceHeader collapsed={!sidebarOpen} current={workspace} onSelect={setWorkspace} />
 
         <SidebarSection>
           {RAIL.map((it) => {
             const Icon = (Icons as Record<string, React.FC<{ size?: number }>>)[it.icon] ?? Icons.circle;
-            const isDisabled = !it.href;
+            // Live routes navigate client-side via the Slot pattern (<SidebarItem
+            // asChild><Link/></SidebarItem>) so the shell + its state persist
+            // across navigation. Disabled (vision-placeholder) items stay a bare
+            // non-interactive anchor.
+            if (it.href) {
+              return (
+                <SidebarItem
+                  key={it.key}
+                  asChild
+                  icon={<Icon size={16} />}
+                  active={it.key === active}
+                  tooltip={it.label}
+                >
+                  <Link href={it.href}>{it.label}</Link>
+                </SidebarItem>
+              );
+            }
             return (
               <SidebarItem
                 key={it.key}
-                href={it.href ?? '#'}
+                href="#"
                 icon={<Icon size={16} />}
-                active={it.key === active}
                 tooltip={it.label}
-                aria-current={it.key === active ? 'page' : undefined}
-                aria-disabled={isDisabled || undefined}
-                onClick={
-                  isDisabled
-                    ? (e: React.MouseEvent) => e.preventDefault()
-                    : undefined
-                }
-                style={
-                  isDisabled
-                    ? { opacity: 0.45, cursor: 'not-allowed', pointerEvents: 'none' }
-                    : undefined
-                }
+                aria-disabled
+                onClick={(e: React.MouseEvent) => e.preventDefault()}
+                style={{ opacity: 0.45, cursor: 'not-allowed', pointerEvents: 'none' }}
               >
                 {it.label}
               </SidebarItem>

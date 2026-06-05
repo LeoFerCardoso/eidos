@@ -23,7 +23,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from '@/ds/core';
-import { FPageHeader, FSection, IconBubble } from '@/portal/shell/portal-shell';
+import { FPageHeader, FSection, IconBubble, FSearch } from '@/portal/shell/portal-shell';
 
 type Maturity = 'Stable' | 'Beta';
 type Person = { name: string; initials: string; role?: string };
@@ -264,9 +264,7 @@ function Gallery({ onUse }: { onUse: (id: string) => void }) {
     <>
       {/* Hero: featured golden path (ember, like the example) */}
       <div className="fp-card fp-card--ember-hero" style={{ display: 'flex', gap: 'var(--space-5)', alignItems: 'center', flexWrap: 'wrap' }}>
-        <span style={{ width: 52, height: 52, borderRadius: 'var(--radius-2xl)', background: 'var(--ember)', color: 'var(--bg)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          {React.createElement((Icons as Record<string, React.FC<{ size?: number }>>)[hero.icon] ?? Icons.package, { size: 26 })}
-        </span>
+        <IconBubble icon={hero.icon} size={52} tone="ember" solid />
         <div style={{ flex: 1, minWidth: 320 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--space-2)', marginBlockEnd: 4 }}>
             <span className="t-mono-label" style={{ color: 'var(--ember)' }}>Most used</span>
@@ -286,18 +284,16 @@ function Gallery({ onUse }: { onUse: (id: string) => void }) {
         </button>
       </div>
 
-      {/* Filters: search + language, matched heights */}
-      <div style={{ display: 'flex', gap: 'var(--space-2)', margin: 'var(--space-4) 0 var(--space-3)', alignItems: 'center', flexWrap: 'wrap' }}>
-        <div className="in-group" style={{ flex: 1, minWidth: 280, maxWidth: 460 }}>
-          <span className="in-addon icon"><Icons.search size={13} /></span>
-          <input className="in-control" placeholder="Filter by name, framework, language" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Filter templates" />
-          {query ? (
-            <button type="button" className="in-addon btn" onClick={() => setQuery('')} aria-label="Clear search">
-              <Icons.x size={13} />
-            </button>
-          ) : (
-            <span className="in-addon" style={{ paddingInline: 10 }}><span className="kbd">⌘K</span></span>
-          )}
+      {/* Filters: search + language — 12px gap, matched heights */}
+      <div className="fp-toolbar" style={{ marginBlockStart: 'var(--space-4)' }}>
+        <div style={{ flex: 1, minWidth: 280, maxWidth: 460, display: 'flex' }}>
+          <FSearch
+            value={query}
+            onChange={setQuery}
+            placeholder="Filter by name, framework, language"
+            aria-label="Filter templates"
+            className="fluid"
+          />
         </div>
         <span className="fp-filter-select">
           <Select value={lang} onValueChange={setLang} options={langOptions} />

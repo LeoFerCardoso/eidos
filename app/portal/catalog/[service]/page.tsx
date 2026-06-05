@@ -25,7 +25,7 @@ import {
   Tabs,
   Timeline,
 } from '@/ds/core';
-import { FPageHeader, FKpi, FSection, IconBubble } from '@/portal/shell/portal-shell';
+import { FPageHeader, FKpi, FSection, IconBubble, FCardHead, FRows, FRow, Sub } from '@/portal/shell/portal-shell';
 import { getService, type PortalService } from '@/portal/data/services';
 
 // ── Tab definitions ──────────────────────────────────────────────────────────
@@ -374,28 +374,15 @@ function MetricsTab({ svc, latencySpark }: { svc: PortalService; latencySpark: n
       </div>
 
       <div className="fp-card">
-        <div className="fp-card-head">
-          <div className="fp-card-title">Scorecard · Production readiness</div>
-          <Pill tone="health-up" dot>Grade A</Pill>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {SCORECARD.map((s, i) => (
-            <div
-              key={s.name}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '10px 0',
-                borderBlockEnd: i < SCORECARD.length - 1 ? '1px solid var(--border)' : 'none',
-                fontSize: 'var(--text-sm)',
-              }}
-            >
-              <span>{s.name}</span>
+        <FCardHead title="Scorecard · Production readiness" action={<Pill tone="health-up" dot>Grade A</Pill>} />
+        <FRows>
+          {SCORECARD.map((s) => (
+            <FRow key={s.name} style={{ paddingBlock: 10, fontSize: 'var(--text-sm)' }}>
+              <span className="fp-row-main">{s.name}</span>
               <Pill tone={s.tone}>{s.grade}</Pill>
-            </div>
+            </FRow>
           ))}
-        </div>
+        </FRows>
       </div>
     </div>
   );
@@ -592,12 +579,10 @@ function OverviewTab({
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           {/* On-call · primary */}
           <div className="fp-card">
-            <div className="fp-card-head">
-              <div className="fp-card-title">On-call · primary</div>
-              <button className="btn ghost sm">
-                <Icons.refresh size={11} /> Rotate
-              </button>
-            </div>
+            <FCardHead
+              title="On-call · primary"
+              action={<button className="btn ghost sm"><Icons.refresh size={11} /> Rotate</button>}
+            />
             <div
               style={{
                 display: 'flex',
@@ -636,12 +621,10 @@ function OverviewTab({
 
           {/* Members with access */}
           <div className="fp-card">
-            <div className="fp-card-head">
-              <div className="fp-card-title">Members with access</div>
-              <button className="btn ghost sm" style={{ fontSize: 'var(--text-xs)' }}>
-                Manage access
-              </button>
-            </div>
+            <FCardHead
+              title="Members with access"
+              action={<button className="btn ghost sm" style={{ fontSize: 'var(--text-xs)' }}>Manage access</button>}
+            />
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '6px 0 4px' }}>
               <Avatar.Group max={6} size="sm">
                 {TEAM_MEMBERS.map((m) => (
@@ -656,12 +639,7 @@ function OverviewTab({
 
           {/* SLO summary */}
           <div className="fp-card">
-            <div className="fp-card-head">
-              <div className="fp-card-title">SLO summary</div>
-              <Pill tone="health-up" dot>
-                All passing
-              </Pill>
-            </div>
+            <FCardHead title="SLO summary" action={<Pill tone="health-up" dot>All passing</Pill>} />
             <div className="tbl-wrap">
               <table className="tbl" style={{ margin: 0 }}>
                 <thead>
@@ -694,30 +672,15 @@ function OverviewTab({
 
           {/* Recent incidents */}
           <div className="fp-card">
-            <div className="fp-card-head">
-              <div className="fp-card-title">Recent incidents</div>
-              <a
-                href="/portal/catalog"
-                className="ds-link-inline"
-                style={{ fontSize: 'var(--text-sm)' }}
-              >
-                View all
-              </a>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <FCardHead
+              title="Recent incidents"
+              action={<a href="/portal/catalog" className="ds-link-inline" style={{ fontSize: 'var(--text-sm)' }}>View all</a>}
+            />
+            <FRows>
               {INCIDENTS.map((inc) => (
-                <div
-                  key={inc.id}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                    padding: '8px 0',
-                    borderBlockStart: '1px solid var(--border)',
-                  }}
-                >
+                <FRow key={inc.id} style={{ paddingBlock: 8 }}>
                   <SeverityPill level={inc.level} />
-                  <div style={{ flex: 1, minWidth: 0 }}>
+                  <div className="fp-row-main">
                     <div
                       style={{
                         fontSize: 'var(--text-sm)',
@@ -742,16 +705,14 @@ function OverviewTab({
                       <RelativeTime value={inc.when} />
                     </div>
                   </div>
-                </div>
+                </FRow>
               ))}
-            </div>
+            </FRows>
           </div>
 
           {/* Activity — summarized (last 4 events) */}
           <div className="fp-card">
-            <div className="fp-card-head">
-              <div className="fp-card-title">Activity</div>
-            </div>
+            <FCardHead title="Activity" />
             <Timeline items={TIMELINE_ITEMS.slice(0, 4)} />
           </div>
         </div>
@@ -900,16 +861,10 @@ Content-Type: application/json
 function IncidentsTab() {
   return (
     <div className="fp-card">
-      <div className="fp-card-head">
-        <div className="fp-card-title">Recent incidents</div>
-        <a
-          href="/portal/catalog"
-          className="ds-link-inline"
-          style={{ fontSize: 'var(--text-sm)' }}
-        >
-          View all
-        </a>
-      </div>
+      <FCardHead
+        title="Recent incidents"
+        action={<a href="/portal/catalog" className="ds-link-inline" style={{ fontSize: 'var(--text-sm)' }}>View all</a>}
+      />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {INCIDENTS.map((inc) => (
           <div
@@ -969,16 +924,3 @@ function SoonTab({ tab }: { tab: string }) {
     </div>
   );
 }
-
-// ── Shared primitives ─────────────────────────────────────────────────────────
-const Sub = ({ children, muted }: { children: React.ReactNode; muted?: boolean }) => (
-  <div
-    style={{
-      fontSize: 'var(--text-xs)',
-      color: muted ? 'var(--fg-muted)' : 'var(--fg)',
-      marginBlockStart: 2,
-    }}
-  >
-    {children}
-  </div>
-);

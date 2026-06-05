@@ -15,7 +15,7 @@
   --fp-header-gap-compact:  14px;
   --fp-section-gap:         18px;
   --fp-filter-gap:          14px;
-  --fp-toolbar-gap:         16px;
+  --fp-toolbar-gap:         28px;  /* Controls → Content gap (search/filters row to the list/grid) */
   --fp-card-pad:            16px;
 }
 
@@ -434,6 +434,45 @@ body:active::-webkit-scrollbar-thumb,
   font-size: 12px;
   margin-top: 2px;
 }
+
+/* ---- Flat list rows (FRows / FRow) ----------------------------------------
+   The shared list-row pattern: a flex row whose main content carries `flex:1`
+   (or `.fp-row-main`) and whose trailing items sit at the inline-end. Rows live
+   inside a `.fp-rows` group that draws a hairline divider BETWEEN rows (never
+   after the last). Square rows, dividers not chips — alignment stays on one
+   inline-start edge (no outer margins). */
+.fp-rows { display: flex; flex-direction: column; }
+.fp-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 9px;
+  text-decoration: none;
+  color: inherit;
+}
+.fp-rows > .fp-row:not(:last-child) { border-block-end: 1px solid var(--border); }
+/* The element that should absorb free space and push trailing items to the end. */
+.fp-row-main { flex: 1; min-inline-size: 0; }
+
+/* ---- Filter toolbar — search + filter control(s) + count, one row ----------
+   The portal standard: a single horizontal row, 12px gap, controls matched to
+   36px height (search via FSearch, Select via .fp-filter-select). Wraps on
+   narrow widths. Replaces the per-page inline `display:flex; gap:12` block. */
+.fp-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-block-end: var(--fp-toolbar-gap, 16px);
+}
+
+/* ---- Sub — small caption under a value/title (FKpi sub slot, etc.) --------- */
+.fp-sub {
+  font-size: var(--text-xs);
+  color: var(--fg);
+  margin-block-start: 2px;
+}
+.fp-sub[data-muted] { color: var(--fg-muted); }
 
 /* ---- Grid helpers — responsive by default ---------------------------------
    Each *-N variant tries to keep N columns but allows reflow when the

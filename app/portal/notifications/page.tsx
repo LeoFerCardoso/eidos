@@ -6,7 +6,7 @@
 // Shares the data + <NotifRow> with the bell so the two never drift.
 import * as React from 'react';
 import { Icons, Tabs, TabsList, TabsTrigger, TabsContent } from '@/ds/core';
-import { FPageHeader } from '@/portal/shell/portal-shell';
+import { FPageHeader, FSearch } from '@/portal/shell/portal-shell';
 import { NotifRow } from '@/portal/notifications/notif-row';
 import { NOTIFS, filterByTab, type Notif, type NotifTab } from '@/portal/data/notifications';
 
@@ -108,18 +108,13 @@ export default function NotificationsInboxPage() {
             })}
           </TabsList>
 
-          <div className="in-group fp-feed-search">
-            <span className="in-addon icon">
-              <Icons.search size={13} />
-            </span>
-            <input
-              className="in-control"
-              placeholder="Search notifications…"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              aria-label="Search notifications"
-            />
-          </div>
+          <FSearch
+            value={query}
+            onChange={setQuery}
+            placeholder="Search notifications…"
+            aria-label="Search notifications"
+            className="fp-feed-search"
+          />
         </div>
 
         {TABS.map(([id]) => (
