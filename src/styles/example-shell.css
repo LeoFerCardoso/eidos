@@ -1708,8 +1708,9 @@ body:active::-webkit-scrollbar-thumb,
 
 /* ── Agents catalog (external page /portal/agents) — avatar card in .fp-grid ── */
 .fp-agents-toolbar { display: flex; align-items: center; gap: 12px; margin-block-end: var(--fp-toolbar-gap, 16px); }
-.fp-agents-search { flex: 1 1 auto; max-inline-size: 460px; }
-.fp-agents-count { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-muted); margin-inline-start: auto; }
+/* Search fills, capped, and eats the slack so the toggle + count group at the end. */
+.fp-agents-search { flex: 1 1 auto; max-inline-size: 460px; margin-inline-end: auto; }
+.fp-agents-count { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-muted); white-space: nowrap; }
 .fp-agents-empty {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 8px; padding: 48px 0; color: var(--fg-faint);
@@ -1723,8 +1724,11 @@ body:active::-webkit-scrollbar-thumb,
   color: var(--fg); text-align: start; cursor: pointer;
   transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 }
+.fp-agents-card { position: relative; }
 .fp-agents-card:hover { background: var(--bg-elevated); border-color: var(--border-strong); transform: translateY(-1px); }
-.fp-agents-card .head { display: flex; align-items: center; gap: 11px; }
+/* Star pinned to the card's top-end corner, equal margin top + inline-end. */
+.fp-agents-card .fp-agents-star { position: absolute; inset-block-start: 12px; inset-inline-end: 12px; }
+.fp-agents-card .head { display: flex; align-items: center; gap: 11px; padding-inline-end: 24px; }
 .fp-agents-card .head .avatar { flex: 0 0 auto; }
 .fp-agents-card .id { flex: 1 1 auto; min-inline-size: 0; }
 .fp-agents-card .name { font-size: 14px; font-weight: 600; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -1744,6 +1748,97 @@ body:active::-webkit-scrollbar-thumb,
 .fp-agents-card .stats b { color: var(--fg); font-weight: 600; }
 .fp-agents-card .stats .dot { color: var(--fg-faint); }
 .fp-agents-card .stats .updated { margin-inline-start: auto; }
+
+/* Star toggle — top-end of every agent card/row. Filled (ember) when starred. */
+.fp-agents-star {
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  inline-size: 28px; block-size: 28px; border-radius: var(--radius-md);
+  background: transparent; border: 0; color: var(--fg-faint); cursor: pointer;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.fp-agents-star:hover { background: var(--surface-active); color: var(--fg-muted); }
+.fp-agents-star.is-on { color: var(--ember); }
+.fp-agents-star.is-on svg { fill: currentColor; }
+.fp-agents-star:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Official mark — solid social-media verified seal (badge-check) in accent-2.
+   The icon paints its own fill via currentColor, so we only set the colour. */
+.fp-agents-verified {
+  display: inline-flex; align-items: center;
+  color: var(--accent-2);
+  margin-inline-start: 4px; flex: 0 0 auto;
+}
+.fp-agents-card .name { display: inline-flex; align-items: center; }
+
+/* Maker line — "Official" or "by <author>", paired with the model pill. */
+.fp-agents-meta {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-block-start: auto; padding-block-start: 4px;
+}
+.fp-agents-maker {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-faint);
+}
+.fp-agents-maker.is-official { color: var(--accent-2); }
+.fp-agents-card .stats { margin-block-start: 0; }
+
+/* Section band — a titled group (Starred, All agents) with a count. The gap
+   ABOVE the first section (Controls → Content) is owned by the toolbar's
+   margin-block-end (--fp-toolbar-gap), so sections carry no top margin. */
+.fp-agents-section { margin-block-end: 20px; }
+.fp-agents-section-head {
+  display: flex; align-items: center; gap: 8px; margin-block-end: 12px;
+}
+.fp-agents-section-title {
+  font-size: 13px; font-weight: 600; color: var(--fg); letter-spacing: -0.005em;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.fp-agents-section-title svg { color: var(--ember); }
+.fp-agents-section-count {
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint);
+}
+
+/* Starred carousel (grid mode) — the DS <Carousel>. Each slide holds one card;
+   make the card fill the 268px slide and equal-height across the row. */
+.fp-agents-carousel .carx-slide { display: flex; }
+.fp-agents-carousel .carx-slide > .fp-agents-card { inline-size: 100%; }
+
+/* List mode — horizontal agent rows. Inset-hover: rows carry inline padding +
+   a rounded hover, and the list bleeds out by the same amount so the row content
+   stays aligned with the section header. The divider is inset to the content. */
+.fp-agents-list { display: flex; flex-direction: column; margin-inline: -12px; }
+.fp-agents-row {
+  position: relative;
+  display: flex; align-items: center; gap: 12px;
+  padding-block: 12px; padding-inline: 12px; border-radius: var(--radius-md);
+  color: var(--fg); text-align: start; cursor: pointer;
+  background: transparent; border: 0; inline-size: 100%;
+  transition: background var(--dur-fast) var(--ease);
+}
+.fp-agents-row:hover { background: var(--surface); }
+.fp-agents-list > .fp-agents-row:not(:last-child)::after {
+  content: ''; position: absolute; inset-inline: 12px; inset-block-end: 0;
+  border-block-end: 1px solid var(--border);
+}
+.fp-agents-row .avatar { flex: 0 0 auto; }
+.fp-agents-row .row-id { flex: 0 0 200px; min-inline-size: 0; }
+.fp-agents-row .name { font-size: 13.5px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-agents-row .role { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-agents-row .row-desc {
+  flex: 1 1 auto; min-inline-size: 0; font-size: 12.5px; color: var(--fg-muted); line-height: 1.45;
+  display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.fp-agents-row .fp-agents-model { flex: 0 0 auto; white-space: nowrap; }
+.fp-agents-row .row-maker { flex: 0 0 auto; inline-size: 116px; font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-agents-row .row-maker.is-official { color: var(--accent-2); }
+.fp-agents-row .row-updated { flex: 0 0 auto; font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-faint); inline-size: 72px; text-align: end; }
+@media (max-width: 860px) {
+  .fp-agents-row .row-desc, .fp-agents-row .row-maker { display: none; }
+}
+
+/* Load-more — centred ghost button under a section. */
+.fp-agents-more { display: flex; justify-content: center; margin-block-start: 18px; }
 
 /* ── View: Project detail (/portal/chat → a pinned space or a project tile) ─ */
 .fp-chat-pd {

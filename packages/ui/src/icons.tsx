@@ -157,6 +157,18 @@ const Icons = {
   arrowUp: I(<><line x1="12" y1="20" x2="12" y2="4"/><polyline points="6 10 12 4 18 10"/></>),
   arrowDown: I(<><line x1="12" y1="4" x2="12" y2="20"/><polyline points="6 14 12 20 18 14"/></>),
   check: I(<polyline points="4 12 10 18 20 6"/>),
+  // Solid "verified" seal (social-media style): the scalloped badge filled in
+  // currentColor with a check knocked out in --bg ink. Unlike the stroked icons
+  // this one paints a fill, so set its colour via `color`/CSS, not stroke.
+  badgeCheck: ({ size = 16, color = 'currentColor', ...rest }: IconProps = {}) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" {...rest}>
+      <path
+        d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"
+        fill={color}
+      />
+      <path d="m9 12 2 2 4-4" fill="none" stroke="var(--bg)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
   x: I(<><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></>),
   plus: I(<><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></>),
   minus: I(<line x1="5" y1="12" x2="19" y2="12"/>),
