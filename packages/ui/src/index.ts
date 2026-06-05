@@ -12,6 +12,7 @@
 // live in the docs app (src/ds/core/docs-primitives.tsx).
 export * from './mocks';
 export * from './icons';
+export * from './brand-icons';
 export * from './badge';
 export * from './atoms';
 export * from './primitives';

@@ -62,6 +62,7 @@ export const MIGRATED: Record<string, () => Promise<{ default: ComponentType }>>
   "blocks/split-feature": () => import('./blocks/split-feature'),
   "blocks/stat-band": () => import('./blocks/stat-band'),
   "brand": () => import('./brand'),
+  "brand-icons": () => import('./brand-icons'),
   "breadcrumb": () => import('./breadcrumb'),
   "button-group": () => import('./button-group'),
   "buttons": () => import('./buttons'),

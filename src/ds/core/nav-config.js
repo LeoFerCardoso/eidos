@@ -53,6 +53,7 @@
         { id: 'spacing',     label: 'Spacing & Radius',  href: 'pages/foundations/spacing.html',        badge: 'updated' },
         { id: 'shadows',     label: 'Elevation',         href: 'pages/foundations/shadows.html', badge: 'updated' },
         { id: 'iconography', label: 'Iconography',       href: 'pages/foundations/iconography.html', badge: 'updated' },
+        { id: 'brand-icons', label: 'Brand Icons',       href: 'pages/foundations/brand-icons.html', badge: 'new' },
         { id: 'motion',      label: 'Motion',            href: 'pages/foundations/motion.html' },
         { id: 'focus-ring',  label: 'Focus Ring',        href: 'pages/foundations/focus-ring.html',     badge: 'new' },
       ]},
