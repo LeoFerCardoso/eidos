@@ -104,53 +104,110 @@ const FEED: {
 
 const MY_SERVICES = ['acerta-api', 'score-engine', 'scpc-gateway', 'consent-service'];
 
-// Ember pixel-mosaic for the welcome hero — a grid of small ember squares that
-// grows denser + brighter toward the bottom edge (a "dissolve rising" texture).
-// Seeded with Math.sin so server and client render the exact same pattern (no
-// hydration drift), and the per-cell opacity does the gradient work; CSS masks
-// the top into transparency and the .wh-gradient mesh sits in front of it.
-const HeroMosaic = React.memo(function HeroMosaic() {
-  const COLS = 104;
-  const ROWS = 16;
-  const CELL = 16;
-  const GAP = 2;
-  const rnd = (c: number, r: number) => {
-    const s = Math.sin(c * 127.1 + r * 311.7) * 43758.5453;
-    return s - Math.floor(s);
-  };
-  const rects: React.ReactNode[] = [];
-  for (let r = 0; r < ROWS; r++) {
-    const rowF = r / (ROWS - 1); // 0 at the top → 1 at the bottom
-    for (let c = 0; c < COLS; c++) {
-      // Denser toward the bottom: a cell is "on" only when its noise falls
-      // under the row's rising threshold.
-      if (rnd(c, r) > rowF * 1.15 + 0.02) continue;
-      const opacity = (0.06 + rowF * 0.4) * (0.55 + rnd(c + 13, r + 7) * 0.45);
-      rects.push(
-        <rect
-          key={`${c}-${r}`}
-          x={c * CELL}
-          y={r * CELL}
-          width={CELL - GAP}
-          height={CELL - GAP}
-          rx={1.5}
-          opacity={Number(opacity.toFixed(3))}
-        />,
-      );
-    }
-  }
-  return (
-    <svg
-      className="wh-mosaic"
-      viewBox={`0 0 ${COLS * CELL} ${ROWS * CELL}`}
-      preserveAspectRatio="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      {rects}
-    </svg>
-  );
-});
+// Doom-fire heat-simulation tunables for the welcome-hero background. No UI
+// controls — these are the knobs: lateral wind, base combustion, cooling rate
+// (flame height) and the frame cadence.
+const FLAME = {
+  WIND: -0.35,    // lateral drift: <0 leans toward inline-start, >0 inline-end
+  FUEL: 0.95,     // combustion intensity at the base (0..1)
+  COOLING: 0.085, // decay per row: higher = shorter flames, lower = taller
+  FRAME_MS: 55,   // ~18fps — a calm flicker, not a strobe
+};
+
+// Character-mosaic variant — faithful to the reference terminal-fire "density"
+// mode: the heat field is rendered as the literal monospace ramp " ░ ▒ ▓ █"
+// inside a <pre> (Geist Mono, tracking-widest, leading-none), NOT drawn squares.
+// Grid (COLS×ROWS) is measured from the container + font metrics so the glyphs
+// tile the whole hero. Colour is var(--ember) with a soft ember glow.
+const FLAME_CHARS = [' ', '░', '▒', '▓', '█'];
+
+function HeroFlameChars() {
+  const ref = React.useRef<HTMLPreElement | null>(null);
+
+  React.useEffect(() => {
+    const pre = ref.current;
+    if (!pre) return;
+    const { WIND, FUEL, COOLING, FRAME_MS } = FLAME;
+
+    let COLS = 0, ROWS = 0;
+    let heat = new Float32Array(0);
+
+    const measure = () => {
+      const rect = pre.getBoundingClientRect();
+      const cs = getComputedStyle(pre);
+      const span = document.createElement('span');
+      span.style.cssText = `position:absolute;visibility:hidden;white-space:pre;font-family:${cs.fontFamily};font-size:${cs.fontSize};letter-spacing:${cs.letterSpacing}`;
+      span.textContent = '█'.repeat(50);
+      document.body.appendChild(span);
+      const charW = span.getBoundingClientRect().width / 50 || 8;
+      document.body.removeChild(span);
+      const lineH = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) || 12;
+      COLS = Math.max(24, Math.floor(rect.width / charW) + 2);
+      ROWS = Math.max(8, Math.floor(rect.height / lineH) + 1);
+      heat = new Float32Array(COLS * (ROWS + 1));
+    };
+
+    const step = () => {
+      const base = ROWS * COLS;
+      for (let x = 0; x < COLS; x++) {
+        heat[base + x] = Math.random() < 0.15 ? Math.random() * 0.4 + (FUEL - 0.4) : FUEL;
+      }
+      for (let y = 0; y < ROWS; y++) {
+        for (let x = 0; x < COLS; x++) {
+          let windShift = 0;
+          if (WIND !== 0 && Math.random() < Math.abs(WIND)) windShift = WIND > 0 ? 1 : -1;
+          const sx = (x + windShift + COLS) % COLS;
+          const parent = heat[(y + 1) * COLS + sx] || 0;
+          const decay = Math.random() * COOLING * 1.5;
+          heat[y * COLS + x] = Math.max(0, parent - decay);
+        }
+      }
+    };
+
+    const render = () => {
+      const n = FLAME_CHARS.length;
+      let out = '';
+      for (let y = 0; y < ROWS; y++) {
+        let line = '';
+        for (let x = 0; x < COLS; x++) {
+          const idx = Math.min(n - 1, Math.floor(heat[y * COLS + x] * n * 1.1));
+          line += FLAME_CHARS[idx];
+        }
+        out += y < ROWS - 1 ? line + '\n' : line;
+      }
+      pre.textContent = out;
+    };
+
+    measure();
+    for (let i = 0; i < ROWS + 8; i++) step();
+    render();
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let raf = 0, last = 0, visible = true;
+    const loop = (t: number) => {
+      if (visible && t - last >= FRAME_MS) {
+        last = t;
+        step();
+        render();
+      }
+      raf = requestAnimationFrame(loop);
+    };
+    if (!reduce) raf = requestAnimationFrame(loop);
+
+    const ro = new ResizeObserver(() => { measure(); render(); });
+    ro.observe(pre);
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0 });
+    io.observe(pre);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      io.disconnect();
+    };
+  }, []);
+
+  return <pre ref={ref} className="wh-mosaic wh-flame-chars" aria-hidden="true" />;
+}
 
 const TONE_ICON: Record<string, 'danger' | 'warn' | 'ember'> = {
   danger: 'danger',
@@ -180,9 +237,11 @@ export default function PortalHome() {
         }
       />
 
-      {/* Welcome hero — sits directly under the header; greeting stays above. */}
+      {/* Welcome hero — sits directly under the header; greeting stays above.
+          Background: an animated terminal-fire mosaic (density ramp " ░ ▒ ▓ █"
+          rendered as monospace glyphs, var(--ember)). */}
       <section className="fp-welcome-hero page-enter">
-        <HeroMosaic />
+        <HeroFlameChars />
         <div className="wh-gradient" aria-hidden="true" />
         <span
           className="ember-glow-bg"

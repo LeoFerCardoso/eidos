@@ -349,28 +349,37 @@ body:active::-webkit-scrollbar-thumb,
 /* ---- Main content -------------------------------------------------------- */
 .fp-main {
   grid-area: main;
-  padding-block-start: var(--fp-page-inset-block);
-  padding-block-end: 64px;
-  padding-inline: var(--fp-page-inset-inline);
-  max-width: 1480px;
-  margin: 0 auto;
+  /* FULL-WIDTH scroll container so the scrollbar hugs the viewport's right edge
+     (the content column is capped by .fp-main-in below, not here). Contain
+     overscroll so reaching the end never chains to the app/document. */
   width: 100%;
-  /* The scroll container for normal pages; contain overscroll so reaching the
-     end never chains to the app/document. */
   overflow-y: auto;
   overscroll-behavior: contain;
 }
-.fp-main--full { max-width: none; padding: 0; overflow: hidden; }
+/* Inner content column — caps line length + centres. The scroller is full-width;
+   this is what used to carry the max-width/padding on .fp-main. */
+.fp-main-in {
+  max-width: 1480px;
+  margin: 0 auto;
+  width: 100%;
+  padding-block: var(--fp-page-inset-block) 64px;
+  padding-inline: var(--fp-page-inset-inline);
+}
+/* Full-bleed + paned routes manage their own layout — dissolve the wrapper so
+   children become direct layout items of .fp-main (display:contents). */
+.fp-main--full { padding: 0; overflow: hidden; }
 /* Paneled layout (Agent detail): fixed height, no own scroll — the two columns
-   scroll independently. Full width so the sidebar sits on the right (the main
-   content is centred in the leftover); not the centred max-width column. */
-.fp-main--panes { max-width: none; margin: 0; padding: 0; overflow: hidden; block-size: 100%; }
+   scroll independently. */
+.fp-main--panes { padding: 0; overflow: hidden; block-size: 100%; }
+.fp-main--full > .fp-main-in,
+.fp-main--panes > .fp-main-in { display: contents; }
 /* Edit: page-scrolled (inherits .fp-main's overflow-y auto). Zero the bottom
    padding so a sticky Save bar (bottom:0) reaches the viewport's bottom edge;
    the breathing space below the bar comes from .fp-wizard--edit itself. */
-.fp-main--edit { padding-block-end: 0; }
+.fp-main--edit > .fp-main-in { padding-block-end: 0; }
 @media (max-width: 1000px) {
-  .fp-main--panes { block-size: auto; overflow-y: auto; padding-block: var(--fp-page-inset-block) 64px; padding-inline: var(--fp-page-inset-inline); }
+  .fp-main--panes { block-size: auto; overflow-y: auto; }
+  .fp-main--panes > .fp-main-in { display: block; padding-block: var(--fp-page-inset-block) 64px; padding-inline: var(--fp-page-inset-inline); }
 }
 
 /* ---- Page header — mirrors the DS canonical pattern (.ds-page-header /
@@ -714,10 +723,22 @@ body:active::-webkit-scrollbar-thumb,
 /* Ember pixel-mosaic rising from the bottom edge (back layer). */
 .fp-welcome-hero .wh-mosaic {
   position: absolute; inset: 0; z-index: 0; inline-size: 100%; block-size: 100%;
+  pointer-events: none; display: block;
   -webkit-mask-image: linear-gradient(to top, #000 36%, transparent 88%);
   mask-image: linear-gradient(to top, #000 36%, transparent 88%);
 }
-.fp-welcome-hero .wh-mosaic rect { fill: var(--ember); }
+/* Character-mosaic (terminal-fire) variant — monospace density ramp glyphs. */
+.fp-welcome-hero .wh-flame-chars {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1;            /* leading-none → rows pack tight */
+  letter-spacing: 0.12em;    /* tracking-widest → terminal glyph spacing */
+  color: var(--ember);
+  white-space: pre;
+  overflow: hidden;
+  text-shadow: 0 0 6px color-mix(in oklch, var(--ember) 40%, transparent);
+}
 /* Ember radial mesh — painted in FRONT of the mosaic so it blends into the wash. */
 .fp-welcome-hero .wh-gradient {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;

@@ -804,7 +804,9 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         pageCrumb={pageCrumb}
       />
 
-      <main className={'fp-main' + (fullBleed ? ' fp-main--full' : edit ? ' fp-main--edit' : paneled ? ' fp-main--panes' : '')}>{children}</main>
+      <main className={'fp-main' + (fullBleed ? ' fp-main--full' : edit ? ' fp-main--edit' : paneled ? ' fp-main--panes' : '')}>
+        <div className="fp-main-in">{children}</div>
+      </main>
 
       {/* Forge AI — in-context copilot slide-over (same thread as /portal/assistant) */}
       <Drawer
