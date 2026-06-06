@@ -46,7 +46,8 @@
         "hooks": [
           { "type": "command", "command": "node .claude/hooks/protect-generated.mjs" },
           { "type": "command", "command": "node .claude/hooks/typography-scale.mjs" },
-          { "type": "command", "command": "node .claude/hooks/no-page-style.mjs" }
+          { "type": "command", "command": "node .claude/hooks/no-page-style.mjs" },
+          { "type": "command", "command": "node .claude/hooks/prefer-ds-components.mjs" }
         ]
       }
     ],
