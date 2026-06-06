@@ -200,6 +200,103 @@ export function capabilitiesFor(agent: Agent): Capability[] {
   return CAPABILITIES.filter((c) => ids.has(c.id));
 }
 
+// ── Guardrails (security / privacy / policy) ──────────────────────────────────
+// Security is a platform guarantee, not a per-agent opt-in: a baseline floor is
+// enforced on every agent (powered by Google Cloud) and can only be tightened.
+// On GCP this maps to Model Armor (I/O screening), Cloud DLP (PII/LGPD), IAM +
+// VPC Service Controls (access), data residency, and Cloud Audit Logs.
+
+export interface Guardrail { id: string; label: string; desc: string; icon: string; tool: string }
+
+/** The enforced floor — identical for every agent, locked on. */
+export const BASELINE_GUARDRAILS: Guardrail[] = [
+  { id: 'armor',     label: 'Prompt & response screening',  desc: 'Blocks prompt injection, jailbreaks, harmful content and malicious URLs.', icon: 'shield',     tool: 'Model Armor' },
+  { id: 'dlp',       label: 'PII protection · LGPD',         desc: 'Redacts CPF, CNPJ and identifiers before they reach or leave the model.',  icon: 'lock',       tool: 'Cloud DLP' },
+  { id: 'consent',   label: 'Consent-scope enforcement',     desc: 'Data is only used within a registered consent scope.',                     icon: 'compliance', tool: 'Consent ledger' },
+  { id: 'perimeter', label: 'Access & exfiltration control', desc: 'Least-privilege identity and a VPC Service Controls perimeter.',            icon: 'key',        tool: 'IAM · VPC-SC' },
+  { id: 'residency', label: 'Data residency',                desc: 'Prompts and data stay in southamerica-east1 (São Paulo).',                 icon: 'globe',      tool: 'GCP region' },
+  { id: 'audit',     label: 'Audit logging',                 desc: 'Every tool call and blocked prompt is logged and reviewable.',             icon: 'activity',   tool: 'Cloud Audit Logs' },
+];
+
+export const ARMOR_LEVELS = [
+  { value: 'standard', label: 'Standard', desc: 'The org-wide Model Armor floor.' },
+  { value: 'strict',   label: 'Strict',   desc: 'Lower thresholds; blocks more aggressively.' },
+] as const;
+
+// Equifax data classification — 5 levels, each gating a class of data. An agent
+// is allowed up to (and including) the level it's granted.
+export const DATA_CLASSES = [
+  { value: 'l1', level: 1, label: 'Public',       icon: 'globe',  desc: 'Public marketing and documentation. No restrictions.' },
+  { value: 'l2', level: 2, label: 'Internal',     icon: 'layers', desc: 'Internal operational data. Employees only.' },
+  { value: 'l3', level: 3, label: 'Confidential', icon: 'lock',   desc: 'Business-confidential data, contracts and pricing.' },
+  { value: 'l4', level: 4, label: 'Sensitive',    icon: 'shield', desc: 'Regulated financial data: scores, transactions, fraud signals.' },
+  { value: 'l5', level: 5, label: 'Restricted',   icon: 'flag',   desc: 'Bureau PII: CPF, SCR, Cadastro Positivo, biometrics.' },
+] as const;
+
+export const dataClassLabel = (v: string) => {
+  const d = DATA_CLASSES.find((x) => x.value === v);
+  return d ? `Level ${d.level} · ${d.label}` : v;
+};
+
+/** Builder-tunable policy on top of the baseline (can only tighten). */
+export interface AgentPolicy { armorLevel: 'standard' | 'strict'; humanApproval: boolean; piiRedaction: boolean; dataClass: string }
+
+export function policyFor(agent: Agent): AgentPolicy {
+  const rng = makeRng(hashSeed(agent.id + ':policy'));
+  const highImpact = agent.tools >= 4; // proxy for write/destructive tools
+  return {
+    armorLevel: agent.official || rng() > 0.5 ? 'strict' : 'standard',
+    humanApproval: highImpact || rng() > 0.4,
+    piiRedaction: true,
+    dataClass: (['l3', 'l4', 'l5'] as const)[Math.floor(rng() * 3)],
+  };
+}
+
+// ── Channels (how the agent is consumed) ──────────────────────────────────────
+// Three audiences: humans (chat), systems (API), agents (A2A). Forge chat is
+// always on; the API endpoint and the A2A surface need a security review before
+// they go live. On GCP: Google Chat / web embed (chat), Vertex AI Agent Engine +
+// Apigee (API), and the Agent2Agent protocol's Agent Card (A2A).
+
+export type ChannelStatus = 'on' | 'review' | 'off';
+export type ChannelConsumer = 'Humans' | 'Systems' | 'Agents';
+export interface ChannelDef { id: string; label: string; consumer: ChannelConsumer; icon: string; desc: string; needsReview: boolean }
+export interface Channel extends ChannelDef { link: string; copyLabel: string; status: ChannelStatus }
+
+export const CHANNELS: ChannelDef[] = [
+  { id: 'forge-chat', label: 'Forge chat',    consumer: 'Humans',  icon: 'chat',  desc: 'Chat with the agent inside Forge.',                  needsReview: false },
+  { id: 'embed',      label: 'Embedded chat', consumer: 'Humans',  icon: 'globe', desc: 'Embed in Google Chat or another internal product.',  needsReview: true },
+  { id: 'api',        label: 'API endpoint',  consumer: 'Systems', icon: 'zap',   desc: 'Invoke programmatically over HTTPS.',                needsReview: true },
+  { id: 'a2a',        label: 'Agent (A2A)',   consumer: 'Agents',  icon: 'agent', desc: 'Discoverable by other agents via the A2A protocol.', needsReview: true },
+];
+
+const CH_HOST = 'forge.equifax.com';
+const CH_API = 'api.equifax.com';
+const CH_A2A = 'agents.equifax.com';
+
+function channelLink(id: string, agentId: string): { link: string; copyLabel: string } {
+  switch (id) {
+    case 'forge-chat': return { link: `https://${CH_HOST}/portal/chat?agent=${agentId}`, copyLabel: `${CH_HOST}/chat?agent=${agentId}` };
+    case 'embed':      return { link: `https://${CH_HOST}/embed/${agentId}`, copyLabel: `${CH_HOST}/embed/${agentId}` };
+    case 'api':        return { link: `https://${CH_API}/agents/${agentId}:invoke`, copyLabel: `${CH_API}/agents/${agentId}:invoke` };
+    case 'a2a':        return { link: `https://${CH_A2A}/${agentId}/.well-known/agent.json`, copyLabel: `${CH_A2A}/${agentId}/.well-known/agent.json` };
+    default:           return { link: '', copyLabel: '' };
+  }
+}
+
+export function channelsFor(agent: Agent): Channel[] {
+  const rng = makeRng(hashSeed(agent.id + ':channels'));
+  return CHANNELS.map((c) => {
+    const { link, copyLabel } = channelLink(c.id, agent.id);
+    let status: ChannelStatus = 'on';
+    if (c.needsReview) {
+      const enabled = agent.official ? rng() > 0.45 : rng() > 0.7;
+      status = enabled ? 'on' : rng() > 0.5 ? 'review' : 'off';
+    }
+    return { ...c, link, copyLabel, status };
+  });
+}
+
 // ── Skills ────────────────────────────────────────────────────────────────────
 
 export interface SkillDef { name: string; icon: string; desc: string }

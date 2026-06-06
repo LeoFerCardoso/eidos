@@ -1890,6 +1890,7 @@ body:active::-webkit-scrollbar-thumb,
 
 /* ── Left: header ─────────────────────────────────────────────────────────── */
 .fp-agentd-topbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-block-end: 20px; }
+.fp-agentd-topbar-actions { display: inline-flex; align-items: center; gap: 8px; }
 .fp-agentd-title { display: flex; align-items: center; gap: 12px; }
 .fp-agentd-title h1 {
   flex: 1; min-inline-size: 0; margin: 0;
@@ -1956,6 +1957,45 @@ body:active::-webkit-scrollbar-thumb,
 .fp-agentd-props dt { font-size: 12px; color: var(--fg-faint); }
 .fp-agentd-props dd { margin: 0; justify-self: end; text-align: end; font-size: 12.5px; color: var(--fg); }
 .fp-agentd-props dd.tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+
+/* Guardrails — enforced baseline (locked) + the agent's policy. */
+.fp-agentd-guards { display: flex; flex-direction: column; gap: 12px; }
+.fp-agentd-guards-note { display: inline-flex; align-items: center; gap: 6px; margin: 0; font-size: 11px; color: var(--success-text); }
+.fp-agentd-guards-note svg { flex: 0 0 auto; }
+.fp-agentd-guards .fp-agentd-list .item .ic { color: var(--success); }
+.fp-agentd-lock { flex: 0 0 auto; display: inline-flex; align-items: center; margin-block-start: 2px; color: var(--fg-faint); }
+.fp-agentd-policy { padding-block-start: 12px; border-block-start: 1px solid var(--border); }
+
+/* Channels — how the agent is consumed (chat / API / A2A), with copy links. */
+.fp-agentd-channels { display: flex; flex-direction: column; gap: 2px; }
+.fp-agentd-channels .ch { display: flex; align-items: flex-start; gap: 9px; padding-block: 9px; border-block-end: 1px solid var(--border); }
+.fp-agentd-channels .ch:last-child { border-block-end: 0; }
+.fp-agentd-channels .ch .ic { flex: 0 0 auto; margin-block-start: 1px; color: var(--ember-text); }
+.fp-agentd-channels .ch .tx { display: flex; flex-direction: column; min-inline-size: 0; flex: 1 1 auto; gap: 3px; }
+.fp-agentd-channels .ch .nm { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: var(--fg); }
+.fp-agentd-channels .ch .consumer { font-family: var(--font-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--fg-faint); }
+.fp-agentd-channels .ch .ds { font-size: 11.5px; color: var(--fg-muted); line-height: 1.4; }
+.fp-agentd-channels .ch .lnk { margin-block-start: 3px; max-inline-size: 100%; overflow: hidden; }
+.fp-agentd-channels .ch .lnk .copy-chip { max-inline-size: 100%; }
+.fp-agentd-channels .ch .lnk .copy-chip span:first-child { overflow: hidden; text-overflow: ellipsis; }
+
+.fp-agentd-chstatus {
+  flex: 0 0 auto; margin-block-start: 1px; font-family: var(--font-mono); font-size: 9.5px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; border: 1px solid transparent;
+}
+.fp-agentd-chstatus.s-on     { color: var(--success-text); border-color: color-mix(in oklch, var(--success) 32%, transparent); background: var(--success-subtle); }
+.fp-agentd-chstatus.s-review { color: var(--ember-text); border-color: color-mix(in oklch, var(--ember) 34%, transparent); background: var(--ember-soft); }
+.fp-agentd-chstatus.s-off    { color: var(--fg-faint); border-color: var(--border-strong); }
+
+/* Share popover — copy link per active channel. */
+.fp-agentd-sharepop { padding: 12px 14px; inline-size: 320px; }
+.fp-agentd-share .h { font-size: 12.5px; font-weight: 600; color: var(--fg); margin-block-end: 10px; }
+.fp-agentd-share .rows { display: flex; flex-direction: column; gap: 2px; }
+.fp-agentd-share .ch { display: flex; align-items: center; gap: 9px; padding-block: 7px; }
+.fp-agentd-share .ch .ic { flex: 0 0 auto; color: var(--ember-text); }
+.fp-agentd-share .ch .nm { flex: 1 1 auto; font-size: 12.5px; color: var(--fg); }
+.fp-agentd-share .ch .st { flex: 0 0 auto; }
+
 /* Model — avatar pill: the LLM logo in a round avatar + the model name. */
 .fp-agentd-modelpill {
   display: inline-flex; align-items: center; gap: 7px;
@@ -2332,7 +2372,7 @@ body:active::-webkit-scrollbar-thumb,
   border: 1px solid var(--border-strong); color: var(--fg-faint); background: var(--bg);
 }
 .fp-wizard-step.is-active .mk { border-color: var(--ember); color: var(--bg); background: var(--ember); }
-.fp-wizard-step.is-done .mk { border-color: color-mix(in oklch, var(--accent-2) 50%, transparent); color: var(--accent-2); }
+.fp-wizard-step.is-done .mk { border-color: color-mix(in oklch, var(--success) 50%, transparent); color: var(--success); }
 .fp-wizard-step .tx { display: flex; flex-direction: column; min-inline-size: 0; }
 .fp-wizard-step .t { font-size: 13px; font-weight: 600; color: var(--fg); }
 .fp-wizard-step.is-todo .t { color: var(--fg-muted); }
@@ -2402,6 +2442,34 @@ body:active::-webkit-scrollbar-thumb,
 
 .fp-wizard-file { margin-block-start: 4px; }
 
+/* Safety step — enforced baseline (locked rows) + tunable controls */
+.fp-wizard-guards { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+.fp-wizard-guards .guard { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-block-end: 1px solid var(--border); }
+.fp-wizard-guards .guard:last-child { border-block-end: 0; }
+.fp-wizard-guards .guard .ic { flex: 0 0 auto; align-self: flex-start; margin-block-start: 1px; color: var(--success); }
+.fp-wizard-guards .guard .tx { display: flex; flex-direction: column; min-inline-size: 0; flex: 1 1 auto; gap: 3px; }
+.fp-wizard-guards .guard .nm { font-size: 12.5px; font-weight: 600; color: var(--fg); }
+.fp-wizard-guards .guard .ds { font-size: 11.5px; color: var(--fg-muted); line-height: 1.45; }
+.fp-wizard-guards .guard .tool {
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--fg-faint); margin-inline-end: 8px;
+  border: 0; padding: 0; background: none; /* shed any global .tool chip styling */
+}
+.fp-wizard-guards .guard .lock {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--success-text); padding: 2px 8px; border-radius: 999px;
+  border: 1px solid color-mix(in oklch, var(--success) 32%, transparent); background: var(--success-subtle);
+}
+.fp-wizard-armor.sel-card-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.fp-wizard-switches { display: flex; flex-direction: column; gap: 14px; }
+
+/* Data classification levels — vertical radio-card list with icon + level. */
+.fp-wizard-levels.sel-card-group { display: flex; flex-direction: column; gap: 6px; }
+.fp-wizard-level-t { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.fp-wizard-level-t svg { color: var(--fg-muted); flex: 0 0 auto; }
+.sel-card--checked .fp-wizard-level-t svg { color: var(--ember-text); }
+
 /* Connected apps + their tools */
 .fp-wizard-apps { display: flex; flex-direction: column; gap: 10px; }
 .fp-wizard-app { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
@@ -2454,6 +2522,17 @@ body:active::-webkit-scrollbar-thumb,
 .fp-wizard-appgroup .av:first-child { margin-inline-start: 0; }
 .fp-wizard-appgroup .lbl { font-size: 12px; color: var(--fg-muted); }
 
+/* Channels recap — toggle where the agent is available (review-gated ones flag). */
+.fp-wizard-rvchannels { display: flex; flex-direction: column; }
+.fp-wizard-rvchannels .rvch { display: flex; align-items: center; gap: 11px; padding-block: 9px; border-block-end: 1px solid var(--border); cursor: pointer; }
+.fp-wizard-rvchannels .rvch:last-child { border-block-end: 0; }
+.fp-wizard-rvchannels .rvch .ic { flex: 0 0 auto; color: var(--fg-muted); }
+.fp-wizard-rvchannels .rvch.on .ic { color: var(--ember-text); }
+.fp-wizard-rvchannels .rvch .tx { display: flex; flex-direction: column; min-inline-size: 0; flex: 1 1 auto; }
+.fp-wizard-rvchannels .rvch .nm { font-size: 12.5px; font-weight: 600; color: var(--fg); }
+.fp-wizard-rvchannels .rvch .ds { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--fg-faint); }
+.fp-wizard-rvchannels .rvch-rev { flex: 0 0 auto; font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ember-text); padding: 2px 7px; border-radius: 999px; background: var(--ember-soft); border: 1px solid color-mix(in oklch, var(--ember) 30%, transparent); }
+
 /* Instructions recap — scrolls inside so the page doesn't grow unbounded. */
 .fp-wizard-review-instr { max-block-size: 280px; overflow-y: auto; }
 
@@ -2486,8 +2565,8 @@ body:active::-webkit-scrollbar-thumb,
 .fp-wizard-donecard {
   align-self: stretch; text-align: start; margin-block-start: 6px;
   border: 1px solid var(--border); border-radius: var(--radius-lg);
-  background: var(--surface); padding: 16px 18px;
-  display: flex; flex-direction: column; gap: 14px;
+  background: var(--surface); padding: 18px 18px 20px;
+  display: flex; flex-direction: column; gap: 22px;
 }
 .fp-wizard-donecard .dc-id { display: flex; align-items: center; gap: 11px; }
 .fp-wizard-donecard .dc-idtx { display: flex; flex-direction: column; min-inline-size: 0; }
@@ -2497,10 +2576,19 @@ body:active::-webkit-scrollbar-thumb,
 .fp-wizard-donecard .dcp { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 8px; border-block-end: 1px solid var(--border); }
 .fp-wizard-donecard .dcp dt { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-faint); }
 .fp-wizard-donecard .dcp dd { margin: 0; color: var(--fg); text-align: end; }
+/* Last props row drops its divider — the security block's top border separates them. */
+.fp-wizard-donecard .dc-props .dcp:nth-last-child(-n+2) { border-block-end: 0; }
 .fp-wizard-donecard .rv-model { display: inline-flex; align-items: center; gap: 6px; }
 .fp-wizard-appgroup.is-mini { gap: 6px; }
 .fp-wizard-appgroup.is-mini .av { inline-size: 22px; block-size: 22px; margin-inline-start: -6px; }
 .fp-wizard-appgroup.is-mini .lbl { font-size: 11px; }
+/* Channels + Security blocks in the success card. */
+.fp-wizard-donecard .dc-ch,
+.fp-wizard-donecard .dc-sec { display: flex; flex-direction: column; gap: 9px; padding-block-start: 14px; border-block-start: 1px solid var(--border); }
+.fp-wizard-donecard .dc-ch-h { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--fg); }
+.fp-wizard-donecard .dc-ch-h svg { color: var(--fg-muted); }
+.fp-wizard-donecard .dc-sec-h { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--success-text); }
+.fp-wizard-donecard .dc-sec-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 
 /* Celebration confetti — a one-shot rain over the success screen. */
 .fp-confetti { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 4; }

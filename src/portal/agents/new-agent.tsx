@@ -15,13 +15,14 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeSanitize from 'rehype-sanitize';
 import {
-  Icons, Avatar, Pill, Prose, Input, Textarea, Select, Checkbox,
+  Icons, Avatar, Pill, Prose, Input, Textarea, Select, Checkbox, Switch,
   RadioCardGroup, FileInput, BrandIcon, AILabel, Popover, Command,
   type SelectGroup, type CommandGroup,
 } from '@/ds/core';
 import { usePageCrumb } from '@/portal/shell/portal-shell';
 import {
   CAPABILITIES, OUTPUT_META, SKILL_POOL, APP_POOL, CONTEXT_POOL,
+  BASELINE_GUARDRAILS, ARMOR_LEVELS, DATA_CLASSES, dataClassLabel, CHANNELS,
   type SkillDef, type ContextDef, type AppDef,
 } from '@/portal/data/agent-detail';
 import type { AgentOutput } from '@/portal/data/agents';
@@ -98,6 +99,7 @@ const STEPS = [
   { id: 'model',     title: 'Model',      sub: 'LLM, output & capabilities' },
   { id: 'knowledge', title: 'Knowledge',  sub: 'Skills & contexts' },
   { id: 'apps',      title: 'Apps',       sub: 'Connections & tools' },
+  { id: 'safety',    title: 'Safety',     sub: 'Guardrails & policy' },
   { id: 'review',    title: 'Review',     sub: 'Confirm & create' },
 ] as const;
 
@@ -195,6 +197,17 @@ export default function NewAgent() {
   // Step 4
   const [apps, setApps] = React.useState<ConnectedApp[]>([]);
 
+  // Step 5 — Safety (the enforced baseline is implicit; these only tighten it)
+  const [armorLevel, setArmorLevel] = React.useState('standard');
+  const [humanApproval, setHumanApproval] = React.useState(true);
+  const [piiRedaction, setPiiRedaction] = React.useState(true);
+  const [dataClass, setDataClass] = React.useState('l3');
+
+  // Channels — where the agent is available. Forge chat is always on; the rest
+  // are requested here and go live after a security review.
+  const [channels, setChannels] = React.useState<Set<string>>(new Set(['forge-chat']));
+  const toggleChannel = (id: string) => setChannels((p) => { const n = new Set(p); n.has(id) ? n.delete(id) : n.add(id); return n; });
+
   const genTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   React.useEffect(() => () => { if (genTimer.current) clearTimeout(genTimer.current); }, []);
 
@@ -265,6 +278,27 @@ export default function NewAgent() {
               </dd>
             </div>
           </dl>
+
+          <div className="dc-ch">
+            <span className="dc-ch-h"><Icons.share size={13} /> Channels</span>
+            <div className="dc-sec-chips">
+              {CHANNELS.filter((c) => channels.has(c.id)).map((c) => (
+                <Pill key={c.id} tone={c.needsReview ? 'ember' : 'health-up'} dot={!c.needsReview}>
+                  {c.label}{c.needsReview ? ' · Pending' : ''}
+                </Pill>
+              ))}
+            </div>
+          </div>
+
+          <div className="dc-sec">
+            <span className="dc-sec-h"><Icons.shield size={14} /> Security checks passed</span>
+            <div className="dc-sec-chips">
+              <Pill tone="health-up" dot>Model Armor · {armorLevel === 'strict' ? 'Strict' : 'Standard'}</Pill>
+              <Pill tone="neutral">LGPD · PII redaction</Pill>
+              {humanApproval && <Pill tone="neutral">Human approval</Pill>}
+              <Pill tone="neutral">{dataClassLabel(dataClass)}</Pill>
+            </div>
+          </div>
         </div>
 
         <div className="row">
@@ -502,6 +536,70 @@ export default function NewAgent() {
     </>
   );
 
+  const StepSafety = (
+    <>
+      <StepHead title="Safety & guardrails" desc="Security is enforced by the platform on every agent, powered by Google Cloud. You can only make these protections stricter, never weaker." />
+
+      <Field label="Enforced baseline" hint="Applied to every agent and locked on. You can't turn these off.">
+        <div className="fp-wizard-guards">
+          {BASELINE_GUARDRAILS.map((g) => (
+            <div key={g.id} className="guard">
+              <span className="ic">{ICON(g.icon, 15)}</span>
+              <div className="tx">
+                <span className="nm">{g.label}</span>
+                <span className="ds"><span className="tool">{g.tool}</span>{g.desc}</span>
+              </div>
+              <span className="lock"><Icons.lock size={11} /> Enforced</span>
+            </div>
+          ))}
+        </div>
+      </Field>
+
+      <Field label="Model Armor level" hint="Standard is the org-wide floor. Strict lowers the thresholds and blocks more aggressively.">
+        <RadioCardGroup
+          orientation="horizontal"
+          ariaLabel="Model Armor level"
+          value={armorLevel}
+          onValueChange={setArmorLevel}
+          className="fp-wizard-armor"
+          options={ARMOR_LEVELS.map((l) => ({ value: l.value, title: l.label, description: l.desc }))}
+        />
+      </Field>
+
+      <Field label="Additional controls" hint="Extra restrictions on top of the baseline.">
+        <div className="fp-wizard-switches">
+          <Switch
+            label="Require human approval before high-impact actions"
+            description="Pause and ask an owner before a tool writes, deploys or changes production."
+            checked={humanApproval}
+            onChange={(e) => setHumanApproval(e.target.checked)}
+          />
+          <Switch
+            label="Redact identifiers in responses"
+            description="Mask CPF, CNPJ and other PII in what the agent returns, beyond the input redaction."
+            checked={piiRedaction}
+            onChange={(e) => setPiiRedaction(e.target.checked)}
+          />
+        </div>
+      </Field>
+
+      <Field label="Maximum data classification" hint="The most sensitive Equifax data tier this agent may touch. It can read anything at or below this level.">
+        <RadioCardGroup
+          orientation="vertical"
+          ariaLabel="Maximum data classification"
+          value={dataClass}
+          onValueChange={setDataClass}
+          className="fp-wizard-levels"
+          options={DATA_CLASSES.map((d) => ({
+            value: d.value,
+            title: <span className="fp-wizard-level-t">{ICON(d.icon, 15)} Level {d.level} · {d.label}</span>,
+            description: d.desc,
+          }))}
+        />
+      </Field>
+    </>
+  );
+
   const StepReview = (
     <>
       <StepHead title="Review & create" desc="A quick recap of how the agent is configured. Step back to change anything." />
@@ -549,6 +647,35 @@ export default function NewAgent() {
         </div>
 
         <div className="rv-block">
+          <span className="rv-h">Channels</span>
+          <div className="fp-wizard-rvchannels">
+            {CHANNELS.map((c) => {
+              const on = channels.has(c.id);
+              const locked = !c.needsReview;
+              return (
+                <label key={c.id} className={'rvch' + (on ? ' on' : '')}>
+                  <span className="ic">{ICON(c.icon, 14)}</span>
+                  <span className="tx"><span className="nm">{c.label}</span><span className="ds">{c.consumer}</span></span>
+                  {on && c.needsReview && <span className="rvch-rev">Pending review</span>}
+                  <Switch checked={on} disabled={locked} onChange={() => toggleChannel(c.id)} />
+                </label>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="rv-block">
+          <span className="rv-h">Security</span>
+          <div className="fp-wizard-appgroup" style={{ flexWrap: 'wrap' }}>
+            <Pill tone="health-up" dot>Baseline enforced</Pill>
+            <Pill tone="neutral">Model Armor · {armorLevel === 'strict' ? 'Strict' : 'Standard'}</Pill>
+            <Pill tone="neutral">LGPD · PII redaction</Pill>
+            {humanApproval && <Pill tone="neutral">Human approval</Pill>}
+            <Pill tone="neutral">{dataClassLabel(dataClass)}</Pill>
+          </div>
+        </div>
+
+        <div className="rv-block">
           <span className="rv-h">Instructions</span>
           <Prose className="fp-wizard-preview fp-wizard-review-instr">
             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>{instructions || '_No instructions._'}</ReactMarkdown>
@@ -558,7 +685,7 @@ export default function NewAgent() {
     </>
   );
 
-  const BODY = [StepDefine, StepModel, StepKnowledge, StepApps, StepReview][step];
+  const BODY = [StepDefine, StepModel, StepKnowledge, StepApps, StepSafety, StepReview][step];
 
   return (
     <div className="fp-wizard">

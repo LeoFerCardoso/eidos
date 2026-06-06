@@ -11,7 +11,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeSanitize from 'rehype-sanitize';
 import {
-  Icons, Avatar, Pill, Chip, Trend, Prose, Modal, BrandIcon,
+  Icons, Avatar, Pill, Chip, Trend, Prose, Modal, BrandIcon, CopyChip, Popover,
   DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
   useChartColors, Recharts,
 } from '@/ds/core';
@@ -22,7 +22,8 @@ import {
   OUTPUT_META, buildInstructions, usageFor, type UsageDay,
   appsFor, addableApps, type AppDef,
   capabilitiesFor, skillsFor, type SkillDef, contextsFor, addableContexts, type ContextDef,
-  versionsFor,
+  versionsFor, BASELINE_GUARDRAILS, policyFor, dataClassLabel,
+  channelsFor, type Channel,
 } from '@/portal/data/agent-detail';
 
 const { ResponsiveContainer, BarChart, Bar, XAxis, Tooltip } = Recharts;
@@ -161,6 +162,35 @@ const KindChip = ({ kind }: { kind: AppDef['kind'] }) => (
   <span className={`fp-agentd-kind k-${kind.toLowerCase()}`}>{kind}</span>
 );
 
+const CH_STATUS: Record<Channel['status'], { label: string; tone: string }> = {
+  on:     { label: 'Live',      tone: 'on' },
+  review: { label: 'In review', tone: 'review' },
+  off:    { label: 'Off',       tone: 'off' },
+};
+const ChannelStatusBadge = ({ status }: { status: Channel['status'] }) => (
+  <span className={`fp-agentd-chstatus s-${CH_STATUS[status].tone}`}>{CH_STATUS[status].label}</span>
+);
+
+// Share popover — one copyable link per active channel (Forge chat, API, A2A).
+function ShareChannels({ agent, channels }: { agent: Agent; channels: Channel[] }) {
+  return (
+    <div className="fp-agentd-share">
+      <div className="h">Share {agent.name}</div>
+      <div className="rows">
+        {channels.map((c) => (
+          <div key={c.id} className="ch">
+            <span className="ic">{ICON(c.icon, 14)}</span>
+            <span className="nm">{c.label}</span>
+            {c.status === 'on'
+              ? <CopyChip value={c.link} label="Copy link" />
+              : <span className="st"><ChannelStatusBadge status={c.status} /></span>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function AgentDetail({ id }: { id: string }) {
@@ -207,6 +237,8 @@ export default function AgentDetail({ id }: { id: string }) {
   const apps = [...appsFor(agent), ...extraApps].sort((a, b) => a.name.localeCompare(b.name));
   const capabilities = capabilitiesFor(agent);
   const versions = versionsFor(agent);
+  const policy = policyFor(agent);
+  const channels = channelsFor(agent);
   const instructions = buildInstructions(agent);
   const appsToAdd = addableApps(apps);
   const ctxToAdd = addableContexts(contexts);
@@ -221,9 +253,20 @@ export default function AgentDetail({ id }: { id: string }) {
             <Link href="/portal/agents" className="btn ghost sm">
               <Icons.chevronLeft size={14} /> Back to agents
             </Link>
-            <Link className="btn ember sm" href={`/portal/chat?agent=${agent.id}`}>
-              {out.conversational ? <><Icons.chat size={13} /> New chat</> : <><Icons.play size={13} /> Run agent</>}
-            </Link>
+            <div className="fp-agentd-topbar-actions">
+              <Popover
+                side="bottom"
+                align="end"
+                aria-label="Share agent"
+                className="fp-agentd-sharepop"
+                trigger={<button type="button" className="btn outline sm"><Icons.share size={13} /> Share</button>}
+              >
+                <ShareChannels agent={agent} channels={channels} />
+              </Popover>
+              <Link className="btn ember sm" href={`/portal/chat?agent=${agent.id}`}>
+                {out.conversational ? <><Icons.chat size={13} /> New chat</> : <><Icons.play size={13} /> Run agent</>}
+              </Link>
+            </div>
           </div>
 
           <div className="fp-agentd-title">
@@ -325,6 +368,30 @@ export default function AgentDetail({ id }: { id: string }) {
           <CostChart data={usage.cost} />
         </AsideSection>
 
+        {/* Guardrails — the enforced security baseline + this agent's policy */}
+        <AsideSection title="Guardrails">
+          <div className="fp-agentd-guards">
+            <p className="fp-agentd-guards-note"><Icons.shield size={12} /> Enforced by Equifax · Google Cloud</p>
+            <div className="fp-agentd-list">
+              {BASELINE_GUARDRAILS.map((g) => (
+                <div key={g.id} className="item">
+                  <span className="ic">{ICON(g.icon, 14)}</span>
+                  <span className="tx"><span className="nm">{g.label}</span><span className="ds">{g.tool}</span></span>
+                  <span className="fp-agentd-lock"><Icons.lock size={10} /></span>
+                </div>
+              ))}
+            </div>
+            <dl className="fp-agentd-props fp-agentd-policy">
+              <dt>Model Armor</dt>
+              <dd><Pill tone={policy.armorLevel === 'strict' ? 'health-up' : 'neutral'} dot>{policy.armorLevel === 'strict' ? 'Strict' : 'Standard'}</Pill></dd>
+              <dt>Human approval</dt>
+              <dd>{policy.humanApproval ? 'Required' : 'Off'}</dd>
+              <dt>Data class</dt>
+              <dd>{dataClassLabel(policy.dataClass)}</dd>
+            </dl>
+          </div>
+        </AsideSection>
+
         {/* Skills */}
         <AsideSection title="Skills" count={skills.length}>
           {skills.length === 0 ? (
@@ -413,6 +480,23 @@ export default function AgentDetail({ id }: { id: string }) {
               ))}
             </div>
           )}
+        </AsideSection>
+
+        {/* Channels — how the agent is consumed (chat / API / A2A) */}
+        <AsideSection title="Channels">
+          <div className="fp-agentd-channels">
+            {channels.map((c) => (
+              <div key={c.id} className="ch">
+                <span className="ic">{ICON(c.icon, 14)}</span>
+                <div className="tx">
+                  <span className="nm">{c.label}<span className="consumer">{c.consumer}</span></span>
+                  <span className="ds">{c.desc}</span>
+                  {c.status === 'on' && <div className="lnk"><CopyChip value={c.link} label={c.copyLabel} /></div>}
+                </div>
+                <ChannelStatusBadge status={c.status} />
+              </div>
+            ))}
+          </div>
         </AsideSection>
 
         {/* Versions */}
