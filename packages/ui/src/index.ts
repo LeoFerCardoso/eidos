@@ -21,6 +21,7 @@ export * from './charts';
 export * from './device';
 export * from './drawer';
 export * from './forms';
+export * from './button';
 export * from './select';
 export * from './calendar';
 export * from './date-picker';

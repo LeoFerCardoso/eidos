@@ -1872,7 +1872,35 @@ a { color: inherit; text-decoration: none; }
    bordered shell; addons (text, icon, button, select) and the control
    live as siblings inside the group. The whole group lights up on focus
    so the inner <input> doesn't paint its own ring. */
-.in-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; max-width: 100%; }
+/* ── Form spacing — ONE source of truth (Field / FormSection / Form) ─────────
+   Six gaps tokenized once; every form inherits them, never hand-tuned again.
+   Changing a gap globally = editing one variable here. */
+:root {
+  --field-label-support: 2px;     /* label ↔ support text */
+  --field-group-control: 8px;     /* (label+support) group ↔ control; label-only ↔ control */
+  --field-gap: 24px;              /* field ↔ field */
+  --form-section-title-body: 4px; /* section title ↔ its body */
+  --form-section-gap: 32px;       /* section ↔ section */
+}
+/* Field — control-agnostic: a label/support group, then any control. */
+.field { display: flex; flex-direction: column; gap: var(--field-group-control); min-inline-size: 0; }
+.field__group { display: flex; flex-direction: column; gap: var(--field-label-support); }
+.field__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.field__label { display: inline-flex; align-items: baseline; gap: 8px; font-size: 13px; font-weight: 500; color: var(--fg); }
+.field__label .req { color: var(--ember); }
+.field__badge { display: inline-flex; align-self: center; }
+.field__sub { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.field__hint { margin: 0; font-size: 12px; line-height: 1.45; color: var(--fg-muted); max-inline-size: 70ch; }
+.field__action { flex: 0 0 auto; align-self: center; }
+/* Form + FormSection — vertical rhythm. */
+.form { display: flex; flex-direction: column; gap: var(--form-section-gap); }
+.form-section { display: flex; flex-direction: column; gap: var(--field-gap); }
+.form-section__head { display: flex; flex-direction: column; gap: var(--form-section-title-body); }
+.form-section__title { margin: 0; font-size: var(--text-lg); font-weight: 700; letter-spacing: -0.01em; color: var(--fg); }
+.form-section__desc { margin: 0; font-size: 13px; line-height: 1.5; color: var(--fg-muted); max-inline-size: 64ch; }
+
+/* .in-field consumes the canonical control gap so DS inputs match form fields. */
+.in-field { display: flex; flex-direction: column; gap: var(--field-group-control); min-width: 0; max-width: 100%; }
 .in-field.fluid { width: 100%; }
 /* Stand-alone .in-group can also stretch to full width (e.g. InputGroup full=true). */
 .in-group.fluid { width: 100%; }

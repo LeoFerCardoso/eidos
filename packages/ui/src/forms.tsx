@@ -1052,3 +1052,85 @@ export function DateInput({ label, help, error, id, className = '', ...rest }: D
   );
 }
 
+
+// ── Field / FormSection / Form ────────────────────────────────────────────────
+// The DS's canonical form layout. Spacing comes ONLY from tokens
+// (--field-*, --form-section-*), so every form gets identical rhythm and a gap
+// is changed in one place. Field is control-agnostic — pass any control as
+// children (a DS Input/Select, a RadioCardGroup, a custom list…).
+
+export interface FieldProps {
+  /** Field label (string or node). */
+  label: React.ReactNode;
+  /** Append a required asterisk. */
+  required?: boolean;
+  /** Support text under the label (2px below it; the group sits 8px above the control). */
+  hint?: React.ReactNode;
+  /** Trailing action (rides the support line, or the label line when there's no hint). */
+  action?: React.ReactNode;
+  /** Small badge after the label (e.g. an AILabel). */
+  badge?: React.ReactNode;
+  /** Associate the label with a control id. */
+  htmlFor?: string;
+  className?: string;
+  children: React.ReactNode;
+}
+export function Field({ label, required, hint, action, badge, htmlFor, className = '', children }: FieldProps) {
+  const lbl = (
+    <span className="field__label">
+      {htmlFor ? <label htmlFor={htmlFor}>{label}</label> : label}
+      {required && <span className="req" aria-hidden="true"> *</span>}
+      {badge && <span className="field__badge">{badge}</span>}
+    </span>
+  );
+  return (
+    <div className={`field ${className}`.trim()}>
+      {hint ? (
+        <div className="field__group">
+          {lbl}
+          <div className="field__sub">
+            <p className="field__hint">{hint}</p>
+            {action && <span className="field__action">{action}</span>}
+          </div>
+        </div>
+      ) : action ? (
+        <div className="field__head">{lbl}<span className="field__action">{action}</span></div>
+      ) : (
+        lbl
+      )}
+      {children}
+    </div>
+  );
+}
+
+export interface FormSectionProps {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  /** Trailing action on the section title row. */
+  action?: React.ReactNode;
+  id?: string;
+  className?: string;
+  children: React.ReactNode;
+}
+export function FormSection({ title, description, action, id, className = '', children }: FormSectionProps) {
+  return (
+    <section id={id} className={`form-section ${className}`.trim()}>
+      {(title || description) && (
+        <div className="form-section__head">
+          {title && (
+            action
+              ? <div className="field__head"><h2 className="form-section__title">{title}</h2><span className="field__action">{action}</span></div>
+              : <h2 className="form-section__title">{title}</h2>
+          )}
+          {description && <p className="form-section__desc">{description}</p>}
+        </div>
+      )}
+      {children}
+    </section>
+  );
+}
+
+export interface FormProps extends React.HTMLAttributes<HTMLDivElement> { children: React.ReactNode }
+export function Form({ className = '', children, ...rest }: FormProps) {
+  return <div className={`form ${className}`.trim()} {...rest}>{children}</div>;
+}
