@@ -90,7 +90,7 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
     return (
       <>
         <p style={{ margin: '0 0 10px' }}>
-          Done — <code className="mono">konduto.fraud-score-v2</code> is <strong>off</strong> in production. The new
+          Done · <code className="mono">konduto.fraud-score-v2</code> is <strong>off</strong> in production. The new
           fraud-score rule stopped running and the estate is recovering:
         </p>
         <RecoveryWidget
@@ -100,7 +100,7 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
           ]}
         />
         <p style={{ margin: '12px 0 12px' }}>
-          This is a <strong>temporary</strong> mitigation — the rule is only gated, not removed, so it can't ship to
+          This is a <strong>temporary</strong> mitigation · the rule is only gated, not removed, so it can't ship to
           users but it's still in the build. While the team prepares the proper fix, I recommend rolling back{' '}
           <code className="mono">konduto-antifraud</code> from <code className="mono">v3.1.7</code> to{' '}
           <code className="mono">v3.1.6</code> in production so the release is clean.
@@ -123,7 +123,7 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
     return (
       <>
         <p style={{ margin: '0 0 10px' }}>
-          Good — the new fraud-score rule didn't ship as raw code. It's wrapped in a feature flag,{' '}
+          Good · the new fraud-score rule didn't ship as raw code. It's wrapped in a feature flag,{' '}
           <code className="mono">konduto.fraud-score-v2</code>, so we don't need a deploy to stop it:
         </p>
         <FlagWidget
@@ -133,7 +133,7 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
           scope="production · 100% of traffic"
         />
         <p style={{ margin: '12px 0 12px' }}>
-          Turning it off is a runtime config change — it takes effect in <strong>~5s</strong>, needs no deploy and is
+          Turning it off is a runtime config change · it takes effect in <strong>~5s</strong>, needs no deploy and is
           fully reversible. The rejections stop immediately and p95 should normalize, buying time while the fix is
           prepared.
         </p>
@@ -171,7 +171,7 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
         <p style={{ margin: '12px 0 12px' }}>
           Likely cause: the new fraud-score rule in <code className="mono">konduto-antifraud v3.1.7</code> is adding
           latency and rejections upstream. It's wrapped in a feature flag, so the{' '}
-          <strong>fastest mitigation is to turn the flag off</strong> — no deploy, instantly reversible — then roll back
+          <strong>fastest mitigation is to turn the flag off</strong> · no deploy, instantly reversible · then roll back
           for a clean release once the fix is ready.
         </p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -204,7 +204,7 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
     return (
       <>
         <p style={{ margin: '0 0 10px' }}>
-          There is <strong>1 open incident</strong> right now. Commander is <UserMention person={COMMANDER} /> —
+          There is <strong>1 open incident</strong> right now. Commander is <UserMention person={COMMANDER} /> ·
           here's the summary and what's driving it:
         </p>
         <IncidentWidget
@@ -229,10 +229,10 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
         />
         <p style={{ margin: '12px 0 12px' }}>
           <code className="mono">acerta-api</code> is degraded because its dependency{' '}
-          <code className="mono">konduto-antifraud</code> (the suspected root cause) is also degraded — the new
+          <code className="mono">konduto-antifraud</code> (the suspected root cause) is also degraded · the new
           fraud-score rule in <code className="mono">v3.1.7</code> is adding latency and rejections upstream. That rule
-          shipped behind a feature flag, so the <strong>fastest mitigation is to flip it off</strong> — no deploy,
-          instantly reversible — before we touch the release.
+          shipped behind a feature flag, so the <strong>fastest mitigation is to flip it off</strong> · no deploy,
+          instantly reversible · before we touch the release.
         </p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           <Button variant="ember" size="sm" onClick={() => ask('Disable the feature flag')}>

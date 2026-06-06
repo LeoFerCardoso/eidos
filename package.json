@@ -23,6 +23,7 @@
     "check:a11y": "node scripts/check-a11y.mjs",
     "check:visual": "node scripts/check-visual.mjs",
     "check:contract": "node scripts/check-contract.mjs",
+    "check:portal-copy": "node scripts/check-portal-copy.mjs",
     "eidos:verify": "node scripts/eidos-verify.mjs",
     "eidos:health": "node scripts/eidos-health.mjs",
     "gen:contract": "node scripts/eidos-gen.mjs contract --sync",

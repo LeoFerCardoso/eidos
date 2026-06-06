@@ -698,6 +698,53 @@ body:active::-webkit-scrollbar-thumb,
 }
 .fp-card--ember-hero > * { position: relative; z-index: 1; }
 
+/* ════════════════════════════════════════════════════════════════════════
+   Home welcome hero — one ambient-ember band that sits directly under the
+   page header (the greeting stays in the header). Warm mesh + dot-grid +
+   corner glow; copy on the inline-start, a decorative Forge mark on the end.
+   ════════════════════════════════════════════════════════════════════════ */
+.fp-welcome-hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  border: 1px solid color-mix(in oklch, var(--ember) 20%, transparent);
+  border-radius: var(--radius-2xl);
+  padding: 26px 28px;
+  margin-block-end: 20px;
+  background-color: var(--ember-softer, color-mix(in oklch, var(--ember) 6%, var(--surface)));
+}
+/* Ember pixel-mosaic rising from the bottom edge (back layer). */
+.fp-welcome-hero .wh-mosaic {
+  position: absolute; inset: 0; z-index: 0; inline-size: 100%; block-size: 100%;
+  -webkit-mask-image: linear-gradient(to top, #000 36%, transparent 88%);
+  mask-image: linear-gradient(to top, #000 36%, transparent 88%);
+}
+.fp-welcome-hero .wh-mosaic rect { fill: var(--ember); }
+/* Ember radial mesh — painted in FRONT of the mosaic so it blends into the wash. */
+.fp-welcome-hero .wh-gradient {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(at 3% -25%, color-mix(in oklch, var(--ember) 20%, transparent) 0px, transparent 52%),
+    radial-gradient(at 100% 135%, color-mix(in oklch, var(--ember) 13%, transparent) 0px, transparent 48%);
+}
+.fp-welcome-hero .wh-inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 28px; }
+.fp-welcome-hero .wh-copy { flex: 1 1 auto; min-inline-size: 0; }
+.fp-welcome-hero .wh-eyebrow { color: var(--ember); }
+.fp-welcome-hero .wh-title {
+  margin: 10px 0 0; color: var(--fg);
+  font-size: var(--text-2xl); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15;
+  max-inline-size: 26ch;
+}
+.fp-welcome-hero .wh-sub { margin: 8px 0 0; font-size: var(--text-md); color: var(--fg-muted); line-height: 1.55; max-inline-size: 62ch; }
+.fp-welcome-hero .wh-actions { margin-block-start: 18px; display: flex; gap: 8px; flex-wrap: wrap; }
+/* Decorative Forge mark — soft ember tile with the sparkle. */
+.fp-welcome-hero .wh-mark {
+  flex: 0 0 auto; display: grid; place-items: center;
+  inline-size: 96px; block-size: 96px; border-radius: var(--radius-2xl);
+  background: color-mix(in oklch, var(--ember) 14%, transparent);
+  border: 1px solid color-mix(in oklch, var(--ember) 26%, transparent);
+  color: var(--ember-text);
+}
+@media (max-width: 760px) { .fp-welcome-hero .wh-mark { display: none; } }
+
 /* Portal service-detail: flatten the DS tab panels. TabsContent renders the
    .eidos-tabpanel surface (border + bg-elevated + 18px padding), which wraps a
    "card around all the cards" in every tab. Scoped to .fp-flat-tabs so the DS
@@ -1928,8 +1975,8 @@ body:active::-webkit-scrollbar-thumb,
 /* Left: content centred in the leftover, keeping ~its previous width. */
 .fp-agentd-main { padding-inline: var(--fp-page-inset-inline); }
 .fp-agentd-main-in { inline-size: 100%; max-inline-size: 1040px; margin-inline: auto; }
-/* Right: the sidebar has a left gutter + a right margin (not flush to the edge). */
-.fp-agentd-aside { padding-inline: 40px var(--fp-page-inset-inline); }
+/* Right: the sidebar margins are uniform — same inset on both inline sides. */
+.fp-agentd-aside { padding-inline: var(--fp-page-inset-inline); }
 @media (max-width: 1000px) {
   .fp-agentd { grid-template-columns: 1fr; row-gap: 28px; block-size: auto; overflow: visible; }
   .fp-agentd-rule { display: none; }

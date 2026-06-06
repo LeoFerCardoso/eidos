@@ -52,5 +52,13 @@ process.stdin.on('end', () => {
     process.stderr.write(`Blocked [ds-first]: "${redef[1]}" already exists in @eidos/ui — import it, don't redefine it in a screen. See DS-COMPONENTS.md.\n`);
     process.exit(2);
   }
+  // 4) em-dash (—) in portal copy — the "ZERO travessão" rule. Deterministic, no
+  //    legit exception. Comments + `template literals` were already stripped from
+  //    `body`, so this only fires on JSX text / string copy. Mirrors the CI gate
+  //    scripts/check-portal-copy.mjs so hook ⇄ verify stay in lockstep.
+  if (body.includes('—')) {
+    process.stderr.write('Blocked [copy]: em-dash (—) is banned in portal copy (ZERO travessão). Use "·" for separators, a comma, or rewrite. (gate: npm run check:portal-copy)\n');
+    process.exit(2);
+  }
   process.exit(0);
 });

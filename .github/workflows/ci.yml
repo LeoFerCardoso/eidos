@@ -61,6 +61,8 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      # portal copy gate — ZERO travessão (em-dash) in product screens. Blocking.
+      - run: npm run check:portal-copy
       - run: npm run build
       - run: npm run verify || true
       - name: build plugin

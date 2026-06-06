@@ -1131,8 +1131,8 @@ a { color: inherit; text-decoration: none; }
 .btn.ghost { background: transparent; border-color: transparent; color: var(--fg-muted); }
 .btn.ghost:hover { background: var(--surface-hover); border-color: transparent; color: var(--fg); }
 
-.btn.outline { background: transparent; border-color: var(--border-strong); color: var(--fg); }
-.btn.outline:hover { background: var(--surface-hover); border-color: var(--border-stronger); color: var(--fg); }
+.btn.outline { background: transparent; border-color: var(--border); color: var(--fg); }
+.btn.outline:hover { background: var(--surface-hover); border-color: var(--border-strong); color: var(--fg); }
 
 .btn.link {
   background: transparent; border-color: transparent; color: var(--ember);

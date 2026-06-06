@@ -38,10 +38,10 @@ const RECENTS = [
 ];
 
 const YESTERDAY = [
-  { id: 'kyc-ring1',   title: 'identity-proofing — Ring 1 rollout plan', preview: 'Ring 1 starts with the LATAM cohort…' },
+  { id: 'kyc-ring1',   title: 'identity-proofing · Ring 1 rollout plan', preview: 'Ring 1 starts with the LATAM cohort…' },
   { id: 'cp-backfill', title: 'cadastro-positivo-ingestor backfill',     preview: 'Reprocess 14M CPFs from the SCR feed…' },
   { id: 'negativ',     title: 'negativation-writer idempotency review',  preview: 'The retry handler is missing a dedup key…' },
-  { id: 'lgpd-sweep',  title: 'LGPD consent sweep — Q2 services',        preview: '12 services log PII without a consent scope…' },
+  { id: 'lgpd-sweep',  title: 'LGPD consent sweep · Q2 services',        preview: '12 services log PII without a consent scope…' },
   { id: 'offer-flag',  title: 'offer-orchestrator cohort rollout',       preview: 'Suggest cohort 2 (10%) for tomorrow…' },
 ];
 
@@ -50,9 +50,9 @@ type Nav = { view: View; chatId?: string; projectId?: string; agentId?: string }
 
 // Archived chats — restorable (rollback un-archives them).
 const ARCHIVED = [
-  { id: 'arc-pix-throttle', title: 'Pix throttle config — 06/04 spike',  preview: 'Added a 2s throttle on the offline path until the rail recovered.', when: 'Archived 2w ago' },
-  { id: 'arc-q4-cost',      title: 'Q4 cost review — Cloud Run',          preview: 'Cloud Run was 18% of the platform bill; rightsized to cut ~30%.',  when: 'Archived 3w ago' },
-  { id: 'arc-sast-q1',      title: 'SAST sweep — Q1 services',            preview: 'Triaged 9 high-severity findings; 7 fixed, 2 accepted.',          when: 'Archived 1mo ago' },
+  { id: 'arc-pix-throttle', title: 'Pix throttle config · 06/04 spike',  preview: 'Added a 2s throttle on the offline path until the rail recovered.', when: 'Archived 2w ago' },
+  { id: 'arc-q4-cost',      title: 'Q4 cost review · Cloud Run',          preview: 'Cloud Run was 18% of the platform bill; rightsized to cut ~30%.',  when: 'Archived 3w ago' },
+  { id: 'arc-sast-q1',      title: 'SAST sweep · Q1 services',            preview: 'Triaged 9 high-severity findings; 7 fixed, 2 accepted.',          when: 'Archived 1mo ago' },
   { id: 'arc-onb-runbook',  title: 'Onboarding runbook for new SREs',     preview: 'Drafted the day-1 setup, pager rotation and escalation paths.',    when: 'Archived 2mo ago' },
 ];
 
@@ -79,7 +79,7 @@ const ART_KIND: Record<ArtifactKind, { icon: string; label: string; bg: string; 
 
 const ARTIFACTS: ArtifactItem[] = [
   { id: 'art-cutover-svg', kind: 'image',    title: 'Cutover sequence diagram',          meta: 'SVG · 24 KB',            created: '2h ago',   chatId: 'acerta-p99', chatTitle: 'acerta-api p99 spike after v4.12' },
-  { id: 'art-runbook',     kind: 'document',  title: 'Runbook — score-engine → Aurora',   meta: 'Markdown · 5.4 KB',      created: 'Yesterday', chatId: 'breaker',    chatTitle: 'Circuit breaker for onescore-gateway' },
+  { id: 'art-runbook',     kind: 'document',  title: 'Runbook · score-engine → Aurora',   meta: 'Markdown · 5.4 KB',      created: 'Yesterday', chatId: 'breaker',    chatTitle: 'Circuit breaker for onescore-gateway' },
   { id: 'art-status-page', kind: 'html',      title: 'Incident status page',              meta: 'Static · 8 KB',          created: 'Yesterday', chatId: 'fraud-fp',   chatTitle: 'konduto-antifraud false-positive spike' },
   { id: 'art-breaker-cfg', kind: 'code',      title: 'Resilience4j breaker config',       meta: 'YAML · 1.2 KB',          created: '2d ago',   chatId: 'breaker',    chatTitle: 'Circuit breaker for onescore-gateway' },
   { id: 'art-fp-dash',     kind: 'app',       title: 'False-positive triage mini-app',    meta: 'React · interactive',    created: '3d ago',   chatId: 'fraud-fp',   chatTitle: 'konduto-antifraud false-positive spike' },
@@ -303,7 +303,7 @@ const NewChatView = ({ onSend, agent }: { onSend: () => void; agent?: Agent }) =
             { id: 'search', icon: 'search',   label: 'Deep search',            description: 'Browse trusted sources for a longer answer' },
             { id: 'tools',  icon: 'terminal', label: 'Run a tool',             description: 'Pick a tool the agent should call (file, shell, web…)' },
           ]}
-          footerHint={<>Forge AI is grounded in your service catalog — double-check before acting on production.</>}
+          footerHint={<>Forge AI is grounded in your service catalog, so double-check before acting on production.</>}
         />
       </div>
     </div>
@@ -313,8 +313,8 @@ const NewChatView = ({ onSend, agent }: { onSend: () => void; agent?: Agent }) =
 // ── View: Active thread ─────────────────────────────────────────────────────
 const SOURCES = [
   { id: 1, domain: 'aws.amazon.com',          title: 'Aurora PostgreSQL pricing & instance sizing',         url: 'https://aws.amazon.com/rds/aurora/pricing/',                     snippet: 'db.r7g.4xlarge runs $1.07/h on-demand · reserved 1-yr cuts ~37%.', fetched: '14:01 · 18s ago' },
-  { id: 2, domain: 'engineering.equifax.com', title: 'Q1 2026 cost review — managed databases',             url: 'https://engineering.equifax.com/q1-2026-db-cost-review',         snippet: 'score-engine and bureau-ingestion account for 62% of Aurora spend.',     fetched: '14:01 · 22s ago' },
-  { id: 3, domain: 'cloud.google.com',        title: 'Cloud SQL for PostgreSQL — connection pooling guide', url: 'https://cloud.google.com/sql/docs/postgres/manage-connections',  snippet: 'PgBouncer with transaction pooling is the recommended path.',       fetched: '14:02 · 41s ago' },
+  { id: 2, domain: 'engineering.equifax.com', title: 'Q1 2026 cost review · managed databases',             url: 'https://engineering.equifax.com/q1-2026-db-cost-review',         snippet: 'score-engine and bureau-ingestion account for 62% of Aurora spend.',     fetched: '14:01 · 22s ago' },
+  { id: 3, domain: 'cloud.google.com',        title: 'Cloud SQL for PostgreSQL · connection pooling guide', url: 'https://cloud.google.com/sql/docs/postgres/manage-connections',  snippet: 'PgBouncer with transaction pooling is the recommended path.',       fetched: '14:02 · 41s ago' },
   { id: 4, domain: 'docs.percona.com',        title: 'PostgreSQL major-version upgrade playbook',           url: 'https://docs.percona.com/postgresql/major-upgrades',             snippet: 'pg_upgrade with --link cuts downtime to under 5 min for 1 TB.',     fetched: '14:02 · 47s ago' },
 ];
 
@@ -329,7 +329,7 @@ const ThreadView = ({ chatId }: { chatId: string }) => {
       <div className="msg-thread fluid fp-chat-msgs">
         <Message from="user" meta={<><span className="t-mono-label">You</span> · 14:01</>}>
           Compare our three production Postgres databases and recommend which one to migrate to
-          Aurora first this quarter — I care about cost, downtime, and blast radius.
+          Aurora first this quarter, and I care about cost, downtime, and blast radius.
         </Message>
 
         <Message
@@ -342,8 +342,8 @@ const ThreadView = ({ chatId }: { chatId: string }) => {
               defaultOpen
               title="Chain of thought"
               steps={[
-                { kind: 'read',    label: 'Loaded service catalog',          detail: 'score-engine, bureau-ingestion, decision-engine — all Postgres 14, multi-AZ on RDS' },
-                { kind: 'search',  label: 'Pulled Q1 cost review',           detail: 'Found managed-db costs broken down per service · last 90 days' },
+                { kind: 'read',    label: 'Loaded service catalog',          detail: 'score-engine, bureau-ingestion, decision-engine, all Postgres 14, multi-AZ on RDS' },
+                { kind: 'search',  label: 'Pulled Q1 cost review',           detail: 'Found managed-db costs broken down per service, last 90 days' },
                 { kind: 'observe', label: 'Compared traffic + write volume', detail: 'decision-engine writes 4× more than bureau-ingestion; score-engine is read-heavy' },
                 { kind: 'plan',    label: 'Drafted a low-risk migration order', detail: 'Read-heavy first → cheapest downtime profile; defer decision-engine' },
               ]}
@@ -355,7 +355,7 @@ const ThreadView = ({ chatId }: { chatId: string }) => {
             <p>
               Across the three databases <code>score-engine</code> has the
               <strong> highest read-to-write ratio</strong> (≈ 28:1 last 30 days), which makes it the
-              lowest-risk migration target — Aurora&apos;s replica-first failover keeps the cutover under
+              lowest-risk migration target, since Aurora&apos;s replica-first failover keeps the cutover under
               one minute <Citation n={1} source={SOURCES[0]} />. Cost-wise it&apos;s already the
               second-biggest line in our managed-db spend <Citation n={2} source={SOURCES[1]} />, so the
               saving is material.
@@ -375,15 +375,15 @@ const ThreadView = ({ chatId }: { chatId: string }) => {
 
             <blockquote>
               <strong>Heads up.</strong> <code>decision-engine</code> is the largest line item but also the
-              riskiest — its write volume needs a connection-pooling rework before the cutover
+              riskiest, its write volume needs a connection-pooling rework before the cutover
               <Citation n={3} source={SOURCES[2]} />. Defer it until Q3 once PgBouncer is in front.
             </blockquote>
 
             <h4>Suggested migration order</h4>
             <ol>
-              <li><strong>score-engine</strong> — read-heavy, smallest write throughput. Plan for a 60-second cutover using <code>pg_upgrade --link</code><Citation n={4} source={SOURCES[3]} />.</li>
-              <li><strong>bureau-ingestion</strong> — write-medium, 1.6 TB. Run a week-long replication shadow against Aurora first.</li>
-              <li><strong>decision-engine</strong> — <em>last</em>. Roll out PgBouncer in front, then re-evaluate.</li>
+              <li><strong>score-engine</strong>: read-heavy, smallest write throughput. Plan for a 60-second cutover using <code>pg_upgrade --link</code><Citation n={4} source={SOURCES[3]} />.</li>
+              <li><strong>bureau-ingestion</strong>: write-medium, 1.6 TB. Run a week-long replication shadow against Aurora first.</li>
+              <li><strong>decision-engine</strong>: <em>last</em>. Roll out PgBouncer in front, then re-evaluate.</li>
             </ol>
 
             <h4>Run the migration</h4>
@@ -423,7 +423,7 @@ forge cli release score-engine --db aurora`}</ProseCode>
           actions={<MessageActions surface="message" onCopy={() => {}} onRegen={() => {}} vote={null} onVote={() => {}} />}
         >
           <Response from="assistant">
-            <h3>Expected p99 win — the math</h3>
+            <h3>Expected p99 win · the math</h3>
             <p>
               With Aurora&apos;s replica-first failover (RTO ≈ 60 s) the contribution of cutover stalls to
               the monthly p99 collapses roughly an order of magnitude. Modelling tail latency:
@@ -439,7 +439,7 @@ forge cli release score-engine --db aurora`}</ProseCode>
             </p>
 
             <h3>Cutover sequence</h3>
-            <Diagram caption="Sequence — score-engine → Aurora cutover during the Sun 02:00 UTC window">
+            <Diagram caption="Sequence · score-engine → Aurora cutover during the Sun 02:00 UTC window">
               <svg viewBox="0 0 560 220" role="img" aria-label="Cutover sequence diagram" style={{ inlineSize: '100%', blockSize: 'auto' }}>
                 <defs>
                   <marker id="fc-aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -472,14 +472,14 @@ forge cli release score-engine --db aurora`}</ProseCode>
               </svg>
             </Diagram>
 
-            <h3>Rollback summary — multi-locale</h3>
+            <h3>Rollback summary · multi-locale</h3>
             <ul>
               <li><strong>EN.</strong> <em>If any check fails, restore the original RDS endpoint in the secret and roll back. Snapshot is retained for 30 days.</em></li>
               <li lang="pt-BR"><strong>PT-BR.</strong> <em>Se algum check falhar, restaure o endpoint RDS original no secret e faça o rollback. O snapshot fica retido por 30 dias.</em></li>
               <li lang="ja"><strong>日本語.</strong> <em>チェックに失敗した場合、シークレット内の元の RDS エンドポイントを復元し、ロールバックしてください。スナップショットは 30 日間保持されます。</em></li>
             </ul>
 
-            <p>Anything else — comms template, runbook PR, or want me to update the catalog card directly?</p>
+            <p>Anything else · comms template, runbook PR, or want me to update the catalog card directly?</p>
           </Response>
         </Message>
       </div>
@@ -498,7 +498,7 @@ forge cli release score-engine --db aurora`}</ProseCode>
             { id: 'search', icon: 'search',   label: 'Deep search' },
             { id: 'tools',  icon: 'terminal', label: 'Run a tool' },
           ]}
-          footerHint={<>Forge AI can make mistakes — please double-check important answers.</>}
+          footerHint={<>Forge AI can make mistakes, so please double-check important answers.</>}
         />
       </div>
     </div>
@@ -511,8 +511,8 @@ type SearchResult = { id: string; title: string; snippet: string; project: strin
 const CORPUS: SearchResult[] = [
   ...RECENTS.map((r, i) => ({ id: r.id, title: r.title, snippet: r.preview, project: ['Score & decisioning', 'Score & decisioning', 'Fraud & risk'][i % 3], when: i === 0 ? '14:01' : i === 1 ? '11:24' : '09:08', bucket: 'today' as const })),
   ...YESTERDAY.map((r, i) => ({ id: r.id, title: r.title, snippet: r.preview, project: ['Identity & KYC', 'Bureau & SCR', 'Bureau & SCR', 'Consent & LGPD', 'Score & decisioning'][i % 5], when: ['Yesterday', 'Yesterday', '2d ago', '3d ago', '4d ago'][i % 5], bucket: i < 2 ? ('week' as const) : ('earlier' as const) })),
-  { id: 'scr-latency', title: 'SCR query latency — 06/04 spike',          snippet: 'scpc-gateway p95 jumped after the feed contract change…', project: 'Bureau & SCR',  when: '2w ago', bucket: 'earlier' },
-  { id: 'finops-q4',   title: 'Q4 cost review — Cloud Run rightsizing',   snippet: 'Cloud Run accounts for 18% of the platform bill…',        project: 'Cost & FinOps', when: '3w ago', bucket: 'earlier' },
+  { id: 'scr-latency', title: 'SCR query latency · 06/04 spike',          snippet: 'scpc-gateway p95 jumped after the feed contract change…', project: 'Bureau & SCR',  when: '2w ago', bucket: 'earlier' },
+  { id: 'finops-q4',   title: 'Q4 cost review · Cloud Run rightsizing',   snippet: 'Cloud Run accounts for 18% of the platform bill…',        project: 'Cost & FinOps', when: '3w ago', bucket: 'earlier' },
 ];
 
 const RECENT_QUERIES = ['p99 spike', 'konduto false positive', 'SCR latency', 'LGPD consent', 'cost review'];
@@ -609,7 +609,7 @@ const PROJECTS: Project[] = [
   { id: 'identity-kyc',      name: 'Identity & KYC',      desc: 'Identity proofing, document OCR, biometric match and watchlist screening.',                icon: 'lock',       chats: 12, docs: 12, updated: '2d ago' },
   { id: 'consent-lgpd',      name: 'Consent & LGPD',      desc: 'Consent scopes, data-subject requests and PII audit across the service catalog.',          icon: 'compliance', chats: 9,  docs: 27, updated: '3d ago' },
   { id: 'incident-library',  name: 'Incident library',    desc: 'Postmortems, RCA drafts and incident command runbooks for the bureau platform.',           icon: 'incident',   chats: 26, docs: 53, updated: '4d ago' },
-  { id: 'runbooks',          name: 'Runbooks',            desc: 'Operational playbooks for every prod service — rollback, restore, throttle, replay.',      icon: 'pipeline',   chats: 5,  docs: 9,  updated: '6d ago' },
+  { id: 'runbooks',          name: 'Runbooks',            desc: 'Operational playbooks for every prod service · rollback, restore, throttle, replay.',      icon: 'pipeline',   chats: 5,  docs: 9,  updated: '6d ago' },
   { id: 'cost-finops',       name: 'Cost & FinOps',       desc: 'Cloud cost analysis, reserved-capacity planning and rightsizing recommendations.',         icon: 'cloud',      chats: 11, docs: 27, updated: '1w ago' },
 ];
 
@@ -820,7 +820,7 @@ const ProjectDetailView = ({ projectId, onBack, onOpenChat }: { projectId: strin
               <button type="button" className="fp-chat-pd-chat-row" onClick={() => onOpenChat(c.id)}>
                 <span className="fp-chat-pd-chat-ico"><Icons.chat size={13} /></span>
                 <span className="fp-chat-pd-chat-title">{c.title}</span>
-                <span className="fp-chat-pd-chat-em">—</span>
+                <span className="fp-chat-pd-chat-em">·</span>
                 <span className="fp-chat-pd-chat-preview">{c.preview}</span>
                 <span className="fp-chat-pd-chat-when">{c.when}</span>
               </button>
@@ -883,7 +883,7 @@ const ArchiveView = ({ onOpen }: { onOpen: (id: string) => void }) => {
                 variant="ghost"
                 className="fp-chat-arc-restore"
                 onClick={() => setRestored((s) => new Set(s).add(c.id))}
-                title="Restore — move back to Chats"
+                title="Restore · move back to Chats"
               >
                 <Icons.undo size={13} /> Restore
               </Button>
@@ -958,7 +958,7 @@ const ArtifactPreview = ({ a }: { a: ArtifactItem }) => {
   if (a.kind === 'document') {
     return (
       <Prose>
-        <h2>Runbook — score-engine → Aurora migration</h2>
+        <h2>Runbook · score-engine → Aurora migration</h2>
         <p><strong>Owners:</strong> score-platform · <strong>Window:</strong> Sun 02:00 UTC</p>
         <h3>1 · Pre-flight</h3>
         <ul>
@@ -1005,7 +1005,7 @@ const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => 
       <header className="fp-chat-pane-head">
         <span className="eyebrow">Forge AI · Artifacts</span>
         <h1>Artifacts</h1>
-        <p className="lede">Everything Forge AI built for you — diagrams, docs, pages, apps, code and datasets. Open one to preview it and jump back to the chat that made it.</p>
+        <p className="lede">Everything Forge AI built for you · diagrams, docs, pages, apps, code and datasets. Open one to preview it and jump back to the chat that made it.</p>
       </header>
 
       {/* Toolbar — search (leading) · grid/list toggle (trailing). */}

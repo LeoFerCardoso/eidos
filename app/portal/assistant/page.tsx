@@ -16,7 +16,7 @@ export default function ForgeAIPage() {
         eyebrow="Copilot"
         leading={<Icons.sparkle size={22} style={{ color: 'var(--ember)' } as React.CSSProperties} />}
         title="Forge AI"
-        subtitle="Reads your estate — services, deploys, incidents and SLOs — and acts on it."
+        subtitle="Reads your estate · services, deploys, incidents and SLOs · and acts on it."
       />
 
       <div style={{ maxWidth: 800, marginInline: 'auto', width: '100%' }}>

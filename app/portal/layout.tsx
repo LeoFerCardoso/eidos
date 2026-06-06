@@ -8,9 +8,9 @@ import { PortalShell } from '@/portal/shell/portal-shell';
 // system is "Eidos"; this product is "Forge".) The product chrome (rail ·
 // topbar) is rendered once here; route content slots into <main>.
 export const metadata: Metadata = {
-  title: 'Forge — IDP',
+  title: 'Forge · IDP',
   description:
-    'Forge — Internal Developer Platform mockup for Equifax Boa Vista, built on the Eidos Design System.',
+    'Forge · Internal Developer Platform mockup for Equifax Boa Vista, built on the Eidos Design System.',
 };
 
 export default function PortalLayout({ children }: { children: React.ReactNode }) {

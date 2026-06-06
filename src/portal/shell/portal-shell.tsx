@@ -648,7 +648,7 @@ const PortalTopbar = ({
         type="button"
         className="fp-topbar-search"
         onClick={onOpenPalette}
-        aria-label="Search Forge — open command palette"
+        aria-label="Search Forge · open command palette"
       >
         <Icons.search size={13} />
         <span className="label">Search services, screens, actions…</span>
@@ -726,7 +726,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         collapsible="icon"
         open={sidebarOpen}
         onOpenChange={setSidebarOpen}
-        aria-label="Forge — primary navigation"
+        aria-label="Forge · primary navigation"
       >
         <WorkspaceHeader collapsed={!sidebarOpen} current={workspace} onSelect={setWorkspace} />
 

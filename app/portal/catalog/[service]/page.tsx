@@ -44,7 +44,7 @@ const TIMELINE_ITEMS = [
     icon: 'deploy',
     tone: 'done',
     title: 'Deploy v4.12.0 promoted to Ring 4',
-    meta: 'Canary clean — auto-promoted by Eidos quality gates',
+    meta: 'Canary clean · auto-promoted by Eidos quality gates',
     at: ago(2),
   },
   {
@@ -75,7 +75,7 @@ const TIMELINE_ITEMS = [
     id: 'ev5',
     icon: 'shield',
     tone: 'done',
-    title: 'Security scan completed — 0 criticals, 1 low triaged',
+    title: 'Security scan completed · 0 criticals, 1 low triaged',
     meta: 'Trivy + CodeQL · scan id sec-7834',
     at: ago(1440),
   },
@@ -238,10 +238,10 @@ const ACERTA_MD = [
   '',
   'Written in **Go 1.22** and deployed as a horizontally-scalable container on the Forge platform. Requests are authenticated via **mTLS** and authorized through `consent-service` before reaching the orchestration layer.',
   '',
-  '- `scpc-gateway` — negative and positive bureau data',
-  '- `score-engine` — OneScore risk value (0–1000)',
-  '- `konduto-antifraud` — fraud-signal gating',
-  '- `consent-service` — LGPD legal-basis validation',
+  '- `scpc-gateway` · negative and positive bureau data',
+  '- `score-engine` · OneScore risk value (0–1000)',
+  '- `konduto-antifraud` · fraud-signal gating',
+  '- `consent-service` · LGPD legal-basis validation',
   '',
   '## Endpoints',
   '',
@@ -270,9 +270,9 @@ const ACERTA_MD = [
   '',
   '## Observability & SLOs',
   '',
-  '- **Availability** — target `99.95%`, current **99.97%**',
-  '- **p95 latency** — target `< 300ms`, current **240ms**',
-  '- **Error rate** — target `< 0.5%`, current **0.21%**',
+  '- **Availability** · target `99.95%`, current **99.97%**',
+  '- **p95 latency** · target `< 300ms`, current **240ms**',
+  '- **Error rate** · target `< 0.5%`, current **0.21%**',
   '',
   'Dashboards: [Grafana](#) · [Traces](#) · [Logs](#)',
   '',
@@ -306,7 +306,7 @@ const genericReadme = (svc: PortalService) =>
     `- **p95 latency** — ${svc.p95}ms`,
     `- **Test coverage** — ${svc.coverage}%`,
     `- **Language** — ${svc.lang}`,
-    svc.pii ? '- **Data** — Personal data · LGPD in-scope' : '',
+    svc.pii ? '- **Data** · Personal data · LGPD in-scope' : '',
     '',
     '## Ownership',
     '',
@@ -916,7 +916,7 @@ function SoonTab({ tab }: { tab: string }) {
   return (
     <div className="fp-card fp-empty">
       <div style={{ fontWeight: 600, color: 'var(--fg)', marginBlockEnd: 6 }}>
-        {tab} — next increment
+        {tab} · next increment
       </div>
       <div>
         This tab ships in the next Forge slice. The structure and data are already ready to wire

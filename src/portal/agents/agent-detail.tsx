@@ -43,7 +43,7 @@ const ICON = (k: string, size = 14) => {
 const iconOf = (k: string): React.ComponentType<{ size?: number; className?: string }> =>
   (Icons as Record<string, React.ComponentType<{ size?: number; className?: string }>>)[k] ?? Icons.circle;
 const Verified = () => (
-  <span className="fp-agents-verified" title="Official — built by Equifax" aria-label="Official agent">
+  <span className="fp-agents-verified" title="Official · built by Equifax" aria-label="Official agent">
     <Icons.badgeCheck size={18} />
   </span>
 );

@@ -25,7 +25,7 @@ const SEED_STARRED = AGENTS.filter((a) => a.starred).map((a) => a.id);
 
 // Solid, coloured social-media style verified seal (Lucide badge-check).
 const Verified = () => (
-  <span className="fp-agents-verified" title="Official — built by Equifax" aria-label="Official agent">
+  <span className="fp-agents-verified" title="Official · built by Equifax" aria-label="Official agent">
     <Icons.badgeCheck size={15} />
   </span>
 );
@@ -246,7 +246,7 @@ function ArchiveView({ onBack, onOpen }: { onBack: () => void; onOpen: (id: stri
                 variant="ghost"
                 className="fp-agents-arc-restore"
                 onClick={() => setRestored((set) => new Set(set).add(a.id))}
-                title="Restore — move back to Agents"
+                title="Restore · move back to Agents"
               >
                 <Icons.undo size={13} /> Restore
               </Button>
@@ -336,7 +336,7 @@ export default function AgentsCatalog() {
       <FPageHeader
         eyebrow="Platform"
         title="Agents"
-        subtitle="Pre-built assistants scoped to a domain — official ones are built by Equifax; the rest are shared by your teammates. Star up to 10 for quick access. Open one to start a chat already grounded in its context."
+        subtitle="Pre-built assistants scoped to a domain. Official ones are built by Equifax; the rest are shared by your teammates. Star up to 10 for quick access. Open one to start a chat already grounded in its context."
         actions={
           <>
             {/* Right→left button hierarchy: ember CTA · outline secondary · ghost tertiary. */}

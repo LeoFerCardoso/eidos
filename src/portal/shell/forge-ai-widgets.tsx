@@ -147,7 +147,7 @@ export interface RecoveryNode {
  * green with their recovered metric — the visual "the estate is healthy again".
  */
 export function RecoveryWidget({
-  title = 'Estate recovered — mitigation holding',
+  title = 'Estate recovered · mitigation holding',
   nodes,
 }: {
   title?: string;

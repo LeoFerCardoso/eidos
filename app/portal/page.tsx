@@ -23,7 +23,7 @@ const DIGEST: { tone: 'danger' | 'warning' | 'ok'; text: React.ReactNode; href: 
     tone: 'danger',
     text: (
       <>
-        <strong>acerta-api</strong> p99 is up <strong>41%</strong> since v4.12.0 — likely the new
+        <strong>acerta-api</strong> p99 is up <strong>41%</strong> since v4.12.0, likely the new
         konduto-antifraud rule. I drafted a rollback.
       </>
     ),
@@ -33,7 +33,7 @@ const DIGEST: { tone: 'danger' | 'warning' | 'ok'; text: React.ReactNode; href: 
     tone: 'warning',
     text: (
       <>
-        <strong>INC-2041</strong> is still open (p95 spike) — on-call is Bruno Mendes, paged 6h ago.
+        <strong>INC-2041</strong> is still open (p95 spike); on-call is Bruno Mendes, paged 6h ago.
       </>
     ),
     href: '/portal/catalog/acerta-api',
@@ -68,7 +68,7 @@ const FEED: {
     id: 'f1',
     icon: 'server',
     tone: 'danger',
-    title: 'acerta-api degraded — p99 latency over SLO',
+    title: 'acerta-api degraded · p99 latency over SLO',
     meta: 'Correlated with konduto-antifraud v3.1.7 · Forge AI proposed a rollback',
     href: '/portal/catalog/acerta-api',
     badge: <HealthBadge state="degraded" pulse />,
@@ -96,13 +96,61 @@ const FEED: {
     icon: 'score',
     tone: 'warning',
     title: 'bureau-api scorecard slipped to B',
-    meta: 'Observability — missing trace coverage on 2 endpoints',
+    meta: 'Observability · missing trace coverage on 2 endpoints',
     href: '/portal/catalog/bureau-api',
     badge: <Pill tone="warning">Grade B</Pill>,
   },
 ];
 
 const MY_SERVICES = ['acerta-api', 'score-engine', 'scpc-gateway', 'consent-service'];
+
+// Ember pixel-mosaic for the welcome hero — a grid of small ember squares that
+// grows denser + brighter toward the bottom edge (a "dissolve rising" texture).
+// Seeded with Math.sin so server and client render the exact same pattern (no
+// hydration drift), and the per-cell opacity does the gradient work; CSS masks
+// the top into transparency and the .wh-gradient mesh sits in front of it.
+const HeroMosaic = React.memo(function HeroMosaic() {
+  const COLS = 104;
+  const ROWS = 16;
+  const CELL = 16;
+  const GAP = 2;
+  const rnd = (c: number, r: number) => {
+    const s = Math.sin(c * 127.1 + r * 311.7) * 43758.5453;
+    return s - Math.floor(s);
+  };
+  const rects: React.ReactNode[] = [];
+  for (let r = 0; r < ROWS; r++) {
+    const rowF = r / (ROWS - 1); // 0 at the top → 1 at the bottom
+    for (let c = 0; c < COLS; c++) {
+      // Denser toward the bottom: a cell is "on" only when its noise falls
+      // under the row's rising threshold.
+      if (rnd(c, r) > rowF * 1.15 + 0.02) continue;
+      const opacity = (0.06 + rowF * 0.4) * (0.55 + rnd(c + 13, r + 7) * 0.45);
+      rects.push(
+        <rect
+          key={`${c}-${r}`}
+          x={c * CELL}
+          y={r * CELL}
+          width={CELL - GAP}
+          height={CELL - GAP}
+          rx={1.5}
+          opacity={Number(opacity.toFixed(3))}
+        />,
+      );
+    }
+  }
+  return (
+    <svg
+      className="wh-mosaic"
+      viewBox={`0 0 ${COLS * CELL} ${ROWS * CELL}`}
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {rects}
+    </svg>
+  );
+});
 
 const TONE_ICON: Record<string, 'danger' | 'warn' | 'ember'> = {
   danger: 'danger',
@@ -131,6 +179,38 @@ export default function PortalHome() {
           </>
         }
       />
+
+      {/* Welcome hero — sits directly under the header; greeting stays above. */}
+      <section className="fp-welcome-hero page-enter">
+        <HeroMosaic />
+        <div className="wh-gradient" aria-hidden="true" />
+        <span
+          className="ember-glow-bg"
+          aria-hidden="true"
+          style={{ width: 420, height: 420, insetInlineEnd: -140, insetBlockStart: -170 } as React.CSSProperties}
+        />
+        <div className="wh-inner">
+          <div className="wh-copy">
+            <span className="wh-eyebrow t-mono-label">Welcome back</span>
+            <h2 className="wh-title">Your whole estate, calm and under control.</h2>
+            <p className="wh-sub">
+              Catalog, pipelines and incidents in one console. Forge AI watches the estate around the
+              clock, so the things that need you surface before they page you.
+            </p>
+            <div className="wh-actions">
+              <Button variant="ember">
+                <Icons.sparkle size={13} /> Ask Forge AI
+              </Button>
+              <Button variant="ghost" asChild><Link href="/portal/catalog">
+                <Icons.catalog size={13} /> Explore catalog
+              </Link></Button>
+            </div>
+          </div>
+          <div className="wh-mark" aria-hidden="true">
+            <Icons.sparkle size={42} />
+          </div>
+        </div>
+      </section>
 
       {/* Forge AI morning digest */}
       <section
