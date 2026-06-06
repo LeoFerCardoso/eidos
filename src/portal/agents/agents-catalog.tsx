@@ -8,7 +8,7 @@
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import {
-  Icons, Avatar, Pill, Select, ToggleGroup, ToggleGroupItem,
+  Button, Icons, Avatar, Pill, Select, ToggleGroup, ToggleGroupItem,
   Carousel, CarouselSlide, CarouselControls, CarouselDots,
 } from '@/ds/core';
 import { FPageHeader, FSearch } from '@/portal/shell/portal-shell';
@@ -250,8 +250,8 @@ export default function AgentsCatalog() {
         subtitle="Pre-built assistants scoped to a domain — official ones are built by Equifax; the rest are shared by your teammates. Star up to 10 for quick access. Open one to start a chat already grounded in its context."
         actions={
           <>
-            <button type="button" className="btn ghost"><Icons.book size={13} /> Docs</button>
-            <button type="button" className="btn ember" onClick={() => router.push('/portal/agents/new')}><Icons.plus size={13} /> New agent</button>
+            <Button type="button" variant="ghost"><Icons.book size={13} /> Docs</Button>
+            <Button type="button" variant="ember" onClick={() => router.push('/portal/agents/new')}><Icons.plus size={13} /> New agent</Button>
           </>
         }
       />
@@ -350,10 +350,10 @@ export default function AgentsCatalog() {
             )}
             {visible < allList.length && (
               <div className="fp-agents-more">
-                <button type="button" className="btn ghost" onClick={() => setVisible((v) => v + PAGE)}>
+                <Button type="button" variant="ghost" onClick={() => setVisible((v) => v + PAGE)}>
                   <Icons.chevronDown size={13} /> Load more
                   <span className="kbd" style={{ marginInlineStart: 6 }}>{allList.length - visible}</span>
-                </button>
+                </Button>
               </div>
             )}
           </div>

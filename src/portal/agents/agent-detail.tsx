@@ -7,11 +7,12 @@
 // DS primitives + BrandIcon for the app logos.
 import * as React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeSanitize from 'rehype-sanitize';
 import {
-  Icons, Avatar, Pill, Chip, Trend, Prose, Modal, BrandIcon, CopyChip, Popover,
+  Icons, Avatar, Pill, Chip, Trend, Prose, Modal, BrandIcon, CopyChip, Popover, AlertDialog, Button,
   DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
   useChartColors, Recharts,
 } from '@/ds/core';
@@ -21,7 +22,7 @@ import { AGENTS, getAgent, type Agent } from '@/portal/data/agents';
 import {
   OUTPUT_META, buildInstructions, usageFor, type UsageDay,
   appsFor, addableApps, type AppDef,
-  capabilitiesFor, skillsFor, type SkillDef, contextsFor, addableContexts, type ContextDef,
+  capabilitiesFor, skillsFor, SKILL_POOL, type SkillDef, contextsFor, addableContexts, type ContextDef,
   versionsFor, BASELINE_GUARDRAILS, policyFor, dataClassLabel,
   channelsFor, type Channel,
 } from '@/portal/data/agent-detail';
@@ -38,6 +39,9 @@ const ICON = (k: string, size = 14) => {
   const C = (Icons as Record<string, React.FC<{ size?: number }>>)[k] ?? Icons.circle;
   return <C size={size} />;
 };
+// Icon component (not element) for DropdownMenuItem's `icon` prop / BrandIcon menus.
+const iconOf = (k: string): React.ComponentType<{ size?: number; className?: string }> =>
+  (Icons as Record<string, React.ComponentType<{ size?: number; className?: string }>>)[k] ?? Icons.circle;
 const Verified = () => (
   <span className="fp-agents-verified" title="Official — built by Equifax" aria-label="Official agent">
     <Icons.badgeCheck size={18} />
@@ -195,7 +199,9 @@ function ShareChannels({ agent, channels }: { agent: Agent; channels: Channel[] 
 
 export default function AgentDetail({ id }: { id: string }) {
   const agent = getAgent(id);
+  const router = useRouter();
   const { setCrumb } = usePageCrumb();
+  const [confirm, setConfirm] = React.useState<null | 'archive' | 'delete'>(null);
   const [starredIds, setStarredIds] = usePersistentState<string[]>('forge.agents.starred', SEED_STARRED);
   const [activeApp, setActiveApp] = React.useState<AppDef | null>(null);
   const [extraApps, setExtraApps] = React.useState<AppDef[]>([]);
@@ -220,7 +226,7 @@ export default function AgentDetail({ id }: { id: string }) {
       <div className="fp-agents-empty" style={{ padding: '64px 0' }}>
         <Icons.sparkle size={28} />
         <p>No agent with id &ldquo;{id}&rdquo;.</p>
-        <Link href="/portal/agents" className="btn ghost sm"><Icons.chevronLeft size={13} /> Back to agents</Link>
+        <Button variant="ghost" size="sm" asChild><Link href="/portal/agents"><Icons.chevronLeft size={13} /> Back to agents</Link></Button>
       </div>
     );
   }
@@ -242,6 +248,7 @@ export default function AgentDetail({ id }: { id: string }) {
   const instructions = buildInstructions(agent);
   const appsToAdd = addableApps(apps);
   const ctxToAdd = addableContexts(contexts);
+  const skillsToAdd = SKILL_POOL.filter((s) => !skills.some((x) => x.name === s.name));
 
   return (
     <div className="fp-agentd">
@@ -250,22 +257,38 @@ export default function AgentDetail({ id }: { id: string }) {
         <div className="fp-agentd-main-in">
         <div className="fp-agentd-head">
           <div className="fp-agentd-topbar">
-            <Link href="/portal/agents" className="btn ghost sm">
-              <Icons.chevronLeft size={14} /> Back to agents
-            </Link>
+            <Button variant="ghost" asChild>
+              <Link href="/portal/agents"><Icons.chevronLeft size={14} /> Back to agents</Link>
+            </Button>
             <div className="fp-agentd-topbar-actions">
               <Popover
                 side="bottom"
                 align="end"
                 aria-label="Share agent"
                 className="fp-agentd-sharepop"
-                trigger={<button type="button" className="btn outline sm"><Icons.share size={13} /> Share</button>}
+                trigger={<Button variant="ghost"><Icons.share size={14} /> Share</Button>}
               >
                 <ShareChannels agent={agent} channels={channels} />
               </Popover>
-              <Link className="btn ember sm" href={`/portal/chat?agent=${agent.id}`}>
-                {out.conversational ? <><Icons.chat size={13} /> New chat</> : <><Icons.play size={13} /> Run agent</>}
-              </Link>
+              <Button variant="default" asChild>
+                <Link href={`/portal/agents/${agent.id}/edit`}><Icons.edit size={14} /> Edit</Link>
+              </Button>
+              <Button variant="ember" asChild>
+                <Link href={`/portal/chat?agent=${agent.id}`}>
+                  {out.conversational ? <><Icons.chat size={14} /> New chat</> : <><Icons.play size={14} /> Run agent</>}
+                </Link>
+              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" icon aria-label="More actions"><Icons.more size={16} /></Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem icon={Icons.copy} onSelect={() => router.push(`/portal/agents/new?from=${agent.id}`)}>Duplicate</DropdownMenuItem>
+                  <DropdownMenuItem icon={Icons.inbox} onSelect={() => setConfirm('archive')}>Archive</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem icon={Icons.trash} variant="destructive" onSelect={() => setConfirm('delete')}>Delete</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
@@ -393,7 +416,21 @@ export default function AgentDetail({ id }: { id: string }) {
         </AsideSection>
 
         {/* Skills */}
-        <AsideSection title="Skills" count={skills.length}>
+        <AsideSection
+          title="Skills"
+          count={skills.length}
+          action={
+            <AddMenu label="Add a skill">
+              {skillsToAdd.length === 0 ? (
+                <DropdownMenuItem disabled>All skills added</DropdownMenuItem>
+              ) : (
+                skillsToAdd.map((s) => (
+                  <DropdownMenuItem key={s.name} icon={iconOf(s.icon)} onSelect={() => setSkills((p) => [...p, s].sort((a, b) => a.name.localeCompare(b.name)))}>{s.name}</DropdownMenuItem>
+                ))
+              )}
+            </AddMenu>
+          }
+        >
           {skills.length === 0 ? (
             <EmptyState icon="zap" label="No skills enabled." />
           ) : (
@@ -421,9 +458,7 @@ export default function AgentDetail({ id }: { id: string }) {
                 <DropdownMenuItem disabled>All contexts attached</DropdownMenuItem>
               ) : (
                 ctxToAdd.map((c) => (
-                  <DropdownMenuItem key={c.id} onSelect={() => setContexts((p) => [...p, c])}>
-                    <span className="fp-agentd-add-item">{ICON(c.icon, 14)} {c.name}</span>
-                  </DropdownMenuItem>
+                  <DropdownMenuItem key={c.id} icon={iconOf(c.icon)} onSelect={() => setContexts((p) => [...p, c])}>{c.name}</DropdownMenuItem>
                 ))
               )}
             </AddMenu>
@@ -456,10 +491,8 @@ export default function AgentDetail({ id }: { id: string }) {
                 <DropdownMenuItem disabled>All apps connected</DropdownMenuItem>
               ) : (
                 appsToAdd.map((a) => (
-                  <DropdownMenuItem key={a.slug} onSelect={() => setExtraApps((p) => [...p, a])}>
-                    <span className="fp-agentd-add-item">
-                      <BrandIcon slug={a.slug} size={15} /> {a.name} <KindChip kind={a.kind} />
-                    </span>
+                  <DropdownMenuItem key={a.slug} icon={(p) => <BrandIcon slug={a.slug} {...p} />} onSelect={() => setExtraApps((p) => [...p, a])}>
+                    {a.name} <KindChip kind={a.kind} />
                   </DropdownMenuItem>
                 ))
               )}
@@ -546,6 +579,28 @@ export default function AgentDetail({ id }: { id: string }) {
           </div>
         )}
       </Modal>
+
+      {/* Archive → recoverable; Delete → permanent (guarded by archive-first copy). */}
+      <AlertDialog
+        open={confirm === 'archive'}
+        onOpenChange={(o) => !o && setConfirm(null)}
+        variant="warning"
+        title={`Archive ${agent.name}?`}
+        description="It moves to Archived and is hidden from the catalog. Live channels are paused. You can restore it any time."
+        cancelLabel="Cancel"
+        confirmLabel="Archive"
+        onConfirm={() => { setConfirm(null); router.push('/portal/agents?archived=1'); }}
+      />
+      <AlertDialog
+        open={confirm === 'delete'}
+        onOpenChange={(o) => !o && setConfirm(null)}
+        variant="danger"
+        title={`Delete ${agent.name}?`}
+        description="This permanently removes the agent, its versions and channels. If you might need it back, archive it instead."
+        cancelLabel="Cancel"
+        confirmLabel="Delete"
+        onConfirm={() => { setConfirm(null); router.push('/portal/agents'); }}
+      />
     </div>
   );
 }

@@ -5,7 +5,7 @@
 // the bell does: a detail line, a right-aligned time, and on-hover actions.
 // Shares the data + <NotifRow> with the bell so the two never drift.
 import * as React from 'react';
-import { Icons, Tabs, TabsList, TabsTrigger, TabsContent } from '@/ds/core';
+import { Button, Icons, Tabs, TabsList, TabsTrigger, TabsContent } from '@/ds/core';
 import { FPageHeader, FSearch } from '@/portal/shell/portal-shell';
 import { NotifRow } from '@/portal/notifications/notif-row';
 import { NOTIFS, filterByTab, type Notif, type NotifTab } from '@/portal/data/notifications';
@@ -84,12 +84,12 @@ export default function NotificationsInboxPage() {
         subtitle="Deploys, reviews, incidents and approvals from the services you own."
         actions={
           <>
-            <button type="button" className="btn ghost">
+            <Button type="button" variant="ghost">
               <Icons.settings size={13} /> Settings
-            </button>
-            <button type="button" className="btn ghost" onClick={markAll} disabled={!allUnread}>
+            </Button>
+            <Button type="button" variant="ghost" onClick={markAll} disabled={!allUnread}>
               <Icons.check size={13} /> Mark all as read
-            </button>
+            </Button>
           </>
         }
       />

@@ -7,6 +7,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
+  Button,
   HealthBadge,
   Icons,
   LangBadge,
@@ -82,12 +83,12 @@ export default function CatalogPage() {
         subtitle={`${SERVICES.length} services · ${TRIBES.length} tribes · ${degraded} degraded now`}
         actions={
           <>
-            <button className="btn ghost">
+            <Button variant="ghost">
               <Icons.download size={13} /> Export
-            </button>
-            <Link className="btn ember" href="/portal/create">
+            </Button>
+            <Button variant="ember" asChild><Link href="/portal/create">
               <Icons.plus size={13} /> New service
-            </Link>
+            </Link></Button>
           </>
         }
       />
@@ -255,25 +256,27 @@ export default function CatalogPage() {
         </div>
         {pageCount > 1 && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <button
-              className="btn ghost sm"
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
               aria-label="Previous page"
             >
               <Icons.chevronLeft size={12} />
-            </button>
+            </Button>
             <span className="mono" style={{ fontSize: 'var(--text-xs)' }}>
               {page} / {pageCount}
             </span>
-            <button
-              className="btn ghost sm"
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
               disabled={page === pageCount}
               aria-label="Next page"
             >
               <Icons.chevronRight size={12} />
-            </button>
+            </Button>
           </div>
         )}
       </div>

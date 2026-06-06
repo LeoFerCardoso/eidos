@@ -11,6 +11,7 @@ import rehypeSanitize from 'rehype-sanitize';
 import {
   Avatar,
   Banner,
+  Button,
   HealthBadge,
   Icons,
   LangBadge,
@@ -465,15 +466,15 @@ export default function ServiceDetailPage() {
         }
         actions={
           <>
-            <button className="btn ghost">
+            <Button variant="ghost">
               <Icons.runbook size={13} /> Runbook
-            </button>
-            <button className="btn ghost">
+            </Button>
+            <Button variant="ghost">
               <Icons.externalLink size={13} /> Open repo
-            </button>
-            <button className="btn ember">
+            </Button>
+            <Button variant="ember">
               <Icons.sparkle size={13} /> Ask Forge AI
-            </button>
+            </Button>
           </>
         }
       />
@@ -581,7 +582,7 @@ function OverviewTab({
           <div className="fp-card">
             <FCardHead
               title="On-call · primary"
-              action={<button className="btn ghost sm"><Icons.refresh size={11} /> Rotate</button>}
+              action={<Button variant="ghost" size="sm"><Icons.refresh size={11} /> Rotate</Button>}
             />
             <div
               style={{
@@ -600,9 +601,9 @@ function OverviewTab({
                   {ON_CALL.role}
                 </div>
               </div>
-              <button className="btn ghost sm" title="Page on-call">
+              <Button variant="ghost" size="sm" title="Page on-call">
                 <Icons.bell size={12} /> Page
-              </button>
+              </Button>
             </div>
             <div
               style={{
@@ -623,7 +624,7 @@ function OverviewTab({
           <div className="fp-card">
             <FCardHead
               title="Members with access"
-              action={<button className="btn ghost sm" style={{ fontSize: 'var(--text-xs)' }}>Manage access</button>}
+              action={<Button variant="ghost" size="sm" style={{ fontSize: 'var(--text-xs)' }}>Manage access</Button>}
             />
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '6px 0 4px' }}>
               <Avatar.Group max={6} size="sm">
@@ -762,15 +763,15 @@ function DegradedBanner({ svc }: { svc: PortalService }) {
           to <code className="mono">v3.1.6</code> or disable the rule via feature flag.
         </p>
         <div style={{ display: 'flex', gap: 8, marginBlockStart: 12, flexWrap: 'wrap' }}>
-          <button className="btn ember sm">
+          <Button variant="ember" size="sm">
             <Icons.rollback size={12} /> Roll back
-          </button>
-          <button className="btn ghost sm">
+          </Button>
+          <Button variant="ghost" size="sm">
             <Icons.deploy size={12} /> View deploy
-          </button>
-          <button className="btn ghost sm">
+          </Button>
+          <Button variant="ghost" size="sm">
             <Icons.sparkle size={12} /> Open in Forge AI
-          </button>
+          </Button>
         </div>
       </div>
     </div>
@@ -809,9 +810,9 @@ function DepsTab({ svc }: { svc: PortalService }) {
                 </td>
                 <td className="mono">{d.p95}ms</td>
                 <td style={{ textAlign: 'end' }}>
-                  <Link className="btn ghost sm" href={`/portal/catalog/${d.id}`}>
+                  <Button variant="ghost" size="sm" asChild><Link href={`/portal/catalog/${d.id}`}>
                     Open <Icons.chevronRight size={12} />
-                  </Link>
+                  </Link></Button>
                 </td>
               </tr>
             ))}

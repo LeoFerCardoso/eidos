@@ -9,7 +9,7 @@
 //                       and on-hover row actions (mark read · archive). A richer
 //                       surface shows richer content, not a stretched summary.
 import * as React from 'react';
-import { Avatar, Icons } from '@/ds/core';
+import { Avatar, Button, Icons } from '@/ds/core';
 import type { Notif } from '@/portal/data/notifications';
 
 export function NotifRow({
@@ -62,8 +62,8 @@ export function NotifRow({
 
         {n.kind === 'approval' && (
           <div className="fp-notif-cta">
-            <button className="btn ember sm" type="button" onClick={() => onRead?.(n.id)}>Approve</button>
-            <button className="btn ghost sm" type="button" onClick={() => onRead?.(n.id)}>Decline</button>
+            <Button variant="ember" size="sm" type="button" onClick={() => onRead?.(n.id)}>Approve</Button>
+            <Button variant="ghost" size="sm" type="button" onClick={() => onRead?.(n.id)}>Decline</Button>
           </div>
         )}
 

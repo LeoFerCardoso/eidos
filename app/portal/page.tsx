@@ -6,6 +6,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import {
   Avatar,
+  Button,
   HealthBadge,
   Icons,
   Pill,
@@ -121,12 +122,12 @@ export default function PortalHome() {
         subtitle="Here's what needs your attention across the estate today."
         actions={
           <>
-            <Link className="btn ghost" href="/portal/create">
+            <Button variant="ghost" asChild><Link href="/portal/create">
               <Icons.plus size={13} /> New service
-            </Link>
-            <button className="btn ember">
+            </Link></Button>
+            <Button variant="ember">
               <Icons.sparkle size={13} /> Ask Forge AI
-            </button>
+            </Button>
           </>
         }
       />
@@ -207,12 +208,12 @@ export default function PortalHome() {
                   </div>
                   <p style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', lineHeight: 1.5, margin: 0 }}>{it.meta}</p>
                   <div style={{ display: 'flex', gap: 8, marginBlockStart: 12 }}>
-                    <Link className="btn ghost sm" href={it.href}>
+                    <Button variant="ghost" size="sm" asChild><Link href={it.href}>
                       View <Icons.chevronRight size={12} />
-                    </Link>
-                    <button className="btn ghost sm">
+                    </Link></Button>
+                    <Button variant="ghost" size="sm">
                       <Icons.sparkle size={12} /> Ask Forge AI
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -231,9 +232,9 @@ export default function PortalHome() {
                 <div style={{ fontWeight: 600 }}>Bruno Mendes</div>
                 <div style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)' }}>SRE · Score &amp; Risk · ends in 6h</div>
               </div>
-              <button className="btn ghost sm">
+              <Button variant="ghost" size="sm">
                 <Icons.bell size={12} /> Page
-              </button>
+              </Button>
             </div>
           </div>
 

@@ -10,6 +10,7 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import {
   Banner,
+  Button,
   Chip,
   Drawer,
   Icons,
@@ -212,12 +213,12 @@ export default function TemplatesPage() {
           subtitle="Owned, opinionated golden paths. Every template ships with LGPD, observability, CI/CD and SLOs already wired."
           actions={
             <>
-              <button type="button" className="btn ghost" onClick={() => alert('Authoring guide')}>
+              <Button type="button" variant="ghost" onClick={() => alert('Authoring guide')}>
                 <Icons.book size={13} /> Authoring guide
-              </button>
-              <button type="button" className="btn ember" onClick={() => setAiOpen(true)}>
+              </Button>
+              <Button type="button" variant="ember" onClick={() => setAiOpen(true)}>
                 <Icons.sparkle size={13} /> Build with Forge AI
-              </button>
+              </Button>
             </>
           }
         />
@@ -279,9 +280,9 @@ function Gallery({ onUse }: { onUse: (id: string) => void }) {
             </span>
           </div>
         </div>
-        <button type="button" className="btn outline" onClick={() => onUse(hero.id)}>
+        <Button type="button" variant="outline" onClick={() => onUse(hero.id)}>
           <Icons.rocket size={13} /> Use template
-        </button>
+        </Button>
       </div>
 
       {/* Filters: search + language — 12px gap, matched heights */}
@@ -416,9 +417,9 @@ function ConfigForm({ template, onCancel, onProvision }: { template: string; onC
     <>
       {/* Back link above the title (in place of the eyebrow) */}
       <div style={{ marginBlockEnd: 'var(--space-2)' }}>
-        <button type="button" className="btn ghost sm" onClick={onCancel} style={{ marginInlineStart: -8 }}>
+        <Button type="button" variant="ghost" size="sm" onClick={onCancel} style={{ marginInlineStart: -8 }}>
           <Icons.chevronLeft size={13} /> Back to templates
-        </button>
+        </Button>
       </div>
       <FPageHeader
         title="Scaffold a new service"
@@ -469,14 +470,14 @@ function ConfigForm({ template, onCancel, onProvision }: { template: string; onC
                   <div key={p.name} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', paddingBlock: 'var(--space-2)', borderBlockEnd: '1px solid var(--border)' }}>
                     <OwnerPill person={p} />
                     <span style={{ marginInlineStart: 'auto', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)', fontFamily: 'var(--font-mono)' }}>{p.role}</span>
-                    <button type="button" className="btn ghost sm" aria-label={`Remove ${p.name}`} onClick={() => setAccess((a) => a.filter((x) => x.name !== p.name))}>
+                    <Button type="button" variant="ghost" size="sm" aria-label={`Remove ${p.name}`} onClick={() => setAccess((a) => a.filter((x) => x.name !== p.name))}>
                       <Icons.x size={12} />
-                    </button>
+                    </Button>
                   </div>
                 ))}
-                <button type="button" className="btn ghost sm" style={{ alignSelf: 'flex-start', marginBlockStart: 'var(--space-1)' }} onClick={() => setAccess((a) => [...a, PEOPLE.larissa, PEOPLE.rafael, PEOPLE.ana].filter((p, i, arr) => arr.findIndex((x) => x.name === p.name) === i).slice(0, 4))}>
+                <Button type="button" variant="ghost" size="sm" style={{ alignSelf: 'flex-start', marginBlockStart: 'var(--space-1)' }} onClick={() => setAccess((a) => [...a, PEOPLE.larissa, PEOPLE.rafael, PEOPLE.ana].filter((p, i, arr) => arr.findIndex((x) => x.name === p.name) === i).slice(0, 4))}>
                   <Icons.plus size={12} /> Add person
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -486,10 +487,10 @@ function ConfigForm({ template, onCancel, onProvision }: { template: string; onC
             {!canProvision && (
               <span style={{ marginInlineEnd: 'auto', fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>Set a service name and at least 2 people with access.</span>
             )}
-            <button type="button" className="btn ghost" onClick={onCancel}>Cancel</button>
-            <button type="button" className="btn ember" disabled={!canProvision} onClick={() => onProvision({ template, name: repoSlug, product, visibility, access })}>
+            <Button type="button" variant="ghost" onClick={onCancel}>Cancel</Button>
+            <Button type="button" variant="ember" disabled={!canProvision} onClick={() => onProvision({ template, name: repoSlug, product, visibility, access })}>
               <Icons.rocket size={13} /> Provision service
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -645,12 +646,12 @@ function Provisioning({ config }: { config: ScaffoldConfig }) {
 
       {complete && (
         <div style={{ display: 'flex', gap: 'var(--space-2)', marginBlockStart: 'var(--space-4)' }}>
-          <button type="button" className="btn ember" onClick={() => router.push(`/portal/catalog/${config.name}`)}>
+          <Button type="button" variant="ember" onClick={() => router.push(`/portal/catalog/${config.name}`)}>
             <Icons.server size={13} /> Open service
-          </button>
-          <button type="button" className="btn ghost" onClick={() => router.push('/portal/catalog')}>
+          </Button>
+          <Button type="button" variant="ghost" onClick={() => router.push('/portal/catalog')}>
             <Icons.catalog size={13} /> Back to catalog
-          </button>
+          </Button>
         </div>
       )}
     </div>
@@ -703,9 +704,9 @@ function ForgeAIDrawer({ open, onClose, onUse }: { open: boolean; onClose: () =>
         node: (
           <>
             <p style={{ margin: '0 0 8px' }}>The <strong>{id.name}</strong> golden path fits. It ships LGPD consent, observability, CI/CD and SLOs. I pre filled the scaffold for you.</p>
-            <button type="button" className="btn ember sm" onClick={() => onUse(id.id)}>
+            <Button type="button" variant="ember" size="sm" onClick={() => onUse(id.id)}>
               <Icons.rocket size={12} /> Use {id.name}
-            </button>
+            </Button>
           </>
         ),
       },
@@ -741,9 +742,9 @@ function ForgeAIDrawer({ open, onClose, onUse }: { open: boolean; onClose: () =>
       >
         <span className="in-addon icon"><Icons.sparkle size={14} /></span>
         <input className="in-control" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Describe what you want to build" aria-label="Message Forge AI" />
-        <button type="submit" className="btn ember sm" disabled={!input.trim()} style={{ margin: 4 }}>
+        <Button type="submit" variant="ember" size="sm" disabled={!input.trim()} style={{ margin: 4 }}>
           <Icons.arrowRight size={13} />
-        </button>
+        </Button>
       </form>
     </Drawer>
   );

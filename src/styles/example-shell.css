@@ -105,7 +105,12 @@ body:active::-webkit-scrollbar-thumb,
   grid-template-areas:
     "rail topbar"
     "rail main";
-  min-height: 100vh;
+  /* App fills the viewport and never scrolls itself — the topbar stays put and
+     the main area (or its columns) is the only scroll container. position:relative
+     so absolutely-positioned descendants are clipped here (no document overflow). */
+  position: relative;
+  block-size: 100dvh;
+  overflow: hidden;
 }
 
 /* ---- Side rail (icons only) --------------------------------------------- */
@@ -350,14 +355,22 @@ body:active::-webkit-scrollbar-thumb,
   max-width: 1480px;
   margin: 0 auto;
   width: 100%;
+  /* The scroll container for normal pages; contain overscroll so reaching the
+     end never chains to the app/document. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
-.fp-main--full { max-width: none; padding: 0; }
+.fp-main--full { max-width: none; padding: 0; overflow: hidden; }
 /* Paneled layout (Agent detail): fixed height, no own scroll — the two columns
    scroll independently. Full width so the sidebar sits on the right (the main
    content is centred in the leftover); not the centred max-width column. */
-.fp-main--panes { max-width: none; margin: 0; padding: 0; overflow: hidden; block-size: calc(100dvh - 48px); }
+.fp-main--panes { max-width: none; margin: 0; padding: 0; overflow: hidden; block-size: 100%; }
+/* Edit: page-scrolled (inherits .fp-main's overflow-y auto). Zero the bottom
+   padding so a sticky Save bar (bottom:0) reaches the viewport's bottom edge;
+   the breathing space below the bar comes from .fp-wizard--edit itself. */
+.fp-main--edit { padding-block-end: 0; }
 @media (max-width: 1000px) {
-  .fp-main--panes { block-size: auto; overflow: visible; padding-block: var(--fp-page-inset-block) 64px; padding-inline: var(--fp-page-inset-inline); }
+  .fp-main--panes { block-size: auto; overflow-y: auto; padding-block: var(--fp-page-inset-block) 64px; padding-inline: var(--fp-page-inset-inline); }
 }
 
 /* ---- Page header — mirrors the DS canonical pattern (.ds-page-header /
@@ -1874,7 +1887,7 @@ body:active::-webkit-scrollbar-thumb,
 .fp-agentd-rule { background: var(--border); }
 /* Each column scrolls on its own. */
 .fp-agentd-main,
-.fp-agentd-aside { overflow-y: auto; min-block-size: 0; padding-block: 32px 56px; }
+.fp-agentd-aside { overflow-y: auto; overscroll-behavior: contain; min-block-size: 0; padding-block: 32px 56px; }
 /* Left: content centred in the leftover, keeping ~its previous width. */
 .fp-agentd-main { padding-inline: var(--fp-page-inset-inline); }
 .fp-agentd-main-in { inline-size: 100%; max-inline-size: 1040px; margin-inline: auto; }
@@ -2344,6 +2357,23 @@ body:active::-webkit-scrollbar-thumb,
    add-menu, empty-state and kind-chip styles.
    ═══════════════════════════════════════════════════════════════════════════ */
 .fp-wizard { max-inline-size: 1000px; margin-inline: auto; }
+
+/* ── Edit mode — ONE continuous page-scrolled form (no lateral nav). The Save
+   bar is sticky(bottom:0): it rides the viewport bottom while scrolling and
+   lands at its natural place — with a breathing space below it — at the end.
+   The breathing space is this element's bottom padding (inside the scroll). ── */
+.fp-wizard--edit { padding-block-end: 56px; }
+.fp-edit-form .fp-edit-section { display: flex; flex-direction: column; gap: var(--field-gap); }
+.fp-edit-section + .fp-edit-section { border-block-start: 1px solid var(--border); padding-block-start: var(--form-section-gap); }
+.fp-edit-foot {
+  position: sticky; inset-block-end: 0; margin-block-start: var(--form-section-gap);
+  padding-block: 16px; background: var(--bg);
+}
+/* Gradient above the bar (no dry separator line) — content dissolves into it. */
+.fp-edit-foot::before {
+  content: ''; position: absolute; inset-inline: 0; inset-block-end: 100%; block-size: 32px;
+  background: linear-gradient(to top, var(--bg) 30%, transparent); pointer-events: none;
+}
 /* Header — same eyebrow/title/lede pattern as the chat panes (.fp-chat-pane-head),
    with the Cancel action pinned to the inline-end. */
 .fp-wizard-head {
@@ -2380,28 +2410,9 @@ body:active::-webkit-scrollbar-thumb,
 
 /* Panel */
 .fp-wizard-panel { min-inline-size: 0; }
-.fp-wizard-content { display: flex; flex-direction: column; gap: 26px; }
-.fp-wizard-stephead { display: flex; flex-direction: column; gap: 4px; }
-.fp-wizard-stephead h2 { margin: 0; font-size: var(--text-lg); font-weight: 700; letter-spacing: -0.01em; }
-.fp-wizard-stephead p { margin: 0; font-size: 13px; color: var(--fg-muted); line-height: 1.5; max-inline-size: 64ch; }
-
-/* Field — golden rule: label + support text are one group (2px between them,
-   tightened for line-height); that group sits 8px above the control. Label
-   only ⇒ 8px to the control. */
-.fp-wizard-field { display: flex; flex-direction: column; gap: 8px; }
-.fp-wizard-field-grp { display: flex; flex-direction: column; gap: 2px; }
-.fp-wizard-field-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.fp-wizard-field-row .act { flex: 0 0 auto; }
-.fp-wizard-field-lbl { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--fg); }
-.fp-wizard-field-lbl .req { color: var(--ember-text); }
-.fp-wizard-field-lbl .bdg { display: inline-flex; }
-.fp-wizard-field-sub { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-.fp-wizard-field-sub .act { flex: 0 0 auto; align-self: center; }
-.fp-wizard-field-hint { font-size: 12px; color: var(--fg-muted); line-height: 1.45; margin: 0; max-inline-size: none; }
-
-/* Golden rule, portal-wide: every DS field (Input / Textarea / Select native /
-   custom .in-field) keeps an 8px gap between its label and the control. */
-.fp-app .in-field { gap: 8px; }
+.fp-wizard-content { display: flex; flex-direction: column; gap: var(--field-gap); }
+/* Fields/labels/sections now come from the DS primitives (.field / .form-section
+   / .form) in tokens.css — no portal-local field spacing here. */
 
 /* Searchable add-picker popover (Skills / Contexts / Apps) — host the Command
    edge to edge inside the popover panel. */

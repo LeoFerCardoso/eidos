@@ -11,21 +11,23 @@
 // success panel (no persistence layer yet).
 import * as React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeSanitize from 'rehype-sanitize';
 import {
   Icons, Avatar, Pill, Prose, Input, Textarea, Select, Checkbox, Switch,
-  RadioCardGroup, FileInput, BrandIcon, AILabel, Popover, Command,
+  RadioCardGroup, FileInput, BrandIcon, AILabel, Popover, Command, Field, Form, Button,
   type SelectGroup, type CommandGroup,
 } from '@/ds/core';
 import { usePageCrumb } from '@/portal/shell/portal-shell';
 import {
   CAPABILITIES, OUTPUT_META, SKILL_POOL, APP_POOL, CONTEXT_POOL,
   BASELINE_GUARDRAILS, ARMOR_LEVELS, DATA_CLASSES, dataClassLabel, CHANNELS,
+  capabilitiesFor, skillsFor, contextsFor, appsFor, policyFor, channelsFor, buildInstructions,
   type SkillDef, type ContextDef, type AppDef,
 } from '@/portal/data/agent-detail';
-import type { AgentOutput } from '@/portal/data/agents';
+import { getAgent, type AgentOutput, type Agent } from '@/portal/data/agents';
 
 // ── Static option data ────────────────────────────────────────────────────────
 
@@ -161,24 +163,65 @@ within your domain; if a request falls outside it, say so and hand off.
 
 type ConnectedApp = AppDef & { enabled: string[] };
 
-// ── Wizard ─────────────────────────────────────────────────────────────────────
+// Map a model display name (e.g. "Opus 4.7") back to a wizard option value.
+function modelValue(label: string): string {
+  const s = label.toLowerCase();
+  if (s.includes('opus')) return 'opus-4.7';
+  if (s.includes('sonnet')) return 'sonnet-4.6';
+  if (s.includes('haiku')) return 'haiku-4.5';
+  if (s.includes('gpt')) return 'gpt-5';
+  if (s.includes('gemini')) return 'gemini-2.5-pro';
+  return 'auto';
+}
 
-export default function NewAgent() {
+// Seed the form state from an existing agent (Edit mode).
+function buildSeed(a: Agent) {
+  const pol = policyFor(a);
+  return {
+    name: a.name,
+    instructions: buildInstructions(a),
+    summary: a.desc,
+    model: modelValue(a.model),
+    output: a.output,
+    skills: skillsFor(a),
+    contexts: contextsFor(a),
+    apps: appsFor(a).map((app) => ({ ...app, enabled: [...app.tools] })) as ConnectedApp[],
+    armorLevel: pol.armorLevel as string,
+    humanApproval: pol.humanApproval,
+    piiRedaction: pol.piiRedaction,
+    dataClass: pol.dataClass,
+    channels: new Set<string>(channelsFor(a).filter((c) => c.status === 'on').map((c) => c.id).concat('forge-chat')),
+  };
+}
+
+// ── Wizard / Edit form ──────────────────────────────────────────────────────────
+// One component, two modes: `create` (linear wizard + success) and `edit`
+// (every section stacked on a dedicated page, seeded from the agent, Save bar).
+
+export default function NewAgent({ editId }: { editId?: string } = {}) {
+  const router = useRouter();
+  const editAgent = editId ? getAgent(editId) : undefined;
+  const isEdit = !!editAgent;
+  const seed = editAgent ? buildSeed(editAgent) : null;
+
   const { setCrumb } = usePageCrumb();
-  React.useEffect(() => { setCrumb({ label: 'New agent', replace: true }); return () => setCrumb(null); }, [setCrumb]);
+  React.useEffect(() => {
+    setCrumb({ label: isEdit ? `Edit · ${editAgent!.name}` : 'New agent', replace: true });
+    return () => setCrumb(null);
+  }, [setCrumb, isEdit, editAgent]);
   const [step, setStep] = React.useState(0);
   const [done, setDone] = React.useState(false);
 
   // Step 1
-  const [name, setName] = React.useState('');
-  const [instructions, setInstructions] = React.useState('');
-  const [summary, setSummary] = React.useState('');
+  const [name, setName] = React.useState(seed?.name ?? '');
+  const [instructions, setInstructions] = React.useState(seed?.instructions ?? '');
+  const [summary, setSummary] = React.useState(seed?.summary ?? '');
   const [summaryState, setSummaryState] = React.useState<'idle' | 'generating' | 'ready'>('idle');
   const [summaryAI, setSummaryAI] = React.useState(false);
 
   // Step 2
-  const [model, setModel] = React.useState('auto');
-  const [output, setOutput] = React.useState<AgentOutput>('conversation');
+  const [model, setModel] = React.useState(seed?.model ?? 'auto');
+  const [output, setOutput] = React.useState<AgentOutput>(seed?.output ?? 'conversation');
   const supported = React.useMemo(() => supportedCaps(model), [model]);
   const [caps, setCaps] = React.useState<Record<string, boolean>>(
     () => Object.fromEntries(CAPABILITIES.map((c) => [c.id, true])),
@@ -190,22 +233,22 @@ export default function NewAgent() {
   }, [supported]);
 
   // Step 3
-  const [skills, setSkills] = React.useState<SkillDef[]>([]);
-  const [contexts, setContexts] = React.useState<ContextDef[]>([]);
+  const [skills, setSkills] = React.useState<SkillDef[]>(seed?.skills ?? []);
+  const [contexts, setContexts] = React.useState<ContextDef[]>(seed?.contexts ?? []);
   const [files, setFiles] = React.useState<{ name: string; icon: string }[]>([]);
 
   // Step 4
-  const [apps, setApps] = React.useState<ConnectedApp[]>([]);
+  const [apps, setApps] = React.useState<ConnectedApp[]>(seed?.apps ?? []);
 
   // Step 5 — Safety (the enforced baseline is implicit; these only tighten it)
-  const [armorLevel, setArmorLevel] = React.useState('standard');
-  const [humanApproval, setHumanApproval] = React.useState(true);
-  const [piiRedaction, setPiiRedaction] = React.useState(true);
-  const [dataClass, setDataClass] = React.useState('l3');
+  const [armorLevel, setArmorLevel] = React.useState(seed?.armorLevel ?? 'standard');
+  const [humanApproval, setHumanApproval] = React.useState(seed?.humanApproval ?? true);
+  const [piiRedaction, setPiiRedaction] = React.useState(seed?.piiRedaction ?? true);
+  const [dataClass, setDataClass] = React.useState(seed?.dataClass ?? 'l3');
 
   // Channels — where the agent is available. Forge chat is always on; the rest
   // are requested here and go live after a security review.
-  const [channels, setChannels] = React.useState<Set<string>>(new Set(['forge-chat']));
+  const [channels, setChannels] = React.useState<Set<string>>(seed?.channels ?? new Set(['forge-chat']));
   const toggleChannel = (id: string) => setChannels((p) => { const n = new Set(p); n.has(id) ? n.delete(id) : n.add(id); return n; });
 
   const genTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -302,8 +345,8 @@ export default function NewAgent() {
         </div>
 
         <div className="row">
-          <Link className="btn" href="/portal/agents"><Icons.agent size={14} /> Go to agents</Link>
-          <Link className="btn ember" href="/portal/chat"><Icons.chat size={14} /> Start a chat</Link>
+          <Button asChild><Link href="/portal/agents"><Icons.agent size={14} /> Go to agents</Link></Button>
+          <Button variant="ember" asChild><Link href="/portal/chat"><Icons.chat size={14} /> Start a chat</Link></Button>
         </div>
       </div>
     );
@@ -685,6 +728,37 @@ export default function NewAgent() {
     </>
   );
 
+  // ── Edit mode — one continuous form (no lateral nav), sticky Save bar ─────────
+  if (isEdit) {
+    const EDIT_SECTIONS = [StepDefine, StepModel, StepKnowledge, StepApps, StepSafety];
+    return (
+      <div className="fp-wizard fp-wizard--edit">
+        <header className="fp-wizard-head">
+          <div className="fp-chat-pane-head">
+            <span className="eyebrow">Forge · Agents</span>
+            <h1>Edit {editAgent!.name}</h1>
+            <p className="lede">Change anything below. Saving creates a new version; sensitive changes go back through review.</p>
+          </div>
+          <Button variant="ghost" asChild><Link href={`/portal/agents/${editId}`}><Icons.x size={14} /> Cancel</Link></Button>
+        </header>
+
+        <Form className="fp-edit-form">
+          {EDIT_SECTIONS.map((node, i) => (
+            <section key={i} className="fp-edit-section">{node}</section>
+          ))}
+        </Form>
+
+        <footer className="fp-wizard-foot fp-edit-foot">
+          <Button variant="ghost" asChild><Link href={`/portal/agents/${editId}`}><Icons.x size={14} /> Cancel</Link></Button>
+          <span className="fp-wizard-progress t-mono">Saving creates a new version</span>
+          <Button type="button" variant="ember" onClick={() => router.push(`/portal/agents/${editId}?saved=1`)} disabled={!step0Ok}>
+            <Icons.check size={14} /> Save changes
+          </Button>
+        </footer>
+      </div>
+    );
+  }
+
   const BODY = [StepDefine, StepModel, StepKnowledge, StepApps, StepSafety, StepReview][step];
 
   return (
@@ -695,7 +769,7 @@ export default function NewAgent() {
           <h1>New agent</h1>
           <p className="lede">Define an assistant scoped to a domain: its instructions, the model it runs on, the capabilities and knowledge it uses, and the apps it can call.</p>
         </div>
-        <Link className="btn ghost sm" href="/portal/agents"><Icons.x size={14} /> Cancel</Link>
+        <Button variant="ghost" size="sm" asChild><Link href="/portal/agents"><Icons.x size={14} /> Cancel</Link></Button>
       </header>
 
       <div className="fp-wizard-body">
@@ -723,13 +797,13 @@ export default function NewAgent() {
           <div className="fp-wizard-content">{BODY}</div>
 
           <footer className="fp-wizard-foot">
-            <button type="button" className="btn ghost" onClick={back} disabled={step === 0}>
+            <Button type="button" variant="ghost" onClick={back} disabled={step === 0}>
               <Icons.chevronLeft size={14} /> Back
-            </button>
+            </Button>
             <span className="fp-wizard-progress t-mono">Step {step + 1} of {STEPS.length}</span>
-            <button type="button" className="btn ember" onClick={next} disabled={!canContinue}>
+            <Button type="button" variant="ember" onClick={next} disabled={!canContinue}>
               {step === STEPS.length - 1 ? <><Icons.check size={14} /> Create agent</> : <>Continue <Icons.arrowRight size={14} /></>}
-            </button>
+            </Button>
           </footer>
         </div>
       </div>
@@ -739,38 +813,12 @@ export default function NewAgent() {
 
 // ── Small building blocks ──────────────────────────────────────────────────────
 
+// Section header = the DS FormSection head, used standalone above a step's fields.
 function StepHead({ title, desc }: { title: string; desc: string }) {
   return (
-    <div className="fp-wizard-stephead">
-      <h2>{title}</h2>
-      <p>{desc}</p>
-    </div>
-  );
-}
-
-function Field({ label, required, hint, action, badge, children }: { label: string; required?: boolean; hint?: React.ReactNode; action?: React.ReactNode; badge?: React.ReactNode; children: React.ReactNode }) {
-  const lbl = (
-    <span className="fp-wizard-field-lbl">{label}{required && <span className="req" title="Required"> *</span>}{badge && <span className="bdg">{badge}</span>}</span>
-  );
-  return (
-    <div className="fp-wizard-field">
-      {hint ? (
-        // Label + support text are one group; the action sits on the support line.
-        <div className="fp-wizard-field-grp">
-          {lbl}
-          <div className="fp-wizard-field-sub">
-            <p className="fp-wizard-field-hint">{hint}</p>
-            {action && <span className="act">{action}</span>}
-          </div>
-        </div>
-      ) : (
-        // No support text — the action rides on the label row.
-        <div className="fp-wizard-field-row">
-          {lbl}
-          {action && <span className="act">{action}</span>}
-        </div>
-      )}
-      {children}
+    <div className="form-section__head">
+      <h2 className="form-section__title">{title}</h2>
+      <p className="form-section__desc">{desc}</p>
     </div>
   );
 }

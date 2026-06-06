@@ -16,6 +16,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import {
+  Button,
   Sidebar,
   SidebarSection,
   SidebarItem,
@@ -563,7 +564,7 @@ const UserMenu = () => (
         <div className="fp-user-plan">
           <div className="fp-user-plan-top">
             <span className="fp-user-plan-name">Platform plan</span>
-            <Link href="/portal/create" className="btn ember sm" onClick={close}>Upgrade</Link>
+            <Button variant="ember" size="sm" asChild><Link href="/portal/create" onClick={close}>Upgrade</Link></Button>
           </div>
           <div className="fp-user-usage">
             <div className="fp-user-usage-bar"><span style={{ inlineSize: '64%' }} /></div>
@@ -616,15 +617,15 @@ const PortalTopbar = ({
   return (
     <header className="fp-topbar">
       {/* Sidebar collapse/expand toggle — first in the breadcrumb area */}
-      <button
-        type="button"
-        className="btn ghost sm"
+      <Button
+        variant="ghost"
+        size="sm"
         aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
         onClick={onToggleSidebar}
         style={{ flexShrink: 0 }}
       >
         <Icons.panelLeft size={16} />
-      </button>
+      </Button>
 
       <nav className="fp-crumbs" aria-label="Breadcrumb">
         {crumbs.map((c, i) => (
@@ -688,6 +689,9 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
   // its left column and sidebar scroll independently, so the main area doesn't
   // scroll as a whole.
   const paneled = /^\/portal\/agents\/(?!new$)[^/]+$/.test(pathname);
+  // Agent edit (/portal/agents/<id>/edit) — contained settings form: the form
+  // scrolls, the Save bar stays pinned at the bottom of the viewport.
+  const edit = /^\/portal\/agents\/[^/]+\/edit$/.test(pathname);
   const [sidebarOpen, setSidebarOpen] = usePersistentState('forge.sidebar.open', true);
   const [workspace, setWorkspace] = usePersistentState('forge.workspace', 0);
   const [aiOpen, setAiOpen] = React.useState(false);
@@ -800,7 +804,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         pageCrumb={pageCrumb}
       />
 
-      <main className={'fp-main' + (fullBleed ? ' fp-main--full' : paneled ? ' fp-main--panes' : '')}>{children}</main>
+      <main className={'fp-main' + (fullBleed ? ' fp-main--full' : edit ? ' fp-main--edit' : paneled ? ' fp-main--panes' : '')}>{children}</main>
 
       {/* Forge AI — in-context copilot slide-over (same thread as /portal/assistant) */}
       <Drawer

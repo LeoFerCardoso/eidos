@@ -18,6 +18,7 @@ import {
   Diagram, MathView,
   Modal, Card, CardMedia, CardHeader, CardTitle, CardContent,
   ToggleGroup, ToggleGroupItem,
+  Button,
 } from '@/ds/core';
 import { usePageCrumb, FSearch } from '@/portal/shell/portal-shell';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -624,14 +625,14 @@ const ProjectsView = ({ onOpen }: { onOpen: (id: string) => void }) => {
           <h1>Your project workspaces</h1>
           <p className="lede">Group conversations, docs and runbooks by scope. Each project keeps its own context so the assistant grounds its answers in only the right files for that workspace.</p>
         </div>
-        <button className="btn ember fp-chat-projects-create"><Icons.plus size={13} /> Create project</button>
+        <Button variant="ember" className="fp-chat-projects-create"><Icons.plus size={13} /> Create project</Button>
       </header>
 
       <div className="fp-chat-projects-toolbar">
         <ChatSearch value={q} onChange={setQ} placeholder="Search projects…" className="fp-chat-projects-search" />
         <div className="fp-chat-projects-toolbar-end">
           <span className="fp-chat-projects-count">{filtered.length} {filtered.length === 1 ? 'project' : 'projects'}</span>
-          <button className="btn sm outline"><span style={{ color: 'var(--fg-muted)' }}>Sort:</span><span>Recent activity</span><Icons.chevronDown size={11} /></button>
+          <Button variant="outline" size="sm"><span style={{ color: 'var(--fg-muted)' }}>Sort:</span><span>Recent activity</span><Icons.chevronDown size={11} /></Button>
         </div>
       </div>
 
@@ -878,14 +879,15 @@ const ArchiveView = ({ onOpen }: { onOpen: (id: string) => void }) => {
                 <span className="preview">{c.preview}</span>
               </button>
               <span className="fp-chat-arc-when">{c.when}</span>
-              <button
-                type="button"
-                className="btn sm ghost fp-chat-arc-restore"
+              <Button
+                variant="ghost"
+                size="sm"
+                className="fp-chat-arc-restore"
                 onClick={() => setRestored((s) => new Set(s).add(c.id))}
                 title="Restore — move back to Chats"
               >
                 <Icons.undo size={13} /> Restore
-              </button>
+              </Button>
             </li>
           ))}
         </ul>
@@ -1096,11 +1098,11 @@ const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => 
               </button>
             </span>
             <span className="fp-art-foot-actions">
-              <button type="button" className="btn sm outline"><Icons.copy size={13} /> Copy</button>
-              <button type="button" className="btn sm outline"><Icons.download size={13} /> Download</button>
-              <button type="button" className="btn sm ember" onClick={() => { onOpenChat(sel.chatId); setSel(null); }}>
+              <Button variant="outline" size="sm"><Icons.copy size={13} /> Copy</Button>
+              <Button variant="outline" size="sm"><Icons.download size={13} /> Download</Button>
+              <Button variant="ember" size="sm" onClick={() => { onOpenChat(sel.chatId); setSel(null); }}>
                 <Icons.chat size={13} /> Open chat
-              </button>
+              </Button>
             </span>
           </>
         ) : undefined}

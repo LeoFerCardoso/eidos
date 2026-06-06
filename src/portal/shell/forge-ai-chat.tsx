@@ -11,6 +11,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import {
   Icons,
+  Button,
   ForgeMark, Message, PromptInput, Suggestion, SuggestionCard,
 } from '@/ds/core';
 import { RootCauseWidget, IncidentWidget, FlagWidget, RecoveryWidget, UserMention } from './forge-ai-widgets';
@@ -76,8 +77,8 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
           minutes, and I'll watch <code className="mono">acerta-api</code> p99 for 10 minutes after.
         </p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <button className="btn ember sm"><Icons.rollback size={12} /> Confirm rollback</button>
-          <button className="btn ghost sm">Cancel</button>
+          <Button variant="ember" size="sm"><Icons.rollback size={12} /> Confirm rollback</Button>
+          <Button variant="ghost" size="sm">Cancel</Button>
         </div>
       </>
     );
@@ -105,12 +106,12 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
           <code className="mono">v3.1.6</code> in production so the release is clean.
         </p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <button className="btn ember sm" onClick={() => ask('Roll back konduto-antifraud')}>
+          <Button variant="ember" size="sm" onClick={() => ask('Roll back konduto-antifraud')}>
             <Icons.rollback size={12} /> Roll back konduto-antifraud
-          </button>
-          <Link className="btn ghost sm" href="/portal/catalog/acerta-api">
+          </Button>
+          <Button variant="ghost" size="sm" asChild><Link href="/portal/catalog/acerta-api">
             <Icons.server size={12} /> View acerta-api
-          </Link>
+          </Link></Button>
         </div>
       </>
     );
@@ -137,10 +138,10 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
           prepared.
         </p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <button className="btn ember sm" onClick={() => ask('Turn off the flag now')}>
+          <Button variant="ember" size="sm" onClick={() => ask('Turn off the flag now')}>
             <Icons.flag size={12} /> Disable the flag
-          </button>
-          <button className="btn ghost sm">Cancel</button>
+          </Button>
+          <Button variant="ghost" size="sm">Cancel</Button>
         </div>
       </>
     );
@@ -174,12 +175,12 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
           for a clean release once the fix is ready.
         </p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <button className="btn ember sm" onClick={() => ask('Disable the feature flag')}>
+          <Button variant="ember" size="sm" onClick={() => ask('Disable the feature flag')}>
             <Icons.flag size={12} /> Disable the feature flag
-          </button>
-          <Link className="btn ghost sm" href="/portal/catalog/acerta-api">
+          </Button>
+          <Button variant="ghost" size="sm" asChild><Link href="/portal/catalog/acerta-api">
             <Icons.server size={12} /> Open acerta-api
-          </Link>
+          </Link></Button>
         </div>
       </>
     );
@@ -192,9 +193,9 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
           <UserMention person={COMMANDER} /> has the <strong>Score &amp; Risk</strong> pager right now. On since 12:00,
           off at 18:00, paged 6h ago for INC-2041. Backup is <UserMention person={BACKUP} />.
         </p>
-        <a className="btn ghost sm" href={COMMANDER.chatHref} target="_blank" rel="noreferrer">
+        <Button variant="ghost" size="sm" asChild><a href={COMMANDER.chatHref} target="_blank" rel="noreferrer">
           <Icons.chat size={12} /> Message on-call
-        </a>
+        </a></Button>
       </>
     );
   }
@@ -234,12 +235,12 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
           instantly reversible — before we touch the release.
         </p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <button className="btn ember sm" onClick={() => ask('Disable the feature flag')}>
+          <Button variant="ember" size="sm" onClick={() => ask('Disable the feature flag')}>
             <Icons.flag size={12} /> Disable the feature flag
-          </button>
-          <Link className="btn ghost sm" href="/portal/catalog/acerta-api">
+          </Button>
+          <Button variant="ghost" size="sm" asChild><Link href="/portal/catalog/acerta-api">
             <Icons.server size={12} /> View impacted service
-          </Link>
+          </Link></Button>
         </div>
       </>
     );
@@ -252,9 +253,9 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
           The <strong>scoring-service</strong> template is the paved road for a new risk-score service. It ships with
           the Ignite feature store wiring, LGPD consent, observability and golden CI/CD pre-configured.
         </p>
-        <Link className="btn ember sm" href="/portal/create">
+        <Button variant="ember" size="sm" asChild><Link href="/portal/create">
           <Icons.rocket size={12} /> Start from a template
-        </Link>
+        </Link></Button>
       </>
     );
   }
@@ -267,9 +268,9 @@ function answer(qRaw: string, ask: (text: string) => void): React.ReactNode {
           now, <code className="mono">acerta-api</code> and <code className="mono">konduto-antifraud</code>, both tied to
           the same konduto deploy. 44 deploys shipped this week with 0 failed gates.
         </p>
-        <Link className="btn ghost sm" href="/portal">
+        <Button variant="ghost" size="sm" asChild><Link href="/portal">
           Open my Home digest <Icons.chevronRight size={12} />
-        </Link>
+        </Link></Button>
       </>
     );
   }
