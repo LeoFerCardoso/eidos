@@ -224,13 +224,15 @@ export const ARMOR_LEVELS = [
 ] as const;
 
 // Equifax data classification — 5 levels, each gating a class of data. An agent
-// is allowed up to (and including) the level it's granted.
+// is allowed up to (and including) the level it's granted. Levels 3+ touch
+// sensitive data, so they are `gated`: only the security team can approve an
+// agent at that tier. Anyone can self-serve Levels 1–2.
 export const DATA_CLASSES = [
-  { value: 'l1', level: 1, label: 'Public',       icon: 'globe',  desc: 'Public marketing and documentation. No restrictions.' },
-  { value: 'l2', level: 2, label: 'Internal',     icon: 'layers', desc: 'Internal operational data. Employees only.' },
-  { value: 'l3', level: 3, label: 'Confidential', icon: 'lock',   desc: 'Business-confidential data, contracts and pricing.' },
-  { value: 'l4', level: 4, label: 'Sensitive',    icon: 'shield', desc: 'Regulated financial data: scores, transactions, fraud signals.' },
-  { value: 'l5', level: 5, label: 'Restricted',   icon: 'flag',   desc: 'Bureau PII: CPF, SCR, Cadastro Positivo, biometrics.' },
+  { value: 'l1', level: 1, label: 'Public',       icon: 'globe',  desc: 'Public marketing and documentation. No restrictions.', gated: false },
+  { value: 'l2', level: 2, label: 'Internal',     icon: 'layers', desc: 'Internal operational data. Employees only.', gated: false },
+  { value: 'l3', level: 3, label: 'Confidential', icon: 'lock',   desc: 'Business-confidential data, contracts and pricing.', gated: true },
+  { value: 'l4', level: 4, label: 'Sensitive',    icon: 'shield', desc: 'Regulated financial data: scores, transactions, fraud signals.', gated: true },
+  { value: 'l5', level: 5, label: 'Restricted',   icon: 'flag',   desc: 'Bureau PII: CPF, SCR, Cadastro Positivo, biometrics.', gated: true },
 ] as const;
 
 export const dataClassLabel = (v: string) => {

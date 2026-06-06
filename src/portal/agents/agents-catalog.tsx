@@ -8,12 +8,13 @@
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import {
-  Button, Icons, Avatar, Pill, Select, ToggleGroup, ToggleGroupItem,
+  Button, Icons, Avatar, Pill, ToggleGroup, ToggleGroupItem,
   Carousel, CarouselSlide, CarouselControls, CarouselDots,
+  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem,
 } from '@/ds/core';
 import { FPageHeader, FSearch } from '@/portal/shell/portal-shell';
 import { usePersistentState } from '@/portal/shell/use-persistent-state';
-import { AGENTS, type Agent } from '@/portal/data/agents';
+import { AGENTS, ARCHIVED_AGENTS, type Agent, type ArchivedAgent } from '@/portal/data/agents';
 
 const STAR_LIMIT = 10;
 const PAGE = 8; // load-more increment for the full list
@@ -189,11 +190,87 @@ const SOURCE_OPTIONS = [
   { value: 'collab', label: 'Collaborator' },
 ];
 
+// ── Archived agents — flat restorable list (mirrors the Chat archive) ──────────
+function ArchiveView({ onBack, onOpen }: { onBack: () => void; onOpen: (id: string) => void }) {
+  // Restoring un-archives an agent (rollback) — it leaves the archive list.
+  const [restored, setRestored] = React.useState<Set<string>>(new Set());
+  const [q, setQ] = React.useState('');
+  const all = ARCHIVED_AGENTS.filter((a) => !restored.has(a.id));
+  const s = q.trim().toLowerCase();
+  const rows = all.filter(
+    (a) => !s || a.name.toLowerCase().includes(s) || a.role.toLowerCase().includes(s) || a.desc.toLowerCase().includes(s),
+  );
+
+  return (
+    <>
+      <div style={{ marginBlockEnd: 'var(--space-2)' }}>
+        <Button type="button" variant="ghost" onClick={onBack} style={{ marginInlineStart: -8 }}>
+          <Icons.chevronLeft size={13} /> Back to agents
+        </Button>
+      </div>
+      <FPageHeader
+        title="Archived agents"
+        subtitle="Agents you've put away. They're hidden from the catalog and their live channels are paused. Restore one to roll it back into Agents."
+      />
+
+      {all.length > 0 && (
+        <div className="fp-toolbar">
+          <FSearch value={q} onChange={setQ} placeholder="Filter archived agents…" aria-label="Filter archived agents" className="fp-agents-search" />
+          <span className="fp-agents-count">{all.length} archived</span>
+        </div>
+      )}
+
+      {all.length === 0 ? (
+        <div className="fp-agents-empty">
+          <Icons.inbox size={28} />
+          <p>No archived agents.</p>
+          <span className="hint">Agents you archive will collect here.</span>
+        </div>
+      ) : rows.length === 0 ? (
+        <div className="fp-agents-empty">
+          <Icons.inbox size={28} />
+          <p>No archived agents match &ldquo;{q.trim()}&rdquo;.</p>
+        </div>
+      ) : (
+        <ul className="fp-agents-arc-list">
+          {rows.map((a: ArchivedAgent) => (
+            <li key={a.id} className="fp-agents-arc-row">
+              <Avatar name={a.name} size={36} />
+              <button type="button" className="fp-agents-arc-body" onClick={() => onOpen(a.id)} aria-label={`Open ${a.name}`}>
+                <span className="name">{a.name}{a.official && <Verified />}</span>
+                <span className="role">{a.role}</span>
+              </button>
+              <Pill tone="neutral" icon={<Icons.sparkle size={10} />} className="fp-agents-model fp-agents-arc-model">{a.model}</Pill>
+              <span className="fp-agents-arc-when">{a.archivedWhen}</span>
+              <Button
+                variant="ghost"
+                className="fp-agents-arc-restore"
+                onClick={() => setRestored((set) => new Set(set).add(a.id))}
+                title="Restore — move back to Agents"
+              >
+                <Icons.undo size={13} /> Restore
+              </Button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
+}
+
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function AgentsCatalog() {
   const router = useRouter();
   const [q, setQ] = React.useState('');
+  // Catalog ⇄ archived list. Opens straight into the archive when the URL carries
+  // ?archived=1 (the agent-detail Archive action routes here).
+  const [view, setView] = React.useState<'catalog' | 'archive'>('catalog');
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('archived')) {
+      setView('archive');
+    }
+  }, []);
   const [mode, setMode] = usePersistentState<'grid' | 'list'>('forge.agents.mode', 'grid');
   const [starredIds, setStarredIds] = usePersistentState<string[]>('forge.agents.starred', SEED_STARRED);
   const [visible, setVisible] = React.useState(PAGE);
@@ -242,6 +319,18 @@ export default function AgentsCatalog() {
 
   const searching = query.length > 0;
 
+  if (view === 'archive') {
+    return (
+      <ArchiveView
+        onBack={() => {
+          setView('catalog');
+          if (typeof window !== 'undefined' && window.location.search) window.history.replaceState(null, '', '/portal/agents');
+        }}
+        onOpen={(id) => router.push('/portal/agents/' + id)}
+      />
+    );
+  }
+
   return (
     <>
       <FPageHeader
@@ -250,7 +339,9 @@ export default function AgentsCatalog() {
         subtitle="Pre-built assistants scoped to a domain — official ones are built by Equifax; the rest are shared by your teammates. Star up to 10 for quick access. Open one to start a chat already grounded in its context."
         actions={
           <>
+            {/* Right→left button hierarchy: ember CTA · outline secondary · ghost tertiary. */}
             <Button type="button" variant="ghost"><Icons.book size={13} /> Docs</Button>
+            <Button type="button" variant="outline" onClick={() => setView('archive')}><Icons.inbox size={13} /> Archive</Button>
             <Button type="button" variant="ember" onClick={() => router.push('/portal/agents/new')}><Icons.plus size={13} /> New agent</Button>
           </>
         }
@@ -328,15 +419,25 @@ export default function AgentsCatalog() {
               title="All agents"
               count={allList.length}
               right={
-                <Select
-                  size="sm"
-                  width="168px"
-                  value={source}
-                  onValueChange={(v) => setSource(v as 'all' | 'official' | 'collab')}
-                  options={SOURCE_OPTIONS}
-                  leadingIcon={Icons.filter}
-                  aria-label="Filter by source"
-                />
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button type="button" className="fp-agents-source" aria-label="Filter by source">
+                      {SOURCE_OPTIONS.find((o) => o.value === source)?.label ?? 'All sources'}
+                      <Icons.chevronDown size={13} />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuRadioGroup
+                      value={source}
+                      onValueChange={(v) => setSource(v as 'all' | 'official' | 'collab')}
+                      indicator="check"
+                    >
+                      {SOURCE_OPTIONS.map((o) => (
+                        <DropdownMenuRadioItem key={o.value} value={o.value}>{o.label}</DropdownMenuRadioItem>
+                      ))}
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               }
             />
             {mode === 'grid' ? (

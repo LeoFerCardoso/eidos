@@ -635,7 +635,16 @@ export default function NewAgent({ editId }: { editId?: string } = {}) {
           className="fp-wizard-levels"
           options={DATA_CLASSES.map((d) => ({
             value: d.value,
-            title: <span className="fp-wizard-level-t">{ICON(d.icon, 15)} Level {d.level} · {d.label}</span>,
+            title: (
+              <span className="fp-wizard-level-t">
+                {ICON(d.icon, 15)} Level {d.level} · {d.label}
+                {d.gated && (
+                  <span className="fp-wizard-level-gate">
+                    {ICON('shield', 12)} Restricted to security approval
+                  </span>
+                )}
+              </span>
+            ),
             description: d.desc,
           }))}
         />
@@ -769,7 +778,7 @@ export default function NewAgent({ editId }: { editId?: string } = {}) {
           <h1>New agent</h1>
           <p className="lede">Define an assistant scoped to a domain: its instructions, the model it runs on, the capabilities and knowledge it uses, and the apps it can call.</p>
         </div>
-        <Button variant="ghost" size="sm" asChild><Link href="/portal/agents"><Icons.x size={14} /> Cancel</Link></Button>
+        <Button variant="ghost" asChild><Link href="/portal/agents"><Icons.x size={14} /> Cancel</Link></Button>
       </header>
 
       <div className="fp-wizard-body">
@@ -786,7 +795,7 @@ export default function NewAgent({ editId }: { editId?: string } = {}) {
                 onClick={() => goto(i)}
                 aria-current={state === 'active' ? 'step' : undefined}
               >
-                <span className="mk">{state === 'done' ? <Icons.check size={13} /> : i + 1}</span>
+                <span className="mk">{state === 'done' ? <Icons.check size={14} strokeWidth={3} /> : i + 1}</span>
                 <span className="tx"><span className="t">{s.title}</span><span className="s">{s.sub}</span></span>
               </button>
             );

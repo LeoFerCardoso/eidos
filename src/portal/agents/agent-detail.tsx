@@ -226,7 +226,7 @@ export default function AgentDetail({ id }: { id: string }) {
       <div className="fp-agents-empty" style={{ padding: '64px 0' }}>
         <Icons.sparkle size={28} />
         <p>No agent with id &ldquo;{id}&rdquo;.</p>
-        <Button variant="ghost" size="sm" asChild><Link href="/portal/agents"><Icons.chevronLeft size={13} /> Back to agents</Link></Button>
+        <Button variant="ghost" asChild><Link href="/portal/agents"><Icons.chevronLeft size={13} /> Back to agents</Link></Button>
       </div>
     );
   }

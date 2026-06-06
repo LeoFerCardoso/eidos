@@ -59,4 +59,15 @@ export const AGENTS: Agent[] = [
   { id: 'apicontract',name: 'API Contract',     role: 'OpenAPI · breaking changes', desc: 'Diffs an API change against its consumers and flags anything that would break a downstream integration.',            model: 'Sonnet 4.6', tools: 4, chats: 21, updated: '4d ago',    official: false, author: 'Pedro Alves', output: 'json', status: 'active', version: 'v1.2.1', tags: ['OpenAPI', 'contracts', 'breaking-changes'], created: 'May 2025' },
 ];
 
-export const getAgent = (id: string): Agent | undefined => AGENTS.find((a) => a.id === id);
+// Archived agents — hidden from the catalog, restorable. Same shape as a live
+// agent plus when it was archived (mirrors the Chat archive's restorable list).
+export type ArchivedAgent = Agent & { archivedWhen: string };
+
+export const ARCHIVED_AGENTS: ArchivedAgent[] = [
+  { id: 'legacy-score', name: 'Legacy Score Bot',  role: 'Models · v1 engine',     desc: 'Answered questions against the retired v1 score engine. Superseded by Score Reviewer.',        model: 'Haiku 4.5',  tools: 3, chats: 58, updated: 'Archived', official: true,  output: 'conversation', status: 'draft', version: 'v0.9.0', tags: ['scoring', 'legacy'], created: 'Nov 2024', archivedWhen: 'Archived 2w ago' },
+  { id: 'pix-throttle', name: 'Pix Throttle Aide', role: 'Incidents · Pix rail',   desc: 'One-off helper built during the 06/04 Pix spike to tune offline-path throttling. No longer needed.', model: 'Sonnet 4.6', tools: 4, chats: 12, updated: 'Archived', official: false, author: 'Diego Ferreira', output: 'conversation', status: 'draft', version: 'v0.3.0', tags: ['incidents', 'pix'], created: 'Apr 2025', archivedWhen: 'Archived 3w ago' },
+  { id: 'old-relnotes', name: 'Changelog Drafter', role: 'Changelogs · GMUD (old)', desc: 'Earlier release-notes prototype. Replaced by Release Notes once GMUD parsing landed.',             model: 'Haiku 4.5',  tools: 2, chats: 31, updated: 'Archived', official: false, author: 'Bruno Mendes', output: 'document', status: 'draft', version: 'v0.6.2', tags: ['changelog', 'docs'], created: 'Feb 2025', archivedWhen: 'Archived 1mo ago' },
+];
+
+export const getAgent = (id: string): Agent | undefined =>
+  AGENTS.find((a) => a.id === id) ?? ARCHIVED_AGENTS.find((a) => a.id === id);

@@ -417,7 +417,7 @@ function ConfigForm({ template, onCancel, onProvision }: { template: string; onC
     <>
       {/* Back link above the title (in place of the eyebrow) */}
       <div style={{ marginBlockEnd: 'var(--space-2)' }}>
-        <Button type="button" variant="ghost" size="sm" onClick={onCancel} style={{ marginInlineStart: -8 }}>
+        <Button type="button" variant="ghost" onClick={onCancel} style={{ marginInlineStart: -8 }}>
           <Icons.chevronLeft size={13} /> Back to templates
         </Button>
       </div>

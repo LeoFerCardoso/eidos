@@ -881,7 +881,6 @@ const ArchiveView = ({ onOpen }: { onOpen: (id: string) => void }) => {
               <span className="fp-chat-arc-when">{c.when}</span>
               <Button
                 variant="ghost"
-                size="sm"
                 className="fp-chat-arc-restore"
                 onClick={() => setRestored((s) => new Set(s).add(c.id))}
                 title="Restore — move back to Chats"
