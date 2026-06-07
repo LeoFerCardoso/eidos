@@ -2982,7 +2982,9 @@ body:active::-webkit-scrollbar-thumb,
   padding-block: 18px; padding-inline: 22px 56px; margin-block-end: 40px;
   border-radius: var(--radius-2xl, 18px);
   border: 1px solid transparent;
-  background: var(--surface);
+  /* Clean, dark base (page --bg) so the copy side reads as a real token, not a
+     muddy grey from cells bleeding through; the gleam border frames it. */
+  background: var(--bg);
   color: var(--fg);
 }
 /* Animatable angle for the conic gleam (registered so it can be tweened). */
@@ -3024,20 +3026,21 @@ body:active::-webkit-scrollbar-thumb,
   position: absolute; inset: 0; z-index: 0; inline-size: 100%; block-size: 100%;
   pointer-events: none;
 }
-/* Copy scrim — fades the surface back in over the inline-start so the title +
-   description keep contrast over the brighter cells, without hiding the grid. */
+/* Copy scrim — paints the clean dark base back over the inline-start so the
+   title + description sit on solid --bg (no cell bleed), fading out before the
+   bright cells on the inline-end. */
 .fp-ai-banner::after {
   content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background: linear-gradient(to right,
-    color-mix(in oklch, var(--surface) 90%, transparent) 0%,
-    color-mix(in oklch, var(--surface) 64%, transparent) 36%,
-    transparent 64%);
+    var(--bg) 0%,
+    color-mix(in oklch, var(--bg) 72%, transparent) 38%,
+    transparent 62%);
 }
 [dir="rtl"] .fp-ai-banner::after {
   background: linear-gradient(to left,
-    color-mix(in oklch, var(--surface) 90%, transparent) 0%,
-    color-mix(in oklch, var(--surface) 64%, transparent) 36%,
-    transparent 64%);
+    var(--bg) 0%,
+    color-mix(in oklch, var(--bg) 72%, transparent) 38%,
+    transparent 62%);
 }
 /* Per-cell flicker — base opacity carried by --mx (set inline, seeded per cell). */
 .fp-ai-banner-mosaic .fp-flick {
