@@ -3780,3 +3780,7 @@ body:active::-webkit-scrollbar-thumb,
   color: var(--ember); background: var(--ember-soft); border-radius: var(--radius-sm, 4px);
   vertical-align: middle;
 }
+
+/* Buckets (/portal/buckets) — small extras (reuses engine bars + signals). */
+.fp-class { display: inline-flex; align-items: center; gap: 7px; font-size: var(--text-sm); color: var(--fg-muted); white-space: nowrap; }
+.fp-stale-cost { font-size: var(--text-xs); color: var(--fg-muted); white-space: nowrap; }
