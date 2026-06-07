@@ -84,7 +84,7 @@ const RAIL: RailItem[] = [
   { key: 'dora',       icon: 'gauge',      label: 'DORA',          href: '/portal/dora'   },
   { key: 'scorecards', icon: 'score',      label: 'Scorecards',    href: '/portal/scorecards' },
   { key: 'incidents',  icon: 'incident',   label: 'Incidents',     href: '/portal/incidents' },
-  { key: 'compliance', icon: 'compliance', label: 'LGPD & Audit'                  },
+  { key: 'compliance', icon: 'compliance', label: 'LGPD & Audit',  href: '/portal/compliance' },
 ];
 
 // ── Active key ────────────────────────────────────────────────────────────────
@@ -109,6 +109,7 @@ const CRUMB_LABELS: Record<string, string> = {
   pipelines:     'Pipelines',
   incidents:     'Incidents',
   fraud:         'Fraud & Risk',
+  compliance:    'LGPD & Audit',
   notifications: 'Notifications',
   chat:          'Chat',
 };

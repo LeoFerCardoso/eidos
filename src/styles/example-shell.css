@@ -3599,3 +3599,13 @@ body:active::-webkit-scrollbar-thumb,
 .fp-signal-id { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .fp-signal-label { font-weight: 600; font-size: var(--text-sm); }
 .fp-signal-detail { font-size: var(--text-xs); color: var(--fg-muted); }
+
+/* ════════════════════════════════════════════════════════════════════════
+   LGPD & Audit (/portal/compliance)
+   ════════════════════════════════════════════════════════════════════════ */
+
+.fp-actor { display: inline-flex; align-items: center; gap: 8px; }
+.fp-actor-ic { color: var(--fg-faint); display: inline-flex; flex-shrink: 0; }
+.fp-ok { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-sm); color: var(--fg-muted); }
+.fp-row-flag { background: color-mix(in oklch, var(--danger) 7%, transparent); }
+.fp-row-flag:hover { background: color-mix(in oklch, var(--danger) 11%, transparent); }
