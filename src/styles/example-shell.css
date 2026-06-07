@@ -3108,10 +3108,30 @@ body:active::-webkit-scrollbar-thumb,
   display: flex; align-items: center; gap: 16px;
   padding-block: 20px; padding-inline: 24px; margin-block-end: 40px;
   border-radius: var(--radius-2xl, 18px);
-  border: 1px solid var(--border);
+  border: 1px solid transparent;
   background: var(--bg-elevated);
   color: var(--fg);
   min-block-size: 96px;
+}
+/* Animated border — the same colour effect as the background: a left-to-right
+   wave through the three theme accents, masked to a thin ring (padding-box XOR
+   border-box). background-position flows the gradient; reduced-motion freezes it. */
+.fp-aip-banner::before {
+  content: ''; position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  border-radius: inherit; padding: 1.5px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+  background-size: 200% 100%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  animation: fp-aip-border-flow 7s linear infinite;
+}
+@keyframes fp-aip-border-flow {
+  to { background-position: -200% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fp-aip-banner::before { animation: none; }
 }
 /* The pattern SVG fills the banner behind the copy. */
 .fp-aip-banner .fp-aip {

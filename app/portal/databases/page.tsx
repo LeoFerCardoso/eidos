@@ -38,11 +38,8 @@ const ENV_OPTS = [
 ];
 const maxEngine = Math.max(...ENGINE_MIX.map((e) => e.sizeGb));
 
-// Forge AI pattern banner (cloned from the AI-Insights hero) — session-only
-// dismiss so it returns on refresh.
+// Forge AI pattern banner (cloned from the AI-Insights hero).
 function DataBanner() {
-  const [dismissed, setDismissed] = React.useState(false);
-  if (dismissed) return null;
   return (
     <div className="fp-aip-banner" role="note">
       <AiPattern />
@@ -56,10 +53,7 @@ function DataBanner() {
           A retention policy on <span className="fp-aip-hl mono">analytics_dw</span> partitions over 18 months cuts cost without touching regulated data.
         </p>
       </div>
-      <Button variant="outline" size="sm" className="fp-aip-banner-action">Review retention</Button>
-      <button type="button" className="fp-aip-banner-close" onClick={() => setDismissed(true)} aria-label="Dismiss banner">
-        <Icons.x size={16} />
-      </button>
+      <Button variant="outline" size="md" className="fp-aip-banner-action">Review retention</Button>
     </div>
   );
 }
