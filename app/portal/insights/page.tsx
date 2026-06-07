@@ -8,6 +8,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import {
   AILabel,
+  AILabelWithPopover,
   Carousel,
   CarouselSlide,
   CarouselControls,
@@ -318,7 +319,7 @@ export default function InsightsPage() {
         <span className="fp-filter-select">
           <Select value={tribe} onValueChange={setTribe} options={tribeOptions} width="170px" />
         </span>
-        <span className="fp-radar-count">{filtered.length} of {OPEN_INSIGHTS.length} risks</span>
+        <span className="fp-radar-count">{filtered.length === OPEN_INSIGHTS.length ? `${filtered.length} risks` : `${filtered.length} of ${OPEN_INSIGHTS.length} risks`}</span>
       </div>
 
       {/* Triage — grouped by horizon, most urgent first. */}
@@ -362,7 +363,7 @@ export default function InsightsPage() {
                 <div key={it.id} className="fp-resolved-row">
                   <span className="fp-resolved-ico"><Ico size={14} /></span>
                   <span className="fp-resolved-title">{it.title}</span>
-                  <span className="fp-resolved-meta">{it.resolvedBy} · {it.resolvedWhen}</span>
+                  <span className="fp-resolved-meta"><AILabel variant="dot" size="sm" /> {it.resolvedBy} · {it.resolvedWhen}</span>
                 </div>
               );
             })}
@@ -375,12 +376,12 @@ export default function InsightsPage() {
         <aside className="fp-ins-right">
           {/* Big insights — 1 per view */}
           <section className="fp-rcar">
-            <div className="fp-rcar-head"><span className="fp-section-title"><Icons.sparkle size={13} /> Big insights</span></div>
+            <div className="fp-rcar-head"><span className="fp-section-title"><Icons.layers size={13} /> Big insights</span></div>
             <Carousel label="Big insights" opts={{ align: 'start' }}>
               {/* 1 · arc gauge */}
               <CarouselSlide width="100%">
                 <article className="fp-bslide">
-                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.sparkle size={13} /> AI INSIGHT</span><h3 className="fp-bslide-title">Agent autonomy this month</h3></div>
+                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.agent size={13} /> AUTONOMY</span><h3 className="fp-bslide-title">Agent autonomy this month</h3><AILabel variant="dot" /></div>
                   <div className="fp-bslide-body"><ArcGauge pct={78} caption="resolved by agents" /></div>
                   <p className="fp-bslide-foot">Agents resolved <strong>78%</strong> of your work, <em>1.4×</em> the alliance median. Your job was steering, not typing.</p>
                 </article>
@@ -388,7 +389,7 @@ export default function InsightsPage() {
               {/* 2 · area trend */}
               <CarouselSlide width="100%">
                 <article className="fp-bslide">
-                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.activity size={13} /> THROUGHPUT</span><h3 className="fp-bslide-title">Changes shipped · last 7 days</h3></div>
+                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.activity size={13} /> THROUGHPUT</span><h3 className="fp-bslide-title">Changes shipped · last 7 days</h3><AILabel variant="dot" /></div>
                   <div className="fp-bslide-body"><AreaViz data={[12, 15, 14, 18, 17, 22, 19, 24, 21, 27, 25, 31]} big="31" /></div>
                   <p className="fp-bslide-foot"><strong>31</strong> changes merged with <strong>0</strong> regressions, mostly dep-bumps, test-gen and CVE patches.</p>
                 </article>
@@ -396,7 +397,7 @@ export default function InsightsPage() {
               {/* 3 · ADR bars */}
               <CarouselSlide width="100%">
                 <article className="fp-bslide">
-                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.compliance size={13} /> GOVERNANCE</span><h3 className="fp-bslide-title">ADR adherence · 28 services</h3></div>
+                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.compliance size={13} /> GOVERNANCE</span><h3 className="fp-bslide-title">ADR adherence · 28 services</h3><AILabel variant="dot" /></div>
                   <div className="fp-bslide-body fp-bslide-body--list">
                     <div className="fp-adr-list">
                       {ADRS.slice(0, 4).map((adr) => (
@@ -417,7 +418,7 @@ export default function InsightsPage() {
               {/* 4 · radar */}
               <CarouselSlide width="100%">
                 <article className="fp-bslide">
-                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.gauge size={13} /> ESTATE HEALTH</span><h3 className="fp-bslide-title">Health across dimensions</h3></div>
+                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.gauge size={13} /> ESTATE HEALTH</span><h3 className="fp-bslide-title">Health across dimensions</h3><AILabel variant="dot" /></div>
                   <div className="fp-bslide-body"><RadarViz axes={[{ label: 'Coverage', value: 88 }, { label: 'SLO', value: 92 }, { label: 'Security', value: 81 }, { label: 'Tests', value: 86 }, { label: 'Docs', value: 64 }]} /></div>
                   <p className="fp-bslide-foot">Strong on <em>SLO</em> and coverage; <strong>Docs at 64%</strong> is the gap the agents are closing next.</p>
                 </article>
@@ -425,7 +426,7 @@ export default function InsightsPage() {
               {/* 5 · big formatted text */}
               <CarouselSlide width="100%">
                 <article className="fp-bslide fp-bslide--mesh">
-                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.trending size={13} /> AI LEVERAGE</span></div>
+                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.trending size={13} /> LEVERAGE</span><AILabel variant="dot" /></div>
                   <div className="fp-bslide-body fp-bslide-body--text">
                     <p className="fp-bigtext"><strong>Last month</strong>, automation saved your team <em>48.3 hours</em> of manual work.</p>
                   </div>
@@ -438,6 +439,7 @@ export default function InsightsPage() {
                   <div className="fp-bslide-head">
                     <span className="fp-bslide-eyebrow"><Icons.gitFork size={13} /> ARCHITECTURE</span>
                     <h3 className="fp-bslide-title">Live service graph</h3>
+                    <AILabel variant="dot" />
                   </div>
                   <div className="fp-bslide-body fp-bslide-body--graph"><MermaidViz chart={ARCH_MERMAID} /></div>
                   <p className="fp-bslide-foot">Drift detected: <em>acerta → konduto</em> is a sync single point of failure for 4 services.</p>
@@ -450,7 +452,7 @@ export default function InsightsPage() {
 
           {/* Metrics — 2 per view */}
           <section className="fp-rcar">
-            <div className="fp-rcar-head"><span className="fp-section-title"><Icons.gauge size={13} /> Radar at a glance</span></div>
+            <div className="fp-rcar-head"><span className="fp-section-title"><Icons.gauge size={13} /> Radar at a glance</span><AILabel variant="mark" size="sm" /></div>
             <Carousel label="Radar metrics" opts={{ align: 'start' }}>
               <CarouselSlide width="calc(50% - 6px)"><MetricTile label="Open risks" to={OPEN_INSIGHTS.length} delta="+2 wk" good={false} cap={`${crit} critical · ${high} high`} bars={[6, 7, 6, 8, 7, 9, 10]} /></CarouselSlide>
               <CarouselSlide width="calc(50% - 6px)"><MetricTile label="Within 30 days" to={within30} delta="+1 wk" good={false} cap="acting window" bars={[5, 6, 6, 7, 7, 8, 8]} /></CarouselSlide>
@@ -497,7 +499,7 @@ export default function InsightsPage() {
                     <div className="fp-card fp-cmp">
                       <div className="fp-cmp-title">{card.title}</div>
                       <div className="fp-cmp-big">{card.big}</div>
-                      <div className="fp-cmp-sub">{card.sub}</div>
+                      <div className="fp-cmp-sub">{card.sub} <AILabel variant="mark" size="sm" /></div>
                       <div className="fp-cmp-bars">
                         {card.cohorts.map((c) => (
                           <div key={c.label} className={`fp-cmp-row${c.highlight ? ' is-you' : ''}`}>
@@ -551,7 +553,8 @@ function InsightRow({ it }: { it: Insight }) {
         <p className="fp-insight-desc">{it.evidence}</p>
         <div className="fp-insight-rem-row">
           <div className="fp-insight-rem">
-            <AILabel variant="dot" /> <span>{it.remediation}</span>
+            <AILabelWithPopover variant="dot" label="Proposed fix" model="eidos-ai/forge-agent" ts="moments ago" confidence={0.9}>The Forge agent drafted this remediation. Review the plan before steering.</AILabelWithPopover>
+            <span>{it.remediation}</span>
           </div>
           <Link href={it.href} className="ds-link-inline fp-insight-steer">Steer<Icons.chevronRight size={12} /></Link>
         </div>

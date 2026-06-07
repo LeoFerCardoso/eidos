@@ -2952,7 +2952,7 @@ body:active::-webkit-scrollbar-thumb,
 .fp-radar-bucket.u-warm { color: var(--warning); }
 .fp-radar-bucket.u-cool { color: var(--fg-muted); }
 .fp-radar-group-head .fp-section-title { display: inline-flex; align-items: center; gap: 7px; }
-.fp-radar-group-head .fp-section-title svg { color: var(--ember); }
+.fp-radar-group-head .fp-section-title svg { color: var(--fg-faint); }
 .fp-radar-group-count {
   font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint);
   background: var(--surface-active); border-radius: var(--radius-md, 6px);
@@ -3107,7 +3107,7 @@ body:active::-webkit-scrollbar-thumb,
 /* ── Big-Insight slides v2: title (top) → content → summary (bottom-left) ─────── */
 .fp-bslide {
   position: relative; isolation: isolate; overflow: hidden;
-  inline-size: 100%; block-size: 100%; min-block-size: 420px;
+  inline-size: 100%; block-size: 100%; min-block-size: 340px;
   padding: 22px 24px; border: 1px solid var(--border); border-radius: var(--radius-2xl, 18px);
   background: var(--surface); display: flex; flex-direction: column; gap: 14px;
 }
@@ -3115,7 +3115,10 @@ body:active::-webkit-scrollbar-thumb,
 .fp-bslide--dots { background-image: radial-gradient(var(--border) 1px, transparent 1px); background-size: 22px 22px; }
 .fp-bslide--lines { background-image: repeating-linear-gradient(48deg, color-mix(in oklch, var(--ember) 6%, transparent) 0 1px, transparent 1px 13px); }
 .fp-bslide-head { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 10px; }
-.fp-bslide-eyebrow { flex-basis: 100%; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ember); }
+/* AI provenance flag trails the slide head (ember = the one reserved accent). */
+.fp-bslide-head .ai-label { margin-inline-start: auto; }
+/* Topical eyebrow is NEUTRAL — ember is reserved for the AI provenance flag. */
+.fp-bslide-eyebrow { flex-basis: 100%; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); }
 .fp-bslide-title { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; flex: 1; min-inline-size: 0; }
 .fp-bslide-action { margin-inline-start: auto; inline-size: 28px; block-size: 28px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--fg-muted); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: color .12s, border-color .12s; }
 .fp-bslide-action:hover { color: var(--ember); border-color: var(--border-strong); }
@@ -3164,9 +3167,9 @@ body:active::-webkit-scrollbar-thumb,
 .fp-ins-right .carx-arrow { opacity: 0.22; transition: opacity .16s ease, border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
 .fp-ins-right .fp-rcar:hover .carx-arrow,
 .fp-ins-right .carx-arrow:focus-visible { opacity: 1; }
-.fp-rcar-head { margin-block-end: 10px; }
+.fp-rcar-head { margin-block-end: 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .fp-rcar-head .fp-section-title { display: inline-flex; align-items: center; gap: 7px; margin-block-end: 0; }
-.fp-rcar-head .fp-section-title svg { color: var(--ember); }
+.fp-rcar-head .fp-section-title svg { color: var(--fg-faint); }
 /* metric tiles get compact inside the narrow 2-up carousel */
 .fp-ins-right .fp-mkpi { padding: 14px; }
 .fp-ins-right .fp-mkpi-value { font-size: 24px; }
