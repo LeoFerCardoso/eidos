@@ -4,6 +4,7 @@
 // generated DETERMINISTICALLY from the agent (a seeded PRNG keyed on the id) so
 // SSR and client render identically and the data is stable across reloads.
 import type { Agent, AgentOutput } from './agents';
+import { SKILLS } from './skills';
 
 // ── Response kind ─────────────────────────────────────────────────────────────
 
@@ -313,30 +314,10 @@ export function channelsFor(agent: Agent): Channel[] {
 
 export interface SkillDef { name: string; icon: string; desc: string }
 
-export const SKILL_POOL: SkillDef[] = [
-  { name: 'Postmortem writer', icon: 'edit', desc: 'Drafts a blameless postmortem from the incident timeline.' },
-  { name: 'Root-cause analysis', icon: 'target', desc: 'Correlates symptoms to a likely cause across the estate.' },
-  { name: 'Runbook authoring', icon: 'book', desc: 'Turns a fix into a repeatable runbook.' },
-  { name: 'Rule tuning', icon: 'zap', desc: 'Simulates rule-threshold changes against traffic.' },
-  { name: 'SCR layout', icon: 'layers', desc: 'Knows the SCR record layout and field contracts.' },
-  { name: 'LGPD remediation', icon: 'shield', desc: 'Drafts consent-scope remediation steps.' },
-  { name: 'Cost optimization', icon: 'gauge', desc: 'Finds the safest places to trim spend.' },
-  { name: 'Reason-code analysis', icon: 'score', desc: 'Explains score reason-code drift.' },
-  { name: 'SLO design', icon: 'target', desc: 'Sets SLO targets and burn-rate alerts per service.' },
-  { name: 'Trace analysis', icon: 'activity', desc: 'Walks a distributed trace and ranks the slowest spans.' },
-  { name: 'Query optimization', icon: 'database', desc: 'Rewrites slow SQL and proposes indexes.' },
-  { name: 'Chargeback evidence', icon: 'doc', desc: 'Assembles a dispute evidence packet from the trail.' },
-  { name: 'Feature freshness', icon: 'refresh', desc: 'Checks Ignite feature lineage and staleness.' },
-  { name: 'PII discovery', icon: 'eye', desc: 'Scans logs and payloads for unregistered PII.' },
-  { name: 'Release notes', icon: 'book', desc: 'Turns a diff and its GMUD into clean release notes.' },
-  { name: 'Flaky test triage', icon: 'flag', desc: 'Quarantines the flakiest tests and finds the cause.' },
-  { name: 'Capacity planning', icon: 'gauge', desc: 'Projects load and right-sizes the fleet.' },
-  { name: 'Threat modeling', icon: 'shield', desc: 'Maps the attack surface and proposes mitigations.' },
-  { name: 'Schema diffing', icon: 'braces', desc: 'Diffs an API change against its consumers.' },
-  { name: 'Incident comms', icon: 'chat', desc: 'Drafts status-page and stakeholder updates.' },
-  { name: 'Deploy gating', icon: 'pipeline', desc: 'Checks quality gates before a release ships.' },
-  { name: 'Anomaly detection', icon: 'activity', desc: 'Flags metric anomalies against the baseline.' },
-];
+// The wizard's skill pool is derived from the Skills catalog (src/portal/data/
+// skills.ts) so the catalog is the single source: anything published there is
+// selectable when creating/editing an agent.
+export const SKILL_POOL: SkillDef[] = SKILLS.map(({ name, icon, desc }) => ({ name, icon, desc }));
 
 export function skillsFor(agent: Agent): SkillDef[] {
   const rng = makeRng(hashSeed(agent.id + ':skills'));

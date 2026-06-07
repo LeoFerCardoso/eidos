@@ -3609,3 +3609,37 @@ body:active::-webkit-scrollbar-thumb,
 .fp-ok { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-sm); color: var(--fg-muted); }
 .fp-row-flag { background: color-mix(in oklch, var(--danger) 7%, transparent); }
 .fp-row-flag:hover { background: color-mix(in oklch, var(--danger) 11%, transparent); }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Skills marketplace (/portal/skills)
+   ════════════════════════════════════════════════════════════════════════ */
+
+.fp-skill {
+  display: flex; flex-direction: column; gap: 9px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  block-size: 100%;
+  transition: border-color .12s ease;
+}
+.fp-skill:hover { border-color: color-mix(in oklch, var(--ember) 32%, var(--border)); }
+.fp-skill-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.fp-skill-ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  inline-size: 34px; block-size: 34px; border-radius: var(--radius-lg);
+  background: var(--ember-soft); color: var(--ember); flex-shrink: 0;
+}
+.fp-skill-name { font-weight: 600; font-size: var(--text-md); letter-spacing: -0.01em; }
+.fp-skill-desc {
+  margin: 0; font-size: var(--text-sm); line-height: 1.5; color: var(--fg-muted);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  min-block-size: calc(1.5em * 2);
+}
+.fp-skill-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: var(--text-xs); }
+.fp-skill-meta { display: inline-flex; align-items: center; gap: 5px; color: var(--fg-muted); font-family: var(--font-mono); }
+.fp-skill-meta svg { color: var(--ember); }
+.fp-skill-dot { color: var(--fg-faint); }
+.fp-skill-cat { color: var(--fg-faint); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.04em; }
+.fp-skill-actions { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-block-start: auto; padding-block-start: 4px; }
+.fp-skill-ver { font-size: var(--text-xs); color: var(--fg-faint); }
