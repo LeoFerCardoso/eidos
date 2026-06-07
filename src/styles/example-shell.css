@@ -2958,6 +2958,8 @@ body:active::-webkit-scrollbar-thumb,
   background: var(--surface-active); border-radius: var(--radius-md, 6px);
   padding-inline: 7px; padding-block: 1px;
 }
+.fp-filter-clear { margin-inline-start: auto; }
+.fp-filter-clear + .fp-radar-count { margin-inline-start: 0; }
 .fp-radar-count { margin-inline-start: auto; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); }
 
 /* Radar row: a compact severity tag + the evidence description. */

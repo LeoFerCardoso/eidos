@@ -9,6 +9,7 @@ import Link from 'next/link';
 import {
   AILabel,
   AILabelWithPopover,
+  Button,
   Carousel,
   CarouselSlide,
   CarouselControls,
@@ -43,8 +44,10 @@ const INSIGHT_ICON: Record<InsightType, keyof typeof Icons> = {
 const TYPE_LABEL: Record<InsightType, string> = {
   slo: 'SLO', spof: 'SPOF', drift: 'Drift', lgpd: 'LGPD', scaling: 'Scaling', security: 'Security',
 };
-const AUTONOMY: Record<Autonomy, { label: string; tone: 'success' | 'ember' | 'warning' }> = {
-  'agent-can-resolve': { label: 'Agent can resolve', tone: 'success' },
+// agent-can-resolve is "nothing for you to do" → quiet neutral pill; colour is
+// reserved for the rows that actually need a human (needs-ok, arch call).
+const AUTONOMY: Record<Autonomy, { label: string; tone: 'neutral' | 'ember' | 'warning' }> = {
+  'agent-can-resolve': { label: 'Agent can resolve', tone: 'neutral' },
   'needs-ok': { label: 'Needs your OK', tone: 'ember' },
   'needs-arch-decision': { label: 'Architecture call', tone: 'warning' },
 };
@@ -319,6 +322,11 @@ export default function InsightsPage() {
         <span className="fp-filter-select">
           <Select value={tribe} onValueChange={setTribe} options={tribeOptions} width="170px" />
         </span>
+        {(type !== ALL || autonomy !== ALL || tribe !== ALL) && (
+          <Button variant="ghost" size="sm" className="fp-filter-clear" onClick={() => { setType(ALL); setAutonomy(ALL); setTribe(ALL); }}>
+            <Icons.x size={13} /> Clear
+          </Button>
+        )}
         <span className="fp-radar-count">{filtered.length === OPEN_INSIGHTS.length ? `${filtered.length} risks` : `${filtered.length} of ${OPEN_INSIGHTS.length} risks`}</span>
       </div>
 
