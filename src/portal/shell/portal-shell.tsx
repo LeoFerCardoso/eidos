@@ -90,8 +90,9 @@ const RAIL_SECTIONS: RailSection[] = [
   {
     label: 'Catalog',
     items: [
-      { key: 'catalog', icon: 'server',  label: 'Catalog',   href: '/portal/catalog' },
-      { key: 'create',  icon: 'package', label: 'Templates', href: '/portal/create' },
+      { key: 'catalog',   icon: 'server',  label: 'Catalog',   href: '/portal/catalog' },
+      { key: 'apis',      icon: 'braces',  label: 'APIs',      href: '/portal/apis' },
+      { key: 'create',    icon: 'package', label: 'Templates', href: '/portal/create' },
     ],
   },
   {
@@ -138,6 +139,7 @@ function activeKey(pathname: string): string {
 const CRUMB_LABELS: Record<string, string> = {
   portal:        'Forge',
   catalog:       'Catalog',
+  apis:          'APIs',
   agents:        'Agents',
   skills:        'Skills',
   contexts:      'Contexts',
