@@ -793,7 +793,10 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         <WorkspaceHeader collapsed={!sidebarOpen} current={workspace} onSelect={setWorkspace} />
 
         {/* Grouped nav — one SidebarSection per subject. Section labels show
-            when expanded and collapse to bare icon clusters in icon mode. */}
+            when expanded and collapse to bare icon clusters in icon mode. The
+            nav scrolls on its own (header + footer stay pinned) when the item
+            count exceeds the viewport, in both expanded and collapsed modes. */}
+        <div className="fp-rail-nav">
         {RAIL_SECTIONS.map((section, si) => (
           <SidebarSection key={section.label ?? `section-${si}`} label={section.label}>
             {section.items.map((it) => {
@@ -831,6 +834,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
             })}
           </SidebarSection>
         ))}
+        </div>
 
         {/* Footer: brand mark only — Forge AI has moved to the topbar */}
         <SidebarFooter>

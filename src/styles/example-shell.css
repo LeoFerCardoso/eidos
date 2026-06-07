@@ -3789,3 +3789,24 @@ body:active::-webkit-scrollbar-thumb,
 .fp-tags { display: inline-flex; flex-wrap: wrap; gap: 4px; }
 .fp-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-muted); background: var(--surface-active); border-radius: var(--radius-sm, 4px); padding-block: 1px; padding-inline: 6px; }
 .fp-flat-tabs .eidos-tabpanel { margin-block-start: 14px; }
+
+/* ── Scrollable sidebar nav ───────────────────────────────────────────────────
+   The grouped nav can exceed the viewport height. Scroll just the nav region so
+   the workspace header (top) and brand footer (bottom) stay pinned. Works the
+   same expanded and collapsed (icon-only). The rail itself keeps overflow:hidden;
+   only .fp-rail-nav scrolls. */
+.fp-app > .sb-rail .fp-rail-nav {
+  flex: 1 1 auto;
+  min-block-size: 0;           /* lets the flex child shrink enough to scroll */
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.fp-app > .sb-rail .fp-rail-nav::-webkit-scrollbar { inline-size: 8px; }
+.fp-app > .sb-rail .fp-rail-nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.fp-app > .sb-rail .fp-rail-nav::-webkit-scrollbar-thumb:hover { background: var(--fg-faint); }
+/* Header band + footer never shrink, so the nav is the only thing that scrolls. */
+.fp-app > .sb-rail .sb-footer { flex-shrink: 0; }
