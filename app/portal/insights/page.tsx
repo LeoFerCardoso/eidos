@@ -254,8 +254,12 @@ function BannerMosaic() {
             corner to corner. Bound to theme tokens via style so it follows the
             active theme. */}
         <linearGradient id="fp-banner-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={W} y2={H}>
+          {/* Hold the accent through the scrim-covered left, then run the full
+              accent → complementary transition across the bright (visible) right
+              so BOTH hues read. */}
           <stop offset="0%" style={{ stopColor: 'var(--accent)' }} />
-          <stop offset="52%" style={{ stopColor: 'color-mix(in oklch, var(--accent), var(--accent-3))' }} />
+          <stop offset="58%" style={{ stopColor: 'var(--accent)' }} />
+          <stop offset="80%" style={{ stopColor: 'color-mix(in oklch, var(--accent), var(--accent-3))' }} />
           <stop offset="100%" style={{ stopColor: 'var(--accent-3)' }} />
         </linearGradient>
       </defs>
