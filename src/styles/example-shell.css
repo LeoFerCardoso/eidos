@@ -3675,3 +3675,58 @@ body:active::-webkit-scrollbar-thumb,
   inline-size: 28px; block-size: 28px; border-radius: var(--radius-md, 6px);
   background: var(--surface-active); color: var(--fg-muted); flex-shrink: 0; margin-block-start: 1px;
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Quality Gates (/portal/quality-gates + /portal/quality-gates/[pr])
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Risk-tone fills, shared by the CRS bar, factor bars and ladder dots. */
+.tone-risk-low  { background: var(--risk-low); }
+.tone-risk-med  { background: var(--risk-med); }
+.tone-risk-high { background: var(--risk-high); }
+.tone-risk-crit { background: var(--risk-crit); }
+
+/* Gate ladder (board). */
+.fp-gates { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.fp-gate { padding: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); border-inline-start: 3px solid var(--border); }
+.fp-gate.is-auto { border-inline-start-color: var(--risk-low); }
+.fp-gate.is-one { border-inline-start-color: var(--risk-med); }
+.fp-gate.is-two { border-inline-start-color: var(--risk-high); }
+.fp-gate.is-blocked { border-inline-start-color: var(--risk-crit); }
+.fp-gate-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-block-end: 8px; }
+.fp-gate-range { font-size: var(--text-xs); color: var(--fg-muted); }
+.fp-gate-blurb { margin: 0; font-size: var(--text-sm); line-height: 1.5; color: var(--fg-muted); }
+
+/* CRS cell (board table). */
+.fp-crs { display: inline-flex; align-items: center; gap: 10px; justify-content: flex-end; }
+.fp-crs-bar { inline-size: 90px; block-size: 6px; border-radius: var(--radius-full); background: var(--surface-active); overflow: hidden; }
+.fp-crs-fill { display: block; block-size: 100%; border-radius: var(--radius-full); }
+
+/* CRS hero (detail). */
+.fp-crs-hero { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; padding-block: 6px 14px; }
+/* The big readout lives in .fp-crs-read; suppress the gauge's built-in one to avoid a duplicate number. */
+.fp-crs-hero .score-speedo .ss-readout { display: none; }
+.fp-crs-read { flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 6px; }
+.fp-crs-num { font-size: var(--text-3xl); font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+.fp-crs-den { font-size: var(--text-lg); color: var(--fg-faint); font-weight: 500; }
+.fp-crs-rule { margin: 0; font-size: var(--text-sm); line-height: 1.5; color: var(--fg-muted); }
+
+/* CRS factor breakdown. */
+.fp-factors { display: flex; flex-direction: column; gap: 12px; border-block-start: 1px solid var(--border); padding-block-start: 14px; }
+.fp-factor { display: grid; grid-template-columns: 1fr 120px 44px; align-items: center; gap: 12px; }
+.fp-factor-id { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.fp-factor-label { font-weight: 600; font-size: var(--text-sm); }
+.fp-factor-detail { font-size: var(--text-xs); color: var(--fg-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-factor-bar { block-size: 6px; border-radius: var(--radius-full); background: var(--surface-active); overflow: hidden; }
+.fp-factor-fill { display: block; block-size: 100%; border-radius: var(--radius-full); }
+.fp-factor-pts { font-size: var(--text-sm); color: var(--fg-muted); text-align: end; }
+@media (max-width: 640px) { .fp-factor { grid-template-columns: 1fr 60px; } .fp-factor-bar { display: none; } }
+
+/* Gate ladder (detail aside). */
+.fp-ladder { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+.fp-ladder-row { display: flex; align-items: center; gap: 10px; padding-block: 8px; padding-inline: 8px; border-radius: var(--radius-md, 6px); font-size: var(--text-sm); color: var(--fg-muted); }
+.fp-ladder-row.is-current { background: var(--surface-active); color: var(--fg); font-weight: 600; }
+.fp-ladder-dot { inline-size: 9px; block-size: 9px; border-radius: var(--radius-full); flex-shrink: 0; }
+.fp-ladder-range { color: var(--fg-faint); font-size: var(--text-xs); inline-size: 78px; }
+.fp-ladder-label { flex: 1; }
+.fp-ladder-row svg { color: var(--ember); }
