@@ -3000,12 +3000,12 @@ body:active::-webkit-scrollbar-thumb,
   content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
   border-radius: inherit; padding: 1px;
   background: conic-gradient(from var(--fp-gleam-angle),
-    #FF6B35,
-    color-mix(in srgb, #FF6B35 28%, transparent),
-    #F0531F,
-    #C13584,
-    color-mix(in srgb, #C13584 28%, transparent),
-    #FF6B35);
+    var(--ember),
+    color-mix(in srgb, var(--ember) 28%, transparent),
+    var(--ember-deep),
+    var(--ember-glow),
+    color-mix(in srgb, var(--ember-glow) 28%, transparent),
+    var(--ember));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -3126,8 +3126,9 @@ body:active::-webkit-scrollbar-thumb,
 .fp-bslide--dots { background-image: radial-gradient(var(--border) 1px, transparent 1px); background-size: 22px 22px; }
 .fp-bslide--lines { background-image: repeating-linear-gradient(48deg, color-mix(in oklch, var(--ember) 6%, transparent) 0 1px, transparent 1px 13px); }
 .fp-bslide-head { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 10px; }
-/* AI provenance flag trails the slide head (ember = the one reserved accent). */
-.fp-bslide-head .ai-label { margin-inline-start: auto; }
+/* AI provenance flag pinned to the slide's top-inline-end corner (ember = the
+   one reserved accent). Sits beside the short eyebrow, clear of the title. */
+.fp-bslide-head .ai-label { position: absolute; inset-block-start: 16px; inset-inline-end: 16px; margin-inline-start: 0; z-index: 2; }
 /* Topical eyebrow is NEUTRAL — ember is reserved for the AI provenance flag. */
 .fp-bslide-eyebrow { flex-basis: 100%; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); }
 .fp-bslide-title { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; flex: 1; min-inline-size: 0; }

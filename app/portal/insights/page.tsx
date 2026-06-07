@@ -72,31 +72,41 @@ const BUCKETS: { key: string; label: string; match: (w: number) => boolean }[] =
 const ALL = 'All';
 
 // ── Mermaid diagram (transparent, client-only — Mermaid touches the DOM) ────────
+// Mermaid's API holds GLOBAL state, so two concurrent renders (React StrictMode's
+// dev double-invoke, carousel remounts, HMR) corrupt each other and leave a blank
+// slide. We therefore (a) initialise once and (b) serialise every render through a
+// module-level promise chain, with a fresh id per call.
+let mmdInit = false;
 let mmdCount = 0;
+let mmdChain: Promise<void> = Promise.resolve();
+
 function MermaidViz({ chart }: { chart: string }) {
   const [svg, setSvg] = React.useState<string | null>(null);
   React.useEffect(() => {
     let active = true;
-    // Fresh id every run so StrictMode's double-invoke (dev) never collides on a
-    // duplicate Mermaid render id (which throws and leaves the slide blank).
     const rid = 'fp-mmd-' + (++mmdCount);
-    import('mermaid').then(async (m) => {
-      m.default.initialize({
-        startOnLoad: false,
-        theme: 'base',
-        securityLevel: 'loose',
-        themeVariables: {
-          background: 'transparent',
-          primaryColor: 'rgba(255,255,255,0.04)',
-          primaryBorderColor: 'rgba(255,255,255,0.22)',
-          primaryTextColor: '#F2EEE8',
-          lineColor: 'rgba(255,255,255,0.30)',
-          fontFamily: 'var(--font-mono, ui-monospace, monospace)',
-          fontSize: '12px',
-        },
-      });
+    mmdChain = mmdChain.then(async () => {
+      if (!active) return;
       try {
-        const r = await m.default.render(rid, chart);
+        const m = (await import('mermaid')).default;
+        if (!mmdInit) {
+          m.initialize({
+            startOnLoad: false,
+            theme: 'base',
+            securityLevel: 'loose',
+            themeVariables: {
+              background: 'transparent',
+              primaryColor: 'rgba(255,255,255,0.04)',
+              primaryBorderColor: 'rgba(255,255,255,0.28)',
+              primaryTextColor: '#F2EEE8',
+              lineColor: 'rgba(255,255,255,0.32)',
+              fontFamily: 'var(--font-mono, ui-monospace, monospace)',
+              fontSize: '12px',
+            },
+          });
+          mmdInit = true;
+        }
+        const r = await m.render(rid, chart);
         if (active) setSvg(r.svg);
       } catch {
         if (active) setSvg(null);
@@ -240,11 +250,12 @@ function BannerMosaic() {
   return (
     <svg className="fp-ai-banner-mosaic" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
-        {/* full ember gradient, corner to corner (top-start → bottom-end) */}
+        {/* Theme accent gradient (ember scale), corner to corner. Bound to the
+            theme tokens via style so it follows the active theme. */}
         <linearGradient id="fp-banner-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={W} y2={H}>
-          <stop offset="0%" stopColor="#FF6B35" />
-          <stop offset="50%" stopColor="#F0531F" />
-          <stop offset="100%" stopColor="#C13584" />
+          <stop offset="0%" style={{ stopColor: 'var(--ember-deep)' }} />
+          <stop offset="50%" style={{ stopColor: 'var(--ember)' }} />
+          <stop offset="100%" style={{ stopColor: 'var(--ember-glow)' }} />
         </linearGradient>
       </defs>
       <g fill="url(#fp-banner-grad)">{rects}</g>
@@ -386,10 +397,20 @@ export default function InsightsPage() {
           <section className="fp-rcar">
             <div className="fp-rcar-head"><span className="fp-section-title"><Icons.layers size={13} /> Big insights</span></div>
             <Carousel label="Big insights" opts={{ align: 'start' }}>
-              {/* 1 · arc gauge */}
+              {/* big formatted text — lead slide */}
+              <CarouselSlide width="100%">
+                <article className="fp-bslide fp-bslide--mesh">
+                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.trending size={13} /> LEVERAGE</span><AILabel variant="box" size="sm" /></div>
+                  <div className="fp-bslide-body fp-bslide-body--text">
+                    <p className="fp-bigtext"><strong>Last month</strong>, automation saved your team <em>48.3 hours</em> of manual work.</p>
+                  </div>
+                  <p className="fp-bslide-foot">Across dep-bumps, test generation and CVE triage, up <strong>+22%</strong> month over month.</p>
+                </article>
+              </CarouselSlide>
+              {/* arc gauge */}
               <CarouselSlide width="100%">
                 <article className="fp-bslide">
-                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.agent size={13} /> AUTONOMY</span><h3 className="fp-bslide-title">Agent autonomy this month</h3><AILabel variant="dot" /></div>
+                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.agent size={13} /> AUTONOMY</span><h3 className="fp-bslide-title">Agent autonomy this month</h3><AILabel variant="box" size="sm" /></div>
                   <div className="fp-bslide-body"><ArcGauge pct={78} caption="resolved by agents" /></div>
                   <p className="fp-bslide-foot">Agents resolved <strong>78%</strong> of your work, <em>1.4×</em> the alliance median. Your job was steering, not typing.</p>
                 </article>
@@ -397,7 +418,7 @@ export default function InsightsPage() {
               {/* 2 · area trend */}
               <CarouselSlide width="100%">
                 <article className="fp-bslide">
-                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.activity size={13} /> THROUGHPUT</span><h3 className="fp-bslide-title">Changes shipped · last 7 days</h3><AILabel variant="dot" /></div>
+                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.activity size={13} /> THROUGHPUT</span><h3 className="fp-bslide-title">Changes shipped · last 7 days</h3><AILabel variant="box" size="sm" /></div>
                   <div className="fp-bslide-body"><AreaViz data={[12, 15, 14, 18, 17, 22, 19, 24, 21, 27, 25, 31]} big="31" /></div>
                   <p className="fp-bslide-foot"><strong>31</strong> changes merged with <strong>0</strong> regressions, mostly dep-bumps, test-gen and CVE patches.</p>
                 </article>
@@ -405,7 +426,7 @@ export default function InsightsPage() {
               {/* 3 · ADR bars */}
               <CarouselSlide width="100%">
                 <article className="fp-bslide">
-                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.compliance size={13} /> GOVERNANCE</span><h3 className="fp-bslide-title">ADR adherence · 28 services</h3><AILabel variant="dot" /></div>
+                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.compliance size={13} /> GOVERNANCE</span><h3 className="fp-bslide-title">ADR adherence · 28 services</h3><AILabel variant="box" size="sm" /></div>
                   <div className="fp-bslide-body fp-bslide-body--list">
                     <div className="fp-adr-list">
                       {ADRS.slice(0, 4).map((adr) => (
@@ -426,28 +447,18 @@ export default function InsightsPage() {
               {/* 4 · radar */}
               <CarouselSlide width="100%">
                 <article className="fp-bslide">
-                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.gauge size={13} /> ESTATE HEALTH</span><h3 className="fp-bslide-title">Health across dimensions</h3><AILabel variant="dot" /></div>
+                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.gauge size={13} /> ESTATE HEALTH</span><h3 className="fp-bslide-title">Health across dimensions</h3><AILabel variant="box" size="sm" /></div>
                   <div className="fp-bslide-body"><RadarViz axes={[{ label: 'Coverage', value: 88 }, { label: 'SLO', value: 92 }, { label: 'Security', value: 81 }, { label: 'Tests', value: 86 }, { label: 'Docs', value: 64 }]} /></div>
                   <p className="fp-bslide-foot">Strong on <em>SLO</em> and coverage; <strong>Docs at 64%</strong> is the gap the agents are closing next.</p>
                 </article>
               </CarouselSlide>
-              {/* 5 · big formatted text */}
-              <CarouselSlide width="100%">
-                <article className="fp-bslide fp-bslide--mesh">
-                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.trending size={13} /> LEVERAGE</span><AILabel variant="dot" /></div>
-                  <div className="fp-bslide-body fp-bslide-body--text">
-                    <p className="fp-bigtext"><strong>Last month</strong>, automation saved your team <em>48.3 hours</em> of manual work.</p>
-                  </div>
-                  <p className="fp-bslide-foot">Across dep-bumps, test generation and CVE triage, up <strong>+22%</strong> month over month.</p>
-                </article>
-              </CarouselSlide>
-              {/* 6 · architecture (Mermaid diagram) */}
+              {/* architecture (Mermaid diagram) */}
               <CarouselSlide width="100%">
                 <article className="fp-bslide">
                   <div className="fp-bslide-head">
                     <span className="fp-bslide-eyebrow"><Icons.gitFork size={13} /> ARCHITECTURE</span>
                     <h3 className="fp-bslide-title">Live service graph</h3>
-                    <AILabel variant="dot" />
+                    <AILabel variant="box" size="sm" />
                   </div>
                   <div className="fp-bslide-body fp-bslide-body--graph"><MermaidViz chart={ARCH_MERMAID} /></div>
                   <p className="fp-bslide-foot">Drift detected: <em>acerta → konduto</em> is a sync single point of failure for 4 services.</p>
