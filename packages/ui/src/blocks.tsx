@@ -563,8 +563,9 @@ const MetricCard = ({
 }: {
   /** Metric name, shown as the uppercase mono eyebrow. */
   label?: React.ReactNode;
-  /** The headline number (auto-formatted with locale grouping). */
-  value?: number | string;
+  /** The headline number — a raw number/string (auto-formatted with locale
+   *  grouping) or a node (e.g. an animated <CountUp/>). */
+  value?: React.ReactNode;
   /** Appended directly after the value (e.g. "%"). */
   suffix?: React.ReactNode;
   /** Unit shown beside the value in muted type (e.g. "ms"). */

@@ -371,7 +371,7 @@ export default function AgentDetail({ id }: { id: string }) {
         </AsideSection>
 
         {/* Usage — two metric cards (with trend) + the daily-spend bar chart */}
-        <AsideSection title="Usage" action={<Link href={`/portal/agents/${agent.id}`} className="fp-agentd-more">View more <Icons.arrowRight size={12} /></Link>}>
+        <AsideSection title="Usage" action={<Link href={`/portal/agents/${agent.id}`} className="fp-agentd-more">View more <Icons.chevronRight size={12} /></Link>}>
           <div className="fp-agentd-metrics">
             <div className="fp-agentd-metric">
               <span className="k">Tokens · 30d</span>

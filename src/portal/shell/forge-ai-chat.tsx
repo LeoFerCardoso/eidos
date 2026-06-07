@@ -5,7 +5,7 @@
 //   • THREAD — picking a starter (or typing) opens a scripted conversation:
 //     the user turn, a brief "reading your estate" assistant turn, then the
 //     answer — rendered as DS <Message> bubbles. It's a simulation so the UX is
-//     demonstrable offline; the full /portal/assistant page will stream real
+//     demonstrable offline; the full /portal/chat page will stream real
 //     model output with markdown. The side panel shows the conversation UX.
 import * as React from 'react';
 import Link from 'next/link';

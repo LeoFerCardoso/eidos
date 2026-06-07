@@ -1,109 +1,42 @@
 'use client';
-// Forge — Home / personal digest. "What needs your attention" landing: a Forge AI
-// morning summary, estate KPIs, a ranked attention feed, and an aside with my
-// services, on-call and recent incidents. Composed from Eidos DS primitives.
+// Forge — Home / mission control over an autonomous agent workforce.
+//
+// The Home is NOT a human inbox. Agents work 24x7 by default; the human is the
+// director. Spine, ranked by how much it demands of you (Port's agentic model —
+// "autonomy with auditability", governance via guardrails):
+//   ① DECIDE  — the small set agents escalated because a GUARDRAIL fired (HITL).
+//   ② STEER   — AI-Insights: deep architectural risk + agent-drafted remediation.
+//   ③ OBSERVE — the agent workstream: what shipped, auditable + reversible.
+// Built from Eidos DS primitives; the welcome hero above is unchanged.
 import * as React from 'react';
 import Link from 'next/link';
 import {
+  AILabel,
   Avatar,
   Button,
+  CountUp,
   ForgeMark,
   HealthBadge,
   Icons,
+  MetricCard,
   Pill,
-  SeverityPill,
-  Sparkline,
-  Trend,
 } from '@/ds/core';
-import { FPageHeader, FKpi, FSection, IconBubble, FCardHead, FRows, FRow, Sub } from '@/portal/shell/portal-shell';
-import { SERVICES, getService } from '@/portal/data/services';
-
-// ── Forge AI morning digest ───────────────────────────────────────────────────
-const DIGEST: { tone: 'danger' | 'warning' | 'ok'; text: React.ReactNode; href: string }[] = [
-  {
-    tone: 'danger',
-    text: (
-      <>
-        <strong>acerta-api</strong> p99 is up <strong>41%</strong> since v4.12.0, likely the new
-        konduto-antifraud rule. I drafted a rollback.
-      </>
-    ),
-    href: '/portal/catalog/acerta-api',
-  },
-  {
-    tone: 'warning',
-    text: (
-      <>
-        <strong>INC-2041</strong> is still open (p95 spike); on-call is Bruno Mendes, paged 6h ago.
-      </>
-    ),
-    href: '/portal/catalog/acerta-api',
-  },
-  {
-    tone: 'ok',
-    text: (
-      <>
-        Estate health is up <strong>2 pts</strong> week-over-week; 44 deploys shipped, 0 failed gates.
-      </>
-    ),
-    href: '/portal/catalog',
-  },
-];
-
-const HEALTH_SERIES = [88, 89, 90, 89, 91, 90, 92];
-const RISK_SERIES = [48, 45, 44, 42, 40, 41, 38];
-const VELOCITY_SERIES = [31, 34, 36, 39, 41, 43, 44];
-const COST_SERIES = [410, 430, 440, 455, 470, 480, 488];
-
-// ── Attention feed ─────────────────────────────────────────────────────────────
-const FEED: {
-  id: string;
-  icon: string;
-  tone: 'danger' | 'warning';
-  title: string;
-  meta: string;
-  href: string;
-  badge: React.ReactNode;
-}[] = [
-  {
-    id: 'f1',
-    icon: 'server',
-    tone: 'danger',
-    title: 'acerta-api degraded · p99 latency over SLO',
-    meta: 'Correlated with konduto-antifraud v3.1.7 · Forge AI proposed a rollback',
-    href: '/portal/catalog/acerta-api',
-    badge: <HealthBadge state="degraded" pulse />,
-  },
-  {
-    id: 'f2',
-    icon: 'incident',
-    tone: 'danger',
-    title: 'INC-2041 · p95 spike after konduto-antifraud deploy',
-    meta: 'Opened 6h ago · commander Bruno Mendes · 2 services impacted',
-    href: '/portal/catalog/acerta-api',
-    badge: <SeverityPill level="p2" />,
-  },
-  {
-    id: 'f3',
-    icon: 'shield',
-    tone: 'warning',
-    title: 'konduto-antifraud false-positive rate +18%',
-    meta: 'Since v3.1.7 · review the new fraud-score rule or roll back',
-    href: '/portal/catalog/konduto-antifraud',
-    badge: <HealthBadge state="degraded" pulse />,
-  },
-  {
-    id: 'f4',
-    icon: 'score',
-    tone: 'warning',
-    title: 'bureau-api scorecard slipped to B',
-    meta: 'Observability · missing trace coverage on 2 endpoints',
-    href: '/portal/catalog/bureau-api',
-    badge: <Pill tone="warning">Grade B</Pill>,
-  },
-];
-
-const MY_SERVICES = ['acerta-api', 'score-engine', 'scpc-gateway', 'consent-service'];
+import { FPageHeader, IconBubble, FCardHead, FRows, FRow } from '@/portal/shell/portal-shell';
+import { getService } from '@/portal/data/services';
+import {
+  SYSTEM_KPIS,
+  DECISIONS,
+  WORKSTREAM,
+  WORKSTREAM_SUMMARY,
+  OPEN_INSIGHTS,
+  MY_SERVICES,
+  gradeFor,
+  type RiskLevel,
+  type InsightType,
+  type Autonomy,
+  type WorkStatus,
+  type Grade,
+} from '@/portal/data/agent-activity';
 
 // Doom-fire heat-simulation tunables for the welcome-hero background. No UI
 // controls — these are the knobs: lateral wind, base combustion, cooling rate
@@ -234,22 +167,82 @@ function HeroMosaicBG() {
   );
 }
 
-const TONE_ICON: Record<string, 'danger' | 'warn' | 'ember'> = {
-  danger: 'danger',
-  warning: 'warn',
-  ok: 'ember',
+// ── readout helpers ────────────────────────────────────────────────────────────
+
+// Severity → the shared "risk" pill tone + the IconBubble tone.
+const RISK_PILL: Record<RiskLevel, 'risk-crit' | 'risk-high' | 'risk-med'> = {
+  crit: 'risk-crit',
+  high: 'risk-high',
+  med: 'risk-med',
+};
+const RISK_BUBBLE: Record<RiskLevel, 'danger' | 'warn' | 'ember'> = {
+  crit: 'danger',
+  high: 'warn',
+  med: 'ember',
 };
 
+const INSIGHT_ICON: Record<InsightType, keyof typeof Icons> = {
+  slo: 'slo',
+  spof: 'gitFork',
+  drift: 'branch',
+  lgpd: 'lockKey',
+  scaling: 'trending',
+  security: 'shield',
+};
+
+const AUTONOMY: Record<Autonomy, { label: string; tone: 'success' | 'ember' | 'warning' }> = {
+  'agent-can-resolve': { label: 'Agent can resolve', tone: 'success' },
+  'needs-ok': { label: 'Needs your OK', tone: 'ember' },
+  'needs-arch-decision': { label: 'Architecture call', tone: 'warning' },
+};
+
+// Horizon urgency drives the chip colour: 'now' and weeks ≤ 2 are hot.
+function horizonUrgency(horizon: string): 'hot' | 'warm' | 'cool' {
+  if (horizon === 'now') return 'hot';
+  const wk = parseInt(horizon.replace(/[^0-9]/g, ''), 10) || 99;
+  if (wk <= 2) return 'hot';
+  if (wk <= 4) return 'warm';
+  return 'cool';
+}
+
+const STATUS_PILL: Record<WorkStatus, React.ReactNode> = {
+  done: <Pill tone="neutral">shipped</Pill>,
+  inflight: <Pill tone="ember" live>running</Pill>,
+  scheduled: <Pill tone="neutral" dot>scheduled</Pill>,
+};
+
+const GRADE_TONE: Record<Grade, 'success' | 'ember' | 'warning' | 'danger'> = {
+  A: 'success',
+  B: 'ember',
+  C: 'warning',
+  D: 'danger',
+};
+
+const QUICK_START: { icon: keyof typeof Icons; label: string; meta: string; href: string }[] = [
+  { icon: 'package', label: 'Scaffold a service', meta: 'Paved-road templates · ~3 min', href: '/portal/create' },
+  { icon: 'agent', label: 'Create an agent', meta: 'Give the fleet a new job', href: '/portal/agents/new' },
+  { icon: 'key', label: 'Request access', meta: 'Self-service, policy-gated', href: '/portal/catalog' },
+  { icon: 'runbook', label: 'Open a runbook', meta: 'Operational playbooks', href: '/portal/catalog' },
+];
+
 export default function PortalHome() {
-  const degraded = SERVICES.filter((s) => s.alert).length;
+  // Time-aware greeting + date label, client-only to stay SSR-stable (the first
+  // paint matches the server, then the effect fills in the live values).
+  const [now, setNow] = React.useState<Date | null>(null);
+  React.useEffect(() => { setNow(new Date()); }, []);
+  const hour = now ? now.getHours() : 8;
+  const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
+  const dateLabel = now
+    ? now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }).toUpperCase()
+    : null;
 
   return (
     <>
       <FPageHeader
-        eyebrow="Home"
+        eyebrow={<>{dateLabel ? `${dateLabel} · ` : ''}SCORE &amp; RISK</>}
         leading={<Icons.sparkle size={22} style={{ color: 'var(--ember)' } as React.CSSProperties} />}
-        title="Good morning, Leonardo"
-        subtitle="Here's what needs your attention across the estate today."
+        title={`${greeting}, Leonardo`}
+        subtitle="Your agents have been shipping overnight. Here's the little that needs a human today."
         actions={
           <>
             <Button variant="ghost" asChild><Link href="/portal/create">
@@ -322,96 +315,170 @@ export default function PortalHome() {
         </div>
       </section>
 
-      {/* Forge AI morning digest */}
-      <section
-        style={{
-          background: 'var(--ember-softer)',
-          border: '1px solid color-mix(in oklch, var(--ember) 22%, transparent)',
-          borderRadius: 'var(--radius-2xl)',
-          padding: '16px 18px',
-          marginBlockEnd: 20,
-          display: 'flex',
-          gap: 14,
-        }}
-      >
-        <IconBubble icon="sparkle" size={36} tone="ember" />
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBlockEnd: 8 }}>
-            <strong style={{ fontSize: 'var(--text-sm)' }}>Forge AI</strong>
-            <span style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-muted)', fontFamily: 'var(--font-mono)' }}>
-              your morning · 3 things
-            </span>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {DIGEST.map((d, i) => (
-              <Link
-                key={i}
-                href={d.href}
-                style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: 9,
-                  fontSize: 'var(--text-sm)',
-                  lineHeight: 1.5,
-                  color: 'var(--fg)',
-                  textDecoration: 'none',
-                }}
-              >
-                <span
-                  style={{
-                    width: 6,
-                    height: 6,
-                    borderRadius: '50%',
-                    marginBlockStart: 7,
-                    flexShrink: 0,
-                    background:
-                      d.tone === 'danger' ? 'var(--danger)' : d.tone === 'warning' ? 'var(--warning)' : 'var(--success)',
-                  }}
-                />
-                <span>{d.text}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Estate KPIs */}
-      <div className="fp-grid fp-grid-4" style={{ marginBlockEnd: 22 }}>
-        <FKpi label="Estate health" value="92" sub={<Sparkline data={HEALTH_SERIES} w={200} h={30} color="var(--success)" />} trendNode={<Trend delta={2} unit="pts" />} />
-        <FKpi label="Degraded now" value={degraded} sub={<Sub muted>of {SERVICES.length} services</Sub>} trendNode={<Trend delta={1} unit="" inverted />} />
-        <FKpi label="Open incidents" value="1" sub={<Sub muted>1 P2 · 0 P1</Sub>} />
-        <FKpi label="Deploys / week" value="44" sub={<Sparkline data={VELOCITY_SERIES} w={200} h={30} />} trendNode={<Trend delta={12} unit="%" />} />
+      {/* Home body — one vertical rhythm with generous space between the major
+          sections (KPIs · Decide · Steer · Observe), so the page breathes. */}
+      <div className="fp-home-body">
+      {/* System KPIs — the agentic system's output, not a human backlog.
+          Canonical DS MetricCard (label mono · Trend top-right · value · spark · foot). */}
+      <div className="fp-grid fp-grid-4">
+        {SYSTEM_KPIS.map((k) => (
+          <Link key={k.key} href={k.href} className="fp-kpi-link">
+            <MetricCard
+              size="lg"
+              label={k.label}
+              value={<CountUp to={k.to} suffix={k.suffix} />}
+              delta={k.delta}
+              deltaUnit={k.unit}
+              inverted={k.inverted}
+              series={k.series}
+              sparkColor={k.tone === 'success' ? 'var(--success)' : undefined}
+              foot={k.sub}
+            />
+          </Link>
+        ))}
       </div>
 
-      {/* Two columns */}
-      <div className="fp-grid fp-grid-2x1" style={{ alignItems: 'flex-start', gap: 18 }}>
-        {/* Attention feed */}
-        <FSection title="Needs attention · ranked by impact">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {FEED.map((it) => (
-              <div key={it.id} className="fp-card" style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                <IconBubble icon={it.icon} size={38} tone={TONE_ICON[it.tone]} />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBlockEnd: 4, flexWrap: 'wrap' }}>
-                    <span style={{ fontWeight: 600, fontSize: 'var(--text-base)' }}>{it.title}</span>
-                    {it.badge}
+      {/* ① DECIDE — the only human queue, kept small by design. */}
+      <section className="fp-section" id="decide">
+        <div className="fp-section-head">
+          <h2 className="fp-section-title">
+            <Icons.gate size={13} /> Needs you · human decisions
+          </h2>
+          <span className="fp-section-note">{DECISIONS.length} of {WORKSTREAM_SUMMARY.shipped + DECISIONS.length} actions needed a human</span>
+        </div>
+
+        {DECISIONS.length === 0 ? (
+          <div className="fp-decide-clear">
+            <IconBubble icon="check" size={36} tone="success" />
+            <div>
+              <strong>Nothing needs you.</strong> Agents have it. Anything risky will surface here.
+            </div>
+          </div>
+        ) : (
+          <div className="fp-decide">
+            {DECISIONS.map((d) => (
+              <div key={d.id} className="fp-decide-row">
+                <IconBubble icon="gate" size={38} tone={RISK_BUBBLE[d.risk]} />
+                <div className="fp-decide-body">
+                  <div className="fp-decide-top">
+                    <span className="fp-decide-title">{d.title}</span>
+                    <Pill tone={RISK_PILL[d.risk]} icon={<Icons.lock size={11} />}>{d.guardrail}</Pill>
                   </div>
-                  <p style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', lineHeight: 1.5, margin: 0 }}>{it.meta}</p>
-                  <div style={{ display: 'flex', gap: 8, marginBlockStart: 12 }}>
-                    <Button variant="ghost" size="sm" asChild><Link href={it.href}>
-                      View <Icons.chevronRight size={12} />
-                    </Link></Button>
-                    <Button variant="ghost" size="sm">
-                      <Icons.sparkle size={12} /> Ask Forge AI
+                  <div className="fp-decide-meta">
+                    <code>{d.service}</code> · {d.agent} · {d.when}
+                  </div>
+                  <p className="fp-decide-why">{d.why}</p>
+                  <div className="fp-decide-rec">
+                    <AILabel variant="dot" />
+                    <span>{d.recommendation}{d.reversible ? ' This change is reversible.' : ''}</span>
+                  </div>
+                  <div className="fp-decide-actions">
+                    <Button variant="ember" size="sm">
+                      <Icons.check size={12} /> Approve
                     </Button>
+                    <Button variant="outline" size="sm" asChild><Link href={d.href}>
+                      Review <Icons.chevronRight size={12} />
+                    </Link></Button>
+                    <Button variant="ghost" size="sm">Dismiss</Button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-        </FSection>
+        )}
+      </section>
 
-        {/* Aside */}
+      {/* ② STEER — AI-Insights (top here; full radar on /portal/insights). */}
+      <section className="fp-section">
+        <div className="fp-section-head">
+          <h2 className="fp-section-title">
+            <Icons.brain size={13} /> AI-Insights · {OPEN_INSIGHTS.length} risks to steer
+          </h2>
+          <Link href="/portal/insights" className="ds-link-inline">View all<Icons.chevronRight size={12} /></Link>
+        </div>
+        <div className="fp-insights">
+          {OPEN_INSIGHTS.slice(0, 4).map((it) => {
+            const Ico = Icons[INSIGHT_ICON[it.type]] || Icons.circle;
+            const a = AUTONOMY[it.autonomy];
+            return (
+              <div key={it.id} className="fp-insight-row">
+                <span className={`fp-insight-ico u-${it.type}`}><Ico size={17} /></span>
+                <div className="fp-insight-body">
+                  <div className="fp-insight-top">
+                    <span className={`fp-insight-horizon u-${horizonUrgency(it.horizon)}`}>
+                      <Icons.clock size={11} /> {it.horizon}
+                    </span>
+                    <span className="fp-insight-title">{it.title}</span>
+                    <Pill tone={a.tone}>{a.label}</Pill>
+                  </div>
+                  <div className="fp-insight-meta">{it.blastRadius} · {it.evidence}</div>
+                  <div className="fp-insight-rem-row">
+                    <div className="fp-insight-rem">
+                      <AILabel variant="dot" /> <span>{it.remediation}</span>
+                    </div>
+                    <Link href={it.href} className="ds-link-inline fp-insight-steer">Steer<Icons.chevronRight size={12} /></Link>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ③ OBSERVE — agent workstream (auditable + reversible) + ambient aside. */}
+      <div className="fp-grid fp-grid-2x1" style={{ alignItems: 'flex-start', gap: 18 }}>
+        <section className="fp-section">
+          <div className="fp-section-head">
+            <h2 className="fp-section-title">
+              <Icons.activity size={13} /> Agent workstream · last 24h
+            </h2>
+            <span className="fp-section-note">
+              {WORKSTREAM_SUMMARY.shipped} shipped · {WORKSTREAM_SUMMARY.regressions} regressions · ~{WORKSTREAM_SUMMARY.hoursSaved}h saved · coverage +{WORKSTREAM_SUMMARY.coverageDelta} pts
+            </span>
+          </div>
+          <div className="fp-work">
+            {WORKSTREAM.map((w) => (
+              <div key={w.id} className="fp-work-row">
+                <span className={`fp-work-status u-${w.status}`} aria-hidden="true" />
+                <div className="fp-work-body">
+                  <div className="fp-work-top">
+                    <Link href={w.href} className="fp-work-title">{w.title}</Link>
+                    {STATUS_PILL[w.status]}
+                  </div>
+                  <div className="fp-work-meta">
+                    {w.agent} · <code>{w.service}</code> · {w.scope} · {w.when}
+                  </div>
+                  <div className="fp-work-foot">
+                    <span className="fp-work-impact">{w.impact}</span>
+                    {w.checks && w.checks.length > 0 && (
+                      <span className="fp-work-verified" title={`Verified: ${w.checks.join(', ')}`}>
+                        <Icons.badgeCheck size={13} /> verified
+                      </span>
+                    )}
+                    <span className="fp-work-spacer" />
+                    {w.status === 'done' && (
+                      <Button variant="ghost" size="sm" asChild><Link href={w.href}>
+                        <Icons.auditLog size={12} /> Audit
+                      </Link></Button>
+                    )}
+                    {w.status === 'done' && w.reversible && (
+                      <Button variant="ghost" size="sm">
+                        <Icons.rollback size={12} /> Roll back
+                      </Button>
+                    )}
+                    {w.status === 'inflight' && (
+                      <Button variant="ghost" size="sm" asChild><Link href={w.href}>
+                        Watch <Icons.chevronRight size={12} />
+                      </Link></Button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Ambient aside */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           {/* On-call */}
           <div className="fp-card">
@@ -428,7 +495,7 @@ export default function PortalHome() {
             </div>
           </div>
 
-          {/* My services */}
+          {/* My services — with a derived scorecard grade */}
           <div className="fp-card">
             <FCardHead
               title="My services"
@@ -442,9 +509,11 @@ export default function PortalHome() {
               {MY_SERVICES.map((id) => {
                 const s = getService(id);
                 if (!s) return null;
+                const grade = gradeFor(s.coverage, s.alert);
                 return (
                   <FRow key={id} href={`/portal/catalog/${id}`}>
                     <span className="fp-row-main" style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', fontWeight: 500 }}>{s.name}</span>
+                    <Pill tone={GRADE_TONE[grade]}>{grade}</Pill>
                     <span className="mono" style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>{s.p95}ms</span>
                     <HealthBadge state={s.alert ? 'degraded' : 'up'} pulse={s.alert} />
                   </FRow>
@@ -453,20 +522,26 @@ export default function PortalHome() {
             </FRows>
           </div>
 
-          {/* CTA */}
-          <Link
-            href="/portal/create"
-            className="fp-card fp-card--ember-hero"
-            style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', color: 'inherit' }}
-          >
-            <IconBubble icon="package" size={36} tone="ember" />
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: 600 }}>Spin up a new service</div>
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)' }}>Paved-road templates · ~3 min</div>
-            </div>
-            <Icons.arrowRight size={16} style={{ color: 'var(--ember)' } as React.CSSProperties} />
-          </Link>
+          {/* Quick start — self-service paved roads (humans + agents) */}
+          <div className="fp-card">
+            <FCardHead title="Quick start" />
+            <FRows>
+              {QUICK_START.map((q) => {
+                return (
+                  <FRow key={q.label} href={q.href}>
+                    <IconBubble icon={q.icon} size={30} tone="ember" />
+                    <span className="fp-row-main">
+                      <span className="fp-qs-label">{q.label}</span>
+                      <span className="fp-qs-meta">{q.meta}</span>
+                    </span>
+                    <Icons.chevronRight size={15} style={{ color: 'var(--fg-muted)' } as React.CSSProperties} />
+                  </FRow>
+                );
+              })}
+            </FRows>
+          </div>
         </div>
+      </div>
       </div>
     </>
   );

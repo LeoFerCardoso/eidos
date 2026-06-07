@@ -811,7 +811,7 @@ export default function NewAgent({ editId }: { editId?: string } = {}) {
             </Button>
             <span className="fp-wizard-progress t-mono">Step {step + 1} of {STEPS.length}</span>
             <Button type="button" variant="ember" onClick={next} disabled={!canContinue}>
-              {step === STEPS.length - 1 ? <><Icons.check size={14} /> Create agent</> : <>Continue <Icons.arrowRight size={14} /></>}
+              {step === STEPS.length - 1 ? <><Icons.check size={14} /> Create agent</> : <>Continue <Icons.chevronRight size={14} /></>}
             </Button>
           </footer>
         </div>

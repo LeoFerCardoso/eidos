@@ -24,6 +24,7 @@
     "check:visual": "node scripts/check-visual.mjs",
     "check:contract": "node scripts/check-contract.mjs",
     "check:portal-copy": "node scripts/check-portal-copy.mjs",
+    "check:class-collisions": "node scripts/check-class-collisions.mjs",
     "eidos:verify": "node scripts/eidos-verify.mjs",
     "eidos:health": "node scripts/eidos-health.mjs",
     "gen:contract": "node scripts/eidos-gen.mjs contract --sync",
@@ -43,8 +44,8 @@
     "mono:build": "turbo run build"
   },
   "dependencies": {
-    "@eidos/ui": "*",
     "@ai-sdk/react": "^3.0.187",
+    "@eidos/ui": "*",
     "@pierre/diffs": "^1.2.3",
     "@pierre/trees": "^1.0.0-beta.4",
     "@tailwindcss/postcss": "^4.3.0",

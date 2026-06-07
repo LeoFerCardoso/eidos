@@ -125,6 +125,15 @@ const Icons = {
   book: I(<><path d="M5 4 h12 a2 2 0 0 1 2 2 v14 H7 a2 2 0 0 1 -2 -2 V4 z"/><path d="M5 18 a2 2 0 0 1 2 -2 h12"/></>),
   clipboard: I(<><rect x="6" y="4" width="12" height="17" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="15" y2="15"/></>),
   sparkle: I(<><path d="M12 3 L13.5 9.5 L20 11 L13.5 12.5 L12 19 L10.5 12.5 L4 11 L10.5 9.5 z"/></>),
+  // Lucide-style "Sparkles" — one filled 4-point star + two small star glints
+  // (reads as three stars). SOLID: the big star is filled in `color`, the glints
+  // stay stroked so they stay crisp at small sizes.
+  sparkles: ({ size = 16, color = 'currentColor', strokeWidth = 1.5, ...rest }: IconProps = {}) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" {...rest}>
+      <path fill={color} stroke="none" d="M11.52 2.3a.5.5 0 0 1 .96 0l1.57 6.1a2 2 0 0 0 1.44 1.45l6.11 1.57a.5.5 0 0 1 0 .96l-6.11 1.57a2 2 0 0 0-1.44 1.45l-1.57 6.1a.5.5 0 0 1-.96 0l-1.57-6.1a2 2 0 0 0-1.44-1.45L2.4 12.46a.5.5 0 0 1 0-.96l6.11-1.57a2 2 0 0 0 1.44-1.45z"/>
+      <path d="M20 3v4M22 5h-4M5 17v3M6.5 18.5h-3"/>
+    </svg>
+  ),
   layers: I(<><polygon points="12 3 21 8 12 13 3 8"/><polyline points="3 13 12 18 21 13"/><polyline points="3 17 12 22 21 17"/></>),
   plug: I(<><path d="M9 2 L9 8"/><path d="M15 2 L15 8"/><rect x="6" y="8" width="12" height="6" rx="1"/><path d="M12 14 L12 18"/><path d="M9 18 L15 18 L15 22 L9 22 z"/></>),
   chevronRight: I(<polyline points="9 6 15 12 9 18"/>),

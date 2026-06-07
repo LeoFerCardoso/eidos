@@ -1132,7 +1132,12 @@ a { color: inherit; text-decoration: none; }
 .btn.ghost:hover { background: var(--surface-hover); border-color: transparent; color: var(--fg); }
 
 .btn.outline { background: transparent; border-color: var(--border); color: var(--fg); }
-.btn.outline:hover { background: var(--surface-hover); border-color: var(--border-strong); color: var(--fg); }
+.btn.outline:hover { background: var(--surface-hover); color: var(--fg); }
+/* The DS button variant class `.outline` collides with the Tailwind `.outline`
+   utility (outline-style:solid; outline-width:1px → a white currentColor ring
+   painted on top of every outline button). The DS owns focus via :focus-visible,
+   so kill the utility's outline at rest while preserving the focus ring. */
+.btn.outline:not(:focus-visible) { outline: 2px solid transparent; }
 
 .btn.link {
   background: transparent; border-color: transparent; color: var(--ember);

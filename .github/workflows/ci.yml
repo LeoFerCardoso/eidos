@@ -63,6 +63,8 @@ jobs:
       - run: npm ci
       # portal copy gate — ZERO travessão (em-dash) in product screens. Blocking.
       - run: npm run check:portal-copy
+      # DS class × Tailwind utility collision gate (e.g. .outline). Blocking.
+      - run: npm run check:class-collisions
       - run: npm run build
       - run: npm run verify || true
       - name: build plugin

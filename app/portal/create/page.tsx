@@ -743,7 +743,7 @@ function ForgeAIDrawer({ open, onClose, onUse }: { open: boolean; onClose: () =>
         <span className="in-addon icon"><Icons.sparkle size={14} /></span>
         <input className="in-control" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Describe what you want to build" aria-label="Message Forge AI" />
         <Button type="submit" variant="ember" size="sm" disabled={!input.trim()} style={{ margin: 4 }}>
-          <Icons.arrowRight size={13} />
+          <Icons.chevronRight size={13} />
         </Button>
       </form>
     </Drawer>

@@ -77,6 +77,7 @@ const RAIL: RailItem[] = [
   { key: 'chat',          icon: 'chat',    label: 'Chat',          href: '/portal/chat' },
   { key: 'catalog',       icon: 'server',  label: 'Catalog',       href: '/portal/catalog' },
   { key: 'agents',        icon: 'agent',   label: 'Agents',        href: '/portal/agents' },
+  { key: 'insights',      icon: 'sparkle', label: 'AI-Insights',   href: '/portal/insights' },
   { key: 'create',     icon: 'package',    label: 'Templates',    href: '/portal/create' },
   { key: 'pipelines',  icon: 'pipeline',   label: 'Pipelines'                     },
   { key: 'fraud',      icon: 'shield',     label: 'Fraud & Risk'                  },
@@ -101,8 +102,8 @@ const CRUMB_LABELS: Record<string, string> = {
   portal:        'Forge',
   catalog:       'Catalog',
   agents:        'Agents',
+  insights:      'AI-Insights',
   create:        'Templates',
-  assistant:     'Forge AI',
   notifications: 'Notifications',
   chat:          'Chat',
 };
@@ -808,7 +809,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         <div className="fp-main-in">{children}</div>
       </main>
 
-      {/* Forge AI — in-context copilot slide-over (same thread as /portal/assistant) */}
+      {/* Forge AI — in-context copilot slide-over (same thread as the full /portal/chat) */}
       <Drawer
         open={aiOpen}
         side="right"
@@ -824,7 +825,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         desc="Reads your estate and acts on it."
         headerActions={
           <Link
-            href="/portal/assistant"
+            href="/portal/chat"
             className="dr-header-action"
             title="Open the full Forge AI page"
             aria-label="Open the full Forge AI page"

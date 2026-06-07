@@ -2784,3 +2784,606 @@ body:active::-webkit-scrollbar-thumb,
   .fp-wizard-step .tx { display: none; }
   .fp-wizard-outputs.sel-card-group { grid-template-columns: 1fr; }
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+   HOME — agentic mission control (Decide → Steer → Observe)
+   The Home is not a human inbox: agents work by default, the human is the
+   director. These surfaces stay FLAT (one concern per region → no card-in-card),
+   rows are square with hairline dividers, and every tone comes from a DS token.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Home body — one vertical rhythm with generous space between the major sections
+   (KPIs · Decide · Steer · Observe). Overrides the denser default section gap,
+   scoped to the Home so other portal pages keep their tighter rhythm. */
+.fp-home-body { display: flex; flex-direction: column; gap: 36px; }
+.fp-home-body > .fp-section { margin-block-end: 0; }
+
+/* Inline text link, optionally with a trailing chevron. inline-flex so the icon
+   sits centered on the text line instead of riding high on the baseline; gap
+   owns the icon spacing (markup carries no literal space). Flows inline like
+   inline-block, so it stays safe inside a sentence. */
+.ds-link-inline { display: inline-flex; align-items: center; gap: 4px; color: var(--fg-muted); }
+.ds-link-inline:hover { color: var(--fg); }
+
+/* Section header — the mono section label + a trailing action/note on one line,
+   sharing the body's inline-start edge. */
+.fp-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-block-end: 12px;
+}
+.fp-section-head .fp-section-title {
+  margin-block-end: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.fp-section-head .fp-section-title svg { color: var(--ember); }
+.fp-section-note {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+}
+
+/* KPI tiles use the canonical DS MetricCard; the link wrapper just makes the
+   tile clickable and adds a subtle ember hover, without altering its chrome. */
+.fp-kpi-link { display: block; text-decoration: none; color: inherit; border-radius: 10px; }
+.fp-kpi-link .metric-card { height: 100%; transition: border-color .12s ease; }
+.fp-kpi-link:hover .metric-card { border-color: color-mix(in oklch, var(--ember) 38%, var(--border)); }
+/* Cards stretch to the tallest tile (the one with a sparkline). Pin the trailing
+   block (sparkline or foot+divider) to the bottom edge so all four share one
+   baseline instead of leaving a gap below the footer. */
+.fp-kpi-link .metric-card .mc-spark,
+.fp-kpi-link .metric-card .mc-foot { margin-block-start: auto; }
+
+/* ── ① DECIDE — HITL decisions a guardrail escalated ─────────────────────── */
+.fp-decide { display: flex; flex-direction: column; }
+.fp-decide-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding-block: 16px;
+}
+.fp-decide-row:not(:last-child) { border-block-end: 1px solid var(--border); }
+.fp-decide-body { flex: 1; min-inline-size: 0; display: flex; flex-direction: column; gap: 6px; }
+.fp-decide-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.fp-decide-title { font-weight: 600; font-size: var(--text-base); }
+.fp-decide-top .pill { margin-inline-start: auto; }
+.fp-decide-meta { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); }
+.fp-decide-meta code { font-family: var(--font-mono); color: var(--fg); }
+.fp-decide-why { margin: 0; font-size: var(--text-sm); color: var(--fg); line-height: 1.5; }
+.fp-decide-rec {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-block-start: 2px;
+  padding: 10px 12px;
+  border-radius: var(--radius-lg);
+  background: var(--ember-softer);
+  border: 1px solid color-mix(in oklch, var(--ember) 16%, transparent);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--fg);
+}
+/* AI marker (AILabel dot) pinned to the first text line: a line-height-tall box
+   centers the glyph on the line, regardless of font metrics. */
+.fp-decide-rec .ai-label { flex-shrink: 0; align-self: flex-start; block-size: calc(var(--text-sm) * 1.5); }
+.fp-decide-actions { display: flex; gap: 8px; margin-block-start: 6px; flex-wrap: wrap; }
+/* Empty state reads as success, not emptiness. */
+.fp-decide-clear {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: var(--radius-xl);
+  background: var(--success-soft);
+  border: 1px solid color-mix(in oklch, var(--success) 26%, transparent);
+  font-size: var(--text-sm);
+  color: var(--fg);
+}
+
+/* ── ② STEER — AI-Insights radar rows ────────────────────────────────────── */
+.fp-insights { display: flex; flex-direction: column; }
+.fp-insight-row {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding-block: 14px;
+}
+.fp-insight-row:not(:last-child) { border-block-end: 1px solid var(--border); }
+.fp-insight-ico {
+  inline-size: 32px; block-size: 32px;
+  border-radius: var(--radius-lg);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.fp-insight-ico.u-slo      { color: var(--ember);    background: var(--ember-soft); }
+.fp-insight-ico.u-scaling  { color: var(--ember);    background: var(--ember-soft); }
+.fp-insight-ico.u-spof     { color: var(--danger);   background: var(--danger-soft); }
+.fp-insight-ico.u-security { color: var(--danger);   background: var(--danger-soft); }
+.fp-insight-ico.u-drift    { color: var(--accent-2); background: var(--accent-2-soft); }
+.fp-insight-ico.u-lgpd     { color: var(--warning);  background: var(--warning-soft); }
+.fp-insight-body { flex: 1; min-inline-size: 0; display: flex; flex-direction: column; gap: 4px; }
+.fp-insight-top { display: flex; align-items: flex-start; gap: 9px; }
+.fp-insight-top .pill { flex-shrink: 0; margin-block-start: 1px; }
+.fp-insight-horizon {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 600;
+  padding-inline: 7px; padding-block: 2px;
+  border-radius: var(--radius-md, 6px);
+  white-space: nowrap; flex-shrink: 0;
+}
+.fp-insight-horizon svg { margin-block-start: -1px; }
+.fp-insight-horizon.u-hot  { color: var(--danger);  background: var(--danger-soft); }
+.fp-insight-horizon.u-warm { color: var(--warning); background: var(--warning-soft); }
+.fp-insight-horizon.u-cool { color: var(--fg-muted); background: var(--surface-active); }
+.fp-insight-title { flex: 1; min-inline-size: 0; font-weight: 600; font-size: var(--text-base); line-height: 1.4; }
+.fp-insight-meta { font-size: var(--text-sm); color: var(--fg-muted); line-height: 1.5; }
+.fp-insight-rem {
+  display: flex; align-items: flex-start; gap: 6px;
+  font-size: var(--text-sm); color: var(--fg); line-height: 1.5;
+}
+.fp-insight-rem .ai-label { flex-shrink: 0; align-self: flex-start; block-size: calc(var(--text-sm) * 1.5); }
+/* Remediation note (left) + the quiet Steer action (right) share one row, so the
+   autonomy badge (now up on the title line) and Steer no longer stack awkwardly. */
+.fp-insight-rem-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.fp-insight-rem-row .fp-insight-rem { flex: 1; min-inline-size: 0; }
+.fp-insight-steer { flex-shrink: 0; }
+@media (max-width: 720px) {
+  .fp-insight-rem-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+/* ── AI-Insights radar page (/portal/insights) ──────────────────────────────── */
+/* Horizon triage groups. */
+.fp-radar-group { margin-block-end: 28px; }
+.fp-radar-group-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-block-end: 6px; padding-block-end: 8px;
+  border-block-end: 1px solid var(--border);
+}
+.fp-radar-bucket {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.fp-radar-bucket.u-hot  { color: var(--danger); }
+.fp-radar-bucket.u-warm { color: var(--warning); }
+.fp-radar-bucket.u-cool { color: var(--fg-muted); }
+.fp-radar-group-head .fp-section-title { display: inline-flex; align-items: center; gap: 7px; }
+.fp-radar-group-head .fp-section-title svg { color: var(--ember); }
+.fp-radar-group-count {
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint);
+  background: var(--surface-active); border-radius: var(--radius-md, 6px);
+  padding-inline: 7px; padding-block: 1px;
+}
+.fp-radar-count { margin-inline-start: auto; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); }
+
+/* Radar row: a compact severity tag + the evidence description. */
+.fp-insight-sev { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.fp-insight-desc { margin: 0; font-size: var(--text-sm); color: var(--fg-muted); line-height: 1.5; }
+
+/* ── AI-Insights dismissible intro banner ───────────────────────────────────── */
+.fp-ai-banner {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; align-items: center; gap: 16px;
+  padding-block: 18px; padding-inline: 22px 56px; margin-block-end: 40px;
+  border-radius: var(--radius-2xl, 18px);
+  border: 1px solid transparent;
+  background: var(--surface);
+  color: var(--fg);
+}
+/* Animatable angle for the conic gleam (registered so it can be tweened). */
+@property --fp-gleam-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+/* Gleam border — the DS gradient-border is-spin technique (conic-gradient masked
+   to a thin ring, rotating CLOCKWISE via @property angle), in OUR palette: ember
+   → F0531F → pink arcs separated by translucent fades, so colour travels around
+   the rim (no white crest). The mask (content-box XOR full) cuts the fill to the
+   1px border only. */
+.fp-ai-banner::before {
+  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  border-radius: inherit; padding: 1px;
+  background: conic-gradient(from var(--fp-gleam-angle),
+    #FF6B35,
+    color-mix(in srgb, #FF6B35 28%, transparent),
+    #F0531F,
+    #C13584,
+    color-mix(in srgb, #C13584 28%, transparent),
+    #FF6B35);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  animation: fp-banner-gleam 6s linear infinite;
+}
+@keyframes fp-banner-gleam {
+  to { --fp-gleam-angle: 360deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fp-ai-banner::before { animation: none; }
+}
+/* Flickering-grid texture — colour lives ONLY in the squares (gradient-filled in
+   the SVG), spanning corner to corner. The per-cell opacity ramp keeps the
+   inline-start (under the copy) dark and the inline-end bright. */
+.fp-ai-banner-mosaic {
+  position: absolute; inset: 0; z-index: 0; inline-size: 100%; block-size: 100%;
+  pointer-events: none;
+}
+/* Copy scrim — fades the surface back in over the inline-start so the title +
+   description keep contrast over the brighter cells, without hiding the grid. */
+.fp-ai-banner::after {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(to right,
+    color-mix(in oklch, var(--surface) 90%, transparent) 0%,
+    color-mix(in oklch, var(--surface) 64%, transparent) 36%,
+    transparent 64%);
+}
+[dir="rtl"] .fp-ai-banner::after {
+  background: linear-gradient(to left,
+    color-mix(in oklch, var(--surface) 90%, transparent) 0%,
+    color-mix(in oklch, var(--surface) 64%, transparent) 36%,
+    transparent 64%);
+}
+/* Per-cell flicker — base opacity carried by --mx (set inline, seeded per cell). */
+.fp-ai-banner-mosaic .fp-flick {
+  animation-name: fp-banner-flick;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+  will-change: opacity;
+}
+@keyframes fp-banner-flick {
+  0% { opacity: calc(var(--mx, 0.4) * 0.04); }
+  100% { opacity: var(--mx, 0.4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fp-ai-banner-mosaic .fp-flick { animation: none; opacity: var(--mx, 0.4); }
+}
+.fp-ai-banner-spark { position: relative; z-index: 1; flex-shrink: 0; display: inline-flex; color: var(--accent); }
+.fp-ai-banner-text { position: relative; z-index: 1; flex: 1; min-inline-size: 0; }
+.fp-ai-banner-title { display: block; color: var(--fg); font-weight: 600; font-size: var(--text-md); letter-spacing: -0.01em; line-height: 1.3; }
+.fp-ai-banner-desc { margin: 3px 0 0; font-size: var(--text-sm); line-height: 1.5; color: var(--fg-muted); max-inline-size: 82ch; }
+/* Close button — modal-close geometry (square, X) with a translucent overlay bg
+   + blur so it stays visible over the bright cells. z-index above the gleam. */
+.fp-ai-banner-close {
+  position: absolute; inset-block-start: 50%; inset-inline-end: 14px; z-index: 4;
+  transform: translateY(-50%);
+  flex: 0 0 auto; inline-size: 32px; block-size: 32px; border-radius: 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: none; cursor: pointer;
+  background: color-mix(in oklch, var(--bg) 32%, transparent);
+  -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);
+  color: var(--fg);
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.fp-ai-banner-close:hover { background: color-mix(in oklch, var(--bg) 55%, transparent); }
+.fp-ai-banner-close:focus-visible { outline: 2px solid var(--ember); outline-offset: 1px; }
+
+/* ── Big-Insight slides (narrow, inside the right-column DS carousel) ─────────── */
+.fp-slide {
+  position: relative; isolation: isolate; overflow: hidden;
+  inline-size: 100%; block-size: 100%; min-block-size: 300px;
+  padding: 22px 24px; border: 1px solid var(--border); border-radius: var(--radius-2xl, 18px);
+  background: var(--surface); display: flex; flex-direction: column;
+}
+.fp-slide--center { align-items: center; justify-content: center; text-align: center; }
+.fp-slide--split, .fp-slide--right { justify-content: center; gap: 16px; }
+.fp-slide--content { padding: 18px 20px; }
+.fp-slide--mesh { background-image: radial-gradient(at 28% 18%, color-mix(in oklch, var(--ember) 16%, transparent), transparent 55%), radial-gradient(at 82% 92%, color-mix(in oklch, var(--ember) 10%, transparent), transparent 52%); }
+.fp-slide--dots { background-image: radial-gradient(var(--border) 1px, transparent 1px); background-size: 22px 22px; }
+.fp-slide--lines { background-image: repeating-linear-gradient(48deg, color-mix(in oklch, var(--ember) 7%, transparent) 0 1px, transparent 1px 13px); }
+.fp-slide-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ember); }
+.fp-slide--center .fp-slide-eyebrow { justify-content: center; }
+.fp-slide-h { font-size: 20px; font-weight: 600; line-height: 1.22; margin: 12px 0 0; letter-spacing: -0.01em; }
+.fp-slide-h em { color: var(--ember); font-style: normal; }
+.fp-slide-p { font-size: var(--text-sm); color: var(--fg-muted); line-height: 1.55; margin: 10px 0 16px; }
+.fp-slide-link { font-size: var(--text-sm); }
+.fp-slide-col { display: flex; flex-direction: column; align-items: flex-start; inline-size: 100%; min-inline-size: 0; }
+.fp-slide--split > .fp-ring, .fp-slide .fp-slide-spof { align-self: center; }
+.fp-slide--content .fp-slide-graph { flex: 1; min-block-size: 0; display: flex; }
+.fp-slide--content .fp-slide-graph .fp-arch-svg { block-size: 100%; inline-size: 100%; }
+.fp-slide--content .fp-arch-legend { margin-block-start: 10px; }
+.fp-slide--content .fp-adr-list { margin-block-start: 12px; gap: 12px; }
+/* SPOF mini-visual */
+.fp-slide-spof { position: relative; inline-size: 100%; max-inline-size: 290px; block-size: 128px; }
+.fp-slide-spof-core { position: absolute; inset-inline-start: 50%; inset-block-start: 50%; transform: translate(-50%, -50%); z-index: 1; font-family: var(--font-mono); font-size: 12px; color: var(--ember); background: var(--ember-soft); border: 1px solid var(--ember); border-radius: 8px; padding: 7px 10px; }
+.fp-slide-spof-node { position: absolute; font-family: var(--font-mono); font-size: 10px; color: var(--fg-muted); background: var(--surface-active); border: 1px solid var(--border); border-radius: 6px; padding: 3px 6px; }
+.fp-slide-spof-node.n0 { inset-block-start: 0; inset-inline-start: 0; }
+.fp-slide-spof-node.n1 { inset-block-start: 0; inset-inline-end: 0; }
+.fp-slide-spof-node.n2 { inset-block-end: 0; inset-inline-start: 0; }
+.fp-slide-spof-node.n3 { inset-block-end: 0; inset-inline-end: 0; }
+/* progress ring */
+.fp-ring { inline-size: 120px; block-size: 120px; flex-shrink: 0; }
+.fp-ring-track { fill: none; stroke: var(--surface-active); stroke-width: 9; }
+.fp-ring-fill { fill: none; stroke-width: 9; stroke-linecap: round; }
+.fp-ring-val { font-family: var(--font-mono); font-size: 26px; font-weight: 600; fill: var(--fg); text-anchor: middle; }
+.fp-ring-lbl { font-family: var(--font-mono); font-size: 9px; fill: var(--fg-muted); text-anchor: middle; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ── Big-Insight slides v2: title (top) → content → summary (bottom-left) ─────── */
+.fp-bslide {
+  position: relative; isolation: isolate; overflow: hidden;
+  inline-size: 100%; block-size: 100%; min-block-size: 420px;
+  padding: 22px 24px; border: 1px solid var(--border); border-radius: var(--radius-2xl, 18px);
+  background: var(--surface); display: flex; flex-direction: column; gap: 14px;
+}
+.fp-bslide--mesh { background-image: radial-gradient(at 26% 14%, color-mix(in oklch, var(--ember) 15%, transparent), transparent 55%), radial-gradient(at 84% 96%, color-mix(in oklch, var(--ember) 9%, transparent), transparent 52%); }
+.fp-bslide--dots { background-image: radial-gradient(var(--border) 1px, transparent 1px); background-size: 22px 22px; }
+.fp-bslide--lines { background-image: repeating-linear-gradient(48deg, color-mix(in oklch, var(--ember) 6%, transparent) 0 1px, transparent 1px 13px); }
+.fp-bslide-head { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 10px; }
+.fp-bslide-eyebrow { flex-basis: 100%; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ember); }
+.fp-bslide-title { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; flex: 1; min-inline-size: 0; }
+.fp-bslide-action { margin-inline-start: auto; inline-size: 28px; block-size: 28px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--fg-muted); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: color .12s, border-color .12s; }
+.fp-bslide-action:hover { color: var(--ember); border-color: var(--border-strong); }
+.fp-bslide-body { flex: 1; min-block-size: 0; display: flex; align-items: center; justify-content: center; }
+.fp-bslide-body--text { align-items: center; justify-content: flex-start; }
+.fp-bslide-body--list, .fp-bslide-body--graph { align-items: stretch; }
+.fp-bslide-body--list .fp-adr-list { inline-size: 100%; align-self: center; }
+.fp-bslide-body--graph .fp-arch-svg { inline-size: 100%; block-size: 100%; }
+.fp-bslide-foot { margin: 0; font-size: var(--text-sm); color: var(--fg-muted); line-height: 1.5; text-align: start; }
+.fp-bslide-foot strong { color: var(--fg); font-weight: 600; }
+.fp-bslide-foot em { color: var(--ember); font-style: normal; font-weight: 600; }
+/* arc gauge */
+.fp-arc { position: relative; inline-size: 280px; max-inline-size: 100%; }
+.fp-arc-svg { display: block; inline-size: 100%; }
+.fp-arc-track { fill: none; stroke: var(--surface-active); stroke-width: 8; stroke-linecap: round; }
+.fp-arc-fill { fill: none; stroke: var(--ember); stroke-width: 8; stroke-linecap: round; }
+.fp-arc-center { position: absolute; inset-inline: 0; inset-block-end: 4px; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.fp-arc-val { font-family: var(--font-mono); font-size: 48px; font-weight: 600; color: var(--fg); line-height: 1; }
+.fp-arc-val i { font-size: 0.48em; color: var(--fg-faint); font-style: normal; }
+.fp-arc-cap { font-family: var(--font-mono); font-size: 10px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+/* area viz */
+.fp-aviz { inline-size: 100%; }
+.fp-aviz-big { font-family: var(--font-mono); font-size: 42px; font-weight: 600; color: var(--fg); line-height: 1; letter-spacing: -0.02em; text-align: center; margin-block-end: 12px; }
+.fp-aviz-big i { font-size: 0.45em; color: var(--fg-faint); font-style: normal; margin-inline-start: 2px; }
+.fp-aviz-svg { display: block; inline-size: 100%; block-size: 96px; }
+/* radar viz */
+.fp-rviz { inline-size: 290px; max-inline-size: 100%; block-size: auto; display: block; margin-inline: auto; overflow: visible; }
+.fp-rviz-grid { fill: none; stroke: var(--border); stroke-width: 1; }
+.fp-rviz-spoke { stroke: var(--border); stroke-width: 1; }
+.fp-rviz-area { fill: color-mix(in oklch, var(--ember) 20%, transparent); stroke: var(--ember); stroke-width: 2; }
+.fp-rviz-label { fill: var(--fg-muted); font-family: var(--font-mono); font-size: 9px; text-anchor: middle; }
+/* mermaid diagram (transparent) */
+.fp-mermaid { inline-size: 100%; block-size: 100%; display: flex; align-items: center; justify-content: center; }
+.fp-mermaid svg { max-inline-size: 100%; max-block-size: 320px; inline-size: auto; block-size: auto; background: transparent; }
+
+/* big formatted text */
+.fp-bigtext { margin: 0; font-size: 26px; font-weight: 500; line-height: 1.32; color: var(--fg-muted); letter-spacing: -0.01em; }
+.fp-bigtext strong { color: var(--fg); font-weight: 700; }
+.fp-bigtext em { color: var(--ember); font-style: normal; font-weight: 700; }
+
+/* ── AI-Insights two-column layout (left radar 2/3 · right carousels 1/3) ─────── */
+.fp-ins-cols { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+.fp-ins-left { min-inline-size: 0; }
+.fp-ins-right { min-inline-size: 0; display: flex; flex-direction: column; gap: 38px; }
+/* Carousel arrows: translucent at rest, full opacity when the carousel is hovered. */
+.fp-ins-right .carx-arrow { opacity: 0.22; transition: opacity .16s ease, border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+.fp-ins-right .fp-rcar:hover .carx-arrow,
+.fp-ins-right .carx-arrow:focus-visible { opacity: 1; }
+.fp-rcar-head { margin-block-end: 10px; }
+.fp-rcar-head .fp-section-title { display: inline-flex; align-items: center; gap: 7px; margin-block-end: 0; }
+.fp-rcar-head .fp-section-title svg { color: var(--ember); }
+/* metric tiles get compact inside the narrow 2-up carousel */
+.fp-ins-right .fp-mkpi { padding: 14px; }
+.fp-ins-right .fp-mkpi-value { font-size: 24px; }
+.fp-ins-right .fp-mbars { inline-size: 46px; block-size: 38px; }
+@media (max-width: 1040px) {
+  .fp-ins-cols { grid-template-columns: 1fr; }
+}
+
+/* ── AI-Insights hero: auto-generated architecture graph + drift feed ──────── */
+.fp-arch-meta { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-faint); font-weight: 400; margin-inline-start: 6px; }
+.fp-arch-card, .fp-drift-card { display: flex; flex-direction: column; }
+.fp-arch-svg {
+  inline-size: 100%; block-size: auto; display: block; flex: 1;
+  border-radius: 10px;
+  background-color: color-mix(in oklch, var(--bg) 40%, var(--surface));
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+/* Edges */
+.fp-arch-edge line { stroke: var(--border-strong); stroke-width: 1.4; fill: none; }
+.fp-arch-edge.u-async line { stroke-dasharray: 5 6; }
+.fp-arch-edge.u-drift line { stroke: var(--ember); stroke-width: 2.2; }
+.fp-arch-edge-tag rect { fill: var(--ember-soft); stroke: color-mix(in oklch, var(--ember) 45%, transparent); }
+.fp-arch-edge-tag text { fill: var(--ember); font-family: var(--font-mono); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-anchor: middle; }
+/* Nodes */
+.fp-arch-node { animation: fp-arch-in .5s var(--ease, ease) both; }
+.fp-arch-node rect { fill: var(--surface-active); stroke: var(--border-strong); stroke-width: 1.2; }
+.fp-arch-name { fill: var(--fg); font-family: var(--font-mono); font-size: 15px; text-anchor: middle; }
+.fp-arch-kind { fill: var(--fg-faint); font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-anchor: middle; }
+.fp-arch-node.is-drift rect { stroke: var(--ember); fill: var(--ember-softer); }
+.fp-arch-node.is-drift .fp-arch-name { fill: var(--ember); }
+@keyframes fp-arch-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .fp-arch-node { animation: none; } }
+/* Legend */
+.fp-arch-legend { display: flex; gap: 18px; margin-block-start: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted); }
+.fp-arch-legend span { display: inline-flex; align-items: center; gap: 7px; }
+.fp-arch-legend i { inline-size: 18px; block-size: 0; border-block-start: 1.6px solid var(--border-strong); }
+.fp-arch-legend .u-async i { border-block-start-style: dashed; }
+.fp-arch-legend .u-drift i { border-block-start-color: var(--ember); border-block-start-width: 2.2px; }
+
+/* Architectural-drift feed (right panel). */
+.fp-drift-feed { display: flex; flex-direction: column; flex: 1; }
+.fp-drift-item { padding-block: 14px; }
+.fp-drift-feed > .fp-drift-item:first-child { padding-block-start: 4px; }
+.fp-drift-feed > .fp-drift-item:not(:last-child) { border-block-end: 1px solid var(--border); }
+.fp-drift-top { display: flex; align-items: center; gap: 10px; margin-block-end: 7px; }
+.fp-drift-when { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); }
+.fp-drift-when svg { color: var(--ember); }
+.fp-drift-title { font-weight: 600; font-size: var(--text-sm); line-height: 1.4; }
+.fp-drift-detail { margin: 5px 0 0; font-size: var(--text-sm); color: var(--fg-muted); line-height: 1.5; }
+
+/* ── Metric tile — value + delta + caption, with a mini bar chart on the end ──── */
+.fp-mkpi {
+  display: flex; align-items: stretch; justify-content: space-between; gap: 14px;
+  padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+}
+.fp-mkpi-main { display: flex; flex-direction: column; gap: 7px; min-inline-size: 0; }
+.fp-mkpi-label { font-size: var(--text-sm); color: var(--fg-muted); }
+.fp-mkpi-valrow { display: flex; align-items: baseline; gap: 8px; }
+.fp-mkpi-value { font-family: var(--font-mono); font-size: 30px; font-weight: 600; color: var(--fg); line-height: 1; letter-spacing: -0.02em; }
+.fp-mkpi-delta { font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 600; }
+.fp-mkpi-delta.is-up { color: var(--success); }
+.fp-mkpi-delta.is-down { color: var(--danger); }
+.fp-mkpi-cap { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-faint); margin-block-start: auto; }
+.fp-mbars { display: flex; align-items: flex-end; gap: 4px; inline-size: 84px; block-size: 52px; align-self: center; flex-shrink: 0; }
+.fp-mbar { flex: 1; min-block-size: 4px; background: var(--ember); border-radius: 3px 3px 0 0; }
+
+/* ── PR analysis panel ──────────────────────────────────────────────────────── */
+.fp-prs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); }
+.fp-pr { padding: 6px 18px; display: flex; flex-direction: column; gap: 6px; }
+.fp-pr:first-child { padding-inline-start: 0; }
+.fp-pr:not(:first-child) { border-inline-start: 1px solid var(--border); }
+.fp-pr-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.fp-pr-verdict {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  padding-inline: 8px; padding-block: 3px; border-radius: var(--radius-md, 6px);
+  border: 1px solid transparent;
+}
+.fp-pr-verdict.u-ship     { color: var(--success); background: var(--success-soft); border-color: color-mix(in oklch, var(--success) 30%, transparent); }
+.fp-pr-verdict.u-block    { color: var(--danger);  background: var(--danger-soft);  border-color: color-mix(in oklch, var(--danger) 30%, transparent); }
+.fp-pr-verdict.u-revision { color: var(--warning); background: var(--warning-soft); border-color: color-mix(in oklch, var(--warning) 30%, transparent); }
+.fp-pr-when { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-faint); }
+.fp-pr-title { font-weight: 600; font-size: var(--text-sm); line-height: 1.4; margin-block-start: 2px; }
+.fp-pr-detail { margin: 0; font-size: var(--text-sm); color: var(--fg-muted); line-height: 1.5; }
+.fp-pr-svc { display: inline-flex; align-items: center; gap: 5px; margin-block-start: auto; padding-block-start: 6px; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); }
+.fp-pr-svc svg { color: var(--ember); }
+@media (max-width: 720px) {
+  .fp-pr:not(:first-child) { border-inline-start: 0; border-block-start: 1px solid var(--border); padding-inline-start: 0; padding-block-start: 14px; }
+}
+
+/* ── ADR adherence panel ────────────────────────────────────────────────────── */
+.fp-adr-list { display: flex; flex-direction: column; gap: 16px; }
+.fp-adr { display: flex; flex-direction: column; gap: 6px; }
+.fp-adr-top { display: flex; align-items: center; gap: 9px; }
+.fp-adr-title { flex: 1; min-inline-size: 0; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-adr-pct { font-family: var(--font-mono); font-size: var(--text-sm); font-weight: 600; color: var(--fg); }
+.fp-adr-bar { display: block; block-size: 6px; border-radius: 999px; background: var(--surface-active); overflow: hidden; }
+.fp-adr-fill { display: block; block-size: 100%; border-radius: 999px; }
+.fp-adr-fill[data-level='hi']  { background: var(--success); }
+.fp-adr-fill[data-level='mid'] { background: var(--ember); }
+.fp-adr-fill[data-level='lo']  { background: var(--warning); }
+.fp-adr-hint { font-size: var(--text-xs); color: var(--fg-muted); }
+
+/* ── AI leverage panel ──────────────────────────────────────────────────────── */
+.fp-lev-card { display: flex; flex-direction: column; }
+.fp-lev-headline { padding-block-end: 14px; margin-block-end: 14px; border-block-end: 1px solid var(--border); }
+.fp-lev-big { font-family: var(--font-mono); font-size: 34px; font-weight: 600; color: var(--ember); line-height: 1; letter-spacing: -0.02em; }
+.fp-lev-big span { font-size: var(--text-sm); font-weight: 500; color: var(--fg-faint); margin-inline-start: 4px; }
+.fp-lev-sub { margin-block-start: 6px; font-size: var(--text-sm); color: var(--fg-muted); }
+.fp-lev-bars { display: flex; flex-direction: column; gap: 9px; }
+.fp-lev-row { display: grid; grid-template-columns: 130px 1fr 44px; align-items: center; gap: 10px; }
+.fp-lev-label { font-size: var(--text-sm); color: var(--fg-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-lev-track { block-size: 8px; border-radius: 999px; background: var(--surface-active); overflow: hidden; }
+.fp-lev-fill { display: block; block-size: 100%; border-radius: 999px; background: var(--border-strong); }
+.fp-lev-val { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); text-align: end; }
+.fp-lev-row.is-you .fp-lev-label { color: var(--fg); font-weight: 600; }
+.fp-lev-row.is-you .fp-lev-fill { background: var(--ember); }
+.fp-lev-row.is-you .fp-lev-val { color: var(--fg); }
+.fp-lev-comps { display: flex; flex-direction: column; gap: 0; margin-block-start: 16px; }
+.fp-lev-comp { display: flex; align-items: center; gap: 12px; padding-block: 9px; }
+.fp-lev-comp:not(:last-child) { border-block-end: 1px solid var(--border); }
+.fp-lev-comp-you { font-family: var(--font-mono); font-size: 16px; font-weight: 600; color: var(--fg); inline-size: 48px; flex-shrink: 0; }
+.fp-lev-comp-mid { flex: 1; min-inline-size: 0; display: flex; flex-direction: column; }
+.fp-lev-comp-label { font-size: var(--text-sm); color: var(--fg); }
+.fp-lev-comp-note { font-size: var(--text-xs); color: var(--fg-muted); }
+.fp-lev-up { color: var(--success); flex-shrink: 0; }
+.fp-lev-down { color: var(--danger); flex-shrink: 0; }
+
+/* ── Signals carousel — agent verdicts (PRs, drift, deploys, security, cost) ──── */
+.fp-sig-nav { display: inline-flex; gap: 6px; }
+.fp-sig-nav button { inline-size: 28px; block-size: 28px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--fg-muted); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: color .12s, border-color .12s; }
+.fp-sig-nav button:hover { color: var(--fg); border-color: var(--border-strong); }
+.fp-sigcar { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; padding-block-end: 2px; }
+.fp-sigcar::-webkit-scrollbar { display: none; }
+.fp-sig { inline-size: 100%; block-size: 100%; display: flex; flex-direction: column; gap: 7px; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+.fp-sig-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.fp-sig-badge { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; padding-inline: 8px; padding-block: 3px; border-radius: var(--radius-md, 6px); border: 1px solid transparent; }
+.fp-sig-badge.u-success { color: var(--success); background: var(--success-soft); border-color: color-mix(in oklch, var(--success) 30%, transparent); }
+.fp-sig-badge.u-danger  { color: var(--danger);  background: var(--danger-soft);  border-color: color-mix(in oklch, var(--danger) 30%, transparent); }
+.fp-sig-badge.u-warning { color: var(--warning); background: var(--warning-soft); border-color: color-mix(in oklch, var(--warning) 30%, transparent); }
+.fp-sig-badge.u-ember   { color: var(--ember);   background: var(--ember-soft);   border-color: color-mix(in oklch, var(--ember) 30%, transparent); }
+.fp-sig-badge.u-neutral { color: var(--fg-muted); background: var(--surface); border-color: var(--border); }
+.fp-sig-title { font-weight: 600; font-size: var(--text-sm); line-height: 1.4; }
+.fp-sig-detail { margin: 0; font-size: var(--text-sm); color: var(--fg-muted); line-height: 1.5; flex: 1; }
+
+/* ── Comparative cards — you vs squad · alliance · company eng ─────────────────── */
+.fp-cmp { display: flex; flex-direction: column; }
+.fp-cmp-title { font-size: var(--text-sm); color: var(--fg-muted); }
+.fp-cmp-big { font-family: var(--font-mono); font-size: 32px; font-weight: 600; color: var(--ember); line-height: 1; letter-spacing: -0.02em; margin-block-start: 8px; }
+.fp-cmp-sub { font-size: var(--text-xs); color: var(--fg-muted); line-height: 1.45; margin-block-start: 6px; padding-block-end: 14px; margin-block-end: 14px; border-block-end: 1px solid var(--border); }
+.fp-cmp-bars { display: flex; flex-direction: column; gap: 10px; margin-block-start: auto; }
+.fp-cmp-row { display: grid; grid-template-columns: 84px 1fr 42px; align-items: center; gap: 10px; }
+.fp-cmp-label { font-size: var(--text-xs); color: var(--fg-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-cmp-track { block-size: 8px; border-radius: 999px; background: var(--surface-active); overflow: hidden; }
+.fp-cmp-fill { display: block; block-size: 100%; border-radius: 999px; background: var(--border-strong); }
+.fp-cmp-val { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); text-align: end; }
+.fp-cmp-row.is-you .fp-cmp-label { color: var(--fg); font-weight: 600; }
+.fp-cmp-row.is-you .fp-cmp-fill { background: var(--ember); }
+.fp-cmp-row.is-you .fp-cmp-val { color: var(--fg); }
+.fp-cmp-notes { display: flex; flex-direction: column; margin-block-start: 16px; padding-block-start: 12px; border-block-start: 1px solid var(--border); }
+.fp-cmp-note { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-block: 6px; }
+.fp-cmp-note:not(:last-child) { border-block-end: 1px solid var(--border); }
+.fp-cmp-note-l { font-size: var(--text-sm); color: var(--fg-muted); }
+.fp-cmp-note-v { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--fg); }
+
+/* Resolved history — quiet flat rows. */
+.fp-radar-resolved .fp-rows { margin-block-start: 4px; }
+.fp-resolved-row { display: flex; align-items: center; gap: 10px; padding-block: 9px; }
+.fp-radar-resolved .fp-rows > .fp-resolved-row:not(:last-child) { border-block-end: 1px solid var(--border); }
+.fp-resolved-ico {
+  inline-size: 24px; block-size: 24px; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-md, 6px);
+  color: var(--success); background: var(--success-soft);
+}
+.fp-resolved-title { flex: 1; min-inline-size: 0; font-size: var(--text-sm); color: var(--fg-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-resolved-meta { flex-shrink: 0; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-faint); }
+
+/* ── ③ OBSERVE — agent workstream (auditable + reversible) ────────────────── */
+.fp-work { display: flex; flex-direction: column; }
+.fp-work-row {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  padding-block: 13px;
+}
+.fp-work-row:not(:last-child) { border-block-end: 1px solid var(--border); }
+.fp-work-status {
+  inline-size: 8px; block-size: 8px; border-radius: 50%;
+  flex-shrink: 0; margin-block-start: 6px;
+}
+.fp-work-status.u-done      { background: var(--success); }
+.fp-work-status.u-scheduled { background: var(--fg-faint); }
+.fp-work-status.u-inflight  {
+  background: var(--ember);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--ember) 24%, transparent);
+}
+.fp-work-body { flex: 1; min-inline-size: 0; display: flex; flex-direction: column; gap: 4px; }
+.fp-work-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.fp-work-title {
+  font-weight: 600; font-size: var(--text-sm); color: var(--fg);
+  text-decoration: none;
+}
+.fp-work-title:hover { color: var(--ember); }
+.fp-work-top .pill { margin-inline-start: auto; }
+.fp-work-meta { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); }
+.fp-work-meta code { font-family: var(--font-mono); color: var(--fg-muted); }
+.fp-work-foot { display: flex; align-items: center; gap: 12px; margin-block-start: 4px; flex-wrap: wrap; }
+.fp-work-impact { font-size: var(--text-sm); color: var(--fg); }
+.fp-work-verified {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: var(--text-xs); font-weight: 500; color: var(--success);
+}
+.fp-work-spacer { flex: 1; min-inline-size: 8px; }
+
+/* Quick-start launcher rows — two-line label inside the flat list. */
+.fp-qs-label { display: block; font-weight: 500; font-size: var(--text-sm); color: var(--fg); }
+.fp-qs-meta  { display: block; font-size: var(--text-xs); color: var(--fg-muted); margin-block-start: 1px; }
+
