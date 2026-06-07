@@ -818,6 +818,26 @@ body:active::-webkit-scrollbar-thumb,
    cancel the 8px side padding for a full-width divider). Scoped via .fp-app. */
 .fp-app .sb-rail { padding-block-start: 0; }
 
+/* Collapsed (icon-only) rail: section labels are hidden, so the subject groups
+   blur together. Mark each group boundary with a short, centered hairline above
+   every section except the first. Only in collapsed mode — when expanded, the
+   labels already separate the groups. */
+.fp-app > .sb-rail.sb-collapsed .sb-section + .sb-section {
+  position: relative;
+  margin-block-start: 9px;
+  padding-block-start: 9px;
+}
+.fp-app > .sb-rail.sb-collapsed .sb-section + .sb-section::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  margin-inline: auto;
+  inline-size: 20px;
+  block-size: 1px;
+  background: var(--border);
+}
+
 /* Portal dropdown menus (workspace switcher · notifications) render their own
    leading visuals (avatars/icons), so suppress the DS empty icon-slot gutter
    that otherwise reserves blank space at the start of every row. */
