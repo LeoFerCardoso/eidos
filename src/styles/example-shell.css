@@ -2920,6 +2920,15 @@ body:active::-webkit-scrollbar-thumb,
 .fp-insight-horizon.u-hot  { color: var(--danger);  background: var(--danger-soft); }
 .fp-insight-horizon.u-warm { color: var(--warning); background: var(--warning-soft); }
 .fp-insight-horizon.u-cool { color: var(--fg-muted); background: var(--surface-active); }
+/* Inside a horizon bucket the group header already carries the urgency colour,
+   so the per-row chip drops to quiet neutral — it stays as the precise estimate
+   (e.g. "~1 wk") without duplicating the bucket's colour signal. On the Home
+   (no .fp-radar-group wrapper) the chip keeps its urgency colour. */
+.fp-radar-group .fp-insight-horizon.u-hot,
+.fp-radar-group .fp-insight-horizon.u-warm,
+.fp-radar-group .fp-insight-horizon.u-cool {
+  color: var(--fg-muted); background: var(--surface-active);
+}
 .fp-insight-title { flex: 1; min-inline-size: 0; font-weight: 600; font-size: var(--text-base); line-height: 1.4; }
 .fp-insight-meta { font-size: var(--text-sm); color: var(--fg-muted); line-height: 1.5; }
 .fp-insight-rem {
