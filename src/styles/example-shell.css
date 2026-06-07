@@ -3759,3 +3759,24 @@ body:active::-webkit-scrollbar-thumb,
 .fp-posture-num { font-size: var(--text-3xl); font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
 .fp-posture-den { font-size: var(--text-lg); color: var(--fg-faint); font-weight: 500; }
 .fp-sev-dot { inline-size: 9px; block-size: 9px; border-radius: var(--radius-full); flex-shrink: 0; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Databases catalog (/portal/databases)
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Storage-by-engine bars. */
+.fp-engine-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+.fp-engine { display: grid; grid-template-columns: 120px 1fr 72px; align-items: center; gap: 10px; }
+.fp-engine-name { display: inline-flex; align-items: center; gap: 8px; font-size: var(--text-sm); color: var(--fg-muted); white-space: nowrap; }
+.fp-engine-bar { block-size: 7px; border-radius: var(--radius-full); background: var(--surface-active); overflow: hidden; }
+.fp-engine-fill { display: block; block-size: 100%; border-radius: var(--radius-full); }
+.fp-engine-val { font-size: var(--text-sm); color: var(--fg); text-align: end; font-variant-numeric: tabular-nums; }
+
+/* Inline PII badge (reused on Databases, Buckets, Cloud Resources). */
+.fp-pii {
+  display: inline-block; margin-inline-start: 8px;
+  padding-block: 1px; padding-inline: 6px;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--ember); background: var(--ember-soft); border-radius: var(--radius-sm, 4px);
+  vertical-align: middle;
+}

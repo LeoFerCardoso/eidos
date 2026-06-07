@@ -90,9 +90,10 @@ const RAIL_SECTIONS: RailSection[] = [
   {
     label: 'Catalog',
     items: [
-      { key: 'catalog',   icon: 'server',  label: 'Catalog',   href: '/portal/catalog' },
-      { key: 'apis',      icon: 'braces',  label: 'APIs',      href: '/portal/apis' },
-      { key: 'create',    icon: 'package', label: 'Templates', href: '/portal/create' },
+      { key: 'catalog',   icon: 'server',   label: 'Catalog',   href: '/portal/catalog' },
+      { key: 'apis',      icon: 'braces',   label: 'APIs',      href: '/portal/apis' },
+      { key: 'databases', icon: 'database', label: 'Databases', href: '/portal/databases' },
+      { key: 'create',    icon: 'package',  label: 'Templates', href: '/portal/create' },
     ],
   },
   {
@@ -101,7 +102,7 @@ const RAIL_SECTIONS: RailSection[] = [
       { key: 'chat',     icon: 'chat',     label: 'Forge AI',    href: '/portal/chat' },
       { key: 'agents',   icon: 'agent',    label: 'Agents',      href: '/portal/agents' },
       { key: 'skills',   icon: 'zap',      label: 'Skills',      href: '/portal/skills' },
-      { key: 'contexts', icon: 'database', label: 'Contexts',    href: '/portal/contexts' },
+      { key: 'contexts', icon: 'layers',   label: 'Contexts',    href: '/portal/contexts' },
       { key: 'insights', icon: 'sparkle',  label: 'AI-Insights', href: '/portal/insights' },
     ],
   },
@@ -140,6 +141,7 @@ const CRUMB_LABELS: Record<string, string> = {
   portal:        'Forge',
   catalog:       'Catalog',
   apis:          'APIs',
+  databases:     'Databases',
   agents:        'Agents',
   skills:        'Skills',
   contexts:      'Contexts',
