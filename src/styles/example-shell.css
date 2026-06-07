@@ -3000,12 +3000,11 @@ body:active::-webkit-scrollbar-thumb,
   content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
   border-radius: inherit; padding: 1px;
   background: conic-gradient(from var(--fp-gleam-angle),
-    var(--ember),
-    color-mix(in srgb, var(--ember) 28%, transparent),
-    var(--ember-deep),
-    var(--ember-glow),
-    color-mix(in srgb, var(--ember-glow) 28%, transparent),
-    var(--ember));
+    var(--accent),
+    color-mix(in srgb, var(--accent) 28%, transparent),
+    var(--accent-3),
+    color-mix(in srgb, var(--accent-3) 28%, transparent),
+    var(--accent));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);

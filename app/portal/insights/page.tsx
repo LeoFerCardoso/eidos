@@ -250,12 +250,13 @@ function BannerMosaic() {
   return (
     <svg className="fp-ai-banner-mosaic" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
-        {/* Theme accent gradient (ember scale), corner to corner. Bound to the
-            theme tokens via style so it follows the active theme. */}
+        {/* Two-hue theme gradient: accent → complementary (forge: ember → violet),
+            corner to corner. Bound to theme tokens via style so it follows the
+            active theme. */}
         <linearGradient id="fp-banner-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={W} y2={H}>
-          <stop offset="0%" style={{ stopColor: 'var(--ember-deep)' }} />
-          <stop offset="50%" style={{ stopColor: 'var(--ember)' }} />
-          <stop offset="100%" style={{ stopColor: 'var(--ember-glow)' }} />
+          <stop offset="0%" style={{ stopColor: 'var(--accent)' }} />
+          <stop offset="52%" style={{ stopColor: 'color-mix(in oklch, var(--accent), var(--accent-3))' }} />
+          <stop offset="100%" style={{ stopColor: 'var(--accent-3)' }} />
         </linearGradient>
       </defs>
       <g fill="url(#fp-banner-grad)">{rects}</g>
@@ -400,7 +401,7 @@ export default function InsightsPage() {
               {/* big formatted text — lead slide */}
               <CarouselSlide width="100%">
                 <article className="fp-bslide fp-bslide--mesh">
-                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.trending size={13} /> LEVERAGE</span><AILabel variant="box" size="sm" /></div>
+                  <div className="fp-bslide-head"><span className="fp-bslide-eyebrow"><Icons.trending size={13} /> LEVERAGE</span><h3 className="fp-bslide-title">Time the agents gave back</h3><AILabel variant="box" size="sm" /></div>
                   <div className="fp-bslide-body fp-bslide-body--text">
                     <p className="fp-bigtext"><strong>Last month</strong>, automation saved your team <em>48.3 hours</em> of manual work.</p>
                   </div>
