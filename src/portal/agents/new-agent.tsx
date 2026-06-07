@@ -677,7 +677,7 @@ export default function NewAgent({ editId }: { editId?: string } = {}) {
                 const locked = !c.needsReview; // only Forge chat is locked on
                 return (
                   <label key={c.id} className={'rvch' + (on ? ' on' : '')}>
-                    <span className="ic">{ICON(c.icon, 15)}</span>
+                    <span className="ic">{c.brand ? <BrandIcon slug={c.brand} size={16} color="brand" /> : ICON(c.icon, 15)}</span>
                     <span className="tx"><span className="nm">{c.label}</span><span className="ds">{c.desc}</span></span>
                     {locked ? <span className="rvch-lock">Always on</span> : on && c.needsReview ? <span className="rvch-rev">Needs setup</span> : null}
                     <Switch checked={on} disabled={locked} onChange={() => toggleChannel(c.id)} aria-label={c.label} />

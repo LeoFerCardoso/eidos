@@ -183,7 +183,7 @@ function ShareChannels({ agent, channels }: { agent: Agent; channels: Channel[] 
       <div className="rows">
         {channels.map((c) => (
           <div key={c.id} className="ch">
-            <span className="ic">{ICON(c.icon, 14)}</span>
+            <span className="ic">{c.brand ? <BrandIcon slug={c.brand} size={15} color="brand" /> : ICON(c.icon, 14)}</span>
             <span className="nm">{c.label}</span>
             {c.status === 'on'
               ? <CopyChip value={c.link} label="Copy link" />
@@ -520,7 +520,7 @@ export default function AgentDetail({ id }: { id: string }) {
           <div className="fp-agentd-channels">
             {channels.map((c) => (
               <div key={c.id} className="ch">
-                <span className="ic">{ICON(c.icon, 14)}</span>
+                <span className="ic">{c.brand ? <BrandIcon slug={c.brand} size={15} color="brand" /> : ICON(c.icon, 14)}</span>
                 <div className="tx">
                   <span className="nm">{c.label}<span className="consumer">{c.consumer}</span></span>
                   <span className="ds">{c.desc}</span>

@@ -262,7 +262,7 @@ export function policyFor(agent: Agent): AgentPolicy {
 
 export type ChannelStatus = 'on' | 'review' | 'off';
 export type ChannelConsumer = 'Humans' | 'Messaging' | 'Systems' | 'Agents';
-export interface ChannelDef { id: string; label: string; consumer: ChannelConsumer; icon: string; desc: string; needsReview: boolean }
+export interface ChannelDef { id: string; label: string; consumer: ChannelConsumer; icon: string; desc: string; needsReview: boolean; /** BrandIcon slug, for real app logos (WhatsApp, Telegram…). Falls back to `icon`. */ brand?: string }
 export interface Channel extends ChannelDef { link: string; copyLabel: string; status: ChannelStatus }
 
 export const CHANNELS: ChannelDef[] = [
@@ -270,13 +270,13 @@ export const CHANNELS: ChannelDef[] = [
   { id: 'embed',      label: 'Embedded chat', consumer: 'Humans',  icon: 'globe', desc: 'Embed in an internal product or portal.',            needsReview: true },
   // Messaging surfaces — let people reach the agent on the apps they already use.
   // Each needs a one-time connection plus a security review before it goes live.
-  { id: 'whatsapp',  label: 'WhatsApp',        consumer: 'Messaging', icon: 'phone', desc: 'Chat with the agent on WhatsApp Business.',       needsReview: true },
-  { id: 'telegram',  label: 'Telegram',        consumer: 'Messaging', icon: 'chat',  desc: 'Reach the agent through a Telegram bot.',         needsReview: true },
-  { id: 'imessage',  label: 'iMessage',        consumer: 'Messaging', icon: 'chat',  desc: 'Message the agent over Apple iMessage.',          needsReview: true },
-  { id: 'sms',       label: 'SMS',             consumer: 'Messaging', icon: 'phone', desc: 'Text the agent over SMS.',                        needsReview: true },
+  { id: 'whatsapp',  label: 'WhatsApp',        consumer: 'Messaging', icon: 'phone', brand: 'whatsapp',    desc: 'Chat with the agent on WhatsApp Business.',       needsReview: true },
+  { id: 'telegram',  label: 'Telegram',        consumer: 'Messaging', icon: 'chat',  brand: 'telegram',    desc: 'Reach the agent through a Telegram bot.',         needsReview: true },
+  { id: 'imessage',  label: 'iMessage',        consumer: 'Messaging', icon: 'chat',  brand: 'imessage',    desc: 'Message the agent over Apple iMessage.',          needsReview: true },
+  { id: 'sms',       label: 'SMS',             consumer: 'Messaging', icon: 'phone', brand: 'twilio',      desc: 'Text the agent over SMS, powered by Twilio.',     needsReview: true },
   { id: 'email',     label: 'Email',           consumer: 'Messaging', icon: 'mail',  desc: 'Let the agent read, write and reply to email.',   needsReview: true },
-  { id: 'gchat',     label: 'Google Chat',     consumer: 'Messaging', icon: 'chat',  desc: 'Add the agent to Google Chat spaces and DMs.',    needsReview: true },
-  { id: 'teams',     label: 'Microsoft Teams', consumer: 'Messaging', icon: 'chat',  desc: 'Add the agent to Microsoft Teams chats.',         needsReview: true },
+  { id: 'gchat',     label: 'Google Chat',     consumer: 'Messaging', icon: 'chat',  brand: 'google-chat', desc: 'Add the agent to Google Chat spaces and DMs.',    needsReview: true },
+  { id: 'teams',     label: 'Microsoft Teams', consumer: 'Messaging', icon: 'chat',  brand: 'teams',       desc: 'Add the agent to Microsoft Teams chats.',         needsReview: true },
   { id: 'api',        label: 'API endpoint',  consumer: 'Systems', icon: 'zap',   desc: 'Invoke programmatically over HTTPS.',                needsReview: true },
   { id: 'a2a',        label: 'Agent (A2A)',   consumer: 'Agents',  icon: 'agent', desc: 'Discoverable by other agents via the A2A protocol.', needsReview: true },
 ];
