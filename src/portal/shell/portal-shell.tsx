@@ -70,25 +70,58 @@ type RailItem = {
   href?: string; // present → live link; absent → disabled (coming soon)
 };
 
-// Product IA — live routes have an href; the rest are disabled (vision placeholders).
-const RAIL: RailItem[] = [
-  { key: 'home',          icon: 'home',    label: 'Home',          href: '/portal' },
-  { key: 'notifications', icon: 'bell',    label: 'Notifications', href: '/portal/notifications' },
-  { key: 'chat',          icon: 'chat',    label: 'Chat',          href: '/portal/chat' },
-  { key: 'catalog',       icon: 'server',  label: 'Catalog',       href: '/portal/catalog' },
-  { key: 'agents',        icon: 'agent',   label: 'Agents',        href: '/portal/agents' },
-  { key: 'skills',        icon: 'zap',     label: 'Skills',        href: '/portal/skills' },
-  { key: 'contexts',      icon: 'database',label: 'Contexts',      href: '/portal/contexts' },
-  { key: 'insights',      icon: 'sparkle', label: 'AI-Insights',   href: '/portal/insights' },
-  { key: 'create',     icon: 'package',    label: 'Templates',    href: '/portal/create' },
-  { key: 'pipelines',  icon: 'pipeline',   label: 'Pipelines',     href: '/portal/pipelines' },
-  { key: 'quality-gates', icon: 'gitPullRequest', label: 'Quality Gates', href: '/portal/quality-gates' },
-  { key: 'fraud',      icon: 'shield',     label: 'Fraud & Risk',  href: '/portal/fraud'  },
-  { key: 'security',   icon: 'lock',       label: 'Security',      href: '/portal/security' },
-  { key: 'dora',       icon: 'gauge',      label: 'DORA',          href: '/portal/dora'   },
-  { key: 'scorecards', icon: 'score',      label: 'Scorecards',    href: '/portal/scorecards' },
-  { key: 'incidents',  icon: 'incident',   label: 'Incidents',     href: '/portal/incidents' },
-  { key: 'compliance', icon: 'compliance', label: 'LGPD & Audit',  href: '/portal/compliance' },
+type RailSection = {
+  /** Section header (mono caps); omit for the top, unlabeled cluster. Hidden when collapsed. */
+  label?: string;
+  items: RailItem[];
+};
+
+// Product IA, grouped by subject. The top cluster is the always-there entry
+// surfaces; the rest are the IDP pillars — Catalog (build), AI (the agentic
+// layer), Delivery (ship + measure), and Governance (standards, security,
+// compliance). Every route is live.
+const RAIL_SECTIONS: RailSection[] = [
+  {
+    items: [
+      { key: 'home',          icon: 'home', label: 'Home',          href: '/portal' },
+      { key: 'notifications', icon: 'bell', label: 'Notifications', href: '/portal/notifications' },
+    ],
+  },
+  {
+    label: 'Catalog',
+    items: [
+      { key: 'catalog', icon: 'server',  label: 'Catalog',   href: '/portal/catalog' },
+      { key: 'create',  icon: 'package', label: 'Templates', href: '/portal/create' },
+    ],
+  },
+  {
+    label: 'AI',
+    items: [
+      { key: 'chat',     icon: 'chat',     label: 'Forge AI',    href: '/portal/chat' },
+      { key: 'agents',   icon: 'agent',    label: 'Agents',      href: '/portal/agents' },
+      { key: 'skills',   icon: 'zap',      label: 'Skills',      href: '/portal/skills' },
+      { key: 'contexts', icon: 'database', label: 'Contexts',    href: '/portal/contexts' },
+      { key: 'insights', icon: 'sparkle',  label: 'AI-Insights', href: '/portal/insights' },
+    ],
+  },
+  {
+    label: 'Delivery',
+    items: [
+      { key: 'pipelines',     icon: 'pipeline',       label: 'Pipelines',     href: '/portal/pipelines' },
+      { key: 'quality-gates', icon: 'gitPullRequest', label: 'Quality Gates', href: '/portal/quality-gates' },
+      { key: 'dora',          icon: 'gauge',          label: 'DORA',          href: '/portal/dora' },
+      { key: 'incidents',     icon: 'incident',       label: 'Incidents',     href: '/portal/incidents' },
+    ],
+  },
+  {
+    label: 'Governance',
+    items: [
+      { key: 'scorecards', icon: 'score',      label: 'Scorecards',   href: '/portal/scorecards' },
+      { key: 'security',   icon: 'lock',       label: 'Security',     href: '/portal/security' },
+      { key: 'fraud',      icon: 'shield',     label: 'Fraud & Risk', href: '/portal/fraud' },
+      { key: 'compliance', icon: 'compliance', label: 'LGPD & Audit', href: '/portal/compliance' },
+    ],
+  },
 ];
 
 // ── Active key ────────────────────────────────────────────────────────────────
@@ -119,7 +152,7 @@ const CRUMB_LABELS: Record<string, string> = {
   security:      'Security',
   compliance:    'LGPD & Audit',
   notifications: 'Notifications',
-  chat:          'Chat',
+  chat:          'Forge AI',
 };
 
 function buildCrumbs(pathname: string): { label: string; href?: string }[] {
@@ -745,41 +778,45 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
       >
         <WorkspaceHeader collapsed={!sidebarOpen} current={workspace} onSelect={setWorkspace} />
 
-        <SidebarSection>
-          {RAIL.map((it) => {
-            const Icon = (Icons as Record<string, React.FC<{ size?: number }>>)[it.icon] ?? Icons.circle;
-            // Live routes navigate client-side via the Slot pattern (<SidebarItem
-            // asChild><Link/></SidebarItem>) so the shell + its state persist
-            // across navigation. Disabled (vision-placeholder) items stay a bare
-            // non-interactive anchor.
-            if (it.href) {
+        {/* Grouped nav — one SidebarSection per subject. Section labels show
+            when expanded and collapse to bare icon clusters in icon mode. */}
+        {RAIL_SECTIONS.map((section, si) => (
+          <SidebarSection key={section.label ?? `section-${si}`} label={section.label}>
+            {section.items.map((it) => {
+              const Icon = (Icons as Record<string, React.FC<{ size?: number }>>)[it.icon] ?? Icons.circle;
+              // Live routes navigate client-side via the Slot pattern (<SidebarItem
+              // asChild><Link/></SidebarItem>) so the shell + its state persist
+              // across navigation. A future placeholder (no href) stays a bare
+              // non-interactive anchor.
+              if (it.href) {
+                return (
+                  <SidebarItem
+                    key={it.key}
+                    asChild
+                    icon={<Icon size={16} />}
+                    active={it.key === active}
+                    tooltip={it.label}
+                  >
+                    <Link href={it.href}>{it.label}</Link>
+                  </SidebarItem>
+                );
+              }
               return (
                 <SidebarItem
                   key={it.key}
-                  asChild
+                  href="#"
                   icon={<Icon size={16} />}
-                  active={it.key === active}
                   tooltip={it.label}
+                  aria-disabled
+                  onClick={(e: React.MouseEvent) => e.preventDefault()}
+                  style={{ opacity: 0.45, cursor: 'not-allowed', pointerEvents: 'none' }}
                 >
-                  <Link href={it.href}>{it.label}</Link>
+                  {it.label}
                 </SidebarItem>
               );
-            }
-            return (
-              <SidebarItem
-                key={it.key}
-                href="#"
-                icon={<Icon size={16} />}
-                tooltip={it.label}
-                aria-disabled
-                onClick={(e: React.MouseEvent) => e.preventDefault()}
-                style={{ opacity: 0.45, cursor: 'not-allowed', pointerEvents: 'none' }}
-              >
-                {it.label}
-              </SidebarItem>
-            );
-          })}
-        </SidebarSection>
+            })}
+          </SidebarSection>
+        ))}
 
         {/* Footer: brand mark only — Forge AI has moved to the topbar */}
         <SidebarFooter>
