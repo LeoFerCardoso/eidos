@@ -2942,8 +2942,8 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
     },
     {
       "prop": "value",
-      "type": "number | string",
-      "description": "The headline number (auto-formatted with locale grouping)."
+      "type": "React.ReactNode",
+      "description": "The headline number — a raw number/string (auto-formatted with locale grouping) or a node (e.g. an animated <CountUp/>)."
     },
     {
       "prop": "suffix",
@@ -3327,6 +3327,28 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
       "description": "Custom tfoot content (e.g. a totals row)."
     }
   ],
+  "BrandIcon": [
+    {
+      "prop": "slug",
+      "type": "string",
+      "required": true,
+      "description": "Registry slug, e.g. \"github\", \"datadog\", \"claude\"."
+    },
+    {
+      "prop": "size",
+      "type": "number",
+      "default": "20"
+    },
+    {
+      "prop": "color",
+      "type": "'brand' | (string & {})",
+      "description": "\"brand\" paints the official hex; otherwise a CSS colour. Default currentColor."
+    },
+    {
+      "prop": "title",
+      "type": "string"
+    }
+  ],
   "SepGlyph": [
     {
       "prop": "type",
@@ -3415,6 +3437,32 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
       "type": "React.ReactNode",
       "required": true,
       "description": "Button (or asChild-wrapped link) elements."
+    }
+  ],
+  "Button": [
+    {
+      "prop": "variant",
+      "type": "ButtonVariant",
+      "default": "'default'",
+      "description": "ember = primary · default = secondary (surface fill) · outline · ghost · link · destructive."
+    },
+    {
+      "prop": "size",
+      "type": "ButtonSize",
+      "default": "'md'",
+      "description": "md (32px) · sm (26px) · xs (22px) · lg (40px)."
+    },
+    {
+      "prop": "icon",
+      "type": "boolean",
+      "default": "false",
+      "description": "Icon-only square button."
+    },
+    {
+      "prop": "asChild",
+      "type": "boolean",
+      "default": "false",
+      "description": "Render the single child element instead of a <button>, merging the .btn classes (e.g. wrap a next/link <Link>)."
     }
   ],
   "Calendar": [
@@ -4999,6 +5047,85 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
     {
       "prop": "error",
       "type": "React.ReactNode"
+    }
+  ],
+  "Field": [
+    {
+      "prop": "label",
+      "type": "React.ReactNode",
+      "required": true,
+      "description": "Field label (string or node)."
+    },
+    {
+      "prop": "required",
+      "type": "boolean",
+      "description": "Append a required asterisk."
+    },
+    {
+      "prop": "hint",
+      "type": "React.ReactNode",
+      "description": "Support text under the label (2px below it; the group sits 8px above the control)."
+    },
+    {
+      "prop": "action",
+      "type": "React.ReactNode",
+      "description": "Trailing action (rides the support line, or the label line when there's no hint)."
+    },
+    {
+      "prop": "badge",
+      "type": "React.ReactNode",
+      "description": "Small badge after the label (e.g. an AILabel)."
+    },
+    {
+      "prop": "htmlFor",
+      "type": "string",
+      "description": "Associate the label with a control id."
+    },
+    {
+      "prop": "className",
+      "type": "string",
+      "default": "''"
+    },
+    {
+      "prop": "children",
+      "type": "React.ReactNode",
+      "required": true
+    }
+  ],
+  "FormSection": [
+    {
+      "prop": "title",
+      "type": "React.ReactNode"
+    },
+    {
+      "prop": "description",
+      "type": "React.ReactNode"
+    },
+    {
+      "prop": "action",
+      "type": "React.ReactNode",
+      "description": "Trailing action on the section title row."
+    },
+    {
+      "prop": "id",
+      "type": "string"
+    },
+    {
+      "prop": "className",
+      "type": "string",
+      "default": "''"
+    },
+    {
+      "prop": "children",
+      "type": "React.ReactNode",
+      "required": true
+    }
+  ],
+  "Form": [
+    {
+      "prop": "children",
+      "type": "React.ReactNode",
+      "required": true
     }
   ],
   "Panel": [
@@ -6985,6 +7112,12 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
       "prop": "tooltip",
       "type": "string",
       "description": "Tooltip label shown when the rail is in icon-only mode. Falls back to children text."
+    },
+    {
+      "prop": "asChild",
+      "type": "boolean",
+      "default": "false",
+      "description": "Render the provided child element as the link instead of a bare <a> (Slot pattern). Use this to compose with a framework router link — e.g. `<SidebarItem asChild ...><Link href=\"…\">Label</Link></SidebarItem>` — so navigation stays client-side. The item's icon/label/badge are injected as the child's content; the child keeps its own href/onClick."
     },
     {
       "prop": "children",
