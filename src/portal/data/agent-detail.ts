@@ -5,6 +5,7 @@
 // SSR and client render identically and the data is stable across reloads.
 import type { Agent, AgentOutput } from './agents';
 import { SKILLS } from './skills';
+import { CONTEXTS } from './contexts';
 
 // ── Response kind ─────────────────────────────────────────────────────────────
 
@@ -325,31 +326,14 @@ export function skillsFor(agent: Agent): SkillDef[] {
   return shuffle(SKILL_POOL, rng).slice(0, n).sort((a, b) => a.name.localeCompare(b.name));
 }
 
-// ── Contexts (placeholder — the context layer is not built yet) ───────────────
+// ── Contexts ──────────────────────────────────────────────────────────────────
 
 export interface ContextDef { id: string; name: string; icon: string; desc: string }
 
-export const CONTEXT_POOL: ContextDef[] = [
-  { id: 'catalog',    name: 'Service catalog',     icon: 'package',    desc: 'Every service, owner and dependency.' },
-  { id: 'slo',        name: 'SLO registry',        icon: 'target',     desc: 'Targets and burn rates per service.' },
-  { id: 'consent',    name: 'Consent ledger',      icon: 'compliance', desc: 'LGPD consent scopes per CPF.' },
-  { id: 'features',   name: 'Ignite feature store',icon: 'database',   desc: 'Feature freshness and lineage.' },
-  { id: 'runbooks',   name: 'Runbook library',     icon: 'book',       desc: 'Approved operational runbooks.' },
-  { id: 'incidents',  name: 'Incident history',    icon: 'incident',   desc: 'Past incidents and resolutions.' },
-  { id: 'scr',        name: 'SCR layout spec',     icon: 'layers',     desc: 'SCR record layout and field contracts.' },
-  { id: 'bureau',     name: 'Boa Vista feeds',     icon: 'doc',        desc: 'Bureau feed schemas and SLAs.' },
-  { id: 'pipelines',  name: 'Pipeline registry',   icon: 'pipeline',   desc: 'CI/CD pipelines and quality gates.' },
-  { id: 'dashboards', name: 'Dashboards & metrics',icon: 'activity',   desc: 'Grafana dashboards and key metrics.' },
-  { id: 'oncall',     name: 'On-call schedule',    icon: 'clock',      desc: 'Rotations and escalation paths.' },
-  { id: 'adr',        name: 'Architecture decisions',icon: 'book',     desc: 'ADRs and design records.' },
-  { id: 'secrets',    name: 'Access & secrets',    icon: 'lock',       desc: 'Access scopes and rotation policy.' },
-  { id: 'finops',     name: 'FinOps ledger',       icon: 'gauge',      desc: 'Cloud spend by service and team.' },
-  { id: 'fraudrules', name: 'konduto rule set',    icon: 'shield',     desc: 'Active antifraud rules and thresholds.' },
-  { id: 'scoremodels',name: 'Score model registry',icon: 'score',      desc: 'Model versions and reason codes.' },
-  { id: 'apidocs',    name: 'API contracts',       icon: 'braces',     desc: 'OpenAPI specs and consumers.' },
-  { id: 'tickets',    name: 'Ticket history',      icon: 'mail',       desc: 'Past tickets and resolutions.' },
-  { id: 'glossary',   name: 'Domain glossary',     icon: 'book',       desc: 'Bureau and credit terms.' },
-];
+// The wizard's context pool is derived from the Contexts knowledge base
+// (src/portal/data/contexts.ts) so the catalog is the single source: anything
+// connected or authored there is attachable to an agent.
+export const CONTEXT_POOL: ContextDef[] = CONTEXTS.map(({ id, name, icon, desc }) => ({ id, name, icon, desc }));
 
 /** Contexts the agent already has — none yet; the layer ships later. */
 export function contextsFor(_agent: Agent): ContextDef[] {

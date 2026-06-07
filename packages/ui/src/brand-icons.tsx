@@ -15,7 +15,7 @@ import {
   siJenkins, siGithubactions, siCircleci, siArgo,
   siDatadog, siDynatrace, siGrafana, siPrometheus, siNewrelic, siSentry, siOpentelemetry, siSplunk, siElastic,
   siPagerduty, siOpsgenie,
-  siJira, siConfluence, siLinear, siNotion, siZendesk,
+  siJira, siConfluence, siLinear, siNotion, siZendesk, siGoogledrive,
   siGooglecloud, siCloudflare, siVercel, siNetlify, siDigitalocean,
   siDocker, siKubernetes, siTerraform,
   siPostgresql, siRedis, siMongodb, siSnowflake,
@@ -121,6 +121,7 @@ export const BRANDS: BrandDef[] = [
   // Project / docs
   fromSI(siJira, 'project', 'jira'),
   fromSI(siConfluence, 'project', 'confluence'),
+  fromSI(siGoogledrive, 'data', 'google-drive', 'Google Drive'),
   fromSI(siLinear, 'project', 'linear'),
   fromSI(siNotion, 'project', 'notion'),
   fromSI(siZendesk, 'project', 'zendesk'),

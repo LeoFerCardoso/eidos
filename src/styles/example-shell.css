@@ -3643,3 +3643,35 @@ body:active::-webkit-scrollbar-thumb,
 .fp-skill-cat { color: var(--fg-faint); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.04em; }
 .fp-skill-actions { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-block-start: auto; padding-block-start: 4px; }
 .fp-skill-ver { font-size: var(--text-xs); color: var(--fg-faint); }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Contexts knowledge base (/portal/contexts)
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Connect tiles. */
+.fp-connect { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.fp-connect-tile {
+  display: flex; align-items: center; gap: 12px; text-align: start;
+  padding: 14px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl);
+  cursor: pointer; transition: border-color .12s ease, background .12s ease;
+}
+.fp-connect-tile:hover { border-color: color-mix(in oklch, var(--ember) 32%, var(--border)); background: var(--surface-active); }
+.fp-connect-ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  inline-size: 34px; block-size: 34px; border-radius: var(--radius-lg);
+  background: var(--bg-elevated); border: 1px solid var(--border); flex-shrink: 0;
+}
+.fp-connect-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.fp-connect-label { font-weight: 600; font-size: var(--text-sm); }
+.fp-connect-desc { font-size: var(--text-xs); color: var(--fg-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-connect-tile > svg { color: var(--fg-faint); flex-shrink: 0; }
+
+/* Source + name cells. */
+.fp-ctx-src { display: inline-flex; align-items: center; gap: 7px; color: var(--fg-muted); font-size: var(--text-sm); white-space: nowrap; }
+.fp-ctx-name { display: inline-flex; align-items: flex-start; gap: 10px; }
+.fp-ctx-ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  inline-size: 28px; block-size: 28px; border-radius: var(--radius-md, 6px);
+  background: var(--surface-active); color: var(--fg-muted); flex-shrink: 0; margin-block-start: 1px;
+}
