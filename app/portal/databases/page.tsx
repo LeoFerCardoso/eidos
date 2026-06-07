@@ -55,8 +55,8 @@ function DataBanner() {
           <span className="fp-aip-hl mono">score_features</span> on <span className="fp-aip-hl">Snowflake</span> (<span className="fp-aip-hl">9.9 TB</span>) does, and feeds every score.{' '}
           A retention policy on <span className="fp-aip-hl mono">analytics_dw</span> partitions over 18 months cuts cost without touching regulated data.
         </p>
-        <Button variant="outline" size="sm" className="fp-aip-banner-cta">Review retention</Button>
       </div>
+      <Button variant="outline" size="sm" className="fp-aip-banner-action">Review retention</Button>
       <button type="button" className="fp-aip-banner-close" onClick={() => setDismissed(true)} aria-label="Dismiss banner">
         <Icons.x size={16} />
       </button>

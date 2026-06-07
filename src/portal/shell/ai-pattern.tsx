@@ -16,7 +16,7 @@ export function AiPattern({ className }: { className?: string }) {
   const SW = 4.2;
   const W = COLS * PITCH;
   const H = ROWS * PITCH;
-  const TILE = PITCH * 56; // wave wavelength (one accent cycle)
+  const TILE = PITCH * 120; // wave wavelength (one accent cycle) — long, so the accents spread out
   const gid = 'aip-' + React.useId().replace(/[^a-zA-Z0-9_-]/g, '');
   const ref = React.useRef<SVGSVGElement>(null);
 

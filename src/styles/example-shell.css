@@ -3106,7 +3106,7 @@ body:active::-webkit-scrollbar-thumb,
 .fp-aip-banner {
   position: relative; isolation: isolate; overflow: hidden;
   display: flex; align-items: center; gap: 16px;
-  padding-block: 20px; padding-inline: 24px 56px; margin-block-end: 40px;
+  padding-block: 20px; padding-inline: 24px; margin-block-end: 40px;
   border-radius: var(--radius-2xl, 18px);
   border: 1px solid var(--border);
   background: var(--bg-elevated);
@@ -3124,16 +3124,16 @@ body:active::-webkit-scrollbar-thumb,
   content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(to right,
     var(--bg-elevated) 0%,
-    var(--bg-elevated) 42%,
-    color-mix(in oklch, var(--bg-elevated) 80%, transparent) 66%,
-    transparent 88%);
+    var(--bg-elevated) 30%,
+    color-mix(in oklch, var(--bg-elevated) 72%, transparent) 58%,
+    transparent 80%);
 }
 [dir="rtl"] .fp-aip-banner::after {
   background: linear-gradient(to left,
     var(--bg-elevated) 0%,
-    var(--bg-elevated) 42%,
-    color-mix(in oklch, var(--bg-elevated) 80%, transparent) 66%,
-    transparent 88%);
+    var(--bg-elevated) 30%,
+    color-mix(in oklch, var(--bg-elevated) 72%, transparent) 58%,
+    transparent 80%);
 }
 /* Cap the copy width so the support text (2-3 lines) stays in the dark scrim
    zone and never runs under the bright end of the pattern. */
@@ -3148,7 +3148,14 @@ body:active::-webkit-scrollbar-thumb,
 /* Highlighted terms in the support copy (entities + metrics) — brighter + bolder
    than the muted body so the key facts pop. Pair with .mono for identifiers. */
 .fp-aip-banner-desc .fp-aip-hl { color: var(--fg); font-weight: 600; }
-.fp-aip-banner-cta { margin-block-start: 14px; }
+/* Primary action — vertically centered on the right side, over the pattern, so
+   it gets a frosted backdrop to stay legible. */
+.fp-aip-banner .fp-aip-banner-action {
+  position: relative; z-index: 2; flex: 0 0 auto; align-self: center;
+  margin-inline-start: auto; margin-inline-end: 4px;
+  background: color-mix(in oklch, var(--bg-elevated) 70%, transparent);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
 /* Close button — pinned to the top-right corner (the banner is tall, so it no
    longer centers). Translucent overlay + blur so it stays legible over the pattern. */
 .fp-aip-banner-close {
