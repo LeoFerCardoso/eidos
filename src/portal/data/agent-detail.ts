@@ -261,13 +261,22 @@ export function policyFor(agent: Agent): AgentPolicy {
 // Apigee (API), and the Agent2Agent protocol's Agent Card (A2A).
 
 export type ChannelStatus = 'on' | 'review' | 'off';
-export type ChannelConsumer = 'Humans' | 'Systems' | 'Agents';
+export type ChannelConsumer = 'Humans' | 'Messaging' | 'Systems' | 'Agents';
 export interface ChannelDef { id: string; label: string; consumer: ChannelConsumer; icon: string; desc: string; needsReview: boolean }
 export interface Channel extends ChannelDef { link: string; copyLabel: string; status: ChannelStatus }
 
 export const CHANNELS: ChannelDef[] = [
   { id: 'forge-chat', label: 'Forge chat',    consumer: 'Humans',  icon: 'chat',  desc: 'Chat with the agent inside Forge.',                  needsReview: false },
-  { id: 'embed',      label: 'Embedded chat', consumer: 'Humans',  icon: 'globe', desc: 'Embed in Google Chat or another internal product.',  needsReview: true },
+  { id: 'embed',      label: 'Embedded chat', consumer: 'Humans',  icon: 'globe', desc: 'Embed in an internal product or portal.',            needsReview: true },
+  // Messaging surfaces — let people reach the agent on the apps they already use.
+  // Each needs a one-time connection plus a security review before it goes live.
+  { id: 'whatsapp',  label: 'WhatsApp',        consumer: 'Messaging', icon: 'phone', desc: 'Chat with the agent on WhatsApp Business.',       needsReview: true },
+  { id: 'telegram',  label: 'Telegram',        consumer: 'Messaging', icon: 'chat',  desc: 'Reach the agent through a Telegram bot.',         needsReview: true },
+  { id: 'imessage',  label: 'iMessage',        consumer: 'Messaging', icon: 'chat',  desc: 'Message the agent over Apple iMessage.',          needsReview: true },
+  { id: 'sms',       label: 'SMS',             consumer: 'Messaging', icon: 'phone', desc: 'Text the agent over SMS.',                        needsReview: true },
+  { id: 'email',     label: 'Email',           consumer: 'Messaging', icon: 'mail',  desc: 'Let the agent read, write and reply to email.',   needsReview: true },
+  { id: 'gchat',     label: 'Google Chat',     consumer: 'Messaging', icon: 'chat',  desc: 'Add the agent to Google Chat spaces and DMs.',    needsReview: true },
+  { id: 'teams',     label: 'Microsoft Teams', consumer: 'Messaging', icon: 'chat',  desc: 'Add the agent to Microsoft Teams chats.',         needsReview: true },
   { id: 'api',        label: 'API endpoint',  consumer: 'Systems', icon: 'zap',   desc: 'Invoke programmatically over HTTPS.',                needsReview: true },
   { id: 'a2a',        label: 'Agent (A2A)',   consumer: 'Agents',  icon: 'agent', desc: 'Discoverable by other agents via the A2A protocol.', needsReview: true },
 ];
@@ -282,7 +291,8 @@ function channelLink(id: string, agentId: string): { link: string; copyLabel: st
     case 'embed':      return { link: `https://${CH_HOST}/embed/${agentId}`, copyLabel: `${CH_HOST}/embed/${agentId}` };
     case 'api':        return { link: `https://${CH_API}/agents/${agentId}:invoke`, copyLabel: `${CH_API}/agents/${agentId}:invoke` };
     case 'a2a':        return { link: `https://${CH_A2A}/${agentId}/.well-known/agent.json`, copyLabel: `${CH_A2A}/${agentId}/.well-known/agent.json` };
-    default:           return { link: '', copyLabel: '' };
+    // Messaging + any future surface: a manage-connection link.
+    default:           return { link: `https://${CH_HOST}/agents/${agentId}/channels/${id}`, copyLabel: `${CH_HOST}/agents/${agentId}/channels/${id}` };
   }
 }
 
