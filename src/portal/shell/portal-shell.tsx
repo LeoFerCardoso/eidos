@@ -124,7 +124,8 @@ const RAIL_SECTIONS: RailSection[] = [
       { key: 'scorecards', icon: 'score',      label: 'Scorecards',   href: '/portal/scorecards' },
       { key: 'security',   icon: 'lock',       label: 'Security',     href: '/portal/security' },
       { key: 'fraud',      icon: 'shield',     label: 'Fraud & Risk', href: '/portal/fraud' },
-      { key: 'compliance', icon: 'compliance', label: 'LGPD & Audit', href: '/portal/compliance' },
+      { key: 'compliance',   icon: 'compliance', label: 'LGPD & Audit', href: '/portal/compliance' },
+      { key: 'architecture', icon: 'book',       label: 'Architecture', href: '/portal/architecture' },
     ],
   },
 ];
@@ -161,6 +162,7 @@ const CRUMB_LABELS: Record<string, string> = {
   fraud:         'Fraud & Risk',
   security:      'Security',
   compliance:    'LGPD & Audit',
+  architecture:  'Architecture',
   notifications: 'Notifications',
   chat:          'Forge AI',
 };

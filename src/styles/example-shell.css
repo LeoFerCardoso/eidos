@@ -3784,3 +3784,8 @@ body:active::-webkit-scrollbar-thumb,
 /* Buckets (/portal/buckets) — small extras (reuses engine bars + signals). */
 .fp-class { display: inline-flex; align-items: center; gap: 7px; font-size: var(--text-sm); color: var(--fg-muted); white-space: nowrap; }
 .fp-stale-cost { font-size: var(--text-xs); color: var(--fg-muted); white-space: nowrap; }
+
+/* Architecture (/portal/architecture) — ADR tag chips + flat-tabs top gap. */
+.fp-tags { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.fp-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-muted); background: var(--surface-active); border-radius: var(--radius-sm, 4px); padding-block: 1px; padding-inline: 6px; }
+.fp-flat-tabs .eidos-tabpanel { margin-block-start: 14px; }
