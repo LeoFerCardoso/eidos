@@ -29,7 +29,7 @@ function ServerCard({ s }: { s: McpServer }) {
   return (
     <div className="fp-skill">
       <div className="fp-skill-top">
-        <span className="fp-skill-ic" aria-hidden="true"><Icon size={18} /></span>
+        <span className={'fp-skill-ic' + (s.status === 'live' ? '' : ' is-muted')} aria-hidden="true"><Icon size={18} /></span>
         <Pill tone={st.tone} dot={s.status === 'live'}>{st.label}</Pill>
       </div>
       <span className="fp-skill-name mono">{s.name}</span>

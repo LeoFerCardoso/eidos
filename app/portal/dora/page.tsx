@@ -75,7 +75,7 @@ export default function DoraPage() {
       <FPageHeader
         eyebrow="Engineering pulse"
         title="DORA"
-        subtitle={`30 services · 7 products · ${elite} at Elite — all four metrics trending up`}
+        subtitle={`30 services · 7 products · ${elite} at Elite · all four metrics trending up`}
         actions={
           <>
             <span className="fp-filter-select">

@@ -35,13 +35,17 @@ function walk(dir, out = []) {
   return out;
 }
 
-// Strip block comments, line comments and template literals — but keep newline
-// count stable so reported line numbers map back to the real source.
+// Strip block + line comments (so authoring notes never trip the gate), keeping
+// the newline count stable so reported line numbers map back to the real source.
+// Template literals are NOT stripped: real UI copy is authored in them (page
+// subtitles, aria-labels, `${...}` headers), and an em-dash there is exactly the
+// violation we must catch. Only the `${expr}` interpolations are blanked so code
+// identifiers inside a template don't get scanned as copy.
 function stripNonCopy(src) {
   return src
     .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
     .replace(/(^|[^:])\/\/[^\n]*/g, (m, p1) => p1 + m.slice(p1.length).replace(/[^\n]/g, ' '))
-    .replace(/`(?:\\.|[^`\\])*`/g, (m) => m.replace(/[^\n]/g, ' '));
+    .replace(/\$\{(?:[^{}]|\{[^}]*\})*\}/g, (m) => m.replace(/[^\n]/g, ' '));
 }
 
 const files = ROOTS.flatMap((r) => walk(join(CWD, r)));

@@ -267,7 +267,7 @@ const WorkspaceHeader = ({
             justifyContent: collapsed ? 'center' : 'flex-start',
             transition: 'background .12s ease',
           }}
-          aria-label={`Switch workspace — current: ${ws.name}`}
+          aria-label={`Switch workspace · current: ${ws.name}`}
         >
           <WsAvatar initials={ws.initials} size={32} />
           {!collapsed && (

@@ -1,5 +1,5 @@
 'use client';
-// Forge — Agent detail / settings page (/portal/agents/[id]). Opened from an
+// Forge · Agent detail / settings page (/portal/agents/[id]). Opened from an
 // agent card. Two columns: a wide left (header + the agent's stored Markdown
 // instructions) and a right metadata sidebar separated by a hairline rule.
 // Sidebar sections: Properties · Capabilities · Apps (MCP/API, with a tool
@@ -63,7 +63,7 @@ const modelBrand = (m: string): string => {
 
 // Avatar-pill (à la OwnerPill) for the model: the LLM logo + the model name.
 const ModelPill = ({ model }: { model: string }) => (
-  <span className="fp-agentd-modelpill" title={`Model — ${model}`}>
+  <span className="fp-agentd-modelpill" title={`Model · ${model}`}>
     <span className="av"><BrandIcon slug={modelBrand(model)} size={12} /></span>
     <span className="nm">{model}</span>
   </span>
@@ -73,7 +73,7 @@ const ModelPill = ({ model }: { model: string }) => (
 
 const fmtTok = (n: number) => (n >= 1e6 ? (n / 1e6).toFixed(2) + 'M' : Math.round(n / 1e3) + 'k');
 
-// Hover tooltip — the extraction date + the token breakdown (input/output/cache)
+// Hover tooltip · the extraction date + the token breakdown (input/output/cache)
 // and the USD total for that day. Styled with the DS chart-tooltip classes.
 function SpendTooltip({ active, payload }: { active?: boolean; payload?: { payload: UsageDay }[] }) {
   if (!active || !payload?.length) return null;
@@ -100,7 +100,7 @@ function SpendTooltip({ active, payload }: { active?: boolean; payload?: { paylo
   );
 }
 
-// Bare bars — no card, title or axes; just the chart + the hover tooltip above.
+// Bare bars · no card, title or axes; just the chart + the hover tooltip above.
 function CostChart({ data }: { data: UsageDay[] }) {
   const c = useChartColors();
   return (
@@ -113,7 +113,7 @@ function CostChart({ data }: { data: UsageDay[] }) {
           <XAxis dataKey="d" hide />
           {/* Mid-height upward (y), and x clamps inside the chart (allowEscapeViewBox
               x:false) so the tooltip flips: aligned to the start for early bars and
-              to the end for late bars — never running off the right edge. */}
+              to the end for late bars · never running off the right edge. */}
           <Tooltip cursor={{ fill: 'var(--viz-grid)' }} content={<SpendTooltip />} position={{ y: -78 }} allowEscapeViewBox={{ x: false, y: true }} />
 
           <Bar dataKey="v" fill={c[0]} radius={[2, 2, 0, 0]} />
@@ -175,7 +175,7 @@ const ChannelStatusBadge = ({ status }: { status: Channel['status'] }) => (
   <span className={`fp-agentd-chstatus s-${CH_STATUS[status].tone}`}>{CH_STATUS[status].label}</span>
 );
 
-// Share popover — one copyable link per active channel (Forge chat, API, A2A).
+// Share popover · one copyable link per active channel (Forge chat, API, A2A).
 function ShareChannels({ agent, channels }: { agent: Agent; channels: Channel[] }) {
   return (
     <div className="fp-agentd-share">
@@ -213,7 +213,7 @@ export default function AgentDetail({ id }: { id: string }) {
     return () => setCrumb(null);
   }, [agent, setCrumb]);
 
-  // Seed editable lists + reset additions per agent. (Contexts start empty —
+  // Seed editable lists + reset additions per agent. (Contexts start empty ·
   // the context layer ships later.)
   React.useEffect(() => {
     setSkills(agent ? skillsFor(agent) : []);
@@ -359,7 +359,7 @@ export default function AgentDetail({ id }: { id: string }) {
           )}
         </AsideSection>
 
-        {/* Output — how the agent responds */}
+        {/* Output · how the agent responds */}
         <AsideSection title="Output">
           <div className={'fp-agentd-output' + (out.conversational ? '' : ' is-artifact')}>
             <span className="io">{ICON(out.icon, 16)}</span>
@@ -370,7 +370,7 @@ export default function AgentDetail({ id }: { id: string }) {
           </div>
         </AsideSection>
 
-        {/* Usage — two metric cards (with trend) + the daily-spend bar chart */}
+        {/* Usage · two metric cards (with trend) + the daily-spend bar chart */}
         <AsideSection title="Usage" action={<Link href={`/portal/agents/${agent.id}`} className="fp-agentd-more">View more <Icons.chevronRight size={12} /></Link>}>
           <div className="fp-agentd-metrics">
             <div className="fp-agentd-metric">
@@ -391,7 +391,7 @@ export default function AgentDetail({ id }: { id: string }) {
           <CostChart data={usage.cost} />
         </AsideSection>
 
-        {/* Guardrails — the enforced security baseline + this agent's policy */}
+        {/* Guardrails · the enforced security baseline + this agent's policy */}
         <AsideSection title="Guardrails">
           <div className="fp-agentd-guards">
             <p className="fp-agentd-guards-note"><Icons.shield size={12} /> Enforced by Equifax · Google Cloud</p>
@@ -515,7 +515,7 @@ export default function AgentDetail({ id }: { id: string }) {
           )}
         </AsideSection>
 
-        {/* Channels — how the agent is consumed (chat / API / A2A) */}
+        {/* Channels · how the agent is consumed (chat / API / A2A) */}
         <AsideSection title="Channels">
           <div className="fp-agentd-channels">
             {channels.map((c) => (
@@ -552,7 +552,7 @@ export default function AgentDetail({ id }: { id: string }) {
         </AsideSection>
       </aside>
 
-      {/* ── App popup — logo, name, details + enabled tools ─────────────── */}
+      {/* ── App popup · logo, name, details + enabled tools ─────────────── */}
       <Modal
         open={!!activeApp}
         onOpenChange={(o) => !o && setActiveApp(null)}

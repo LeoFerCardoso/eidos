@@ -303,9 +303,9 @@ const genericReadme = (svc: PortalService) =>
     '',
     '## Observability',
     '',
-    `- **p95 latency** — ${svc.p95}ms`,
-    `- **Test coverage** — ${svc.coverage}%`,
-    `- **Language** — ${svc.lang}`,
+    `- **p95 latency** · ${svc.p95}ms`,
+    `- **Test coverage** · ${svc.coverage}%`,
+    `- **Language** · ${svc.lang}`,
     svc.pii ? '- **Data** · Personal data · LGPD in-scope' : '',
     '',
     '## Ownership',
@@ -853,7 +853,7 @@ function ApiTab({ svc }: { svc: PortalService }) {
 Authorization: Bearer <token>
 Content-Type: application/json
 
-{ "document": "***********", "product": "${(apis[0] ?? '—')}" }`}</pre>
+{ "document": "***********", "product": "${(apis[0] ?? 'n/a')}" }`}</pre>
     </div>
   );
 }

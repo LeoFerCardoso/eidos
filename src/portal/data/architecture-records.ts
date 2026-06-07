@@ -75,7 +75,7 @@ export const KPIS = [
   { id: 'accepted', label: 'Accepted ADRs', value: String(ADRS.filter((a) => a.status === 'accepted').length), note: 'In force across the org.' },
   { id: 'proposed', label: 'Proposed', value: String(ADRS.filter((a) => a.status === 'proposed').length), note: 'Open for review.' },
   { id: 'diagrams', label: 'Diagrams', value: String(DIAGRAMS.length), note: 'Across 6 types.' },
-  { id: 'agents', label: 'Used by agents', value: String(ADRS.filter((a) => a.status === 'accepted').length), note: 'ADRs ground agent decisions.' },
+  { id: 'retired', label: 'Superseded / retired', value: String(ADRS.filter((a) => a.status === 'superseded' || a.status === 'deprecated').length), note: 'No longer in force.' },
 ];
 
 export const AI_READ = {

@@ -29,7 +29,7 @@ function SkillCard({ s }: { s: Skill }) {
   return (
     <div className="fp-skill">
       <div className="fp-skill-top">
-        <span className="fp-skill-ic" aria-hidden="true"><Icon size={18} /></span>
+        <span className={'fp-skill-ic' + (s.official ? '' : ' is-muted')} aria-hidden="true"><Icon size={18} /></span>
         <Pill tone={s.official ? 'ember' : 'neutral'} dot={s.official}>
           {s.official ? 'Official' : 'Community'}
         </Pill>

@@ -93,8 +93,8 @@ export default function PrDetail({ prId }: { prId: string }) {
         actions={actions}
       />
 
-      {/* PR-analysis agent diagnosis. */}
-      <AiBanner eyebrow="PR-analysis agent" title="Diagnosis">{pr.diagnosis}</AiBanner>
+      {/* PR-analysis agent diagnosis — unified Forge AI eyebrow. */}
+      <AiBanner title="PR-analysis diagnosis">{pr.diagnosis}</AiBanner>
 
       <div className="fp-grid fp-grid-2x1" style={{ alignItems: 'start', marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
         {/* MAIN */}

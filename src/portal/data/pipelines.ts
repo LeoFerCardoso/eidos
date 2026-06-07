@@ -1,4 +1,4 @@
-// Forge (IDP Portal) — Pipelines data (Equifax Boa Vista, credit bureau).
+// Forge (IDP Portal) · Pipelines data (Equifax Boa Vista, credit bureau).
 // Naming: design system = "Eidos"; product/portal = "Forge"; copilot = "Forge AI".
 //
 // Backs /portal/pipelines (the run console) and /portal/pipelines/[run] (the
@@ -21,7 +21,7 @@ export interface PipeRun {
   trigger: string;
   started: string;
   duration: string;
-  /** 0..6 — how many steps have completed (the current step = stepProgress). */
+  /** 0..6 · how many steps have completed (the current step = stepProgress). */
   stepProgress: number;
   stage: string;
   risk: { score: number; verdict: 'low' | 'med' | 'high' };
@@ -36,7 +36,7 @@ export const RUNS: PipeRun[] = [
   { id: 'run_8h2k9n', service: 'konduto-antifraud', version: 'v3.1.8',  sha: 'b21e88a', status: 'running', author: 'Beatriz Okamoto',    branch: 'main',           trigger: 'Push to main',   started: '14m ago',  duration: '4m 02s', stepProgress: 3, stage: 'Risk gate',        risk: { score: 52, verdict: 'med' },  coverageDelta: '+0.4pp', blast: 'Ring 0 → 2', region: 'br-se-1' },
   { id: 'run_8h2k9m', service: 'score-engine',      version: 'v7.4.0',  sha: '7e8af12', status: 'success', author: 'Thiago Albuquerque', branch: 'main',           trigger: 'Tag v7.4.0',     started: '51m ago',  duration: '7m 41s', stepProgress: 6, stage: 'Promoted',         risk: { score: 24, verdict: 'low' },  coverageDelta: '+1.2pp', blast: 'Ring 0 → 4', region: 'br-se-1 · br-ne-1' },
   { id: 'run_8h2k9l', service: 'identity-proofing', version: 'v3.7.2',  sha: '4d0b21e', status: 'success', author: 'Camila Tanaka',      branch: 'main',           trigger: 'Push to main',   started: '2h ago',   duration: '5m 18s', stepProgress: 6, stage: 'Promoted',         risk: { score: 31, verdict: 'low' },  coverageDelta: '+0.6pp', blast: 'Ring 0 → 3', region: 'br-se-1' },
-  { id: 'run_8h2k9k', service: 'scpc-gateway',      version: 'v5.2.0',  sha: '9a2bf73', status: 'pending', author: 'Larissa Fontana',    branch: 'release/5.2',    trigger: 'Manual',         started: 'queued',   duration: '—',      stepProgress: 0, stage: 'Queued',           risk: { score: 0,  verdict: 'low' },  coverageDelta: '0.0pp',  blast: 'Ring 0 → 2', region: 'br-se-1' },
+  { id: 'run_8h2k9k', service: 'scpc-gateway',      version: 'v5.2.0',  sha: '9a2bf73', status: 'pending', author: 'Larissa Fontana',    branch: 'release/5.2',    trigger: 'Manual',         started: 'queued',   duration: '-',      stepProgress: 0, stage: 'Queued',           risk: { score: 0,  verdict: 'low' },  coverageDelta: '0.0pp',  blast: 'Ring 0 → 2', region: 'br-se-1' },
   { id: 'run_8h2k9j', service: 'decision-engine',   version: 'v6.0.4',  sha: 'd5510aa', status: 'success', author: 'Thiago Albuquerque', branch: 'main',           trigger: 'Push to main',   started: '3h ago',   duration: '6m 55s', stepProgress: 6, stage: 'Promoted',         risk: { score: 44, verdict: 'med' },  coverageDelta: '+0.3pp', blast: 'Ring 0 → 4', region: 'br-se-1 · br-ne-1' },
 ];
 
@@ -64,7 +64,7 @@ export function stagesFor(run: PipeRun): Stage[] {
     else status = 'pending';
     let meta = STEP_META[i];
     if (i === 3) meta = `score ${run.risk.score} · ${run.risk.verdict}`;
-    if (status === 'pending') meta = '—';
+    if (status === 'pending') meta = '-';
     if (status === 'error') meta = i === 1 ? '6 failed of 4,061' : 'failed';
     return { id: label.toLowerCase().replace(/\s+/g, '-'), label, status, meta };
   });

@@ -1,4 +1,4 @@
-// Forge — agent detail helpers. The detail page (/portal/agents/[id]) shows an
+// Forge · agent detail helpers. The detail page (/portal/agents/[id]) shows an
 // agent's stored instructions (Markdown), its access list, and usage charts.
 // To avoid hand-authoring 18 long blobs, the instructions + usage + access are
 // generated DETERMINISTICALLY from the agent (a seeded PRNG keyed on the id) so
@@ -13,11 +13,11 @@ export const OUTPUT_META: Record<
   AgentOutput,
   { label: string; icon: string; note: string; conversational: boolean }
 > = {
-  conversation: { label: 'Conversation', icon: 'chat',      note: 'Replies in chat — back-and-forth, grounded in your estate.', conversational: true },
+  conversation: { label: 'Conversation', icon: 'chat',      note: 'Replies in chat · back-and-forth, grounded in your estate.', conversational: true },
   json:         { label: 'JSON',         icon: 'database',  note: 'Returns a structured JSON payload, not a chat reply.',        conversational: false },
   code:         { label: 'Code',         icon: 'terminal',  note: 'Returns a code block ready to copy or open as an artifact.',  conversational: false },
   document:     { label: 'Document',     icon: 'doc',       note: 'Returns a formatted document (Markdown / PDF).',              conversational: false },
-  image:        { label: 'Image',        icon: 'image',     note: 'Generates an image — its only output is the rendered asset.', conversational: false },
+  image:        { label: 'Image',        icon: 'image',     note: 'Generates an image · its only output is the rendered asset.', conversational: false },
   file:         { label: 'File',         icon: 'file',      note: 'Returns a downloadable file artifact.',                       conversational: false },
 };
 
@@ -71,7 +71,7 @@ export function usageFor(agent: Agent): AgentUsage {
   const rng = makeRng(hashSeed(agent.id));
   // Fixed 30-day window (anchored, so SSR + client agree): May 6 → Jun 4, 2026.
   const cost: UsageDay[] = Array.from({ length: COST_DAYS }, (_, i) => {
-    const dt = new Date(2026, 4, 6 + i); // explicit args — deterministic
+    const dt = new Date(2026, 4, 6 + i); // explicit args · deterministic
     const date = `${WD[dt.getDay()]}, ${dt.getDate()} · ${MO[dt.getMonth()]} ${dt.getFullYear()}`;
     const input = Math.round((90 + rng() * 820) * 1000); // 90k..910k
     const output = Math.round(input * (0.25 + rng() * 0.35));
@@ -99,7 +99,7 @@ function shuffle<T>(arr: T[], rng: () => number): T[] {
 }
 
 // ── Apps (MCP servers / direct APIs the agent can call) ───────────────────────
-// MCP servers and direct APIs are both "apps" — each carries its brand logo, a
+// MCP servers and direct APIs are both "apps" · each carries its brand logo, a
 // kind chip, and the set of tools enabled for this agent.
 
 export type AppKind = 'MCP' | 'API' | 'Webhook';
@@ -161,7 +161,7 @@ export function appsFor(agent: Agent): AppDef[] {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
-/** Apps not yet connected — the "Add app" menu. */
+/** Apps not yet connected · the "Add app" menu. */
 export const addableApps = (current: AppDef[]): AppDef[] => {
   const have = new Set(current.map((a) => a.slug));
   return APP_POOL.filter((a) => !have.has(a.slug));
@@ -210,7 +210,7 @@ export function capabilitiesFor(agent: Agent): Capability[] {
 
 export interface Guardrail { id: string; label: string; desc: string; icon: string; tool: string }
 
-/** The enforced floor — identical for every agent, locked on. */
+/** The enforced floor · identical for every agent, locked on. */
 export const BASELINE_GUARDRAILS: Guardrail[] = [
   { id: 'armor',     label: 'Prompt & response screening',  desc: 'Blocks prompt injection, jailbreaks, harmful content and malicious URLs.', icon: 'shield',     tool: 'Model Armor' },
   { id: 'dlp',       label: 'PII protection · LGPD',         desc: 'Redacts CPF, CNPJ and identifiers before they reach or leave the model.',  icon: 'lock',       tool: 'Cloud DLP' },
@@ -225,7 +225,7 @@ export const ARMOR_LEVELS = [
   { value: 'strict',   label: 'Strict',   desc: 'Lower thresholds; blocks more aggressively.' },
 ] as const;
 
-// Equifax data classification — 5 levels, each gating a class of data. An agent
+// Equifax data classification · 5 levels, each gating a class of data. An agent
 // is allowed up to (and including) the level it's granted. Levels 3+ touch
 // sensitive data, so they are `gated`: only the security team can approve an
 // agent at that tier. Anyone can self-serve Levels 1–2.
@@ -270,7 +270,7 @@ export interface Channel extends ChannelDef { link: string; copyLabel: string; s
 export const CHANNELS: ChannelDef[] = [
   { id: 'forge-chat', label: 'Forge chat',    consumer: 'Humans',  icon: 'chat',  desc: 'Chat with the agent inside Forge.',                  needsReview: false },
   { id: 'embed',      label: 'Embedded chat', consumer: 'Humans',  icon: 'globe', desc: 'Embed in an internal product or portal.',            needsReview: true },
-  // Messaging surfaces — let people reach the agent on the apps they already use.
+  // Messaging surfaces · let people reach the agent on the apps they already use.
   // Each needs a one-time connection plus a security review before it goes live.
   { id: 'whatsapp',  label: 'WhatsApp',        consumer: 'Messaging', icon: 'phone', brand: 'whatsapp',    desc: 'Chat with the agent on WhatsApp Business.',       needsReview: true },
   { id: 'telegram',  label: 'Telegram',        consumer: 'Messaging', icon: 'chat',  brand: 'telegram',    desc: 'Reach the agent through a Telegram bot.',         needsReview: true },
@@ -335,7 +335,7 @@ export interface ContextDef { id: string; name: string; icon: string; desc: stri
 // connected or authored there is attachable to an agent.
 export const CONTEXT_POOL: ContextDef[] = CONTEXTS.map(({ id, name, icon, desc }) => ({ id, name, icon, desc }));
 
-/** Contexts the agent already has — none yet; the layer ships later. */
+/** Contexts the agent already has · none yet; the layer ships later. */
 export function contextsFor(_agent: Agent): ContextDef[] {
   return [];
 }
@@ -385,7 +385,7 @@ const OUTPUT_BLOCK: Record<AgentOutput, string> = {
   json: [
     '## Output contract',
     '',
-    'This agent always answers with a single JSON object — never prose:',
+    'This agent always answers with a single JSON object · never prose:',
     '',
     '```json',
     '{',
@@ -411,7 +411,7 @@ const OUTPUT_BLOCK: Record<AgentOutput, string> = {
   document: [
     '## Output contract',
     '',
-    'This agent returns a formatted **document** (Markdown, exportable to PDF) —',
+    'This agent returns a formatted **document** (Markdown, exportable to PDF) ·',
     'a titled report with sections, not a chat reply.',
   ].join('\n'),
   image: [
@@ -428,7 +428,7 @@ const OUTPUT_BLOCK: Record<AgentOutput, string> = {
 
 export function buildInstructions(agent: Agent): string {
   const out = OUTPUT_META[agent.output];
-  // No leading H1 / summary repeat — the page header already shows the name and
+  // No leading H1 / summary repeat · the page header already shows the name and
   // summary; the instructions body starts at the first section.
   return [
     '## Role',
@@ -440,7 +440,7 @@ export function buildInstructions(agent: Agent): string {
     '',
     '1. Read the request and pull only the context you need from the catalog and connected sources.',
     '2. Reason step by step; prefer the smallest, reversible action.',
-    `3. ${out.conversational ? 'Answer in chat with citations to the evidence you used.' : `Return a single **${out.label}** artifact — ${out.note.toLowerCase()}`}`,
+    `3. ${out.conversational ? 'Answer in chat with citations to the evidence you used.' : `Return a single **${out.label}** artifact · ${out.note.toLowerCase()}`}`,
     '',
     '## Guardrails',
     '',

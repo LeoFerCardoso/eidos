@@ -1,13 +1,13 @@
 'use client';
-// Forge — Chat workspace. A full-bleed surface INSIDE the portal shell that
+// Forge · Chat workspace. A full-bleed surface INSIDE the portal shell that
 // mirrors the /example/ai-chat experience: a 264px sub-sidebar (New chat ·
 // Projects · Search · pinned spaces · chat history) plus a main column that
-// swaps between four views — New chat (empty hero), an active thread, Search,
+// swaps between four views · New chat (empty hero), an active thread, Search,
 // and Projects. Navigation is internal state (no route change) so the whole
 // experience lives "inside this page", as the product IA intends.
 //
 // Built only from DS components (PromptInput, Message, Response, ChainOfThought,
-// Citation, Sources, Diagram, MathView, Suggestion…). NO inline <style> — all
+// Citation, Sources, Diagram, MathView, Suggestion…). NO inline <style> · all
 // chrome is the .fp-chat-* layer in src/styles/example-shell.css.
 import * as React from 'react';
 import {
@@ -48,7 +48,7 @@ const YESTERDAY = [
 type View = 'new' | 'thread' | 'search' | 'projects' | 'project' | 'archive' | 'artifacts';
 type Nav = { view: View; chatId?: string; projectId?: string; agentId?: string };
 
-// Archived chats — restorable (rollback un-archives them).
+// Archived chats · restorable (rollback un-archives them).
 const ARCHIVED = [
   { id: 'arc-pix-throttle', title: 'Pix throttle config · 06/04 spike',  preview: 'Added a 2s throttle on the offline path until the rail recovered.', when: 'Archived 2w ago' },
   { id: 'arc-q4-cost',      title: 'Q4 cost review · Cloud Run',          preview: 'Cloud Run was 18% of the platform bill; rightsized to cut ~30%.',  when: 'Archived 3w ago' },
@@ -56,7 +56,7 @@ const ARCHIVED = [
   { id: 'arc-onb-runbook',  title: 'Onboarding runbook for new SREs',     preview: 'Drafted the day-1 setup, pager rotation and escalation paths.',    when: 'Archived 2mo ago' },
 ];
 
-// Artifacts created through chat — each links back to the chat that made it.
+// Artifacts created through chat · each links back to the chat that made it.
 type ArtifactKind = 'image' | 'document' | 'html' | 'app' | 'code' | 'data';
 type ArtifactItem = {
   id: string;
@@ -170,7 +170,7 @@ const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => {
 
     <div className="fp-chat-sep" role="separator" />
 
-    {/* Projects — the pinned spaces, with a link through to the full gallery. */}
+    {/* Projects · the pinned spaces, with a link through to the full gallery. */}
     <div className="fp-chat-grouphead">
       <span>Projects</span>
       <button type="button" className="fp-chat-viewmore" onClick={() => go({ view: 'projects' })}>
@@ -191,7 +191,7 @@ const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => {
 
     <div className="fp-chat-sep" role="separator" />
 
-    {/* Agents — quick new-chat with a domain assistant; View more opens the
+    {/* Agents · quick new-chat with a domain assistant; View more opens the
         external Agents catalog (/portal/agents). */}
     <div className="fp-chat-grouphead">
       <span>Agents</span>
@@ -263,7 +263,7 @@ const NewChatView = ({ onSend, agent }: { onSend: () => void; agent?: Agent }) =
         <h1 className="fp-chat-empty-title">{agent ? `Chat with ${agent.name}` : 'Hello, Leonardo'}</h1>
         <p className="fp-chat-empty-sub">
           {agent
-            ? `${agent.role}. Ask anything in this domain — it answers from the right runbooks and catalog services.`
+            ? `${agent.role}. Ask anything in this domain · it answers from the right runbooks and catalog services.`
             : 'What can Forge AI help you with today? Ask about a service, draft a runbook, or kick off an incident review.'}
         </p>
       </div>
@@ -834,7 +834,7 @@ const ProjectDetailView = ({ projectId, onBack, onOpenChat }: { projectId: strin
 
 // ── View: Archive ───────────────────────────────────────────────────────────
 const ArchiveView = ({ onOpen }: { onOpen: (id: string) => void }) => {
-  // Restoring un-archives a chat (rollback) — it leaves the archive list.
+  // Restoring un-archives a chat (rollback) · it leaves the archive list.
   const [restored, setRestored] = React.useState<Set<string>>(new Set());
   const [q, setQ] = React.useState('');
   const all = ARCHIVED.filter((c) => !restored.has(c.id));
@@ -925,7 +925,7 @@ const APP_SRC = `<!doctype html><html><head><meta charset="utf-8"><style>
   <div class="card"><div><div class="t">tx_8843 · R$ 4.500,00</div><div class="m">score 0.88 · rule device-mismatch</div></div><div><button>Approve</button> <button class="gh" onclick="this.closest('.card').remove()">Reject</button></div></div>
 </body></html>`;
 
-const BREAKER_YAML = `# onescore-gateway — Resilience4j circuit breaker
+const BREAKER_YAML = `# onescore-gateway · Resilience4j circuit breaker
 resilience4j.circuitbreaker:
   instances:
     scpc:
@@ -1008,7 +1008,7 @@ const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => 
         <p className="lede">Everything Forge AI built for you · diagrams, docs, pages, apps, code and datasets. Open one to preview it and jump back to the chat that made it.</p>
       </header>
 
-      {/* Toolbar — search (leading) · grid/list toggle (trailing). */}
+      {/* Toolbar · search (leading) · grid/list toggle (trailing). */}
       <div className="fp-chat-art-toolbar">
         <ChatSearch value={q} onChange={setQ} placeholder="Search artifacts…" className="fp-chat-art-search" />
         <ToggleGroup
@@ -1043,7 +1043,7 @@ const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => 
                 role="button"
                 tabIndex={0}
                 className="fp-chat-art-card"
-                aria-label={`${a.title} — ${k.label}`}
+                aria-label={`${a.title} · ${k.label}`}
                 onClick={() => setSel(a)}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSel(a); } }}
               >
@@ -1066,7 +1066,7 @@ const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => 
             const I = ICON(k.icon);
             return (
               <li key={a.id} className="fp-chat-art-row">
-                <button type="button" className="fp-chat-art-row-btn" onClick={() => setSel(a)} aria-label={`${a.title} — ${k.label}`}>
+                <button type="button" className="fp-chat-art-row-btn" onClick={() => setSel(a)} aria-label={`${a.title} · ${k.label}`}>
                   <span className="fp-chat-art-row-ico" style={{ background: k.bg, color: k.fg }} aria-hidden="true"><I size={15} /></span>
                   <span className="fp-chat-art-row-body">
                     <span className="title">{a.title}</span>

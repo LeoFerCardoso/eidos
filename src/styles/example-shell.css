@@ -3751,6 +3751,9 @@ body:active::-webkit-scrollbar-thumb,
   inline-size: 34px; block-size: 34px; border-radius: var(--radius-lg);
   background: var(--ember-soft); color: var(--ember); flex-shrink: 0;
 }
+/* Muted tile — community skills / non-live MCP servers, so the grid isn't a
+   wall of identical ember tiles (the trusted/live ones keep the ember tile). */
+.fp-skill-ic.is-muted { background: var(--surface-active); color: var(--fg-muted); }
 .fp-skill-name { font-weight: 600; font-size: var(--text-md); letter-spacing: -0.01em; }
 .fp-skill-desc {
   margin: 0; font-size: var(--text-sm); line-height: 1.5; color: var(--fg-muted);
