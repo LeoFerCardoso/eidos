@@ -48,8 +48,9 @@ function DataBanner() {
       <AiPattern />
       <div className="fp-aip-banner-text">
         <span className="fp-aip-banner-eyebrow">Forge AI</span>
-        <strong className="fp-aip-banner-title">Watching your data estate</strong>
-        <p className="fp-aip-banner-desc">Every table, schema and access is analyzed for growth, cost and unregistered PII, surfaced right here as it changes.</p>
+        <strong className="fp-aip-banner-title">{AI_READ.title}</strong>
+        <p className="fp-aip-banner-desc">{AI_READ.body}</p>
+        <Button variant="outline" size="sm" className="fp-aip-banner-cta">Review retention</Button>
       </div>
       <button type="button" className="fp-aip-banner-close" onClick={() => setDismissed(true)} aria-label="Dismiss banner">
         <Icons.x size={16} />
@@ -89,15 +90,6 @@ export default function DatabasesPage() {
       />
 
       <DataBanner />
-
-      <div className="fp-ai-read">
-        <span className="fp-ai-read-icon" aria-hidden="true"><Icons.sparkle size={16} /></span>
-        <div className="fp-ai-read-body">
-          <span className="fp-ai-read-eyebrow">Forge AI · {AI_READ.title}</span>
-          <p>{AI_READ.body}</p>
-        </div>
-        <Button variant="outline" size="sm">Review retention</Button>
-      </div>
 
       <div className="fp-grid fp-grid-4">
         {KPIS.map((k) => (

@@ -3124,23 +3124,28 @@ body:active::-webkit-scrollbar-thumb,
   content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(to right,
     var(--bg-elevated) 0%,
-    color-mix(in oklch, var(--bg-elevated) 82%, transparent) 40%,
-    transparent 74%);
+    var(--bg-elevated) 32%,
+    color-mix(in oklch, var(--bg-elevated) 80%, transparent) 56%,
+    transparent 82%);
 }
 [dir="rtl"] .fp-aip-banner::after {
   background: linear-gradient(to left,
     var(--bg-elevated) 0%,
-    color-mix(in oklch, var(--bg-elevated) 82%, transparent) 40%,
-    transparent 74%);
+    var(--bg-elevated) 32%,
+    color-mix(in oklch, var(--bg-elevated) 80%, transparent) 56%,
+    transparent 82%);
 }
-.fp-aip-banner-text { position: relative; z-index: 2; flex: 1; min-inline-size: 0; }
+/* Cap the copy width so the support text (which can run several lines) stays in
+   the dark scrim zone and never runs under the bright end of the pattern. */
+.fp-aip-banner-text { position: relative; z-index: 2; flex: 1; min-inline-size: 0; max-inline-size: 620px; }
 .fp-aip-banner-eyebrow {
   display: block; font-family: var(--font-mono); font-size: var(--text-xs);
   text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-2);
   margin-block-end: 4px;
 }
 .fp-aip-banner-title { display: block; color: var(--fg); font-weight: 600; font-size: var(--text-lg); letter-spacing: -0.01em; line-height: 1.25; }
-.fp-aip-banner-desc { margin: 4px 0 0; font-size: var(--text-sm); line-height: 1.5; color: var(--fg-muted); max-inline-size: 78ch; }
+.fp-aip-banner-desc { margin: 4px 0 0; font-size: var(--text-sm); line-height: 1.55; color: var(--fg-muted); }
+.fp-aip-banner-cta { margin-block-start: 14px; }
 /* Close button — square modal-close geometry with a translucent overlay + blur
    so it stays legible over the pattern. */
 .fp-aip-banner-close {
