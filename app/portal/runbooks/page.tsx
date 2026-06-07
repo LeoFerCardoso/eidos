@@ -15,6 +15,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Button, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import {
   AI_READ,
   AUTOMATION_META,
@@ -67,14 +68,9 @@ export default function RunbooksPage() {
         }
       />
 
-      <div className="fp-ai-read">
-        <span className="fp-ai-read-icon" aria-hidden="true"><Icons.sparkle size={16} /></span>
-        <div className="fp-ai-read-body">
-          <span className="fp-ai-read-eyebrow">Forge AI · {AI_READ.title}</span>
-          <p>{AI_READ.body}</p>
-        </div>
-        <Button variant="outline" size="sm">Draft automation</Button>
-      </div>
+      <AiBanner title={AI_READ.title} action="Draft automation">
+        <span className="fp-aip-hl">Reprocess stuck recovery cases</span> sits at <span className="fp-aip-hl">79%</span> success, fully manual, last run 5 weeks ago on <span className="fp-aip-hl mono">recovery-comms</span>. Scripting the drain-and-reprocess step is the best automation candidate.
+      </AiBanner>
 
       <div className="fp-grid fp-grid-4">
         {KPIS.map((k) => (

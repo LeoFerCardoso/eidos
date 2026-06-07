@@ -14,6 +14,7 @@
 import * as React from 'react';
 import { Button, Icons, LangBadge, Pill, Progress, ScoreGauge, Select, Sparkline, Trend } from '@/ds/core';
 import { FPageHeader, FSection } from '@/portal/shell/portal-shell';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import {
   AI_READ,
   INITIATIVE_TONE,
@@ -82,18 +83,9 @@ export default function ScorecardsPage() {
       />
 
       {/* Forge AI read — the first gap to close. */}
-      <div className="fp-ai-read">
-        <span className="fp-ai-read-icon" aria-hidden="true">
-          <Icons.sparkle size={16} />
-        </span>
-        <div className="fp-ai-read-body">
-          <span className="fp-ai-read-eyebrow">Forge AI · {AI_READ.title}</span>
-          <p>{AI_READ.body}</p>
-        </div>
-        <Button variant="outline" size="sm">
-          Open recovery-comms
-        </Button>
-      </div>
+      <AiBanner title={AI_READ.title} action="Open recovery-comms">
+        <span className="fp-aip-hl mono">recovery-comms</span> scores <span className="fp-aip-hl">49</span>, the only failing service, and owns the debt-restructure path. Its weak spot is <span className="fp-aip-hl">Observability</span>; folding it into the SLO initiative clears the at-risk line this window.
+      </AiBanner>
 
       {/* Summary KPIs */}
       <div className="fp-grid fp-grid-4">

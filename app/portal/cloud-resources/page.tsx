@@ -15,6 +15,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Button, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import {
   AI_READ,
   KPIS,
@@ -68,14 +69,9 @@ export default function CloudResourcesPage() {
         }
       />
 
-      <div className="fp-ai-read">
-        <span className="fp-ai-read-icon" aria-hidden="true"><Icons.sparkle size={16} /></span>
-        <div className="fp-ai-read-body">
-          <span className="fp-ai-read-eyebrow">Forge AI · {AI_READ.title}</span>
-          <p>{AI_READ.body}</p>
-        </div>
-        <Button variant="outline" size="sm">Cut idle spend</Button>
-      </div>
+      <AiBanner title={AI_READ.title} action="Cut idle spend">
+        Three idle resources cost <span className="fp-aip-hl">R$ 7.5k/mo</span> for nothing, and <span className="fp-aip-hl mono">ocr-batch-fn</span> is up <span className="fp-aip-hl">22%</span> and erroring. Fixing it and stopping the idle three trims ~<span className="fp-aip-hl">R$ 11k/mo</span> without touching production.
+      </AiBanner>
 
       <div className="fp-grid fp-grid-4">
         {KPIS.map((k) => (

@@ -21,6 +21,7 @@ import {
   StatusDot,
 } from '@/ds/core';
 import { FPageHeader, FSection, usePageCrumb } from '@/portal/shell/portal-shell';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import { GATES, PR_STATUS_META, gateFor, getPr } from '@/portal/data/quality-gates';
 
 const FACTOR_MAX = 300;
@@ -93,13 +94,7 @@ export default function PrDetail({ prId }: { prId: string }) {
       />
 
       {/* PR-analysis agent diagnosis. */}
-      <div className="fp-ai-read">
-        <span className="fp-ai-read-icon" aria-hidden="true"><Icons.sparkle size={16} /></span>
-        <div className="fp-ai-read-body">
-          <span className="fp-ai-read-eyebrow">PR-analysis agent · diagnosis</span>
-          <p>{pr.diagnosis}</p>
-        </div>
-      </div>
+      <AiBanner eyebrow="PR-analysis agent" title="Diagnosis">{pr.diagnosis}</AiBanner>
 
       <div className="fp-grid fp-grid-2x1" style={{ alignItems: 'start', marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
         {/* MAIN */}

@@ -15,7 +15,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Button, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
-import { AiPattern } from '@/portal/shell/ai-pattern';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import {
   AI_READ,
   DATABASES,
@@ -37,26 +37,6 @@ const ENV_OPTS = [
   { value: 'staging', label: 'Staging' },
 ];
 const maxEngine = Math.max(...ENGINE_MIX.map((e) => e.sizeGb));
-
-// Forge AI pattern banner (cloned from the AI-Insights hero).
-function DataBanner() {
-  return (
-    <div className="fp-aip-banner" role="note">
-      <AiPattern />
-      <div className="fp-aip-banner-text">
-        <span className="fp-aip-banner-eyebrow">Forge AI</span>
-        <strong className="fp-aip-banner-title">{AI_READ.title}</strong>
-        <p className="fp-aip-banner-desc">
-          <span className="fp-aip-hl mono">analytics_dw</span> on <span className="fp-aip-hl">BigQuery</span> is our biggest store at{' '}
-          <span className="fp-aip-hl">18.4 TB</span> and up <span className="fp-aip-hl">14% MoM</span>, yet holds no PII.{' '}
-          <span className="fp-aip-hl mono">score_features</span> on <span className="fp-aip-hl">Snowflake</span> (<span className="fp-aip-hl">9.9 TB</span>) does, and feeds every score.{' '}
-          A retention policy on <span className="fp-aip-hl mono">analytics_dw</span> partitions over 18 months cuts cost without touching regulated data.
-        </p>
-      </div>
-      <Button variant="outline" size="md" className="fp-aip-banner-action">Review retention</Button>
-    </div>
-  );
-}
 
 export default function DatabasesPage() {
   const [query, setQuery] = React.useState('');
@@ -88,7 +68,10 @@ export default function DatabasesPage() {
         }
       />
 
-      <DataBanner />
+      <AiBanner title={AI_READ.title} action="Review retention">
+        <span className="fp-aip-hl mono">analytics_dw</span> (<span className="fp-aip-hl">BigQuery</span>) is our biggest store at{' '}
+        <span className="fp-aip-hl">18.4 TB</span>, up <span className="fp-aip-hl">14% MoM</span>, yet holds no PII. A retention rule on partitions over 18 months cuts cost without touching regulated data.
+      </AiBanner>
 
       <div className="fp-grid fp-grid-4">
         {KPIS.map((k) => (

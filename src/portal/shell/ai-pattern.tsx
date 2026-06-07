@@ -8,6 +8,42 @@
 // userSpace gradient translated by one tile (SMIL), paused under
 // prefers-reduced-motion.
 import * as React from 'react';
+import { Button } from '@/ds/core';
+
+/**
+ * Forge AI banner — the signature dash-pattern hero shared across Forge AI
+ * surfaces: eyebrow + title + support (2 lines, with highlighted terms) and an
+ * optional right-aligned action, over the animated pattern + accent-wave border.
+ * Highlight key entities/metrics in `children` with <span className="fp-aip-hl">
+ * (add `mono` for identifiers).
+ */
+export function AiBanner({
+  title,
+  action,
+  eyebrow = 'Forge AI',
+  children,
+}: {
+  title: React.ReactNode;
+  action?: string;
+  eyebrow?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="fp-aip-banner" role="note">
+      <AiPattern />
+      <div className="fp-aip-banner-text">
+        <span className="fp-aip-banner-eyebrow">{eyebrow}</span>
+        <strong className="fp-aip-banner-title">{title}</strong>
+        <p className="fp-aip-banner-desc">{children}</p>
+      </div>
+      {action && (
+        <Button variant="outline" size="md" className="fp-aip-banner-action">
+          {action}
+        </Button>
+      )}
+    </div>
+  );
+}
 
 export function AiPattern({ className }: { className?: string }) {
   const PITCH = 13;

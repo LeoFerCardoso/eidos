@@ -21,6 +21,7 @@ import {
   TabsTrigger,
 } from '@/ds/core';
 import { FPageHeader } from '@/portal/shell/portal-shell';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import {
   ADRS,
   ADR_STATUS_META,
@@ -64,14 +65,9 @@ export default function ArchitecturePage() {
         }
       />
 
-      <div className="fp-ai-read">
-        <span className="fp-ai-read-icon" aria-hidden="true"><Icons.sparkle size={16} /></span>
-        <div className="fp-ai-read-body">
-          <span className="fp-ai-read-eyebrow">Forge AI · {AI_READ.title}</span>
-          <p>{AI_READ.body}</p>
-        </div>
-        <Button variant="outline" size="sm">Review ADR-0043</Button>
-      </div>
+      <AiBanner title={AI_READ.title} action="Review ADR-0043">
+        Every accepted ADR is loaded as agent context, so agents refuse changes that violate one. <span className="fp-aip-hl mono">ADR-0043</span> (agents call systems via <span className="fp-aip-hl">MCP</span>) is still proposed but already shapes the server catalog.
+      </AiBanner>
 
       <div className="fp-grid fp-grid-4">
         {KPIS.map((k) => (

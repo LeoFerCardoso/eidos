@@ -14,6 +14,7 @@
 import * as React from 'react';
 import { Button, Icons, Pill, Select, Sparkline, Trend } from '@/ds/core';
 import { FPageHeader, FSection } from '@/portal/shell/portal-shell';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import {
   AI_READ,
   BLOCKED_PER_HOUR,
@@ -75,14 +76,9 @@ export default function FraudPage() {
       />
 
       {/* Forge AI read — the rule to tune. */}
-      <div className="fp-ai-read">
-        <span className="fp-ai-read-icon" aria-hidden="true"><Icons.sparkle size={16} /></span>
-        <div className="fp-ai-read-body">
-          <span className="fp-ai-read-eyebrow">Forge AI · {AI_READ.title}</span>
-          <p>{AI_READ.body}</p>
-        </div>
-        <Button variant="outline" size="sm">Tune Geo mismatch</Button>
-      </div>
+      <AiBanner title={AI_READ.title} action="Tune Geo mismatch">
+        <span className="fp-aip-hl">Geo mismatch</span> fires <span className="fp-aip-hl">938x/day</span> at a <span className="fp-aip-hl">5.8%</span> false-positive rate, 3x the average, yet saves only <span className="fp-aip-hl">R$ 420k</span>. Narrowing it to high-value sessions cuts false positives ~<span className="fp-aip-hl">40%</span> at no cost to catch rate.
+      </AiBanner>
 
       {/* KPIs */}
       <div className="fp-grid fp-grid-4">

@@ -99,7 +99,7 @@ export const INCIDENTS: Incident[] = [
     suspectedDeploy: { id: 'D-9182', service: 'acerta-api', version: 'v4.12.0', sha: 'a91f2dc', author: P.rafael },
     ai: {
       title: 'Probable cause and the safe move',
-      body: 'Deploy D-9182 (v4.12.0) shipped a CPF cache change 14 minutes ago that triples fan-out to score-engine. The auto-scaler is two minutes behind demand, so p95 crossed the SLO. The rollback to v4.11.9 is the lowest-risk mitigation and is already recovering p95. No data loss; no human gate needed to complete it.',
+      body: 'Deploy D-9182 (v4.12.0) shipped a CPF cache change that triples fan-out to score-engine, and the auto-scaler is two minutes behind, so p95 crossed the SLO. The rollback to v4.11.9 is the lowest-risk fix and is already recovering p95.',
     },
   },
   {

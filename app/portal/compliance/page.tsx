@@ -14,6 +14,7 @@
 import * as React from 'react';
 import { Button, Icons, Pill, Select, StatusDot } from '@/ds/core';
 import { FPageHeader, FSection } from '@/portal/shell/portal-shell';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import {
   ACTOR_ICON,
   AI_READ,
@@ -57,14 +58,9 @@ export default function CompliancePage() {
       />
 
       {/* Forge AI read — the access to review. */}
-      <div className="fp-ai-read">
-        <span className="fp-ai-read-icon" aria-hidden="true"><Icons.sparkle size={16} /></span>
-        <div className="fp-ai-read-body">
-          <span className="fp-ai-read-eyebrow">Forge AI · {AI_READ.title}</span>
-          <p>{AI_READ.body}</p>
-        </div>
-        <Button variant="outline" size="sm">Review export</Button>
-      </div>
+      <AiBanner title={AI_READ.title} action="Review export">
+        The <span className="fp-aip-hl">SRE Triage Agent</span> exported CPF and address for <span className="fp-aip-hl mono">***.221.087-**</span> during <span className="fp-aip-hl mono">INC-1243</span>, but the subject has an open deletion request (<span className="fp-aip-hl mono">DSR-4812</span>). Hold the export until it resolves.
+      </AiBanner>
 
       {/* KPIs */}
       <div className="fp-grid fp-grid-4">

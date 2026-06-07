@@ -13,6 +13,7 @@
 import * as React from 'react';
 import { Button, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import {
   AI_READ,
   BUCKETS,
@@ -63,14 +64,9 @@ export default function BucketsPage() {
         }
       />
 
-      <div className="fp-ai-read">
-        <span className="fp-ai-read-icon" aria-hidden="true"><Icons.sparkle size={16} /></span>
-        <div className="fp-ai-read-body">
-          <span className="fp-ai-read-eyebrow">Forge AI · {AI_READ.title}</span>
-          <p>{AI_READ.body}</p>
-        </div>
-        <Button variant="outline" size="sm">Stage cleanup</Button>
-      </div>
+      <AiBanner title={AI_READ.title} action="Stage cleanup">
+        Three dead buckets hold <span className="fp-aip-hl">6.6 TB</span> and cost <span className="fp-aip-hl">R$ 4.1k/mo</span>, unread for over a year. <span className="fp-aip-hl mono">legacy-konduto-dump</span> and <span className="fp-aip-hl mono">tmp-ocr-scratch</span> carry PII, so delete them under retention.
+      </AiBanner>
 
       <div className="fp-grid fp-grid-4">
         {KPIS.map((k) => (

@@ -14,6 +14,7 @@
 import * as React from 'react';
 import { Button, Icons, Pill, Select, Sparkline, Trend } from '@/ds/core';
 import { FPageHeader, FSection } from '@/portal/shell/portal-shell';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import {
   AI_READ,
   DEPLOYS_PER_DAY,
@@ -88,18 +89,9 @@ export default function DoraPage() {
       />
 
       {/* Forge AI read — the one lever, woven in (not a chat box). */}
-      <div className="fp-ai-read">
-        <span className="fp-ai-read-icon" aria-hidden="true">
-          <Icons.sparkle size={16} />
-        </span>
-        <div className="fp-ai-read-body">
-          <span className="fp-ai-read-eyebrow">Forge AI · {AI_READ.title}</span>
-          <p>{AI_READ.body}</p>
-        </div>
-        <Button variant="outline" size="sm">
-          Open Recovery
-        </Button>
-      </div>
+      <AiBanner title={AI_READ.title} action="Open Recovery">
+        <span className="fp-aip-hl">Recovery</span> is the only product below the <span className="fp-aip-hl">High</span> band: <span className="fp-aip-hl">16%</span> change-fail and <span className="fp-aip-hl">2.4h</span> restore drag the average. Ring-based rollout there lifts the org to <span className="fp-aip-hl">Elite</span> on all four metrics.
+      </AiBanner>
 
       {/* 4 DORA metrics */}
       <div className="fp-grid fp-grid-4">

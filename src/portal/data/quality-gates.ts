@@ -85,7 +85,7 @@ export const PRS: PullRequest[] = [
     ],
     approvers: [],
     eligible: [P.thiago, P.larissa],
-    diagnosis: 'A focused performance change on a single read path with rising coverage and no security findings. The PR-analysis agent scored it 184, under the 300 auto-merge line, so it merged without a human gate once checks went green.',
+    diagnosis: 'A focused perf change on one read path with rising coverage and no security findings. Scored 184, under the 300 auto-merge line, so it merged with no human gate once checks went green.',
   },
   {
     id: 7418, title: 'biometric step-up for high-risk auth', service: 'identity-proofing', author: P.camila, branch: 'feat/biometric-stepup',
@@ -99,7 +99,7 @@ export const PRS: PullRequest[] = [
     ],
     approvers: [{ person: P.camila, status: 'approved' }, { person: P.thiago, status: 'pending' }],
     eligible: [P.thiago, P.mariana],
-    diagnosis: 'Adds a biometric step-up to the authentication path. Risk comes from the auth blast radius, not the code itself. CRS 452 puts it in the single-approval gate. Thiago Albuquerque is the suggested reviewer given his ownership of the risk path.',
+    diagnosis: 'Adds a biometric step-up to the auth path; the risk is the auth blast radius, not the code. CRS 452 lands in the single-approval gate, with Thiago Albuquerque the suggested reviewer.',
   },
   {
     id: 7419, title: 'extract decision tree into strategy', service: 'bureau-ingestion', author: P.diego, branch: 'refactor/decision-strategy',
@@ -113,7 +113,7 @@ export const PRS: PullRequest[] = [
     ],
     approvers: [{ person: P.diego, status: 'approved' }, { person: P.thiago, status: 'pending' }],
     eligible: [P.thiago, P.larissa, P.mariana],
-    diagnosis: 'A wide refactor of ingestion that drops coverage below the gate and reaches every ring. CRS 712 requires two approvals, one from a senior or principal. The PR-analysis agent recommends restoring coverage before merge and pairing a reviewer from Platform given the blast radius.',
+    diagnosis: 'A wide ingestion refactor that drops coverage below the gate and reaches every ring. CRS 712 needs two approvals; restore coverage first and pair a Platform reviewer given the blast radius.',
   },
   {
     id: 7416, title: 'parallelize document validation', service: 'document-ocr', author: P.mariana, branch: 'perf/parallel-validate',
@@ -141,7 +141,7 @@ export const PRS: PullRequest[] = [
     ],
     approvers: [],
     eligible: [P.rafael, P.larissa],
-    diagnosis: 'A large unsafe rewrite of the core scoring kernel: coverage falls 7.4pp, three SAST findings include unsafe blocks, and it reaches every ring. CRS 938 is above the 900 ceiling, so it cannot merge. The PR-analysis agent recommends splitting it into a safe-refactor PR and an isolated kernel PR behind a flag.',
+    diagnosis: 'An unsafe rewrite of the scoring kernel: coverage down 7.4pp, three SAST findings, all rings. CRS 938 is over the 900 ceiling, so it cannot merge; split it into a safe refactor and a flagged kernel PR.',
   },
   {
     id: 7412, title: 'bump tonic to 0.11 in consent-service', service: 'consent-service', author: P.diego, branch: 'chore/bump-tonic',
@@ -170,7 +170,7 @@ export const PRS: PullRequest[] = [
     ],
     approvers: [{ person: P.beatriz, status: 'approved' }],
     eligible: [P.thiago, P.mariana],
-    diagnosis: 'A rule change that alters the approve/deny mix for live traffic. The PR-analysis agent weighted decision impact heavily, landing CRS 564 in the single-approval gate, and flags running it in shadow mode for a day before merge.',
+    diagnosis: 'A rule change that shifts the live approve/deny mix. Decision impact weighed heavily, landing CRS 564 in the single-approval gate; run it in shadow mode for a day before merge.',
   },
 ];
 

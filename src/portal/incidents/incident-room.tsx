@@ -24,6 +24,7 @@ import {
   Timeline,
 } from '@/ds/core';
 import { FPageHeader, FSection, usePageCrumb } from '@/portal/shell/portal-shell';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import { STATUS_META, getIncident, type Responder } from '@/portal/data/incidents';
 
 const ROLE_TONE: Record<Responder['role'], 'ember' | 'neutral'> = {
@@ -94,18 +95,7 @@ export default function IncidentRoom({ id }: { id: string }) {
       />
 
       {inc.ai ? (
-        <div className="fp-ai-read">
-          <span className="fp-ai-read-icon" aria-hidden="true"><Icons.sparkle size={16} /></span>
-          <div className="fp-ai-read-body">
-            <span className="fp-ai-read-eyebrow">Forge AI · {inc.ai.title}</span>
-            <p>{inc.ai.body}</p>
-          </div>
-          {inc.suspectedDeploy && (
-            <Button variant="outline" size="sm" asChild>
-              <Link href={`/portal/pipelines`}>View deploy</Link>
-            </Button>
-          )}
-        </div>
+        <AiBanner title={inc.ai.title} action={inc.suspectedDeploy ? 'View deploy' : undefined}>{inc.ai.body}</AiBanner>
       ) : resolved ? (
         <Banner tone="success" icon="check" title="Resolved" message={`${inc.title} was resolved in ${inc.duration}. A postmortem is attached.`} />
       ) : null}

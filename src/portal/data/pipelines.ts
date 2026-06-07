@@ -133,7 +133,7 @@ export function aiReadFor(run: PipeRun): { title: string; body: string } | null 
   if (run.id === 'run_8h2k9o') {
     return {
       title: 'Why this run failed',
-      body: 'The strategy refactor in c012f8e changed the SCR record layout from 27 to 26 fields and stopped guarding empty CNPJs. Two tests caught it before any traffic shifted, and coverage dropped below the 80% gate. The fix is to restore the 27th field mapping and add a nil check in reconcile. No rollback needed: the run never reached canary.',
+      body: 'Commit c012f8e dropped the SCR layout from 27 to 26 fields and stopped guarding empty CNPJs. Two tests caught it before any traffic shifted. Restore the 27th field and add a nil check in reconcile; no rollback needed.',
     };
   }
   return null;

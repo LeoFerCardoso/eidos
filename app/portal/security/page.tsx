@@ -14,6 +14,7 @@
 import * as React from 'react';
 import { Button, Icons, Pill, Select, Trend } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import {
   AI_READ,
   FINDINGS,
@@ -78,14 +79,9 @@ export default function SecurityPage() {
       />
 
       {/* Forge AI read — fix this first. */}
-      <div className="fp-ai-read">
-        <span className="fp-ai-read-icon" aria-hidden="true"><Icons.sparkle size={16} /></span>
-        <div className="fp-ai-read-body">
-          <span className="fp-ai-read-eyebrow">Forge AI · {AI_READ.title}</span>
-          <p>{AI_READ.body}</p>
-        </div>
-        <Button variant="outline" size="sm">Open the fix</Button>
-      </div>
+      <AiBanner title={AI_READ.title} action="Open the fix">
+        <span className="fp-aip-hl mono">SEC-2041</span> is a critical <span className="fp-aip-hl">RCE</span> (<span className="fp-aip-hl mono">CVE-2024-7254</span>) in a transitive dep of <span className="fp-aip-hl mono">score-engine</span>, the core scoring path. The patch is a one-line bump with no API change, clearing the top exposure.
+      </AiBanner>
 
       {/* KPIs */}
       <div className="fp-grid fp-grid-4">

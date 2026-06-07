@@ -22,6 +22,7 @@ import {
   StatusDot,
 } from '@/ds/core';
 import { FPageHeader, FSection, usePageCrumb } from '@/portal/shell/portal-shell';
+import { AiBanner } from '@/portal/shell/ai-pattern';
 import {
   ARTIFACTS,
   STATUS_META,
@@ -110,14 +111,7 @@ export default function PipelineRunDetail({ runId }: { runId: string }) {
       />
 
       {ai ? (
-        <div className="fp-ai-read">
-          <span className="fp-ai-read-icon" aria-hidden="true"><Icons.sparkle size={16} /></span>
-          <div className="fp-ai-read-body">
-            <span className="fp-ai-read-eyebrow">Forge AI · {ai.title}</span>
-            <p>{ai.body}</p>
-          </div>
-          <Button variant="outline" size="sm">Open the fix</Button>
-        </div>
+        <AiBanner title={ai.title} action="Open the fix">{ai.body}</AiBanner>
       ) : run.status === 'running' ? (
         <Banner
           tone="info"
