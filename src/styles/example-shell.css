@@ -3409,3 +3409,70 @@ body:active::-webkit-scrollbar-thumb,
 .fp-qs-label { display: block; font-weight: 500; font-size: var(--text-sm); color: var(--fg); }
 .fp-qs-meta  { display: block; font-size: var(--text-xs); color: var(--fg-muted); margin-block-start: 1px; }
 
+
+/* ════════════════════════════════════════════════════════════════════════
+   DORA · Engineering pulse (/portal/dora) + shared dashboard primitives
+   Reused across DORA / Fraud & Risk / Scorecards: the Forge AI read strip,
+   the chart legend, the vertical bar chart, and the KPI head row.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Forge AI read — a woven-in single-lever insight (not a chat box). */
+.fp-ai-read {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-block: 14px;
+  padding-inline: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-inline-start: 3px solid var(--ember);
+  border-radius: var(--radius-xl);
+  margin-block-end: var(--fp-section-gap, 18px);
+}
+.fp-ai-read-icon { color: var(--ember); display: inline-flex; flex-shrink: 0; }
+.fp-ai-read-body { flex: 1; min-width: 0; }
+.fp-ai-read-eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ember);
+  margin-block-end: 4px;
+}
+.fp-ai-read-body p { margin: 0; font-size: var(--text-sm); line-height: 1.6; color: var(--fg-muted); }
+.fp-ai-read > :last-child { flex-shrink: 0; }
+
+/* KPI head — label + band pill on one baseline. */
+.fp-kpi-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.fp-kpi-note { margin: 0; font-size: var(--text-sm); color: var(--fg-muted); line-height: 1.5; }
+
+/* Chart legend strip. */
+.fp-legend { display: inline-flex; gap: 12px; font-size: var(--text-xs); color: var(--fg-muted); font-family: var(--font-mono); }
+.fp-legend-item { display: inline-flex; align-items: center; gap: 5px; }
+.fp-legend-dot { inline-size: 8px; block-size: 8px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+
+/* Vertical bar chart — labels pin to the bottom, values float above each bar. */
+.fp-bars { display: flex; align-items: stretch; gap: 10px; block-size: 232px; padding-block-start: 12px; margin-block-start: 12px; }
+.fp-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; min-width: 0; }
+.fp-bar-val { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-faint); }
+.fp-bar { inline-size: 100%; background: var(--ember); border-radius: 4px 4px 0 0; opacity: 0.9; transition: block-size 600ms var(--ease); }
+.fp-bar.is-muted { background: var(--surface-active); opacity: 1; }
+.fp-bar-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted); }
+
+/* Lead-time card. */
+.fp-lead { display: flex; flex-direction: column; gap: 14px; }
+.fp-lead-hero { display: flex; flex-direction: column; gap: 2px; }
+.fp-lead-value { font-size: var(--text-3xl); font-weight: 700; letter-spacing: -0.02em; font-family: var(--font-mono); color: var(--ember); line-height: 1.05; }
+.fp-lead-cap { font-size: var(--text-sm); color: var(--fg-muted); }
+.fp-lead-copy { margin: 0; font-size: var(--text-sm); line-height: 1.6; color: var(--fg-muted); }
+.fp-lead-copy strong { color: var(--fg); font-weight: 600; }
+.fp-lead-pcts { margin: 0; border-block-start: 1px solid var(--border); padding-block-start: 12px; display: flex; flex-direction: column; gap: 8px; }
+.fp-lead-pct { display: flex; justify-content: space-between; font-size: var(--text-sm); color: var(--fg-muted); }
+.fp-lead-pct dt, .fp-lead-pct dd { margin: 0; }
+
+/* Table cell sub-line (e.g. "5 services" under a product name). */
+.fp-cell-sub { display: block; font-size: var(--text-xs); color: var(--fg-faint); font-weight: 400; margin-block-start: 2px; }
+
+/* Good-direction emphasis in dashboard copy. */
+.u-good { color: var(--success); }
