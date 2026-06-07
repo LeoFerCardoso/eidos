@@ -13,7 +13,7 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Icons, Pill, Select, SeverityPill, StatusDot } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
-import { INCIDENTS, KPIS, STATUS_META, activeCount, type IncStatus } from '@/portal/data/incidents';
+import { INCIDENTS, KPIS, STATUS_META, type IncStatus } from '@/portal/data/incidents';
 
 const FILTERS = [
   { value: 'all', label: 'All incidents' },
@@ -44,7 +44,7 @@ export default function IncidentsPage() {
       <FPageHeader
         eyebrow="Reliability"
         title="Incidents"
-        subtitle={`${activeCount} active · ${INCIDENTS.length} in the trailing week`}
+        subtitle="Triage what's on fire, run the war room, and learn from what already closed."
         actions={
           <>
             <Button variant="ghost">

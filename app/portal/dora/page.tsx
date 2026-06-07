@@ -68,14 +68,13 @@ function Kpi({ kpi }: { kpi: DoraKpi }) {
 export default function DoraPage() {
   const [range, setRange] = React.useState('7d');
   const maxDay = Math.max(...DEPLOYS_PER_DAY.map((d) => d.n));
-  const elite = DORA_BY_PRODUCT.filter((p) => p.band === 'Elite').length;
 
   return (
     <>
       <FPageHeader
         eyebrow="Engineering pulse"
         title="DORA"
-        subtitle={`30 services · 7 products · ${elite} at Elite · all four metrics trending up`}
+        subtitle="See how fast and how safely the org ships, and the one product dragging the band down."
         actions={
           <>
             <span className="fp-filter-select">

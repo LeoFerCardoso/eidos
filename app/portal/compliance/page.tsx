@@ -44,7 +44,7 @@ export default function CompliancePage() {
       <FPageHeader
         eyebrow="LGPD & Audit"
         title="LGPD & Audit"
-        subtitle="98.7% consent coverage · 6 open subject requests · 38.2k audit events today"
+        subtitle="Prove the bureau handles personal data right: consent, subject requests, and who touched what."
         actions={
           <>
             <span className="fp-filter-select">

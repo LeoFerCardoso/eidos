@@ -69,7 +69,7 @@ export default function SecurityPage() {
       <FPageHeader
         eyebrow="Security posture"
         title="Security"
-        subtitle={`${openFindings.length} open findings · ${THREATS.length} active threats · posture ${POSTURE.score}/100`}
+        subtitle="Find and fix the bureau's active exposure, from vulnerabilities to deviations and live threats."
         actions={
           <>
             <Button variant="ghost"><Icons.download size={13} /> Export</Button>

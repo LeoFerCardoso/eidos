@@ -45,7 +45,7 @@ export default function QualityGatesPage() {
       <FPageHeader
         eyebrow="Change management"
         title="Quality Gates"
-        subtitle="Every PR scored 0 to 1000 by the PR-analysis agent · the score sets the approval gate"
+        subtitle="Let low-risk changes merge themselves, and route the risky ones to the right approvers."
         actions={
           <Button variant="ghost"><Icons.download size={13} /> Export</Button>
         }

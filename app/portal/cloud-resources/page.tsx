@@ -60,7 +60,7 @@ export default function CloudResourcesPage() {
       <FPageHeader
         eyebrow="Catalog"
         title="Cloud Resources"
-        subtitle={`${RESOURCES.length} resources · ${KPIS[0].value}/mo · ${RESOURCES.filter((r) => r.status === 'idle').length} idle`}
+        subtitle="Every cloud resource in one place with its cost, and a clear path to trim the waste."
         actions={
           <>
             <Button variant="ghost"><Icons.download size={13} /> Export</Button>

@@ -46,7 +46,7 @@ export default function ApisPage() {
       <FPageHeader
         eyebrow="Catalog"
         title="APIs"
-        subtitle={`${APIS.length} APIs across ${PRODUCTS.length} products · ${APIS.filter((a) => a.visibility === 'public').length} public`}
+        subtitle="Discover every API the bureau exposes, who owns it, and who is allowed to consume it."
         actions={
           <>
             <Button variant="ghost"><Icons.download size={13} /> Export</Button>

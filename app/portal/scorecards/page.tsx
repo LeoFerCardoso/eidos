@@ -61,7 +61,7 @@ export default function ScorecardsPage() {
       <FPageHeader
         eyebrow="Quality scorecards"
         title="Scorecards"
-        subtitle={`${scorecard.desc} · ${rows.length} services · ${summary.passing}% passing`}
+        subtitle="Where every service stands on readiness, security and docs, and the initiatives closing the gaps."
         actions={
           <>
             <span className="fp-filter-select">

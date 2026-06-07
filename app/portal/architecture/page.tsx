@@ -56,7 +56,7 @@ export default function ArchitecturePage() {
       <FPageHeader
         eyebrow="Governance"
         title="Architecture"
-        subtitle={`${ADRS.filter((a) => a.status === 'accepted').length} decisions in force · ${DIAGRAMS.length} diagrams`}
+        subtitle="The decisions every team and agent must follow, plus the diagrams that explain the estate."
         actions={
           <>
             <Button variant="ghost"><Icons.download size={13} /> Export</Button>

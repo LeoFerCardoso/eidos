@@ -59,7 +59,7 @@ export default function RunbooksPage() {
       <FPageHeader
         eyebrow="Delivery"
         title="Runbooks"
-        subtitle={`${RUNBOOKS.length} runbooks · ${Math.round((RUNBOOKS.filter((r) => r.automation === 'automated').length / RUNBOOKS.length) * 100)}% automated`}
+        subtitle="The SRE playbook: run a fix when something breaks, and automate the manual ones."
         actions={
           <>
             <Button variant="ghost"><Icons.download size={13} /> Export</Button>

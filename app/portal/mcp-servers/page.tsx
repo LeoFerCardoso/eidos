@@ -71,7 +71,7 @@ export default function McpServersPage() {
       <FPageHeader
         eyebrow="Catalog"
         title="MCP servers"
-        subtitle={`${SERVERS.length} servers · ${SERVERS.reduce((m, s) => m + s.tools, 0)} tools · built by ${TEAMS.length} teams`}
+        subtitle="Find the MCP servers your teams built and wire their tools into your agents."
         actions={
           <>
             <Button variant="ghost"><Icons.book size={13} /> Build guide</Button>

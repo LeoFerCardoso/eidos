@@ -59,7 +59,7 @@ export default function DatabasesPage() {
       <FPageHeader
         eyebrow="Catalog"
         title="Databases"
-        subtitle={`${DATABASES.length} databases · ${DATABASES.reduce((m, d) => m + d.tables, 0).toLocaleString('en-US')} tables · ${DATABASES.filter((d) => d.pii).length} hold PII`}
+        subtitle="Know what data you hold, how fast it grows, and where the PII lives. Built for the data team."
         actions={
           <>
             <Button variant="ghost"><Icons.download size={13} /> Export</Button>

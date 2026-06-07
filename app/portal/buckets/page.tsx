@@ -55,7 +55,7 @@ export default function BucketsPage() {
       <FPageHeader
         eyebrow="Catalog"
         title="Buckets"
-        subtitle={`${BUCKETS.length} buckets · ${fmtSize(BUCKETS.reduce((m, b) => m + b.sizeGb, 0))} · ${BUCKETS.filter((b) => b.status === 'dead').length} dead`}
+        subtitle="See everything you store, and reclaim the cold and dead data quietly running up the bill."
         actions={
           <>
             <Button variant="ghost"><Icons.download size={13} /> Export</Button>

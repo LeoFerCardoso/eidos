@@ -60,7 +60,7 @@ export default function PipelinesPage() {
       <FPageHeader
         eyebrow="Delivery"
         title="Pipelines"
-        subtitle={`${RUNS.length} recent runs · 94% success in the last 24h`}
+        subtitle="Watch every deploy move through the golden pipeline, and jump into anything that stalls or fails."
         actions={
           <>
             <Button variant="ghost">

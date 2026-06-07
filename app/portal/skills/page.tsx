@@ -13,7 +13,7 @@
 import * as React from 'react';
 import { Button, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch } from '@/portal/shell/portal-shell';
-import { SKILLS, SKILL_CATEGORIES, communityCount, officialCount, type Skill } from '@/portal/data/skills';
+import { SKILLS, SKILL_CATEGORIES, type Skill } from '@/portal/data/skills';
 
 const SOURCES = ['All', 'Official', 'Community'] as const;
 type Source = (typeof SOURCES)[number];
@@ -81,7 +81,7 @@ export default function SkillsPage() {
       <FPageHeader
         eyebrow="Marketplace"
         title="Skills"
-        subtitle={`${SKILLS.length} skills · ${officialCount} official · ${communityCount} from the community`}
+        subtitle="Browse packaged abilities, official and community, and drop them into any agent."
         actions={
           <>
             <Button variant="ghost"><Icons.book size={13} /> Author guide</Button>

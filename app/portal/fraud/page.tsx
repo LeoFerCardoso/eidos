@@ -62,7 +62,7 @@ export default function FraudPage() {
       <FPageHeader
         eyebrow="Anti-Fraud & Risk"
         title="Fraud & Risk"
-        subtitle="R$ 4.8M blocked today · 96.4% catch rate · 2.1% false positives"
+        subtitle="Hold the line between catching fraud and blocking good customers, and chase what's spiking now."
         actions={
           <>
             <span className="fp-filter-select">

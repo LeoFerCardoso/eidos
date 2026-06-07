@@ -21,7 +21,6 @@ import {
   SOURCE_META,
   STATUS_META,
   fmtItems,
-  totalItems,
   type Context,
   type ContextSource,
 } from '@/portal/data/contexts';
@@ -71,7 +70,7 @@ export default function ContextsPage() {
       <FPageHeader
         eyebrow="Knowledge base"
         title="Contexts"
-        subtitle={`${CONTEXTS.length} contexts · ${fmtItems(totalItems)} items indexed for agents to read`}
+        subtitle="Connect and curate what your agents read, from bureau registries to Drive, Confluence and your own docs."
         actions={
           <>
             <Button variant="ghost"><Icons.upload size={13} /> Upload</Button>
