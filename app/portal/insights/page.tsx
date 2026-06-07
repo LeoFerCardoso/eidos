@@ -20,7 +20,6 @@ import {
   Select,
 } from '@/ds/core';
 import { FPageHeader, FCardHead } from '@/portal/shell/portal-shell';
-import { AiPattern } from '@/portal/shell/ai-pattern';
 import { TRIBES } from '@/portal/data/services';
 import {
   INSIGHTS,
@@ -212,16 +211,73 @@ function RadarViz({ axes }: { axes: { label: string; value: number }[] }) {
   );
 }
 
+// Flickering-grid texture for the banner (à la magicui FlickeringGrid). A regular
+// grid of small SQUARES — the COLOUR lives only in the squares (each is painted
+// from the ember gradient, gradientUnits=userSpaceOnUse → samples its position)
+// over a neutral banner surface. ~40% of cells flicker independently via a CSS
+// animation whose delay/duration is seeded per cell (deterministic → SSR-stable,
+// no hydration drift, no Math.random). slice + xMax anchor keep the cells square
+// at any banner width and the dense ember end pinned to the inline-end. The mask
+// fades the grid out before the copy. Reduced-motion freezes it (CSS).
+function BannerMosaic() {
+  const SQ = 4, PITCH = 7; // squareSize 4, gap 3 → dense
+  const COLS = 176, ROWS = 12;
+  const W = COLS * PITCH, H = ROWS * PITCH; // content fills the viewBox exactly → no right-edge gap
+  const rnd = (c: number, r: number) => {
+    const s = Math.sin(c * 127.1 + r * 311.7) * 43758.5453;
+    return s - Math.floor(s);
+  };
+  const rects: React.ReactNode[] = [];
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const colF = c / (COLS - 1);
+      // full-width opacity ramp: darker on the inline-start, brighter toward the end.
+      const mx = (0.08 + colF * 0.78) * (0.55 + rnd(c + 13, r + 7) * 0.45);
+      const flick = rnd(c, r) > 0.64; // ~36% of cells flicker
+      const delay = (rnd(c + 5, r + 9) * 2.6).toFixed(2);
+      const dur = (0.9 + rnd(c + 7, r + 3) * 1.7).toFixed(2); // faster → more marked
+      rects.push(
+        <rect
+          key={`${c}-${r}`}
+          x={c * PITCH} y={r * PITCH} width={SQ} height={SQ} rx={0.8}
+          opacity={Number(mx.toFixed(3))}
+          className={flick ? 'fp-flick' : undefined}
+          style={flick ? ({ animationDelay: `${delay}s`, animationDuration: `${dur}s`, '--mx': mx.toFixed(3) } as React.CSSProperties) : undefined}
+        />,
+      );
+    }
+  }
+  return (
+    <svg className="fp-ai-banner-mosaic" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        {/* Two-hue theme gradient: accent → complementary (forge: ember → violet),
+            corner to corner. Bound to theme tokens via style so it follows the
+            active theme. */}
+        <linearGradient id="fp-banner-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={W} y2={H}>
+          {/* Hold the accent through the scrim-covered left, then run the full
+              accent → complementary transition across the bright (visible) right
+              so BOTH hues read. */}
+          <stop offset="0%" style={{ stopColor: 'var(--accent)' }} />
+          <stop offset="58%" style={{ stopColor: 'var(--accent)' }} />
+          <stop offset="80%" style={{ stopColor: 'color-mix(in oklch, var(--accent), var(--accent-3))' }} />
+          <stop offset="100%" style={{ stopColor: 'var(--accent-3)' }} />
+        </linearGradient>
+      </defs>
+      <g fill="url(#fp-banner-grad)">{rects}</g>
+    </svg>
+  );
+}
+
 // ── Dismissible intro banner (session-only → always shows on refresh) ────────────
 function InsightsBanner() {
   const [dismissed, setDismissed] = React.useState(false);
   if (dismissed) return null;
   return (
     <div className="fp-ai-banner" role="note">
-      <AiPattern />
+      <BannerMosaic />
+      <span className="fp-ai-banner-spark" aria-hidden="true"><Icons.sparkles size={28} /></span>
       <div className="fp-ai-banner-text">
-        <span className="fp-ai-banner-eyebrow">Forge AI</span>
-        <strong className="fp-ai-banner-title">Watching your estate</strong>
+        <strong className="fp-ai-banner-title">Forge AI is watching your estate</strong>
         <p className="fp-ai-banner-desc">Every PR, deploy and inter-service call is analyzed for drift, risk and opportunity, surfaced right here as it happens.</p>
       </div>
       <button type="button" className="fp-ai-banner-close" onClick={() => setDismissed(true)} aria-label="Dismiss banner">

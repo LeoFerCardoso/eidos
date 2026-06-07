@@ -15,6 +15,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Button, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
+import { AiPattern } from '@/portal/shell/ai-pattern';
 import {
   AI_READ,
   DATABASES,
@@ -36,6 +37,26 @@ const ENV_OPTS = [
   { value: 'staging', label: 'Staging' },
 ];
 const maxEngine = Math.max(...ENGINE_MIX.map((e) => e.sizeGb));
+
+// Forge AI pattern banner (cloned from the AI-Insights hero) — session-only
+// dismiss so it returns on refresh.
+function DataBanner() {
+  const [dismissed, setDismissed] = React.useState(false);
+  if (dismissed) return null;
+  return (
+    <div className="fp-aip-banner" role="note">
+      <AiPattern />
+      <div className="fp-aip-banner-text">
+        <span className="fp-aip-banner-eyebrow">Forge AI</span>
+        <strong className="fp-aip-banner-title">Watching your data estate</strong>
+        <p className="fp-aip-banner-desc">Every table, schema and access is analyzed for growth, cost and unregistered PII, surfaced right here as it changes.</p>
+      </div>
+      <button type="button" className="fp-aip-banner-close" onClick={() => setDismissed(true)} aria-label="Dismiss banner">
+        <Icons.x size={16} />
+      </button>
+    </div>
+  );
+}
 
 export default function DatabasesPage() {
   const [query, setQuery] = React.useState('');
@@ -66,6 +87,8 @@ export default function DatabasesPage() {
           </>
         }
       />
+
+      <DataBanner />
 
       <div className="fp-ai-read">
         <span className="fp-ai-read-icon" aria-hidden="true"><Icons.sparkle size={16} /></span>

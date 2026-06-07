@@ -3000,8 +3000,110 @@ body:active::-webkit-scrollbar-thumb,
 .fp-insight-sev { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
 .fp-insight-desc { margin: 0; font-size: var(--text-sm); color: var(--fg-muted); line-height: 1.5; }
 
-/* ── Forge AI banner ─ signature dash-pattern background ───────────────────── */
+/* ── AI-Insights dismissible intro banner ───────────────────────────────────── */
 .fp-ai-banner {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; align-items: center; gap: 16px;
+  padding-block: 18px; padding-inline: 22px 56px; margin-block-end: 40px;
+  border-radius: var(--radius-2xl, 18px);
+  border: 1px solid transparent;
+  /* Clean, dark base (page --bg) so the copy side reads as a real token, not a
+     muddy grey from cells bleeding through; the gleam border frames it. */
+  background: var(--bg);
+  color: var(--fg);
+}
+/* Animatable angle for the conic gleam (registered so it can be tweened). */
+@property --fp-gleam-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+/* Gleam border — the DS gradient-border is-spin technique (conic-gradient masked
+   to a thin ring, rotating CLOCKWISE via @property angle), in OUR palette: ember
+   → F0531F → pink arcs separated by translucent fades, so colour travels around
+   the rim (no white crest). The mask (content-box XOR full) cuts the fill to the
+   1px border only. */
+.fp-ai-banner::before {
+  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  border-radius: inherit; padding: 1px;
+  background: conic-gradient(from var(--fp-gleam-angle),
+    var(--accent),
+    color-mix(in srgb, var(--accent) 28%, transparent),
+    var(--accent-3),
+    color-mix(in srgb, var(--accent-3) 28%, transparent),
+    var(--accent));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  animation: fp-banner-gleam 6s linear infinite;
+}
+@keyframes fp-banner-gleam {
+  to { --fp-gleam-angle: 360deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fp-ai-banner::before { animation: none; }
+}
+/* Flickering-grid texture — colour lives ONLY in the squares (gradient-filled in
+   the SVG), spanning corner to corner. The per-cell opacity ramp keeps the
+   inline-start (under the copy) dark and the inline-end bright. */
+.fp-ai-banner-mosaic {
+  position: absolute; inset: 0; z-index: 0; inline-size: 100%; block-size: 100%;
+  pointer-events: none;
+}
+/* Copy scrim — paints the clean dark base back over the inline-start so the
+   title + description sit on solid --bg (no cell bleed), fading out before the
+   bright cells on the inline-end. */
+.fp-ai-banner::after {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(to right,
+    var(--bg) 0%,
+    color-mix(in oklch, var(--bg) 72%, transparent) 38%,
+    transparent 62%);
+}
+[dir="rtl"] .fp-ai-banner::after {
+  background: linear-gradient(to left,
+    var(--bg) 0%,
+    color-mix(in oklch, var(--bg) 72%, transparent) 38%,
+    transparent 62%);
+}
+/* Per-cell flicker — base opacity carried by --mx (set inline, seeded per cell). */
+.fp-ai-banner-mosaic .fp-flick {
+  animation-name: fp-banner-flick;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+  will-change: opacity;
+}
+@keyframes fp-banner-flick {
+  0% { opacity: calc(var(--mx, 0.4) * 0.04); }
+  100% { opacity: var(--mx, 0.4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fp-ai-banner-mosaic .fp-flick { animation: none; opacity: var(--mx, 0.4); }
+}
+.fp-ai-banner-spark { position: relative; z-index: 1; flex-shrink: 0; display: inline-flex; color: var(--accent); }
+.fp-ai-banner-text { position: relative; z-index: 1; flex: 1; min-inline-size: 0; }
+.fp-ai-banner-title { display: block; color: var(--fg); font-weight: 600; font-size: var(--text-md); letter-spacing: -0.01em; line-height: 1.3; }
+.fp-ai-banner-desc { margin: 3px 0 0; font-size: var(--text-sm); line-height: 1.5; color: var(--fg-muted); max-inline-size: 82ch; }
+/* Close button — modal-close geometry (square, X) with a translucent overlay bg
+   + blur so it stays visible over the bright cells. z-index above the gleam. */
+.fp-ai-banner-close {
+  position: absolute; inset-block-start: 50%; inset-inline-end: 14px; z-index: 4;
+  transform: translateY(-50%);
+  flex: 0 0 auto; inline-size: 32px; block-size: 32px; border-radius: 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: none; cursor: pointer;
+  background: color-mix(in oklch, var(--bg) 32%, transparent);
+  -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);
+  color: var(--fg);
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.fp-ai-banner-close:hover { background: color-mix(in oklch, var(--bg) 55%, transparent); }
+.fp-ai-banner-close:focus-visible { outline: 2px solid var(--ember); outline-offset: 1px; }
+
+/* ── Forge AI banner ─ signature dash-pattern background ───────────────────── */
+.fp-aip-banner {
   position: relative; isolation: isolate; overflow: hidden;
   display: flex; align-items: center; gap: 16px;
   padding-block: 20px; padding-inline: 24px 56px; margin-block-end: 40px;
@@ -3012,36 +3114,36 @@ body:active::-webkit-scrollbar-thumb,
   min-block-size: 96px;
 }
 /* The pattern SVG fills the banner behind the copy. */
-.fp-ai-banner .fp-aip {
+.fp-aip-banner .fp-aip {
   position: absolute; inset: 0; inline-size: 100%; block-size: 100%; z-index: 0;
   pointer-events: none;
 }
 /* Copy scrim — solid on the inline-start so the text reads on a clean surface,
    fading out before the bright end of the pattern. */
-.fp-ai-banner::after {
+.fp-aip-banner::after {
   content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(to right,
     var(--bg-elevated) 0%,
     color-mix(in oklch, var(--bg-elevated) 82%, transparent) 40%,
     transparent 74%);
 }
-[dir="rtl"] .fp-ai-banner::after {
+[dir="rtl"] .fp-aip-banner::after {
   background: linear-gradient(to left,
     var(--bg-elevated) 0%,
     color-mix(in oklch, var(--bg-elevated) 82%, transparent) 40%,
     transparent 74%);
 }
-.fp-ai-banner-text { position: relative; z-index: 2; flex: 1; min-inline-size: 0; }
-.fp-ai-banner-eyebrow {
+.fp-aip-banner-text { position: relative; z-index: 2; flex: 1; min-inline-size: 0; }
+.fp-aip-banner-eyebrow {
   display: block; font-family: var(--font-mono); font-size: var(--text-xs);
   text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-2);
   margin-block-end: 4px;
 }
-.fp-ai-banner-title { display: block; color: var(--fg); font-weight: 600; font-size: var(--text-lg); letter-spacing: -0.01em; line-height: 1.25; }
-.fp-ai-banner-desc { margin: 4px 0 0; font-size: var(--text-sm); line-height: 1.5; color: var(--fg-muted); max-inline-size: 78ch; }
+.fp-aip-banner-title { display: block; color: var(--fg); font-weight: 600; font-size: var(--text-lg); letter-spacing: -0.01em; line-height: 1.25; }
+.fp-aip-banner-desc { margin: 4px 0 0; font-size: var(--text-sm); line-height: 1.5; color: var(--fg-muted); max-inline-size: 78ch; }
 /* Close button — square modal-close geometry with a translucent overlay + blur
    so it stays legible over the pattern. */
-.fp-ai-banner-close {
+.fp-aip-banner-close {
   position: absolute; inset-block-start: 50%; inset-inline-end: 14px; z-index: 3;
   transform: translateY(-50%);
   flex: 0 0 auto; inline-size: 32px; block-size: 32px; border-radius: 6px;
@@ -3052,8 +3154,8 @@ body:active::-webkit-scrollbar-thumb,
   color: var(--fg);
   transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
 }
-.fp-ai-banner-close:hover { background: color-mix(in oklch, var(--bg) 62%, transparent); }
-.fp-ai-banner-close:focus-visible { outline: 2px solid var(--ember); outline-offset: 1px; }
+.fp-aip-banner-close:hover { background: color-mix(in oklch, var(--bg) 62%, transparent); }
+.fp-aip-banner-close:focus-visible { outline: 2px solid var(--ember); outline-offset: 1px; }
 
 /* ── AI pattern background (reusable) ─────────────────────────────────────────
    Signature dash field for Forge AI surfaces. Colours default to the cool AI
