@@ -3118,9 +3118,13 @@ body:active::-webkit-scrollbar-thumb,
    border-box). background-position flows the gradient; reduced-motion freezes it. */
 .fp-aip-banner::before {
   content: ''; position: absolute; inset: 0; z-index: 4; pointer-events: none;
-  border-radius: inherit; padding: 1.5px;
+  border-radius: inherit; padding: 1px;
+  /* Same wave as the background: one accent cycle every ~800px (≈ the pattern's
+     on-screen wavelength), repeated, flowing left -> right at the same 7s cadence
+     so the rim and the field move together. */
   background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
-  background-size: 200% 100%;
+  background-size: 800px 100%;
+  background-repeat: repeat;
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -3128,7 +3132,7 @@ body:active::-webkit-scrollbar-thumb,
   animation: fp-aip-border-flow 7s linear infinite;
 }
 @keyframes fp-aip-border-flow {
-  to { background-position: -200% 0; }
+  to { background-position: 800px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .fp-aip-banner::before { animation: none; }
