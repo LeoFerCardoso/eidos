@@ -3553,3 +3553,25 @@ body:active::-webkit-scrollbar-thumb,
 /* Inline text link. */
 .u-link { color: var(--ember); text-decoration: none; font-weight: 500; }
 .u-link:hover { text-decoration: underline; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Incidents war room (/portal/incidents/[id])
+   ════════════════════════════════════════════════════════════════════════ */
+
+.fp-card-meta { font-size: var(--text-xs); color: var(--fg-muted); }
+
+/* Responders list. */
+.fp-resp { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.fp-resp-row { display: flex; align-items: center; gap: 10px; }
+.fp-resp-id { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.fp-resp-name { font-weight: 600; font-size: var(--text-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-resp-role { font-size: var(--text-xs); color: var(--fg-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Suggested runbooks list. */
+.fp-rb { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+.fp-rb-row { display: flex; align-items: center; gap: 10px; padding-block: 10px; border-block-start: 1px solid var(--border); }
+.fp-rb-row:first-child { border-block-start: 0; padding-block-start: 2px; }
+.fp-rb-ic { color: var(--fg-muted); display: inline-flex; flex-shrink: 0; }
+.fp-rb-id { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.fp-rb-name { font-weight: 600; font-size: var(--text-sm); }
+.fp-rb-meta { font-size: var(--text-xs); color: var(--fg-muted); }
