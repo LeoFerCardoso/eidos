@@ -90,5 +90,5 @@ export const KPIS = [
 
 export const AI_READ = {
   title: 'Largest cost and risk',
-  body: 'analytics_dw on BigQuery is the biggest store at 18.4 TB and growing 14% month over month, but holds no PII. score_features on Snowflake (9.9 TB) does hold PII and feeds every score, so it carries both cost and LGPD weight. Forge suggests a retention policy on analytics_dw partitions older than 18 months to bend the cost curve without touching the regulated stores.',
+  body: 'analytics_dw on BigQuery is our biggest store at 18.4 TB and up 14% MoM, yet holds no PII. score_features on Snowflake (9.9 TB) does, and feeds every score. A retention policy on analytics_dw partitions over 18 months cuts cost without touching regulated data.',
 };

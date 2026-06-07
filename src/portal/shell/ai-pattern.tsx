@@ -1,23 +1,38 @@
 'use client';
 // Forge — AI pattern background. A deterministic field of short, rounded line
-// segments (horizontal + vertical dashes) on a regular grid, tinted by a single
-// left-to-right gradient (ice -> blue -> violet -> orchid). It is the signature
-// background for Forge AI surfaces, replacing the generic glow/sparkle banner
-// look. Pure, SSR-stable (sin-hash, no random/Date), aria-hidden.
-//
-// Gradient stops read CSS vars (--aip-1..4) so a host can retheme; defaults sit
-// in the .fp-aip rule in example-shell.css. The gradient id is per-instance
-// (useId) so multiple patterns on one page don't collide.
+// segments (horizontal + vertical dashes) on a fine grid, tinted by a colour
+// wave that flows left -> right cycling the three theme accents (ember -> ice ->
+// violet). It is the signature background for Forge AI surfaces, replacing the
+// generic glow/sparkle banner look. Pure, SSR-stable (sin-hash, no random/Date),
+// aria-hidden. The dashes are kept small by a dense grid; the wave is a repeating
+// userSpace gradient translated by one tile (SMIL), paused under
+// prefers-reduced-motion.
 import * as React from 'react';
 
 export function AiPattern({ className }: { className?: string }) {
   const PITCH = 13;
-  const COLS = 132;
-  const ROWS = 16;
-  const SW = 4.4;
+  const COLS = 180; // dense → small dashes
+  const ROWS = 26;
+  const SW = 4.2;
   const W = COLS * PITCH;
   const H = ROWS * PITCH;
+  const TILE = PITCH * 56; // wave wavelength (one accent cycle)
   const gid = 'aip-' + React.useId().replace(/[^a-zA-Z0-9_-]/g, '');
+  const ref = React.useRef<SVGSVGElement>(null);
+
+  // Pause the SMIL colour wave when the user prefers reduced motion.
+  React.useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const apply = () => {
+      const el = ref.current as unknown as { pauseAnimations?: () => void; unpauseAnimations?: () => void } | null;
+      if (!el) return;
+      if (mq.matches) el.pauseAnimations?.();
+      else el.unpauseAnimations?.();
+    };
+    apply();
+    mq.addEventListener?.('change', apply);
+    return () => mq.removeEventListener?.('change', apply);
+  }, []);
 
   const rnd = (c: number, r: number) => {
     const s = Math.sin(c * 127.1 + r * 311.7) * 43758.5453;
@@ -50,17 +65,34 @@ export function AiPattern({ className }: { className?: string }) {
 
   return (
     <svg
+      ref={ref}
       className={'fp-aip' + (className ? ' ' + className : '')}
       viewBox={`0 0 ${W} ${H}`}
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
     >
       <defs>
-        <linearGradient id={gid} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={W} y2="0">
-          <stop offset="0%" style={{ stopColor: 'var(--aip-1)' }} />
-          <stop offset="36%" style={{ stopColor: 'var(--aip-2)' }} />
-          <stop offset="70%" style={{ stopColor: 'var(--aip-3)' }} />
-          <stop offset="100%" style={{ stopColor: 'var(--aip-4)' }} />
+        {/* Colour wave: one accent cycle per TILE, repeated across the field and
+            translated by exactly one tile so it loops seamlessly. Stops start and
+            end on --accent so the repeat is continuous. */}
+        <linearGradient
+          id={gid}
+          gradientUnits="userSpaceOnUse"
+          spreadMethod="repeat"
+          x1="0" y1="0" x2={TILE} y2="0"
+        >
+          <stop offset="0%" style={{ stopColor: 'var(--accent)' }} />
+          <stop offset="33%" style={{ stopColor: 'var(--accent-2)' }} />
+          <stop offset="66%" style={{ stopColor: 'var(--accent-3)' }} />
+          <stop offset="100%" style={{ stopColor: 'var(--accent)' }} />
+          <animateTransform
+            attributeName="gradientTransform"
+            type="translate"
+            from="0 0"
+            to={`${TILE} 0`}
+            dur="7s"
+            repeatCount="indefinite"
+          />
         </linearGradient>
       </defs>
       <g stroke={`url(#${gid})`} strokeWidth={SW} strokeLinecap="round" fill="none">

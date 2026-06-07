@@ -3124,20 +3124,20 @@ body:active::-webkit-scrollbar-thumb,
   content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(to right,
     var(--bg-elevated) 0%,
-    var(--bg-elevated) 32%,
-    color-mix(in oklch, var(--bg-elevated) 80%, transparent) 56%,
-    transparent 82%);
+    var(--bg-elevated) 42%,
+    color-mix(in oklch, var(--bg-elevated) 80%, transparent) 66%,
+    transparent 88%);
 }
 [dir="rtl"] .fp-aip-banner::after {
   background: linear-gradient(to left,
     var(--bg-elevated) 0%,
-    var(--bg-elevated) 32%,
-    color-mix(in oklch, var(--bg-elevated) 80%, transparent) 56%,
-    transparent 82%);
+    var(--bg-elevated) 42%,
+    color-mix(in oklch, var(--bg-elevated) 80%, transparent) 66%,
+    transparent 88%);
 }
-/* Cap the copy width so the support text (which can run several lines) stays in
-   the dark scrim zone and never runs under the bright end of the pattern. */
-.fp-aip-banner-text { position: relative; z-index: 2; flex: 1; min-inline-size: 0; max-inline-size: 620px; }
+/* Cap the copy width so the support text (2-3 lines) stays in the dark scrim
+   zone and never runs under the bright end of the pattern. */
+.fp-aip-banner-text { position: relative; z-index: 2; flex: 1; min-inline-size: 0; max-inline-size: 760px; }
 .fp-aip-banner-eyebrow {
   display: block; font-family: var(--font-mono); font-size: var(--text-xs);
   text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-2);
@@ -3145,12 +3145,14 @@ body:active::-webkit-scrollbar-thumb,
 }
 .fp-aip-banner-title { display: block; color: var(--fg); font-weight: 600; font-size: var(--text-lg); letter-spacing: -0.01em; line-height: 1.25; }
 .fp-aip-banner-desc { margin: 4px 0 0; font-size: var(--text-sm); line-height: 1.55; color: var(--fg-muted); }
+/* Highlighted terms in the support copy (entities + metrics) — brighter + bolder
+   than the muted body so the key facts pop. Pair with .mono for identifiers. */
+.fp-aip-banner-desc .fp-aip-hl { color: var(--fg); font-weight: 600; }
 .fp-aip-banner-cta { margin-block-start: 14px; }
-/* Close button — square modal-close geometry with a translucent overlay + blur
-   so it stays legible over the pattern. */
+/* Close button — pinned to the top-right corner (the banner is tall, so it no
+   longer centers). Translucent overlay + blur so it stays legible over the pattern. */
 .fp-aip-banner-close {
-  position: absolute; inset-block-start: 50%; inset-inline-end: 14px; z-index: 3;
-  transform: translateY(-50%);
+  position: absolute; inset-block-start: 14px; inset-inline-end: 14px; z-index: 3;
   flex: 0 0 auto; inline-size: 32px; block-size: 32px; border-radius: 6px;
   display: inline-flex; align-items: center; justify-content: center;
   border: none; cursor: pointer;
@@ -3163,15 +3165,9 @@ body:active::-webkit-scrollbar-thumb,
 .fp-aip-banner-close:focus-visible { outline: 2px solid var(--ember); outline-offset: 1px; }
 
 /* ── AI pattern background (reusable) ─────────────────────────────────────────
-   Signature dash field for Forge AI surfaces. Colours default to the cool AI
-   gradient (ice → blue → violet → orchid); a host can override --aip-* to retheme. */
-.fp-aip {
-  display: block;
-  --aip-1: #5AD7EE;
-  --aip-2: #4B82F7;
-  --aip-3: var(--accent-3, #A78BFA);
-  --aip-4: #E6A8E8;
-}
+   Signature dash field for Forge AI surfaces. The colour wave cycles the theme
+   accents (--accent / --accent-2 / --accent-3) directly inside the SVG. */
+.fp-aip { display: block; }
 
 /* ── Big-Insight slides (narrow, inside the right-column DS carousel) ─────────── */
 .fp-slide {
