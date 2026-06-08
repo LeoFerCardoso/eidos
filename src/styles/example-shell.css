@@ -1998,6 +1998,52 @@ body:active::-webkit-scrollbar-thumb,
 .fp-agents-maker.is-official { color: var(--accent-2); }
 .fp-agents-card .stats { margin-block-start: 0; }
 
+/* Role archetype — the agent's SDLC job title (Developer / Incident manager /
+   Policy judge / Product manager / Team lead). A compact mono chip on cards and
+   rows; the selectable chip row above the list (.fp-agents-roles) doubles as the
+   legend + filter. Kept neutral — no ember — so the page's accent budget stays
+   with the Starred star and the Verified seal. */
+.fp-agents-archetype {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.01em;
+  color: var(--fg-muted); white-space: nowrap;
+}
+.fp-agents-archetype svg { color: var(--fg-faint); flex: 0 0 auto; }
+.fp-agents-row .row-archetype {
+  flex: 0 0 132px; overflow: hidden; text-overflow: ellipsis;
+}
+
+.fp-agents-roles {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-block-end: 20px;
+}
+.fp-agents-role-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  block-size: 30px; padding-inline: 11px;
+  border: 1px solid var(--border); border-radius: 999px;
+  background: var(--surface); color: var(--fg-muted);
+  font-size: 12px; line-height: 1; cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease),
+              background var(--dur-fast) var(--ease);
+}
+.fp-agents-role-chip svg { color: var(--fg-faint); flex: 0 0 auto; }
+.fp-agents-role-chip .n { font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); }
+.fp-agents-role-chip:hover { border-color: var(--border-strong); color: var(--fg); }
+.fp-agents-role-chip:hover svg { color: var(--fg-muted); }
+.fp-agents-role-chip[aria-pressed="true"] {
+  border-color: var(--border-strong); background: var(--elev-1);
+  color: var(--fg); font-weight: 500;
+}
+.fp-agents-role-chip[aria-pressed="true"] svg { color: var(--fg); }
+.fp-agents-role-chip[aria-pressed="true"] .n { color: var(--fg-muted); }
+.fp-agents-role-chip:focus-visible {
+  outline: 2px solid var(--ring, var(--accent)); outline-offset: 2px;
+}
+
+@media (max-width: 860px) {
+  .fp-agents-row .row-archetype { display: none; }
+}
+
 /* Section band — a titled group (Starred, All agents) with a count. The gap
    ABOVE the first section (Controls → Content) is owned by the toolbar's
    margin-block-end (--fp-toolbar-gap), so sections carry no top margin. */
@@ -3820,6 +3866,15 @@ body:active::-webkit-scrollbar-thumb,
 .fp-flag-target { display: inline-flex; align-items: center; gap: 8px; }
 .fp-flag-spark { flex: 0 0 auto; inline-size: 72px; block-size: 20px; display: inline-flex; }
 .fp-flag-spark .sparkline { inline-size: 72px; }
+
+/* ── MCP server detail ─────────────────────────────────────────────────── */
+.fp-mcp-overview { display: flex; gap: 10px; align-items: flex-start; margin-block-start: 12px; max-inline-size: 80ch; font-size: var(--text-base); line-height: 1.65; color: var(--fg-muted); }
+.fp-mcp-overview-ic { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; inline-size: 28px; block-size: 28px; border-radius: 8px; background: var(--surface-active); color: var(--fg-muted); margin-block-start: 1px; }
+.fp-mcp-spark { flex: 0 0 auto; inline-size: 80px; block-size: 22px; display: inline-flex; }
+.fp-mcp-spark .sparkline { inline-size: 80px; }
+.fp-mcp-consumers { display: flex; flex-direction: column; gap: 10px; }
+.fp-mcp-consumer { display: flex; align-items: center; gap: 10px; }
+.fp-mcp-consumer .nm { flex: 1; min-inline-size: 0; font-weight: 600; font-size: var(--text-sm); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* ════════════════════════════════════════════════════════════════════════
    Skills marketplace (/portal/skills)

@@ -1,72 +1,32 @@
 'use client';
-// Forge - MCP server detail page (/portal/mcp-servers/[id]).
-// Two-column .fp-agentd layout (reused from agent-detail): left main + rule +
-// right aside. Left: server header, overview prose + install snippet, tools
-// table. Right: Properties, Connected agents, Versions.
+// Forge - MCP server detail page (/portal/mcp-servers/[id]). Inspired by the
+// example mcp-detail screen: a server overview, the full Tools list with call
+// volume + latency, and the connection / activity / consumer info, plus the
+// connect snippet. Single-column page (not the agent-detail two-column shell).
 import * as React from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import {
-  Icons, Pill, Prose, ProseCode, Button, CopyChip,
+  Icons, Pill, ProseCode, Button, CopyChip, HealthBadge, Sparkline, Avatar,
 } from '@/ds/core';
-import { usePageCrumb } from '@/portal/shell/portal-shell';
+import { FPageHeader, FSection, usePageCrumb } from '@/portal/shell/portal-shell';
 import {
-  SERVERS, STATUS_META, getServer, toolsFor, connectedAgentsFor, versionsFor, snippetFor,
-  type McpServer,
+  STATUS_META, getServer, toolsFor, toolStat, connectedAgentsFor, connectionFor,
+  activityFor, versionsFor, snippetFor,
+  type McpServer, type McpStatus,
 } from '@/portal/data/mcp';
-
-// ── Local helpers (not exported) ─────────────────────────────────────────────
 
 const ICON = (k: string, size = 14) => {
   const C = (Icons as Record<string, React.FC<{ size?: number }>>)[k] ?? Icons.circle;
   return <C size={size} />;
 };
 
-function AsideSection({
-  title,
-  count,
-  action,
-  children,
-}: {
-  title: string;
-  count?: number;
-  action?: React.ReactNode;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="fp-agentd-sec">
-      <div className="fp-agentd-sec-head">
-        <span className="t">{title}</span>
-        {count !== undefined && <span className="fp-agentd-sec-count">{count}</span>}
-        {action && <span className="fp-agentd-sec-action">{action}</span>}
-      </div>
-      {children}
-    </section>
-  );
-}
-
-function EmptyState({ icon, label }: { icon: string; label: string }) {
-  return (
-    <div className="fp-agentd-empty">
-      <span className="ic">{ICON(icon, 16)}</span>
-      <span>{label}</span>
-    </div>
-  );
-}
-
-// ── Transport badge ───────────────────────────────────────────────────────────
+const HEALTH: Record<McpStatus, 'up' | 'degraded' | 'down'> = { live: 'up', beta: 'degraded', deprecated: 'down' };
 
 const TRANSPORT_TONE: Record<McpServer['transport'], React.ComponentProps<typeof Pill>['tone']> = {
-  HTTP:  'ice',
-  SSE:   'ember',
-  stdio: 'neutral',
+  HTTP: 'ice', SSE: 'ember', stdio: 'neutral',
 };
-
-// ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function McpDetail({ id }: { id: string }) {
   const server = getServer(id);
-  const router = useRouter();
   const { setCrumb } = usePageCrumb();
 
   React.useEffect(() => {
@@ -76,252 +36,164 @@ export default function McpDetail({ id }: { id: string }) {
 
   if (!server) {
     return (
-      <div className="fp-agents-empty" style={{ padding: '64px 0' }}>
+      <div className="fp-empty" style={{ marginBlockStart: 24 }}>
         <Icons.mcpServer size={28} />
-        <p>No MCP server with id &ldquo;{id}&rdquo;.</p>
-        <Button variant="ghost" asChild>
-          <Link href="/portal/mcp-servers">
-            <Icons.chevronLeft size={13} /> Back to MCP servers
-          </Link>
-        </Button>
+        <span>
+          No MCP server <span className="mono">{id}</span>.{' '}
+          <a href="/portal/mcp-servers" className="u-link">Back to MCP servers</a>
+        </span>
       </div>
     );
   }
 
   const st = STATUS_META[server.status];
   const tools = toolsFor(id);
-  const connectedAgents = connectedAgentsFor(id);
+  const agents = connectedAgentsFor(id);
   const versions = versionsFor(id);
   const snippet = snippetFor(id);
-
+  const conn = connectionFor(id);
+  const activity = activityFor(id);
   const ServerIcon = (Icons as Record<string, React.FC<{ size?: number }>>)[server.icon] ?? Icons.server;
 
-  // Build a plausible overview paragraph and connection description.
-  const overviewText = `${server.name} is an Equifax-internal MCP adapter that exposes ${server.team} systems as a stable tool surface for Forge AI agents. It centralises authentication (${server.auth}), audit-logs every tool call, and enforces per-agent rate limits so consuming agents can operate without carrying credentials. The server runs ${tools.length} tools across the ${server.team} domain and is currently used by ${server.agents} agent connections.`;
-
   return (
-    <div className="fp-agentd">
-      {/* ── Left: header + content ── */}
-      <div className="fp-agentd-main">
-        <div className="fp-agentd-main-in">
-          <div className="fp-agentd-head">
-            <div className="fp-agentd-topbar">
-              <Button variant="ghost" asChild>
-                <Link href="/portal/mcp-servers">
-                  <Icons.chevronLeft size={14} /> Back to MCP servers
-                </Link>
-              </Button>
-              <div className="fp-agentd-topbar-actions">
-                <Button variant="ghost" asChild>
-                  <Link href={`https://docs.forge.equifax.com/mcp/${id}`} target="_blank" rel="noopener">
-                    <Icons.book size={14} /> Docs
-                  </Link>
-                </Button>
-                <Button variant="ember">
-                  <Icons.plus size={14} /> Connect to agent
-                </Button>
-              </div>
-            </div>
+    <>
+      <FPageHeader
+        eyebrow="MCP server"
+        title={server.name}
+        status={<HealthBadge state={HEALTH[server.status]} />}
+        subtitle={`${server.desc} Exposes ${server.team} systems as a stable tool surface for Forge AI agents.`}
+        meta={
+          <div className="fp-meta">
+            <span className="fp-meta-chip mono">{server.version}</span>
+            <span className="fp-meta-chip">{server.team}</span>
+            <span className="fp-meta-chip"><Pill tone={TRANSPORT_TONE[server.transport]}>{server.transport}</Pill></span>
+            <span className="fp-meta-chip"><Icons.key size={11} /> {server.auth}</span>
+            <span className="fp-meta-chip"><Pill tone={st.tone} dot={server.status === 'live'}>{st.label}</Pill></span>
+          </div>
+        }
+        actions={
+          <>
+            <Button variant="ghost"><Icons.refresh size={13} /> Refresh tools</Button>
+            <Button variant="ghost"><Icons.book size={13} /> Docs</Button>
+            <Button variant="ember"><Icons.plus size={13} /> Connect to agent</Button>
+          </>
+        }
+      />
 
-            <div className="fp-agentd-title">
-              <span
-                className="fp-agentd-server-ic"
-                aria-hidden="true"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 44,
-                  height: 44,
-                  borderRadius: 10,
-                  background: 'var(--surface-raised)',
-                  border: '1px solid var(--border)',
-                  color: 'var(--fg-muted)',
-                  flexShrink: 0,
-                }}
-              >
-                <ServerIcon size={22} />
-              </span>
-              <h1>{server.name}</h1>
-            </div>
+      {/* Overview */}
+      <p className="fp-mcp-overview">
+        <span className="fp-mcp-overview-ic" aria-hidden="true"><ServerIcon size={16} /></span>
+        {server.name} centralises authentication ({server.auth}), audit-logs every tool call, and
+        rate-limits per agent, so {agents.slice(0, 3).join(', ') || 'consuming agents'} can use {server.team} systems
+        without each carrying credentials. It runs {tools.length} tools over {server.transport} and serves {server.agents} agent connections.
+      </p>
 
-            <p className="fp-agentd-summary">{server.desc}</p>
+      <div className="fp-grid fp-grid-2x1" style={{ alignItems: 'start', marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
+        {/* Main — Tools */}
+        <div className="fp-card" style={{ padding: 0 }}>
+          <div className="fp-card-head" style={{ paddingBlock: 12, paddingInline: 16, borderBlockEnd: '1px solid var(--border)' }}>
+            <div className="fp-card-title">Tools <span className="fp-agentd-sec-count">{tools.length}</span></div>
+            <span className="fp-card-meta">callable by agents</span>
+          </div>
+          <div className="tbl-wrap">
+            <table className="tbl" style={{ margin: 0 }}>
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>Input</th>
+                  <th>Output</th>
+                  <th style={{ textAlign: 'end' }}>Calls · 24h</th>
+                  <th style={{ textAlign: 'end' }}>Avg latency</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tools.map((t) => {
+                  const stat = toolStat(t.name);
+                  return (
+                    <tr key={t.name}>
+                      <td style={{ verticalAlign: 'top', paddingBlockStart: 11 }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 3, maxWidth: 300 }}>
+                          <span className="mono" style={{ color: 'var(--ember)', fontWeight: 600, fontSize: 'var(--text-sm)' }}>{t.name}</span>
+                          <span style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', lineHeight: 1.45 }}>{t.desc}</span>
+                        </div>
+                      </td>
+                      <td className="mono" style={{ verticalAlign: 'top', paddingBlockStart: 11, fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>
+                        {t.input || <span style={{ color: 'var(--fg-faint)' }}>none</span>}
+                      </td>
+                      <td className="mono" style={{ verticalAlign: 'top', paddingBlockStart: 11, color: 'var(--accent-2)', fontSize: 'var(--text-sm)' }}>{t.output}</td>
+                      <td style={{ verticalAlign: 'top', paddingBlockStart: 8 }}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, justifyContent: 'flex-end', inlineSize: '100%' }}>
+                          <span className="fp-mcp-spark"><Sparkline data={stat.spark} w={80} h={22} /></span>
+                          <span className="mono" style={{ fontSize: 'var(--text-sm)', color: 'var(--fg-muted)' }}>{stat.calls.toLocaleString('en-US')}</span>
+                        </span>
+                      </td>
+                      <td className="mono" style={{ verticalAlign: 'top', paddingBlockStart: 11, textAlign: 'end', fontSize: 'var(--text-sm)' }}>{stat.latency}ms</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Aside — Connection / Activity / Consumers / Versions */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div className="fp-card">
+            <div className="fp-card-head">
+              <div className="fp-card-title">Connection</div>
+              <HealthBadge state={HEALTH[server.status]} />
+            </div>
+            <dl className="fp-kv">
+              <div className="fp-kv-row"><dt>Endpoint</dt><dd><CopyChip value={conn.endpoint} label={conn.endpoint} /></dd></div>
+              <div className="fp-kv-row"><dt>Auth</dt><dd><Pill tone="ice"><Icons.key size={10} /> {server.auth}</Pill></dd></div>
+              <div className="fp-kv-row"><dt>Rate limit</dt><dd className="mono">{conn.rateLimit}</dd></div>
+              <div className="fp-kv-row"><dt>Last heartbeat</dt><dd className="mono">{conn.heartbeat}</dd></div>
+              <div className="fp-kv-row"><dt>Uptime · 30d</dt><dd className="mono" style={{ color: server.status === 'deprecated' ? 'var(--warning)' : 'var(--success)' }}>{conn.uptime}</dd></div>
+            </dl>
           </div>
 
-          {/* Overview prose */}
-          <Prose className="fp-agentd-instructions">
-            <h2>Overview</h2>
-            <p>{overviewText}</p>
-
-            <h2>Connect</h2>
-            <p>
-              Add the server to your agent&apos;s MCP client config. The server uses{' '}
-              <code>{server.transport}</code> transport and <code>{server.auth}</code>{' '}
-              authentication. Copy the snippet below and replace the placeholder values
-              with your credentials.
-            </p>
-            <ProseCode lang={snippet.lang}>{snippet.code}</ProseCode>
-
-            <p>
-              After adding the config, restart your agent runtime. The server will
-              appear in the <em>Apps</em> section of the agent detail page once the
-              connection is confirmed.
-            </p>
-          </Prose>
-
-          {/* Tools table */}
-          <section style={{ marginBlockStart: 24 }}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                marginBlockEnd: 10,
-              }}
-            >
-              <span
-                style={{
-                  fontSize: 'var(--text-sm)',
-                  fontWeight: 600,
-                  color: 'var(--fg)',
-                  letterSpacing: '-0.01em',
-                }}
-              >
-                Tools
-              </span>
-              <span className="fp-agentd-sec-count">{tools.length}</span>
-            </div>
-
-            {tools.length === 0 ? (
-              <EmptyState icon="toolCall" label="No tools defined for this server." />
-            ) : (
-              <div className="tbl-wrap">
-                <table className="tbl" style={{ margin: 0 }}>
-                  <thead>
-                    <tr>
-                      <th>Tool</th>
-                      <th>Input params</th>
-                      <th>Output type</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {tools.map((t) => (
-                      <tr key={t.name}>
-                        <td style={{ verticalAlign: 'top', paddingBlockStart: 10 }}>
-                          <div
-                            style={{
-                              display: 'flex',
-                              flexDirection: 'column',
-                              gap: 3,
-                              maxWidth: 280,
-                            }}
-                          >
-                            <span
-                              className="mono"
-                              style={{
-                                color: 'var(--ember)',
-                                fontWeight: 600,
-                                fontSize: 'var(--text-sm)',
-                              }}
-                            >
-                              {t.name}
-                            </span>
-                            <span
-                              style={{
-                                fontSize: 'var(--text-sm)',
-                                color: 'var(--fg-muted)',
-                                lineHeight: 1.45,
-                              }}
-                            >
-                              {t.desc}
-                            </span>
-                          </div>
-                        </td>
-                        <td style={{ verticalAlign: 'top', paddingBlockStart: 10 }}>
-                          {t.input ? (
-                            <span
-                              className="mono"
-                              style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}
-                            >
-                              {t.input}
-                            </span>
-                          ) : (
-                            <span style={{ color: 'var(--fg-faint)', fontSize: 'var(--text-xs)' }}>
-                              none
-                            </span>
-                          )}
-                        </td>
-                        <td style={{ verticalAlign: 'top', paddingBlockStart: 10 }}>
-                          <span
-                            className="mono"
-                            style={{ color: 'var(--accent-2)', fontSize: 'var(--text-sm)' }}
-                          >
-                            {t.output}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+          {activity.length > 0 && (
+            <div className="fp-card">
+              <div className="fp-card-head">
+                <div className="fp-card-title">Recent activity</div>
+                <Pill tone="neutral" dot live>Live</Pill>
               </div>
-            )}
-          </section>
-        </div>
-      </div>
-
-      <div className="fp-agentd-rule" aria-hidden="true" />
-
-      {/* ── Right: metadata sidebar ── */}
-      <aside className="fp-agentd-aside">
-        {/* Properties */}
-        <AsideSection title="Properties">
-          <dl className="fp-agentd-props">
-            <dt>Team</dt>
-            <dd>{server.team}</dd>
-            <dt>Transport</dt>
-            <dd>
-              <Pill tone={TRANSPORT_TONE[server.transport]}>{server.transport}</Pill>
-            </dd>
-            <dt>Auth</dt>
-            <dd>{server.auth}</dd>
-            <dt>Version</dt>
-            <dd className="mono">{server.version}</dd>
-            <dt>Status</dt>
-            <dd>
-              <Pill tone={st.tone} dot={server.status === 'live'}>
-                {st.label}
-              </Pill>
-            </dd>
-            <dt>Tools</dt>
-            <dd className="mono">{server.tools}</dd>
-            <dt>Agent connections</dt>
-            <dd className="mono">{server.agents}</dd>
-          </dl>
-        </AsideSection>
-
-        {/* Connected agents */}
-        <AsideSection title="Connected agents" count={connectedAgents.length}>
-          {connectedAgents.length === 0 ? (
-            <EmptyState icon="sparkle" label="No agent connections yet." />
-          ) : (
-            <div className="fp-agentd-list">
-              {connectedAgents.map((name) => (
-                <div key={name} className="item">
-                  <span className="ic">{ICON('sparkle', 14)}</span>
-                  <span className="tx">
-                    <span className="nm">{name}</span>
-                  </span>
-                </div>
-              ))}
+              <div className="fp-rb">
+                {activity.map((ev) => (
+                  <div key={ev.id} className="fp-rb-row">
+                    <span className="fp-rb-ic" style={{ color: ev.tone === 'done' ? 'var(--success)' : 'var(--fg-muted)' }}>{ICON(ev.icon, 14)}</span>
+                    <span className="fp-rb-id">
+                      <span className="fp-rb-name">{ev.title}</span>
+                      <span className="fp-rb-meta">{ev.meta}</span>
+                    </span>
+                    <span className="mono" style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-faint)', whiteSpace: 'nowrap' }}>{ev.at}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
-        </AsideSection>
 
-        {/* Versions */}
-        <AsideSection title="Versions" count={versions.length}>
-          {versions.length === 0 ? (
-            <EmptyState icon="clock" label="No version history." />
-          ) : (
+          <div className="fp-card">
+            <div className="fp-card-head">
+              <div className="fp-card-title">Consumers</div>
+              <span className="fp-card-meta">{agents.length} agents</span>
+            </div>
+            <div className="fp-mcp-consumers">
+              {agents.map((name) => (
+                <span key={name} className="fp-mcp-consumer">
+                  <Avatar name={name} size={24} />
+                  <span className="nm">{name}</span>
+                  <Pill tone="neutral">agent</Pill>
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="fp-card">
+            <div className="fp-card-head">
+              <div className="fp-card-title">Versions</div>
+              <span className="fp-card-meta">{versions.length}</span>
+            </div>
             <div className="fp-agentd-versions">
               {versions.map((v) => (
                 <div key={v.version + v.date} className="ver">
@@ -337,9 +209,20 @@ export default function McpDetail({ id }: { id: string }) {
                 </div>
               ))}
             </div>
-          )}
-        </AsideSection>
-      </aside>
-    </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Connect */}
+      <FSection title="Connect" style={{ marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
+        <div className="fp-card">
+          <p className="fp-kpi-note" style={{ marginBlockEnd: 12 }}>
+            Add the server to your agent&apos;s MCP client config over <code>{server.transport}</code> with{' '}
+            <code>{server.auth}</code> auth, then restart the agent runtime. It appears in the agent&apos;s Apps once the connection is confirmed.
+          </p>
+          <ProseCode lang={snippet.lang}>{snippet.code}</ProseCode>
+        </div>
+      </FSection>
+    </>
   );
 }

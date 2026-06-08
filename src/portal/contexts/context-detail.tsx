@@ -6,6 +6,9 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeSanitize from 'rehype-sanitize';
 import {
   Icons, Pill, Prose, BrandIcon, Button,
 } from '@/ds/core';
@@ -66,11 +69,11 @@ function sampleContent(ctx: Context): { heading: string; items: string[] } {
           return {
             heading: 'Sample records',
             items: [
-              'service:payment-gateway · owner:payments · tier:1',
-              'service:consent-api · owner:compliance · tier:1',
-              'service:ignite-feature-server · owner:data-bureau · tier:2',
-              'service:konduto-proxy · owner:anti-fraud · tier:2',
-              'service:scr-reconciler · owner:bureau · tier:1',
+              'service:payment-gateway · owner:payments · crit:high',
+              'service:consent-api · owner:compliance · crit:high',
+              'service:ignite-feature-server · owner:data-bureau · crit:med',
+              'service:konduto-proxy · owner:anti-fraud · crit:med',
+              'service:scr-reconciler · owner:bureau · crit:high',
             ],
           };
         case 'slo':
@@ -178,19 +181,17 @@ function sampleContent(ctx: Context): { heading: string; items: string[] } {
 
 // ── Overview prose per context ────────────────────────────────────────────────
 
-function overviewFor(ctx: Context): React.ReactNode {
+function overviewMarkdown(ctx: Context): string {
   const sample = sampleContent(ctx);
   const itemCount = fmtItems(ctx.items);
 
   const leadBySource: Record<string, string> = {
-    Registry: `The **${ctx.name}** is a live registry context maintained by the ${ctx.owner} team. It exposes ${itemCount} indexed records that agents query to ground their answers with current, authoritative data from the platform.`,
-    'Google Drive': `The **${ctx.name}** is synced from Google Drive and maintained by ${ctx.owner}. It provides ${itemCount} indexed documents that agents reference when answering questions about processes, architecture decisions, and ways of working.`,
-    Confluence: `The **${ctx.name}** is indexed from a Confluence space owned by ${ctx.owner}. It contains ${itemCount} pages covering policies, procedures, and reference material that agents cite when answering compliance and operational questions.`,
-    Upload: `The **${ctx.name}** is a manually uploaded document provided by ${ctx.owner}. Its ${itemCount} document is parsed and chunked so agents can cite exact sections when answering field-level questions.`,
+    Registry: `The **${ctx.name}** is a live registry context maintained by the ${ctx.owner} team. It exposes \`${itemCount}\` indexed records that agents query to ground their answers with current, authoritative data from the platform.`,
+    'Google Drive': `The **${ctx.name}** is synced from Google Drive and maintained by ${ctx.owner}. It provides \`${itemCount}\` indexed documents that agents reference when answering questions about processes, architecture decisions, and ways of working.`,
+    Confluence: `The **${ctx.name}** is indexed from a Confluence space owned by ${ctx.owner}. It contains \`${itemCount}\` pages covering policies, procedures, and reference material that agents cite when answering compliance and operational questions.`,
+    Upload: `The **${ctx.name}** is a manually uploaded document provided by ${ctx.owner}. Its \`${itemCount}\` document is parsed and chunked so agents can cite exact sections when answering field-level questions.`,
     Markdown: `The **${ctx.name}** is an authored Markdown document owned by ${ctx.owner}. It contains editorial guidance that shapes how agents phrase and format their responses.`,
   };
-
-  const lead = leadBySource[ctx.source];
 
   const usageNote: Record<string, string> = {
     Registry: 'Agents retrieve records from this context to answer factual questions without hallucinating current state. The registry is the authoritative source, so grounded answers cite it directly.',
@@ -200,29 +201,30 @@ function overviewFor(ctx: Context): React.ReactNode {
     Markdown: 'This context is injected into the agent system prompt to influence tone and format globally, not just in individual answers.',
   };
 
-  return (
-    <>
-      <p>{lead}</p>
-      <h3>How agents use this context</h3>
-      <p>{usageNote[ctx.source]}</p>
-      <h3>What is indexed</h3>
-      <p>
-        {ctx.source === 'Registry'
-          ? `The indexer reads each record from the ${ctx.name.toLowerCase()} and generates embeddings over the key fields. Records are chunked by entity, so agents retrieve complete, consistent objects rather than fragmented text.`
-          : ctx.source === 'Upload'
-          ? 'The PDF is parsed page by page. Tables are converted to structured text and headings are preserved as chunk boundaries so agents can locate specific sections quickly.'
-          : ctx.source === 'Markdown'
-          ? 'The document is indexed as a single chunk. It is short enough that the full content fits in the context window without retrieval.'
-          : `Documents are chunked by heading hierarchy. ${ctx.source === 'Google Drive' ? 'Slide decks are converted to text per slide.' : 'Confluence pages are indexed per heading section.'} Agents retrieve the most relevant chunks by cosine similarity.`}
-      </p>
-      <h3>{sample.heading}</h3>
-      <ul>
-        {sample.items.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-    </>
-  );
+  const indexed =
+    ctx.source === 'Registry'
+      ? `The indexer reads each record from the ${ctx.name.toLowerCase()} and generates embeddings over the key fields. Records are chunked by entity, so agents retrieve complete, consistent objects rather than fragmented text.`
+      : ctx.source === 'Upload'
+      ? 'The PDF is parsed page by page. Tables are converted to structured text and headings are preserved as chunk boundaries so agents can locate specific sections quickly.'
+      : ctx.source === 'Markdown'
+      ? 'The document is indexed as a single chunk. It is short enough that the full content fits in the context window without retrieval.'
+      : `Documents are chunked by heading hierarchy. ${ctx.source === 'Google Drive' ? 'Slide decks are converted to text per slide.' : 'Confluence pages are indexed per heading section.'} Agents retrieve the most relevant chunks by cosine similarity.`;
+
+  // Sample lines render as inline-code list items so field markup reads cleanly.
+  const sampleList = sample.items.map((item) => `- \`${item.replace(/`/g, '')}\``).join('\n');
+
+  return [
+    leadBySource[ctx.source],
+    '',
+    '### How agents use this context',
+    usageNote[ctx.source],
+    '',
+    '### What is indexed',
+    indexed,
+    '',
+    `### ${sample.heading}`,
+    sampleList,
+  ].join('\n');
 }
 
 // ── Source cell (icon or BrandIcon + label) ────────────────────────────────────
@@ -343,7 +345,9 @@ export default function ContextDetail({ id }: { id: string }) {
           </div>
 
           <Prose className="fp-agentd-instructions">
-            {overviewFor(ctx)}
+            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
+              {overviewMarkdown(ctx)}
+            </ReactMarkdown>
           </Prose>
         </div>
       </div>

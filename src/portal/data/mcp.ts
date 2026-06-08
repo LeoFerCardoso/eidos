@@ -377,3 +377,49 @@ export const snippetFor = (id: string): { lang: string; code: string } => {
   const s = getServer(id);
   return SNIPPETS_BY_SERVER[id] ?? (s ? DEFAULT_SNIPPET(id, s) : { lang: 'json', code: '{}' });
 };
+
+// ── Per-tool telemetry (deterministic, SSR-stable: integer hash only) ────────
+const hashOf = (s: string): number => {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+};
+
+export interface ToolStat { calls: number; latency: number; spark: number[] }
+export const toolStat = (name: string): ToolStat => {
+  const h = hashOf(name);
+  const base = 8 + (h % 92);
+  const calls = base * 19 + (h % 240);
+  const latency = 80 + (h % 540);
+  const amp = Math.max(2, Math.round(base * 0.5));
+  const spark = Array.from({ length: 12 }, (_, i) => Math.max(2, base - Math.round(amp / 2) + (hashOf(`${name}#${i}`) % amp)));
+  return { calls, latency, spark };
+};
+
+// ── Connection + recent activity (static per server) ─────────────────────────
+export interface Connection { endpoint: string; rateLimit: string; heartbeat: string; uptime: string }
+export const connectionFor = (id: string): Connection => {
+  const s = getServer(id);
+  return {
+    endpoint: `mcp://forge.equifax/${id}`,
+    rateLimit: '5,000 / hour',
+    heartbeat: s?.status === 'deprecated' ? 'paused' : '16m ago',
+    uptime: s?.status === 'live' ? '99.97%' : s?.status === 'beta' ? '99.2%' : '97.4%',
+  };
+};
+
+export interface ActivityItem { id: string; title: string; meta: string; icon: string; at: string; tone: 'done' | 'default' }
+export const activityFor = (id: string): ActivityItem[] => {
+  const s = getServer(id);
+  const tools = toolsFor(id);
+  const agents = connectedAgentsFor(id);
+  if (!s || tools.length === 0) return [];
+  const a = (i: number) => agents[i % Math.max(1, agents.length)] ?? 'an agent';
+  return [
+    { id: 'a1', title: `Tool call · ${tools[0].name}`,                meta: `${a(0)} · ok`,   icon: 'toolCall', at: '3m ago',  tone: 'done' },
+    { id: 'a2', title: `Tool call · ${tools[1 % tools.length].name}`, meta: `${a(1)} · ok`,   icon: 'toolCall', at: '11m ago', tone: 'done' },
+    { id: 'a3', title: 'Heartbeat · ok',                              meta: 'latency 38ms',   icon: 'pulse',    at: '16m ago', tone: 'done' },
+    { id: 'a4', title: `${s.auth} token refreshed`,                   meta: 'valid 30d',      icon: 'key',      at: '28m ago', tone: 'default' },
+    { id: 'a5', title: `Tool call · ${tools[2 % tools.length].name}`, meta: `${a(2)} · ok`,   icon: 'toolCall', at: '42m ago', tone: 'done' },
+  ];
+};
