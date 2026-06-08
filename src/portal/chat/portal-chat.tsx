@@ -15,6 +15,7 @@ import {
   PromptInput, PromptBanner, SuggestionCard,
   Message, Response, MessageActions, ProseCode, Prose,
   ChainOfThought, Citation, Sources,
+  ArtifactWidget, ArtifactPanel,
   Diagram, MathView,
   Modal, Card, CardMedia, CardHeader, CardTitle, CardContent,
   ToggleGroup, ToggleGroupItem,
@@ -31,10 +32,15 @@ const PINNED = [
   { id: 'space-bureau', label: 'Bureau & SCR',        icon: 'book' },
 ];
 
+// The runbook-draft chat opens the docked-artifact view (not a plain thread),
+// so it's reachable from the history list as well as from the Artifacts gallery.
+const ARTIFACT_CHAT_ID = 'rb-aurora';
+
 const RECENTS = [
-  { id: 'acerta-p99', title: 'acerta-api p99 spike after v4.12',        preview: 'Correlated it with the konduto-antifraud deploy…' },
-  { id: 'breaker',    title: 'Circuit breaker for onescore-gateway',    preview: 'A Resilience4j config for the SCPC timeout…' },
-  { id: 'fraud-fp',   title: 'konduto-antifraud false-positive spike',  preview: 'The new fraud-score rule is over-rejecting…' },
+  { id: 'acerta-p99',        title: 'acerta-api p99 spike after v4.12',        preview: 'Correlated it with the konduto-antifraud deploy…' },
+  { id: ARTIFACT_CHAT_ID,    title: 'Runbook draft · score-engine → Aurora',   preview: 'Drafted the cutover, rollback and post-deploy checklist…' },
+  { id: 'breaker',           title: 'Circuit breaker for onescore-gateway',    preview: 'A Resilience4j config for the SCPC timeout…' },
+  { id: 'fraud-fp',          title: 'konduto-antifraud false-positive spike',  preview: 'The new fraud-score rule is over-rejecting…' },
 ];
 
 const YESTERDAY = [
@@ -45,8 +51,8 @@ const YESTERDAY = [
   { id: 'offer-flag',  title: 'offer-orchestrator cohort rollout',       preview: 'Suggest cohort 2 (10%) for tomorrow…' },
 ];
 
-type View = 'new' | 'thread' | 'search' | 'projects' | 'project' | 'archive' | 'artifacts';
-type Nav = { view: View; chatId?: string; projectId?: string; agentId?: string };
+type View = 'new' | 'thread' | 'search' | 'projects' | 'project' | 'archive' | 'artifacts' | 'artifact';
+type Nav = { view: View; chatId?: string; projectId?: string; agentId?: string; artifactOpen?: boolean };
 
 // Archived chats · restorable (rollback un-archives them).
 const ARCHIVED = [
@@ -149,8 +155,11 @@ const HistoryBucket = ({
   </div>
 );
 
-const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => {
+const ChatSidebar = ({ nav, go, openChat }: { nav: Nav; go: (n: Nav) => void; openChat: (id: string) => void }) => {
   const router = useRouter();
+  // The runbook-draft chat lives in the 'artifact' view; every other history row
+  // is a plain thread. Highlight whichever one the current view represents.
+  const activeChat = nav.view === 'artifact' ? ARTIFACT_CHAT_ID : nav.view === 'thread' ? nav.chatId : undefined;
   return (
   <aside className="fp-chat-side" aria-label="Chat navigation">
     <button
@@ -215,8 +224,8 @@ const ChatSidebar = ({ nav, go }: { nav: Nav; go: (n: Nav) => void }) => {
 
     <div className="fp-chat-sep" role="separator" />
 
-    <HistoryBucket label="Chats"     items={RECENTS}   activeChat={nav.view === 'thread' ? nav.chatId : undefined} onOpen={(id) => go({ view: 'thread', chatId: id })} />
-    <HistoryBucket label="Yesterday" items={YESTERDAY} activeChat={nav.view === 'thread' ? nav.chatId : undefined} onOpen={(id) => go({ view: 'thread', chatId: id })} />
+    <HistoryBucket label="Chats"     items={RECENTS}   activeChat={activeChat} onOpen={openChat} />
+    <HistoryBucket label="Yesterday" items={YESTERDAY} activeChat={activeChat} onOpen={openChat} />
   </aside>
   );
 };
@@ -988,11 +997,15 @@ const ArtifactPreview = ({ a }: { a: ArtifactItem }) => {
   );
 };
 
-const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => {
+const ArtifactsView = ({ onOpenChat, onOpenDoc }: { onOpenChat: (id: string) => void; onOpenDoc: () => void }) => {
   const [sel, setSel] = React.useState<ArtifactItem | null>(null);
   const [mode, setMode] = React.useState<'grid' | 'list'>('grid');
   const [q, setQ] = React.useState('');
   const kind = sel ? ART_KIND[sel.kind] : null;
+
+  // Documents open in the chat workspace (the docked-panel experience); every
+  // other kind previews in a modal.
+  const openItem = (a: ArtifactItem) => (a.kind === 'document' ? onOpenDoc() : setSel(a));
 
   const items = ARTIFACTS.filter((a) => {
     const s = q.trim().toLowerCase();
@@ -1044,8 +1057,8 @@ const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => 
                 tabIndex={0}
                 className="fp-chat-art-card"
                 aria-label={`${a.title} · ${k.label}`}
-                onClick={() => setSel(a)}
-                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSel(a); } }}
+                onClick={() => openItem(a)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openItem(a); } }}
               >
                 <CardMedia alt={`${k.label} artifact`} className="fp-chat-art-media" style={{ ['--art-accent']: k.fg } as React.CSSProperties}>
                   <span className="fp-chat-art-tag">{k.label}</span>
@@ -1066,7 +1079,7 @@ const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => 
             const I = ICON(k.icon);
             return (
               <li key={a.id} className="fp-chat-art-row">
-                <button type="button" className="fp-chat-art-row-btn" onClick={() => setSel(a)} aria-label={`${a.title} · ${k.label}`}>
+                <button type="button" className="fp-chat-art-row-btn" onClick={() => openItem(a)} aria-label={`${a.title} · ${k.label}`}>
                   <span className="fp-chat-art-row-ico" style={{ background: k.bg, color: k.fg }} aria-hidden="true"><I size={15} /></span>
                   <span className="fp-chat-art-row-body">
                     <span className="title">{a.title}</span>
@@ -1112,10 +1125,201 @@ const ArtifactsView = ({ onOpenChat }: { onOpenChat: (id: string) => void }) => 
   );
 };
 
+// ── View: Artifact thread (docked panel) ────────────────────────────────────
+// The conversation that produced a runbook, with the artifact docked open on
+// the right. Opening the artifact collapses the chat sub-sidebar so the panel +
+// conversation get the full width; closing it brings the sidebar back. Ported
+// from /example/ai-chat-artifacts into the portal's .fp-chat-* namespace.
+const RUNBOOK_DOC = {
+  id: 'rb-score-aurora',
+  kind: 'document' as const,
+  title: 'Runbook: score-engine → Aurora migration',
+  meta: '5.4 KB · markdown',
+  content: '',
+};
+
+// Rendered runbook body — a richer document than the plain-text fallback. Lives
+// inline as Prose so the panel doesn't have to import react-markdown.
+const RunbookBody = () => (
+  <Prose>
+    <h2>Runbook: score-engine → Aurora migration</h2>
+    <p>
+      <strong>Owners:</strong> score-platform · <strong>On-call:</strong>{' '}
+      <code>score-oncall</code> · <strong>Window:</strong> Sun 02:00-03:00 UTC
+    </p>
+
+    <h3>1 · Pre-flight</h3>
+    <ul>
+      <li>Confirm RPO ≤ 5 min in the catalog SLO panel</li>
+      <li>Take a logical backup (<code>pg_dump --format=custom</code>) → S3</li>
+      <li>Drain async queues, pause the <code>score-events</code> consumer</li>
+      <li>Notify <code>#release</code> 30 min before the window</li>
+    </ul>
+
+    <h3>2 · Cutover</h3>
+    <ol>
+      <li>Snapshot the source RDS instance</li>
+      <li>Restore as an Aurora cluster from the snapshot</li>
+      <li>Bring up writers in sa-east-1a and sa-east-1b</li>
+      <li>Update the <code>score-engine</code> secret to point at the Aurora endpoint</li>
+      <li>Trigger a rolling restart (max-surge 25%, ramp 60s per shard)</li>
+    </ol>
+
+    <h3>3 · Validation</h3>
+    <ul>
+      <li>Replica lag &lt; 200 ms across both AZs</li>
+      <li>Pool saturation under 60% at p95</li>
+      <li>Synthetic score request + verify on the canary cluster</li>
+      <li>Compare the <code>score-events</code> consumer offset before / after</li>
+    </ul>
+
+    <blockquote>
+      <strong>If any check fails, roll back.</strong> The rollback path is faster
+      than the forward path during the maintenance window.
+    </blockquote>
+
+    <h3>4 · Rollback</h3>
+    <ol>
+      <li>Restore the original RDS endpoint in the secret</li>
+      <li>Rolling restart (same surge / ramp as cutover)</li>
+      <li>Resume the <code>score-events</code> consumer</li>
+      <li>File a post-mortem within 24 h</li>
+    </ol>
+
+    <h3>5 · Post-deploy checklist</h3>
+    <ul>
+      <li>Update the catalog database card with the new Aurora identifier</li>
+      <li>Bump the cost dashboard tag from <code>rds-prod</code> to <code>aurora-prod</code></li>
+      <li>Archive the snapshot after 30 days</li>
+    </ul>
+  </Prose>
+);
+
+const ArtifactThreadView = ({ initialOpen = false }: { initialOpen?: boolean }) => {
+  // Entry point decides the starting state: from the Artifacts gallery the panel
+  // is docked open; from the chat list it starts closed (the conversation with
+  // the artifact chip), and the user opens it by clicking the artifact.
+  const [panelOpen, setPanelOpen] = React.useState(initialOpen);
+  const [text, setText] = React.useState('');
+  const [model, setModel] = React.useState('eidos-opus-4-7');
+
+  return (
+    <div className="fp-chat-aica">
+      {/* Conversation column — shrinks when the panel opens */}
+      <div className="fp-chat-aica-chat">
+        <div className="fp-chat-thread">
+          <div className="msg-thread fluid fp-chat-msgs">
+            <Message from="user" meta={<><span className="t-mono-label">You</span> · 14:04</>}>
+              Yes, draft the runbook. Include the rollback path and a section for the post-deploy
+              validation checklist.
+            </Message>
+
+            <Message
+              from="assistant"
+              meta={<><span className="t-mono-label">Forge AI</span> <span style={{ color: 'var(--fg-faint)', marginInlineStart: 6 }}>Opus 4.7 · 14:05</span></>}
+              actions={<MessageActions surface="message" onCopy={() => {}} onRegen={() => {}} vote={null} onVote={() => {}} />}
+            >
+              <Response from="assistant">
+                <p>
+                  Drafted the runbook with a five-section structure (Pre-flight, Cutover, Validation,
+                  Rollback, Post-deploy checklist). The rollback path reuses the snapshot from step 1
+                  and a re-pointed connection secret, so the app rolls back without a code change.
+                </p>
+                <p>
+                  Validation covers replica lag, pool saturation, a synthetic score request, and the
+                  consumer offset for <code>score-events</code>.
+                </p>
+              </Response>
+
+              <div style={{ marginTop: 12 }}>
+                <ArtifactWidget artifact={RUNBOOK_DOC} onOpen={() => setPanelOpen(true)} />
+              </div>
+            </Message>
+
+            <Message from="user" meta={<><span className="t-mono-label">You</span> · 14:07</>}>
+              Looks good. Add a step for archiving the snapshot after 30 days, and let&apos;s move on to
+              the on-call comms template.
+            </Message>
+
+            <Message
+              from="assistant"
+              meta={<><span className="t-mono-label">Forge AI</span> <span style={{ color: 'var(--ember)', marginInlineStart: 6 }}>updating runbook…</span></>}
+            >
+              <Prose>
+                <p>
+                  Added the archival step to the Post-deploy checklist and bumped the version meta. The
+                  on-call comms template reuses the same Slack thread format as the Score &amp; decisioning
+                  space, so want it as a separate artifact?
+                </p>
+              </Prose>
+            </Message>
+          </div>
+
+          <div className="fp-chat-thread-foot">
+            <PromptInput
+              status="ready"
+              value={text}
+              onChange={setText}
+              onSubmit={() => setText('')}
+              modelValue={model}
+              onModelChange={setModel}
+              placeholder="Reply…"
+              actions={[
+                { id: 'upload', icon: 'upload',   label: 'Upload images or files' },
+                { id: 'search', icon: 'search',   label: 'Deep search' },
+                { id: 'tools',  icon: 'terminal', label: 'Run a tool' },
+              ]}
+              footerHint={<>Forge AI can make mistakes, so please double-check important answers.</>}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Artifact side panel — Drawer in inline mode, docked on the right */}
+      <ArtifactPanel
+        artifact={RUNBOOK_DOC}
+        open={panelOpen}
+        onClose={() => setPanelOpen(false)}
+        side="right"
+        width={460}
+        actions={
+          <>
+            <Button variant="outline" size="xs"><Icons.copy size={12} /> Copy</Button>
+            <Button variant="outline" size="xs" aria-label="Download"><Icons.download size={12} /></Button>
+            <Button variant="outline" size="xs" aria-label="Share"><Icons.share size={12} /></Button>
+          </>
+        }
+      >
+        <RunbookBody />
+      </ArtifactPanel>
+
+      {/* Reopen affordance when the panel is closed — pinned to the trailing edge. */}
+      {!panelOpen && (
+        <button
+          type="button"
+          className="fp-chat-aica-reopen"
+          onClick={() => setPanelOpen(true)}
+          title="Open runbook artifact"
+        >
+          <Icons.doc size={13} />
+          <span>Runbook</span>
+        </button>
+      )}
+    </div>
+  );
+};
+
 // ── Root ────────────────────────────────────────────────────────────────────
 export default function PortalChat() {
   const [nav, setNav] = React.useState<Nav>({ view: 'new' });
   const go = React.useCallback((n: Nav) => setNav(n), []);
+  // Opening a chat by id routes the runbook-draft to its docked-artifact view;
+  // every other id is a plain thread. One helper so history, search, archive,
+  // project detail and the artifact gallery all stay consistent.
+  const openChat = React.useCallback(
+    (id: string) => setNav(id === ARTIFACT_CHAT_ID ? { view: 'artifact', artifactOpen: false } : { view: 'thread', chatId: id }),
+    [],
+  );
 
   // Deep link from the Agents catalog: /portal/chat?agent=<id> opens a fresh
   // chat already scoped to that agent.
@@ -1128,21 +1332,24 @@ export default function PortalChat() {
   // Surface the open chat's title in the topbar breadcrumb (Forge / Chat / …).
   const { setCrumb } = usePageCrumb();
   React.useEffect(() => {
-    setCrumb(nav.view === 'thread' ? { label: findChatTitle(nav.chatId ?? 'acerta-p99') } : null);
+    if (nav.view === 'thread') setCrumb({ label: findChatTitle(nav.chatId ?? 'acerta-p99') });
+    else if (nav.view === 'artifact') setCrumb({ label: 'Runbook · score-engine → Aurora' });
+    else setCrumb(null);
     return () => setCrumb(null);
   }, [nav, setCrumb]);
 
   return (
     <div className="fp-chat">
-      <ChatSidebar nav={nav} go={go} />
+      <ChatSidebar nav={nav} go={go} openChat={openChat} />
       <section className="fp-chat-main">
         {nav.view === 'new' && <NewChatView agent={AGENTS.find((a) => a.id === nav.agentId)} onSend={() => go({ view: 'thread', chatId: 'acerta-p99' })} />}
         {nav.view === 'thread' && <ThreadView chatId={nav.chatId ?? 'acerta-p99'} />}
-        {nav.view === 'search' && <SearchView onOpen={(id) => go({ view: 'thread', chatId: id })} />}
+        {nav.view === 'search' && <SearchView onOpen={openChat} />}
         {nav.view === 'projects' && <ProjectsView onOpen={(id) => go({ view: 'project', projectId: id })} />}
-        {nav.view === 'project' && <ProjectDetailView projectId={nav.projectId ?? 'space-score'} onBack={() => go({ view: 'projects' })} onOpenChat={(id) => go({ view: 'thread', chatId: id })} />}
-        {nav.view === 'archive' && <ArchiveView onOpen={(id) => go({ view: 'thread', chatId: id })} />}
-        {nav.view === 'artifacts' && <ArtifactsView onOpenChat={(id) => go({ view: 'thread', chatId: id })} />}
+        {nav.view === 'project' && <ProjectDetailView projectId={nav.projectId ?? 'space-score'} onBack={() => go({ view: 'projects' })} onOpenChat={openChat} />}
+        {nav.view === 'archive' && <ArchiveView onOpen={openChat} />}
+        {nav.view === 'artifacts' && <ArtifactsView onOpenChat={openChat} onOpenDoc={() => go({ view: 'artifact', artifactOpen: true })} />}
+        {nav.view === 'artifact' && <ArtifactThreadView key={nav.artifactOpen ? 'open' : 'closed'} initialOpen={!!nav.artifactOpen} />}
       </section>
     </div>
   );
