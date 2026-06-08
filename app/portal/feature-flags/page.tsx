@@ -115,7 +115,7 @@ export default function FeatureFlagsPage() {
                         <span className="fp-flag-name">
                           <span className="mono" style={{ fontWeight: 600 }}>{f.key}</span>
                           {f.ring && (
-                            <Link href="/portal/pipelines" className="fp-ring-chip" aria-label="Open ring deployment">
+                            <Link href="/portal/pipelines/run_8h2k9p" className="fp-ring-chip" aria-label="Open ring deployment">
                               <Icons.ring size={10} /> ring-rollout
                             </Link>
                           )}

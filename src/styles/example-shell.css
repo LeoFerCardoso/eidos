@@ -3763,6 +3763,10 @@ body:active::-webkit-scrollbar-thumb,
 .fp-rb-id { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .fp-rb-name { font-weight: 600; font-size: var(--text-sm); }
 .fp-rb-meta { font-size: var(--text-xs); color: var(--fg-muted); }
+/* Ring deployment · live metrics column (sparklines). */
+.fp-rb-metrics { display: flex; flex-direction: column; gap: 14px; }
+.fp-rb-metric-head { display: flex; align-items: center; justify-content: space-between; font-size: var(--text-sm); color: var(--fg-muted); margin-block-end: 2px; }
+.fp-rb-metric .sparkline { inline-size: 100%; }
 
 /* ════════════════════════════════════════════════════════════════════════
    Fraud & Risk (/portal/fraud)

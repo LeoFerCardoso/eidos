@@ -15,20 +15,27 @@ import {
   Banner,
   Button,
   CopyChip,
+  HealthBadge,
   Icons,
   LogViewer,
   Pill,
   Pipeline,
+  RingBar,
+  Sparkline,
   StatusDot,
 } from '@/ds/core';
 import { FPageHeader, FSection, usePageCrumb } from '@/portal/shell/portal-shell';
 import { AiBanner } from '@/portal/shell/ai-pattern';
 import {
   ARTIFACTS,
+  RING_HEALTH,
+  RING_LIVE,
   STATUS_META,
   aiReadFor,
   getRun,
   logFor,
+  ringCursor,
+  ringsFor,
   stagesFor,
 } from '@/portal/data/pipelines';
 
@@ -58,6 +65,9 @@ export default function PipelineRunDetail({ runId }: { runId: string }) {
   const stages = stagesFor(run);
   const log = logFor(run);
   const ai = aiReadFor(run);
+  const rings = ringsFor(run);
+  const ringIdx = ringCursor(run);
+  const rolloutLive = run.status === 'running' && run.currentRing >= 1;
   const riskColor =
     run.risk.verdict === 'low' ? 'var(--success)' : run.risk.verdict === 'med' ? 'var(--warning)' : 'var(--danger)';
 
@@ -116,15 +126,121 @@ export default function PipelineRunDetail({ runId }: { runId: string }) {
         <Banner
           tone="info"
           icon="sparkle"
-          title="Auto-promote armed"
-          message="Change Risk Score is 38, under the 300 auto-merge threshold. If canary health holds through the observation window, Forge promotes this run to Ring 2 with no human gate."
+          title={run.currentRing >= 5 ? 'GA rollout in progress' : run.currentRing >= 1 ? 'Auto-promote armed' : 'Tests running'}
+          message={
+            run.currentRing >= 5
+              ? `Ring 5 GA is ramping at ${run.gaPercent}% traffic. If the error budget holds through the observation window, Forge promotes to 100% with no human gate.`
+              : run.currentRing >= 1
+                ? `Live through Ring ${run.currentRing} of 5. Auto-promote advances to the next ring once each ring's error budget holds.`
+                : 'Change Risk Score is under the 300 auto-merge line. Once the canary clears, Forge begins the ring rollout automatically.'
+          }
         />
       ) : null}
 
-      <FSection title="Stages" style={{ marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
+      <FSection title="Deployment stages" style={{ marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
         <div className="fp-card" style={{ paddingBlock: 18, paddingInline: 16 }}>
           <Pipeline variant="chevron" steps={stages} />
         </div>
+      </FSection>
+
+      {/* Ring deployment — feature activation through the five rings. */}
+      <FSection title="Ring deployment" style={{ marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
+        <div className="fp-card" style={{ padding: 18 }}>
+          <RingBar
+            rings={rings.map((r) => ({ label: r.label, audience: r.audience, percent: r.percent, status: r.status }))}
+            currentRing={ringIdx}
+          />
+          {run.currentRing === 0 && (
+            <p className="fp-kpi-note" style={{ marginBlockStart: 12 }}>
+              Rollout starts after the canary clears. The first two rings are internal (Team, Internal); the last three reach end users (Alpha, Beta, GA).
+            </p>
+          )}
+          <div style={{ marginBlockStart: 16, borderBlockStart: '1px solid var(--border)', paddingBlockStart: 14 }}>
+            <div className="tbl-wrap">
+              <table className="tbl" style={{ margin: 0 }}>
+                <thead>
+                  <tr>
+                    <th>Ring</th>
+                    <th>Audience</th>
+                    <th>Scope</th>
+                    <th style={{ textAlign: 'end' }}>Traffic</th>
+                    <th style={{ textAlign: 'end' }}>Error rate</th>
+                    <th style={{ textAlign: 'end' }}>p95</th>
+                    <th style={{ textAlign: 'end' }}>SLO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rings.map((r) => (
+                    <tr key={r.n}>
+                      <td>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontWeight: 600 }}>
+                          <StatusDot tone={r.status === 'done' ? 'done' : r.status === 'running' ? 'running' : 'pending'} size="sm" pulse={r.status === 'running'} />
+                          {r.label}
+                        </span>
+                      </td>
+                      <td style={{ color: 'var(--fg-muted)' }}>{r.audience}</td>
+                      <td><Pill tone={r.scope === 'internal' ? 'neutral' : 'ice'}>{r.scope === 'internal' ? 'Internal' : 'End users'}</Pill></td>
+                      <td className="mono" style={{ textAlign: 'end' }}>{r.traffic}</td>
+                      <td className="mono" style={{ textAlign: 'end', color: r.err === '-' ? 'var(--fg-faint)' : 'var(--fg)' }}>{r.err}</td>
+                      <td className="mono" style={{ textAlign: 'end', color: r.p95 === '-' ? 'var(--fg-faint)' : 'var(--fg)' }}>{r.p95}</td>
+                      <td style={{ textAlign: 'end' }}>
+                        {r.slo === 'pass' ? <HealthBadge state="up" label="Pass" /> : r.slo === 'warn' ? <Pill tone="warning" dot>Watch</Pill> : <span style={{ color: 'var(--fg-faint)' }}>-</span>}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {rolloutLive && (
+          <div className="fp-grid fp-grid-2" style={{ marginBlockStart: 14, alignItems: 'start' }}>
+            <div className="fp-card">
+              <div className="fp-card-head">
+                <div className="fp-card-title">Health gates</div>
+                <span className="fp-card-meta">{RING_HEALTH.filter((g) => g.status === 'pass').length} of {RING_HEALTH.length} green</span>
+              </div>
+              <div className="fp-rb">
+                {RING_HEALTH.map((g) => {
+                  const tone = g.status === 'pass' ? 'var(--success)' : g.status === 'warn' ? 'var(--warning)' : 'var(--danger)';
+                  const Icon = g.status === 'pass' ? Icons.check : g.status === 'warn' ? Icons.alert : Icons.x;
+                  return (
+                    <div key={g.name} className="fp-rb-row">
+                      <span style={{ color: tone, display: 'inline-flex' }}><Icon size={14} /></span>
+                      <span className="fp-rb-id">
+                        <span className="fp-rb-name">{g.name}</span>
+                        <span className="fp-rb-meta">target {g.target}</span>
+                      </span>
+                      <span className="mono" style={{ color: tone }}>{g.value}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="fp-card">
+              <div className="fp-card-head">
+                <div className="fp-card-title">Live metrics</div>
+                <span className="fp-card-meta">last 7 min</span>
+              </div>
+              <div className="fp-rb-metrics">
+                <div className="fp-rb-metric">
+                  <div className="fp-rb-metric-head"><span>Error rate</span><span className="mono" style={{ color: 'var(--success)' }}>0.21%</span></div>
+                  <Sparkline data={RING_LIVE.err} w={300} h={34} color="var(--success)" />
+                </div>
+                <div className="fp-rb-metric">
+                  <div className="fp-rb-metric-head"><span>p95 latency</span><span className="mono">145ms</span></div>
+                  <Sparkline data={RING_LIVE.p95} w={300} h={34} color="var(--ember)" />
+                </div>
+                <div className="fp-rb-metric">
+                  <div className="fp-rb-metric-head"><span>SLO compliance</span><span className="mono" style={{ color: 'var(--success)' }}>99.97%</span></div>
+                  <Sparkline data={RING_LIVE.slo} w={300} h={34} color="var(--accent-2)" />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </FSection>
 
       <div className="fp-grid fp-grid-2x1" style={{ alignItems: 'start', marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
