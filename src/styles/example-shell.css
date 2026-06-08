@@ -1777,6 +1777,11 @@ body:active::-webkit-scrollbar-thumb,
 .fp-chat-aica-reopen:hover { background: color-mix(in oklab, var(--ember) 25%, transparent); }
 .fp-chat-aica-reopen svg { color: var(--ember); }
 
+/* HTML-page artifact docked in the panel — fill the panel body height (scoped
+   to the iframe variant so the Prose/runbook body keeps its block flow). */
+.fp-chat-aica .dr-body:has(.fp-aica-frame) { display: flex; }
+.fp-aica-frame { flex: 1 1 auto; block-size: 100%; min-block-size: 60vh; }
+
 @media (max-width: 1080px) {
   .fp-chat-aica { flex-direction: column; }
   .fp-chat-aica-reopen { inset-block-start: auto; inset-block-end: 92px; }
