@@ -11,9 +11,9 @@
 // Composes only Eidos DS + .fp-* classes.
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Icons, Pill, Select, StatusDot } from '@/ds/core';
+import { Button, Icons, Pill, ScoreGauge, Select, Stat, StatusDot } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
-import { GATES, KPIS, PRS, PR_STATUS_META, crsTone, gateFor, type PrStatus } from '@/portal/data/quality-gates';
+import { FLEET, GATES, PRS, PR_STATUS_META, gateFor, type PrStatus } from '@/portal/data/quality-gates';
 
 const FILTERS = [
   { value: 'all', label: 'All PRs' },
@@ -27,6 +27,10 @@ export default function QualityGatesPage() {
   const router = useRouter();
   const [query, setQuery] = React.useState('');
   const [status, setStatus] = React.useState('all');
+  // The speedo gauge draws SVG arcs with Math.cos/sin (last-ULP differences
+  // between Node and the browser trip hydration), so render it post-mount only.
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => setMounted(true), []);
 
   const filtered = React.useMemo(() => {
     let list = PRS;
@@ -51,15 +55,31 @@ export default function QualityGatesPage() {
         }
       />
 
-      {/* KPIs */}
-      <div className="fp-grid fp-grid-4">
-        {KPIS.map((k) => (
-          <div key={k.id} className="fp-kpi">
-            <span className="label">{k.label}</span>
-            <div className="value">{k.value}</div>
-            <p className="fp-kpi-note">{k.note}</p>
+      {/* Fleet overview — the change-risk gauge + headline checks (chart cards). */}
+      <div className="fp-qg-overview">
+        <div className="fp-card fp-qg-gauge">
+          <div className="fp-card-head">
+            <div className="fp-card-title">Change Risk Score · fleet</div>
+            <Pill tone="neutral">last 24h</Pill>
           </div>
-        ))}
+          <div className="fp-qg-gauge-body">
+            {mounted ? (
+              <ScoreGauge variant="speedo" value={FLEET.crs} min={0} max={1000} ticks labels size={260} label="Aggregate risk · open PRs" />
+            ) : (
+              <div style={{ inlineSize: 260, blockSize: 184 }} aria-hidden="true" />
+            )}
+          </div>
+          <p className="fp-qg-gauge-note">
+            Under <strong style={{ color: 'var(--success)' }}>300</strong> is the healthy band. Forge auto-merges PRs under 300 once every P0 gate passes.
+          </p>
+        </div>
+        <div className="fp-grid fp-grid-3 fp-qg-stats">
+          {FLEET.stats.map((s) => (
+            <div key={s.id} className="fp-card">
+              <Stat label={s.label} value={s.value} suffix={s.suffix} hint={s.hint} delta={s.delta} inverted={s.inverted} variant="hero" />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Gate ladder — the CRS rule, made the spine of the page. */}

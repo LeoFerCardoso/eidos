@@ -3896,6 +3896,15 @@ body:active::-webkit-scrollbar-thumb,
 .tone-risk-high { background: var(--risk-high); }
 .tone-risk-crit { background: var(--risk-crit); }
 
+/* Fleet overview — the change-risk gauge card + the headline stat grid. */
+.fp-qg-overview { display: grid; grid-template-columns: minmax(300px, 0.85fr) 1.35fr; gap: 14px; align-items: stretch; }
+.fp-qg-gauge { display: flex; flex-direction: column; }
+.fp-qg-gauge-body { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; padding-block: 8px; }
+.fp-qg-gauge-note { margin: 0; font-size: var(--text-sm); line-height: 1.6; color: var(--fg-muted); text-align: center; }
+.fp-qg-stats { align-content: stretch; }
+.fp-qg-stats > .fp-card { display: flex; flex-direction: column; }
+@media (max-width: 920px) { .fp-qg-overview { grid-template-columns: minmax(0, 1fr); } }
+
 /* Gate ladder (board). */
 .fp-gates { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
 .fp-gate { padding: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); border-inline-start: 3px solid var(--border); }

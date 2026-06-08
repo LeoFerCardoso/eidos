@@ -18,11 +18,12 @@ import {
   Icons,
   Pill,
   ScoreGauge,
+  Stat,
   StatusDot,
 } from '@/ds/core';
 import { FPageHeader, FSection, usePageCrumb } from '@/portal/shell/portal-shell';
 import { AiBanner } from '@/portal/shell/ai-pattern';
-import { GATES, PR_STATUS_META, gateFor, getPr } from '@/portal/data/quality-gates';
+import { GATES, PR_STATUS_META, checksFor, gateFor, getPr } from '@/portal/data/quality-gates';
 
 const FACTOR_MAX = 300;
 
@@ -58,6 +59,7 @@ export default function PrDetail({ prId }: { prId: string }) {
   const gate = gateFor(pr.crs);
   const st = PR_STATUS_META[pr.status];
   const approved = pr.approvers.filter((a) => a.status === 'approved').length;
+  const checks = checksFor(pr);
 
   const actions =
     pr.status === 'merged' ? (
@@ -95,6 +97,14 @@ export default function PrDetail({ prId }: { prId: string }) {
 
       {/* PR-analysis agent diagnosis — unified Forge AI eyebrow. */}
       <AiBanner title="PR-analysis diagnosis">{pr.diagnosis}</AiBanner>
+
+      {/* This PR's own checks — the chart-card view scoped to one change. */}
+      <div className="fp-grid fp-grid-4" style={{ marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
+        <div className="fp-card"><Stat label="Tests" value={String(checks.tests)} suffix=" runs" hint="unit · integration · e2e" variant="hero" /></div>
+        <div className="fp-card"><Stat label="Coverage" value={String(checks.coverage)} suffix="%" hint={`delta ${pr.coverageDelta}`} variant="hero" /></div>
+        <div className="fp-card"><Stat label="Pass rate" value={String(checks.passRate)} suffix="%" hint="P0 gates" variant="hero" /></div>
+        <div className="fp-card"><Stat label="Performance" value={checks.perf} hint="p95 vs budget" variant="hero" /></div>
+      </div>
 
       <div className="fp-grid fp-grid-2x1" style={{ alignItems: 'start', marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
         {/* MAIN */}

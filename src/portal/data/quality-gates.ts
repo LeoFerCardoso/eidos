@@ -190,3 +190,30 @@ export const KPIS = [
   { id: 'median', label: 'Median CRS', value: '248', note: 'Down 34 vs last week.' },
   { id: 'blocked', label: 'Blocked now', value: '1', note: 'CRS at or above 900.' },
 ];
+
+/** Fleet overview — the change-risk gauge value + the headline check stats that
+ *  sit at the top of the board (the chart-card row). */
+export interface FleetStat { id: string; label: string; value: string; suffix?: string; hint: string; delta: number; inverted?: boolean }
+export const FLEET: { crs: number; stats: FleetStat[] } = {
+  crs: 248,
+  stats: [
+    { id: 'tests', label: 'Tests · 24h',   value: '2,418', suffix: ' runs', hint: '214 PRs · 17 per PR',     delta: 12 },
+    { id: 'cov',   label: 'Coverage',      value: '83.2',  suffix: '%',     hint: 'target ≥ 80%',           delta: 1.4 },
+    { id: 'pass',  label: 'Pass rate',     value: '91',    suffix: '%',     hint: 'all P0 gates cleared',    delta: 2.1 },
+    { id: 'sast',  label: 'SAST findings', value: '2',                      hint: '0 critical · 2 high',     delta: -3, inverted: true },
+    { id: 'auto',  label: 'Auto-merges',   value: '61',    suffix: '%',     hint: 'CRS under 300',           delta: 8 },
+    { id: 'ttm',   label: 'Time to merge', value: '4m 12s',                 hint: 'PR open to merged · p50', delta: -12, inverted: true },
+  ],
+};
+
+/** Per-PR check rollup, derived deterministically from the PR so the detail page
+ *  shows that PR's own test/coverage/perf view (SSR-stable, no randomness). */
+export interface PrChecks { tests: number; coverage: number; passRate: number; perf: string }
+export const checksFor = (pr: PullRequest): PrChecks => {
+  const delta = parseFloat(pr.coverageDelta) || 0;
+  const coverage = Math.round((80 + delta) * 10) / 10;
+  const tests = 40 + pr.files * 17 + (pr.additions % 13);
+  const passRate = pr.status === 'blocked' ? 76 : pr.status === 'in-review' ? 88 : 99;
+  const perf = pr.crs >= 700 ? '+14% p95' : pr.crs >= 400 ? 'within 6%' : 'within budget';
+  return { tests, coverage, passRate, perf };
+};
