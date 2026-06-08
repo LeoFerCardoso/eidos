@@ -13,6 +13,7 @@
 //
 // Composes only Eidos DS + .fp-* classes.
 import * as React from 'react';
+import Link from 'next/link';
 import { BrandIcon, Button, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
 import {
@@ -132,12 +133,22 @@ export default function ContextsPage() {
                   const Icon = (Icons as Record<string, React.FC<{ size?: number }>>)[c.icon] ?? Icons.doc;
                   const st = STATUS_META[c.status];
                   return (
-                    <tr key={c.id}>
+                    <tr
+                      key={c.id}
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => window.location.assign(`/portal/contexts/${c.id}`)}
+                    >
                       <td>
                         <span className="fp-ctx-name">
                           <span className="fp-ctx-ic"><Icon size={14} /></span>
                           <span>
-                            <span style={{ fontWeight: 600 }}>{c.name}</span>
+                            <Link
+                              href={`/portal/contexts/${c.id}`}
+                              style={{ fontWeight: 600, color: 'inherit', textDecoration: 'none' }}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {c.name}
+                            </Link>
                             <span className="fp-cell-sub">{c.desc}</span>
                           </span>
                         </span>
@@ -150,7 +161,7 @@ export default function ContextsPage() {
                         <Pill tone={st.tone} dot live={c.status === 'syncing'}>{st.label}</Pill>
                       </td>
                       <td style={{ textAlign: 'end' }}>
-                        <Button variant="ghost" size="sm"><Icons.plus size={11} /> Add</Button>
+                        <Button variant="ghost" size="sm" onClick={(e) => e.stopPropagation()}><Icons.plus size={11} /> Add</Button>
                       </td>
                     </tr>
                   );

@@ -83,3 +83,100 @@ export const fmtItems = (n: number): string => {
   if (n >= 1_000) return (n / 1_000).toFixed(1).replace(/\.0$/, '') + 'k';
   return String(n);
 };
+
+/** Look up a context by id. */
+export const getContext = (id: string): Context | undefined =>
+  CONTEXTS.find((c) => c.id === id);
+
+/** Static sync schedule per context (deterministic, keyed on id). */
+export interface SyncInfo {
+  connector: string;
+  transport: string;
+  schedule: string;
+  lastSync: string;
+  freshnessNote: string;
+}
+
+const SYNC_INFO: Record<string, SyncInfo> = {
+  catalog:     { connector: 'Backstage Catalog API', transport: 'REST / polling', schedule: 'Every 5 min',  lastSync: '2m ago',   freshnessNote: 'Entities are refreshed on every entity update event.' },
+  slo:         { connector: 'Backstage SLO plugin',  transport: 'REST / polling', schedule: 'Every 5 min',  lastSync: '6m ago',   freshnessNote: 'Burn rates are recomputed after each ingest cycle.' },
+  consent:     { connector: 'Consent Service gRPC',  transport: 'gRPC streaming', schedule: 'On change',    lastSync: '1m ago',   freshnessNote: 'Opt-ins and opt-outs are streamed in under 60 s.' },
+  features:    { connector: 'Ignite Feature Store',  transport: 'REST / batch',   schedule: 'Every 15 min', lastSync: '9m ago',   freshnessNote: 'Lineage graph is rebuilt after every pipeline run.' },
+  runbooks:    { connector: 'Runbook Service API',   transport: 'REST / polling', schedule: 'Every 30 min', lastSync: '1h ago',   freshnessNote: 'Approved runbooks are published automatically on merge.' },
+  incidents:   { connector: 'Incident platform API', transport: 'REST / polling', schedule: 'Every 5 min',  lastSync: '14m ago',  freshnessNote: 'Post-mortems are indexed after resolution is confirmed.' },
+  scr:         { connector: 'SCR Vault',             transport: 'REST / on-push', schedule: 'On change',    lastSync: '3d ago',   freshnessNote: 'Spec is versioned; re-indexed only on layout changes.' },
+  bureau:      { connector: 'Boa Vista SFTP bridge', transport: 'SFTP / batch',   schedule: 'Every 30 min', lastSync: '22m ago',  freshnessNote: 'Feed schemas update when a new file is delivered.' },
+  pipelines:   { connector: 'CI/CD registry API',   transport: 'REST / polling', schedule: 'Every 5 min',  lastSync: '4m ago',   freshnessNote: 'Pipeline configs are indexed on every push to main.' },
+  dashboards:  { connector: 'Grafana HTTP API',      transport: 'REST / polling', schedule: 'Every 15 min', lastSync: '7m ago',   freshnessNote: 'Dashboard JSON is captured after each save event.' },
+  oncall:      { connector: 'PagerDuty API',         transport: 'REST / polling', schedule: 'Every 15 min', lastSync: '31m ago',  freshnessNote: 'Rotations are re-indexed after a schedule override.' },
+  secrets:     { connector: 'Vault KV API',          transport: 'REST / polling', schedule: 'Every 30 min', lastSync: '18m ago',  freshnessNote: 'Rotation policy metadata only; secret values never indexed.' },
+  finops:      { connector: 'GCP Billing export',   transport: 'BigQuery job',   schedule: 'Every 1 h',    lastSync: '1h ago',   freshnessNote: 'Spend data is available with up to 1 h of latency.' },
+  fraudrules:  { connector: 'konduto Management API',transport: 'REST / polling', schedule: 'Every 15 min', lastSync: '12m ago',  freshnessNote: 'Rule changes are indexed within one polling cycle.' },
+  scoremodels: { connector: 'Score Model Registry', transport: 'REST / polling', schedule: 'Every 30 min', lastSync: '40m ago',  freshnessNote: 'A new model version triggers an immediate re-index.' },
+  apidocs:     { connector: 'OpenAPI registry',      transport: 'REST / on-push', schedule: 'On change',    lastSync: '11m ago',  freshnessNote: 'Specs are indexed on every merge to the contracts repo.' },
+  'drive-arch':    { connector: 'Google Drive API',  transport: 'OAuth2 / push',  schedule: 'On change',    lastSync: '2d ago',   freshnessNote: 'Slides are re-indexed when a file is modified in Drive.' },
+  'drive-onboard': { connector: 'Google Drive API',  transport: 'OAuth2 / push',  schedule: 'On change',    lastSync: '5h ago',   freshnessNote: 'Currently syncing 3 documents added in the last 24 h.' },
+  'conf-bureau':   { connector: 'Confluence REST API', transport: 'REST / polling', schedule: 'Every 1 h', lastSync: '1d ago',   freshnessNote: 'Space pages are re-indexed after every content update.' },
+  'conf-lgpd':     { connector: 'Confluence REST API', transport: 'REST / polling', schedule: 'Every 4 h', lastSync: '3d ago',   freshnessNote: 'DPIAs are indexed after each review cycle completes.' },
+  'upload-scr':    { connector: 'File upload',        transport: 'Multipart HTTP', schedule: 'Manual',      lastSync: '6d ago',   freshnessNote: 'Re-upload a new PDF to refresh this context.' },
+  'md-style':      { connector: 'Forge document editor', transport: 'Internal API', schedule: 'On save',   lastSync: '2h ago',   freshnessNote: 'Changes are indexed within seconds of saving the document.' },
+};
+
+export const syncFor = (id: string): SyncInfo =>
+  SYNC_INFO[id] ?? {
+    connector: 'Internal connector',
+    transport: 'REST / polling',
+    schedule: 'Every 15 min',
+    lastSync: 'Unknown',
+    freshnessNote: 'Sync schedule not configured for this context.',
+  };
+
+/** Static list of agent ids that use a given context (deterministic subset). */
+const CTX_AGENTS: Record<string, string[]> = {
+  catalog:     ['sre', 'onboard', 'dora'],
+  slo:         ['sre', 'dora', 'p99hunter'],
+  consent:     ['lgpd', 'cadpos', 'consentmap'],
+  features:    ['score', 'bureau', 'fraud'],
+  runbooks:    ['sre', 'onboard'],
+  incidents:   ['sre', 'fraud'],
+  scr:         ['bureau', 'scr', 'cadpos'],
+  bureau:      ['bureau', 'scr'],
+  pipelines:   ['dora', 'flaky', 'apicontract'],
+  dashboards:  ['sre', 'dora'],
+  oncall:      ['sre', 'onboard'],
+  secrets:     ['sre', 'lgpd'],
+  finops:      ['costwatch', 'dora'],
+  fraudrules:  ['fraud', 'kondtuner', 'chargeback'],
+  scoremodels: ['score', 'bureau'],
+  apidocs:     ['apicontract', 'bureau'],
+  'drive-arch':    ['onboard', 'dora'],
+  'drive-onboard': ['onboard'],
+  'conf-bureau':   ['bureau', 'scr'],
+  'conf-lgpd':     ['lgpd', 'consentmap'],
+  'upload-scr':    ['bureau', 'scr'],
+  'md-style':      ['sre', 'fraud', 'bureau'],
+};
+
+export const usedByFor = (id: string): string[] => CTX_AGENTS[id] ?? [];
+
+/** Data classification per context. */
+const CTX_DATA_CLASS: Record<string, { dataClass: string; readers: string[]; restricted: boolean }> = {
+  consent:    { dataClass: 'Restricted (PII)', readers: ['Compliance', 'LGPD Auditor', 'Consent Mapper'], restricted: true },
+  secrets:    { dataClass: 'Restricted (secrets metadata)', readers: ['Security', 'SRE Copilot'], restricted: true },
+  fraudrules: { dataClass: 'Confidential', readers: ['Anti-Fraud', 'Fraud Analyst', 'konduto Tuner'], restricted: true },
+  scoremodels:{ dataClass: 'Confidential', readers: ['Score and Risk', 'Score Reviewer'], restricted: true },
+  'conf-lgpd':{ dataClass: 'Internal (LGPD-sensitive)', readers: ['Compliance', 'LGPD Auditor'], restricted: true },
+};
+
+export interface AccessInfo {
+  dataClass: string;
+  readers: string[];
+  restricted: boolean;
+}
+
+export const accessFor = (id: string): AccessInfo =>
+  CTX_DATA_CLASS[id] ?? {
+    dataClass: 'Internal',
+    readers: ['Platform', 'Agent operators'],
+    restricted: false,
+  };

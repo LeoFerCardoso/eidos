@@ -66,3 +66,134 @@ export const SKILLS: Skill[] = [
 
 export const officialCount = SKILLS.filter((s) => s.official).length;
 export const communityCount = SKILLS.filter((s) => !s.official).length;
+
+export const getSkill = (id: string): Skill | undefined => SKILLS.find((s) => s.id === id);
+
+// ── Per-skill capability chips ─────────────────────────────────────────────────
+// 3-6 chips relevant to the skill category, used in the detail sidebar.
+
+export interface SkillCapability { id: string; label: string; icon: string }
+
+const CAP_MAP: Record<SkillCategory, SkillCapability[]> = {
+  Incident: [
+    { id: 'timeline-parse',  label: 'Timeline parsing',    icon: 'activity'  },
+    { id: 'alert-correlate', label: 'Alert correlation',   icon: 'zap'       },
+    { id: 'postmortem',      label: 'Postmortem drafting',  icon: 'edit'      },
+    { id: 'escalation',      label: 'Escalation routing',  icon: 'chat'      },
+    { id: 'runbook',         label: 'Runbook lookup',       icon: 'book'      },
+  ],
+  Delivery: [
+    { id: 'gate-check',      label: 'Quality gate checks', icon: 'pipeline'  },
+    { id: 'diff-parse',      label: 'Diff parsing',        icon: 'braces'    },
+    { id: 'gmud-parse',      label: 'GMUD extraction',     icon: 'doc'       },
+    { id: 'risk-score',      label: 'Change risk scoring', icon: 'gauge'     },
+    { id: 'release-notes',   label: 'Release notes gen.',  icon: 'book'      },
+  ],
+  Security: [
+    { id: 'threat-model',    label: 'Threat modeling',     icon: 'shield'    },
+    { id: 'pii-scan',        label: 'PII scanning',        icon: 'eye'       },
+    { id: 'rule-sim',        label: 'Rule simulation',     icon: 'zap'       },
+    { id: 'evidence-pack',   label: 'Evidence assembly',   icon: 'doc'       },
+    { id: 'attack-surface',  label: 'Attack surface map',  icon: 'globe'     },
+    { id: 'lgpd-check',      label: 'LGPD scope check',   icon: 'lock'      },
+  ],
+  Observability: [
+    { id: 'metric-query',    label: 'Metric querying',     icon: 'activity'  },
+    { id: 'trace-walk',      label: 'Trace traversal',     icon: 'layers'    },
+    { id: 'slo-target',      label: 'SLO target setting',  icon: 'target'    },
+    { id: 'anomaly-flag',    label: 'Anomaly flagging',    icon: 'flag'      },
+    { id: 'capacity-proj',   label: 'Capacity projection', icon: 'gauge'     },
+  ],
+  Data: [
+    { id: 'sql-rewrite',     label: 'SQL rewriting',       icon: 'database'  },
+    { id: 'schema-parse',    label: 'Schema parsing',      icon: 'braces'    },
+    { id: 'lineage-check',   label: 'Lineage checking',    icon: 'layers'    },
+    { id: 'reason-code',     label: 'Reason-code mapping', icon: 'score'     },
+    { id: 'freshness-check', label: 'Freshness checks',    icon: 'refresh'   },
+  ],
+  Quality: [
+    { id: 'test-triage',     label: 'Test triage',         icon: 'flag'      },
+    { id: 'flake-detect',    label: 'Flake detection',     icon: 'activity'  },
+    { id: 'contract-diff',   label: 'Contract diffing',    icon: 'braces'    },
+    { id: 'coverage-parse',  label: 'Coverage parsing',    icon: 'target'    },
+  ],
+  FinOps: [
+    { id: 'spend-parse',     label: 'Spend parsing',       icon: 'gauge'     },
+    { id: 'cost-trend',      label: 'Cost trend analysis', icon: 'activity'  },
+    { id: 'rightsizing',     label: 'Rightsizing advice',  icon: 'layers'    },
+    { id: 'budget-alert',    label: 'Budget alerting',     icon: 'flag'      },
+  ],
+  Compliance: [
+    { id: 'consent-scope',   label: 'Consent scope check', icon: 'compliance'},
+    { id: 'lgpd-remediate',  label: 'LGPD remediation',   icon: 'shield'    },
+    { id: 'pii-register',    label: 'PII registration',    icon: 'lock'      },
+    { id: 'audit-trail',     label: 'Audit trail read',    icon: 'activity'  },
+  ],
+};
+
+export const capabilitiesFor = (skill: Skill): SkillCapability[] => CAP_MAP[skill.category] ?? [];
+
+// ── Static "used by" agents per skill ─────────────────────────────────────────
+// Maps a skill id to the agent ids that use it. Kept static and consistent.
+
+const USED_BY: Record<string, string[]> = {
+  'postmortem-writer':  ['sre', 'p99hunter'],
+  'root-cause':         ['sre', 'fraud', 'p99hunter'],
+  'runbook-authoring':  ['sre', 'onboard'],
+  'incident-comms':     ['sre'],
+  'deploy-gating':      ['dora', 'relnotes'],
+  'release-notes':      ['relnotes', 'dora'],
+  'threat-modeling':    ['lgpd', 'fraud'],
+  'pii-discovery':      ['lgpd', 'consentmap'],
+  'lgpd-remediation':   ['lgpd', 'consentmap'],
+  'slo-design':         ['sre', 'dora'],
+  'trace-analysis':     ['sre', 'p99hunter'],
+  'anomaly-detection':  ['sre', 'fraud'],
+  'query-optimization': ['bureau', 'score'],
+  'cost-optimization':  ['costwatch'],
+  'flaky-test-triage':  ['flaky', 'dora'],
+  'schema-diffing':     ['apicontract', 'bureau'],
+  'capacity-planning':  ['sre', 'dora'],
+  'rule-tuning':        ['fraud', 'kondtuner'],
+  'reason-code':        ['score', 'bureau'],
+  'scr-layout':         ['bureau', 'scr'],
+  'feature-freshness':  ['score'],
+  'chargeback-evidence':['chargeback', 'fraud'],
+};
+
+export const usedByFor = (skill: Skill): string[] => USED_BY[skill.id] ?? [];
+
+// ── Versions per skill ─────────────────────────────────────────────────────────
+
+export interface SkillVersion { version: string; date: string; note: string; current?: boolean }
+
+const VERSIONS_MAP: Record<string, SkillVersion[]> = {
+  'postmortem-writer': [
+    { version: 'v2.4.0', date: 'May 2026', note: 'Added GMUD correlation and timeline diff view.', current: true },
+    { version: 'v2.3.0', date: 'Apr 2026', note: 'Severity auto-tagging from alert payload.' },
+    { version: 'v2.0.0', date: 'Jan 2026', note: 'Rewrite with structured output schema.' },
+  ],
+  'root-cause': [
+    { version: 'v3.1.2', date: 'Jun 2026', note: 'Improved cross-service trace correlation.', current: true },
+    { version: 'v3.0.0', date: 'Mar 2026', note: 'Multi-signal fusion (logs, traces, metrics).' },
+    { version: 'v2.8.0', date: 'Jan 2026', note: 'Added PagerDuty alert ingestion.' },
+  ],
+  'deploy-gating': [
+    { version: 'v2.0.4', date: 'May 2026', note: 'GMUD gate and DORA check integration.', current: true },
+    { version: 'v2.0.0', date: 'Feb 2026', note: 'New gate DSL replacing legacy YAML.' },
+    { version: 'v1.5.0', date: 'Oct 2025', note: 'SLO burn-rate gate added.' },
+  ],
+  'pii-discovery': [
+    { version: 'v2.1.1', date: 'May 2026', note: 'CPF and CNPJ pattern improvements.', current: true },
+    { version: 'v2.0.0', date: 'Feb 2026', note: 'Streaming log scanning support.' },
+    { version: 'v1.4.0', date: 'Sep 2025', note: 'Initial LGPD field catalogue.' },
+  ],
+};
+
+const DEFAULT_VERSIONS = (skill: Skill): SkillVersion[] => [
+  { version: skill.version, date: 'Jun 2026', note: 'Current release.', current: true },
+  { version: 'v' + (parseFloat(skill.version.slice(1)) - 0.1).toFixed(1) + '.0', date: 'Mar 2026', note: 'Stability and performance improvements.' },
+];
+
+export const versionsFor = (skill: Skill): SkillVersion[] =>
+  VERSIONS_MAP[skill.id] ?? DEFAULT_VERSIONS(skill);

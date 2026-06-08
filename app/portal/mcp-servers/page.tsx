@@ -11,6 +11,8 @@
 //
 // Composes only Eidos DS + .fp-* classes (reuses the marketplace card grid).
 import * as React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch } from '@/portal/shell/portal-shell';
 import { KPIS, SERVERS, STATUS_META, TEAMS, type McpServer } from '@/portal/data/mcp';
@@ -26,8 +28,17 @@ const TRANSPORT_OPTS = [
 function ServerCard({ s }: { s: McpServer }) {
   const Icon = (Icons as Record<string, React.FC<{ size?: number }>>)[s.icon] ?? Icons.server;
   const st = STATUS_META[s.status];
+  const router = useRouter();
   return (
-    <div className="fp-skill">
+    <div
+      className="fp-skill"
+      style={{ cursor: 'pointer' }}
+      role="button"
+      tabIndex={0}
+      aria-label={`Open ${s.name} details`}
+      onClick={() => router.push(`/portal/mcp-servers/${s.id}`)}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); router.push(`/portal/mcp-servers/${s.id}`); } }}
+    >
       <div className="fp-skill-top">
         <span className={'fp-skill-ic' + (s.status === 'live' ? '' : ' is-muted')} aria-hidden="true"><Icon size={18} /></span>
         <Pill tone={st.tone} dot={s.status === 'live'}>{st.label}</Pill>
@@ -43,7 +54,14 @@ function ServerCard({ s }: { s: McpServer }) {
         <span className="fp-skill-cat">{s.transport}</span>
       </div>
       <div className="fp-skill-actions">
-        <Button variant="outline" size="sm"><Icons.plus size={12} /> Connect</Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={(e) => e.stopPropagation()}
+          asChild
+        >
+          <Link href={`/portal/mcp-servers/${s.id}`}><Icons.plus size={12} /> Connect</Link>
+        </Button>
         <span className="fp-skill-ver">{s.team}</span>
       </div>
     </div>

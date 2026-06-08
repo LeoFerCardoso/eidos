@@ -11,6 +11,7 @@
 //
 // Composes only Eidos DS + .fp-* classes.
 import * as React from 'react';
+import Link from 'next/link';
 import { Button, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch } from '@/portal/shell/portal-shell';
 import { SKILLS, SKILL_CATEGORIES, type Skill } from '@/portal/data/skills';
@@ -27,7 +28,11 @@ const SORTS = [
 function SkillCard({ s }: { s: Skill }) {
   const Icon = (Icons as Record<string, React.FC<{ size?: number }>>)[s.icon] ?? Icons.zap;
   return (
-    <div className="fp-skill">
+    <Link
+      href={`/portal/skills/${s.id}`}
+      className="fp-skill"
+      style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}
+    >
       <div className="fp-skill-top">
         <span className={'fp-skill-ic' + (s.official ? '' : ' is-muted')} aria-hidden="true"><Icon size={18} /></span>
         <Pill tone={s.official ? 'ember' : 'neutral'} dot={s.official}>
@@ -45,10 +50,16 @@ function SkillCard({ s }: { s: Skill }) {
         <span className="fp-skill-cat">{s.category}</span>
       </div>
       <div className="fp-skill-actions">
-        <Button variant="outline" size="sm"><Icons.plus size={12} /> Add to agent</Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={(e) => e.preventDefault()}
+        >
+          <Icons.plus size={12} /> Add to agent
+        </Button>
         <span className="fp-skill-ver mono">{s.version}</span>
       </div>
-    </div>
+    </Link>
   );
 }
 
