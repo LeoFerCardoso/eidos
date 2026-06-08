@@ -3797,6 +3797,25 @@ body:active::-webkit-scrollbar-thumb,
 .fp-ok { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-sm); color: var(--fg-muted); }
 .fp-row-flag { background: color-mix(in oklch, var(--danger) 7%, transparent); }
 .fp-row-flag:hover { background: color-mix(in oklch, var(--danger) 11%, transparent); }
+/* Ring-driven row — a soft ember wash (not an error). */
+.fp-row-accent { background: var(--ember-soft); }
+.fp-row-accent:hover { background: color-mix(in oklch, var(--ember) 12%, transparent); }
+
+/* ── Feature flags ─────────────────────────────────────────────────────── */
+.fp-flag-name { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.fp-ring-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 1px 7px; border-radius: 999px;
+  background: var(--ember-soft); color: var(--ember);
+  border: 1px solid color-mix(in oklab, var(--ember) 25%, transparent);
+  font: 600 10.5px/1.5 var(--font-mono);
+  text-decoration: none; white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease);
+}
+.fp-ring-chip:hover { background: color-mix(in oklab, var(--ember) 22%, transparent); }
+.fp-flag-target { display: inline-flex; align-items: center; gap: 8px; }
+.fp-flag-spark { flex: 0 0 auto; inline-size: 72px; block-size: 20px; display: inline-flex; }
+.fp-flag-spark .sparkline { inline-size: 72px; }
 
 /* ════════════════════════════════════════════════════════════════════════
    Skills marketplace (/portal/skills)

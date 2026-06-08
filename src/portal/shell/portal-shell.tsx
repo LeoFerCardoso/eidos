@@ -114,6 +114,7 @@ const RAIL_SECTIONS: RailSection[] = [
     items: [
       { key: 'pipelines',     icon: 'pipeline',       label: 'Pipelines',     href: '/portal/pipelines' },
       { key: 'quality-gates', icon: 'gitPullRequest', label: 'Quality Gates', href: '/portal/quality-gates' },
+      { key: 'feature-flags', icon: 'flag',           label: 'Feature Flags', href: '/portal/feature-flags' },
       { key: 'dora',          icon: 'gauge',          label: 'DORA',          href: '/portal/dora' },
       { key: 'incidents',     icon: 'incident',       label: 'Incidents',     href: '/portal/incidents' },
       { key: 'runbooks',      icon: 'runbook',        label: 'Runbooks',      href: '/portal/runbooks' },
@@ -159,6 +160,7 @@ const CRUMB_LABELS: Record<string, string> = {
   scorecards:    'Scorecards',
   pipelines:     'Pipelines',
   'quality-gates': 'Quality Gates',
+  'feature-flags': 'Feature Flags',
   incidents:     'Incidents',
   runbooks:      'Runbooks',
   fraud:         'Fraud & Risk',
