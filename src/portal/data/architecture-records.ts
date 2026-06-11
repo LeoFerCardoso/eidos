@@ -46,9 +46,19 @@ export interface Diagram {
   title: string;
   type: DiagramType;
   scope: string;
-  format: 'Mermaid' | 'Excalidraw' | 'C4';
+  format: 'Mermaid' | 'Excalidraw' | 'C4' | 'LucidChart';
   updated: string;
   owner: string;
+  /**
+   * When set, the diagram lives OUTSIDE Forge (in LucidChart). The card shows an
+   * external badge and clicking warns the user before it opens in a new tab.
+   */
+  external?: { provider: 'LucidChart'; url: string };
+  /**
+   * True when an inline, in-portal rendering of the diagram exists (rendered on
+   * /portal/architecture/[id]). Diagrams without it open to a source-only stub.
+   */
+  hasView?: boolean;
 }
 
 export const DIAGRAM_ICON: Record<DiagramType, string> = {
@@ -61,15 +71,20 @@ export const DIAGRAM_ICON: Record<DiagramType, string> = {
 };
 
 export const DIAGRAMS: Diagram[] = [
-  { id: 'd-credit-solution', title: 'Credit consultation, end to end', type: 'Solution', scope: 'Score & Risk',  format: 'C4',         updated: '3 days ago',  owner: 'Thiago Albuquerque' },
-  { id: 'd-bureau-context',  title: 'Bureau platform system context',  type: 'Context',  scope: 'Platform',     format: 'C4',         updated: '1 week ago',  owner: 'Diego Vasquez' },
+  { id: 'd-credit-solution', title: 'Credit consultation, end to end', type: 'Solution', scope: 'Score & Risk',  format: 'C4',         updated: '3 days ago',  owner: 'Thiago Albuquerque', hasView: true },
+  { id: 'd-bureau-context',  title: 'Bureau platform system context',  type: 'Context',  scope: 'Platform',     format: 'LucidChart', updated: '1 week ago',  owner: 'Diego Vasquez', external: { provider: 'LucidChart', url: 'https://lucid.app/lucidchart/bureau-platform-context/view' } },
   { id: 'd-pii-dataflow',    title: 'PII data flow and consent gates',  type: 'Data flow',scope: 'Compliance',   format: 'Mermaid',    updated: '5 days ago',  owner: 'Camila Tanaka' },
   { id: 'd-score-erd',       title: 'Score feature store schema',       type: 'ERD',      scope: 'Data & Bureau',format: 'Mermaid',    updated: '2 weeks ago', owner: 'Diego Vasquez' },
   { id: 'd-auth-sequence',   title: 'Biometric step-up auth sequence',  type: 'Sequence', scope: 'Identity',     format: 'Mermaid',    updated: '4 days ago',  owner: 'Camila Tanaka' },
-  { id: 'd-fraud-components', title: 'Antifraud decision components',   type: 'Component',scope: 'Anti-Fraud',   format: 'Excalidraw', updated: '1 week ago',  owner: 'Beatriz Okamoto' },
+  { id: 'd-fraud-components', title: 'Antifraud decision components',   type: 'Component',scope: 'Anti-Fraud',   format: 'LucidChart', updated: '1 week ago',  owner: 'Beatriz Okamoto', external: { provider: 'LucidChart', url: 'https://lucid.app/lucidchart/antifraud-decision-components/view' } },
   { id: 'd-deploy-dataflow', title: 'Ring deploy and rollback flow',    type: 'Data flow',scope: 'Platform',     format: 'Mermaid',    updated: '6 days ago',  owner: 'Larissa Fontana' },
   { id: 'd-onescore-solution', title: 'OneScore PJ solution design',    type: 'Solution', scope: 'Score & Risk', format: 'C4',         updated: '2 days ago',  owner: 'Thiago Albuquerque' },
 ];
+
+/** Look up a diagram by id (for the /portal/architecture/[id] detail route). */
+export function getDiagram(id: string): Diagram | undefined {
+  return DIAGRAMS.find((d) => d.id === id);
+}
 
 export const KPIS = [
   { id: 'accepted', label: 'Accepted ADRs', value: String(ADRS.filter((a) => a.status === 'accepted').length), note: 'In force across the org.' },

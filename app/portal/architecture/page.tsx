@@ -1,6 +1,7 @@
 'use client';
 // Forge — Architecture. The Architecture Decision Records the company follows
-// (and that ground the agents) plus the catalog of architecture diagrams.
+// (and that ground the agents) plus the catalog of architecture diagrams and
+// the live service dependency topology (blast-radius graph).
 //
 // Brief — Persona: architects, every engineer, and the platform agents.
 // Question: what decisions must we follow, what changed, and where is the
@@ -11,7 +12,9 @@
 //
 // Composes only Eidos DS + .fp-* classes.
 import * as React from 'react';
+import Link from 'next/link';
 import {
+  AlertDialog,
   Button,
   Icons,
   Pill,
@@ -31,22 +34,60 @@ import {
   KPIS,
   type Diagram,
 } from '@/portal/data/architecture-records';
+import TopologyGraph from '@/portal/architecture/topology-graph';
 
+// Internal diagrams open the in-portal detail route; external (LucidChart)
+// diagrams carry a badge and warn before they leave Forge in a new tab.
 function DiagramCard({ d }: { d: Diagram }) {
   const Icon = (Icons as Record<string, React.FC<{ size?: number }>>)[DIAGRAM_ICON[d.type]] ?? Icons.layers;
-  return (
-    <div className="fp-skill">
+  const [leaving, setLeaving] = React.useState(false);
+
+  const body = (
+    <>
       <div className="fp-skill-top">
         <span className="fp-skill-ic" aria-hidden="true"><Icon size={18} /></span>
-        <Pill tone="neutral">{d.type}</Pill>
+        {d.external
+          ? <Pill tone="ice"><Icons.externalLink size={11} /> {d.external.provider}</Pill>
+          : <Pill tone="neutral">{d.type}</Pill>}
       </div>
       <span className="fp-skill-name">{d.title}</span>
       <p className="fp-skill-desc">{d.scope} · {d.format}</p>
       <div className="fp-skill-actions">
-        <Button variant="outline" size="sm"><Icons.maximize size={12} /> Open</Button>
+        {d.external
+          ? <span className="fp-skill-link"><Icons.externalLink size={12} /> Open in {d.external.provider}</span>
+          : <span className="fp-skill-link"><Icons.arrowRight size={12} /> View diagram</span>}
         <span className="fp-skill-ver">{d.updated}</span>
       </div>
-    </div>
+    </>
+  );
+
+  if (d.external) {
+    return (
+      <>
+        <button type="button" className="fp-skill fp-skill-card" onClick={() => setLeaving(true)}>
+          {body}
+        </button>
+        <AlertDialog
+          open={leaving}
+          onOpenChange={(o) => !o && setLeaving(false)}
+          variant="info"
+          title={`Open this diagram in ${d.external.provider}?`}
+          description={`"${d.title}" is hosted in ${d.external.provider}, outside Forge. The link opens in a new tab and is not governed by Forge access controls.`}
+          cancelLabel="Stay in Forge"
+          confirmLabel={`Open in ${d.external.provider}`}
+          onConfirm={() => {
+            window.open(d.external!.url, '_blank', 'noopener,noreferrer');
+            setLeaving(false);
+          }}
+        />
+      </>
+    );
+  }
+
+  return (
+    <Link href={`/portal/architecture/${d.id}`} className="fp-skill fp-skill-card">
+      {body}
+    </Link>
   );
 }
 
@@ -84,6 +125,7 @@ export default function ArchitecturePage() {
           <TabsList>
             <TabsTrigger value="adrs">Decision records</TabsTrigger>
             <TabsTrigger value="diagrams">Diagrams</TabsTrigger>
+            <TabsTrigger value="topology">Topology</TabsTrigger>
           </TabsList>
 
           <TabsContent value="adrs">
@@ -134,6 +176,10 @@ export default function ArchitecturePage() {
                 <DiagramCard key={d.id} d={d} />
               ))}
             </div>
+          </TabsContent>
+
+          <TabsContent value="topology">
+            <TopologyGraph />
           </TabsContent>
         </Tabs>
       </div>
