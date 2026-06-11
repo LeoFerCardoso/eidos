@@ -79,3 +79,57 @@ export function Sub({ children, muted }: { children: React.ReactNode; muted?: bo
     </div>
   );
 }
+
+// ── PersonAvatar / AvatarStack ─────────────────────────────────────────────────
+// A round initials chip (ember-on-ember-soft, matching the workspace + account
+// avatars) and an overlapping stack of them with a "+N" overflow. Shared by the
+// Teams and Products surfaces. Visuals: .fp-ava / .fp-ava-stack in example-shell.css.
+
+export function PersonAvatar({
+  initials,
+  size = 28,
+  title,
+}: {
+  initials: string;
+  size?: number;
+  title?: string;
+}) {
+  return (
+    <span
+      className="fp-ava"
+      title={title}
+      aria-hidden={title ? undefined : true}
+      style={{ inlineSize: size, blockSize: size, fontSize: Math.round(size * 0.4) }}
+    >
+      {initials}
+    </span>
+  );
+}
+
+export function AvatarStack({
+  people,
+  max = 5,
+  size = 24,
+}: {
+  people: { initials: string; name?: string }[];
+  max?: number;
+  size?: number;
+}) {
+  const shown = people.slice(0, max);
+  const extra = people.length - shown.length;
+  return (
+    <span className="fp-ava-stack" aria-hidden="true">
+      {shown.map((p, i) => (
+        <PersonAvatar key={i} initials={p.initials} size={size} title={p.name} />
+      ))}
+      {extra > 0 && (
+        <span
+          className="fp-ava is-more"
+          style={{ inlineSize: size, blockSize: size, fontSize: Math.round(size * 0.36) }}
+        >
+          +{extra}
+        </span>
+      )}
+    </span>
+  );
+}

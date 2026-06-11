@@ -13,7 +13,7 @@
 // SSR hydration mismatch that the old ad-hoc useTheme caused.
 import * as React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import {
   Button,
@@ -44,7 +44,7 @@ import { NOTIFS, NOTIF_PREVIEW, filterByTab, type NotifTab } from '@/portal/data
 // without changing their import paths.
 export { FPageHeader, FSection, FKpi, IconBubble } from '@/ds/examples/example-shell';
 export { FSearch, type FSearchProps } from './fsearch';
-export { FCardHead, FRows, FRow, Sub } from './layout';
+export { FCardHead, FRows, FRow, Sub, PersonAvatar, AvatarStack } from './layout';
 
 // useLayoutEffect on the client, useEffect on the server (no SSR warning).
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
@@ -83,35 +83,43 @@ type RailSection = {
 const RAIL_SECTIONS: RailSection[] = [
   {
     items: [
-      { key: 'home',          icon: 'home', label: 'Home',          href: '/portal' },
-      { key: 'notifications', icon: 'bell', label: 'Notifications', href: '/portal/notifications' },
+      { key: 'home',          icon: 'home',    label: 'Home',          href: '/portal' },
+      { key: 'teams',         icon: 'network', label: 'Teams',         href: '/portal/teams' },
+      { key: 'notifications', icon: 'bell',    label: 'Notifications', href: '/portal/notifications' },
     ],
   },
   {
     label: 'Catalog',
     items: [
-      { key: 'catalog',   icon: 'server',   label: 'Catalog',   href: '/portal/catalog' },
+      { key: 'catalog',   icon: 'server',   label: 'Services',  href: '/portal/catalog' },
+      { key: 'products',  icon: 'package',  label: 'Products',  href: '/portal/products' },
       { key: 'apis',      icon: 'braces',   label: 'APIs',      href: '/portal/apis' },
       { key: 'databases', icon: 'database', label: 'Databases', href: '/portal/databases' },
-      { key: 'buckets',     icon: 'folder',  label: 'Buckets',     href: '/portal/buckets' },
+      { key: 'buckets',     icon: 'folder',  label: 'Storages',    href: '/portal/buckets' },
       { key: 'mcp-servers',     icon: 'plug',    label: 'MCP servers',     href: '/portal/mcp-servers' },
       { key: 'cloud-resources', icon: 'cloud',   label: 'Cloud Resources', href: '/portal/cloud-resources' },
-      { key: 'create',          icon: 'package', label: 'Templates',       href: '/portal/create' },
+      { key: 'create',          icon: 'squareDashed', label: 'Templates',  href: '/portal/create' },
     ],
   },
   {
     label: 'AI',
     items: [
-      { key: 'chat',     icon: 'chat',     label: 'Forge AI',    href: '/portal/chat' },
+      { key: 'chat',     icon: 'chat',     label: 'Chats',       href: '/portal/chat' },
       { key: 'agents',   icon: 'agent',    label: 'Agents',      href: '/portal/agents' },
       { key: 'skills',   icon: 'zap',      label: 'Skills',      href: '/portal/skills' },
+      { key: 'actions',  icon: 'command',  label: 'Actions',     href: '/portal/actions' },
       { key: 'contexts', icon: 'layers',   label: 'Contexts',    href: '/portal/contexts' },
+      { key: 'traces',      icon: 'branch',     label: 'Traces',      href: '/portal/traces' },
+      { key: 'evaluations', icon: 'checkCheck', label: 'Evaluations', href: '/portal/evaluations' },
       { key: 'insights', icon: 'sparkle',  label: 'AI-Insights', href: '/portal/insights' },
     ],
   },
   {
     label: 'Delivery',
     items: [
+      { key: 'intake',        icon: 'circleDot',      label: 'Intake',        href: '/portal/intake' },
+      { key: 'workflows',     icon: 'share',          label: 'Workflows',     href: '/portal/workflows' },
+      { key: 'runs',          icon: 'activity',       label: 'Runs',          href: '/portal/runs' },
       { key: 'pipelines',     icon: 'pipeline',       label: 'Pipelines',     href: '/portal/pipelines' },
       { key: 'quality-gates', icon: 'gitPullRequest', label: 'Quality Gates', href: '/portal/quality-gates' },
       { key: 'feature-flags', icon: 'flag',           label: 'Feature Flags', href: '/portal/feature-flags' },
@@ -123,10 +131,13 @@ const RAIL_SECTIONS: RailSection[] = [
   {
     label: 'Governance',
     items: [
+      { key: 'access',     icon: 'user',       label: 'Access',       href: '/portal/access' },
+      { key: 'approvals',  icon: 'gate',       label: 'Approvals',    href: '/portal/approvals' },
+      { key: 'audit',      icon: 'auditLog',   label: 'Audit log',    href: '/portal/audit' },
       { key: 'scorecards', icon: 'score',      label: 'Scorecards',   href: '/portal/scorecards' },
       { key: 'security',   icon: 'lock',       label: 'Security',     href: '/portal/security' },
       { key: 'fraud',      icon: 'shield',     label: 'Fraud & Risk', href: '/portal/fraud' },
-      { key: 'compliance',   icon: 'compliance', label: 'LGPD & Audit', href: '/portal/compliance' },
+      { key: 'compliance',   icon: 'compliance', label: 'LGPD',         href: '/portal/compliance' },
       { key: 'architecture', icon: 'book',       label: 'Architecture', href: '/portal/architecture' },
     ],
   },
@@ -145,17 +156,28 @@ function activeKey(pathname: string): string {
 
 const CRUMB_LABELS: Record<string, string> = {
   portal:        'Forge',
-  catalog:       'Catalog',
+  catalog:       'Services',
+  products:      'Products',
+  teams:         'Teams',
+  settings:      'Settings',
   apis:          'APIs',
   databases:     'Databases',
-  buckets:       'Buckets',
+  buckets:       'Storages',
   'mcp-servers': 'MCP servers',
   'cloud-resources': 'Cloud Resources',
   agents:        'Agents',
   skills:        'Skills',
+  actions:       'Actions',
   contexts:      'Contexts',
+  traces:        'Traces',
+  evaluations:   'Evaluations',
   insights:      'AI-Insights',
   create:        'Templates',
+  intake:        'Intake',
+  workflows:     'Workflows',
+  runs:          'Runs',
+  approvals:     'Approvals',
+  audit:         'Audit log',
   dora:          'DORA',
   scorecards:    'Scorecards',
   pipelines:     'Pipelines',
@@ -165,10 +187,12 @@ const CRUMB_LABELS: Record<string, string> = {
   runbooks:      'Runbooks',
   fraud:         'Fraud & Risk',
   security:      'Security',
-  compliance:    'LGPD & Audit',
+  compliance:    'LGPD',
+  postmortem:    'Postmortem',
+  access:        'Access',
   architecture:  'Architecture',
   notifications: 'Notifications',
-  chat:          'Forge AI',
+  chat:          'Chats',
 };
 
 function buildCrumbs(pathname: string): { label: string; href?: string }[] {
@@ -255,6 +279,9 @@ const WorkspaceHeader = ({
             alignItems: 'center',
             gap: 10,
             height: 48,
+            // Never let the tall nav shrink the header band below the topbar's
+            // 48px row (a column-flex sibling would otherwise steal its height).
+            flexShrink: 0,
             paddingBlock: 0,
             paddingInline: collapsed ? 0 : 14,
             marginInline: -8,
@@ -481,9 +508,9 @@ const NotificationsPanel = () => {
 type UserRow = { icon: keyof typeof Icons; label: string; shortcut?: string; href?: string };
 
 const USER_ROWS: UserRow[] = [
-  { icon: 'user',     label: 'Profile',       href: '/portal' },
+  { icon: 'user',     label: 'Profile',       href: '/portal/settings' },
   { icon: 'activity', label: 'My activity',   href: '/portal' },
-  { icon: 'settings', label: 'Settings',      shortcut: '⌘,' },
+  { icon: 'settings', label: 'Settings',      href: '/portal/settings', shortcut: '⌘,' },
   { icon: 'command',  label: 'Command menu',  shortcut: '⌘K' },
 ];
 
@@ -493,8 +520,8 @@ const USER_ROWS: UserRow[] = [
 // DESCENDANT (not portaled) so the parent Popover's click-outside never fires when
 // you pick an option; it opens to the inline-start since the menu hugs the topbar's
 // trailing edge. Selecting an option keeps both menus open so you can tune freely.
-const AppearanceSubmenu = () => {
-  const { theme, setTheme, themes } = useColorTheme();
+const AppearanceSubmenu = ({ close }: { close: () => void }) => {
+  const { theme, setTheme, themes, recents } = useColorTheme();
   const { resolvedTheme, setTheme: setMode } = useTheme();
   const [mounted, setMounted] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -517,6 +544,11 @@ const AppearanceSubmenu = () => {
 
   const mode = mounted ? resolvedTheme ?? 'dark' : 'dark';
   const current = themes.find((t) => t.id === theme) ?? themes[0];
+
+  // The 3 most-recently-used themes for quick access. Padded with the catalog
+  // order so there are always 3 even before any history accrues.
+  const quickIds = [...recents, ...themes.map((t) => t.id)].filter((v, i, a) => a.indexOf(v) === i).slice(0, 3);
+  const quickThemes = quickIds.map((id) => themes.find((t) => t.id === id)).filter(Boolean) as typeof themes;
 
   return (
     <div
@@ -559,8 +591,8 @@ const AppearanceSubmenu = () => {
           })}
 
           <span className="fp-user-flyout-sep" />
-          <span className="fp-user-flyout-label">Accent</span>
-          {themes.map((t) => (
+          <span className="fp-user-flyout-label">Theme</span>
+          {quickThemes.map((t) => (
             <button
               key={t.id}
               type="button"
@@ -574,6 +606,11 @@ const AppearanceSubmenu = () => {
               {theme === t.id && <Icons.check size={14} />}
             </button>
           ))}
+          <Link href="/portal/settings?section=appearance" className="fp-user-opt fp-user-opt--more" onClick={close}>
+            <Icons.palette size={14} />
+            <span className="label">More themes</span>
+            <Icons.chevronRight size={13} />
+          </Link>
         </div>
       )}
     </div>
@@ -622,7 +659,7 @@ const UserMenu = () => (
               </button>
             );
           })}
-          <AppearanceSubmenu />
+          <AppearanceSubmenu close={close} />
         </div>
 
         <div className="fp-user-plan">
@@ -745,6 +782,7 @@ const PortalTopbar = ({
 
 export function PortalShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() ?? '/portal';
+  const router = useRouter();
   const active = activeKey(pathname);
   // The Chat surface is full-bleed (its own sub-sidebar + independent scroll),
   // so it opts out of the padded, max-width content column.
@@ -767,17 +805,23 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
   // mount useEffect (which runs after) wins instead of being cleared by it.
   useIsomorphicLayoutEffect(() => { setPageCrumb(null); }, [pathname]);
 
-  // ⌘K / Ctrl+K toggles the command palette anywhere in the portal.
+  // ⌘K toggles the command palette; ⌘, jumps to Settings — anywhere in the portal.
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        setPaletteOpen((v) => !v);
+      if (e.metaKey || e.ctrlKey) {
+        const k = e.key.toLowerCase();
+        if (k === 'k') {
+          e.preventDefault();
+          setPaletteOpen((v) => !v);
+        } else if (e.key === ',') {
+          e.preventDefault();
+          router.push('/portal/settings');
+        }
       }
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, []);
+  }, [router]);
 
   return (
     <PageCrumbContext.Provider value={crumbCtx}>

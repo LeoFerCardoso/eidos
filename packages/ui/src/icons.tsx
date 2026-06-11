@@ -166,6 +166,9 @@ const Icons = {
   arrowUp: I(<><line x1="12" y1="20" x2="12" y2="4"/><polyline points="6 10 12 4 18 10"/></>),
   arrowDown: I(<><line x1="12" y1="4" x2="12" y2="20"/><polyline points="6 14 12 20 18 14"/></>),
   check: I(<polyline points="4 12 10 18 20 6"/>),
+  // Double check (lucide check-check): the "evaluated and confirmed" mark.
+  // Reads as verification-by-process where badgeCheck reads as identity seal.
+  checkCheck: I(<><path d="M18 6 7 17l-5-5"/><path d="m22 10-7.5 7.5L13 16"/></>),
   // Solid "verified" seal (social-media style): the scalloped badge filled in
   // currentColor with a check knocked out in --bg ink. Unlike the stroked icons
   // this one paints a fill, so set its colour via `color`/CSS, not stroke.
@@ -267,6 +270,20 @@ const Icons = {
   brain:       I(<><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></>),
   terminal:    I(<><rect x="3" y="4" width="18" height="16" rx="2"/><polyline points="7 9 10 12 7 15"/><line x1="12" y1="16" x2="17" y2="16"/></>),
   package:     I(<><polyline points="3 7 12 12 21 7"/><path d="M3 7 V17 L12 22 L21 17 V7 L12 2 z"/><line x1="12" y1="12" x2="12" y2="22"/></>),
+  // Dashed square (lucide square-dashed): the outline waiting to be filled in,
+  // i.e. a template / scaffold slot. Nav icon for golden-path templates.
+  squareDashed: I(<><path d="M5 3a2 2 0 0 0-2 2"/><path d="M19 3a2 2 0 0 1 2 2"/><path d="M21 19a2 2 0 0 1-2 2"/><path d="M5 21a2 2 0 0 1-2-2"/><path d="M9 3h1"/><path d="M9 21h1"/><path d="M14 3h1"/><path d="M14 21h1"/><path d="M3 9v1"/><path d="M21 9v1"/><path d="M3 14v1"/><path d="M21 14v1"/></>),
+  // Building blocks (lucide blocks): a shared library/SDK that other services
+  // compose, where `package` stays the single product cube.
+  blocks: I(<><rect width="7" height="7" x="14" y="3" rx="1"/><path d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3"/></>),
+  // Ticket stub (lucide ticket): a work item from Jira / ServiceNow.
+  ticket: I(<><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 11v2"/><path d="M13 17v2"/></>),
+  // Open issue (lucide circle-dot, the GitHub issue mark): an item waiting to
+  // be triaged — the intake queue's unit.
+  circleDot: I(<><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></>),
+  // Three stacked cubes (lucide boxes): a catalog of building blocks, where
+  // `package` is the single product cube.
+  boxes:       I(<><path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z"/><path d="m7 16.5-4.74-2.85"/><path d="m7 16.5 5-3"/><path d="M7 16.5v5.17"/><path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z"/><path d="m17 16.5-5-3"/><path d="m17 16.5 4.74-2.85"/><path d="M17 16.5v5.17"/><path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z"/><path d="M12 8 7.5 5.3"/><path d="m12 8 4.5-2.7"/><path d="M12 8v5.5"/></>),
   gitFork:     I(<><circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="M6 7 V11 a2 2 0 0 0 2 2 H16 a2 2 0 0 0 2 -2 V7"/><line x1="12" y1="13" x2="12" y2="17"/></>),
   gitPullRequest: I(<><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/><line x1="6" y1="7" x2="6" y2="17"/><path d="M14 5 H16 a2 2 0 0 1 2 2 V17"/><polyline points="11 2 14 5 11 8"/></>),
   lockKey:     I(<><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11 V8 a4 4 0 0 1 8 0 V11"/><circle cx="12" cy="16" r="1.2" fill="currentColor"/></>),

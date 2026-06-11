@@ -7,6 +7,7 @@
 // v2 (2026-05-17): crumbs accept {label, href} OR plain strings; optional
 // subNav strip below the topbar; <IconBubble> + useQueryParam helpers.
 import * as React from 'react';
+import Link from 'next/link';
 import { Icons, MOCKS } from '@/ds/core';
 
 // Single source of truth for the product navigation rail. Pages select
@@ -287,8 +288,22 @@ const FShell = ({ nav = 'home', crumbs, subNav, actions, fullBleed = false, onAg
 //   • meta    — chip row below the lede (version, deploy, p95, coverage)
 //   • compact — drops the lede, shrinks the title (above-table dense form)
 // Backward-compatible: omit the new props for the standard variant.
+// ── Forge screen templates (T1–T6) ───────────────────────────────────────────
+// Every portal page declares ONE of six templates, so variation is intentional
+// and navigation stays predictable. Adding a T7 requires justifying why none
+// of these fit (docs/DESIGN-GAPS.md · Q5):
+//   T1 Registro   — Title → AiBanner → KPIs → Toolbar → grid-table
+//                   (Audit, Runs, Intake, Traces, APIs, Buckets, …)
+//   T2 Pulse      — Title → time-range → composed metric+chart cards → table
+//                   (DORA, Fraud, Evaluations, Cloud Resources, Scorecards)
+//   T3 Galeria    — Title → facets → card grid, one optional hero
+//                   (Catalog, Products, Agents, Skills, Actions, Templates)
+//   T4 Detalhe    — back-in-eyebrow (the `back` prop below) → Title (NO icon
+//                   tile) → meta chips → tabs → content + rail
+//   T5 Workbench  — master list + working panel (Access, Chat)
+//   T6 Mission    — free composition; Home and AI-Insights ONLY.
 const FPageHeader = ({
-  eyebrow, title, subtitle, status, meta, icon, actions, compact, leading,
+  eyebrow, title, subtitle, status, meta, icon, actions, compact, leading, back,
 }: {
   eyebrow?: any;
   title?: any;
@@ -299,10 +314,20 @@ const FPageHeader = ({
   actions?: any;
   compact?: any;
   leading?: any;
+  /** Detail pages: the way back rides the EYEBROW slot (top-left, where the
+   *  eye looks for the path it came in by) — never the right action cluster.
+   *  Takes precedence over `eyebrow`. */
+  back?: { href: string; label: any };
 }) => (
   <div className={'fp-page-header' + (compact ? ' is-compact' : '')}>
     <div>
-      {eyebrow && <span className="eyebrow">{eyebrow}</span>}
+      {back ? (
+        <Link href={back.href} className="eyebrow fp-back-eyebrow">
+          <Icons.arrowLeft size={11} /> {back.label}
+        </Link>
+      ) : eyebrow ? (
+        <span className="eyebrow">{eyebrow}</span>
+      ) : null}
       <div className="fp-page-header-title-row">
         {leading}
         {icon}
