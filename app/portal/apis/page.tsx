@@ -10,6 +10,7 @@
 //
 // Composes only Eidos DS + .fp-* classes.
 import * as React from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
@@ -25,7 +26,67 @@ const KIND_OPTS = [
   { value: 'Event', label: 'Event' },
 ];
 
+// Get-started band (Frontstack-style Setup): install the Forge CLI in your
+// package manager of choice, authenticate, and run an endpoint from the shell.
+const PMS = [
+  { id: 'npm', label: 'npm', cmd: 'npm i -g @forge/cli' },
+  { id: 'pnpm', label: 'pnpm', cmd: 'pnpm add -g @forge/cli' },
+  { id: 'yarn', label: 'yarn', cmd: 'yarn global add @forge/cli' },
+  { id: 'brew', label: 'Homebrew', cmd: 'brew install equifax/tap/forge' },
+];
+
+function SetupCard() {
+  const [pm, setPm] = React.useState('npm');
+  const [copied, setCopied] = React.useState(false);
+  const cmd = PMS.find((p) => p.id === pm)?.cmd ?? PMS[0].cmd;
+  const copy = (text: string) => {
+    navigator.clipboard?.writeText(text).catch(() => {});
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1400);
+  };
+  return (
+    <div className="fp-setup">
+      <div className="fp-setup-tx">
+        <span className="fp-setup-eyebrow mono">Get started</span>
+        <h2 className="fp-setup-title">Integrate in minutes</h2>
+        <p className="fp-setup-desc">
+          Install the Forge CLI to call any API from your terminal, generate typed clients, and
+          run requests in the Workbench. You can also call the REST surfaces directly.
+        </p>
+        <div className="fp-setup-steps mono">
+          <span><span className="n">1</span> Install the CLI</span>
+          <span><span className="n">2</span> <span className="c">forge login --workspace bvs</span></span>
+          <span><span className="n">3</span> <span className="c">forge api acerta-consulta POST</span></span>
+        </div>
+      </div>
+      <div className="fp-setup-code">
+        <div className="fp-code-head">
+          <div className="fp-lang-tabs" role="tablist" aria-label="Package manager">
+            {PMS.map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                role="tab"
+                aria-selected={pm === p.id}
+                className={`fp-lang-tab${pm === p.id ? ' is-active' : ''}`}
+                onClick={() => setPm(p.id)}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+          <button type="button" className="fp-copy" onClick={() => copy(cmd)}>
+            {copied ? <Icons.check size={12} /> : <Icons.copy size={12} />} {copied ? 'Copied' : 'Copy'}
+          </button>
+        </div>
+        <pre className="fp-code-body mono"><span style={{ color: 'var(--fg-faint)' }}>$ </span>{cmd}</pre>
+      </div>
+    </div>
+  );
+}
+
 export default function ApisPage() {
+  const router = useRouter();
   const [query, setQuery] = React.useState('');
   const [product, setProduct] = React.useState('all');
   const [kind, setKind] = React.useState('all');
@@ -65,6 +126,10 @@ export default function ApisPage() {
         ))}
       </div>
 
+      <div style={{ marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
+        <SetupCard />
+      </div>
+
       <div className="fp-toolbar" style={{ marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
         <div style={{ flex: 1, minWidth: 240, maxWidth: 420, display: 'flex' }}>
           <FSearch value={query} onChange={setQuery} placeholder="Search APIs, services, owners…" aria-label="Search APIs" className="fluid" />
@@ -97,14 +162,14 @@ export default function ApisPage() {
                 {filtered.map((a) => {
                   const st = STATUS_TONE[a.status];
                   return (
-                    <tr key={a.id}>
+                    <tr key={a.id} style={{ cursor: 'pointer' }} onClick={() => router.push(`/portal/apis/${a.id}`)}>
                       <td>
                         <span style={{ fontWeight: 600 }}>{a.name} <span className="mono" style={{ color: 'var(--fg-faint)', fontWeight: 400 }}>{a.version}</span></span>
                         <span className="fp-cell-sub">{a.desc}</span>
                       </td>
                       <td><Pill tone={KIND_TONE[a.kind]}>{a.kind}</Pill></td>
                       <td>
-                        <Link href={`/portal/catalog/${a.service}`} className="u-link mono">{a.service}</Link>
+                        <Link href={`/portal/catalog/${a.service}`} className="fp-entity-link mono" onClick={(e) => e.stopPropagation()}>{a.service}</Link>
                       </td>
                       <td style={{ color: 'var(--fg-muted)', fontSize: 'var(--text-sm)' }}>{a.product}</td>
                       <td><Pill tone={VIS_TONE[a.visibility as ApiVisibility]}>{a.visibility}</Pill></td>
