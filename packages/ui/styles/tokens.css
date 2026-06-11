@@ -845,6 +845,576 @@
   --info-border: rgba(37,99,235,0.28);
 }
 
+/* ============================================================================
+ * COBALT — a cool blue theme, anchored on the requested primary #2563EB.
+ *   • PRIMARY — #2563EB is the deep light-mode accent (white ink rides on top);
+ *     its bright sibling #4F86F7 is the dark-mode accent (dark ink rides on top,
+ *     exactly like Forge's ember), so the whole component system keeps working
+ *     without touching a single component (--ember-fg is NOT overridden).
+ *   • SURFACES — COLD blue-tinted neutrals (oklch hue 264) instead of Forge's
+ *     warm hue 60.
+ *   • SECONDARY ACCENTS — electric cyan (--accent-2, info/AI signal) + a brass
+ *     gold (--accent-3, premium-tier). The gold is pushed off the warning-amber
+ *     hue (lower L, hue 78 vs warning's ~85) so a premium signal never reads as
+ *     a warning.
+ * Same compact-override pattern as Dusk/Fjord; everything not set here (borders,
+ * fg, status green/amber/red, severity/health/risk) is inherited from Forge.
+ * ========================================================================== */
+
+[data-ds-theme="cobalt"] {
+  /* SURFACES — cool blue, neutral chroma so the cyan + gold accents pop (hue 264) */
+  --canvas:           oklch(0.13 0.010 264);
+  --bg:               oklch(0.165 0.012 264);
+  --bg-elevated:      oklch(0.2 0.014 264);
+  --surface:          oklch(0.235 0.016 264);
+  --surface-hover:    oklch(0.275 0.018 264);
+  --surface-overlay:  oklch(0.255 0.016 264);
+  --surface-active:   oklch(0.32 0.020 264);
+  --surface-selected: oklch(0.285 0.050 264);
+
+  /* ACCENT — bright cobalt; #2563EB is the deep/pressed tone. Dark ink rides on
+     top (inherited). --ember-text is a lighter blue so links/icons stay AA on
+     the dark surfaces and on the soft accent band. */
+  --ember:        #4F86F7;
+  --ember-glow:   #74A0FA;
+  --ember-deep:   #2563EB;
+  --ember-soft:   rgba(79,134,247,0.16);
+  --ember-softer: rgba(79,134,247,0.08);
+  --ember-border: rgba(79,134,247,0.32);
+  --ember-text:   #9DBDFF;
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(79,134,247,0.16),
+    0 8px 24px rgba(79,134,247,0.22);
+  --ai-accent:          #4F86F7;
+  --ai-streaming-caret: #4F86F7;
+  --viz-cat-1:   #4F86F7;
+  --viz-seq-mid: #4F86F7;
+
+  /* SECONDARY — cyan info/AI + brass gold premium (gold kept off warning-amber) */
+  --accent-2:      #22D3EE;
+  --accent-2-soft: rgba(34,211,238,0.16);
+  --accent-3:      #E0A22B;
+  --info:        #22D3EE;
+  --info-strong: #06B6D4;
+  --info-soft:   rgba(34,211,238,0.14);
+  --info-subtle: rgba(34,211,238,0.07);
+  --info-border: rgba(34,211,238,0.30);
+}
+
+[data-ds-theme="cobalt"][data-mode="light"] {
+  /* SURFACES — cool blue mirror (hue 264) */
+  --canvas:           oklch(0.93 0.006 264);
+  --bg:               oklch(0.97 0.005 264);
+  --bg-elevated:      oklch(0.995 0.002 264);
+  --surface:          oklch(1 0 0);
+  --surface-hover:    oklch(0.965 0.006 264);
+  --surface-overlay:  oklch(1 0 0);
+  --surface-active:   oklch(0.935 0.008 264);
+  --surface-selected: oklch(0.95 0.040 264);
+
+  /* ACCENT — the literal #2563EB (deep, white ink inherited). */
+  --ember:        #2563EB;
+  --ember-glow:   #3B82F6;
+  --ember-deep:   #1D4ED8;
+  --ember-soft:   rgba(37,99,235,0.10);
+  --ember-softer: rgba(37,99,235,0.05);
+  --ember-border: rgba(37,99,235,0.30);
+  --ember-text:   #1D4ED8;
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(37,99,235,0.14),
+    0 8px 24px rgba(37,99,235,0.18);
+  --ai-accent:          #2563EB;
+  --ai-streaming-caret: #2563EB;
+  --viz-cat-1:   #2563EB;
+  --viz-seq-mid: #2563EB;
+
+  /* SECONDARY — deeper cyan + brass gold so they hit AA on white */
+  --accent-2:      #0891B2;
+  --accent-2-soft: rgba(8,145,178,0.10);
+  --accent-3:      #A16207;
+  --info:        #0891B2;
+  --info-strong: #0E7490;
+  --info-soft:   rgba(8,145,178,0.10);
+  --info-subtle: rgba(8,145,178,0.05);
+  --info-border: rgba(8,145,178,0.28);
+  --info-text:   #0E7490;
+}
+
+/* ============================================================================
+ * GARNET — a brand theme anchored on the deep crimson #9E1B32.
+ *
+ * STRATEGY — the brand palette mapped to roles, not sprayed on the page:
+ *   • PRIMARY  #9E1B32 — the literal accent in LIGHT mode (white ink rides on
+ *     top); a brightened crimson #E03A57 in DARK (dark ink rides on top, the
+ *     Eidos invariant), with #9E1B32 kept as the deep/pressed tone. So no
+ *     component is touched (--ember-fg is NOT overridden).
+ *   • NEUTRALS #000/#fff/#5b6771/#a3aaad/#e7e7e7 — drive the whole surface +
+ *     foreground + border system. Surfaces are neutral-cool charcoal in dark,
+ *     so the crimson is the only warm note; slate #5B6771 is the muted text.
+ *   • AUXILIARY (5) mapped to the SEMANTIC ROLES + the categorical chart series:
+ *       teal   #007298 → info / AI signal (--accent-2)
+ *       green  #45842A → success
+ *       gold   #F1C319 → warning
+ *       purple #652F6C → premium (--accent-3)
+ *       orange #E77204 → the 5th categorical chart hue
+ *     and all five together → --viz-cat-1..5 (data series).
+ *   • ACCESSIBLE variants (#994a00/#294d19/#004d66/#431f47/#98700c) become the
+ *     -text / -strong tokens so every role hits AA as text/icon on white.
+ *   • DANGER is left as the base bright red — distinct from the wine brand red,
+ *     so an error never reads as a brand mark.
+ * Compact-override pattern like Dusk/Fjord/Cobalt; anything not set is inherited.
+ * ========================================================================== */
+[data-ds-theme="garnet"] {
+  /* SURFACES — neutral-cool charcoal (hue 255, very low chroma) so the crimson pops */
+  --canvas:           oklch(0.13 0.004 255);
+  --bg:               oklch(0.165 0.005 255);
+  --bg-elevated:      oklch(0.2 0.006 255);
+  --surface:          oklch(0.235 0.007 255);
+  --surface-hover:    oklch(0.275 0.008 255);
+  --surface-overlay:  oklch(0.255 0.007 255);
+  --surface-active:   oklch(0.32 0.009 255);
+  --surface-selected: oklch(0.28 0.045 16);  /* crimson-tinged selection */
+
+  /* PRIMARY — brightened crimson; #9E1B32 is the deep/pressed tone. Dark ink
+     rides on top (inherited). --ember-text is a light rose so links/icons/
+     avatars stay AA on the dark surfaces and on the soft accent band. */
+  --ember:        #E03A57;
+  --ember-glow:   #EA5C74;
+  --ember-deep:   #9E1B32;
+  --ember-soft:   rgba(224,58,87,0.16);
+  --ember-softer: rgba(224,58,87,0.08);
+  --ember-border: rgba(224,58,87,0.34);
+  --ember-text:   #F7A8B4;
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(224,58,87,0.16),
+    0 8px 24px rgba(224,58,87,0.22);
+  --ai-accent:          #E03A57;
+  --ai-streaming-caret: #E03A57;
+
+  /* INFO / AI — brand teal #007298, brightened for dark legibility */
+  --accent-2:      #34ABD0;
+  --accent-2-soft: rgba(52,171,208,0.16);
+  --info:        #34ABD0;
+  --info-strong: #007298;
+  --info-soft:   rgba(52,171,208,0.14);
+  --info-subtle: rgba(52,171,208,0.07);
+  --info-border: rgba(52,171,208,0.30);
+
+  /* PREMIUM — brand purple #652F6C, brightened */
+  --accent-3:    #B07FB8;
+
+  /* SUCCESS — brand green #45842A, brightened */
+  --success:        #5FB23E;
+  --success-strong: #45842A;
+  --success-soft:   rgba(95,178,62,0.14);
+  --success-subtle: rgba(95,178,62,0.07);
+  --success-border: rgba(95,178,62,0.30);
+  --success-text:   #9FD98A;
+
+  /* WARNING — brand gold #F1C319 (already bright; dark ink rides on it) */
+  --warning:        #F1C319;
+  --warning-strong: #C99A0E;
+  --warning-soft:   rgba(241,195,25,0.16);
+  --warning-subtle: rgba(241,195,25,0.08);
+  --warning-border: rgba(241,195,25,0.32);
+  --warning-text:   #F8D766;
+
+  /* CATEGORICAL CHART SERIES — the five brand auxiliaries, brightened for dark */
+  --viz-cat-1:  #E03A57;  /* crimson */
+  --viz-cat-2:  #34ABD0;  /* teal    */
+  --viz-cat-3:  #B07FB8;  /* purple  */
+  --viz-cat-4:  #5FB23E;  /* green   */
+  --viz-cat-5:  #F08A2C;  /* orange  */
+  --viz-seq-mid: #E03A57;
+}
+
+[data-ds-theme="garnet"][data-mode="light"] {
+  /* SURFACES — brand neutrals (#fff / #e7e7e7), near-neutral cool slate */
+  --canvas:           oklch(0.928 0.002 255);  /* ~#e7e7e7 */
+  --bg:               oklch(0.972 0.0015 255);
+  --bg-elevated:      oklch(0.992 0.001 255);
+  --surface:          oklch(1 0 0);
+  --surface-hover:    oklch(0.966 0.002 255);
+  --surface-overlay:  oklch(1 0 0);
+  --surface-active:   oklch(0.935 0.003 255);
+  --surface-selected: oklch(0.94 0.035 16);
+
+  /* BORDERS — brand slate #5B6771 */
+  --border-subtle:   rgba(91,103,113,0.10);
+  --border:          rgba(91,103,113,0.18);
+  --border-strong:   rgba(91,103,113,0.30);
+  --border-stronger: rgba(91,103,113,0.45);
+
+  /* FOREGROUND — brand neutrals: cool near-black, slate muted (#5B6771) */
+  --fg:        #15181B;
+  --fg-muted:  #5B6771;
+  --fg-subtle: #767D84;
+  --fg-faint:  #889096;
+
+  /* PRIMARY — the literal #9E1B32 (deep, white ink inherited) */
+  --ember:        #9E1B32;
+  --ember-glow:   #B81F39;
+  --ember-deep:   #7E1528;
+  --ember-soft:   rgba(158,27,50,0.10);
+  --ember-softer: rgba(158,27,50,0.05);
+  --ember-border: rgba(158,27,50,0.30);
+  --ember-text:   #9E1B32;
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(158,27,50,0.14),
+    0 8px 24px rgba(158,27,50,0.18);
+  --ai-accent:          #9E1B32;
+  --ai-streaming-caret: #9E1B32;
+
+  /* INFO / AI — brand teal #007298 (deep var #004D66 for AA text) */
+  --accent-2:      #007298;
+  --accent-2-soft: rgba(0,114,152,0.10);
+  --info:        #007298;
+  --info-strong: #004D66;
+  --info-soft:   rgba(0,114,152,0.10);
+  --info-subtle: rgba(0,114,152,0.05);
+  --info-border: rgba(0,114,152,0.28);
+  --info-text:   #004D66;
+
+  /* PREMIUM — brand purple #652F6C (white ink); deep var #431F47 */
+  --accent-3:    #652F6C;
+
+  /* SUCCESS — brand green #45842A (deep/text var #294D19) */
+  --success:        #45842A;
+  --success-strong: #294D19;
+  --success-soft:   rgba(69,132,42,0.10);
+  --success-subtle: rgba(69,132,42,0.05);
+  --success-border: rgba(69,132,42,0.28);
+  --success-text:   #294D19;
+
+  /* WARNING — brand gold #F1C319 (dark ink on it), deep/text var #98700C */
+  --warning:        #F1C319;
+  --warning-strong: #98700C;
+  --warning-soft:   rgba(241,195,25,0.12);
+  --warning-subtle: rgba(241,195,25,0.06);
+  --warning-border: rgba(241,195,25,0.30);
+  --warning-text:   #98700C;
+
+  /* CATEGORICAL CHART SERIES — the five brand auxiliaries (light/accessible) */
+  --viz-cat-1:  #9E1B32;  /* crimson */
+  --viz-cat-2:  #007298;  /* teal    */
+  --viz-cat-3:  #652F6C;  /* purple  */
+  --viz-cat-4:  #45842A;  /* green   */
+  --viz-cat-5:  #E77204;  /* orange  */
+  --viz-seq-mid: #9E1B32;
+}
+
+/* ============================================================================
+ * GRAPHITE — Apple-inspired, MONOCHROME. The signature is the absence of a hue:
+ *   • SURFACES are pure neutral (chroma ~0). Light = white cards on the Apple
+ *     grey #f5f5f7; dark = true OLED black stepping up to neutral graphite cards.
+ *   • ACCENT is greyscale, like Apple's dark/light pill buttons: a near-black
+ *     #1D1D1F fill in LIGHT (white ink) and a near-white #F5F5F7 fill in DARK
+ *     (dark ink). This maps onto the Eidos invariant for free — light = deep
+ *     accent + white ink, dark = bright accent + dark ink — so --ember-fg is NOT
+ *     overridden and every primary button becomes the elegant graphite pill.
+ *   • TEXT is the Apple near-black #1d1d1f (never pure #000); muted tiers are
+ *     darkened from Apple's #6e6e73 so dense chrome (the sidebar) stays legible.
+ *   • COLOUR lives ONLY in the functional roles + chart series, mapped to the
+ *     iOS/macOS system palette (green/orange/red/cyan/indigo). danger IS the
+ *     system red here (Apple defines one), so it is overridden too.
+ * Compact-override pattern like the other themes; anything unset is inherited.
+ * ========================================================================== */
+[data-ds-theme="graphite"] {
+  /* SURFACES — true OLED black to neutral graphite cards (chroma 0, no tint) */
+  --canvas:           oklch(0 0 0);
+  --bg:               oklch(0.075 0 0);
+  --bg-elevated:      oklch(0.155 0 0);
+  --surface:          oklch(0.205 0 0);
+  --surface-hover:    oklch(0.25 0 0);
+  --surface-overlay:  oklch(0.225 0 0);
+  --surface-active:   oklch(0.305 0 0);
+  --surface-selected: oklch(0.275 0 0);  /* neutral grey selection */
+
+  /* FOREGROUND — Apple off-white over neutral greys */
+  --fg:        #F5F5F7;
+  --fg-muted:  #A1A1A6;
+  --fg-subtle: #86868B;
+  --fg-faint:  #6E6E73;
+
+  /* ACCENT — greyscale: near-white pill (dark ink rides on top, inherited). The
+     elegant light-button-on-dark look. #D1D1D6 is the pressed tone. */
+  --ember:        #F5F5F7;
+  --ember-glow:   #FFFFFF;
+  --ember-deep:   #D1D1D6;
+  --ember-soft:   rgba(245,245,247,0.14);
+  --ember-softer: rgba(245,245,247,0.07);
+  --ember-border: rgba(245,245,247,0.26);
+  --ember-text:   #F5F5F7;
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(245,245,247,0.14),
+    0 8px 24px rgba(0,0,0,0.45);
+  --ai-accent:          #F5F5F7;
+  --ai-streaming-caret: #F5F5F7;
+
+  /* INFO / AI — system cyan */
+  --accent-2:      #64D2FF;
+  --accent-2-soft: rgba(100,210,255,0.16);
+  --info:        #64D2FF;
+  --info-strong: #32ADE6;
+  --info-soft:   rgba(100,210,255,0.14);
+  --info-subtle: rgba(100,210,255,0.07);
+  --info-border: rgba(100,210,255,0.30);
+
+  /* PREMIUM — system indigo */
+  --accent-3:    #7D7AFF;
+
+  /* SUCCESS — system green */
+  --success:        #30D158;
+  --success-strong: #248A3D;
+  --success-soft:   rgba(48,209,88,0.14);
+  --success-subtle: rgba(48,209,88,0.07);
+  --success-border: rgba(48,209,88,0.30);
+  --success-text:   #74E98E;
+
+  /* WARNING — system orange */
+  --warning:        #FF9F0A;
+  --warning-strong: #C97A00;
+  --warning-soft:   rgba(255,159,10,0.16);
+  --warning-subtle: rgba(255,159,10,0.08);
+  --warning-border: rgba(255,159,10,0.32);
+  --warning-text:   #FFC266;
+
+  /* DANGER — system red (Apple defines one, so override) */
+  --danger:        #FF453A;
+  --danger-soft:   rgba(255,69,58,0.14);
+  --danger-strong: #FF6961;
+  --danger-subtle: rgba(255,69,58,0.07);
+  --danger-border: rgba(255,69,58,0.30);
+  --danger-text:   #FF8A82;
+
+  /* CATEGORICAL CHART SERIES — the Apple system palette */
+  --viz-cat-1:  #2997FF;  /* blue   */
+  --viz-cat-2:  #30D158;  /* green  */
+  --viz-cat-3:  #FF9F0A;  /* orange */
+  --viz-cat-4:  #7D7AFF;  /* indigo */
+  --viz-cat-5:  #64D2FF;  /* cyan   */
+  --viz-seq-mid: #2997FF;
+}
+
+[data-ds-theme="graphite"][data-mode="light"] {
+  /* SURFACES — white cards on the Apple grey #f5f5f7 (near-neutral, faint cool) */
+  --canvas:           oklch(0.93 0.003 286);   /* ~#e8e8ed */
+  --bg:               oklch(0.966 0.002 286);  /* ~#f5f5f7 */
+  --bg-elevated:      oklch(0.99 0.0015 286);
+  --surface:          oklch(1 0 0);            /* #ffffff */
+  --surface-hover:    oklch(0.966 0.002 286);
+  --surface-overlay:  oklch(1 0 0);
+  --surface-active:   oklch(0.93 0.003 286);
+  --surface-selected: oklch(0.93 0 0);  /* neutral grey selection */
+
+  /* BORDERS — Apple separator ink #3c3c43 */
+  --border-subtle:   rgba(60,60,67,0.08);
+  --border:          rgba(60,60,67,0.16);
+  --border-strong:   rgba(60,60,67,0.28);
+  --border-stronger: rgba(60,60,67,0.42);
+
+  /* FOREGROUND — Apple near-black; muted tiers darkened from Apple's #6e6e73
+     so the (now grey) sidebar + dense secondary text stay clearly legible. */
+  --fg:        #1D1D1F;
+  --fg-muted:  #54545A;
+  --fg-subtle: #6E6E73;
+  --fg-faint:  #86868B;
+
+  /* ACCENT — greyscale: the near-black pill (white ink inherited). The elegant
+     dark-button-on-white look from the reference. #000 is the pressed tone. */
+  --ember:        #1D1D1F;
+  --ember-glow:   #000000;
+  --ember-deep:   #000000;
+  --ember-soft:   rgba(29,29,31,0.07);
+  --ember-softer: rgba(29,29,31,0.04);
+  --ember-border: rgba(29,29,31,0.20);
+  --ember-text:   #1D1D1F;
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(29,29,31,0.12),
+    0 8px 24px rgba(29,29,31,0.18);
+  --ai-accent:          #1D1D1F;
+  --ai-streaming-caret: #1D1D1F;
+
+  /* INFO / AI — system cyan (deeper for AA on white) */
+  --accent-2:      #0A84C4;
+  --accent-2-soft: rgba(10,132,196,0.10);
+  --info:        #0A84C4;
+  --info-strong: #006A99;
+  --info-soft:   rgba(10,132,196,0.10);
+  --info-subtle: rgba(10,132,196,0.05);
+  --info-border: rgba(10,132,196,0.28);
+  --info-text:   #006A99;
+
+  /* PREMIUM — system indigo */
+  --accent-3:    #5E5CE6;
+
+  /* SUCCESS — system green (deeper solid so white ink hits AA) */
+  --success:        #248A3D;
+  --success-strong: #1D7A32;
+  --success-soft:   rgba(52,199,89,0.12);
+  --success-subtle: rgba(52,199,89,0.06);
+  --success-border: rgba(52,199,89,0.30);
+  --success-text:   #248A3D;
+
+  /* WARNING — system orange (dark ink rides on it, inherited) */
+  --warning:        #FF9500;
+  --warning-strong: #B25000;
+  --warning-soft:   rgba(255,149,0,0.12);
+  --warning-subtle: rgba(255,149,0,0.06);
+  --warning-border: rgba(255,149,0,0.30);
+  --warning-text:   #B25000;
+
+  /* DANGER — system red (deeper solid so white ink hits AA) */
+  --danger:        #D70015;
+  --danger-strong: #B3000F;
+  --danger-soft:   rgba(255,59,48,0.10);
+  --danger-subtle: rgba(255,59,48,0.05);
+  --danger-border: rgba(215,0,21,0.28);
+  --danger-text:   #D70015;
+
+  /* CATEGORICAL CHART SERIES — Apple system palette (light) */
+  --viz-cat-1:  #0071E3;  /* blue   */
+  --viz-cat-2:  #34C759;  /* green  */
+  --viz-cat-3:  #FF9500;  /* orange */
+  --viz-cat-4:  #5E5CE6;  /* indigo */
+  --viz-cat-5:  #32ADE6;  /* cyan   */
+  --viz-seq-mid: #0071E3;
+}
+
+/* ============================================================================
+ * DUNE — warm monochrome, the thermal opposite of Graphite. Built from a
+ * sand-to-coffee palette (cream / beige / wheat / camel / chocolate / caramel).
+ *   • SURFACES are warm earthy neutrals (hue ~65-80): cream + warm-white cards
+ *     in LIGHT; deep espresso browns in DARK. The warmth lives in the chrome.
+ *   • ACCENT is coffee: a deep brown #7A5A3C in LIGHT (white ink) and its bright
+ *     sibling, a latte #D4BB93, in DARK (dark ink rides on top, the Eidos
+ *     invariant) with #8B6A48 as the deep/pressed tone. --ember-fg NOT overridden.
+ *   • TEXT is espresso #3A2C1E over warm taupe #6B5B47.
+ *   • The few functional colours stay recognisable: info is a muted denim blue
+ *     (the one cool note), premium a terracotta; success/warning/danger are
+ *     inherited (standard green/amber/red read fine on warm chrome). viz-cat is
+ *     an earthy series.
+ * Compact-override pattern like the other themes; anything unset is inherited.
+ * ========================================================================== */
+[data-ds-theme="dune"] {
+  /* SURFACES — deep espresso browns (warm hue 65, low chroma) */
+  --canvas:           oklch(0.12 0.012 65);
+  --bg:               oklch(0.155 0.013 65);
+  --bg-elevated:      oklch(0.19 0.014 65);
+  --surface:          oklch(0.225 0.015 65);
+  --surface-hover:    oklch(0.265 0.016 65);
+  --surface-overlay:  oklch(0.245 0.015 65);
+  --surface-active:   oklch(0.31 0.017 65);
+  --surface-selected: oklch(0.29 0.045 70);  /* warm latte-tinged selection */
+
+  /* FOREGROUND — warm cream over taupe */
+  --fg:        #F0E8D9;
+  --fg-muted:  #B6A88F;
+  --fg-subtle: #97876F;
+  --fg-faint:  #7D6E58;
+
+  /* ACCENT — latte (bright sibling; dark ink rides on top). #8B6A48 is pressed. */
+  --ember:        #D4BB93;
+  --ember-glow:   #E2CBA6;
+  --ember-deep:   #8B6A48;
+  --ember-soft:   rgba(212,187,147,0.16);
+  --ember-softer: rgba(212,187,147,0.08);
+  --ember-border: rgba(212,187,147,0.30);
+  --ember-text:   #E2CBA6;
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(212,187,147,0.16),
+    0 8px 24px rgba(0,0,0,0.50);
+  --ai-accent:          #D4BB93;
+  --ai-streaming-caret: #D4BB93;
+
+  /* INFO / AI — muted denim blue (the one cool note) */
+  --accent-2:      #6FA0C4;
+  --accent-2-soft: rgba(111,160,196,0.16);
+  --info:        #6FA0C4;
+  --info-strong: #4A6D8C;
+  --info-soft:   rgba(111,160,196,0.14);
+  --info-subtle: rgba(111,160,196,0.07);
+  --info-border: rgba(111,160,196,0.30);
+
+  /* PREMIUM — terracotta */
+  --accent-3:    #D08A5C;
+
+  /* CATEGORICAL CHART SERIES — earthy palette */
+  --viz-cat-1:  #D4BB93;  /* latte      */
+  --viz-cat-2:  #6FA0C4;  /* denim      */
+  --viz-cat-3:  #D08A5C;  /* terracotta */
+  --viz-cat-4:  #8BB35A;  /* olive      */
+  --viz-cat-5:  #E0A93E;  /* amber      */
+  --viz-seq-mid: #D4BB93;
+}
+
+[data-ds-theme="dune"][data-mode="light"] {
+  /* SURFACES — cream page, warm-white cards (warm hue ~80) */
+  --canvas:           oklch(0.885 0.025 78);   /* ~#e6dac6 deep sand */
+  --bg:               oklch(0.925 0.018 80);   /* ~#efe7d7 cream     */
+  --bg-elevated:      oklch(0.985 0.006 80);
+  --surface:          oklch(0.975 0.008 80);   /* ~#fbf8f1 warm white */
+  --surface-hover:    oklch(0.935 0.016 80);
+  --surface-overlay:  oklch(0.975 0.008 80);
+  --surface-active:   oklch(0.885 0.025 78);
+  --surface-selected: oklch(0.88 0.045 72);
+
+  /* BORDERS — warm brown ink #5A4630 */
+  --border-subtle:   rgba(90,70,48,0.08);
+  --border:          rgba(90,70,48,0.16);
+  --border-strong:   rgba(90,70,48,0.26);
+  --border-stronger: rgba(90,70,48,0.40);
+
+  /* FOREGROUND — espresso near-black over taupe */
+  --fg:        #3A2C1E;
+  --fg-muted:  #6B5B47;
+  --fg-subtle: #8A7A63;
+  --fg-faint:  #A0917A;
+
+  /* ACCENT — coffee (deep, white ink inherited). #5E4429 is pressed. */
+  --ember:        #7A5A3C;
+  --ember-glow:   #8B6A48;
+  --ember-deep:   #5E4429;
+  --ember-soft:   rgba(122,90,60,0.12);
+  --ember-softer: rgba(122,90,60,0.06);
+  --ember-border: rgba(122,90,60,0.30);
+  --ember-text:   #6B4F35;
+  --elev-ember:
+    0 0 0 1px var(--ember),
+    0 0 0 4px rgba(122,90,60,0.14),
+    0 8px 24px rgba(94,68,41,0.20);
+  --ai-accent:          #7A5A3C;
+  --ai-streaming-caret: #7A5A3C;
+
+  /* INFO / AI — denim blue (deeper for AA on cream) */
+  --accent-2:      #3E6B8C;
+  --accent-2-soft: rgba(62,107,140,0.12);
+  --info:        #3E6B8C;
+  --info-strong: #2C5273;
+  --info-soft:   rgba(62,107,140,0.12);
+  --info-subtle: rgba(62,107,140,0.06);
+  --info-border: rgba(62,107,140,0.28);
+  --info-text:   #2C5273;
+
+  /* PREMIUM — terracotta (deeper) */
+  --accent-3:    #A8542E;
+
+  /* CATEGORICAL CHART SERIES — earthy palette (light) */
+  --viz-cat-1:  #7A5A3C;  /* coffee     */
+  --viz-cat-2:  #3E6B8C;  /* denim      */
+  --viz-cat-3:  #A8542E;  /* terracotta */
+  --viz-cat-4:  #5F8A3C;  /* olive      */
+  --viz-cat-5:  #C8841C;  /* amber      */
+  --viz-seq-mid: #7A5A3C;
+}
+
 * { box-sizing: border-box; }
 html, body {
   margin: 0; padding: 0;
