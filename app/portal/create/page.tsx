@@ -67,7 +67,7 @@ const TEMPLATES: Template[] = [
     maintainer: PEOPLE.rafael,
     usage: 84,
     version: '3.2.0',
-    icon: 'package',
+    icon: 'server',
     featured: true,
     match: /score|risk|credit|rating/i,
   },
@@ -147,7 +147,7 @@ const TEMPLATES: Template[] = [
     maintainer: PEOPLE.camila,
     usage: 29,
     version: '1.9.2',
-    icon: 'package',
+    icon: 'blocks',
     match: /lib|sdk|package|shared|module/i,
   },
 ];
@@ -312,7 +312,7 @@ function Gallery({ onUse }: { onUse: (id: string) => void }) {
           ) : (
             <div className="fp-grid fp-grid-auto">
               {filtered.map((t, i) => {
-                const Icon = (Icons as Record<string, React.FC<{ size?: number }>>)[t.icon] ?? Icons.package;
+                const Icon = (Icons as Record<string, React.FC<{ size?: number }>>)[t.icon] ?? Icons.squareDashed;
                 return (
                   <div
                     key={t.id}
@@ -329,7 +329,7 @@ function Gallery({ onUse }: { onUse: (id: string) => void }) {
                     style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', cursor: 'pointer', ...STAGGER(i) }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-                      <IconBubble icon={t.icon} size={36} tone="ember">
+                      <IconBubble icon={t.icon} size={36} tone="neutral">
                         <Icon size={16} />
                       </IconBubble>
                       <div style={{ flex: 1, minWidth: 0 }}>
@@ -365,7 +365,7 @@ function Gallery({ onUse }: { onUse: (id: string) => void }) {
                 const Icon = (Icons as Record<string, React.FC<{ size?: number }>>)[g.icon] ?? Icons.check;
                 return (
                   <div key={g.label} style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'flex-start' }}>
-                    <span style={{ color: 'var(--ember)', marginBlockStart: 1, flexShrink: 0 }}><Icon size={14} /></span>
+                    <span style={{ color: 'var(--fg-muted)', marginBlockStart: 1, flexShrink: 0 }}><Icon size={14} /></span>
                     <div>
                       <div style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}>{g.label}</div>
                       <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>{g.note}</div>
@@ -381,7 +381,7 @@ function Gallery({ onUse }: { onUse: (id: string) => void }) {
               {RECENT.map((r) => {
                 const tpl = getTemplate(r.id);
                 if (!tpl) return null;
-                const Ic = (Icons as Record<string, React.FC<{ size?: number }>>)[tpl.icon] ?? Icons.package;
+                const Ic = (Icons as Record<string, React.FC<{ size?: number }>>)[tpl.icon] ?? Icons.squareDashed;
                 return (
                   <li key={r.id} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
                     <Ic size={12} />
@@ -410,17 +410,15 @@ function ConfigForm({ template, onCancel, onProvision }: { template: string; onC
   const tpl = getTemplate(template)!;
   const repoSlug = name ? slug(name) : 'my-new-service';
   const repoPath = `forge/${slug(product)}/${repoSlug}`;
-  const TplIcon = (Icons as Record<string, React.FC<{ size?: number }>>)[tpl.icon] ?? Icons.package;
+  const TplIcon = (Icons as Record<string, React.FC<{ size?: number }>>)[tpl.icon] ?? Icons.squareDashed;
   const canProvision = name.trim().length > 1 && access.length >= 2;
 
   return (
     <>
-      {/* Back link above the title (in place of the eyebrow) */}
-      <div style={{ marginBlockEnd: 'var(--space-2)' }}>
-        <Button type="button" variant="ghost" onClick={onCancel} style={{ marginInlineStart: -8 }}>
-          <Icons.chevronLeft size={13} /> Back to templates
-        </Button>
-      </div>
+      {/* T4 standard: the way back rides the eyebrow slot */}
+      <button type="button" className="fp-back-eyebrow" onClick={onCancel} style={{ background: 'none', border: 0, padding: 0 }}>
+        <Icons.arrowLeft size={11} /> Templates
+      </button>
       <FPageHeader
         title="Scaffold a new service"
         subtitle={<>From the <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--fg)' }}>{tpl.name}</span> golden path</>}
@@ -431,7 +429,7 @@ function ConfigForm({ template, onCancel, onProvision }: { template: string; onC
         <div className="fp-card" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>
           {/* Template context row */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', paddingBlockEnd: 'var(--space-4)', borderBlockEnd: '1px solid var(--border)' }}>
-            <IconBubble icon={tpl.icon} size={32} tone="ember"><TplIcon size={14} /></IconBubble>
+            <IconBubble icon={tpl.icon} size={32} tone="neutral"><TplIcon size={14} /></IconBubble>
             <div style={{ flex: 1, minWidth: 0 }}>
               <span style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>Template </span>
               <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 600 }}>{tpl.name} <span style={{ color: 'var(--fg-faint)' }}>v{tpl.version}</span></span>
@@ -500,7 +498,7 @@ function ConfigForm({ template, onCancel, onProvision }: { template: string; onC
             <div className="t-mono-label" style={{ marginBlockEnd: 'var(--space-3)' }}>Summary</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
               <Row label="Template" value={<span style={{ fontFamily: 'var(--font-mono)' }}>{tpl.name}</span>} />
-              <Row label="Repository" value={<span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', color: 'var(--ember)' }}>{repoPath}</span>} />
+              <Row label="Repository" value={<span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', color: 'var(--fg)' }}>{repoPath}</span>} />
               <Row label="Product" value={<Pill tone="ember">{product}</Pill>} />
               <Row label="Visibility" value={<Pill tone="neutral">{visibility}</Pill>} />
               <Row label="Access" value={<span style={{ fontFamily: 'var(--font-mono)' }}>{access.length} people</span>} />
@@ -509,7 +507,7 @@ function ConfigForm({ template, onCancel, onProvision }: { template: string; onC
               <div className="t-mono-label" style={{ marginBlockEnd: 'var(--space-2)' }}>Forge will</div>
               {['Create the repo and open a PR', 'Run CI and build the image', 'Register p95 and availability SLOs', 'Add the service to the catalog'].map((s) => (
                 <div key={s} style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center', fontSize: 'var(--text-sm)', color: 'var(--fg-muted)', paddingBlock: 'var(--space-1)' }}>
-                  <Icons.check size={13} style={{ color: 'var(--ember)', flexShrink: 0 } as React.CSSProperties} /> {s}
+                  <Icons.check size={13} style={{ color: 'var(--success)', flexShrink: 0 } as React.CSSProperties} /> {s}
                 </div>
               ))}
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-muted)', fontFamily: 'var(--font-mono)', marginBlockStart: 'var(--space-2)' }}>About 90 seconds</div>

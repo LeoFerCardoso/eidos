@@ -1,7 +1,9 @@
 'use client';
 // Forge · Agent detail / settings page (/portal/agents/[id]). Opened from an
-// agent card. Two columns: a wide left (header + the agent's stored Markdown
-// instructions) and a right metadata sidebar separated by a hairline rule.
+// agent card. Two columns: a wide left (header + tabs) and a right metadata
+// sidebar separated by a hairline rule. Tabs on the left: Overview (agent
+// instructions) · Permissions & scope (identity, autonomy ramp, granted
+// actions, scopes, secrets). See docs/AGENTIC-PLATFORM-VISION.md §7.5 + §7.12.
 // Sidebar sections: Properties · Capabilities · Apps (MCP/API, with a tool
 // popup) · Skills · Contexts · Usage (DS charts) · Versions. Built from Eidos
 // DS primitives + BrandIcon for the app logos.
@@ -17,6 +19,7 @@ import {
   useChartColors, Recharts,
 } from '@/ds/core';
 import { usePageCrumb } from '@/portal/shell/portal-shell';
+import { AsideSection, EmptyState } from '@/portal/shell/detail-kit';
 import { usePersistentState } from '@/portal/shell/use-persistent-state';
 import { AGENTS, getAgent, type Agent } from '@/portal/data/agents';
 import {
@@ -26,6 +29,10 @@ import {
   versionsFor, BASELINE_GUARDRAILS, policyFor, dataClassLabel,
   channelsFor, type Channel,
 } from '@/portal/data/agent-detail';
+import {
+  getPrincipal, AUTONOMY_ORDER, AUTONOMY_META, type Principal,
+} from '@/portal/data/access';
+import { getAction } from '@/portal/data/actions';
 
 const { ResponsiveContainer, BarChart, Bar, XAxis, Tooltip } = Recharts;
 
@@ -116,7 +123,7 @@ function CostChart({ data }: { data: UsageDay[] }) {
               to the end for late bars · never running off the right edge. */}
           <Tooltip cursor={{ fill: 'var(--viz-grid)' }} content={<SpendTooltip />} position={{ y: -78 }} allowEscapeViewBox={{ x: false, y: true }} />
 
-          <Bar dataKey="v" fill={c[0]} radius={[2, 2, 0, 0]} />
+          <Bar dataKey="v" fill="var(--accent-2)" radius={[2, 2, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -125,27 +132,7 @@ function CostChart({ data }: { data: UsageDay[] }) {
 
 // ── Sidebar scaffolding ───────────────────────────────────────────────────────
 
-function AsideSection({ title, action, count, children }: { title: string; action?: React.ReactNode; count?: number; children: React.ReactNode }) {
-  return (
-    <section className="fp-agentd-sec">
-      <div className="fp-agentd-sec-head">
-        <span className="t">{title}</span>
-        {count !== undefined && <span className="fp-agentd-sec-count">{count}</span>}
-        {action && <span className="fp-agentd-sec-action">{action}</span>}
-      </div>
-      {children}
-    </section>
-  );
-}
 
-function EmptyState({ icon, label }: { icon: string; label: string }) {
-  return (
-    <div className="fp-agentd-empty">
-      <span className="ic">{ICON(icon, 16)}</span>
-      <span>{label}</span>
-    </div>
-  );
-}
 
 function AddMenu({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -195,6 +182,133 @@ function ShareChannels({ agent, channels }: { agent: Agent; channels: Channel[] 
   );
 }
 
+// ── Permissions & scope tab ───────────────────────────────────────────────────
+
+// Autonomy ramp: a 4-rung ladder with the current level highlighted.
+// Replicates the AutonomyRamp pattern from /portal/access without importing
+// the Access page component (that page is read-only per task constraints).
+function AgentAutonomyRamp({ p }: { p: Principal }) {
+  if (!p.autonomy) return null;
+  const idx = AUTONOMY_ORDER.indexOf(p.autonomy);
+  return (
+    <div className="fp-acc-ramp">
+      <div className="fp-acc-ramp-head">
+        <span className="t">Autonomy</span>
+        {p.successRate !== undefined && (
+          <span className="fp-acc-ramp-rate mono">{p.successRate}% verified</span>
+        )}
+      </div>
+      <div
+        className="fp-acc-rungs"
+        role="img"
+        aria-label={`Autonomy level: ${AUTONOMY_META[p.autonomy].label}`}
+      >
+        {AUTONOMY_ORDER.map((lvl, i) => (
+          <span
+            key={lvl}
+            className={`fp-acc-rung${i <= idx ? ' is-on' : ''}${i === idx ? ' is-cur' : ''}`}
+          >
+            <span className="bar" />
+            <span className="lbl">{AUTONOMY_META[lvl].label}</span>
+          </span>
+        ))}
+      </div>
+      <p className="fp-acc-ramp-blurb">{AUTONOMY_META[p.autonomy].blurb}</p>
+    </div>
+  );
+}
+
+function PermissionsTab({ agent }: { agent: Agent }) {
+  const principal = agent.principalId ? getPrincipal(agent.principalId) : undefined;
+
+  if (!principal) {
+    return (
+      <div className="fp-agentd-perm-empty">
+        <span className="ic"><Icons.shield size={22} /></span>
+        <p className="lbl">No platform identity yet</p>
+        <p className="note">
+          This agent does not have a machine identity in the Access control plane.
+          Request one in <Link href="/portal/access" className="fp-agentd-more">Access control</Link>.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="fp-agentd-perm">
+      {/* Over-privileged alert */}
+      {principal.overPrivileged && (
+        <div className="fp-acc-flag fp-agentd-perm-flag">
+          <Icons.alert size={14} />
+          <span>
+            Over-privileged: this identity holds grants beyond its autonomy level or unused for
+            90 days. Review and trim in{' '}
+            <Link href="/portal/access" className="fp-agentd-perm-link">Access control</Link>.
+          </span>
+        </div>
+      )}
+
+      {/* Autonomy ramp */}
+      <AgentAutonomyRamp p={principal} />
+
+      {/* Identity metadata */}
+      <dl className="fp-agentd-props fp-agentd-perm-props">
+        <dt>Identity</dt>
+        <dd className="mono">{principal.id}</dd>
+        <dt>Owner</dt>
+        <dd>{principal.owner ?? 'Unassigned'}</dd>
+        <dt>Scopes</dt>
+        <dd>{principal.scopes.join(' · ')}</dd>
+        <dt>Environments</dt>
+        <dd className="mono">{principal.envs.join(' · ')}</dd>
+        {principal.secrets !== undefined && (
+          <>
+            <dt>Secret refs</dt>
+            <dd className="mono">{principal.secrets}</dd>
+          </>
+        )}
+        <dt>Last used</dt>
+        <dd>{principal.lastUsed}</dd>
+      </dl>
+
+      {/* Granted actions */}
+      <div className="fp-acc-grants-head">
+        <Icons.command size={13} /> Granted actions{' '}
+        <span className="n mono">{principal.grants.length}</span>
+      </div>
+      <div className="fp-acc-grants">
+        {principal.grants.map((g) => {
+          const act = getAction(g.action);
+          const inner = (
+            <>
+              <span className="ga-name mono">{g.action}</span>
+              <span className="ga-scope">{g.scope}</span>
+            </>
+          );
+          return act ? (
+            <Link
+              key={g.action}
+              href={`/portal/actions/${g.action}`}
+              className="fp-acc-grant is-link"
+            >
+              {inner}<Icons.chevronRight size={12} className="ga-go" />
+            </Link>
+          ) : (
+            <div key={g.action} className="fp-acc-grant">{inner}</div>
+          );
+        })}
+      </div>
+
+      {/* Quiet link to the Access page */}
+      <div className="fp-agentd-perm-footer">
+        <Link href="/portal/access" className="fp-agentd-perm-link">
+          <Icons.lock size={11} /> Manage in Access control
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function AgentDetail({ id }: { id: string }) {
@@ -207,6 +321,7 @@ export default function AgentDetail({ id }: { id: string }) {
   const [extraApps, setExtraApps] = React.useState<AppDef[]>([]);
   const [skills, setSkills] = React.useState<SkillDef[]>([]);
   const [contexts, setContexts] = React.useState<ContextDef[]>([]);
+  const [mainTab, setMainTab] = React.useState<'overview' | 'permissions'>('overview');
 
   React.useEffect(() => {
     if (agent) setCrumb({ label: agent.name, replace: true });
@@ -214,11 +329,13 @@ export default function AgentDetail({ id }: { id: string }) {
   }, [agent, setCrumb]);
 
   // Seed editable lists + reset additions per agent. (Contexts start empty ·
-  // the context layer ships later.)
+  // the context layer ships later.) Also reset the main tab so navigating
+  // between agents always opens Overview first.
   React.useEffect(() => {
     setSkills(agent ? skillsFor(agent) : []);
     setContexts(agent ? contextsFor(agent) : []);
     setExtraApps([]);
+    setMainTab('overview');
   }, [agent]);
 
   if (!agent) {
@@ -251,15 +368,13 @@ export default function AgentDetail({ id }: { id: string }) {
   const skillsToAdd = SKILL_POOL.filter((s) => !skills.some((x) => x.name === s.name));
 
   return (
-    <div className="fp-agentd">
+    <div className={`fp-agentd${mainTab === 'permissions' ? ' is-perm' : ''}`}>
       {/* ── Left: header + instructions (content centred in the leftover) ── */}
       <div className="fp-agentd-main">
         <div className="fp-agentd-main-in">
         <div className="fp-agentd-head">
           <div className="fp-agentd-topbar">
-            <Button variant="ghost" asChild>
-              <Link href="/portal/agents"><Icons.chevronLeft size={14} /> Back to agents</Link>
-            </Button>
+            <Link href="/portal/agents" className="fp-back-eyebrow" style={{ marginBlockEnd: 0 }}><Icons.arrowLeft size={11} /> Agents</Link>
             <div className="fp-agentd-topbar-actions">
               <Popover
                 side="bottom"
@@ -314,11 +429,55 @@ export default function AgentDetail({ id }: { id: string }) {
           <p className="fp-agentd-summary">{agent.desc}</p>
         </div>
 
-        <Prose className="fp-agentd-instructions">
-          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
-            {instructions}
-          </ReactMarkdown>
-        </Prose>
+        {/* Tab strip */}
+        <div className="fp-tabs fp-agentd-tabs" role="tablist" aria-label="Agent sections">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mainTab === 'overview'}
+            aria-controls="agentd-panel-overview"
+            id="agentd-tab-overview"
+            className={`fp-tab${mainTab === 'overview' ? ' is-active' : ''}`}
+            onClick={() => setMainTab('overview')}
+          >
+            Overview
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mainTab === 'permissions'}
+            aria-controls="agentd-panel-permissions"
+            id="agentd-tab-permissions"
+            className={`fp-tab${mainTab === 'permissions' ? ' is-active' : ''}`}
+            onClick={() => setMainTab('permissions')}
+          >
+            Permissions &amp; scope
+          </button>
+        </div>
+
+        {/* Overview panel */}
+        <div
+          role="tabpanel"
+          id="agentd-panel-overview"
+          aria-labelledby="agentd-tab-overview"
+          hidden={mainTab !== 'overview'}
+        >
+          <Prose className="fp-agentd-instructions">
+            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
+              {instructions}
+            </ReactMarkdown>
+          </Prose>
+        </div>
+
+        {/* Permissions & scope panel */}
+        <div
+          role="tabpanel"
+          id="agentd-panel-permissions"
+          aria-labelledby="agentd-tab-permissions"
+          hidden={mainTab !== 'permissions'}
+        >
+          <PermissionsTab agent={agent} />
+        </div>
         </div>
       </div>
 

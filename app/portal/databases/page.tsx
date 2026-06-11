@@ -16,6 +16,7 @@ import Link from 'next/link';
 import { Button, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
 import { AiBanner } from '@/portal/shell/ai-pattern';
+import { SankeyCard } from '@/portal/shell/viz';
 import {
   AI_READ,
   DATABASES,
@@ -24,10 +25,12 @@ import {
   KPIS,
   STATUS_TONE,
   TOP_TABLES,
+  fmtBrl,
   fmtRows,
   fmtSize,
   type DbEnv,
   type Engine,
+  DB_SANKEY,
 } from '@/portal/data/databases';
 
 const ENGINE_OPTS = [{ value: 'all', label: 'All engines' }, ...ENGINES.map((e) => ({ value: e, label: e }))];
@@ -83,21 +86,22 @@ export default function DatabasesPage() {
         ))}
       </div>
 
-      <div className="fp-grid fp-grid-2" style={{ marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
-        <div className="fp-card">
-          <div className="fp-card-head">
-            <div className="fp-card-title">Storage by engine</div>
-          </div>
-          <ul className="fp-engine-list">
-            {ENGINE_MIX.map((e) => (
-              <li key={e.engine} className="fp-engine">
-                <span className="fp-engine-name"><span className="fp-mix-dot" style={{ background: e.color }} /> {e.engine}</span>
-                <span className="fp-engine-bar"><span className="fp-engine-fill" style={{ inlineSize: `${(e.sizeGb / maxEngine) * 100}%`, background: e.color }} /></span>
-                <span className="fp-engine-val mono">{fmtSize(e.sizeGb)}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="fp-grid fp-grid-2x1" style={{ marginBlockStart: 'var(--fp-section-gap, 18px)', alignItems: 'stretch' }}>
+        {/* Where the data spend flows: engine → store → owning team. The cost
+            concentration (and who pays it) reads in one glance. */}
+        <SankeyCard
+          title="Spend flow"
+          meta="engine → database → team · R$/mo"
+          data={DB_SANKEY}
+          height={250}
+          ai={
+            <>
+              BigQuery and Snowflake are 75% of data spend and both land on Data
+              Platform; analytics_dw alone is R$ 17.6k/mo with no PII, which makes it
+              the safest place to cut first (18-month partition retention).
+            </>
+          }
+        />
 
         <div className="fp-card">
           <div className="fp-card-head">
@@ -148,6 +152,7 @@ export default function DatabasesPage() {
                   <th style={{ textAlign: 'end' }}>Size</th>
                   <th style={{ textAlign: 'end' }}>Tables</th>
                   <th style={{ textAlign: 'end' }}>Rows</th>
+                  <th style={{ textAlign: 'end' }}>Cost / mo</th>
                   <th style={{ textAlign: 'end' }}>30d</th>
                   <th>Owner</th>
                   <th style={{ textAlign: 'end' }}>Status</th>
@@ -160,18 +165,30 @@ export default function DatabasesPage() {
                     <tr key={d.id}>
                       <td>
                         <span style={{ fontWeight: 600 }}>
-                          {d.service ? <Link href={`/portal/catalog/${d.service}`} className="u-link">{d.name}</Link> : d.name}
+                          {d.service ? <Link href={`/portal/catalog/${d.service}`} className="fp-entity-link">{d.name}</Link> : d.name}
                           {d.pii && <span className="fp-pii">PII</span>}
                         </span>
                         <span className="fp-cell-sub" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                           <span className="fp-mix-dot" style={{ background: 'var(--fg-faint)', inlineSize: 7, blockSize: 7 }} />{d.engine}
                         </span>
                       </td>
-                      <td><Pill tone={d.env === 'prod' ? 'ember' : 'neutral'}>{d.env}</Pill></td>
+                      {/* prod is the common case (12 of 13 rows): quiet mono text.
+                          staging is the exception and earns the pill. */}
+                      <td>
+                        {d.env === 'prod' ? (
+                          <span className="mono" style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>prod</span>
+                        ) : (
+                          <Pill tone="neutral">{d.env}</Pill>
+                        )}
+                      </td>
                       <td className="mono" style={{ color: 'var(--fg-muted)', fontSize: 'var(--text-sm)' }}>{d.region}</td>
                       <td className="mono" style={{ textAlign: 'end' }}>{fmtSize(d.sizeGb)}</td>
                       <td className="mono" style={{ textAlign: 'end' }}>{d.tables || 'n/a'}</td>
                       <td className="mono" style={{ textAlign: 'end' }}>{fmtRows(d.rowsM)}</td>
+                      <td className="mono" style={{ textAlign: 'end' }}>
+                        {fmtBrl(d.costMo + d.queryMo)}
+                        {d.queryMo > 0 && <span className="fp-cell-sub">{fmtBrl(d.queryMo)} query scan</span>}
+                      </td>
                       <td className="mono" style={{ textAlign: 'end', color: d.growth < 0 ? 'var(--danger)' : d.growth > 8 ? 'var(--warning)' : 'var(--fg-muted)' }}>{d.growth > 0 ? '+' : ''}{d.growth}%</td>
                       <td style={{ whiteSpace: 'nowrap' }}>{d.owner}</td>
                       <td style={{ textAlign: 'end' }}><Pill tone={st.tone} dot live={d.status === 'degraded'}>{st.label}</Pill></td>

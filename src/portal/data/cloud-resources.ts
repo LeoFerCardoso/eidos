@@ -269,3 +269,9 @@ export const AI_READ = {
   title: 'Where the money leaks',
   body: 'Three idle resources, db-backups, legacy-konduto-dump and staging-cluster, cost R$ 7.5k a month for work nothing is doing right now. Separately, ocr-batch-fn jumped 22% and is erroring, so it is both wasteful and broken. Fixing the function and stopping the idle three would trim roughly R$ 11k a month without touching production scoring.',
 };
+
+
+// ── T2 Pulse additions (viz family) ──────────────────────────────────────────
+/** 30-day total spend trend (R$ k/day) + the prior month ghost. */
+export const SPEND_TREND = [7.4, 7.5, 7.4, 7.6, 7.8, 7.7, 7.9, 8.0, 7.9, 8.1, 8.0, 8.2, 8.4, 8.3, 8.2, 8.4, 8.6, 8.5, 8.7, 8.6, 8.8, 9.0, 8.9, 9.1, 9.0, 9.2, 9.4, 9.3, 9.5, 9.6];
+export const SPEND_TREND_PREV = [7.1, 7.2, 7.1, 7.3, 7.2, 7.4, 7.3, 7.5, 7.4, 7.5, 7.6, 7.5, 7.7, 7.6, 7.7, 7.8, 7.7, 7.9, 7.8, 7.9, 8.0, 7.9, 8.1, 8.0, 8.1, 8.2, 8.1, 8.2, 8.3, 8.2];

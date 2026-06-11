@@ -13,6 +13,7 @@ import {
   Icons, Pill, Prose, BrandIcon, Button,
 } from '@/ds/core';
 import { usePageCrumb } from '@/portal/shell/portal-shell';
+import { AsideSection, EmptyState } from '@/portal/shell/detail-kit';
 import {
   getContext, SOURCE_META, STATUS_META, fmtItems,
   syncFor, usedByFor, accessFor,
@@ -27,37 +28,7 @@ const ICON = (k: string, size = 14) => {
   return <C size={size} />;
 };
 
-function AsideSection({
-  title,
-  action,
-  count,
-  children,
-}: {
-  title: string;
-  action?: React.ReactNode;
-  count?: number;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="fp-agentd-sec">
-      <div className="fp-agentd-sec-head">
-        <span className="t">{title}</span>
-        {count !== undefined && <span className="fp-agentd-sec-count">{count}</span>}
-        {action && <span className="fp-agentd-sec-action">{action}</span>}
-      </div>
-      {children}
-    </section>
-  );
-}
 
-function EmptyState({ icon, label }: { icon: string; label: string }) {
-  return (
-    <div className="fp-agentd-empty">
-      <span className="ic">{ICON(icon, 16)}</span>
-      <span>{label}</span>
-    </div>
-  );
-}
 
 // ── Per-source sample content ─────────────────────────────────────────────────
 
@@ -287,11 +258,7 @@ export default function ContextDetail({ id }: { id: string }) {
         <div className="fp-agentd-main-in">
           <div className="fp-agentd-head">
             <div className="fp-agentd-topbar">
-              <Button variant="ghost" asChild>
-                <Link href="/portal/contexts">
-                  <Icons.chevronLeft size={14} /> Back to contexts
-                </Link>
-              </Button>
+              <Link href="/portal/contexts" className="fp-back-eyebrow" style={{ marginBlockEnd: 0 }}><Icons.arrowLeft size={11} /> Contexts</Link>
               <div className="fp-agentd-topbar-actions">
                 <Button variant="ghost" onClick={() => router.refresh()}>
                   <Icons.refresh size={14} /> Sync now

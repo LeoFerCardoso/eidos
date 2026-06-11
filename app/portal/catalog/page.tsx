@@ -79,7 +79,7 @@ export default function CatalogPage() {
     <>
       <FPageHeader
         eyebrow="Software Catalog"
-        title="Catalog"
+        title="Services"
         subtitle={`${SERVICES.length} services · ${TRIBES.length} tribes · ${degraded} degraded now`}
         actions={
           <>

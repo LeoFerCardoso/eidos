@@ -41,7 +41,14 @@ function ServerCard({ s }: { s: McpServer }) {
     >
       <div className="fp-skill-top">
         <span className={'fp-skill-ic' + (s.status === 'live' ? '' : ' is-muted')} aria-hidden="true"><Icon size={18} /></span>
-        <Pill tone={st.tone} dot={s.status === 'live'}>{st.label}</Pill>
+        {/* Live is the common state: quiet text. Beta/Deprecated earn the pill. */}
+        {s.status === 'live' ? (
+          <span className="mono" style={{ fontSize: 10.5, color: 'var(--fg-faint)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Live
+          </span>
+        ) : (
+          <Pill tone={st.tone}>{st.label}</Pill>
+        )}
       </div>
       <span className="fp-skill-name mono">{s.name}</span>
       <p className="fp-skill-desc">{s.desc}</p>

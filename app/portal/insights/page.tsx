@@ -90,6 +90,9 @@ function MermaidViz({ chart }: { chart: string }) {
       try {
         const m = (await import('mermaid')).default;
         if (!mmdInit) {
+          // Mermaid serializes colors into the SVG, so resolve the live token
+          // (theme-aware: Ember/Cobalt/Garnet) instead of hardcoding a hex.
+          const fgToken = getComputedStyle(document.documentElement).getPropertyValue('--fg').trim();
           m.initialize({
             startOnLoad: false,
             theme: 'base',
@@ -98,7 +101,7 @@ function MermaidViz({ chart }: { chart: string }) {
               background: 'transparent',
               primaryColor: 'rgba(255,255,255,0.04)',
               primaryBorderColor: 'rgba(255,255,255,0.28)',
-              primaryTextColor: '#F2EEE8',
+              primaryTextColor: fgToken,
               lineColor: 'rgba(255,255,255,0.32)',
               fontFamily: 'var(--font-mono, ui-monospace, monospace)',
               fontSize: '12px',
@@ -477,14 +480,12 @@ export default function InsightsPage() {
           {/* Metrics — 2 per view */}
           <section className="fp-rcar">
             <div className="fp-rcar-head"><span className="fp-section-title"><Icons.gauge size={13} /> Radar at a glance</span><AILabel variant="mark" size="sm" /></div>
-            <Carousel label="Radar metrics" opts={{ align: 'start' }}>
-              <CarouselSlide width="calc(50% - 6px)"><MetricTile label="Open risks" to={OPEN_INSIGHTS.length} delta="+2 wk" good={false} cap={`${crit} critical · ${high} high`} bars={[6, 7, 6, 8, 7, 9, 10]} /></CarouselSlide>
-              <CarouselSlide width="calc(50% - 6px)"><MetricTile label="Within 30 days" to={within30} delta="+1 wk" good={false} cap="acting window" bars={[5, 6, 6, 7, 7, 8, 8]} /></CarouselSlide>
-              <CarouselSlide width="calc(50% - 6px)"><MetricTile label="Agent-resolvable" to={agentResolvable} delta="+1 wk" good cap="no human needed" bars={[1, 2, 2, 2, 3, 2, 3]} /></CarouselSlide>
-              <CarouselSlide width="calc(50% - 6px)"><MetricTile label="Resolved · 30d" to={resolved.length} delta="+3 wk" good cap="by the fleet" bars={[0, 1, 1, 2, 2, 3, 3]} /></CarouselSlide>
-              <CarouselControls />
-              <CarouselDots />
-            </Carousel>
+            <div className="fp-mkpi-grid">
+              <div><MetricTile label="Open risks" to={OPEN_INSIGHTS.length} delta="+2 wk" good={false} cap={`${crit} critical · ${high} high`} bars={[6, 7, 6, 8, 7, 9, 10]} /></div>
+              <div><MetricTile label="Within 30 days" to={within30} delta="+1 wk" good={false} cap="acting window" bars={[5, 6, 6, 7, 7, 8, 8]} /></div>
+              <div><MetricTile label="Agent-resolvable" to={agentResolvable} delta="+1 wk" good cap="no human needed" bars={[1, 2, 2, 2, 3, 2, 3]} /></div>
+              <div><MetricTile label="Resolved · 30d" to={resolved.length} delta="+3 wk" good cap="by the fleet" bars={[0, 1, 1, 2, 2, 3, 3]} /></div>
+            </div>
           </section>
 
           {/* Signals — 1 per view */}

@@ -14,12 +14,14 @@ import * as React from 'react';
 import { Button, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
 import { AiBanner } from '@/portal/shell/ai-pattern';
+import { TreemapCard } from '@/portal/shell/viz';
 import {
   AI_READ,
   BUCKETS,
   CLASS_META,
   CLASS_MIX,
   KPIS,
+  LIFECYCLE_META,
   STALE,
   STATUS_META,
   fmtBrl,
@@ -54,7 +56,7 @@ export default function BucketsPage() {
     <>
       <FPageHeader
         eyebrow="Catalog"
-        title="Buckets"
+        title="Storages"
         subtitle="See everything you store, and reclaim the cold and dead data quietly running up the bill."
         actions={
           <>
@@ -65,7 +67,7 @@ export default function BucketsPage() {
       />
 
       <AiBanner title={AI_READ.title} action="Stage cleanup">
-        Three dead buckets hold <span className="fp-aip-hl">6.6 TB</span> and cost <span className="fp-aip-hl">R$ 4.1k/mo</span>, unread for over a year. <span className="fp-aip-hl mono">legacy-konduto-dump</span> and <span className="fp-aip-hl mono">tmp-ocr-scratch</span> carry PII, so delete them under retention.
+        Three dead buckets hold <span className="fp-aip-hl">6.6 TB</span> and cost <span className="fp-aip-hl">R$ 4.1k/mo</span>, all without a lifecycle policy; <span className="fp-aip-hl mono">legacy-konduto-dump</span> and <span className="fp-aip-hl mono">tmp-ocr-scratch</span> carry PII, so delete them under retention. Separately, <span className="fp-aip-hl mono">bureau-exports</span> egress hit <span className="fp-aip-hl">R$ 2.3k/mo</span> (+31% MoM), 2.5x its storage cost: a partner is pulling full files instead of the delta feed.
       </AiBanner>
 
       <div className="fp-grid fp-grid-4">
@@ -79,18 +81,27 @@ export default function BucketsPage() {
       </div>
 
       <div className="fp-grid fp-grid-2" style={{ marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
-        <div className="fp-card">
-          <div className="fp-card-head"><div className="fp-card-title">Storage by class</div></div>
-          <ul className="fp-engine-list">
-            {CLASS_MIX.map((c) => (
-              <li key={c.klass} className="fp-engine">
-                <span className="fp-engine-name"><span className="fp-mix-dot" style={{ background: c.color }} /> {c.label}</span>
-                <span className="fp-engine-bar"><span className="fp-engine-fill" style={{ inlineSize: `${c.pct}%`, background: c.color }} /></span>
-                <span className="fp-engine-val mono">{fmtSize(c.sizeGb)}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {/* Storage map: area = size, colour = lifecycle STATE — the dead weight
+            is visible at a glance instead of hiding inside class averages. */}
+        <TreemapCard
+          title="Storage map"
+          meta="area = size · color = state"
+          height={236}
+          items={BUCKETS.map((b) => ({
+            name: b.name,
+            value: b.sizeGb,
+            caption: `${fmtSize(b.sizeGb)} · ${fmtBrl(b.costMo)}/mo`,
+            state: b.status === 'dead' ? 'Dead' : b.lifecycle !== 'active' ? LIFECYCLE_META[b.lifecycle].label : b.status === 'frozen' ? 'Frozen' : 'Active',
+            tone: b.status === 'dead' ? 'bad' : b.lifecycle !== 'active' ? 'warn' : b.status === 'frozen' ? 'cold' : 'neutral',
+          }))}
+          ai={
+            <>
+              The three dead buckets are only 9% of the area but R$ 4.1k/mo, all without a
+              lifecycle policy; db-backups dominates the map (22.8 TB) and is the first
+              candidate for Archive-class tiering.
+            </>
+          }
+        />
 
         <div className="fp-card">
           <div className="fp-card-head">
@@ -124,7 +135,7 @@ export default function BucketsPage() {
         </span>
       </div>
 
-      <FSection title="Buckets" style={{ marginBlockStart: 'var(--fp-filter-gap, 14px)' }}>
+      <FSection title="Storages" style={{ marginBlockStart: 'var(--fp-filter-gap, 14px)' }}>
         <div className="fp-card" style={{ padding: 0 }}>
           <div className="tbl-wrap">
             <table className="tbl" style={{ margin: 0 }}>
@@ -137,6 +148,8 @@ export default function BucketsPage() {
                   <th style={{ textAlign: 'end' }}>Last read</th>
                   <th>Owner</th>
                   <th style={{ textAlign: 'end' }}>Cost / mo</th>
+                  <th style={{ textAlign: 'end' }}>Egress / mo</th>
+                  <th>Lifecycle</th>
                   <th style={{ textAlign: 'end' }}>Status</th>
                 </tr>
               </thead>
@@ -150,12 +163,35 @@ export default function BucketsPage() {
                         <span style={{ fontWeight: 600 }}>{b.name}{b.pii && <span className="fp-pii">PII</span>}</span>
                         <span className="fp-cell-sub">{b.provider} · {b.content} · {b.region}</span>
                       </td>
-                      <td><span className="fp-class"><span className="fp-mix-dot" style={{ background: cm.color }} /> {cm.label}</span></td>
+                      <td>
+                        <span className="fp-class"><span className="fp-mix-dot" style={{ background: cm.color }} /> {cm.label}</span>
+                        <span className="fp-cell-sub">{b.autoclass ? 'Autoclass on' : 'no autoclass'}</span>
+                      </td>
                       <td className="mono" style={{ textAlign: 'end' }}>{fmtObjects(b.objects)}</td>
                       <td className="mono" style={{ textAlign: 'end' }}>{fmtSize(b.sizeGb)}</td>
                       <td className="mono" style={{ textAlign: 'end', color: 'var(--fg-muted)' }}>{b.lastAccess}</td>
                       <td style={{ whiteSpace: 'nowrap' }}>{b.owner}</td>
-                      <td className="mono" style={{ textAlign: 'end' }}>{fmtBrl(b.costMo)}</td>
+                      <td className="mono" style={{ textAlign: 'end' }}>
+                        {fmtBrl(b.costMo)}
+                        <span className="fp-cell-sub" style={b.trend >= 10 ? { color: 'var(--warning)' } : undefined}>
+                          {b.trend > 0 ? `+${b.trend}% MoM` : 'flat'}
+                        </span>
+                      </td>
+                      <td className="mono" style={{ textAlign: 'end', color: b.egressMo > b.costMo ? 'var(--warning)' : 'var(--fg-muted)' }}>
+                        {b.egressMo > 0 ? fmtBrl(b.egressMo) : '·'}
+                      </td>
+                      <td>
+                        {/* The healthy state is quiet text; only the exceptions
+                            (no policy / drift) earn a pill. */}
+                        {b.lifecycle === 'active' ? (
+                          <span className="mono" style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>policy on</span>
+                        ) : (
+                          (() => {
+                            const lm = LIFECYCLE_META[b.lifecycle];
+                            return <Pill tone={lm.tone}>{lm.label}</Pill>;
+                          })()
+                        )}
+                      </td>
                       <td style={{ textAlign: 'end' }}><Pill tone={sm.tone}>{sm.label}</Pill></td>
                     </tr>
                   );

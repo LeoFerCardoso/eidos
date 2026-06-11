@@ -58,7 +58,7 @@ export default function McpDetail({ id }: { id: string }) {
   return (
     <>
       <FPageHeader
-        eyebrow="MCP server"
+        back={{ href: '/portal/mcp-servers', label: 'MCP servers' }}
         title={server.name}
         status={<HealthBadge state={HEALTH[server.status]} />}
         subtitle={`${server.desc} Exposes ${server.team} systems as a stable tool surface for Forge AI agents.`}

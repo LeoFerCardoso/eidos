@@ -49,8 +49,8 @@ export const RUNBOOKS: Runbook[] = [
   { id: 'rb-canary-abort',    title: 'Abort a canary and roll forward',    desc: 'Stops a failing canary and restores full traffic.',         category: 'Rollback',   service: 'decision-engine',   automation: 'automated', success: 97, runs: 28, lastRun: '3 days ago', avg: '1m 50s', owner: 'Thiago Albuquerque', trigger: 'auto', incidents: 7 },
 ];
 
-export const TRIGGER_META: Record<Trigger, { label: string; tone: 'ember' | 'ice' | 'neutral' }> = {
-  auto: { label: 'Auto', tone: 'ember' },
+export const TRIGGER_META: Record<Trigger, { label: string; tone: 'success' | 'ice' | 'neutral' }> = {
+  auto: { label: 'Auto', tone: 'success' },
   alert: { label: 'On alert', tone: 'ice' },
   manual: { label: 'Manual', tone: 'neutral' },
 };

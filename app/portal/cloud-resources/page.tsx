@@ -16,6 +16,7 @@ import Link from 'next/link';
 import { Button, Chip, Icons, Pill, Select } from '@/ds/core';
 import { FPageHeader, FSearch, FSection } from '@/portal/shell/portal-shell';
 import { AiBanner } from '@/portal/shell/ai-pattern';
+import { MetricChartCard } from '@/portal/shell/viz';
 import {
   AI_READ,
   ACCOUNTS,
@@ -31,6 +32,8 @@ import {
   utilBand,
   type ResStatus,
   type ResType,
+  SPEND_TREND,
+  SPEND_TREND_PREV,
 } from '@/portal/data/cloud-resources';
 
 const TYPE_OPTS = [{ value: 'all', label: 'All types' }, ...TYPES.map((t) => ({ value: t, label: t }))];
@@ -194,7 +197,8 @@ export default function CloudResourcesPage() {
         ))}
       </div>
 
-      <div className="fp-grid fp-grid-2" style={{ marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
+      {/* Spend breakdown + the 30-day trend against last month's ghost. */}
+      <div className="fp-grid fp-grid-2" style={{ marginBlockStart: 'var(--fp-section-gap, 18px)', alignItems: 'stretch' }}>
         <div className="fp-card">
           <div className="fp-card-head">
             <div className="fp-card-title">Spend by type</div>
@@ -205,24 +209,6 @@ export default function CloudResourcesPage() {
               <li key={s.key} className="fp-engine">
                 <span className="fp-engine-name">{s.key}</span>
                 <span className="fp-engine-bar">
-                  <span className="fp-engine-fill" style={{ inlineSize: `${s.pct}%`, background: 'var(--ember)' }} />
-                </span>
-                <span className="fp-engine-val mono">{fmtBrl(s.cost)}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="fp-card">
-          <div className="fp-card-head">
-            <div className="fp-card-title">Spend by product</div>
-            <span className="fp-card-meta">monthly</span>
-          </div>
-          <ul className="fp-engine-list">
-            {SPEND_BY_PRODUCT.map((s) => (
-              <li key={s.key} className="fp-engine">
-                <span className="fp-engine-name">{s.key}</span>
-                <span className="fp-engine-bar">
                   <span className="fp-engine-fill" style={{ inlineSize: `${s.pct}%`, background: 'var(--accent-2)' }} />
                 </span>
                 <span className="fp-engine-val mono">{fmtBrl(s.cost)}</span>
@@ -230,6 +216,14 @@ export default function CloudResourcesPage() {
             ))}
           </ul>
         </div>
+        <MetricChartCard
+          label="Total spend · 30d"
+          value="R$ 9.6k/day"
+          delta={{ label: '+9.5% MoM', good: false }}
+          note="Prior month as the dashed ghost. The step on day 13 is the analytics_dw scan growth."
+          series={SPEND_TREND}
+          prev={SPEND_TREND_PREV}
+        />
       </div>
 
       {/* Toolbar */}
@@ -317,7 +311,7 @@ export default function CloudResourcesPage() {
                             <span className="fp-actor">
                               <span className="fp-actor-ic"><Icon size={13} /></span>
                               {href ? (
-                                <Link href={href} className="u-link" style={{ fontWeight: 600 }}>
+                                <Link href={href} className="fp-entity-link" style={{ fontWeight: 600 }}>
                                   {r.name}{' '}
                                   <Icons.chevronRight
                                     size={11}

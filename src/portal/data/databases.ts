@@ -20,6 +20,8 @@ export interface Database {
   rowsM: number; // millions of rows
   pii: boolean;
   owner: string;
+  costMo: number; // R$ / month, storage + compute (billing export)
+  queryMo: number; // R$ / month, on-demand query/scan spend (BigQuery, Snowflake)
   growth: number; // % month over month
   status: DbStatus;
   service?: string;
@@ -37,19 +39,19 @@ export const ENGINE_COLOR: Record<Engine, string> = {
 };
 
 export const DATABASES: Database[] = [
-  { id: 'bureau-core',     name: 'bureau_core',       engine: 'PostgreSQL', env: 'prod', region: 'br-se-1', sizeGb: 4280, tables: 312, rowsM: 8400, pii: true,  owner: 'Bureau Data',     growth: 6,  status: 'healthy',  service: 'bureau-ingestion' },
-  { id: 'scpc-records',    name: 'scpc_records',      engine: 'PostgreSQL', env: 'prod', region: 'br-se-1', sizeGb: 2110, tables: 148, rowsM: 5200, pii: true,  owner: 'Bureau Data',     growth: 4,  status: 'healthy',  service: 'scpc-gateway' },
-  { id: 'score-features',  name: 'score_features',    engine: 'Snowflake',  env: 'prod', region: 'br-se-1', sizeGb: 9870, tables: 86,  rowsM: 14200,pii: true,  owner: 'Data Platform',   growth: 11, status: 'healthy',  service: 'ignite-feature-store' },
-  { id: 'analytics-dw',    name: 'analytics_dw',      engine: 'BigQuery',   env: 'prod', region: 'us-east-1',sizeGb: 18400,tables: 204, rowsM: 31000,pii: false, owner: 'Data Platform',   growth: 14, status: 'healthy' },
-  { id: 'identity-store',  name: 'identity_store',    engine: 'PostgreSQL', env: 'prod', region: 'br-se-1', sizeGb: 760,  tables: 64,  rowsM: 420,  pii: true,  owner: 'Identity',        growth: 3,  status: 'degraded', service: 'identity-proofing' },
-  { id: 'fraud-events',    name: 'fraud_events',      engine: 'MongoDB',    env: 'prod', region: 'br-se-1', sizeGb: 1340, tables: 22,  rowsM: 2600, pii: true,  owner: 'Anti-Fraud',      growth: 9,  status: 'healthy',  service: 'konduto-antifraud' },
-  { id: 'device-cache',    name: 'device_cache',      engine: 'Redis',      env: 'prod', region: 'br-se-1', sizeGb: 48,   tables: 0,   rowsM: 0,    pii: false, owner: 'Anti-Fraud',      growth: 1,  status: 'healthy',  service: 'device-fingerprint' },
-  { id: 'consent-ledger',  name: 'consent_ledger',    engine: 'PostgreSQL', env: 'prod', region: 'br-se-1', sizeGb: 520,  tables: 28,  rowsM: 4200, pii: true,  owner: 'Compliance',      growth: 5,  status: 'healthy',  service: 'consent-service' },
-  { id: 'decision-logs',   name: 'decision_logs',     engine: 'BigQuery',   env: 'prod', region: 'us-east-1',sizeGb: 6200, tables: 12,  rowsM: 9800, pii: false, owner: 'Decisioning',     growth: 8,  status: 'healthy',  service: 'decision-engine' },
-  { id: 'ocr-blobs-meta',  name: 'ocr_blobs_meta',    engine: 'MongoDB',    env: 'prod', region: 'br-se-1', sizeGb: 410,  tables: 8,   rowsM: 180,  pii: true,  owner: 'Identity',        growth: 2,  status: 'healthy',  service: 'document-ocr' },
-  { id: 'recovery-cases',  name: 'recovery_cases',    engine: 'MySQL',      env: 'prod', region: 'br-se-1', sizeGb: 280,  tables: 41,  rowsM: 120,  pii: true,  owner: 'Recovery',        growth: -2, status: 'degraded', service: 'recovery-comms' },
-  { id: 'rate-limit',      name: 'rate_limit',        engine: 'Redis',      env: 'prod', region: 'br-se-1', sizeGb: 12,   tables: 0,   rowsM: 0,    pii: false, owner: 'Platform',        growth: 0,  status: 'healthy' },
-  { id: 'sandbox-bureau',  name: 'bureau_core',       engine: 'PostgreSQL', env: 'staging', region: 'br-se-1', sizeGb: 84, tables: 312, rowsM: 12,   pii: false, owner: 'Bureau Data',     growth: 0,  status: 'healthy' },
+  { id: 'bureau-core',     name: 'bureau_core',       engine: 'PostgreSQL', env: 'prod', region: 'br-se-1', sizeGb: 4280, tables: 312, rowsM: 8400, pii: true,  owner: 'Bureau Data',     costMo: 4120, queryMo: 0, growth: 6,  status: 'healthy',  service: 'bureau-ingestion' },
+  { id: 'scpc-records',    name: 'scpc_records',      engine: 'PostgreSQL', env: 'prod', region: 'br-se-1', sizeGb: 2110, tables: 148, rowsM: 5200, pii: true,  owner: 'Bureau Data',     costMo: 2050, queryMo: 0, growth: 4,  status: 'healthy',  service: 'scpc-gateway' },
+  { id: 'score-features',  name: 'score_features',    engine: 'Snowflake',  env: 'prod', region: 'br-se-1', sizeGb: 9870, tables: 86,  rowsM: 14200,pii: true,  owner: 'Data Platform',   costMo: 9340, queryMo: 3100, growth: 11, status: 'healthy',  service: 'ignite-feature-store' },
+  { id: 'analytics-dw',    name: 'analytics_dw',      engine: 'BigQuery',   env: 'prod', region: 'us-east-1',sizeGb: 18400,tables: 204, rowsM: 31000,pii: false, owner: 'Data Platform',   costMo: 12400, queryMo: 5200, growth: 14, status: 'healthy' },
+  { id: 'identity-store',  name: 'identity_store',    engine: 'PostgreSQL', env: 'prod', region: 'br-se-1', sizeGb: 760,  tables: 64,  rowsM: 420,  pii: true,  owner: 'Identity',        costMo: 980, queryMo: 0, growth: 3,  status: 'degraded', service: 'identity-proofing' },
+  { id: 'fraud-events',    name: 'fraud_events',      engine: 'MongoDB',    env: 'prod', region: 'br-se-1', sizeGb: 1340, tables: 22,  rowsM: 2600, pii: true,  owner: 'Anti-Fraud',      costMo: 1230, queryMo: 0, growth: 9,  status: 'healthy',  service: 'konduto-antifraud' },
+  { id: 'device-cache',    name: 'device_cache',      engine: 'Redis',      env: 'prod', region: 'br-se-1', sizeGb: 48,   tables: 0,   rowsM: 0,    pii: false, owner: 'Anti-Fraud',      costMo: 610, queryMo: 0, growth: 1,  status: 'healthy',  service: 'device-fingerprint' },
+  { id: 'consent-ledger',  name: 'consent_ledger',    engine: 'PostgreSQL', env: 'prod', region: 'br-se-1', sizeGb: 520,  tables: 28,  rowsM: 4200, pii: true,  owner: 'Compliance',      costMo: 520, queryMo: 0, growth: 5,  status: 'healthy',  service: 'consent-service' },
+  { id: 'decision-logs',   name: 'decision_logs',     engine: 'BigQuery',   env: 'prod', region: 'us-east-1',sizeGb: 6200, tables: 12,  rowsM: 9800, pii: false, owner: 'Decisioning',     costMo: 4870, queryMo: 2100, growth: 8,  status: 'healthy',  service: 'decision-engine' },
+  { id: 'ocr-blobs-meta',  name: 'ocr_blobs_meta',    engine: 'MongoDB',    env: 'prod', region: 'br-se-1', sizeGb: 410,  tables: 8,   rowsM: 180,  pii: true,  owner: 'Identity',        costMo: 390, queryMo: 0, growth: 2,  status: 'healthy',  service: 'document-ocr' },
+  { id: 'recovery-cases',  name: 'recovery_cases',    engine: 'MySQL',      env: 'prod', region: 'br-se-1', sizeGb: 280,  tables: 41,  rowsM: 120,  pii: true,  owner: 'Recovery',        costMo: 310, queryMo: 0, growth: -2, status: 'degraded', service: 'recovery-comms' },
+  { id: 'rate-limit',      name: 'rate_limit',        engine: 'Redis',      env: 'prod', region: 'br-se-1', sizeGb: 12,   tables: 0,   rowsM: 0,    pii: false, owner: 'Platform',        costMo: 150, queryMo: 0, growth: 0,  status: 'healthy' },
+  { id: 'sandbox-bureau',  name: 'bureau_core',       engine: 'PostgreSQL', env: 'staging', region: 'br-se-1', sizeGb: 84, tables: 312, rowsM: 12,   pii: false, owner: 'Bureau Data',     costMo: 95, queryMo: 0, growth: 0,  status: 'healthy' },
 ];
 
 export interface TableRow { name: string; db: string; rowsM: number; sizeGb: number; pii: boolean }
@@ -71,8 +73,10 @@ export const STATUS_TONE: Record<DbStatus, { label: string; tone: 'health-up' | 
 /** Compact storage label (deterministic). */
 export const fmtSize = (gb: number): string => (gb >= 1000 ? (gb / 1000).toFixed(1).replace(/\.0$/, '') + ' TB' : gb + ' GB');
 export const fmtRows = (m: number): string => (m === 0 ? 'n/a' : m >= 1000 ? (m / 1000).toFixed(1).replace(/\.0$/, '') + 'B' : m + 'M');
+export const fmtBrl = (n: number): string => 'R$ ' + (n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : String(n));
 
 const totalGb = DATABASES.reduce((m, d) => m + d.sizeGb, 0);
+const totalCost = DATABASES.reduce((m, d) => m + d.costMo + d.queryMo, 0);
 
 /** Storage by engine, for the breakdown bar. */
 export const ENGINE_MIX = ENGINES.map((e) => ({
@@ -83,12 +87,47 @@ export const ENGINE_MIX = ENGINES.map((e) => ({
 
 export const KPIS = [
   { id: 'dbs', label: 'Databases', value: String(DATABASES.length), note: `${DATABASES.filter((d) => d.env === 'prod').length} in production.` },
-  { id: 'tables', label: 'Tables', value: DATABASES.reduce((m, d) => m + d.tables, 0).toLocaleString('en-US'), note: 'Across all engines.' },
+  { id: 'cost', label: 'Spend / mo', value: fmtBrl(totalCost), note: 'Storage + compute + query scan.' },
   { id: 'size', label: 'Total storage', value: fmtSize(totalGb), note: 'Provisioned across regions.' },
   { id: 'pii', label: 'PII databases', value: String(DATABASES.filter((d) => d.pii).length), note: 'Under LGPD controls.' },
 ];
 
 export const AI_READ = {
   title: 'Largest cost and risk',
-  body: 'analytics_dw on BigQuery is our biggest store at 18.4 TB and up 14% MoM, yet holds no PII. score_features on Snowflake (9.9 TB) does, and feeds every score. A retention policy on analytics_dw partitions over 18 months cuts cost without touching regulated data.',
+  body: 'analytics_dw on BigQuery is our biggest line at R$ 17.6k/mo (R$ 5.2k of it query scan) and up 14% MoM, yet holds no PII. score_features on Snowflake (R$ 12.4k/mo) does, and feeds every score. A retention policy on analytics_dw partitions over 18 months plus partition filters on the top 3 scheduled queries cuts roughly R$ 4k/mo without touching regulated data.',
+};
+
+
+// ── T2 Pulse: spend flow for the Sankey (engine → database → owning team) ────
+// Values are R$/mo from costMo + queryMo; only the heaviest stores are named,
+// the tail folds into "other stores".
+export const DB_SANKEY = {
+  nodes: [
+    { name: 'BigQuery' },      // 0
+    { name: 'Snowflake' },     // 1
+    { name: 'PostgreSQL' },    // 2
+    { name: 'Mongo / Redis' }, // 3
+    { name: 'analytics_dw' },  // 4
+    { name: 'decision_logs' }, // 5
+    { name: 'score_features' },// 6
+    { name: 'bureau_core' },   // 7
+    { name: 'other stores' },  // 8
+    { name: 'Data Platform' }, // 9
+    { name: 'Decisioning' },   // 10
+    { name: 'Bureau Data' },   // 11
+    { name: 'Other teams' },   // 12
+  ],
+  links: [
+    { source: 0, target: 4, value: 17600 },
+    { source: 0, target: 5, value: 6970 },
+    { source: 1, target: 6, value: 12440 },
+    { source: 2, target: 7, value: 4120 },
+    { source: 2, target: 8, value: 3955 },
+    { source: 3, target: 8, value: 2380 },
+    { source: 4, target: 9, value: 17600 },
+    { source: 6, target: 9, value: 12440 },
+    { source: 5, target: 10, value: 6970 },
+    { source: 7, target: 11, value: 4120 },
+    { source: 8, target: 12, value: 6335 },
+  ],
 };

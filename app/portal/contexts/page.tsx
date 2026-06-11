@@ -158,7 +158,12 @@ export default function ContextsPage() {
                       <td style={{ color: 'var(--fg-muted)', whiteSpace: 'nowrap' }}>{c.owner}</td>
                       <td className="mono" style={{ textAlign: 'end', color: 'var(--fg-muted)', whiteSpace: 'nowrap' }}>{c.updated}</td>
                       <td style={{ textAlign: 'end' }}>
-                        <Pill tone={st.tone} dot live={c.status === 'syncing'}>{st.label}</Pill>
+                        {/* Healthy state is quiet text; only syncing/draft earn a pill. */}
+                        {c.status === 'connected' ? (
+                          <span className="mono" style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-muted)' }}>connected</span>
+                        ) : (
+                          <Pill tone={st.tone} dot live={c.status === 'syncing'}>{st.label}</Pill>
+                        )}
                       </td>
                       <td style={{ textAlign: 'end' }}>
                         <Button variant="ghost" size="sm" onClick={(e) => e.stopPropagation()}><Icons.plus size={11} /> Add</Button>

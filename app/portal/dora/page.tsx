@@ -12,9 +12,10 @@
 // Composes only Eidos DS + existing .fp-* classes. Ember follows the example
 // screens (liberal). No tier, no per-page <style>.
 import * as React from 'react';
-import { Button, Icons, Pill, Select, Sparkline, Trend } from '@/ds/core';
+import { Button, Icons, Pill, Select, Trend } from '@/ds/core';
 import { FPageHeader, FSection } from '@/portal/shell/portal-shell';
 import { AiBanner } from '@/portal/shell/ai-pattern';
+import { MetricChartCard } from '@/portal/shell/viz';
 import {
   AI_READ,
   DEPLOYS_PER_DAY,
@@ -27,9 +28,11 @@ import {
   type DoraKpi,
 } from '@/portal/data/dora';
 
-const BAND_TONE: Record<DoraBand, 'ember' | 'health-up' | 'warning' | 'danger'> = {
-  Elite: 'ember',
-  High: 'health-up',
+/* Elite = the BEST band: success, not ember (4 KPI cards would spend the whole
+   warm-accent budget on a status). High stays the cooler positive. */
+const BAND_TONE: Record<DoraBand, 'success' | 'ice' | 'warning' | 'danger'> = {
+  Elite: 'success',
+  High: 'ice',
   Medium: 'warning',
   Low: 'danger',
 };
@@ -48,20 +51,22 @@ function BandPill({ band, dot = true }: { band: DoraBand; dot?: boolean }) {
   );
 }
 
+/* T2 Pulse: each DORA metric is a composed metric+chart card — current window
+   solid, prior window as the dashed ghost, the band as the badge. */
 function Kpi({ kpi }: { kpi: DoraKpi }) {
+  const good = kpi.inverted ? kpi.delta <= 0 : kpi.delta >= 0;
+  // Deterministic prior-window ghost derived from the series (mock data).
+  const prev = kpi.series.map((v, i) => Math.round(v * (0.82 + 0.04 * ((i * 7) % 3))));
   return (
-    <div className="fp-kpi">
-      <div className="fp-kpi-head">
-        <span className="label">{kpi.label}</span>
-        <BandPill band={kpi.band} />
-      </div>
-      <div className="fp-kpi-row">
-        <div className="value">{kpi.value}</div>
-        <Trend delta={kpi.delta} unit={kpi.unit} inverted={kpi.inverted} />
-      </div>
-      <Sparkline data={kpi.series} w={240} h={32} color={kpi.color} />
-      <p className="fp-kpi-note">{kpi.note}</p>
-    </div>
+    <MetricChartCard
+      label={kpi.label}
+      value={kpi.value}
+      delta={{ label: `${kpi.delta > 0 ? '+' : ''}${kpi.delta}${kpi.unit}`, good }}
+      badge={<BandPill band={kpi.band} />}
+      note={kpi.note}
+      series={kpi.series}
+      prev={prev}
+    />
   );
 }
 
@@ -106,7 +111,7 @@ export default function DoraPage() {
             <div className="fp-card-title">Deploys per day</div>
             <div className="fp-legend">
               <span className="fp-legend-item">
-                <span className="fp-legend-dot" style={{ background: 'var(--ember)' }} /> weekday
+                <span className="fp-legend-dot" style={{ background: 'var(--accent-2)' }} /> weekday
               </span>
               <span className="fp-legend-item">
                 <span className="fp-legend-dot" style={{ background: 'var(--surface-active)' }} /> weekend
@@ -215,7 +220,7 @@ export default function DoraPage() {
                   return (
                     <tr key={d.id}>
                       <td className="mono" style={{ fontWeight: 600 }}>{d.id}</td>
-                      <td className="mono" style={{ color: 'var(--ember)' }}>{d.service}</td>
+                      <td className="mono" style={{ color: 'var(--fg-muted)' }}>{d.service}</td>
                       <td className="mono" style={{ color: 'var(--fg-muted)' }}>{d.version}</td>
                       <td>{d.stage}</td>
                       <td>{d.author}</td>

@@ -93,8 +93,8 @@ export default function FraudPage() {
           <div className="fp-card-head">
             <div className="fp-card-title">Blocked attempts per hour</div>
             <div className="fp-legend">
-              <span className="fp-legend-item"><span className="fp-legend-dot" style={{ background: 'var(--ember)' }} /> blocked</span>
-              <span className="fp-legend-item"><span className="fp-legend-dot" style={{ background: 'var(--ember-glow, var(--ember))' }} /> peak</span>
+              <span className="fp-legend-item"><span className="fp-legend-dot" style={{ background: 'var(--accent-2)' }} /> blocked</span>
+              <span className="fp-legend-item"><span className="fp-legend-dot" style={{ background: 'var(--ember)' }} /> peak</span>
             </div>
           </div>
           <div className="fp-bars">

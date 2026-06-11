@@ -153,7 +153,7 @@ export default function RunbooksPage() {
                         <span style={{ fontWeight: 600 }}>{r.title}</span>
                         <span className="fp-cell-sub">{r.category} · resolves {r.incidents} incidents · {r.avg} avg</span>
                       </td>
-                      <td><Link href={`/portal/catalog/${r.service}`} className="u-link mono">{r.service}</Link></td>
+                      <td><Link href={`/portal/catalog/${r.service}`} className="fp-entity-link mono">{r.service}</Link></td>
                       <td><Pill tone={am.tone}>{am.label}</Pill></td>
                       <td><Pill tone={tm.tone}>{tm.label}</Pill></td>
                       <td className="mono" style={{ textAlign: 'end', color: successColor(r.success) }}>{r.success}%</td>

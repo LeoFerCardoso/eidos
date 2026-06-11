@@ -175,10 +175,10 @@ const RISK_PILL: Record<RiskLevel, 'risk-crit' | 'risk-high' | 'risk-med'> = {
   high: 'risk-high',
   med: 'risk-med',
 };
-const RISK_BUBBLE: Record<RiskLevel, 'danger' | 'warn' | 'ember'> = {
+const RISK_BUBBLE: Record<RiskLevel, 'danger' | 'warn' | 'neutral'> = {
   crit: 'danger',
   high: 'warn',
-  med: 'ember',
+  med: 'neutral',
 };
 
 const INSIGHT_ICON: Record<InsightType, keyof typeof Icons> = {
@@ -254,6 +254,7 @@ export default function PortalHome() {
           </>
         }
       />
+
 
       {/* Welcome hero — sits directly under the header; greeting stays above.
           Background: an animated terminal-fire mosaic (density ramp " ░ ▒ ▓ █"
@@ -529,7 +530,7 @@ export default function PortalHome() {
               {QUICK_START.map((q) => {
                 return (
                   <FRow key={q.label} href={q.href}>
-                    <IconBubble icon={q.icon} size={30} tone="ember" />
+                    <IconBubble icon={q.icon} size={30} tone="neutral" />
                     <span className="fp-row-main">
                       <span className="fp-qs-label">{q.label}</span>
                       <span className="fp-qs-meta">{q.meta}</span>

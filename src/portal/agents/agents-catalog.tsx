@@ -14,7 +14,10 @@ import {
 } from '@/ds/core';
 import { FPageHeader, FSearch } from '@/portal/shell/portal-shell';
 import { usePersistentState } from '@/portal/shell/use-persistent-state';
-import { AGENTS, ARCHIVED_AGENTS, type Agent, type ArchivedAgent } from '@/portal/data/agents';
+import {
+  AGENTS, ARCHIVED_AGENTS, ARCHETYPE_META, ARCHETYPE_ORDER,
+  type Agent, type ArchivedAgent, type AgentArchetype,
+} from '@/portal/data/agents';
 
 const STAR_LIMIT = 10;
 const PAGE = 8; // load-more increment for the full list
@@ -38,6 +41,21 @@ const Maker = ({ a, className }: { a: Agent; className?: string }) =>
   ) : (
     <span className={`fp-agents-maker${className ? ` ${className}` : ''}`}>by {a.author}</span>
   );
+
+// Role archetype chip — the agent's SDLC job title (one of five). Icon resolved
+// dynamically from the archetype metadata. Shown on cards + rows; the chip row
+// above the list (see RoleFilter) doubles as the legend.
+const RoleBadge = ({ a, className }: { a: Agent; className?: string }) => {
+  const meta = ARCHETYPE_META[a.archetype];
+  const Ico = Icons[meta.icon as keyof typeof Icons] as
+    | React.ComponentType<{ size?: number }>
+    | undefined;
+  return (
+    <span className={`fp-agents-archetype${className ? ` ${className}` : ''}`} title={meta.blurb}>
+      {Ico && <Ico size={11} />} {meta.label}
+    </span>
+  );
+};
 
 function StarBtn({
   on,
@@ -107,6 +125,7 @@ function AgentCard({
       </div>
       <div className="desc">{a.desc}</div>
       <div className="fp-agents-meta">
+        <RoleBadge a={a} />
         <Pill tone="neutral" icon={<Icons.sparkle size={10} />} className="fp-agents-model">{a.model}</Pill>
         <Maker a={a} />
       </div>
@@ -157,6 +176,7 @@ function AgentRow({
       </div>
       <div className="row-desc">{a.desc}</div>
       <Pill tone="neutral" icon={<Icons.sparkle size={10} />} className="fp-agents-model">{a.model}</Pill>
+      <RoleBadge a={a} className="row-archetype" />
       <Maker a={a} className="row-maker" />
       <span className="row-updated">{a.updated}</span>
       <StarBtn on={on} disabled={starDisabled} onToggle={onToggle} />
@@ -203,11 +223,9 @@ function ArchiveView({ onBack, onOpen }: { onBack: () => void; onOpen: (id: stri
 
   return (
     <>
-      <div style={{ marginBlockEnd: 'var(--space-2)' }}>
-        <Button type="button" variant="ghost" onClick={onBack} style={{ marginInlineStart: -8 }}>
-          <Icons.chevronLeft size={13} /> Back to agents
-        </Button>
-      </div>
+      <button type="button" className="fp-back-eyebrow" onClick={onBack} style={{ background: 'none', border: 0, padding: 0 }}>
+        <Icons.arrowLeft size={11} /> Agents
+      </button>
       <FPageHeader
         title="Archived agents"
         subtitle="Agents you've put away. They're hidden from the catalog and their live channels are paused. Restore one to roll it back into Agents."
@@ -276,7 +294,16 @@ export default function AgentsCatalog() {
   const [visible, setVisible] = React.useState(PAGE);
   // Source filter — scoped to the "All agents" list (official vs collaborator).
   const [source, setSource] = React.useState<'all' | 'official' | 'collab'>('all');
-  React.useEffect(() => setVisible(PAGE), [source, q]);
+  // Role-archetype facet — a global filter across the whole catalog (bands + search).
+  const [roleFilter, setRoleFilter] = React.useState<AgentArchetype | 'all'>('all');
+  React.useEffect(() => setVisible(PAGE), [source, q, roleFilter]);
+
+  // Stable per-role counts (whole fleet) — the chip row doubles as the legend.
+  const roleCounts = React.useMemo(() => {
+    const c = {} as Record<AgentArchetype, number>;
+    for (const a of AGENTS) c[a.archetype] = (c[a.archetype] ?? 0) + 1;
+    return c;
+  }, []);
 
   const starred = React.useMemo(() => new Set(starredIds), [starredIds]);
   // Opening a card goes to the agent's detail/settings page (not straight to chat).
@@ -300,7 +327,9 @@ export default function AgentsCatalog() {
     (a.author ?? '').toLowerCase().includes(query) ||
     (a.official ? 'official' : '').includes(query);
 
-  const filtered = AGENTS.filter(matches);
+  const filtered = AGENTS.filter(
+    (a) => matches(a) && (roleFilter === 'all' || a.archetype === roleFilter),
+  );
   // The Starred band is a quick-access shortcut to the favourites; "All agents"
   // stays the COMPLETE list — starring a card pins it above without removing it.
   const starredList = filtered.filter((a) => starred.has(a.id)).slice(0, STAR_LIMIT);
@@ -367,6 +396,37 @@ export default function AgentsCatalog() {
           <ToggleGroupItem value="list" aria-label="List view"><Icons.list size={12} /></ToggleGroupItem>
         </ToggleGroup>
         <span className="fp-agents-count">{filtered.length} {filtered.length === 1 ? 'agent' : 'agents'}</span>
+      </div>
+
+      {/* Role facet — the five SDLC archetypes. Selectable chips that double as a
+          legend with per-role counts; clicking the active one clears it. */}
+      <div className="fp-agents-roles" role="group" aria-label="Filter by role">
+        <button
+          type="button"
+          className="fp-agents-role-chip"
+          aria-pressed={roleFilter === 'all'}
+          onClick={() => setRoleFilter('all')}
+        >
+          All roles <span className="n">{AGENTS.length}</span>
+        </button>
+        {ARCHETYPE_ORDER.map((r) => {
+          const meta = ARCHETYPE_META[r];
+          const Ico = Icons[meta.icon as keyof typeof Icons] as
+            | React.ComponentType<{ size?: number }>
+            | undefined;
+          return (
+            <button
+              key={r}
+              type="button"
+              className="fp-agents-role-chip"
+              aria-pressed={roleFilter === r}
+              title={meta.blurb}
+              onClick={() => setRoleFilter((cur) => (cur === r ? 'all' : r))}
+            >
+              {Ico && <Ico size={12} />} {meta.label} <span className="n">{roleCounts[r] ?? 0}</span>
+            </button>
+          );
+        })}
       </div>
 
       {/* ── Search results — a single flat set, no bands ── */}

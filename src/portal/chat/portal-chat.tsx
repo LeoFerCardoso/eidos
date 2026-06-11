@@ -87,12 +87,12 @@ type ArtifactItem = {
 };
 
 const ART_KIND: Record<ArtifactKind, { icon: string; label: string; bg: string; fg: string }> = {
-  image:    { icon: 'image',    label: 'Image',    bg: 'rgba(52, 211, 153, 0.14)', fg: '#34D399' },
-  document: { icon: 'doc',      label: 'Document', bg: 'rgba(96, 165, 250, 0.16)', fg: '#60A5FA' },
-  html:     { icon: 'globe',    label: 'HTML',     bg: 'rgba(192, 132, 252, 0.16)', fg: '#C084FC' },
-  app:      { icon: 'appWindow', label: 'App',     bg: 'rgba(251, 146, 60, 0.16)', fg: '#FB923C' },
-  code:     { icon: 'terminal', label: 'Code',     bg: 'rgba(56, 189, 248, 0.16)', fg: '#38BDF8' },
-  data:     { icon: 'database', label: 'Dataset',  bg: 'rgba(163, 230, 53, 0.14)', fg: '#A3E635' },
+  image:    { icon: 'image',    label: 'Image',    bg: 'var(--success-soft)',                                        fg: 'var(--success)' },
+  document: { icon: 'doc',      label: 'Document', bg: 'var(--accent-2-soft)',                                       fg: 'var(--accent-2)' },
+  html:     { icon: 'globe',    label: 'HTML',     bg: 'color-mix(in oklch, var(--accent-3) 16%, transparent)',      fg: 'var(--accent-3)' },
+  app:      { icon: 'appWindow', label: 'App',     bg: 'var(--ember-soft)',                                          fg: 'var(--ember)' },
+  code:     { icon: 'terminal', label: 'Code',     bg: 'var(--info-soft)',                                           fg: 'var(--info)' },
+  data:     { icon: 'database', label: 'Dataset',  bg: 'color-mix(in oklch, var(--viz-cat-9) 15%, transparent)',     fg: 'var(--viz-cat-9)' },
 };
 
 const ARTIFACTS: ArtifactItem[] = [
@@ -486,9 +486,9 @@ forge cli release score-engine --db aurora`}</ProseCode>
                   <line x1="70" y1="140" x2="330" y2="140" markerEnd="url(#fc-aha)" />
                   <text x="200" y="135" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="var(--ember)">rotate secret → aurora endpoint</text>
                 </g>
-                <g stroke="var(--success, #34D399)" fill="var(--success, #34D399)">
+                <g stroke="var(--success)" fill="var(--success)">
                   <line x1="330" y1="180" x2="460" y2="180" markerEnd="url(#fc-aha)" />
-                  <text x="395" y="175" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="var(--success, #34D399)">rolling restart</text>
+                  <text x="395" y="175" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="var(--success)">rolling restart</text>
                 </g>
               </svg>
             </Diagram>
@@ -691,11 +691,11 @@ const ProjectsView = ({ onOpen }: { onOpen: (id: string) => void }) => {
 // ── View: Project detail ────────────────────────────────────────────────────
 type FileKind = 'xls' | 'doc' | 'pdf' | 'pptx' | 'csv';
 const FILE_META: Record<FileKind, { label: string; bg: string; fg: string }> = {
-  xls:  { label: 'XLS', bg: 'rgba(52, 211, 153, 0.14)', fg: '#34D399' },
-  doc:  { label: 'DOC', bg: 'rgba(96, 165, 250, 0.16)', fg: '#60A5FA' },
-  pdf:  { label: 'PDF', bg: 'rgba(248, 113, 113, 0.16)', fg: '#F87171' },
-  pptx: { label: 'PPT', bg: 'rgba(251, 146, 60, 0.16)', fg: '#FB923C' },
-  csv:  { label: 'CSV', bg: 'rgba(192, 132, 252, 0.16)', fg: '#C084FC' },
+  xls:  { label: 'XLS', bg: 'var(--success-soft)',                                     fg: 'var(--success)' },
+  doc:  { label: 'DOC', bg: 'var(--accent-2-soft)',                                     fg: 'var(--accent-2)' },
+  pdf:  { label: 'PDF', bg: 'var(--danger-soft)',                                       fg: 'var(--danger)' },
+  pptx: { label: 'PPT', bg: 'var(--ember-soft)',                                        fg: 'var(--ember)' },
+  csv:  { label: 'CSV', bg: 'color-mix(in oklch, var(--accent-3) 16%, transparent)',    fg: 'var(--accent-3)' },
 };
 
 type ProjectPayload = {
@@ -919,6 +919,8 @@ const ArchiveView = ({ onOpen }: { onOpen: (id: string) => void }) => {
 // ── View: Artifacts ─────────────────────────────────────────────────────────
 // Lightweight, self-contained previews per artifact kind (no network / no real
 // files) so the gallery + viewer are demonstrable offline.
+// srcdoc is isolated from app tokens: the iframe shadow DOM cannot inherit CSS variables
+// from the host page, so hardcoded hex values inside these template strings must stay.
 const HTML_SRC = `<!doctype html><html><head><meta charset="utf-8"><style>
   :root{color-scheme:dark}body{font:14px/1.5 system-ui,sans-serif;margin:0;background:#0b0b0d;color:#e7e7ea;padding:28px}
   .ok{color:#34d399}.bad{color:#f87171}h1{font-size:20px;margin:0 0 4px}.sub{color:#9b9ba3;margin:0 0 20px}
