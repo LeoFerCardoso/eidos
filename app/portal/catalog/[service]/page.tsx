@@ -28,6 +28,7 @@ import {
   Timeline,
 } from '@/ds/core';
 import { FPageHeader, FKpi, FSection, IconBubble, FCardHead, FRows, FRow, Sub } from '@/portal/shell/portal-shell';
+import { MetricChartCard } from '@/portal/shell/viz';
 import { ApiExplorer } from '@/portal/apis/api-explorer';
 import { APIS } from '@/portal/data/apis';
 import { getService, SERVICES, type PortalService } from '@/portal/data/services';
@@ -339,11 +340,36 @@ function ServiceReadme({ svc }: { svc: PortalService }) {
 
 // ── Metrics tab: DORA + service metrics + readiness scorecard ─────────────────
 const DORA = [
-  { label: 'Deploy frequency', value: '7 / wk', delta: '+16%', spark: [3, 4, 4, 5, 5, 6, 7] },
-  { label: 'Lead time', value: '1.8h', delta: '−21%', spark: [3.1, 2.8, 2.6, 2.3, 2.1, 1.9, 1.8] },
-  { label: 'Change-fail rate', value: '6%', delta: '−2pp', spark: [11, 10, 9, 8, 7, 7, 6] },
-  { label: 'MTTR', value: '26m', delta: '−13%', spark: [44, 40, 36, 33, 30, 28, 26] },
+  { label: 'Deploy frequency', value: '7 / wk', delta: '+16%', good: true, spark: [3, 4, 4, 5, 5, 6, 7] },
+  { label: 'Lead time', value: '1.8h', delta: '-21%', good: true, spark: [3.1, 2.8, 2.6, 2.3, 2.1, 1.9, 1.8] },
+  { label: 'Change-fail rate', value: '6%', delta: '-2pp', good: true, spark: [11, 10, 9, 8, 7, 7, 6] },
+  { label: 'MTTR', value: '26m', delta: '-13%', good: true, spark: [44, 40, 36, 33, 30, 28, 26] },
 ];
+
+// Golden-signal trend cards for the Service metrics section. Series are mock but
+// deterministic per service (no Math.random — SSR-safe); throughput is derived
+// from coverage/deploys/p95. The previous-window ghost is plotted dashed.
+type SignalUnit = 'ms' | 'pp' | 'pct';
+function deltaOf(s: number[], unit: SignalUnit, goodUp: boolean): { label: string; good: boolean } {
+  const a = s[0];
+  const d = s[s.length - 1] - a;
+  const good = goodUp ? d >= 0 : d <= 0;
+  const sign = d > 0 ? '+' : d < 0 ? '-' : '';
+  const mag = Math.abs(d);
+  const label =
+    unit === 'ms' ? `${sign}${Math.round(mag)}ms` :
+    unit === 'pp' ? `${sign}${mag.toFixed(2)}pp` :
+    `${sign}${Math.round(Math.abs(d / a) * 100)}%`;
+  return { label, good };
+}
+function ghostOf(s: number[], unit: SignalUnit, goodUp: boolean): number[] {
+  return s.map((v) => {
+    if (unit === 'pp' && goodUp) return +(v - 0.04).toFixed(2); // availability: prior window a touch lower
+    if (unit === 'pp') return +(v + 0.12).toFixed(2);           // error rate: prior window a touch higher
+    if (unit === 'ms') return Math.round(v * 1.07);             // latency: prior window ~7% slower
+    return Math.round(v * 0.93);                                // throughput: prior window ~7% lower
+  });
+}
 
 const SCORECARD: { name: string; grade: string; tone: 'health-up' | 'warning' | 'danger' }[] = [
   { name: 'Reliability', grade: 'A', tone: 'health-up' },
@@ -354,30 +380,68 @@ const SCORECARD: { name: string; grade: string; tone: 'health-up' | 'warning' | 
 ];
 
 function MetricsTab({ svc, latencySpark }: { svc: PortalService; latencySpark: number[] }) {
+  const lat = latencySpark.slice(-7);
+  const within = (ok: boolean) =>
+    ok ? <Pill tone="health-up" dot>within SLO</Pill> : <Pill tone="warning" dot>over SLO</Pill>;
+
+  // Derived, deterministic throughput (requests/min) trend.
+  const tputBase = 5200 + svc.coverage * 90 - svc.p95 * 3;
+  const tput = Array.from({ length: 7 }, (_, i) =>
+    Math.max(600, Math.round(tputBase * (0.9 + 0.018 * i) + Math.sin(i + svc.p95) * tputBase * 0.02)));
+
+  const signals: {
+    label: string; value: string; note: string; unit: SignalUnit; goodUp: boolean;
+    series: number[]; badge?: React.ReactNode;
+  }[] = [
+    { label: 'Availability', value: '99.97%', note: 'SLO 99.95%', unit: 'pp', goodUp: true,
+      series: [99.92, 99.95, 99.96, 99.95, 99.97, 99.96, 99.97], badge: within(true) },
+    { label: 'p95 latency', value: `${svc.p95}ms`, note: 'SLO < 300ms', unit: 'ms', goodUp: false,
+      series: lat, badge: within(svc.p95 <= 300) },
+    { label: 'Error rate', value: '0.18%', note: 'SLO < 0.5%', unit: 'pp', goodUp: false,
+      series: [0.40, 0.30, 0.50, 0.20, 0.20, 0.30, 0.18], badge: within(true) },
+    { label: 'Throughput', value: `${(tput[tput.length - 1] / 1000).toFixed(1)}k`, note: 'requests / min', unit: 'pct', goodUp: true,
+      series: tput },
+  ];
+
+  const facts = [`Coverage ${svc.coverage}%`, `v${svc.version}`, `${svc.deps?.length ?? 0} dependencies`, svc.squad]
+    .filter(Boolean) as string[];
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
       <div>
         <div className="fp-section-title" style={{ marginBlockEnd: 10 }}>DORA metrics · last 30 days</div>
-        <div className="fp-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 14 }}>
+        <div className="fp-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14 }}>
           {DORA.map((d) => (
-            <FKpi
+            <MetricChartCard
               key={d.label}
               label={d.label}
               value={d.value}
-              sub={<Sub><span style={{ color: 'var(--success)' }}>{d.delta}</span> vs prev</Sub>}
-              trendNode={<Sparkline data={d.spark} w={84} h={24} color="var(--success)" />}
+              delta={{ label: d.delta, good: d.good }}
+              series={d.spark}
+              prev={d.spark.map((v, i) => +(v * (0.82 + 0.04 * ((i * 7) % 3))).toFixed(2))}
             />
           ))}
         </div>
       </div>
 
       <div>
-        <div className="fp-section-title" style={{ marginBlockEnd: 10 }}>Service metrics</div>
-        <div className="fp-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 14 }}>
-          <FKpi label="p95 Latency" value={`${svc.p95}ms`} sub={<Sub muted>SLO 300ms</Sub>} trendNode={<Sparkline data={latencySpark.slice(-7)} w={80} h={22} />} />
-          <FKpi label="Coverage" value={`${svc.coverage}%`} sub={<Sub muted>tests</Sub>} />
-          <FKpi label="Dependencies" value={svc.deps?.length ?? 0} sub={<Sub muted>services</Sub>} />
-          <FKpi label="Version" value={`v${svc.version}`} sub={<Sub muted>current</Sub>} />
+        <div className="fp-section-title" style={{ marginBlockEnd: 10 }}>Service metrics · golden signals</div>
+        <div className="fp-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14 }}>
+          {signals.map((s) => (
+            <MetricChartCard
+              key={s.label}
+              label={s.label}
+              value={s.value}
+              badge={s.badge}
+              delta={deltaOf(s.series, s.unit, s.goodUp)}
+              note={s.note}
+              series={s.series}
+              prev={ghostOf(s.series, s.unit, s.goodUp)}
+            />
+          ))}
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBlockStart: 12 }}>
+          {facts.map((f) => <span key={f} className="fp-meta-chip mono">{f}</span>)}
         </div>
       </div>
 
