@@ -25,7 +25,7 @@ import {
 } from '@/ds/core';
 import { FPageHeader, FSection, usePageCrumb } from '@/portal/shell/portal-shell';
 import { AiBanner } from '@/portal/shell/ai-pattern';
-import { STATUS_META, getIncident, type Responder } from '@/portal/data/incidents';
+import { SOURCE_META, STATUS_META, getIncident, type Diagnosis, type Evidence, type Responder } from '@/portal/data/incidents';
 
 const ROLE_TONE: Record<Responder['role'], 'ember' | 'neutral'> = {
   Commander: 'ember',
@@ -33,6 +33,87 @@ const ROLE_TONE: Record<Responder['role'], 'ember' | 'neutral'> = {
   Comms: 'neutral',
   Responder: 'neutral',
 };
+
+const EVIDENCE_ICON: Record<Evidence['kind'], keyof typeof Icons> = {
+  deploy: 'deploy',
+  pr: 'gitPullRequest',
+  'dep-edge': 'gitFork',
+  runbook: 'folder',
+  metric: 'activity',
+};
+
+const BLAST_TONE = {
+  high: 'severity-p1',
+  medium: 'severity-p2',
+  low: 'neutral',
+} as const satisfies Record<Diagnosis['remediation']['blastRadius'], string>;
+
+/** §7.6 — the self-heal-incident run, seen from the war room: the agent's
+ *  root-cause hypothesis with evidence, and its remediation behind a guardrail. */
+function DiagnosisPanel({ d, resolved }: { d: Diagnosis; resolved: boolean }) {
+  const r = d.remediation;
+  const awaiting = r.state === 'awaiting-approval' && !resolved;
+  return (
+    <div className="fp-card" style={{ marginBlockStart: 'var(--fp-section-gap, 18px)' }}>
+      <div className="fp-card-head">
+        <div className="fp-card-title" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+          <Icons.bot size={13} /> Agent diagnosis · {d.agent}
+        </div>
+        <span className="fp-card-meta mono">confidence {Math.round(d.confidence * 100)}%</span>
+      </div>
+
+      <p style={{ margin: 0, fontSize: 'var(--text-sm)', lineHeight: 1.55, color: 'var(--fg)' }}>{d.hypothesis}</p>
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBlockStart: 12 }}>
+        {d.evidence.map((e) => {
+          const Ic = Icons[EVIDENCE_ICON[e.kind]];
+          return (
+            <span
+              key={e.label}
+              className="fp-meta-chip mono"
+              style={{ whiteSpace: 'nowrap', paddingBlock: 4, paddingInline: 10 }}
+            >
+              <Ic size={11} /> {e.label}
+            </span>
+          );
+        })}
+      </div>
+
+      <div
+        style={{
+          display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
+          marginBlockStart: 14, paddingBlockStart: 12, borderBlockStart: '1px solid var(--border)',
+        }}
+      >
+        <span style={{ color: 'var(--fg-faint)', display: 'inline-flex' }}><Icons.gate size={14} /></span>
+        <div style={{ flex: 1, minInlineSize: 220 }}>
+          <div style={{ fontWeight: 600, fontSize: 'var(--text-sm)' }}>{r.summary}</div>
+          <span className="fp-cell-sub">
+            <Link href={`/portal/actions/${r.action}`} className="u-link-quiet mono">{r.action}</Link>
+            {' · '}guardrail: {r.gate}{' · '}{r.blastNote}
+          </span>
+        </div>
+        <Pill tone={BLAST_TONE[r.blastRadius]}>blast {r.blastRadius}</Pill>
+        {awaiting ? (
+          <span style={{ display: 'inline-flex', gap: 8 }}>
+            <Button variant="outline" size="sm"><Icons.check size={11} /> Approve &amp; run</Button>
+            <Button variant="ghost" size="sm">Deny</Button>
+          </span>
+        ) : (
+          <Pill tone="status-done">{r.state === 'auto-applied' ? 'auto-applied' : r.state}</Pill>
+        )}
+      </div>
+
+      {/* Quiet provenance link: ember on this card belongs to the decision
+          (Approve & run), not to navigation. */}
+      <div style={{ marginBlockStart: 10 }}>
+        <Link href={`/portal/workflows/${d.workflow}`} className="u-link-quiet" style={{ fontSize: 'var(--text-xs)' }}>
+          Part of workflow <span className="mono">{d.workflow}</span> · view runs
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 export default function IncidentRoom({ id }: { id: string }) {
   const inc = getIncident(id);
@@ -60,7 +141,9 @@ export default function IncidentRoom({ id }: { id: string }) {
 
   const actions = resolved ? (
     <>
-      <Button variant="ghost"><Icons.doc size={13} /> Postmortem</Button>
+      <Button variant="ghost" asChild>
+        <Link href={`/portal/incidents/${inc.id}/postmortem`}><Icons.doc size={13} /> Postmortem</Link>
+      </Button>
       <Button variant="outline"><Icons.refresh size={13} /> Reopen</Button>
     </>
   ) : (
@@ -74,7 +157,7 @@ export default function IncidentRoom({ id }: { id: string }) {
   return (
     <>
       <FPageHeader
-        eyebrow={`Incidents · ${inc.service}`}
+        back={{ href: '/portal/incidents', label: 'Incidents' }}
         title={`${inc.id} · ${inc.title}`}
         status={
           <>
@@ -85,19 +168,43 @@ export default function IncidentRoom({ id }: { id: string }) {
         subtitle={inc.summary}
         meta={
           <div className="fp-meta">
+            {(() => {
+              const src = SOURCE_META[inc.source.kind];
+              const SrcIcon = Icons[src.icon as keyof typeof Icons];
+              return (
+                <span className="fp-meta-chip" title={inc.source.detail}>
+                  <SrcIcon size={12} /> {src.label} · {inc.source.detail}
+                </span>
+              );
+            })()}
+            {inc.paging && (
+              <span className="fp-meta-chip" title={`Rotation ${inc.paging.rotation}`}>
+                <Icons.bell size={12} /> {inc.paging.rotation} · acked in {inc.paging.ackedIn}
+                {inc.paging.escalations > 0 ? ` · ${inc.paging.escalations} escalation` : ''}
+              </span>
+            )}
             <span className="fp-meta-chip"><Icons.clock size={12} /> Started {inc.started}</span>
-            <span className="fp-meta-chip"><Icons.server size={12} /> {inc.servicesAffected} services</span>
-            <span className="fp-meta-chip"><Icons.user size={12} /> {inc.customers} customers</span>
-            <span className="fp-meta-chip"><Icons.globe size={12} /> {inc.region}</span>
+            {/* Impact merged into one chip: 7 chips wrapped into a ragged two-line
+                band; 4 keep the header scannable. */}
+            <span className="fp-meta-chip">
+              <Icons.server size={12} /> {inc.servicesAffected} services · {inc.customers} customers · {inc.region}
+            </span>
           </div>
         }
         actions={actions}
       />
 
-      {inc.ai ? (
+      {inc.diagnosis ? (
+        <DiagnosisPanel d={inc.diagnosis} resolved={resolved} />
+      ) : inc.ai ? (
         <AiBanner title={inc.ai.title} action={inc.suspectedDeploy ? 'View deploy' : undefined}>{inc.ai.body}</AiBanner>
       ) : resolved ? (
-        <Banner tone="success" icon="check" title="Resolved" message={`${inc.title} was resolved in ${inc.duration}. A postmortem is attached.`} />
+        <Banner
+          tone="success"
+          icon="check"
+          title="Resolved"
+          message={`${inc.title} was resolved in ${inc.duration}.${inc.postmortem ? ` A ${inc.postmortem.status} postmortem is attached.` : ''}`}
+        />
       ) : null}
 
       {/* War-room KPIs */}

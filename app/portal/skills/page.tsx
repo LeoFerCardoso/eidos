@@ -35,9 +35,15 @@ function SkillCard({ s }: { s: Skill }) {
     >
       <div className="fp-skill-top">
         <span className={'fp-skill-ic' + (s.official ? '' : ' is-muted')} aria-hidden="true"><Icon size={18} /></span>
-        <Pill tone={s.official ? 'ember' : 'neutral'} dot={s.official}>
-          {s.official ? 'Official' : 'Community'}
-        </Pill>
+        {/* Official is the COMMON state (20 of 26 cards): quiet mono text.
+            Community is the exception and earns the pill. */}
+        {s.official ? (
+          <span className="mono" style={{ fontSize: 10.5, color: 'var(--fg-faint)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Official
+          </span>
+        ) : (
+          <Pill tone="neutral">Community</Pill>
+        )}
       </div>
       <span className="fp-skill-name">{s.name}</span>
       <p className="fp-skill-desc">{s.desc}</p>
@@ -96,7 +102,7 @@ export default function SkillsPage() {
         actions={
           <>
             <Button variant="ghost"><Icons.book size={13} /> Author guide</Button>
-            <Button variant="ember"><Icons.plus size={13} /> Publish skill</Button>
+            <Button variant="ember" asChild><Link href="/portal/skills/new"><Icons.plus size={13} /> Publish skill</Link></Button>
           </>
         }
       />

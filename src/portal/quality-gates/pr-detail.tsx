@@ -79,7 +79,7 @@ export default function PrDetail({ prId }: { prId: string }) {
   return (
     <>
       <FPageHeader
-        eyebrow={`Quality Gates · ${pr.service}`}
+        back={{ href: '/portal/quality-gates', label: 'Quality Gates' }}
         title={`#${pr.id} · ${pr.title}`}
         status={<Pill tone={st.tone} dot live={pr.status === 'in-review'}>{st.label}</Pill>}
         subtitle={`${pr.author.name} wants to merge ${pr.branch} into main.`}

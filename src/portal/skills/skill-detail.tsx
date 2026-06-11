@@ -8,6 +8,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Icons, Pill, Chip, Prose, ProseCode, Button } from '@/ds/core';
 import { usePageCrumb } from '@/portal/shell/portal-shell';
+import { AsideSection, EmptyState } from '@/portal/shell/detail-kit';
 import {
   getSkill, capabilitiesFor, usedByFor, versionsFor,
   type Skill, type SkillCapability, type SkillVersion,
@@ -21,32 +22,7 @@ const ICON = (k: string, size = 14) => {
   return <C size={size} />;
 };
 
-function AsideSection({
-  title, count, children,
-}: {
-  title: string;
-  count?: number;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="fp-agentd-sec">
-      <div className="fp-agentd-sec-head">
-        <span className="t">{title}</span>
-        {count !== undefined && <span className="fp-agentd-sec-count">{count}</span>}
-      </div>
-      {children}
-    </section>
-  );
-}
 
-function EmptyState({ icon, label }: { icon: string; label: string }) {
-  return (
-    <div className="fp-agentd-empty">
-      <span className="ic">{ICON(icon, 16)}</span>
-      <span>{label}</span>
-    </div>
-  );
-}
 
 // ── README content per category ───────────────────────────────────────────────
 // Static, plausible per-skill write-up: description, inputs, outputs, example
@@ -240,11 +216,7 @@ export default function SkillDetail({ id }: { id: string }) {
           <div className="fp-agentd-head">
             {/* Topbar: back link + actions */}
             <div className="fp-agentd-topbar">
-              <Button variant="ghost" asChild>
-                <Link href="/portal/skills">
-                  <Icons.chevronLeft size={14} /> Back to skills
-                </Link>
-              </Button>
+              <Link href="/portal/skills" className="fp-back-eyebrow" style={{ marginBlockEnd: 0 }}><Icons.arrowLeft size={11} /> Skills</Link>
               <div className="fp-agentd-topbar-actions">
                 <Button variant="ghost">
                   <Icons.book size={14} /> Docs

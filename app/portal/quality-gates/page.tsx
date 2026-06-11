@@ -133,7 +133,7 @@ export default function QualityGatesPage() {
                           <span className="mono" style={{ color: 'var(--fg-muted)', marginInlineEnd: 8 }}>#{p.id}</span>
                           {p.title}
                         </span>
-                        <span className="fp-cell-sub mono" style={{ color: 'var(--ember)' }}>{p.service}</span>
+                        <span className="fp-cell-sub mono" style={{ color: 'var(--fg-muted)' }}>{p.service}</span>
                       </td>
                       <td style={{ whiteSpace: 'nowrap' }}>{p.author.name}</td>
                       <td style={{ textAlign: 'end' }}>
