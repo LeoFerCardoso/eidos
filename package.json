@@ -49,6 +49,7 @@
     "@pierre/diffs": "^1.2.3",
     "@pierre/trees": "^1.0.0-beta.4",
     "@tailwindcss/postcss": "^4.3.0",
+    "@xyflow/react": "^12.11.0",
     "ai": "^6.0.185",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
