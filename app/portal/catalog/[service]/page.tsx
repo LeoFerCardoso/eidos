@@ -999,34 +999,26 @@ function IncidentsTab() {
  * where:
  *   dependents_count = number of services in SERVICES whose deps include this id
  *   pii_bonus        = +2 if svc.pii is true
- *   critical_bonus   = +3 if the service id is in the hardcoded tier-0 set
+ *   critical_bonus   = +3 if svc.criticalPath is true
  *                      (acerta-api, score-engine, decision-engine, consent-service,
  *                       scpc-gateway, konduto-antifraud — the revenue / compliance path)
  *
  * Thresholds:  score >= 8 = HIGH, >= 4 = MEDIUM, else LOW
+ * Vocabulary: criticalPath field on PortalService (ADR-0001 §1 — no "tier" vocabulary).
  */
-const TIER_0_IDS = new Set([
-  'acerta-api',
-  'score-engine',
-  'decision-engine',
-  'consent-service',
-  'scpc-gateway',
-  'konduto-antifraud',
-]);
-
 function computeBlastRadius(svc: PortalService): {
   score: number;
   level: 'HIGH' | 'MEDIUM' | 'LOW';
   dependents: PortalService[];
   pii: boolean;
-  tier0: boolean;
+  criticalPath: boolean;
 } {
   const dependents = SERVICES.filter((s) => s.deps?.includes(svc.id) && s.id !== svc.id);
   const pii = svc.pii === true;
-  const tier0 = TIER_0_IDS.has(svc.id);
-  const score = dependents.length + (pii ? 2 : 0) + (tier0 ? 3 : 0);
+  const criticalPath = svc.criticalPath === true;
+  const score = dependents.length + (pii ? 2 : 0) + (criticalPath ? 3 : 0);
   const level: 'HIGH' | 'MEDIUM' | 'LOW' = score >= 8 ? 'HIGH' : score >= 4 ? 'MEDIUM' : 'LOW';
-  return { score, level, dependents, pii, tier0 };
+  return { score, level, dependents, pii, criticalPath };
 }
 
 /** Contexts that are plausibly relevant to a given service — deterministic subset. */
@@ -1149,7 +1141,7 @@ function BlastRadiusChip({ blast }: { blast: ReturnType<typeof computeBlastRadiu
     >
       Blast radius {blast.level} &middot; {blast.dependents.length} dependents
       {blast.pii ? ' · PII' : ''}
-      {blast.tier0 ? ' · tier-0' : ''}
+      {blast.criticalPath ? ' · critical-path' : ''}
     </Pill>
   );
 }
@@ -1444,8 +1436,8 @@ function ContextTab({ svc }: { svc: PortalService }) {
               <Pill tone="neutral" style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)' }}>
                 {svc.lang}
               </Pill>
-              {TIER_0_IDS.has(svc.id) && (
-                <Pill tone="danger" dot>tier-0</Pill>
+              {svc.criticalPath && (
+                <Pill tone="danger" dot>critical-path</Pill>
               )}
             </div>
           </div>

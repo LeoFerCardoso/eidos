@@ -46,6 +46,8 @@ export interface PortalService {
   squad: string;
   /** does it touch personal data → LGPD-in-scope. */
   pii?: boolean;
+  /** true → on the critical blast-radius path. Replaces the old hardcoded TIER_0_IDS set. ADR-0001 §1: no "tier-0" vocabulary. */
+  criticalPath?: boolean;
 }
 
 export const SERVICES: PortalService[] = [
@@ -66,6 +68,7 @@ export const SERVICES: PortalService[] = [
     apis: ['Acerta Essential', 'Acerta Plus', 'Acerta Complete'],
     squad: 'Squad Query',
     pii: true,
+    criticalPath: true,
   },
   {
     id: 'score-engine',
@@ -81,6 +84,7 @@ export const SERVICES: PortalService[] = [
     apis: ['OneScore', 'Score PF', 'Score PJ'],
     squad: 'Squad Models',
     pii: true,
+    criticalPath: true,
   },
   {
     id: 'ignite-feature-store',
@@ -140,6 +144,7 @@ export const SERVICES: PortalService[] = [
     apis: ['Transactional Anti-Fraud'],
     squad: 'Squad Fraud',
     pii: true,
+    criticalPath: true,
   },
   {
     id: 'device-fingerprint',
@@ -259,6 +264,7 @@ export const SERVICES: PortalService[] = [
     apis: ['Boa Vista API SCPC'],
     squad: 'Squad Bureau',
     pii: true,
+    criticalPath: true,
   },
   {
     id: 'cadastro-positivo-ingestor',
@@ -344,6 +350,7 @@ export const SERVICES: PortalService[] = [
     deps: ['score-engine', 'konduto-antifraud'],
     apis: ['Risk Decisioning'],
     squad: 'Squad Decisioning',
+    criticalPath: true,
   },
   {
     id: 'policy-studio',
@@ -402,6 +409,7 @@ export const SERVICES: PortalService[] = [
     apis: ['Consent API'],
     squad: 'Squad Platform',
     pii: true,
+    criticalPath: true,
   },
   {
     id: 'audit-trail',
