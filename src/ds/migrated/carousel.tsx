@@ -56,7 +56,7 @@ export function Demo() {
 const FEATURES = [
   { tag: 'NEW',    title: 'Fluid type scale',  desc: 'clamp() across every heading, defined once in tokens.' },
   { tag: 'UPDATE', title: 'Dark mode tokens',  desc: 'Six surface levels + automatic chrome contrast.' },
-  { tag: 'NEW',    title: 'Tailwind v4 preset', desc: 'Drop-in @theme block. Zero config.' },
+  { tag: 'NEW',    title: 'Typed Layout', desc: 'Box/Stack/Inline/Grid — token props, zero raw markup.' },
   { tag: 'NEW',    title: 'Framer Motion 11',  desc: 'Pre-tuned motion variants per surface.' },
   { tag: 'UPDATE', title: 'Accessible focus',  desc: 'Ember rings everywhere — bye, browser blue.' },
   { tag: 'NEW',    title: 'RTL contract',      desc: 'Logical properties throughout. Flip with one attribute.' },
@@ -64,14 +64,14 @@ const FEATURES = [
 
 const HEROES = [
   { tag: 'RELEASE',  title: 'Eidos 1.1',         desc: '7 new components, full alphabetical sort.' },
-  { tag: 'GUIDE',    title: 'Tailwind v4 setup',  desc: 'A 90-second walkthrough of the new preset.' },
+  { tag: 'GUIDE',    title: 'Typed Layout guide',  desc: 'Token props, the as polymorphic prop, eslint gate.' },
   { tag: 'ROADMAP',  title: 'Coming next',        desc: 'Combobox, command palette, and a chart kit.' },
 ];
 
 const FEATURES_AR = [
   { tag: 'جديد',  title: 'مقياس الخط المرن', desc: 'clamp() لكل عنوان، يُعرَّف مرة في الرموز.' },
   { tag: 'تحديث', title: 'رموز الوضع الداكن', desc: 'ست طبقات سطح + تباين تلقائي للواجهة.' },
-  { tag: 'جديد',  title: 'إعداد Tailwind v4', desc: 'كتلة @theme بدون أي تكوين.' },
+  { tag: 'جديد',  title: 'التخطيط المكتوب', desc: 'Box/Stack/Inline/Grid — خصائص الرمز، بدون علامات HTML مباشرة.' },
   { tag: 'جديد',  title: 'Framer Motion 11',  desc: 'متغيرات حركة مضبوطة لكل سطح.' },
 ];
 

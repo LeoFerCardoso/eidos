@@ -39,9 +39,9 @@
       { group: 'Get Started', items: [
         { id: 'overview',           label: 'Introduction',  href: 'design-system.html' },
         { id: 'installation',       label: 'Installation',  href: 'pages/get-started/installation.html' },
+        { id: 'typed-layout',       label: 'Typed Layout',  href: 'pages/get-started/typed-layout.html',  badge: 'new' },
         { id: 'components-catalog', label: 'Components',    href: 'pages/get-started/components.html' },
         { id: 'theming',            label: 'Theming',       href: 'pages/get-started/theming.html' },
-        { id: 'tailwind',           label: 'Tailwind',      href: 'pages/get-started/tailwind.html' },
         { id: 'rtl',                label: 'RTL',           href: 'pages/get-started/rtl.html',           badge: 'updated' },
         { id: 'llm',                label: 'LLM',           href: 'pages/get-started/llm.html' },
       ]},

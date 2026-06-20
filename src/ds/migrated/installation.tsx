@@ -154,63 +154,37 @@ import { MetricCard } from '@/components/forge/metric-card';`}
       {/* ── Layout & responsiveness ──────────────────────────────────────── */}
       <SubHead meta="layout">Layout &amp; responsiveness</SubHead>
       <Lede up>
-        Eidos components style themselves; <em>arranging</em> them is your call. You do
-        <strong> not</strong> need Tailwind for grids or responsiveness — the design
-        system ships semantic layout helpers and the components use logical CSS
-        properties, so they adapt to viewport and direction out of the box.
+        Eidos components style themselves; <em>arranging</em> them goes through the typed
+        layout primitives — <Code>Box</Code> / <Code>Stack</Code> / <Code>Inline</Code> /{' '}
+        <Code>Grid</Code> from <Code>@eidos/ui</Code>. Every spacing, color and radius prop
+        is a design token, so an off-system value <strong>does not compile</strong>. No
+        Tailwind, no raw <Code>&lt;div&gt;</Code>, no inline <Code>style</Code>. See{' '}
+        <Code>Typed Layout</Code> for the full strategy.
       </Lede>
       <CodeBlock
-        label="grid + responsiveness (no Tailwind required)"
-        code={`/* Grid: the .ds-grid helper + a column count. */
-<div className="ds-grid cols-3">   {/* cols-2 · cols-3 · cols-4 · cols-6 */}
-  <MetricCard …/> <MetricCard …/> <MetricCard …/>
-</div>
+        label="layout with the typed vocabulary"
+        code={`import { Stack, Inline, Grid, Box } from '@eidos/ui';
 
-/* Responsive: plain CSS media queries in your own stylesheet —
-   compose Eidos classes, collapse columns where you need to. */
-@media (max-width: 760px) {
-  .ds-grid.cols-3 { grid-template-columns: 1fr; }
-}
+// Vertical rhythm — token gap, no raw CSS.
+<Stack gap="4">
+  <MetricCard …/> <MetricCard …/>
+</Stack>
 
-/* RTL is automatic: components use logical properties
-   (inline-start / inline-end), so dir="rtl" mirrors them with no extra work. */`}
+// Responsive grid — typed column count + token gap.
+<Grid columns="3" gap="4">
+  <ServiceCard …/> <ServiceCard …/> <ServiceCard …/>
+</Grid>
+
+// Semantics come from \`as\`; RTL is automatic (logical properties under the hood).
+<Box as="nav" display="flex" align="center" gap="2" px="4">…</Box>`}
         lang="jsx"
       />
       <p className="ds-caption">
         Tokens are real CSS variables (<Code>--space-*</Code>, <Code>--radius-*</Code>,
-        <Code>--text-*</Code>), so you can build any custom layout in plain CSS or inline
-        styles and stay perfectly on-brand — no utility framework needed.
-      </p>
-
-      {/* ── Optional Tailwind ────────────────────────────────────────────── */}
-      <SubHead meta="optional">Optional: Tailwind</SubHead>
-      <Lede up>
-        Tailwind is <strong>optional</strong>. Eidos components carry zero Tailwind
-        utilities, so they work in any React project (or Vue/Svelte/plain HTML) with or
-        without it. If your app already uses Tailwind v4, opt into a token bridge so
-        utilities like <Code>bg-surface</Code> / <Code>text-fg-muted</Code> resolve to the
-        live, theme-aware Eidos tokens:
-      </Lede>
-      <CodeBlock
-        label="app.css — optional Tailwind token bridge"
-        code={`@import "tailwindcss";
-
-/* Map Eidos tokens → Tailwind utilities (theme-aware: tracks light/dark). */
-@theme inline {
-  --color-bg: var(--bg);
-  --color-surface: var(--surface);
-  --color-fg: var(--fg);
-  --color-fg-muted: var(--fg-muted);
-  --color-border: var(--border);
-  --color-ember: var(--ember);
-  --font-sans: 'Geist', system-ui, sans-serif;
-  --font-mono: 'Geist Mono', ui-monospace, monospace;
-}`}
-        lang="css"
-      />
-      <p className="ds-caption">
-        With the bridge in place you can mix Eidos components and Tailwind utilities for
-        bespoke screens — but it's never required to use the design system.
+        <Code>--text-*</Code>), and the primitives compile to atomic classes bound to them —
+        so every layout stays perfectly on-brand and theme-aware with zero utility framework.
+        The <Code>eslint-plugin-eidos</Code> rules fail the build on raw markup, inline style,
+        or a hardcoded color.
       </p>
 
       {/* ── CLI reference ───────────────────────────────────────────────── */}

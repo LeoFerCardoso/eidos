@@ -33,7 +33,8 @@ function ToasterScene({ position = 'top-right', dir = 'ltr', minHeight = 320 }: 
 
   return (
     <div dir={dir} style={{ position: 'relative', minHeight, width: '100%' }}>
-      <Toaster position={position} />
+      {/* Toaster IS the provider — the consumer must be its descendant, not a sibling. */}
+      <Toaster position={position}>
       <ToasterConsumer>
         {({ toast, dismiss }) => (
           <div style={{
@@ -78,6 +79,7 @@ function ToasterScene({ position = 'top-right', dir = 'ltr', minHeight = 320 }: 
           </div>
         )}
       </ToasterConsumer>
+      </Toaster>
     </div>
   );
 }

@@ -215,7 +215,6 @@ export const MIGRATED: Record<string, () => Promise<{ default: ComponentType }>>
   "table": () => import('./table'),
   "tabs": () => import('./tabs'),
   "tag-input": () => import('./tag-input'),
-  "tailwind": () => import('./tailwind'),
   "textarea": () => import('./textarea'),
   "theming": () => import('./theming'),
   "toggle": () => import('./toggle'),
@@ -223,5 +222,6 @@ export const MIGRATED: Record<string, () => Promise<{ default: ComponentType }>>
   "toolbar": () => import('./toolbar'),
   "tooltips": () => import('./tooltips'),
   "trend": () => import('./trend'),
+  "typed-layout": () => import('./typed-layout'),
   "typography": () => import('./typography'),
 };

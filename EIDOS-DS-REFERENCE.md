@@ -595,10 +595,10 @@ Todos exportados em `window` para uso em `<script type="text/babel">` separados.
 ### 5.1 Get Started (6)
 
 - **overview** — Landing/intro: filosofia, princípios, stats, FAQs. Stats vivos via getComputedStyle.
-- **installation** — Dois caminhos (usar Eidos num produto vs. rodar docs local). Prerequisites (Node 20+, Tailwind v4), steps com circulos numerados, CDN pinning com SRI.
+- **installation** — Dois caminhos (usar Eidos num produto vs. rodar docs local). Prerequisites (Node 20+), steps com circulos numerados, CLI copy-paste workflow (eidos add). No Tailwind required.
 - **components-catalog** (`components.html`) — Catálogo auto-gerado via `SECTIONS.walk()`. Tile grid por group/subgroup com descrição e ícone.
 - **theming** — Dark/light via `[data-theme]`, override de tokens com `oklch()`, persistência em `localStorage`.
-- **tailwind** — Preset para Tailwind v4 (`@theme` block) + config v3 legacy. Inclui keyframes inline.
+- **typed-layout** — Vocabulário de layout fortemente tipado (Box/Stack/Inline/Grid do @eidos/ui). Token props (p/gap/background/radius), prop `as` polimórfica, gerador de tokens e regras eslint-plugin-eidos. READ THIS before laying out any screen.
 - **rtl** — Suporte RTL via logical properties. Auditoria de 7 components com `transform: translateX`, guidance de Intl.* para datas/moedas.
 
 ### 5.2 Foundations (8)
@@ -901,7 +901,7 @@ eidos-design-system/
 │       │   ├── shell.jsx             ← DSShell, SideNav, Topbar, ThemeToggle, CommandPalette
 │       │   └── boot.jsx              ← Mounting (sempre por último na página)
 │       ├── pages/
-│       │   ├── get-started/          ← overview, installation, components, theming, tailwind, rtl
+│       │   ├── get-started/          ← overview, installation, components, theming, typed-layout, rtl
 │       │   ├── foundations/          ← brand, color, severity, typography, spacing, shadows, iconography, motion
 │       │   ├── components/           ← 80+ componentes
 │       │   ├── charts/               ← 12 chart types

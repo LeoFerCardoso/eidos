@@ -1,238 +1,241 @@
 # Eidos Design System
 
-> Eidos is the design system that powers Equifax/Boa Vista's internal developer platform. It's CSS-first (Tailwind v4 + token CSS variables), framework-agnostic at the class layer, and ships React reference components meant to be copy-pasted into product code. There is no npm package to install — own your copy of every component.
+> Eidos is the design system that powers Equifax/Boa Vista's internal developer platform. It is token-first and LLM-safe: layout is a strongly-typed vocabulary (Box/Stack/Inline/Grid) where every spacing/color/radius prop is a design token, so an off-system value does not compile. It ships React reference components meant to be copy-pasted into product code. There is no npm package to install for the components — own your copy of each. NOT Tailwind: components carry zero utility classes, and product code must not use raw HTML layout elements or inline styles.
 
 ## Principles
 
 - One accent: ember (#FF6B35). Use at most twice per screen.
-- Compose existing classes and components. Never reinvent something that already lives in tokens.css / ds.css.
-- Logical CSS properties everywhere (inset-inline-*, padding-inline-*, margin-inline-*). RTL is a first-class requirement, not an after-thought.
-- Tokens live in tokens.css; component classes live in ds.css. No per-page <style> blocks.
-- React core is split: atoms.jsx → primitives.jsx → blocks.jsx → charts.jsx → shell.jsx. Load in that order; each IIFE exports to window.
+- Layout goes through the typed primitives from @eidos/ui — Box / Stack / Inline / Grid — never a raw <div>/<section>/<nav> and never an inline style. Semantics come from the polymorphic `as` prop (<Box as="nav">, <Stack as="ul">).
+- Spacing, color and radius are token props (p="4", gap="3", background="surface", radius="md"), not literal values. A value outside the token union is a TypeScript error. Never hardcode a hex/rgb/oklch color.
+- The eslint-plugin-eidos rules (no-raw-layout-elements / no-inline-style / no-hardcoded-color) fail the build on off-system markup — green means safe to merge.
+- Compose existing components. Never reinvent something that already lives in tokens.css / ds.css / @eidos/ui.
+- Logical CSS properties everywhere (inset-inline-*, padding-inline-*, margin-inline-*); the typed props are logical by construction (px/py/ps/pe). RTL is a first-class requirement.
+- Tokens live in packages/ui/styles/tokens.css (the canonical source); the typed token unions (tokens.gen.ts) and atomic stylesheet (system.gen.css) are generated from it — never hand-edit them. The React core is the @eidos/ui package; pages import primitives from '@/ds/core', which re-exports it plus the docs-shell wrappers.
 
 ## Files an LLM should read first
 
 - /CLAUDE.md — TL;DR authoring rules (read on every session start).
 - /EIDOS-DS-REFERENCE.md — long-form catalog (tokens, every CSS class, every React component, every icon, every page). ~920 lines.
-- /eidos-design-system/assets/js/core/nav-config.js — single source of truth for navigation, slugs, and labels.
-- /eidos-design-system/assets/css/tokens.css — every design token (colors, type, spacing, radius, shadow, motion).
-- /eidos-design-system/assets/css/ds.css — every component class (.btn, .pill, .surface, .in-*, .fc-*, .cb-*, .menu, .tt, .ds-frame, .ds-grid, …).
+- /src/ds/core/nav-config.js — single source of truth for navigation, slugs, and labels (read by scripts/gen-nav.mjs → src/lib/nav.ts).
+- /packages/ui/styles/tokens.css — every design token (colors, type, spacing, radius, shadow, motion). The CANONICAL source.
+- /packages/ui/src/system/ — the typed layout vocabulary (Box/Stack/Inline/Grid) + generated token unions (tokens.gen.ts). Read box.tsx for the prop contract.
+- /packages/eslint-plugin-eidos/ — the rules that ban raw markup / inline style / hardcoded color. The enforcement half of the LLM-safe contract.
+- /packages/ui/styles/ds.css — every component class (.btn, .pill, .surface, .in-*, .fc-*, .cb-*, .menu, .tt, .ds-frame, .ds-grid, …); AI-surface classes live in ai.css.
 
 ## Docs
 
 - [Introduction](design-system.html): What Eidos is, who maintains it, how it ships.
-- [Installation](pages/get-started/installation.html): Tailwind v4 preset + React copy-paste workflow. No npm install.
-- [Components catalog](pages/get-started/components.html): Searchable grid of every component with previews.
-- [Theming](pages/get-started/theming.html): Light/dark via data-theme, custom accents via CSS variables.
-- [Tailwind](pages/get-started/tailwind.html): Full @theme block (v4) plus tailwind.config.js (v3) presets.
-- [RTL](pages/get-started/rtl.html): Logical-property cookbook and direction-aware overrides.
-- [LLM](pages/get-started/llm.html): This file — generated from the navigation source of truth.
+- [Installation](/installation): React copy-paste workflow (eidos CLI). No Tailwind, no npm package for components.
+- [Typed Layout](/typed-layout): The token vocabulary — Box/Stack/Inline/Grid, token props, the compile-time + lint guarantees. READ THIS before laying out any screen.
+- [Components catalog](/components-catalog): Searchable grid of every component with previews.
+- [Theming](/theming): Light/dark via data-mode, custom accents via CSS variables.
+- [RTL](/rtl): Logical-property cookbook and direction-aware overrides.
 
 ## Foundations
 
-- [Brand](pages/foundations/brand.html): Flame mark, lockups, brand color rules, do/don't on logo usage.
-- [Color](pages/foundations/color.html): Surface, foreground, ember, ice, violet, status palettes with usage matrix.
-- [Severity & state](pages/foundations/severity.html): Mapping of info/success/warning/danger/critical onto tokens and pills.
-- [Typography](pages/foundations/typography.html): Geist sans + Geist Mono, display-xl through mono-label scale.
-- [Spacing & Radius](pages/foundations/spacing.html): 4px base scale; radius xs (3px) through 2xl (12px).
-- [Shadows & Borders](pages/foundations/shadows.html): Elevation 1/2/3 + alpha border tokens.
-- [Iconography](pages/foundations/iconography.html): 95+ icons in window.Icons, 12–20px sizes, 1.5px stroke, currentColor.
-- [Motion](pages/foundations/motion.html): cubic-bezier(0.16, 1, 0.3, 1) — durations fast (120ms), normal (220ms), slow (360ms).
+- [Brand](/brand): Flame mark, lockups, brand color rules, do/don't on logo usage.
+- [Color](/color): Surface, foreground, ember, ice, violet, status palettes with usage matrix.
+- [Severity & state](/severity): Mapping of info/success/warning/danger/critical onto tokens and pills.
+- [Typography](/typography): Geist sans + Geist Mono, display-xl through mono-label scale.
+- [Spacing & Radius](/spacing): 4px base scale; radius xs (3px) through 2xl (12px).
+- [Shadows & Borders](/shadows): Elevation 1/2/3 + alpha border tokens.
+- [Iconography](/iconography): 95+ icons exported as Icons from @eidos/ui, 12–20px sizes, 1.5px stroke, currentColor.
+- [Motion](/motion): cubic-bezier(0.16, 1, 0.3, 1) — durations fast (120ms), normal (220ms), slow (360ms).
 
 ## Components — Form & Input
 
-- [AI Label](pages/components/ai-label.html): Pill marking AI-generated content with shimmer accent.
-- [Button](pages/components/buttons.html): .btn — primary, ghost, ember variants; sizes sm / md / lg.
-- [Button Group](pages/components/button-group.html): Segmented control of attached buttons.
-- [Calendar](pages/components/calendar.html): Single-month grid; basis of Date Picker.
-- [Checkbox](pages/components/checkbox.html): .fc-check chrome over an opacity-0 real input. Wrap label, don't htmlFor.
-- [Color Input](pages/components/color-input.html): Hex/RGB picker with swatch preview.
-- [Combobox](pages/components/combobox.html): .cb-* — fixed-positioned panel with search filter.
-- [Date Picker](pages/components/date-picker.html): Input + calendar popover; supports single + range.
-- [File Input](pages/components/file-input.html): Drop zone + chooser with file list and per-row remove.
-- [Form composition](pages/components/forms.html): Full label + control + helper + error patterns.
-- [Input](pages/components/input.html): .in-control sits inside .in-group; focus ring lives on the group.
-- [Input Group](pages/components/input-group.html): Left/right addons — icon, text, button, select, spinner, stepper.
-- [Label](pages/components/label.html): Semantic label tied to a control via id/htmlFor.
-- [Number Input](pages/components/number-input.html): Input with stepper addon.
-- [OTP Input](pages/components/otp-input.html): 4–8 digit one-time-passcode boxes.
-- [Pills & Chips](pages/components/pills.html): .pill (status) and .chip (selectable).
-- [Radio Group](pages/components/radio.html): .fc-radio chrome; exclusive selection.
-- [Select](pages/components/select.html): Native + custom Select with .sel-search panel.
-- [Slider](pages/components/slider.html): Single value + range with two thumbs.
-- [Switch](pages/components/switch.html): .fc-toggle; thumb uses spring cubic-bezier(0.34, 1.56, 0.64, 1).
-- [Tag Input](pages/components/tag-input.html): Comma / Enter–separated tags with backspace removal.
-- [Textarea](pages/components/textarea.html): Multi-line input with optional auto-grow.
-- [Toolbar](pages/components/toolbar.html): Horizontal action bar with dividers + icon buttons.
+- [AI Label](/ai/label): Pill marking AI-generated content with shimmer accent.
+- [Button](/buttons): .btn — primary, ghost, ember variants; sizes sm / md / lg.
+- [Button Group](/button-group): Segmented control of attached buttons.
+- [Calendar](/calendar): Single-month grid; basis of Date Picker.
+- [Checkbox](/checkbox): .fc-check chrome over an opacity-0 real input. Wrap label, don't htmlFor.
+- [Color Input](/color-input): Hex/RGB picker with swatch preview.
+- [Combobox](/combobox): .cb-* — fixed-positioned panel with search filter.
+- [Date Picker](/date-picker): Input + calendar popover; supports single + range.
+- [File Input](/file-input): Drop zone + chooser with file list and per-row remove.
+- [Form composition](/forms): Full label + control + helper + error patterns.
+- [Input](/input): .in-control sits inside .in-group; focus ring lives on the group.
+- [Input Group](/input-group): Left/right addons — icon, text, button, select, spinner, stepper.
+- [Label](/label): Semantic label tied to a control via id/htmlFor.
+- [Number Input](/number-input): Input with stepper addon.
+- [OTP Input](/otp-input): 4–8 digit one-time-passcode boxes.
+- [Pills & Chips](/pills): .pill (status) and .chip (selectable).
+- [Radio Group](/radio): .fc-radio chrome; exclusive selection.
+- [Select](/select): Native + custom Select with .sel-search panel.
+- [Slider](/slider): Single value + range with two thumbs.
+- [Switch](/switch): .fc-toggle; thumb uses spring cubic-bezier(0.34, 1.56, 0.64, 1).
+- [Tag Input](/tag-input): Comma / Enter–separated tags with backspace removal.
+- [Textarea](/textarea): Multi-line input with optional auto-grow.
+- [Toolbar](/toolbar): Horizontal action bar with dividers + icon buttons.
 
 ## Components — Layout & Navigation
 
-- [Accordion](pages/components/accordion.html): Collapsible vertical sections.
-- [Breadcrumb](pages/components/breadcrumb.html): Path with separators; collapses on overflow.
-- [Navigation Menu](pages/components/navigation.html): Top-level horizontal nav with mega-menu panels.
-- [Resizable](pages/components/resizable.html): Split panes with draggable handle.
-- [Scroll Area](pages/components/scroll-area.html): Styled custom scrollbar wrapper.
-- [Separator](pages/components/separator.html): Horizontal / vertical divider.
-- [Sidebar](pages/components/sidebar.html): Left rail with groups + subgroups + collapsible sections.
-- [Tabs](pages/components/tabs.html): Horizontal segmented tab bar.
+- [Accordion](/accordion): Collapsible vertical sections.
+- [Breadcrumb](/breadcrumb): Path with separators; collapses on overflow.
+- [Navigation Menu](/navigation): Top-level horizontal nav with mega-menu panels.
+- [Resizable](/resizable): Split panes with draggable handle.
+- [Scroll Area](/scroll-area): Styled custom scrollbar wrapper.
+- [Separator](/separator): Horizontal / vertical divider.
+- [Sidebar](/sidebar): Left rail with groups + subgroups + collapsible sections.
+- [Tabs](/tabs): Horizontal segmented tab bar.
 
 ## Components — Overlays & Dialogs
 
-- [Alert Dialog](pages/components/alert-dialog.html): Confirmation modal for destructive actions.
-- [Command](pages/components/command.html): ⌘K palette / fuzzy command runner.
-- [Drawer](pages/components/drawer.html): Bottom sheet (mobile-first pattern).
-- [Dropdown Menu](pages/components/menu.html): .menu primitive; also used by Menubar and Context menu.
-- [Hover Card](pages/components/hover-card.html): On-hover persona / preview card.
-- [Menubar](pages/components/menubar.html): Horizontal app menu bar (File / Edit / View).
-- [Modal](pages/components/modal.html): Center dialog with backdrop + focus trap.
-- [Popover](pages/components/popover.html): Anchored popover panel for non-trivial content.
-- [Sidesheet](pages/components/sidesheet.html): Right-edge slide-in panel for detail views.
-- [Tooltip](pages/components/tooltips.html): [data-tt="…"] attribute works on any element; no JS hookup needed.
+- [Alert Dialog](/alert-dialog): Confirmation modal for destructive actions.
+- [Command](/command): ⌘K palette / fuzzy command runner.
+- [Drawer](/drawer): Bottom sheet (mobile-first pattern).
+- [Dropdown Menu](/menu): .menu primitive; also used by Menubar and Context menu.
+- [Hover Card](/hover-card): On-hover persona / preview card.
+- [Menubar](/menubar): Horizontal app menu bar (File / Edit / View).
+- [Modal](/modal): Center dialog with backdrop + focus trap.
+- [Popover](/popover): Anchored popover panel for non-trivial content.
+- [Sidesheet](/sidesheet): Right-edge slide-in panel for detail views.
+- [Tooltip](/tooltips): [data-tt="…"] attribute works on any element; no JS hookup needed.
 
 ## Components — Feedback & Status
 
-- [Alert](pages/components/alerts.html): Inline contextual banner with icon + tone.
-- [Badge](pages/components/badges.html): Small label (.badge); use for count / tag, not status.
-- [Banner](pages/components/banner.html): Page-level dismissable announcement.
-- [Empty state](pages/components/empty.html): Empty pattern with illustration + CTA.
-- [Notification](pages/components/notification.html): Toast / snackbar (transient).
-- [Progress](pages/components/progress.html): Linear + circular progress; determinate and indeterminate.
-- [Skeleton](pages/components/skeleton.html): Loading placeholder shimmer.
-- [Spinner](pages/components/spinner.html): Circular loading indicator.
-- [Status dot](pages/components/status-dot.html): Small colored dot atom for state.
-- [Status & semantics](pages/components/status.html): Token mapping for state colors.
-- [Trend](pages/components/trend.html): Up/down delta number + sparkline mini-chart.
+- [Alert](/alerts): Inline contextual banner with icon + tone.
+- [Badge](/badges): Small label (.badge); use for count / tag, not status.
+- [Banner](/banner): Page-level dismissable announcement.
+- [Empty state](/empty): Empty pattern with illustration + CTA.
+- [Notification](/notification): Toast / snackbar (transient).
+- [Progress](/progress): Linear + circular progress; determinate and indeterminate.
+- [Skeleton](/skeleton): Loading placeholder shimmer.
+- [Spinner](/spinner): Circular loading indicator.
+- [Status dot](/status-dot): Small colored dot atom for state.
+- [Status & semantics](/status): Token mapping for state colors.
+- [Trend](/trend): Up/down delta number + sparkline mini-chart.
 
 ## Components — IDP Blocks
 
-- [Data table](pages/components/data-table.html): Sortable / filterable Equifax-style data grid.
-- [Diff viewer](pages/components/diff-viewer.html): Side-by-side or unified code diff.
-- [Filter panel](pages/components/filter-panel.html): Facet + range filter sidebar.
-- [JSON inspector](pages/components/json-inspector.html): Collapsible JSON tree.
-- [Log viewer](pages/components/log-viewer.html): Line-numbered terminal log with level coloring.
-- [Pipeline](pages/components/pipeline.html): Multi-stage CI/CD pipeline visualization.
-- [Ring bar](pages/components/ring-bar.html): Concentric rings for deploy waves / cohorts.
-- [Timeline](pages/components/timeline.html): Chronological event list with branched lanes.
-- [Tree view](pages/components/tree-view.html): Collapsible nested tree (file explorer style).
+- [Data table](/idp/data-table): Sortable / filterable Equifax-style data grid.
+- [Diff viewer](/idp/diff-viewer): Side-by-side or unified code diff.
+- [Filter panel](/idp/filter-panel): Facet + range filter sidebar.
+- [JSON inspector](/idp/json-inspector): Collapsible JSON tree.
+- [Log viewer](/idp/log-viewer): Line-numbered terminal log with level coloring.
+- [Pipeline](/idp/pipeline): Multi-stage CI/CD pipeline visualization.
+- [Ring bar](/idp/ring-bar): Concentric rings for deploy waves / cohorts.
+- [Timeline](/idp/timeline): Chronological event list with branched lanes.
+- [Tree view](/idp/tree-view): Collapsible nested tree (file explorer style).
 
 ## Components — Display & Media
 
-- [Aspect Ratio](pages/components/aspect-ratio.html): Fixed-ratio wrapper for images / videos.
-- [Avatar](pages/components/avatars.html): Image, initials, with optional status dot.
-- [Card](pages/components/card.html): Surface wrapper for content cells.
-- [Carousel](pages/components/carousel.html): Horizontal scroller with scroll-snap; RTL-aware.
-- [Copy chip](pages/components/copy-chip.html): Text + inline copy-to-clipboard button atom.
-- [Count up](pages/components/count-up.html): Animated number increment on mount.
-- [Data Display](pages/components/data.html): Definition list / key–value pairs.
-- [Kbd](pages/components/kbd.html): Keyboard key / chord display (⌘K).
-- [Relative time](pages/components/relative-time.html): "2 minutes ago" auto-updating atom.
-- [Surfaces](pages/components/surfaces.html): bg / surface / border layering rules.
-- [Table](pages/components/table.html): Base .tbl class — rows, headers, alignment, density.
+- [Aspect Ratio](/aspect-ratio): Fixed-ratio wrapper for images / videos.
+- [Avatar](/avatars): Image, initials, with optional status dot.
+- [Card](/card): Surface wrapper for content cells.
+- [Carousel](/carousel): Horizontal scroller with scroll-snap; RTL-aware.
+- [Copy chip](/copy-chip): Text + inline copy-to-clipboard button atom.
+- [Count up](/count-up): Animated number increment on mount.
+- [Data Display](/data): Definition list / key–value pairs.
+- [Kbd](/kbd): Keyboard key / chord display (⌘K).
+- [Relative time](/relative-time): "2 minutes ago" auto-updating atom.
+- [Surfaces](/surfaces): bg / surface / border layering rules.
+- [Table](/table): Base .tbl class — rows, headers, alignment, density.
 
 ## Components — Misc
 
-- [Collapsible](pages/components/collapsible.html): Generic open / close section.
-- [Pagination](pages/components/pagination.html): Page-by-page nav; also .sm compact variant.
-- [Toggle](pages/components/toggle.html): Single on / off button (icon-only or labeled).
-- [Toggle Group](pages/components/toggle-group.html): Exclusive or inclusive radio group of toggles.
+- [Collapsible](/collapsible): Generic open / close section.
+- [Pagination](/pagination): Page-by-page nav; also .sm compact variant.
+- [Toggle](/toggle): Single on / off button (icon-only or labeled).
+- [Toggle Group](/toggle-group): Exclusive or inclusive radio group of toggles.
 
 ## Charts
 
 Recharts wrappers themed with Eidos tokens — viz palette lives in tokens.css. Use only for data visualization; not for layout decoration.
 
-- [Overview](pages/charts/overview.html): Palette, color order, and shared options for every chart.
-- [Area chart](pages/charts/area.html): Filled time-series; supports stacked.
-- [Bar chart](pages/charts/bar.html): Vertical / horizontal categorical bars.
-- [Composed chart](pages/charts/composed.html): Bar + line + area combined on one axis.
-- [Gauge chart](pages/charts/gauge.html): Half-ring percentage gauge.
-- [Heatmap](pages/charts/heatmap.html): 2D matrix with intensity coloring.
-- [Histogram](pages/charts/histogram.html): Distribution buckets.
-- [Line chart](pages/charts/line.html): Time-series single / multi-series.
-- [Pie chart](pages/charts/pie.html): Categorical share-of-total.
-- [Radar chart](pages/charts/radar.html): Multi-axis polar plot.
-- [Radial chart](pages/charts/radial.html): Concentric percent rings.
-- [Sankey diagram](pages/charts/sankey.html): Flow between categories.
+- [Overview](/charts/overview): Palette, color order, and shared options for every chart.
+- [Area chart](/charts/area): Filled time-series; supports stacked.
+- [Bar chart](/charts/bar): Vertical / horizontal categorical bars.
+- [Composed chart](/charts/composed): Bar + line + area combined on one axis.
+- [Gauge chart](/charts/gauge): Half-ring percentage gauge.
+- [Heatmap](/charts/heatmap): 2D matrix with intensity coloring.
+- [Histogram](/charts/histogram): Distribution buckets.
+- [Line chart](/charts/line): Time-series single / multi-series.
+- [Pie chart](/charts/pie): Categorical share-of-total.
+- [Radar chart](/charts/radar): Multi-axis polar plot.
+- [Radial chart](/charts/radial): Concentric percent rings.
+- [Sankey diagram](/charts/sankey): Flow between categories.
 
 ## Elements
 
 "Recipe" compositions built entirely from existing primitives — Pill, Card, Avatar, Trend, Sparkline, StatusDot, ScoreGauge. NOT new components; copy as a starting point.
 
-- [Overview](pages/elements/overview.html): Recipe catalog with previews.
-- [Agent card](pages/elements/agent-card.html): AI agent profile tile (avatar + role + actions).
-- [Hero](pages/elements/hero.html): Page hero — eyebrow + title + lede + CTA.
-- [Metric card](pages/elements/metric-card.html): KPI + delta + sparkline.
-- [Page headers](pages/elements/page-headers.html): Title + meta + actions row pattern.
-- [Score gauge](pages/elements/score-gauge.html): Circular percentage score with grade letter.
-- [Service card](pages/elements/service-card.html): IDP service tile with score / status / owner.
+- [Overview](/idp/overview): Recipe catalog with previews.
+- [Agent card](/idp/agent-card): AI agent profile tile (avatar + role + actions).
+- [Hero](/idp/hero): Page hero — eyebrow + title + lede + CTA.
+- [Metric card](/idp/metric-card): KPI + delta + sparkline.
+- [Page headers](/idp/page-headers): Title + meta + actions row pattern.
+- [Score gauge](/idp/score-gauge): Circular percentage score with grade letter.
+- [Service card](/idp/service-card): IDP service tile with score / status / owner.
 
 ## AI
 
 Surfaces a Eidos product needs once it's wired to a model. Every page composes existing components (pill, btn, in-group, collapsible, surface) — no new primitives.
 
-- [Citations](pages/ai/citations.html): Source citation pattern with hover preview.
-- [Conversation](pages/ai/conversation.html): Full thread layout — header, scroll area, composer.
-- [Errors](pages/ai/errors.html): Model error states (rate limit, timeout, refusal).
-- [History](pages/ai/history.html): Past conversations sidebar.
-- [Message](pages/ai/message.html): Single message bubble (user / assistant / system).
-- [Prompt Input](pages/ai/prompt-input.html): Multi-line composer with attachments + actions.
-- [Reasoning](pages/ai/reasoning.html): Collapsible thinking-trace block.
-- [Response](pages/ai/response.html): Assistant response with copy / regenerate / feedback actions.
-- [Suggestion](pages/ai/suggestion.html): Clickable prompt-suggestion chip.
-- [Tool](pages/ai/tool.html): Tool-call display — input, output, status, duration.
+- [Citations](/ai/citations): Source citation pattern with hover preview.
+- [Conversation](/ai/conversation): Full thread layout — header, scroll area, composer.
+- [Errors](/ai/errors): Model error states (rate limit, timeout, refusal).
+- [History](/ai/history): Past conversations sidebar.
+- [Message](/ai/message): Single message bubble (user / assistant / system).
+- [Prompt Input](/ai/prompt-input): Multi-line composer with attachments + actions.
+- [Reasoning](/ai/reasoning): Collapsible thinking-trace block.
+- [Response](/ai/response): Assistant response with copy / regenerate / feedback actions.
+- [Suggestion](/ai/suggestion): Clickable prompt-suggestion chip.
+- [Tool](/ai/tool): Tool-call display — input, output, status, duration.
 
 ## Patterns
 
 Decorative surfaces and visual effects. Use to enhance other components, never as the primary content.
 
-- [Dot grid](pages/patterns/dot-grid.html): Background dot lattice.
-- [Linear grid](pages/patterns/linear-grid.html): Background line lattice.
-- [Mesh gradient](pages/patterns/mesh-gradient.html): Soft multi-stop gradient blob.
-- [Conic orb](pages/patterns/conic-orb.html): Conic gradient sphere.
-- [Radial spotlight](pages/patterns/radial-spotlight.html): Radial highlight from a focal point.
-- [Noise grain](pages/patterns/noise-grain.html): SVG-based grain overlay.
-- [Ember glow](pages/patterns/ember-glow.html): Ember accent halo (for hero CTAs).
-- [Gradient border](pages/patterns/gradient-border.html): Conic-mask animated border.
+- [Dot grid](/patterns/dot-grid): Background dot lattice.
+- [Linear grid](/patterns/linear-grid): Background line lattice.
+- [Mesh gradient](/patterns/mesh-gradient): Soft multi-stop gradient blob.
+- [Conic orb](/patterns/conic-orb): Conic gradient sphere.
+- [Radial spotlight](/patterns/radial-spotlight): Radial highlight from a focal point.
+- [Noise grain](/patterns/noise-grain): SVG-based grain overlay.
+- [Ember glow](/patterns/ember-glow): Ember accent halo (for hero CTAs).
+- [Gradient border](/patterns/gradient-border): Conic-mask animated border.
 
 ## Examples
 
 Full-product screens assembled exclusively from existing components. Reference these before building anything new — odds are the layout already exists.
 
-- [AI Chat](pages/examples/ai-chat-empty.html): Empty-state AI chat thread.
-- [AI · Chat thread](pages/examples/ai-chat-thread.html): Populated AI conversation.
-- [AI · Projects](pages/examples/ai-projects.html): AI projects gallery.
-- [AI · Project detail](pages/examples/ai-project-detail.html): Single AI project page.
-- [AI Insights](pages/examples/ai-insights.html): AI-generated insights dashboard.
-- [Agent Chat](pages/examples/agent-chat.html): Agent conversation with tool calls.
-- [Agent Catalog](pages/examples/agent-catalog.html): Browse of available agents.
-- [Cloud Inventory](pages/examples/cloud-inventory.html): Asset inventory table.
-- [DORA Dashboard](pages/examples/dora-dashboard.html): DORA metrics overview.
-- [Feature Flags](pages/examples/feature-flags.html): Flag rollout management.
-- [Incident Room](pages/examples/incident-room.html): Active-incident war room.
-- [MCP Server Detail](pages/examples/mcp-detail.html): Single MCP server page.
-- [Pipeline Console](pages/examples/pipeline-console.html): Pipeline run dashboard.
-- [Pipeline View](pages/examples/pipeline-view.html): Single pipeline detail.
-- [Quality Gates](pages/examples/quality-gates.html): Gate configuration page.
-- [Ring Deployment](pages/examples/ring-deployment.html): Wave-based deploy progression.
-- [Score Cards](pages/examples/score-cards.html): Service score breakdown.
-- [Service Catalog](pages/examples/service-catalog.html): IDP service catalog grid.
-- [Service Detail](pages/examples/service-detail.html): Single service page.
-- [Service Scaffold](pages/examples/service-scaffold.html): New-service wizard.
-- [Templates Gallery](pages/examples/templates.html): Starter templates gallery.
+- [AI Chat](/example/ai-chat-empty): Empty-state AI chat thread.
+- [AI · Chat thread](/example/ai-chat-thread): Populated AI conversation.
+- [AI · Projects](/example/ai-projects): AI projects gallery.
+- [AI · Project detail](/example/ai-project-detail): Single AI project page.
+- [AI Insights](/example/ai-insights): AI-generated insights dashboard.
+- [Agent Chat](/example/agent-chat): Agent conversation with tool calls.
+- [Agent Catalog](/example/agent-catalog): Browse of available agents.
+- [Cloud Inventory](/example/cloud-inventory): Asset inventory table.
+- [DORA Dashboard](/example/dora-dashboard): DORA metrics overview.
+- [Feature Flags](/example/feature-flags): Flag rollout management.
+- [Incident Room](/example/incident-room): Active-incident war room.
+- [MCP Server Detail](/example/mcp-detail): Single MCP server page.
+- [Pipeline Console](/example/pipeline-console): Pipeline run dashboard.
+- [Pipeline View](/example/pipeline-view): Single pipeline detail.
+- [Quality Gates](/example/quality-gates): Gate configuration page.
+- [Ring Deployment](/example/ring-deployment): Wave-based deploy progression.
+- [Score Cards](/example/score-cards): Service score breakdown.
+- [Service Catalog](/example/service-catalog): IDP service catalog grid.
+- [Service Detail](/example/service-detail): Single service page.
+- [Service Scaffold](/example/service-scaffold): New-service wizard.
+- [Templates Gallery](/example/templates): Starter templates gallery.
 
 ## Resources
 
-- [Accessibility](pages/resources/a11y.html): Keyboard nav, focus rings, contrast targets.
-- [Changelog](pages/resources/changelog.html): Version history.
+- [Accessibility](/a11y): Keyboard nav, focus rings, contrast targets.
+- [Changelog](/changelog): Version history.
 
 ## Rules for code generation
 
 1. Read this file + EIDOS-DS-REFERENCE.md before writing any new page. Skipping that step produces drift from the system.
 2. Compose. If something can be built from Pill + Card + Avatar + Trend, build it that way — don't invent a new class.
-3. Never write a per-page <style> block. Use existing classes (.btn, .surface, .ds-frame, .ds-grid, .in-*, .fc-*, .cb-*, .menu, .tt, .pill, .chip, .badge, .avatar, .tbl) or extend tokens.css / ds.css.
-4. Every component page must include: live demo Frame, Anatomy, Decision matrix, Do/Don't with live UI demos (not just text), and an RTL example. See buttons.jsx as the canonical template.
+3. Layout uses the typed primitives — Box / Stack / Inline / Grid from @eidos/ui with token props (gap="3", p="4", background="surface", radius="md"); semantics via the `as` prop (<Box as="nav">). For product code do NOT use raw <div>/<section>/<nav> for layout, inline style, or a hardcoded color — eslint-plugin-eidos fails the build on all three. Never write a per-page <style> block; compose existing classes or extend tokens.css / ds.css.
+4. Every component page must include: live demo Frame, Anatomy, Decision matrix, Do/Don't with live UI demos (not just text), and an RTL example. See src/ds/migrated/buttons.tsx as the canonical template.
 5. Spacing rhythm: caption after Frame uses marginTop: 14 (positive). Lede after SubHead uses marginTop: -6 (negative — attaches lede to its heading; intentional). Consecutive Frames separate with .ds-frame + .ds-frame { margin-top: 18px }.
 6. RTL: logical properties everywhere (inset-inline-*, padding-inline-*, margin-inline-*, border-inline-*, text-align: start). The only physical-property exception is transform: translateX(…) — that needs a [dir="rtl"] override.
-7. Adding a new page requires three coordinated changes: (1) append { id, label, href } in nav-config.js; (2) create pages/<group>/<slug>.html from pages/_template.html; (3) create assets/js/pages/<group>/<slug>.jsx registering window.PAGES['<slug>'].
-8. Version bumps happen in two places at once: sidebar sub-text and topbar badge in shell.jsx. They must always stay in sync. Bump cache-busting query strings via eidos-design-system/scripts/bump-version.sh.
-9. React + Babel are pinned (react@18.3.1, react-dom@18.3.1, @babel/standalone@7.29.0). Each <script type="text/babel"> has its own scope — share components via Object.assign(window, { … }) at the end of each IIFE.
-10. Common gotchas: black screen → missing Icons.x reference or syntax error in the page JSX (check boot.jsx's diagnostic). Doubled focus ring → suppress on inner inputs with box-shadow: none !important. Dropdown clipped → .ds-frame has overflow: hidden; use position: fixed + getBoundingClientRect() to escape.
+7. Adding a new page is two coordinated changes: (1) append { id, label, href } to the right DS section in src/ds/core/nav-config.js; (2) create src/ds/migrated/<slug>.tsx (core) or src/ds/migrated/<ds>/<slug>.tsx (sub-DS) — a 'use client' module with a default export that imports its primitives from '@/ds/core'. The gen scripts (gen-nav / gen-migrated / gen-examples) auto-run on dev/build and regenerate src/lib/nav.ts + the MIGRATED registry. Restart next dev after nav/DS changes.
+8. Version bumps live in one source of truth: DS_VERSION in src/lib/site.ts (the topbar VersionBadge reads it). Bump it there; the /release command also sweeps stale nav badges.
+9. Pages are idiomatic TSX compiled by SWC — there is no .babelrc, no <script> tags, and no window bridge. Components are plain ES modules from @eidos/ui (re-exported by '@/ds/core'); share nothing through globals.
+10. Common gotchas: JSX text must stay SWC-valid — escape a literal > as {'>'}. Doubled focus ring → suppress on inner inputs with box-shadow: none !important. Dropdown clipped → .ds-frame has overflow: hidden; use position: fixed + getBoundingClientRect() to escape.

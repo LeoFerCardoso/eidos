@@ -8,31 +8,35 @@ import { Icons, Section, SubHead, CodeBlock, Lede } from '@/ds/core';
 // context window. Long-form lives in EIDOS-DS-REFERENCE.md.
 const LLMS_TXT = `# Eidos Design System
 
-> Eidos is the design system that powers Equifax/Boa Vista's internal developer platform. It's CSS-first (Tailwind v4 + token CSS variables), framework-agnostic at the class layer, and ships React reference components meant to be copy-pasted into product code. There is no npm package to install — own your copy of every component.
+> Eidos is the design system that powers Equifax/Boa Vista's internal developer platform. It is token-first and LLM-safe: layout is a strongly-typed vocabulary (Box/Stack/Inline/Grid) where every spacing/color/radius prop is a design token, so an off-system value does not compile. It ships React reference components meant to be copy-pasted into product code. There is no npm package to install for the components — own your copy of each. NOT Tailwind: components carry zero utility classes, and product code must not use raw HTML layout elements or inline styles.
 
 ## Principles
 
 - One accent: ember (#FF6B35). Use at most twice per screen.
-- Compose existing classes and components. Never reinvent something that already lives in tokens.css / ds.css.
-- Logical CSS properties everywhere (inset-inline-*, padding-inline-*, margin-inline-*). RTL is a first-class requirement, not an after-thought.
-- Tokens live in packages/ui/styles/tokens.css; component classes live in packages/ui/styles/ds.css (AI surfaces in ai.css). No per-page style blocks — compose existing classes or extend those stylesheets.
-- The React core is the @eidos/ui package (icons → atoms → primitives → blocks → charts → device → drawer → ai). It is a plain ES-module barrel with no load-order side effects and no window globals; pages import their primitives from '@/ds/core', which re-exports @eidos/ui plus the docs-shell wrappers.
+- Layout goes through the typed primitives from @eidos/ui — Box / Stack / Inline / Grid — never a raw <div>/<section>/<nav> and never an inline style. Semantics come from the polymorphic \`as\` prop (<Box as="nav">, <Stack as="ul">).
+- Spacing, color and radius are token props (p="4", gap="3", background="surface", radius="md"), not literal values. A value outside the token union is a TypeScript error. Never hardcode a hex/rgb/oklch color.
+- The eslint-plugin-eidos rules (no-raw-layout-elements / no-inline-style / no-hardcoded-color) fail the build on off-system markup — green means safe to merge.
+- Compose existing components. Never reinvent something that already lives in tokens.css / ds.css / @eidos/ui.
+- Logical CSS properties everywhere (inset-inline-*, padding-inline-*, margin-inline-*); the typed props are logical by construction (px/py/ps/pe). RTL is a first-class requirement.
+- Tokens live in packages/ui/styles/tokens.css (the canonical source); the typed token unions (tokens.gen.ts) and atomic stylesheet (system.gen.css) are generated from it — never hand-edit them. The React core is the @eidos/ui package; pages import primitives from '@/ds/core', which re-exports it plus the docs-shell wrappers.
 
 ## Files an LLM should read first
 
 - /CLAUDE.md — TL;DR authoring rules (read on every session start).
 - /EIDOS-DS-REFERENCE.md — long-form catalog (tokens, every CSS class, every React component, every icon, every page). ~920 lines.
 - /src/ds/core/nav-config.js — single source of truth for navigation, slugs, and labels (read by scripts/gen-nav.mjs → src/lib/nav.ts).
-- /packages/ui/styles/tokens.css — every design token (colors, type, spacing, radius, shadow, motion).
+- /packages/ui/styles/tokens.css — every design token (colors, type, spacing, radius, shadow, motion). The CANONICAL source.
+- /packages/ui/src/system/ — the typed layout vocabulary (Box/Stack/Inline/Grid) + generated token unions (tokens.gen.ts). Read box.tsx for the prop contract.
+- /packages/eslint-plugin-eidos/ — the rules that ban raw markup / inline style / hardcoded color. The enforcement half of the LLM-safe contract.
 - /packages/ui/styles/ds.css — every component class (.btn, .pill, .surface, .in-*, .fc-*, .cb-*, .menu, .tt, .ds-frame, .ds-grid, …); AI-surface classes live in ai.css.
 
 ## Docs
 
 - [Introduction](design-system.html): What Eidos is, who maintains it, how it ships.
-- [Installation](/installation): Tailwind v4 preset + React copy-paste workflow. No npm install.
+- [Installation](/installation): React copy-paste workflow (eidos CLI). No Tailwind, no npm package for components.
+- [Typed Layout](/typed-layout): The token vocabulary — Box/Stack/Inline/Grid, token props, the compile-time + lint guarantees. READ THIS before laying out any screen.
 - [Components catalog](/components-catalog): Searchable grid of every component with previews.
 - [Theming](/theming): Light/dark via data-mode, custom accents via CSS variables.
-- [Tailwind](/tailwind): Full @theme block (v4) plus tailwind.config.js (v3) presets.
 - [RTL](/rtl): Logical-property cookbook and direction-aware overrides.
 
 ## Foundations
@@ -235,7 +239,7 @@ Full-product screens assembled exclusively from existing components. Reference t
 
 1. Read this file + EIDOS-DS-REFERENCE.md before writing any new page. Skipping that step produces drift from the system.
 2. Compose. If something can be built from Pill + Card + Avatar + Trend, build it that way — don't invent a new class.
-3. Never write a per-page <style> block. Use existing classes (.btn, .surface, .ds-frame, .ds-grid, .in-*, .fc-*, .cb-*, .menu, .tt, .pill, .chip, .badge, .avatar, .tbl) or extend tokens.css / ds.css.
+3. Layout uses the typed primitives — Box / Stack / Inline / Grid from @eidos/ui with token props (gap="3", p="4", background="surface", radius="md"); semantics via the `as` prop (<Box as="nav">). For product code do NOT use raw <div>/<section>/<nav> for layout, inline style, or a hardcoded color — eslint-plugin-eidos fails the build on all three. Never write a per-page <style> block; compose existing classes or extend tokens.css / ds.css.
 4. Every component page must include: live demo Frame, Anatomy, Decision matrix, Do/Don't with live UI demos (not just text), and an RTL example. See src/ds/migrated/buttons.tsx as the canonical template.
 5. Spacing rhythm: caption after Frame uses marginTop: 14 (positive). Lede after SubHead uses marginTop: -6 (negative — attaches lede to its heading; intentional). Consecutive Frames separate with .ds-frame + .ds-frame { margin-top: 18px }.
 6. RTL: logical properties everywhere (inset-inline-*, padding-inline-*, margin-inline-*, border-inline-*, text-align: start). The only physical-property exception is transform: translateX(…) — that needs a [dir="rtl"] override.
@@ -357,7 +361,7 @@ Rules:
         {[
           ['Read the catalog first',              'Before writing any new page, read llms.txt + EIDOS-DS-REFERENCE.md. Skipping this step produces drift.'],
           ['Compose, never reinvent',             'If something can be built from Pill + Card + Avatar + Trend, build it that way. Don’t invent a new class.'],
-          ['No per-page style blocks',            'Use existing classes (.btn, .surface, .ds-frame, .ds-grid, .in-*, .fc-*, .cb-*, .menu, .tt) or extend packages/ui/styles/tokens.css / ds.css.'],
+          ['Typed layout, no raw markup',         'Box/Stack/Inline/Grid from @eidos/ui with token props; semantics via `as`. No raw <div>/inline style/hardcoded color in product code — eslint-plugin-eidos fails the build. No per-page <style>.'],
           ['Every page = full template',          'Live demo + Anatomy + Decision matrix + Do/Don’t (with live UI, not text) + RTL example. See src/ds/migrated/buttons.tsx as the template.'],
           ['Spacing rhythm is intentional',       'Caption after Frame: marginTop: 14. Lede after SubHead: marginTop: -6 (negative — attaches lede to its heading).'],
           ['Logical CSS for RTL',                 'inset-inline-*, padding-inline-*, margin-inline-*, text-align: start. Only physical exception: transform: translateX(…).'],
@@ -405,7 +409,7 @@ Rules:
             <span className="name">Installation</span>
             <Icons.arrowRight size={14} color="var(--fg-faint)"/>
           </div>
-          <span className="meta">Tailwind preset + React copy-paste</span>
+          <span className="meta">eidos CLI · React copy-paste</span>
         </a>
         <a href="/components-catalog" className="comp-tile" style={{textDecoration:'none', color:'inherit'}}>
           <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>

@@ -293,12 +293,12 @@ export default function Overview() {
           </div>
           <span className="meta">Light · Dark · custom</span>
         </a>
-        <a href="/tailwind" className="comp-tile focus-ring" style={{textDecoration:'none', color:'inherit'}}>
+        <a href="/typed-layout" className="comp-tile focus-ring" style={{textDecoration:'none', color:'inherit'}}>
           <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-            <span className="name">Tailwind v4 preset</span>
+            <span className="name">Typed Layout</span>
             <Icons.arrowRight size={14} color="var(--fg-faint)"/>
           </div>
-          <span className="meta">Drop-in @theme block</span>
+          <span className="meta">Box · Stack · token props</span>
         </a>
         <a href="/a11y" className="comp-tile focus-ring" style={{textDecoration:'none', color:'inherit'}}>
           <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
@@ -363,12 +363,12 @@ export default function Overview() {
     <div style={{marginTop: 56, padding: 24, border:'1px solid var(--border)', borderRadius: 'var(--radius-xl)', background:'var(--bg-elevated)', display:'flex', alignItems:'center', justifyContent:'space-between', gap: 16, flexWrap:'wrap'}}>
       <div>
         <div className="t-body" style={{fontWeight: 600, letterSpacing:'-0.01em'}}>Building something new?</div>
-        <div className="t-small" style={{color:'var(--fg-muted)', marginTop: 4}}>Start from the Tailwind preset — it ships every token Eidos uses.</div>
+        <div className="t-small" style={{color:'var(--fg-muted)', marginTop: 4}}>Start from Typed Layout — Box/Stack/Grid over the token vocabulary.</div>
       </div>
       <div style={{display:'flex', gap: 8}}>
         <a className="btn ghost" href="/a11y">Accessibility</a>
         <a className="btn" href="/changelog">Changelog</a>
-        <a className="btn ember" href="/tailwind">Get the preset <Icons.arrowRight size={14}/></a>
+        <a className="btn ember" href="/typed-layout">Typed Layout <Icons.arrowRight size={14}/></a>
       </div>
     </div>
   </section>

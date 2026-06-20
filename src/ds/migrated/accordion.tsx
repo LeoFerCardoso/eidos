@@ -30,7 +30,7 @@ const FAQ = [
   {
     value: 'q2',
     q: 'Can I use Eidos with my own framework?',
-    a: 'Yes. Tokens ship as plain CSS variables; the Tailwind preset is opt-in. The React examples on this site are for demonstration — copy them into your stack of choice.',
+    a: 'Yes. Tokens ship as plain CSS variables — no Tailwind needed. The React examples on this site are for demonstration — copy them into your stack of choice.',
   },
   {
     value: 'q3',
@@ -94,7 +94,7 @@ export function Demo() {
       </AccordionItem>
       <AccordionItem value="q2">
         <AccordionTrigger>Can I use Eidos with my own framework?</AccordionTrigger>
-        <AccordionContent>Yes. Tokens ship as CSS variables; the Tailwind preset is opt-in.</AccordionContent>
+        <AccordionContent>Yes. Tokens ship as CSS variables — no Tailwind needed.</AccordionContent>
       </AccordionItem>
     </Accordion>
   )
@@ -144,7 +144,7 @@ function RTLDemo() {
         <AccordionItem value="r2">
           <AccordionTrigger>هل يمكنني استخدام فورج مع إطار العمل الخاص بي؟</AccordionTrigger>
           <AccordionContent>
-            <p>نعم. تُشحن الرموز كمتغيرات CSS عادية، وإعداد Tailwind اختياري. أمثلة React هنا للعرض فقط.</p>
+            <p>نعم. تُشحن الرموز كمتغيرات CSS عادية — لا حاجة إلى Tailwind. أمثلة React هنا للعرض فقط.</p>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="r3">
