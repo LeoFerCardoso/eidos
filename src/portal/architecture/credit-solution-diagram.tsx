@@ -96,8 +96,8 @@ const EDGES: DiagramEdge[] = [
   { id: 'e4', from: 'onescore', to: 'score',    sh: 'r', th: 'l',  label: '4 · request score',          tone: 'spine' },
   { id: 'e5', from: 'onescore', to: 'konduto',  sh: 'r', th: 'l',  label: '5 · fraud check',            tone: 'spine' },
   { id: 'e6', from: 'score',    to: 'ignite',   sh: 'r', th: 'l',  label: 'read features',              tone: 'feed' },
-  { id: 'e7', from: 'bureau',   to: 'ignite',   sh: 'l', th: 'r',  label: 'nightly load',               tone: 'feed' },
-  { id: 'e8', from: 'scpc',     to: 'ignite',   sh: 'l', th: 'r',  label: 'positive data',              tone: 'feed' },
+  { id: 'e7', from: 'bureau',   to: 'ignite',   sh: 'ls', th: 'rt', label: 'nightly load',               tone: 'feed' },
+  { id: 'e8', from: 'scpc',     to: 'ignite',   sh: 'ls', th: 'rt', label: 'positive data',              tone: 'feed' },
   { id: 'e9', from: 'score',    to: 'decision', sh: 'r', th: 'l',  label: '6 · score',                  tone: 'spine' },
   { id: 'e10', from: 'konduto', to: 'decision', sh: 'r', th: 'l',  label: 'risk signal',                tone: 'spine' },
   { id: 'e11', from: 'onescore', to: 'audit',   sh: 'b', th: 'ti', label: 'append event',               tone: 'gov' },
@@ -117,7 +117,9 @@ function ContainerNode({ data }: NodeProps) {
     >
       {/* Connection points — invisible, one source + one target per side used. */}
       <Handle id="l" type="target" position={Position.Left} className="fp-cflow-handle" />
+      <Handle id="ls" type="source" position={Position.Left} className="fp-cflow-handle" />
       <Handle id="r" type="source" position={Position.Right} className="fp-cflow-handle" />
+      <Handle id="rt" type="target" position={Position.Right} className="fp-cflow-handle" />
       <Handle id="t" type="source" position={Position.Top} className="fp-cflow-handle" />
       <Handle id="ti" type="target" position={Position.Top} className="fp-cflow-handle" />
       <Handle id="b" type="source" position={Position.Bottom} className="fp-cflow-handle" />

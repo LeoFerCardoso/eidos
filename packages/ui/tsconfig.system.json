@@ -1,0 +1,12 @@
+{
+  "//": "Strict typecheck for the LLM-safe System layer only. The legacy components still",
+  "//2": "run under the relaxed base config; strict is rolled out here first (PO decision #5),",
+  "//3": "then widened. Run: npm run system:typecheck.",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false
+  },
+  "include": ["src/system/**/*.ts", "src/system/**/*.tsx"]
+}

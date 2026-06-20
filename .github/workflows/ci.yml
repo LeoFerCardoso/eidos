@@ -25,6 +25,25 @@ jobs:
       - run: npm run ui:typecheck
       - run: npm run ui:build
 
+  llm-safe:
+    name: "LLM-safe design system (typed vocab + lint gate)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      # generated token types + atomic CSS must track the canonical token source
+      - run: npm run check:system
+      # the typed <Box> vocabulary type-checks under strict
+      - run: npm run system:typecheck
+      # the eslint rules' own unit tests
+      - run: npm run eslint-plugin:test
+      # the ratchet: migrated portal paths must contain no off-system markup. Blocking.
+      - run: npm run lint:llm-safe
+
   registry-cli:
     name: "registry build + eidos CLI E2E"
     runs-on: ubuntu-latest
@@ -87,6 +106,10 @@ jobs:
       - run: node scripts/eidos-gen.mjs contract --check
       # DTCG export must track the canonical token source
       - run: npm run gen:tokens -- --check
+      # typed-vocabulary token types + atomic CSS must track the canonical token source
+      - run: npm run check:system
+      # every color token must have a light/dark variant (or be allowlisted mode-invariant)
+      - run: npm run check:token-parity
       # full clause sweep — ADVISORY until the parity/story/docs backlog is burned down
       # (Phases 4–5); flip to `--all --strict --heavy` to make it blocking.
       - run: npm run eidos:verify -- --all --static || true

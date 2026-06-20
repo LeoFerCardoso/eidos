@@ -5,6 +5,7 @@ import Script from 'next/script';
 import '@eidos/ui/styles/tokens.css';
 import '@eidos/ui/styles/ds.css';
 import '@eidos/ui/styles/ai.css';
+import '@eidos/ui/styles/system.gen.css';
 import '../src/styles/ai-shell.css';
 import '../src/styles/example-shell.css';
 import './tailwind.css';

@@ -73,7 +73,7 @@ const ForgeMark = ({
     ? { filter: 'drop-shadow(0 0 10px rgba(255,107,53,0.55))' }
     : undefined;
 
-  const sparklePath = (s, i, extra = {}) => (
+  const sparklePath = (s: { tx: number; ty: number; r: number }, i: number, extra: React.SVGProps<SVGPathElement> = {}) => (
     <path key={i} d={SPARKLE_D}
           transform={`translate(${s.tx} ${s.ty}) scale(${(s.r / 6).toFixed(4)})`}
           {...extra}/>

@@ -65,6 +65,8 @@
   "devDependencies": {
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/parser": "^8.61.1",
+    "eslint": "^9.39.4",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "recharts": "^2.15.4",

@@ -1,0 +1,29 @@
+{
+  "name": "eslint-plugin-eidos",
+  "version": "0.1.0",
+  "description": "ESLint rules that make off-system markup fail the build — the enforcement half of the Eidos LLM-safe design system.",
+  "license": "MIT",
+  "type": "commonjs",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "rules",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./index.js"
+  },
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "peerDependencies": {
+    "eslint": ">=8"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eidos",
+    "design-system",
+    "llm-safe"
+  ]
+}

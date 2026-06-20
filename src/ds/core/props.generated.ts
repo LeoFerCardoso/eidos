@@ -7215,6 +7215,120 @@ export const GENERATED_PROPS: Record<string, GeneratedPropRow[]> = {
       "description": "Extra classes merged via cn()."
     }
   ],
+  "Box": [
+    {
+      "prop": "as",
+      "type": "React.ElementType",
+      "description": "The semantic element to render (`nav`, `ul`, `li`, `header`, …). Defaults to `div`."
+    },
+    {
+      "prop": "children",
+      "type": "React.ReactNode"
+    },
+    {
+      "prop": "p",
+      "type": "SpaceToken",
+      "description": "padding (all sides)"
+    },
+    {
+      "prop": "px",
+      "type": "SpaceToken",
+      "description": "padding inline (←→)"
+    },
+    {
+      "prop": "py",
+      "type": "SpaceToken",
+      "description": "padding block (↑↓)"
+    },
+    {
+      "prop": "pt",
+      "type": "SpaceToken",
+      "description": "padding block-start"
+    },
+    {
+      "prop": "pb",
+      "type": "SpaceToken",
+      "description": "padding block-end"
+    },
+    {
+      "prop": "ps",
+      "type": "SpaceToken",
+      "description": "padding inline-start"
+    },
+    {
+      "prop": "pe",
+      "type": "SpaceToken",
+      "description": "padding inline-end"
+    },
+    {
+      "prop": "gap",
+      "type": "SpaceToken"
+    },
+    {
+      "prop": "gapX",
+      "type": "SpaceToken"
+    },
+    {
+      "prop": "gapY",
+      "type": "SpaceToken"
+    },
+    {
+      "prop": "radius",
+      "type": "RadiusToken"
+    },
+    {
+      "prop": "background",
+      "type": "BackgroundToken",
+      "description": "background-color (token only)"
+    },
+    {
+      "prop": "borderColor",
+      "type": "BorderToken",
+      "description": "1px solid border in the given token color"
+    },
+    {
+      "prop": "color",
+      "type": "TextToken",
+      "description": "foreground/text color (token only)"
+    },
+    {
+      "prop": "display",
+      "type": "Display"
+    },
+    {
+      "prop": "direction",
+      "type": "Direction"
+    },
+    {
+      "prop": "align",
+      "type": "Align"
+    },
+    {
+      "prop": "justify",
+      "type": "Justify"
+    },
+    {
+      "prop": "wrap",
+      "type": "Wrap"
+    },
+    {
+      "prop": "flex",
+      "type": "FlexValue"
+    },
+    {
+      "prop": "columns",
+      "type": "GridColumns",
+      "description": "grid-template-columns: repeat(n, 1fr)"
+    },
+    {
+      "prop": "width",
+      "type": "Size"
+    },
+    {
+      "prop": "height",
+      "type": "Size"
+    }
+  ],
   "SortArrow": [
     {
       "prop": "dir",

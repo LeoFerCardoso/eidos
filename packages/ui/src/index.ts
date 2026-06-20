@@ -10,6 +10,7 @@
 // The three DOCS-SHELL wrappers (Section / ComponentInstall / AutoPropsTable) are
 // NOT here — they depend on the docs app's nav registry + generated props map and
 // live in the docs app (src/ds/core/docs-primitives.tsx).
+export * from './system';
 export * from './mocks';
 export * from './icons';
 export * from './brand-icons';

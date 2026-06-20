@@ -11,9 +11,10 @@
     "*.css"
   ],
   "scripts": {
-    "predev": "node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs && node scripts/gen-examples.mjs && node scripts/gen-props.mjs",
+    "predev": "node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs && node scripts/gen-examples.mjs && node scripts/gen-props.mjs && node scripts/gen-system.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs && node scripts/gen-examples.mjs && node scripts/gen-props.mjs",
+    "dev:fresh": "rm -rf .next && npm run dev",
+    "prebuild": "node scripts/gen-nav.mjs && node scripts/gen-migrated.mjs && node scripts/gen-examples.mjs && node scripts/gen-props.mjs && node scripts/gen-system.mjs",
     "build": "next build",
     "start": "next start",
     "gen:nav": "node scripts/gen-nav.mjs",
@@ -29,6 +30,12 @@
     "eidos:health": "node scripts/eidos-health.mjs",
     "gen:contract": "node scripts/eidos-gen.mjs contract --sync",
     "gen:tokens": "node scripts/gen-tokens.mjs",
+    "gen:system": "node scripts/gen-system.mjs",
+    "check:system": "node scripts/gen-system.mjs --check",
+    "check:token-parity": "node scripts/check-token-mode-parity.mjs",
+    "system:typecheck": "tsc --noEmit -p packages/ui/tsconfig.system.json",
+    "eslint-plugin:test": "node --test packages/eslint-plugin-eidos/test/*.test.mjs",
+    "lint:llm-safe": "eslint \"app/portal/**/*.{ts,tsx}\" \"src/portal/**/*.{ts,tsx}\"",
     "gen:props": "node scripts/gen-props.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "build:plugin": "node scripts/build-plugin.mjs",
@@ -70,6 +77,9 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^8",
+    "eslint": "^9",
+    "eslint-plugin-eidos": "*",
     "@types/node": "^20",
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",

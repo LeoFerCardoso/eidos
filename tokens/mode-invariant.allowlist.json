@@ -1,0 +1,13 @@
+{
+  "default": [
+    "ink-fixed",
+    "snackbar-bg",
+    "snackbar-fg"
+  ],
+  "dusk": [],
+  "fjord": [],
+  "cobalt": [],
+  "garnet": [],
+  "graphite": [],
+  "dune": []
+}

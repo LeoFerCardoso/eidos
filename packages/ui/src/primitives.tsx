@@ -17,10 +17,10 @@ import { Icons } from './icons';
 const CopyButton = ({ text, label = 'Copy' }: { text?: string; label?: string }) => {
   const [ok, setOk] = React.useState(false);
   const onClick = async () => {
-    try { await navigator.clipboard.writeText(text); }
+    try { await navigator.clipboard.writeText(text ?? ''); }
     catch(e) {
       const ta = document.createElement('textarea');
-      ta.value = text; document.body.appendChild(ta); ta.select();
+      ta.value = text ?? ''; document.body.appendChild(ta); ta.select();
       try { document.execCommand('copy'); } catch(e2){}
       ta.remove();
     }
@@ -35,13 +35,13 @@ const CopyButton = ({ text, label = 'Copy' }: { text?: string; label?: string })
 };
 
 // ---- Token-stream highlighter -------------------------------------------
-const escapeHtml = (s) => String(s)
+const escapeHtml = (s: unknown) => String(s)
   .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
 // JS / JSX / TS — single alternation regex; group order = priority.
 // Importantly, attribute-name match REQUIRES a following `=` via lookahead,
 // so `class` as a JS keyword and `class` as an attribute don't collide.
-const tokJs = (src) => {
+const tokJs = (src: string) => {
   const out = [];
   const re = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|("(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'|`(?:[^`\\]|\\.)*`)|(\b(?:className|onClick|onChange|onSubmit|onKeyDown|onKeyUp|onFocus|onBlur|style|key|ref|href|src|alt|type|value|placeholder|disabled|checked|readOnly|required|role|id|name|lang|dir|title|width|height|aria-[a-z]+|data-[a-z-]+)\b)(?=\s*=)|(\b(?:const|let|var|function|return|import|from|export|default|if|else|for|of|in|new|class|extends|await|async|try|catch|finally|throw|while|do|switch|case|break|continue|typeof|instanceof|null|true|false|undefined|this|super)\b)|(\b[A-Z][A-Za-z0-9_$]*\b)|(=>)/g;
   let pos = 0, m;
@@ -60,7 +60,7 @@ const tokJs = (src) => {
 };
 
 // CSS — comments, custom properties, at-rules, strings, numbers/units.
-const tokCss = (src) => {
+const tokCss = (src: string) => {
   const out = [];
   const re = /(\/\*[\s\S]*?\*\/)|(--[A-Za-z0-9-]+)|(@[a-z-]+)|("(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*')|(\b\d+(?:\.\d+)?(?:px|em|rem|%|s|ms|deg|vh|vw|fr|ch|ex)?\b)/g;
   let pos = 0, m;
@@ -79,7 +79,7 @@ const tokCss = (src) => {
 
 // HTML — proper state-machine. Tag names are .f, attributes are .a,
 // attribute values are .s, comments are .c.
-const tokHtml = (src) => {
+const tokHtml = (src: string) => {
   const out = [];
   let i = 0;
   while (i < src.length) {
@@ -144,7 +144,7 @@ const tokHtml = (src) => {
 };
 
 // bash / shell — comments, strings, vars.
-const tokBash = (src) => {
+const tokBash = (src: string) => {
   const out = [];
   const re = /(#[^\n]*)|("(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*')|(\$[A-Za-z_][A-Za-z0-9_]*|\$\{[^}]+\})/g;
   let pos = 0, m;
@@ -163,14 +163,14 @@ const tokBash = (src) => {
 // there is no obvious JS at top level (no `const` / `function` / `=>`),
 // treat a 'jsx' label as raw HTML. Lets old call sites that wrote
 // lang="jsx" for a chunk of HTML render correctly without an audit.
-const sniffHtml = (src) => {
+const sniffHtml = (src: string) => {
   const head = src.replace(/^\s+/, '').slice(0, 200);
   if (!head.startsWith('<')) return false;
   if (/\b(const|function|return|import|export|=>)\b/.test(head)) return false;
   return true;
 };
 
-const tokenize = (src, lang='jsx') => {
+const tokenize = (src: unknown, lang='jsx') => {
   const code = String(src);
   const norm = (lang || 'jsx').toLowerCase();
   let chosen = norm;
@@ -244,7 +244,7 @@ const CodeBlock = ({ label = 'snippet', code, lang = 'jsx' }: CodeBlockProps) =>
 // usage + types + styles). `files` is an array of { path, code, lang? }.
 // The tree groups by folder; selecting a leaf swaps the code pane.
 // langFromExt() infers tokenizer from extension when `lang` is omitted.
-const langFromExt = (path) => {
+const langFromExt = (path: string) => {
   const ext = path.toLowerCase().split('.').pop();
   if (ext === 'tsx' || ext === 'jsx' || ext === 'ts' || ext === 'js') return 'jsx';
   if (ext === 'css' || ext === 'scss') return 'css';
@@ -255,25 +255,28 @@ const langFromExt = (path) => {
 
 // Build nested folder tree from flat list of paths.
 // Returns { [name]: { __file: idx } | { __folder: subtree } }
-const buildTree = (files) => {
-  const root = {};
+// Recursive tree node — an interface (not a type alias) so the self-reference is legal.
+interface FileTreeNode { [key: string]: { __file: number } | FileTreeNode }
+const buildTree = (files: { path: string; code: string; lang?: string }[]): FileTreeNode => {
+  const root: FileTreeNode = {};
   files.forEach((f, idx) => {
     const parts = f.path.split('/');
-    let cursor = root;
-    parts.forEach((part, i) => {
+    let cursor: FileTreeNode = root;
+    parts.forEach((part: string, i: number) => {
       const isLeaf = i === parts.length - 1;
       if (isLeaf) {
         cursor[part] = { __file: idx };
       } else {
-        if (!cursor[part] || cursor[part].__file !== undefined) cursor[part] = {};
-        cursor = cursor[part];
+        const existing = cursor[part];
+        if (!existing || (existing as { __file?: number }).__file !== undefined) cursor[part] = {};
+        cursor = cursor[part] as FileTreeNode;
       }
     });
   });
   return root;
 };
 
-const fileExtDot = (path) => {
+const fileExtDot = (path: string) => {
   const ext = path.toLowerCase().split('.').pop();
   // Color-coded dot in the file tree — quick visual cue per language.
   if (ext === 'tsx' || ext === 'jsx') return 'var(--ember-glow)';
@@ -292,7 +295,7 @@ const TreeNode = ({ node, activeIdx, setActive, depth }: {
 }) => {
   const entries = Object.entries(node);
   return (
-    <ul className="ds-codetree-list" style={depth === 0 ? null : { paddingInlineStart: 14 }}>
+    <ul className="ds-codetree-list" style={depth === 0 ? undefined : { paddingInlineStart: 14 }}>
       {entries.map(([name, value]) => {
         if (value.__file !== undefined) {
           const idx = value.__file;
@@ -414,7 +417,7 @@ const TabbedCode = ({ tabs, defaultIndex = 0, ariaLabel = 'package manager' }: {
 // to ~6 lines with a fade overlay, then expand on click. Keeps long Frame
 // bodies from dominating the page rhythm.
 const COLLAPSE_THRESHOLD = 8; // lines visible without scroll before we clip
-const countLines = (src) => String(src).replace(/^\n+|\s+$/g, '').split('\n').length;
+const countLines = (src: unknown) => String(src).replace(/^\n+|\s+$/g, '').split('\n').length;
 const CollapsibleCode = ({ code, lang = 'jsx' }: { code?: string; lang?: string }) => {
   const collapsible = countLines(code) > COLLAPSE_THRESHOLD;
   const [expanded, setExpanded] = React.useState(false);
@@ -519,7 +522,7 @@ const PropsTable = ({ rows, label = 'props' }: {
 // Section heading (H2). Semantic <h2> so the page has a real outline (TOC + a11y),
 // at the H2 size in the type scale. When the title is a plain string it gets an id +
 // hover anchor so it can be deep-linked and picked up by the "On this page" rail.
-const slugifyHeading = (s) =>
+const slugifyHeading = (s: unknown) =>
   String(s).toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
 const SubHead = ({ children, meta }: { children?: React.ReactNode; meta?: string }) => {
@@ -579,7 +582,7 @@ const SpecRow = ({ token, value, usage }: {
 // the cn() helper (clsx + tailwind-merge). Components that need a real library
 // (recharts for charts, ai/react-markdown for AI) pass their own list.
 const DEFAULT_PEERS = 'clsx tailwind-merge';
-const installTabs = (name, peers = DEFAULT_PEERS) => {
+const installTabs = (name: string, peers = DEFAULT_PEERS) => {
   const manual = `# 1. Install the Eidos base layer once (design tokens + ds.css + cn).
 npx eidos@latest init
 
@@ -613,7 +616,7 @@ ${peers !== DEFAULT_PEERS ? `\n#    (pulls npm deps: ${peers})` : ''}
 //   </nav>
 // All styling lives in ds.css under the .pg-* block so other pages can
 // render the same chrome without importing this component.
-const pageRange = (current, total, siblings = 1) => {
+const pageRange = (current: number, total: number, siblings = 1) => {
   const out = [];
   const start = Math.max(2, current - siblings);
   const end = Math.min(total - 1, current + siblings);

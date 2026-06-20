@@ -35,7 +35,7 @@ import {
 //   icon        Icons key — override default tone icon
 //   size        "sm" | "md" (default) | "lg"
 // ═════════════════════════════════════════════════════════════════════════
-const BANNER_DEFAULT_ICON = { info: 'info', success: 'check', warning: 'alert', danger: 'alert', neutral: 'info' };
+const BANNER_DEFAULT_ICON: Record<string, string> = { info: 'info', success: 'check', warning: 'alert', danger: 'alert', neutral: 'info' };
 const Banner = ({
   tone = 'info', icon, title, message,
   action, onAction, actions, onDismiss,
@@ -69,7 +69,7 @@ const Banner = ({
 }) => {
   const isCustom = tone === 'custom';
   const IconName = icon || BANNER_DEFAULT_ICON[tone] || 'info';
-  const IconComp = Icons[IconName] || Icons.info;
+  const IconComp = Icons[IconName as keyof typeof Icons] || Icons.info;
   const style = isCustom ? {
     background: bg,
     color: fg,
@@ -117,8 +117,8 @@ const Banner = ({
 // currentIndex (optional) forces which step reads as in-flight; otherwise
 // the first `running` step is treated as current.
 // ═════════════════════════════════════════════════════════════════════════
-const PIPE_STATUS = { ok: 'done', pass: 'done', running: 'running', pending: 'pending', fail: 'error', skip: 'skipped' };
-const pipeIcon = (tone) => {
+const PIPE_STATUS: Record<string, string> = { ok: 'done', pass: 'done', running: 'running', pending: 'pending', fail: 'error', skip: 'skipped' };
+const pipeIcon = (tone: string) => {
   if (tone === 'done')    return Icons.check;
   if (tone === 'error')   return Icons.x;
   if (tone === 'skipped') return Icons.minus;
@@ -131,7 +131,7 @@ type PipeStep = { id?: string; label?: string; status?: string; meta?: string; d
 const PipelineStepper = ({ steps, currentIndex, compact }: { steps: PipeStep[]; currentIndex?: number; compact?: boolean }) => (
   <ol className={'pipeline pipeline-stepper' + (compact ? ' compact' : '')}>
     {steps.map((s, i) => {
-      const tone = PIPE_STATUS[s.status] || s.status || 'pending';
+      const tone = (s.status ? PIPE_STATUS[s.status] : undefined) || s.status || 'pending';
       const isCurrent = currentIndex !== undefined ? i === currentIndex : tone === 'running';
       const Icn = pipeIcon(tone);
       const a11yName = [s.label, tone].filter(Boolean).join(', ');
@@ -163,7 +163,7 @@ const PipelineStepper = ({ steps, currentIndex, compact }: { steps: PipeStep[]; 
 const PipelineChevron = ({ steps, currentIndex }: { steps: PipeStep[]; currentIndex?: number }) => (
   <ol className="pipeline pipeline-chevron">
     {steps.map((s, i) => {
-      const tone = PIPE_STATUS[s.status] || s.status || 'pending';
+      const tone = (s.status ? PIPE_STATUS[s.status] : undefined) || s.status || 'pending';
       const isCurrent = currentIndex !== undefined ? i === currentIndex : tone === 'running';
       const Icn = pipeIcon(tone);
       const positionCls = i === 0 ? ' chev-first' : i === steps.length - 1 ? ' chev-last' : '';
@@ -237,7 +237,7 @@ const Timeline = ({ items = [], compact = false }: {
   return (
     <ol className={'timeline tl-v' + (compact ? ' compact' : '')}>
       {items.map((it, i) => {
-        const Icon = it.icon && Icons[it.icon];
+        const Icon = it.icon && Icons[it.icon as keyof typeof Icons];
         const isCurrent = !!it.current;
         const isDone = !!it.done;
         const cls = ['tl-item'];
@@ -363,14 +363,14 @@ const RingBar = ({ rings = [], currentRing = 0, popoverFor }: {
 //   size      number — px (default 240 for speedo, 96 for compact)
 //   thickness number — stroke (default 16 for speedo, 8 for compact)
 // ═════════════════════════════════════════════════════════════════════════
-const lerp = (a, b, t) => a + (b - a) * t;
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 // CRS bands · aligned with the "under 300 is healthy" copy on the
 // Quality-gates fleet gauge. Lower risk → green, higher risk → red.
 //   < 30%  healthy   (success / green)
 //   < 55%  caution   (ember)
 //   < 80%  high      (warning)
 //   ≥ 80% critical   (danger / red)
-const ringTone = (n, inverted) => {
+const ringTone = (n: number, inverted?: boolean) => {
   const x = inverted ? 1 - n : n;
   if (x < 0.30) return 'var(--success)';
   if (x < 0.55) return 'var(--ember)';
@@ -390,15 +390,16 @@ const ScoreGaugeSpeedo = ({ value, min, max, ticks, labels, inverted, label, siz
 }) => {
   const w = size || 240;
   const h = w * 0.7;
-  const r = (w - thickness) / 2 - 8;
+  const th = thickness ?? 16;
+  const r = (w - th) / 2 - 8;
   const cx = w / 2, cy = h - 12;
   const sweep = Math.PI; // 180° arc
   const startA = Math.PI; // left side
   const norm = Math.max(0, Math.min(1, (value - min) / (max - min)));
   const angle = startA + norm * sweep;
-  const px = (a) => cx + r * Math.cos(a);
-  const py = (a) => cy + r * Math.sin(a);
-  const arcPath = (a0, a1) => {
+  const px = (a: number) => cx + r * Math.cos(a);
+  const py = (a: number) => cy + r * Math.sin(a);
+  const arcPath = (a0: number, a1: number) => {
     const large = a1 - a0 > Math.PI ? 1 : 0;
     return `M${px(a0)},${py(a0)} A${r},${r} 0 ${large} 1 ${px(a1)},${py(a1)}`;
   };
@@ -417,14 +418,14 @@ const ScoreGaugeSpeedo = ({ value, min, max, ticks, labels, inverted, label, siz
       <svg width={w} height={h + 8} viewBox={`0 0 ${w} ${h + 8}`} aria-hidden="true">
         {segs.map((s, i) => (
           <path key={i} d={arcPath(startA + s.from * sweep, startA + s.to * sweep)}
-                fill="none" stroke={s.color} strokeWidth={thickness} strokeLinecap="butt" opacity="0.32"/>
+                fill="none" stroke={s.color} strokeWidth={th} strokeLinecap="butt" opacity="0.32"/>
         ))}
-        <path className="ss-arc" d={arcPath(startA, angle)} fill="none" stroke={ringTone(norm, inverted)} strokeWidth={thickness} strokeLinecap="round"/>
+        <path className="ss-arc" d={arcPath(startA, angle)} fill="none" stroke={ringTone(norm, inverted)} strokeWidth={th} strokeLinecap="round"/>
         {ticks !== false && Array.from({ length: tickCount + 1 }).map((_, i) => {
           const t = i / tickCount;
           const a = startA + t * sweep;
-          const r1 = r - thickness / 2 - 2;
-          const r2 = r - thickness / 2 - (i % 5 === 0 ? 10 : 6);
+          const r1 = r - th / 2 - 2;
+          const r2 = r - th / 2 - (i % 5 === 0 ? 10 : 6);
           return (
             <line key={i}
                   x1={cx + r1 * Math.cos(a)} y1={cy + r1 * Math.sin(a)}
@@ -434,11 +435,11 @@ const ScoreGaugeSpeedo = ({ value, min, max, ticks, labels, inverted, label, siz
         })}
         {labels && (
           <>
-            <text x={cx + (r - thickness - 18) * Math.cos(startA)} y={cy + (r - thickness - 18) * Math.sin(startA) + 4}
+            <text x={cx + (r - th - 18) * Math.cos(startA)} y={cy + (r - th - 18) * Math.sin(startA) + 4}
                   textAnchor="middle" fill="var(--fg-faint)" fontSize="10" fontFamily="var(--font-mono)">LOW</text>
             <text x={cx} y={14}
                   textAnchor="middle" fill="var(--fg-faint)" fontSize="10" fontFamily="var(--font-mono)">MED</text>
-            <text x={cx + (r - thickness - 18) * Math.cos(startA + sweep)} y={cy + (r - thickness - 18) * Math.sin(startA + sweep) + 4}
+            <text x={cx + (r - th - 18) * Math.cos(startA + sweep)} y={cy + (r - th - 18) * Math.sin(startA + sweep) + 4}
                   textAnchor="middle" fill="var(--fg-faint)" fontSize="10" fontFamily="var(--font-mono)">CRIT</text>
           </>
         )}
@@ -550,7 +551,7 @@ const ScoreGauge = ({
 // ═════════════════════════════════════════════════════════════════════════
 // MetricCard — KPI tile. Composition of Card + Trend + Sparkline.
 // ═════════════════════════════════════════════════════════════════════════
-const fmtValue = (v) => {
+const fmtValue = (v: React.ReactNode) => {
   if (typeof v !== 'number' || !isFinite(v)) return v;
   if (Number.isInteger(v)) return v.toLocaleString();
   return v.toLocaleString(undefined, { maximumFractionDigits: 2 });
@@ -866,7 +867,7 @@ const LogViewer = ({
 }) => {
   const [query, setQuery] = React.useState('');
   const [active, setActive] = React.useState(new Set(['info', 'warn', 'error', 'fatal', 'debug', 'trace']));
-  const ref = React.useRef(null);
+  const ref = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     if (follow && ref.current) ref.current.scrollTop = ref.current.scrollHeight;
   }, [lines, follow]);
@@ -977,7 +978,8 @@ const DiffUnified = ({ hunks, wrap }: { hunks: DiffHunk[]; wrap?: boolean }) => 
 );
 const DiffSplit = ({ hunks, wrap }: { hunks: DiffHunk[]; wrap?: boolean }) => {
   // Convert unified hunks into pairs of (left, right) lines
-  const pairs = [];
+  type DiffPair = { header: string; left?: undefined; right?: undefined } | { header?: undefined; left: DiffLine | null; right: DiffLine | null };
+  const pairs: DiffPair[] = [];
   hunks.forEach((h, hi) => {
     if (h.header) pairs.push({ header: h.header });
     let i = 0;
@@ -1086,7 +1088,7 @@ const TreeNode = ({ node, level, expanded, toggle, selected, onSelect }: {
 }) => {
   const has = node.children && node.children.length > 0;
   const isOpen = expanded[node.id];
-  const IconComp = node.icon && Icons[node.icon];
+  const IconComp = node.icon && Icons[node.icon as keyof typeof Icons];
   const isSel = selected === node.id;
   return (
     <li className={'tree-node lvl-' + level + (isSel ? ' is-selected' : '') + (isOpen ? ' is-open' : '')}>
@@ -1112,7 +1114,7 @@ const TreeNode = ({ node, level, expanded, toggle, selected, onSelect }: {
       </div>
       {has && isOpen && (
         <ul className="tree-children" role="group">
-          {node.children.map(c => (
+          {node.children!.map(c => (
             <TreeNode key={c.id} node={c} level={level + 1}
                       expanded={expanded} toggle={toggle}
                       selected={selected} onSelect={onSelect}/>
@@ -1135,10 +1137,10 @@ const TreeView = ({ nodes = [], defaultExpanded = [], selected, onSelect, varian
   variant?: string;
 }) => {
   const init = React.useMemo(() => {
-    const o = {}; defaultExpanded.forEach(id => { o[id] = true; }); return o;
+    const o: Record<string, boolean> = {}; defaultExpanded.forEach((id: string) => { o[id] = true; }); return o;
   }, [defaultExpanded.join('|')]);
-  const [expanded, setExpanded] = React.useState(init);
-  const toggle = (id) => setExpanded(p => ({ ...p, [id]: !p[id] }));
+  const [expanded, setExpanded] = React.useState<Record<string, boolean>>(init);
+  const toggle = (id: string) => setExpanded(p => ({ ...p, [id]: !p[id] }));
   return (
     <ul className={'tree-view variant-' + variant} role="tree">
       {nodes.map(n => (
@@ -1153,15 +1155,15 @@ const TreeView = ({ nodes = [], defaultExpanded = [], selected, onSelect, varian
 // ═════════════════════════════════════════════════════════════════════════
 // JSONInspector — keys ember, strings green, numbers cyan, bool magenta.
 // ═════════════════════════════════════════════════════════════════════════
-const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
+const isObj = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 // Build the toggle's accessible name from the branch key, state and item count
 // so a screen reader announces e.g. "deploy.rings, collapsed, 3 items".
-const branchLabel = (keyLabel, open, count, kind) => {
+const branchLabel = (keyLabel: string | undefined, open: boolean, count: number, kind: string) => {
   const noun = kind === 'array' ? (count === 1 ? 'item' : 'items') : (count === 1 ? 'key' : 'keys');
   const head = keyLabel ? `${keyLabel}, ` : '';
   return `${head}${open ? 'expanded' : 'collapsed'}, ${count} ${noun}`;
 };
-const renderValue = (v, path, expanded, toggle, depth, keyLabel?) => {
+const renderValue = (v: unknown, path: string, expanded: Record<string, boolean>, toggle: (p: string) => void, depth: number, keyLabel?: string) => {
   if (v === null) return <span className="json-null">null</span>;
   if (typeof v === 'string') return <span className="json-str">"{v}"</span>;
   if (typeof v === 'number') return <span className="json-num">{String(v)}</span>;
@@ -1216,10 +1218,10 @@ const JSONInspector = ({ data, defaultCollapsedPaths = [] }: {
   defaultCollapsedPaths?: string[];
 }) => {
   const init = React.useMemo(() => {
-    const o = {}; defaultCollapsedPaths.forEach(p => { o[p] = false; }); return o;
+    const o: Record<string, boolean> = {}; defaultCollapsedPaths.forEach((p: string) => { o[p] = false; }); return o;
   }, [defaultCollapsedPaths.join('|')]);
-  const [expanded, setExpanded] = React.useState(init);
-  const toggle = (p) => setExpanded(prev => ({ ...prev, [p]: !(prev[p] !== false) }));
+  const [expanded, setExpanded] = React.useState<Record<string, boolean>>(init);
+  const toggle = (p: string) => setExpanded(prev => ({ ...prev, [p]: !(prev[p] !== false) }));
   return (
     <div className="json-inspector">
       {renderValue(data, '$', expanded, toggle, 0)}
@@ -1252,7 +1254,7 @@ const FilterPanel = ({ groups = [], onClear, query, onQueryChange, placeholder =
   placeholder?: string;
 }) => {
   const q = (query || '').trim().toLowerCase();
-  const match = (label) => !q || String(label).toLowerCase().includes(q);
+  const match = (label: React.ReactNode) => !q || String(label).toLowerCase().includes(q);
   // When a search query filters every facet out of every group, show one quiet
   // Empty region instead of a blank column (fp-head + fp-search stay visible).
   const anyVisible = groups.some(g => g.items.some(it => match(it.label)));

@@ -45,7 +45,7 @@ const usePrefersReducedMotion = () => {
 const useChartReducedMotion = usePrefersReducedMotion;
 
 // Compact number formatter — keeps axis ticks short.
-const fmtCompact = (n) => {
+const fmtCompact = (n: number) => {
   if (n == null || Number.isNaN(n)) return '';
   const a = Math.abs(n);
   if (a >= 1e9) return (n / 1e9).toFixed(a < 1e10 ? 1 : 0) + 'B';
@@ -55,7 +55,7 @@ const fmtCompact = (n) => {
   return String(n);
 };
 
-const fmtNumber = (n, unit) => {
+const fmtNumber = (n: number | string | null | undefined, unit?: string) => {
   if (n == null || Number.isNaN(n)) return '';
   const t = typeof n === 'number' ? n.toLocaleString(undefined, { maximumFractionDigits: 2 }) : String(n);
   return unit ? `${t} ${unit}` : t;

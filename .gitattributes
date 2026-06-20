@@ -1,0 +1,7 @@
+# Generated / vendored outputs — not hand-authored. Excluded from the ADR-0007 CRS
+# churn score (the gate reads this via `git check-attr linguist-generated`) and from
+# GitHub language stats. Edit the SOURCE and re-run the generator, never these.
+package-lock.json                       linguist-generated=true
+packages/ui/styles/system.gen.css       linguist-generated=true
+packages/ui/src/system/tokens.gen.ts    linguist-generated=true
+src/ds/core/props.generated.ts          linguist-generated=true

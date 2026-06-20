@@ -342,7 +342,7 @@ const LangBadge = ({
     icon={
       <span
         aria-hidden="true"
-        style={{ display: 'inline-block', flex: '0 0 auto', width: 7, height: 7, borderRadius: '50%', background: MOCKS.LANGS[lang] || 'var(--fg-subtle)' }}
+        style={{ display: 'inline-block', flex: '0 0 auto', width: 7, height: 7, borderRadius: '50%', background: (lang ? MOCKS.LANGS[lang as keyof typeof MOCKS.LANGS] : undefined) || 'var(--fg-subtle)' }}
       />
     }
     className={className}
@@ -401,8 +401,8 @@ const Empty = ({
   if (dotted) cls.push('dotted');
 
   let iconNode = icon;
-  if (!iconNode && iconName && Icons && Icons[iconName]) {
-    const I = Icons[iconName];
+  if (!iconNode && iconName && Icons && (iconName as string) in Icons) {
+    const I = Icons[iconName as keyof typeof Icons];
     iconNode = <I size={sz === 'lg' ? 22 : sz === 'sm' ? 16 : 18}/>;
   }
 
@@ -740,17 +740,17 @@ const CopyChip = ({
 //   absolute  boolean — show absolute alongside ("Mon · 3 min ago")
 //   tooltip   boolean — wrap in .tt[data-tt="<full datetime>"] (default false)
 //   tooltipSide  "top" | "bottom" | "left" | "right"  (default "top")
-const fmtAbs = (d) => {
+const fmtAbs = (d: Date) => {
   const day = d.toLocaleDateString(undefined, { weekday: 'short', day: '2-digit', month: 'short' });
   const time = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
   return `${day} ${time}`;
 };
-const fmtFull = (d) => {
+const fmtFull = (d: Date) => {
   const day = d.toLocaleDateString(undefined, { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
   const time = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
   return `${day} · ${time}`;
 };
-const fmtRel = (d) => {
+const fmtRel = (d: Date) => {
   const diff = Math.floor((Date.now() - d.getTime()) / 1000);
   const abs = Math.abs(diff);
   const future = diff < 0;
